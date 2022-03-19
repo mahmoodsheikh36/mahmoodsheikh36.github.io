@@ -1,0 +1,141 @@
+* sage
+** recursive sum with sage
+   this also shows a limitation of sagemath's, i thought something as simple as a quick 1-liner
+   using the sum function would do the job
+   #+begin_src sage :exports both
+     def ev(self, x):
+         if x == 0:
+             return 1
+         else:
+             return 1 + sum(self(j) for j in range(x))
+     f = function("f", nargs=1, eval_func=ev)
+     [f(i) for i in range(12)]
+   #+end_src
+
+   #+RESULTS:
+   : [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+
+** recursive sum but pure python
+   #+begin_src python :exports both
+     def f(n):
+         if n == 0:
+             return 1
+         else:
+             total_sum = 0
+             for i in range(n):
+                 total_sum += f(i)
+             return total_sum + 1
+     return [f(i) for i in range(12)]
+   #+end_src
+
+   #+RESULTS:
+   | 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048 |
+
+** vectors of variables
+   #+begin_src sage :exports both
+     x = list(var("x", n=8, latex_name='\overline{x}'))
+     x[0]=123
+     show(x)
+   #+end_src
+
+   #+RESULTS:
+   : [123, x1, x2, x3, x4, x5, x6, x7]
+
+** indexed variables
+   consider the following summation:
+   \[ \sum_{i=1}^{k} a_i \cdot d = \dfrac{k}{2}[2a_1 + (k - 1)d] \]
+   here $a_i$ is always dependant on the index $i$ and we cant define a variable number of variables
+   so we define $a$ as a function of $i$
+   #+begin_src sage :exports both
+     a = function("a")
+     d = var("d")
+     i, k = var("i, k", domain="integer")
+     S = sum(a(j)*d, j, 1, k+1)
+     S(j=10)
+   #+end_src
+
+   #+RESULTS:
+   : d*sum(a(10), 10, 1, k + 1)
+
+** symbolic functions
+   just like you can define a symbolic variable, you can also define yet-unknown functions!
+   #+begin_src sage :exports both
+     T = var('T')
+     a = function('a')
+     R = var('R')
+     v = var('v')
+     b = var('b')
+     p = R*T/v - a(T)/v/(v+b)
+     diff(p, T)
+   #+end_src
+
+   #+RESULTS:
+   : R/v - diff(a(T), T)/((b + v)*v)
+
+** i found this problem on a discord server dedicated to maths
+   \[ \sum_{i=0}^{10}\left[\prod_{j=i}^{1}(10-j)\right] = 108 \]
+   i tried replicating it in sagemath but unfortunately sagemath cant handle this either
+   #+begin_src sage :exports both
+   from sage.calculus.calculus import symbolic_product
+   sum(symbolic_product(10-j, j, i, 1), i, 0, 10)
+   #+end_src
+   this block of code makes perfect sense to me but idk why it doesnt work
+
+** boolean functions
+   #+begin_src sage :exports both
+     from sage.crypto.boolean_function import BooleanFunction
+     f = BooleanFunction([0,0,0,1,0,1,1,1])
+     f.truth_table()
+     f.linear_structures().list()
+   #+end_src
+
+   #+RESULTS:
+   : (False, False, False, True, False, True, True, True)
+   : [(0, 0, 0), (1, 1, 1)]
+
+   #+begin_src sage :exports both
+     from sage.crypto.boolean_function import BooleanFunction
+     B.<x, y> = BooleanPolynomialRing()
+     f = BooleanFunction(-x*-y)
+     f2 = BooleanFunction([1,0,0,0])
+     f.algebraic_normal_form()
+     f2.truth_table()
+     f.truth_table()
+     [[f(i), f2(i)] for i in range(4)]
+   #+end_src
+
+   #+RESULTS:
+   : x0*x1
+   : (True, False, False, False)
+   : (False, False, False, True)
+   : [[False, True], [False, False], [False, False], [True, False]]
+* boolean algebra
+  #+begin_src python :exports both
+    from sympy.logic import SOPform
+    from sympy import symbols
+    from sympy.logic.boolalg import truth_table
+
+    w, x, y, z = symbols('w x y z')
+    minterms = [5, 7, 8, 9, 10, 15]
+    sop = SOPform([w, x, y, z], minterms, [])
+
+    return list(truth_table(sop, [w,x,y,z]))
+  #+end_src
+
+  #+RESULTS:
+  | (0 0 0 0) | False |
+  | (0 0 0 1) | False |
+  | (0 0 1 0) | False |
+  | (0 0 1 1) | False |
+  | (0 1 0 0) | False |
+  | (0 1 0 1) | True  |
+  | (0 1 1 0) | False |
+  | (0 1 1 1) | True  |
+  | (1 0 0 0) | True  |
+  | (1 0 0 1) | True  |
+  | (1 0 1 0) | True  |
+  | (1 0 1 1) | False |
+  | (1 1 0 0) | False |
+  | (1 1 0 1) | False |
+  | (1 1 1 0) | False |
+  | (1 1 1 1) | True  |
