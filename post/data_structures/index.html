@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>data structures</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.102.1" />
+        
+
+        
+
+        
+            
+        
+
+        
+
+    </head>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">data structures</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fas fa-envelope"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/username/"><i class="fab fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/username/"><i class="fab fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fab fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/username/"><i class="fab fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div>
+        <h2>data structures</h2>
+        <h5>July 10, 2022</h5>
+        
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
+
+<a href="https://mahmoodsheikh36.github.iotags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
+
+
+    </div>
+
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
+  padding: 2px;
+  border: 1px black solid;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<div class="note">
+<p>for most data structures i havent implemented deletion yet.. <br/>
+also its good to note that most of the code isnt optimized to hell, but it doesnt really matter since its only for education purposes and you should probably be using the data structures provided by the programming language&rsquo;s standard library <br/></p>
+</div>
+<h2 id="properties-of-floor"><span class="section-num">1</span> properties of floor</h2>
+<div class="characteristic">
+<p>for every 2 <a href="/post/calculus2/#normal">normal</a> numbers \(m,n\) and every <a href="/post/calculus2/#real">real</a> number \(x\) <br/>
+\[
+\ceil*{\frac{\ceil*{\frac{x}{m}}}{n}} = \ceil*{\frac{x}{m \cdot n}} \qquad \floor*{\frac{\floor*{\frac{x}{m}}}{n}} = \floor*{\frac{x}{m \cdot n}}
+\] <br/></p>
+<div class="my_example">
+<p>\[
+\ceil*{\frac{\ceil*{\frac{x}{2^i}}}{2}} = \ceil*{\frac{x}{2^{i+1}}} \qquad \floor*{\frac{\floor*{\frac{x}{2^i}}}{2}} = \floor*{\frac{x}{2^{i+1}}}
+\] <br/></p>
+</div>
+</div>
+<div class="characteristic">
+<p>the following is true for every normal number \(n\) and any number \(x\) <br/></p>
+<p>\begin{gather}
+\floor*{x}+n = \floor*{x+n} \qquad \ceil*{x}+n=\ceil*{x+n}\\
+n-\floor*{x} = \ceil*{n-x} \qquad n-\ceil*{x} = \floor*{n-x}\\
+\floor*{x} \geq \ceil*{x}-1 \qquad \ceil*{x} \leq \floor*{x}+1\\
+\floor*{x} &gt; x-1 \qquad \ceil*{x} &lt; x+1\\
+\floor*{x} \leq x \qquad \ceil*{x} \geq x\\
+\floor*{x} = n \iff n \leq x &lt; n+1 \qquad \ceil*{x} = n \iff n-1 &lt; x \leq n
+\end{gather}</p>
+</div>
+<h2 id="order-of-growth"><span class="section-num">2</span> order of growth</h2>
+<div class="definition">
+<p>the order of growth of an <a href="/post/20220706211958-algorithm/">algorithm</a> is an approximation of the time required to run a computer program as the input size increases, the order of growth ignores the constant factor needed for fixed operations and focuses instead on the operations that increase proportional to input size <br/>
+an order of growth is a set of functions whose asymptotic growth behavior is considered equivalent. for example, \(2n\), \(100n\) and \(n+1\) belong to the same order of growth, which is written \(O(n)\) in big-oh notation and often called linear because every function in the set grows linearly with \(n\) <br/></p>
+</div>
+<h2 id="asymptotic-notations"><span class="section-num">3</span> asymptotic notations</h2>
+<table>
+<thead>
+<tr>
+<th>notation</th>
+<th>name</th>
+<th>formal definition</th>
+<th>limit definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\(f(n) = O(g(n))\)</td>
+<td>Big Oh</td>
+<td>\(\exists k &gt; 0 \ \exists n_0 \ \forall n &gt; n_0 : \vert f(n) \vert \leq k \cdot g(n)\)</td>
+<td>\(\lim_{n\to\infty} \frac{\vert f(n) \vert}{g(n)} = c\), where \(c \geq 0\) is a constant</td>
+</tr>
+<tr>
+<td>\(f(n) = \Omega(g(n))\)</td>
+<td>Big Omega</td>
+<td>\(\exists k &gt; 0 \ \exists n_0 \ \forall n &gt; n_0 : \vert f(n) \vert \geq k \cdot g(n)\)</td>
+<td>\(\lim_{n\to\infty} \frac{g(n)}{f(n)} = c\), where \(c \geq 0\) is a constant</td>
+</tr>
+<tr>
+<td>\(f(n) = \Theta(g(n))\)</td>
+<td>Big Theta</td>
+<td>\(\exists k_1 &gt; 0\ \exists k_2 &gt; 0\ \exists n_0\ \forall n &gt; n_0 : k_1 \cdot g(n) \leq \vert f(n) \vert \leq k_2 \cdot g(n)\)</td>
+<td>\(\lim_{n\to\infty} \frac{f(n)}{g(n)} = c\), where \(c &gt; 0\) is a constant</td>
+</tr>
+</tbody>
+</table>
+<h3 id="big-o"><span class="section-num">3.1</span> Big O</h3>
+<div class="definition">
+<p><strong>Big O</strong> of a <a href="/post/discrete_maths2/#function">function</a> \(f\), denoted by \(O(f)\), is an upper asymptotic bound of \(f\) <br/></p>
+</div>
+<h3 id="big-omega"><span class="section-num">3.2</span> Big Omega</h3>
+<div class="definition">
+<p><strong>Big Omega</strong> of a <a href="/post/discrete_maths2/#function">function</a> \(f\), denoted by \(\Omega(f)\), is a lower asymptotic bound of \(f\) <br/></p>
+</div>
+<h3 id="big-theta"><span class="section-num">3.3</span> Big Theta</h3>
+<div class="definition">
+<p><strong>Big Theta</strong> of a <a href="/post/discrete_maths2/#function">function</a> \(f\), denoted by \(\Theta(f)\), is tight bound of \(f\), so it is both <a href="#big-omega">Big Omega</a> and <a href="#big-o">Big O</a> <br/></p>
+</div>
+<h2 id="time-complexity"><span class="section-num">4</span> time complexity</h2>
+<p>the following definitions differ and shouldnt be confused with <a href="#asymptotic-notations">asymptotic notations</a> like <a href="#big-o">Big O</a>, as they arent directly related but might have some similarities <br/></p>
+<h3 id="best-case"><span class="section-num">4.1</span> best case</h3>
+<h3 id="average-case"><span class="section-num">4.2</span> average case</h3>
+<div class="definition">
+<p>the average-case complexity of an <a href="/post/20220706211958-algorithm/">algorithm</a> is the amount of some computational resource (typically time) used by the algorithm, averaged over all possible inputs. <br/></p>
+</div>
+<h3 id="worst-case"><span class="section-num">4.3</span> worst case</h3>
+<h2 id="recursive-functions"><span class="section-num">5</span> recursive functions</h2>
+<p>consider factorial <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fac</span>(n):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>: <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>: <span style="color:#66d9ef">return</span> fac(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> n
+</span></span></code></pre></div><h3 id="recurrence-relation"><span class="section-num">5.1</span> recurrence relation</h3>
+<p>to analyze the runtime of such a function we use a mathematical concept called <strong>Recurrence relation</strong> <br/>
+a recurrence defines \(T(n)\) in terms of \(T\) for smaller values <br/>
+example: \(T(n) = T(n-1) + 1\), here \(T(n)\) is defined in terms of \(T(n-1)\) <br/></p>
+<h4 id="initial-condition"><span class="section-num">5.1.1</span> initial condition</h4>
+<p>a <a href="#recurrence-relation">recurrence relation</a> must have <strong>initial conditions</strong>, initial conditions are values of the recurrence for small values of \(n\) <br/>
+the values of \(T(0),T(1)\) are usually sufficient as initial conditions <br/></p>
+<h4 id="closed-form"><span class="section-num">5.1.2</span> closed form</h4>
+<p>to solve a <a href="#recurrence-relation">recurrence</a>, we find a <strong>closed form</strong> for it, a closed form for \(T(n)\) is an equation that defines \(T(n)\) using an expression that does <strong>not</strong> involve \(T\) <br/>
+there is no single method that works for all, we check for patterns and use substitution <br/>
+to get a better understanding, we look at examples <br/></p>
+<div class="my_example">
+<p>consider the following function that returns the factorial of a given number <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fac</span>(n):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>: <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>: <span style="color:#66d9ef">return</span> n <span style="color:#f92672">*</span> fac(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>print([fac(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)])
+</span></span></code></pre></div><p>for <code>fac(n)</code>, how many times is <code>fac</code> called? <br/>
+\[ T(n) \leq T(n-1) + C_1 \] <br/>
+\(C_1\) represents the total time of all the operations that take constant time that the function does on every iteration <br/>
+now this is obviously not what we wanna arrive at, we need to arrive at an expression that doesnt have \(T\) in it <br/>
+we can substitute in \(n - 1\) because \(T\) is a function that takes any positive integer <br/></p>
+<p>\begin{align*}
+T(n) &amp;\leq \underbrace{T(n-2) + C_1}_{T(n-1)} + C_1\\
+T(n) &amp;\leq T(n-3) + 3C_1
+\end{align*}</p>
+<p>now you probably already see the pattern here, on every iteration the function takes constant time \(C_1\) to run, until it reaches the last iteration \(k\) at which point it we would&rsquo;ve \(k\) times \(C_1\), e.g.: <br/>
+\[ T(n) \leq T(n-k) + kC_1 \] <br/></p>
+<p>now we know that the total number of times the function calls itself depends on the initial value of \(n\), in this case that number would be \(n - 1\), as in, this function calls itself \(n - 1\) times <br/>
+we substitute \(k = n - 1\) to get the total time this function takes to run <br/></p>
+<p>\begin{align*}
+T(n) &amp;\leq T(n-(n-1)) + (n-1)C_1\\
+&amp;\leq T(1) + (n-1)C_1\\
+&amp;\leq C_1 + (n-1)C_1 &amp;\text{because } C_1 \geq T(1)\\
+&amp;\leq nC_1
+\end{align*}</p>
+<p>so we conclude that <br/>
+\[
+\Theta(n) = nC_1 \implies \Theta(n) = n
+\] <br/></p>
+</div>
+<div class="my_example">
+<p>consider the following function that returns the maximum value in a given array <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mymax</span>(arr, l, r):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> l <span style="color:#f92672">==</span> r:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> arr[l]
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> max(arr[l], mymax(arr, l<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, r))
+</span></span><span style="display:flex;"><span>arr <span style="color:#f92672">=</span> [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">81</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">58</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>]
+</span></span><span style="display:flex;"><span>print(mymax(arr, <span style="color:#ae81ff">0</span>, len(arr)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+</span></span></code></pre></div><p>we need to find a recurrence for this function so we can analyze its time complexity <br/>
+first thing we notice is on every iteration we have a constant time (excluding the recursive call), we call it \(C\) <br/>
+we can also notice that the variable &ldquo;\(r\)&rdquo; never changes, so our recurrence should only depends on \(l\) <br/>
+now we can guess that the recurrence equation is: <br/>
+\[ T(l) = T(l-1) + C \] <br/>
+you might be confused (hopefully not) that we wrote \(l-1\) even though in the recursive call its \(l+1\), this is because we dont care about the value of the variable itself but rather about how many times the variable causes the function to call itself <br/>
+now if we had written \(l+1\) this would suggest that given the value \(l\) the function runs \(l+1\) times which is not correct <br/>
+and so this equals to \(\Theta(n)\) (using the same proof as the previous problem) <br/></p>
+</div>
+<div class="my_example">
+<p>consider the following function that returns the fibonacci number at the given index <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> n <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>]: <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>: <span style="color:#66d9ef">return</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>print([fib(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)])
+</span></span></code></pre></div><p>for <code>fib(n)</code>, how many times is <code>fib</code> called? <br/></p>
+<p>\begin{align*}
+T(1) &amp;= 1\\
+T(2) &amp;= 1\\
+T(3) &amp;= T(1) + T(2) + 1 = 1 + 1 + 1 = 3\\
+T(4) &amp;= T(3) + T(2) + 1 = 3 + 1 + 1 = 5\\
+T(5) &amp;= T(4) + T(3) + 1 = 5 + 3 + 1 = 9\\
+T(n) &amp;= T(n-1) + T(n-2) + 1 = 2^n + 1
+\end{align*}</p>
+</div>
+<h3 id="recursion-tree"><span class="section-num">5.2</span> recursion tree</h3>
+<div class="my_example">
+<p>consider the following <a href="#recurrence-relation">recurrence relation</a> <br/>
+\[ T(n) = T\left(\frac{n}{3}\right) + T\left(\frac{2n}{3}\right) + n \] <br/>
+a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \(T(n)\) <br/>
+with that in mind, the first step would be: <br/></p>
+<p><figure><img src="/ox-hugo/AT4XkK.png"/>
+</figure>
+ <br/></p>
+<p>if we sum all the nodes we can see that indeed \(T(n) = T\left(\frac{2n}{3}\right) + T\left(\frac{n}{3}\right) + n\) <br/>
+for the next step we need to write \(T\left(\frac{2n}{3}\right)\) and \(T\left(\frac{n}{3}\right)\) in terms of time complexity for smaller values of \(n\) so we can know what the next row of nodes would be <br/></p>
+<p>\begin{align*}
+T\left(\frac{2n}{3}\right) &amp;= T\left(\frac{2 \cdot \frac{2n}{3}}{3}\right) + T\left(\frac{\frac{2n}{3}}{3}\right) + \frac{2n}{3} = T\left(\frac{4n}{9}\right) + T\left(\frac{2n}{9}\right) + \frac{2n}{3}\\
+T\left(\frac{n}{3}\right) &amp;= T\left(\frac{2 \cdot \frac{n}{3}}{3}\right) + T\left(\frac{\frac{n}{3}}{3}\right) + \frac{n}{3} = T\left(\frac{2n}{9}\right) + T\left(\frac{n}{9}\right) + \frac{n}{3}
+\end{align*}</p>
+<p>according to this, the tree with the new nodes would be: <br/></p>
+<p><figure><img src="/ox-hugo/e66eVE.png"/>
+</figure>
+ <br/></p>
+<p>we define a <strong>full row</strong> as a row that is full of nodes, in the previous tree the rows \(1,2,3\) are full, we might notice that the sum of all the nodes of a full row is \(n\) <br/>
+let \(y\) be the last full row <br/>
+because the leftmost node is always the smallest in its row, for a row to be full the leftmost node has to be greater or equal to 1 (\(\frac{n}{3^y} \geq 1\) in this case) <br/>
+if \(\frac{n}{3^y} \geq 1\) is true then the leftmost node in the row \(y+1\) whose value is \(\frac{n}{3^y}\) appears in the tree (because nodes with values greater or equal to 1 do appear in the tree), and so the row \(y+1\) is full, which results in a contradiction because \(y\) is the last full row <br/>
+therefore it must be that \(\frac{n}{3^y} &lt; 1 \implies n &lt; 3^y \implies y &gt; \log_3{n}\) <br/>
+therefore the tree contains atleast \(\log_3{n}\) full rows, and because the sum of every full row is \(n\) we get: <br/>
+\(T(n) =\) sum of all nodes = sum of nodes in full rows + sum of nodes in unfull rows \(\geq\) sum of nodes in full rows \(\geq\) \(n \cdot \log_3{n} = \Theta(n\log{n})\) <br/>
+and therefore \(T(n) = \Omega(n\log{n})\) <br/>
+let \(x\) be the last row in the tree, the value of the rightmost node in row \(x\) would be \({\left(\frac23\right)}^{x-1} \cdot n\) <br/>
+if this value is less than 1 then this node doesnt appear in the tree and all the other nodes in row \(x\) that have a smaller value also dont exist which gives us a contradiction because \(x\) is the last row in the tree <br/>
+therefore we get \({\left(\frac23\right)}^{x-1}n \geq 1 \implies n \geq {\left(\frac32\right)}^{x-1} \implies \log_{3/2}n \geq x - 1 \implies x \leq 1 + \log_{3/2}n\) <br/>
+and therefore in the tree there is at most \(1 + \log_{3/2}n\) rows, and since the sum of every row in the tree is \(n\) we get: <br/>
+\(T(n)\) = sum of all nodes = sum of all nodes in all rows \(\leq n \cdot\) number of rows in the tree \(\leq n \cdot (1+\log_{3/2}n) = \Theta(n\log{n})\) <br/>
+and therefore \(T(n) = O(n\log{n})\) <br/>
+in summery, we proved that \(T(n) = \Theta(n\log{n})\) <br/></p>
+</div>
+<div class="my_example">
+<p>consider the following <a href="#recurrence-relation">recurrence relation</a> <br/>
+\[
+T(n) = 2T\left(\frac{n}{8}\right) + 3T\left(\frac{n}{9}\right) + n
+\] <br/>
+we cant determine \(\Theta\) using the <a href="#master-theorem">Master Theorem</a>, but we can using a recursion tree <br/>
+the first step would be: <br/></p>
+<p><figure><img src="/ox-hugo/0IoNVgg.png"/>
+</figure>
+ <br/></p>
+<p>\begin{align*}
+T\left(\frac{n}{8}\right) &amp;= 2T\left(\frac{n}{8^2}\right) + 3T\left(\frac{n}{8\cdot9}\right) + \frac{n}{8}\\
+T\left(\frac{n}{9}\right) &amp;= 2T\left(\frac{n}{8\cdot9}\right) + 3T\left(\frac{n}{9^2}\right) + \frac{n}{9}
+\end{align*}</p>
+<p><figure><img src="/ox-hugo/8OoGIIt.png"/>
+</figure>
+ <br/></p>
+<p>\begin{align*}
+T(n) &amp;= \text{sum of all nodes}\\
+&amp;= \text{sum of all nodes in all levels}\\
+&amp;\leq n+n\left(\frac{2}{8}+\frac{3}{9}\right)+n\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+n\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\\
+&amp;\leq n\left(\left(\frac{2}{8}+\frac{3}{9}\right)+\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\right)\\
+&amp;= n\cdot \frac{1}{1-\left(\frac{2}{8}+\frac{3}{9}\right)}\\
+&amp;= \Theta(n)
+\end{align*}</p>
+<p>note the sum was found using <a href="/post/20220711182517-sum_of_geometric_progression/">geometric progression formula</a> <br/>
+and so we have shown that \(T(n) = O(n)\) <br/>
+\[
+T(n) = \text{sum of all nodes in the tree} \ge \text{root} = n = \Theta(n)
+\] <br/>
+and so we have shown that \(T(n) = \Omega(n)\) <br/>
+and so \(T(n) = \Theta(n)\) <br/></p>
+</div>
+<div class="my_example">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span>best_sum(A, i) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&gt;</span> size(A)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> max(best_sum(A, i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), A[i] <span style="color:#f92672">+</span> best_sum(A, i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>\begin{align*}
+T(n) &amp;= T(n-1) + T(n-2) + C\\
+&amp;\le 2T(n-1) + C\\
+&amp;\le 2(2T(n-2)+C) + C = 4T(n-2) + 3C\\
+&amp;\le 4(2T(n-3) + C) + 3C = 8T(n-3) + 7C\\
+&amp;\vdots\\
+&amp;\le 2^{n-1}T(n-(n-1)) + \left(2^{n-1}-1\right)C\\
+&amp;\le 2^{n-1}T(1) + \left(2^{n-1}-1\right)C\\
+&amp;\leq 2^n = \Theta(2^n)
+\end{align*}</p>
+<p>we proved \(T(n) = O(2^n)\), now we try showing \(T(n) = \Omega(2^n)\) <br/></p>
+<p>\begin{align*}
+T(n) &amp;= T(n-1) + T(n-2) + C\\
+&amp;\ge 2T(n-2) + C\\
+&amp;\ge 2(2T(n-4) + C) + C = 4T(n-4) + 3C\\
+&amp;\ge 4(2T(n-6) + C) + 3C = 8T(n-6) + 7C\\
+&amp;\vdots\\
+&amp;\ge 2^{n/2}T(n-(n-2)) + \left(2^{n/2}-1\right)C\\
+&amp;\ge 2^{n/2}T(2) + \left(2^{n/2}-1\right)C\\
+&amp;\ge 2^{n/2} = \Theta\left(2^{n/2}\right)
+\end{align*}</p>
+<p>and so we showed that \(T(n) = \Omega\left(2^{n/2}\right)\), which means there isnt a tight bound on the <a href="#time-complexity">time complexity</a> of this function <br/>
+using a <a href="#recursion-tree">recursion tree</a>: <br/></p>
+<p><figure><img src="/ox-hugo/QIrzGtq.png"/>
+</figure>
+ <br/></p>
+<p>\begin{align*}
+T(n) &amp;= \text{sum of all nodes}\\
+&amp;= \text{sum of all nodes in all levels}\\
+&amp;\le 2^{x-1}\\
+&amp;\le 2^{x} = \Theta(2^x)
+\end{align*}</p>
+<p>we denote by \(y\) the last level with a full row, for this row to exist, \(n-2(y-1) \ge 0 \implies n+2 \ge 2y \implies \frac{n+2}{2} \ge y\), so we have \(\frac{n+2}{2}\) full rows <br/></p>
+<p>\begin{align*}
+T(n) &amp;= \text{sum of all nodes}\\
+&amp;\ge \text{sum of full rows}\\
+&amp;\ge \sum_{i=1}^{\frac{n+2}{2}} 2^{i-1}\\
+&amp;\ge 2^{\frac12n+1}-1\\
+&amp;\ge \frac{2^{n/2}}{2}-1
+\end{align*}</p>
+<p>the division by 2 doesnt affect big omega so \(T(n) = \Omega\left(2^{n/2}\right)\) <br/></p>
+</div>
+<h3 id="master-theorem"><span class="section-num">5.3</span> Master theorem</h3>
+<h4 id="dividing-functions"><span class="section-num">5.3.1</span> dividing functions</h4>
+<p>to solve a <a href="#recurrence-relation">recurrence relation</a> of the form: <br/>
+\[ T(n) = aT\left(\frac{n}{b}\right) + f(n) \text{ where } a \geq 1, b &gt; 1 \] <br/>
+we compare \(f(n)\) with \(n^{\log_b{a}}\) and check which one dominates, the possible outcomes are: <br/></p>
+<p>\begin{align}
+\exists \epsilon &gt; 0 \mid f(n) = O\left(n^{\log_b(a)-\epsilon}\right) &amp;\implies T(n) = \Theta\left(n^{\log_b{a}}\right)\\
+f(n) = \Theta\left(n^{\log_b{a}}\right) &amp;\implies T(n) = \Theta\left(n^{\log_b{a}}\log{n}\right)\\
+\exists \epsilon &gt; 0 \mid f(n) = \Omega\left(n^{\log_b(a)+\epsilon}\right) \text{ and } 0 &lt; c &lt; 1 \mid af\left(\frac{n}{b}\right) &lt; cf(n) &amp;\implies T(n) = \Theta(f(n))
+\end{align}</p>
+<div class="my_example">
+<p>example of the first possibility <br/></p>
+<p>\begin{gather*}
+T(n) = 8T\left(\frac{n}{2}\right) + 1000n^2\\
+a = 8,\ b = 2,\ f(n) = 1000n^2
+\end{gather*}</p>
+<p>the conditions of the first possibility are met: <br/>
+\[ n^{\log_b{a}} = n^{\log_2{8}} = n^3 = O\left(1000n^2\right) \] <br/>
+therefore we get: <br/>
+\[ T(n) = \Theta(n^3) \] <br/></p>
+</div>
+<div class="my_example">
+<p>example of the second possibility <br/></p>
+<p>\begin{gather*}
+T(n) = 2T\left(\frac{n}{2}\right) + 10n\\
+a = 2, b = 2, f(n) = 10n
+\end{gather*}</p>
+<p>the conditions of the second possibility are met: <br/>
+\[ n^{\log_b{a}} = n^{\log_2{2}} = n^1 = \Theta(10n) \] <br/>
+we get: <br/>
+\[ T(n) = \Theta(n\log{n}) \] <br/></p>
+</div>
+<div class="my_example">
+<p>example of the third possibility <br/></p>
+<p>\begin{gather*}
+T(n) = 2T\left(\frac{n}{2}\right) + n^2\\
+a=2,b=2,f(n)=n^2
+\end{gather*}</p>
+<p>the conditions of the third possibility are met: <br/>
+\[ n^{\log_b{a}} = n^{\log_2{2}} = n^1 = \Omega(n^2) \] <br/>
+we get: <br/>
+\[ T(n) = \Theta\left(n^2\right) \] <br/></p>
+</div>
+<h4 id="decreasing-functions"><span class="section-num">5.3.2</span> decreasing functions</h4>
+<p>The <strong>master theorem</strong> can be used to solve recurrences of the form \(T(n) = aT(n - b) + f(n)\), where \(a \geq 1\) and \(b &gt; 0\) and \(f(n)\) is <strong>asymptotically positive</strong>. (asymptotically positive means that the function is positive for all sufficiently large n.) this recurrence describes an algorithm that divides a problem of size \(n\) into sub problems, each of size \(n-b\), and solves them recursively. <br/>
+the theorem is as follows: <br/>
+if \(T(n) = aT(n-b) + f(n)\), where \(a \geq 1\), \(b &gt; 0\), \(f(n) = O(n^k)\) and \(k \geq 0\) <br/>
+we consider 3 cases: <br/>
+<strong>case 1</strong>, if \(a = 1\) <br/>
+\[ T(n) = O(n \cdot f(n)) \text{ or } O\left(n^{k+1}\right) \] <br/></p>
+<div class="my_example">
+<p>\begin{align}
+T(n) = T(n - 1) + 1 &amp;\implies O(n)\\
+T(n) = T(n - 1) + n &amp;\implies O(n^2)\\
+T(n) = T(n-1) + \log{n} &amp;\implies O(n\log{n})
+\end{align}</p>
+</div>
+<p><strong>case 2</strong>, if \(a &gt; 1\) <br/>
+\[ T(n) = O\left(a^{\frac{n}{b}} \cdot f(n)\right) \text{ or } O\left(a^{\frac{n}{b}} \cdot n^k\right) \] <br/></p>
+<div class="my_example">
+<p>\begin{align}
+T(n) = 2T(n-1)+1 &amp;\implies O(2^n)\\
+T(n) = 3T(n-1)+1 &amp;\implies O(3^n)\\
+T(n) = 2T(n-1)+n &amp;\implies O(n \cdot 2^n)
+\end{align}</p>
+</div>
+<p><strong>case 3</strong>, if \(a &lt; 1\) <br/></p>
+<div class="my_example">
+<p>\[ T(n) = O(f(n)) \text{ or } O\left(n^k\right) \] <br/></p>
+</div>
+<h2 id="data-structure"><span class="section-num">6</span> data structure</h2>
+<div class="definition">
+<p>a <strong>data structure</strong> is a collection of data and operations on said data, the data is represented as objects, and each object <code>x</code> has: <br/></p>
+<ul>
+<li><code>key(x)</code>: a key that is used to identify the object (usually a number that uniquely identifies the object) <br/></li>
+<li><code>info(x)</code> or <code>value(x)</code>: contains the data needed to store for the object (usually without the key) <br/></li>
+</ul>
+<div class="my_example">
+<p>for example, if <code>x</code> is a person, <code>key(x)</code> could be the person&rsquo;s ID, <code>value(x)</code> would be information on said person, like age, height, weight etc.. <br/></p>
+</div>
+</div>
+<h3 id="keyvalue"><span class="section-num">6.1</span> KeyValue</h3>
+<p><a id="code-snippet--KeyValue"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> K, <span style="color:#66d9ef">typename</span> V<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KeyValue</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  K key;
+</span></span><span style="display:flex;"><span>  V value;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  KeyValue(K key, V value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key <span style="color:#f92672">=</span> key;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>value <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  K <span style="color:#a6e22e">get_key</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  V <span style="color:#a6e22e">get_value</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>value;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_value</span>(V value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>value <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_key</span>(K key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key <span style="color:#f92672">=</span> key;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span> <span style="color:#f92672">&lt;</span>(<span style="color:#66d9ef">const</span> KeyValue<span style="color:#f92672">&lt;</span>K, V<span style="color:#f92672">&gt;&amp;</span> c1, <span style="color:#66d9ef">const</span> KeyValue<span style="color:#f92672">&lt;</span>K, V<span style="color:#f92672">&gt;&amp;</span> c2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> c1.key <span style="color:#f92672">&lt;</span> c2.key;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span> <span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">const</span> KeyValue<span style="color:#f92672">&lt;</span>K, V<span style="color:#f92672">&gt;&amp;</span> c1, <span style="color:#66d9ef">const</span> KeyValue<span style="color:#f92672">&lt;</span>K, V<span style="color:#f92672">&gt;&amp;</span> c2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> c1.key <span style="color:#f92672">&gt;</span> c2.key;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="abstract-data-type"><span class="section-num">6.2</span> abstract data type</h3>
+<div class="definition">
+<p><strong>abstract data types</strong>, commonly abbreviated *ADT*s, are a way of classifying <a href="#data-structure">data structure</a>s based on how they are used and the behaviors they provide. they do not specify how the data structure must be implemented or laid out in memory, but simply provide a minimal expected interface and set of behaviors. for example, a <a href="#stack">stack</a> is an abstract data type that specifies a linear data structure with <a href="#lifo">LIFO</a> behavior. stacks are commonly implemented using <a href="/post/20220728190531-array/">array</a>s or <a href="#linked-list">linked list</a>s, but a needlessly complicated implementation using a <a href="#binary-search-tree">binary search tree</a> is still a valid implementation. to be clear, it is incorrect to say that stacks are arrays or vice versa. an array can be used as a stack. likewise, a stack can be implemented using an array. <br/></p>
+<div class="characteristic">
+<p>since abstract data types dont specify an implementation, this means its also incorrect to talk about the <a href="#time-complexity">time complexity</a> of a given abstract data type. an associative array may or may not have \(O(1)\) average search times. An associative array that is implemented by a <a href="#hash-table">hash table</a> does have \(O(1)\) average search times. <br/></p>
+</div>
+<div class="characteristic">
+<p>to further complicate matters, since certain abstract data types are almost always implemented with a particular data structure, some programmers will use the two terms interchangeably: for example, priority queue and heap, or associative array and hash table. the context in which the term is being used can usually provide distinction. <br/></p>
+</div>
+<div class="question">
+<p>The Ministry of Education&rsquo;s computer system stores data on teachers, schools and subjects. For each teacher they keep: an ID number and details about the subjects they teach and the schools where they teach. For each school we keep: the name of the school (assuming that this name uniquely identifies the school) and details about the teachers who teach at the school and the subjects taught at the school. For each subject we keep: subject number and details about the teachers who teach this subject and the schools where the subject is taught. <br/></p>
+<ul>
+<li>Given a teacher&rsquo;s ID number, subject number and school name Adding/deleting the figure that the teacher teaches the subject at school takes \(O(m\cdot\log r+\log p)\) time on average, where m indicates the number of schools where the teacher teaches the subject, p indicates the number of subjects the teacher teaches, and r indicates the number of teachers who teach the subject. <br/></li>
+<li>Given a teacher&rsquo;s ID number, printing a list of all the subjects taught by the teacher, where for each subject, in addition to the subject number, a number is printed indicating the number of schools where the teacher teaches the profession. The list of subjects must be sorted by the number of schools where the teacher teaches the subject in ascending order. This action must be performed on time O(p) on average where p indicates the number of subjects taught by the teacher. For example if the teacher teaches subject A in 3 schools, subject B in 5 schools and subject C in 2 schools, then the output will be (in order from left to right (: 5 C 2, A 3, B <br/></li>
+<li>Given a subject number and a school number, printing all the teachers who teach this subject in this school, with the teachers sorted by the number of schools where they teach this subject in ascending order. This action must be performed on time O(q) on average where q indicates the number of teachers to be printed. For example, suppose teacher X teaches the given subject in the given school and 3 other schools, and teacher Y teaches the given subject in the given school and 6 other schools, and teacher Z teaches the given subject In the given school and 2 more schools, then the output will be (in order from left to right): Z,X,Y. <br/></li>
+</ul>
+<p>Describe verbally how all the above actions are performed. <br/></p>
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.*<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashSet<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Set<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Stack<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.TreeMap<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ADT</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">findK</span><span style="color:#f92672">(</span>Integer<span style="color:#f92672">[]</span> A<span style="color:#f92672">,</span> Integer k<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Set<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> s <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++){</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">contains</span><span style="color:#f92672">(</span>k<span style="color:#f92672">-</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>      s<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Integer<span style="color:#f92672">[]</span> arr <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>1<span style="color:#f92672">,</span>7<span style="color:#f92672">,</span>9<span style="color:#f92672">,</span>3<span style="color:#f92672">,</span>7<span style="color:#f92672">,</span>4<span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>findK<span style="color:#f92672">(</span>arr<span style="color:#f92672">,</span> 17<span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>findK<span style="color:#f92672">(</span>arr<span style="color:#f92672">,</span> 16<span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Set<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> s <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
+</span></span><span style="display:flex;"><span>    s<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>5<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    s<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>6<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">:</span> s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">contains</span><span style="color:#f92672">(</span>6<span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Integer<span style="color:#f92672">&gt;</span> mp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Integer<span style="color:#f92672">&gt;();</span>
+</span></span><span style="display:flex;"><span>    Integer v <span style="color:#f92672">=</span> mp<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;USA&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>v <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> mp<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;USA&#34;</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> mp<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;USA&#34;</span><span style="color:#f92672">,</span> v<span style="color:#f92672">++);</span>
+</span></span><span style="display:flex;"><span>    mp<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;USA&#34;</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    mp<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;USA&#34;</span><span style="color:#f92672">,</span> 2<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    mp<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;israel&#34;</span><span style="color:#f92672">,</span> 12<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>mp<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;USA&#34;</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> li <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Stack<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> st <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Stack<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
+</span></span><span style="display:flex;"><span>    st<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    st<span style="color:#f92672">.</span><span style="color:#a6e22e">pop</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    st<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>2<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    st<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>3<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Iterator<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> it <span style="color:#f92672">=</span> st<span style="color:#f92672">.</span><span style="color:#a6e22e">iterator</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>it<span style="color:#f92672">.</span><span style="color:#a6e22e">hasNext</span><span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>it<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">:</span> st<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></div>
+<h3 id="concrete-data-type"><span class="section-num">6.3</span> concrete data type</h3>
+<div class="definition">
+<p>a <strong>concrete data type</strong> is the &ldquo;concrete&rdquo; and actual implementation of a given <a href="#abstract-data-type">abstract data type</a> <br/>
+i.e. it is the actual <a href="#data-structure">data structure</a> we use in programming <br/></p>
+</div>
+<h3 id="list"><span class="section-num">6.4</span> list</h3>
+<div class="definition">
+<p>a <strong>list</strong> is an <a href="#abstract-data-type">abstract data type</a> that is dynamically sized (often automatically resized) <strong>list of objects</strong> that stores as many objects as necessary, each type of list has its own method of dynamic storage <br/></p>
+</div>
+<h4 id="linked-list"><span class="section-num">6.4.1</span> linked list</h4>
+<div class="definition">
+<p>a <strong>linked list</strong> is a <a href="#concrete-data-type">concrete data type</a> that is an implementation of a <a href="#list">list</a> <br/></p>
+</div>
+<h5 id="characteristics"><span class="section-num">6.4.1.1</span> characteristics</h5>
+<ul>
+<li>is the list <strong>sorted</strong>? the nodes are sorted by their <code>key</code> (usually in an ascending order) <br/></li>
+<li>is the list <strong>doubly/singly linked</strong>? in a doubly linked list each node points to the next and previous node whereas in a singly linked list a node only points to the next <br/></li>
+<li>does the list have a <strong>tail</strong>? a pointer <code>tail(x)</code> points to the last node in a linked list <br/></li>
+<li>is the list <strong>circular</strong>? in a circular linked list the last node points to the first whereas in a non-circular linked list it points to NULL (nothing) <br/></li>
+</ul>
+<h5 id="functions"><span class="section-num">6.4.1.2</span> functions</h5>
+<ul>
+<li><code>insert(x)</code>: inserts <code>x</code> <br/></li>
+<li><code>search(k)</code>: returns the node whose key is <code>k</code> <br/></li>
+<li><code>isEmpty()</code>: returns whether list is empty <br/></li>
+<li><code>delete(x)</code>: given the node <code>x</code>, removes it from the list <br/></li>
+</ul>
+<h5 id="implementation--c-plus-plus"><span class="section-num">6.4.1.3</span> implementation (c++)</h5>
+<h6 id="node"><span class="section-num">6.4.1.3.1</span> Node</h6>
+<p><a id="code-snippet--Node"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cassert&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> KeyValue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, T<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> next;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  Node(<span style="color:#66d9ef">int</span> key, T value) <span style="color:#f92672">:</span> KeyValue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, T<span style="color:#f92672">&gt;</span>(key, value) {}
+</span></span><span style="display:flex;"><span>  Node(<span style="color:#66d9ef">int</span> key) <span style="color:#f92672">:</span> KeyValue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, T<span style="color:#f92672">&gt;</span>(key, key) {}
+</span></span><span style="display:flex;"><span>  Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_next() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_next</span>(Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> next) {
+</span></span><span style="display:flex;"><span>    assert(<span style="color:#66d9ef">this</span> <span style="color:#f92672">!=</span> next);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> next;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_next</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_tail() {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>; n<span style="color:#f92672">-&gt;</span>get_next() <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>; n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_next());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h6 id="doublynode"><span class="section-num">6.4.1.3.2</span> DoublyNode</h6>
+<p><a id="code-snippet--DoublyNode"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DoublyNode</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  DoublyNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> left <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  DoublyNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> right <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  T data;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  DoublyNode(T data) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> data;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">~</span>DoublyNode() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> left;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> right;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  T <span style="color:#a6e22e">get_data</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>data;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_left</span>(DoublyNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left<span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_right</span>(DoublyNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right<span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  DoublyNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> get_right() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  DoublyNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> get_left() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_right</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_left</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h6 id="linkedlist"><span class="section-num">6.4.1.3.3</span> LinkedList</h6>
+<p><a id="code-snippet--LinkedList"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LinkedList</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> head;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  LinkedList() <span style="color:#f92672">:</span> head(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">~</span>LinkedList() {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>head;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (n) {
+</span></span><span style="display:flex;"><span>      Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> next <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_next();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">delete</span> n;
+</span></span><span style="display:flex;"><span>      n <span style="color:#f92672">=</span> next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_head() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>head;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_head</span>(Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>head <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  LinkedList<span style="color:#f92672">*</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>add(<span style="color:#66d9ef">new</span> Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(key));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  LinkedList<span style="color:#f92672">*</span> <span style="color:#a6e22e">add</span>(Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>head <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_tail()<span style="color:#f92672">-&gt;</span>set_next(n);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_tail() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty())
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>head<span style="color:#f92672">-&gt;</span>get_tail();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_empty</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>head <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_node(<span style="color:#66d9ef">int</span> index) {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n <span style="color:#f92672">=</span> head;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> index; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>      n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_next();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">size</span>() {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>head; n <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>; n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_next()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">++</span>i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h6 id="doublylinkedlist"><span class="section-num">6.4.1.3.4</span> DoublyLinkedList</h6>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>to be implemented
+</span></span></code></pre></div><h6 id="linkedlistwithtail"><span class="section-num">6.4.1.3.5</span> LinkedListWithTail</h6>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>to be implemented
+</span></span></code></pre></div><h6 id="circularlinkedlist"><span class="section-num">6.4.1.3.6</span> CircularLinkedList</h6>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>to be implemented
+</span></span></code></pre></div><h4 id="array-list"><span class="section-num">6.4.2</span> array list</h4>
+<div class="definition">
+<p>a <strong>linked list</strong> is a <a href="#concrete-data-type">concrete data type</a> that is an implementation of a <a href="#list">list</a> based on an <a href="/post/20220728190531-array/">array</a> that is dynamically continuously reconstructed on insertions to hold as many objects as necessary <br/></p>
+<div class="note">
+<p>some might suggest that a linked list should shrink automatically aswell on deletions, though that isnt a popular implementation <br/></p>
+</div>
+<div class="characteristic">
+<p>an array list contains a fixed-size array initialized to a constant length, when the array gets filled we create a new array whose size is \(n \times c\) where \(n\) is a constant (usually 2), and \(c\) is the previous size of the array, and we copy all the objects to the new array and then we have more space to store more objects <br/></p>
+</div>
+</div>
+<h5 id="arraylist"><span class="section-num">6.4.2.1</span> ArrayList</h5>
+<p><a id="code-snippet--ArrayList"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cassert&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;memory&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define INITIAL_SIZE 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define SCALING_FACTOR 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArrayList</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> actual_size;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> idx;
+</span></span><span style="display:flex;"><span>  T<span style="color:#f92672">*</span> arr;
+</span></span><span style="display:flex;"><span>  T<span style="color:#f92672">*</span> <span style="color:#a6e22e">allocate_memory</span>(<span style="color:#66d9ef">int</span> num_of_objects) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>actual_size <span style="color:#f92672">=</span> num_of_objects;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// return new T[num_of_objects];
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// return alloc.allocate(num_of_objects);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> (T<span style="color:#f92672">*</span>)<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span> <span style="color:#66d9ef">new</span>(num_of_objects <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(T));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">resize</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> prev_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>actual_size;
+</span></span><span style="display:flex;"><span>    T<span style="color:#f92672">*</span> newArr <span style="color:#f92672">=</span> allocate_memory(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>actual_size <span style="color:#f92672">*</span> SCALING_FACTOR);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> idx; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>      newArr[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// delete[] this-&gt;arr;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// alloc.deallocate(this-&gt;arr, prev_size);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span> <span style="color:#66d9ef">delete</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr <span style="color:#f92672">=</span> newArr;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  ArrayList() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>allocate_memory(INITIAL_SIZE);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">~</span>ArrayList() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span>[] <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  ArrayList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> add(T val) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>idx <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>actual_size)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>resize();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>idx<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> val;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  T<span style="color:#f92672">&amp;</span> get(<span style="color:#66d9ef">int</span> i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[i];
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  T<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span> [](<span style="color:#66d9ef">int</span> i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[i];
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set</span>(<span style="color:#66d9ef">int</span> index, T obj) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[index] <span style="color:#f92672">=</span> obj;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">size</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>idx;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove</span>(<span style="color:#66d9ef">int</span> index) {
+</span></span><span style="display:flex;"><span>    assert(index <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>idx);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> index; i <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>idx<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insert</span>(<span style="color:#66d9ef">int</span> index, T value) {
+</span></span><span style="display:flex;"><span>    assert(index <span style="color:#f92672">&lt;</span> idx);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>actual_size<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>resize();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx; i <span style="color:#f92672">&gt;</span> index; <span style="color:#f92672">--</span>i)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>arr[index] <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>    idx<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> ArrayList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> from_array(T<span style="color:#f92672">*</span> other_arr, <span style="color:#66d9ef">int</span> length) {
+</span></span><span style="display:flex;"><span>    ArrayList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> length; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>      list<span style="color:#f92672">-&gt;</span>add(other_arr[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> list;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="stack"><span class="section-num">6.5</span> stack</h3>
+<div class="definition">
+<p>a <strong>stack</strong> is an <a href="#abstract-data-type">abstract data type</a> <br/></p>
+</div>
+<h4 id="lifo"><span class="section-num">6.5.1</span> LIFO</h4>
+<h3 id="queue"><span class="section-num">6.6</span> queue</h3>
+<div class="definition">
+<p>a <strong>queue</strong> is a linear <a href="#abstract-data-type">abstract data type</a> in which the operations are performed based on <a href="#fifo">FIFO</a> principle <br/></p>
+</div>
+<h4 id="fifo"><span class="section-num">6.6.1</span> FIFO</h4>
+<div class="definition">
+<p><strong>FIFO</strong> stands for <strong>first in first out</strong>, which means the first entity that enters would be the first one to exit <br/></p>
+</div>
+<h4 id="circular-queue"><span class="section-num">6.6.2</span> Circular Queue</h4>
+<div class="definition">
+<p>a <strong>Circular Queue</strong> is a <a href="#queue">Queue</a> in which the last element is connected back to the first element to make a circle. <br/></p>
+</div>
+<h4 id="priority-queue"><span class="section-num">6.6.3</span> priority queue</h4>
+<p>a <strong>priority queue</strong> is an <a href="/post/data_structures/#abstract-data-type">abstract data type</a> similar to a regular <a href="#queue">queue</a> or <a href="#stack">stack</a> in which each element additionally has a priority associated with it. in a priority queue, an element with high priority is served before an element with low priority <br/></p>
+<h3 id="tree"><span class="section-num">6.7</span> tree</h3>
+<div class="definition">
+<p>a <strong>tree</strong> is an <a href="#abstract-data-type">abstract data type</a> which stores data in the shape of a downwards-growing tree and every entry is called a <a href="#node">node</a> <br/></p>
+</div>
+<h4 id="node"><span class="section-num">6.7.1</span> node</h4>
+<p>trees store data as <strong>nodes</strong>, meaning each item in a tree is called a node <br/>
+each node <code>x</code> has the following fields <br/></p>
+<ul>
+<li><code>key(x)</code>: a key that&rsquo;s used to identify the node (like every data structure) <br/></li>
+<li><code>info(x)</code>: contains the data we need to store (like every data structure) <br/></li>
+<li><code>left(x)</code>: a pointer to the left child of <code>x</code> <br/></li>
+<li><code>right(x)</code>: a pointer to the right child <br/></li>
+<li><code>parent(x)</code> (optional): a pointer to the parent of <code>x</code> <br/></li>
+</ul>
+<p>every node in a <a href="#binary-tree">binary tree</a> has from 0 to 2 children <br/></p>
+<h5 id="height"><span class="section-num">6.7.1.1</span> height</h5>
+<div class="definition">
+<p>the <strong>height</strong> of a <a href="#node">node</a> <code>x</code> is defined as the <a href="#height">height of subtree</a> of said <a href="#node">node</a>, denoted by \(T_x\) <br/></p>
+</div>
+<h5 id="balance-factor"><span class="section-num">6.7.1.2</span> balance factor</h5>
+<p>the <strong>balance factor</strong> of a <a href="#node">node</a> <code>x</code>, denoted by <code>balance(x)</code> or <code>BF(x)</code>, is defined as the height of the <a href="#subtree">subtree</a> of the left child of <code>x</code>, denoted by \(T_{\text{left}(x)}\) minus the height of the subtree of the right child of <code>x</code> denoted by \(T_{\text{right}(x)}\), in short: <br/>
+\[
+BF(X) = \text{height}(T_{\text{left}(x)}) - \text{height}(T_{\text{right}(x)})
+\] <br/>
+see for example this tree, the balance factor of each node is written above it <br/></p>
+<p><figure><img src="/ox-hugo/gXx4ZR.png"/>
+</figure>
+ <br/></p>
+<h4 id="height"><span class="section-num">6.7.2</span> height</h4>
+<div class="definition">
+<p>the <strong>height</strong> of a tree is the number of the <a href="#node">node</a>s in the longest path downwards (including the root node) <br/></p>
+</div>
+<h4 id="root"><span class="section-num">6.7.3</span> root</h4>
+<div class="definition">
+<p>the tree itself <code>T</code> (not for every node) contains a pointer <code>root(T)</code> that points to the root node of the tree (the first and topmost node) <br/></p>
+</div>
+<h4 id="leaf"><span class="section-num">6.7.4</span> leaf</h4>
+<div class="definition">
+<p>a <a href="#node">node</a> that doesnt have children is called a <strong>leaf</strong> <br/></p>
+</div>
+<h4 id="internal-node"><span class="section-num">6.7.5</span> internal node</h4>
+<div class="definition">
+<p>a <a href="#node">node</a> that has atleast one child is called an <strong>internal node</strong> <br/></p>
+</div>
+<h4 id="sibling"><span class="section-num">6.7.6</span> sibling</h4>
+<div class="definition">
+<p>2 nodes are considered siblings if they share the same parent node <br/></p>
+</div>
+<h4 id="ancestor"><span class="section-num">6.7.7</span> ancestor</h4>
+<div class="definition">
+<p>an <strong>ancestor</strong> of a given <a href="#node">node</a> is a node that is at an upper level of it <br/></p>
+</div>
+<h4 id="descendant"><span class="section-num">6.7.8</span> descendant</h4>
+<div class="definition">
+<p>a <strong>descendant</strong> of a given <a href="#node">node</a> is a node that is at a lower level of the given node <br/></p>
+</div>
+<h4 id="subtree"><span class="section-num">6.7.9</span> subtree</h4>
+<p>for some <a href="#binary-tree">binary tree</a> <code>T</code> and a node <code>x</code> of said tree we denote \(T_x\) as the <strong>subtree</strong> whose <a href="#root">root</a> is <code>x</code>, and the left <strong>subtree</strong> of <code>x</code> is the tree whose root is the left child of <code>x</code> denoted by \(T_{\text{left}(x)}\) and the right subtree of <code>x</code> is the tree whose root is the right child of <code>x</code> denoted by \(T_{\text{right}(x)}\) <br/></p>
+<p><figure><img src="/ox-hugo/vD1CJC.png"/>
+</figure>
+ <br/></p>
+<p>the height of this tree is 4 <br/></p>
+<h4 id="complete-tree"><span class="section-num">6.7.10</span> complete tree</h4>
+<div class="definition">
+<p>a <strong>complete</strong> <a href="#binary-tree">binary tree</a> is a binary tree in which every <a href="#node">node</a> has 2 or 0 children, and the leaves are all on at the same level <br/></p>
+</div>
+<h4 id="almost-complete-tree"><span class="section-num">6.7.11</span> almost complete tree</h4>
+<div class="definition">
+<p>an <strong>almost complete</strong> binary tree is a binary tree from which 0 or more nodes have been deleted continuously from the right part of the last level of nodes <br/></p>
+<div class="characteristic">
+<p>the nodes in the last level in an almost complete binary tree have to appear continuously from left to right <br/></p>
+</div>
+<div class="characteristic">
+<p>every <a href="#complete-tree">complete tree</a> is an <a href="#almost-complete-tree">almost complete tree</a> but not every almost complete tree is a complete tree <br/></p>
+</div>
+<div class="characteristic">
+<p>every level contains 2 times as many nodes as the level before it, except perhaps for the last level <br/></p>
+</div>
+<div class="characteristic">
+<p>the height of a tree is \(\floor*{\log_2 n}\) <br/></p>
+</div>
+<div class="characteristic">
+<p>the number of nodes in a tree is \(\ceil*{\frac{n}{2}}\) <br/></p>
+</div>
+<div class="characteristic">
+<p>the number of nodes at height \(i\) is \(\ceil*{\frac{n}{2i+1}}\) <br/></p>
+</div>
+</div>
+<h4 id="breadth-first-search"><span class="section-num">6.7.12</span> breadth-first search</h4>
+<p><strong>breadth-first search</strong> or <strong>BFS</strong> for short, explores each level before moving onto the next one <br/>
+extra memory, usually a <a href="#queue">queue</a>, is needed to keep track of the child nodes that were encountered but not yet explored. <br/>
+<img src="/ox-hugo/Animated_BFS.gif" alt=""> <br/></p>
+<h4 id="depth-first-search"><span class="section-num">6.7.13</span> depth-first search</h4>
+<p><strong>depth-first search</strong> or <strong>DFS</strong> for short, consists of exploring branches as far as possible before <a href="#backtracking">backtracking</a> and exploring branches of other nodes <br/>
+this is the algorithm we&rsquo;ll be using because its simpler <br/>
+<img src="/ox-hugo/bfs_dfs.gif" alt=""> <br/></p>
+<h5 id="inorder-traversal"><span class="section-num">6.7.13.1</span> inorder traversal</h5>
+<p>left, parent, right <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span>Algorithm inorder(tree)
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">1.</span> go to the left child, i.e., call inorder(left<span style="color:#f92672">-</span>child), print it
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">2.</span> go back to the parent, print it
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">3.</span> go to the right child, i.e., call inorder(right<span style="color:#f92672">-</span>child), print it
+</span></span></code></pre></div><div class="note">
+<p>note that before printing a child will always call <code>inorder(left-child)</code>, so the first node to print would be the leftmost node in the deepest level <br/></p>
+</div>
+<h5 id="preorder-traversal"><span class="section-num">6.7.13.2</span> preorder traversal</h5>
+<p>parent, left, right <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span>Algorithm preorder(tree)
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">1.</span> visit the parent, print it
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">2.</span> go to the left child, i.e., call preorder(left<span style="color:#f92672">-</span>child), print it
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">3.</span> go to the right child, i.e., call preorder(right<span style="color:#f92672">-</span>child), print it
+</span></span></code></pre></div><h5 id="postorder-traversal"><span class="section-num">6.7.13.3</span> postorder traversal</h5>
+<p>left, right, parent <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span>Algorithm postorder(tree)
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">1.</span> go to the left child, i.e., call postorder(left<span style="color:#f92672">-</span>child), print it
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">2.</span> go to the right child, i.e., call postorder(right<span style="color:#f92672">-</span>child), print it
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">3.</span> visit the parent, print it
+</span></span></code></pre></div><h4 id="binary-tree"><span class="section-num">6.7.14</span> binary tree</h4>
+<div class="definition">
+<p>a <strong>binary tree</strong> is a <a href="#concrete-data-type">concrete data type</a> that is an implementation of a <a href="#tree">tree</a> <br/></p>
+</div>
+<h5 id="binarytreenode"><span class="section-num">6.7.14.1</span> BinaryTreeNode</h5>
+<p><a id="code-snippet--BinaryTreeNode"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinaryTree</span>; <span style="color:#75715e">/* forward declare the class instead of including it */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinaryTreeNode</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> parent;
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> right;
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> left;
+</span></span><span style="display:flex;"><span>  T value;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> key;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  BinaryTreeNode(<span style="color:#66d9ef">int</span> key, T value)  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key <span style="color:#f92672">=</span> key;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>value <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key <span style="color:#f92672">=</span> key;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>value <span style="color:#f92672">=</span> key;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">~</span>BinaryTreeNode()  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_parent</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_right</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (node <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)
+</span></span><span style="display:flex;"><span>      node<span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_left</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (node <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)
+</span></span><span style="display:flex;"><span>      node<span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_parent() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_right() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_left() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_right</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_left</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_parent</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  T <span style="color:#a6e22e">get_value</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>value;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get_key</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_leaf</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right());
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_right_child</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent<span style="color:#f92672">-&gt;</span>get_right() <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_left_child</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent<span style="color:#f92672">-&gt;</span>get_left() <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">height</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> right_height <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>height() <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> left_height <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>height() <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (left_height <span style="color:#f92672">&gt;</span> right_height) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> left_height;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> right_height;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key <span style="color:#f92672">==</span> key) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>find(key) <span style="color:#f92672">:</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>find(key) <span style="color:#f92672">:</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n_left <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">?</span> n_left : n_right;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">balance_factor</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>height() <span style="color:#f92672">-</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>height();
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>height();
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">-</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>height();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_balanced</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> is_left_balanced <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>is_balanced() <span style="color:#f92672">:</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> is_right_balanced <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>is_balanced() <span style="color:#f92672">:</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span><span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_problematic() <span style="color:#f92672">&amp;&amp;</span> is_left_balanced <span style="color:#f92672">&amp;&amp;</span> is_right_balanced;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_problematic</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> abs(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>balance_factor()) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find_problematic_node() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_problematic())
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> p_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> p_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left())
+</span></span><span style="display:flex;"><span>      p_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>find_problematic_node();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right())
+</span></span><span style="display:flex;"><span>      p_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>find_problematic_node();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> p_left <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">?</span> p_right : p_left;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_complete</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_leaf())
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>distance_to(root) <span style="color:#f92672">==</span> root<span style="color:#f92672">-&gt;</span>height();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left())
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right<span style="color:#f92672">-&gt;</span>is_complete(root) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left<span style="color:#f92672">-&gt;</span>is_complete(root);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">distance_to</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> other) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (other<span style="color:#f92672">-&gt;</span>height() <span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>height()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> other<span style="color:#f92672">-&gt;</span>find_path(<span style="color:#66d9ef">this</span>)<span style="color:#f92672">-&gt;</span>height();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>find_path(other)<span style="color:#f92672">-&gt;</span>height();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find_path(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> other) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span> <span style="color:#f92672">==</span> other) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(other<span style="color:#f92672">-&gt;</span>key, other<span style="color:#f92672">-&gt;</span>value);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left()) {
+</span></span><span style="display:flex;"><span>        BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>find_path(other);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n_left <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+</span></span><span style="display:flex;"><span>          BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>value);
+</span></span><span style="display:flex;"><span>          node<span style="color:#f92672">-&gt;</span>set_left(n_left);
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">return</span> node;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right()) {
+</span></span><span style="display:flex;"><span>        BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>find_path(other);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n_right <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+</span></span><span style="display:flex;"><span>          BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>value);
+</span></span><span style="display:flex;"><span>          node<span style="color:#f92672">-&gt;</span>set_right(n_right);
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">return</span> node;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find_rightmost_leaf() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_leaf() <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>level() <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>find_root()<span style="color:#f92672">-&gt;</span>height()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> from_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>find_rightmost_leaf() <span style="color:#f92672">:</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (from_right <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> from_right;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>find_rightmost_leaf() <span style="color:#f92672">:</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find_leftmost_leaf() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_leaf() <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>level() <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>find_root()<span style="color:#f92672">-&gt;</span>height() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> from_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_left()<span style="color:#f92672">-&gt;</span>find_leftmost_leaf() <span style="color:#f92672">:</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (from_left <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> from_left;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_right()<span style="color:#f92672">-&gt;</span>find_leftmost_leaf() <span style="color:#f92672">:</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_right_and_left</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_right</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent<span style="color:#f92672">-&gt;</span>get_right() <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_left</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent<span style="color:#f92672">-&gt;</span>get_left() <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_right_uncle() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>parent<span style="color:#f92672">-&gt;</span>parent<span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">level</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> lvl <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (n<span style="color:#f92672">-&gt;</span>has_parent()) {
+</span></span><span style="display:flex;"><span>      lvl<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>      n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_parent();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> lvl;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find_root() {
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (n<span style="color:#f92672">-&gt;</span>has_parent()) {
+</span></span><span style="display:flex;"><span>      n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_parent();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_left())
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>left<span style="color:#f92672">-&gt;</span>print();
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>key <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>has_right())
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>right<span style="color:#f92672">-&gt;</span>print();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h5 id="binarytree"><span class="section-num">6.7.14.2</span> BinaryTree</h5>
+<p><a id="code-snippet--BinaryTree"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinaryTree</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> root;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  BinaryTree() { root <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>; }
+</span></span><span style="display:flex;"><span>  BinaryTree(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">~</span>BinaryTree() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> get_root() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set_root</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_empty</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">size</span>() {
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root(); n <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>; n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_right()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">++</span>i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">height</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty())
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root<span style="color:#f92672">-&gt;</span>height();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_balanced</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root()<span style="color:#f92672">-&gt;</span>is_balanced();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find_problematic_node() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root<span style="color:#f92672">-&gt;</span>find_problematic_node();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root<span style="color:#f92672">-&gt;</span>find(key);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* inorder print */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty()) <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root()<span style="color:#f92672">-&gt;</span>print();
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">empty</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> insert_right(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>set_root(node);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (n<span style="color:#f92672">-&gt;</span>has_right()) {
+</span></span><span style="display:flex;"><span>      n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_right();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    n<span style="color:#f92672">-&gt;</span>set_right(node);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> insert_left(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>set_root(node);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (n<span style="color:#f92672">-&gt;</span>has_left()) {
+</span></span><span style="display:flex;"><span>      n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_left();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    n<span style="color:#f92672">-&gt;</span>set_left(node);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> insert_right(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>insert_right(<span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(key));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> insert_left(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>insert_left(<span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(key));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_complete</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty() <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root<span style="color:#f92672">-&gt;</span>is_complete(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* note that this function gets the rightmost leaf in the last level */</span>
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find_rightmost_leaf() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root<span style="color:#f92672">-&gt;</span>find_rightmost_leaf();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* note that this function gets the leftmost leaf in the second-to-last level */</span>
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> find_leftmost_leaf() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root<span style="color:#f92672">-&gt;</span>find_leftmost_leaf();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h5 id="algorithms"><span class="section-num">6.7.14.3</span> algorithms</h5>
+<div class="question">
+<p>add to the class of a <a href="#binary-tree">binary tree</a> a function that takes in an integer \(k\) and checks if there is a node in the tree that contains exactly \(k\) <a href="#descendant">descendant</a>s, it should run in \(O(n)\) time <br/></p>
+<div class="answer">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">node_descendants</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;*</span> n, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>is_leaf()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> new_num <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>has_right()) new_num<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>has_left()) new_num<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">&amp;&amp;</span> node_descendants(n<span style="color:#f92672">-&gt;</span>get_right(), new_num))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">&amp;&amp;</span> node_descendants(n<span style="color:#f92672">-&gt;</span>get_left(), new_num))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">&amp;&amp;</span> node_descendants(n<span style="color:#f92672">-&gt;</span>get_right(), k))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">&amp;&amp;</span> node_descendants(n<span style="color:#f92672">-&gt;</span>get_left(), k))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  t.print();
+</span></span><span style="display:flex;"><span>  print_latex_forest(t.get_root());
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> node_descendants(t.get_root(), <span style="color:#ae81ff">9</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>this code runs in \(O(2n) \sim O(n)\) time <br/></p>
+</div>
+</div>
+<h4 id="binary-search-tree"><span class="section-num">6.7.15</span> binary search tree</h4>
+<p>a <strong>binary search tree</strong> is a <a href="#binary-tree">binary tree</a> that has the following restrictions: <br/></p>
+<ul>
+<li>the keys of all the nodes in the left <a href="#subtree">subtree</a> of any given <a href="#node">node</a> <code>x</code> is smaller than the key of <code>x</code> <br/></li>
+<li>the keys of all the nodes in the right side of the tree are bigger or equal to the key of <code>x</code> <br/></li>
+</ul>
+<p>for example the following tree is a binary search tree: <br/></p>
+<p><figure><img src="/ox-hugo/a0JkT1.png"/>
+</figure>
+ <br/></p>
+<h5 id="insertion"><span class="section-num">6.7.15.1</span> insertion</h5>
+<p>a new key is always inserted as a <a href="#leaf">leaf</a>. we start from the <a href="#root">root</a>, making our way downwards by comparing the new key to the key of the current node to decide which child to move to on each iteration, until we hit a leaf node, then we add the new node as its child <br/></p>
+<h5 id="binarysearchtree"><span class="section-num">6.7.15.2</span> BinarySearchTree</h5>
+<p><a id="code-snippet--BinarySearchTree"></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinarySearchTree</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  BinarySearchTree() {}
+</span></span><span style="display:flex;"><span>  BinarySearchTree(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) <span style="color:#f92672">:</span> BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(node) {}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">virtual</span> BinarySearchTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> insert(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>set_right(<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>set_left(<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>is_empty()) {
+</span></span><span style="display:flex;"><span>      BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>set_root(node);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> n <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">while</span> (true) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>get_key() <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-&gt;</span>get_key()) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>n<span style="color:#f92672">-&gt;</span>has_left()) {
+</span></span><span style="display:flex;"><span>            n<span style="color:#f92672">-&gt;</span>set_left(node);
+</span></span><span style="display:flex;"><span>            node<span style="color:#f92672">-&gt;</span>set_parent(n);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_left();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>n<span style="color:#f92672">-&gt;</span>has_right()) {
+</span></span><span style="display:flex;"><span>            n<span style="color:#f92672">-&gt;</span>set_right(node);
+</span></span><span style="display:flex;"><span>            node<span style="color:#f92672">-&gt;</span>set_parent(n);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          n <span style="color:#f92672">=</span> n<span style="color:#f92672">-&gt;</span>get_right();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinarySearchTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> insert(<span style="color:#66d9ef">int</span> key, T value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>insert(<span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(key, value));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinarySearchTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> insert(<span style="color:#66d9ef">int</span> value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>insert(<span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(value));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  BinarySearchTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> insert(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> values, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> size; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>insert(<span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(values[i]));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* this needs to be implemented asap */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* in case that node is the only one in the tree */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root()<span style="color:#f92672">-&gt;</span>is_leaf() <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root() <span style="color:#f92672">==</span> node) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>set_root(<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* in case the node has no children */</span>
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> parent <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>get_parent();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>is_leaf()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>is_right_child()) {
+</span></span><span style="display:flex;"><span>        parent<span style="color:#f92672">-&gt;</span>set_right(<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        parent<span style="color:#f92672">-&gt;</span>set_left(<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">rotate_right</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> previous_left <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>get_left();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>is_left_child()) {
+</span></span><span style="display:flex;"><span>      node<span style="color:#f92672">-&gt;</span>get_parent()<span style="color:#f92672">-&gt;</span>set_left(previous_left);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>is_right_child()) {
+</span></span><span style="display:flex;"><span>      node<span style="color:#f92672">-&gt;</span>get_parent()<span style="color:#f92672">-&gt;</span>set_right(previous_left);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (node <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>set_root(previous_left);
+</span></span><span style="display:flex;"><span>      previous_left<span style="color:#f92672">-&gt;</span>set_parent(<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>set_parent(previous_left);
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>set_left(previous_left<span style="color:#f92672">-&gt;</span>get_right());
+</span></span><span style="display:flex;"><span>    previous_left<span style="color:#f92672">-&gt;</span>set_right(node);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">rotate_left</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> node) {
+</span></span><span style="display:flex;"><span>    BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> previous_right <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>get_right();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>is_right_child()) {
+</span></span><span style="display:flex;"><span>      node<span style="color:#f92672">-&gt;</span>get_parent()<span style="color:#f92672">-&gt;</span>set_right(previous_right);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>is_left_child()) {
+</span></span><span style="display:flex;"><span>      node<span style="color:#f92672">-&gt;</span>get_parent()<span style="color:#f92672">-&gt;</span>set_left(previous_right);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (node <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>get_root()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>set_root(previous_right);
+</span></span><span style="display:flex;"><span>      previous_right<span style="color:#f92672">-&gt;</span>set_parent(<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>set_parent(previous_right);
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>set_right(previous_right<span style="color:#f92672">-&gt;</span>get_left());
+</span></span><span style="display:flex;"><span>    previous_right<span style="color:#f92672">-&gt;</span>set_left(node);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>example usage: <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  BinarySearchTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> t;
+</span></span><span style="display:flex;"><span>  t.insert(<span style="color:#ae81ff">11</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">5</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">4</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">7</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">6</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">20</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">15</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">24</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">16</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">12</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">14</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">13</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">17</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">26</span>);
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;is this tree balanced?: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.is_balanced() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;the height of this tree is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.get_root()<span style="color:#f92672">-&gt;</span>height() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;the balance factor of the root is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.get_root()<span style="color:#f92672">-&gt;</span>balance_factor() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>  print_latex_forest(t.get_root());
+</span></span><span style="display:flex;"><span>  BinaryTreeNode<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;*</span> newroot <span style="color:#f92672">=</span> t.get_root()<span style="color:#f92672">-&gt;</span>find_path(t.find(<span style="color:#ae81ff">13</span>));
+</span></span><span style="display:flex;"><span>  print_latex_forest(newroot);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">delete</span> newroot;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>is this tree balanced?: 0 <br/>
+the height of this tree is: 6 <br/>
+the balance factor of the root is: -1 <br/></p>
+<p><figure><img src="/ox-hugo/l4WxCrf.png"/>
+</figure>
+ <br/></p>
+<p><figure><img src="/ox-hugo/6uIbzb8.png"/>
+</figure>
+ <br/></p>
+<h4 id="avl-tree"><span class="section-num">6.7.16</span> AVL tree</h4>
+<p>an <strong>AVL tree</strong> is a <a href="#binary-search-tree">binary search tree</a> in which every node <code>x</code> has a <a href="#balance-factor">balance factor</a> of \(0,1,-1\), meaning: <br/>
+\[
+\left|\text{height}\left(T_{\text{left}(x)}\right) - \text{height}\left(T_{\text{right}(x)}\right)\right| \leq 1
+\] <br/>
+every node <code>x</code> of this tree holds an extra field called <code>balance</code> which holds the <a href="#balance-factor">balance factor</a> of said node <br/>
+for example, the following tree is an AVL tree: <br/></p>
+<p><figure><img src="/ox-hugo/CRLd0L.png"/>
+</figure>
+ <br/></p>
+<p>if we were to remove the node with value 14 or with value 9 this wouldnt be an AVL tree <br/></p>
+<div class="lemma">
+<p>let <code>T</code> be an AVL tree with <code>n</code> nodes and height \(h\), then \(h = \Theta(\log n)\) <br/></p>
+</div>
+<h5 id="minimal-form"><span class="section-num">6.7.16.1</span> minimal form</h5>
+<div class="definition">
+<p>a minimal form of an <a href="#avl-tree">AVL tree</a> with a given height \(h\) is one which contains the least possible number of nodes <br/></p>
+<div class="lemma">
+<p>the minimal number of nodes for a tree of height \(h\) is given by the following <a href="#recurrence-relation">recurrence relation</a> <br/></p>
+<p>\begin{align*}
+N(h)&amp;=N(h-1) + N(h-2) + 1\\
+N(1)&amp;=1\\
+N(2)&amp;=2
+\end{align*}</p>
+<div class="note">
+<p>according to some sources, the base cases are \(N(0)=1,\ N(1)=2\), but the base cases given above make more sense because a tree with a single node should have a height of 1 not 0 <br/></p>
+</div>
+</div>
+<div class="lemma">
+<p>a minimal form of an <a href="#avl-tree">AVL tree</a> with a given number of nodes \(N\) is the one with the smallest height which is given by: <br/>
+\[
+h = \log_2 N
+\] <br/></p>
+</div>
+<p>here is a python snippet to find the minimal number of nodes needed for a given height: <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(height):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> height <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> height <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> find(height<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> find(height<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> [(i,find(i)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">15</span>)]
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>height</th>
+<th>nodes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>7</td>
+</tr>
+<tr>
+<td>5</td>
+<td>12</td>
+</tr>
+<tr>
+<td>6</td>
+<td>20</td>
+</tr>
+<tr>
+<td>7</td>
+<td>33</td>
+</tr>
+<tr>
+<td>8</td>
+<td>54</td>
+</tr>
+<tr>
+<td>9</td>
+<td>88</td>
+</tr>
+<tr>
+<td>10</td>
+<td>143</td>
+</tr>
+<tr>
+<td>11</td>
+<td>232</td>
+</tr>
+<tr>
+<td>12</td>
+<td>376</td>
+</tr>
+<tr>
+<td>13</td>
+<td>609</td>
+</tr>
+<tr>
+<td>14</td>
+<td>986</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="problematic-node"><span class="section-num">6.7.16.2</span> problematic node</h5>
+<div class="definition">
+<p>a <strong>problematic node</strong> is a <a href="#node">node</a> whose <a href="#balance-factor">balance factor</a> is \(\pm2\) <br/></p>
+</div>
+<h5 id="insertion"><span class="section-num">6.7.16.3</span> insertion</h5>
+<p>the process of inserting a node to an AVL tree starts with inserting it using the same insertion method we used for a <a href="#binary-search-tree">binary search tree</a>, after said insertion we start going up the tree starting at the new node we just inserted and updating the <a href="#balance-factor">balance factor</a> for every node we encounter as we go <br/>
+if we arrive at <a href="#problematic-node">problematic node</a>, we apply the proper <a href="#rotation">rotation</a> to <a href="#rebalancing">rebalance</a> the tree <br/></p>
+<h5 id="rebalancing"><span class="section-num">6.7.16.4</span> rebalancing</h5>
+<p>during a modifying operation of a <a href="#binary-tree">binary tree</a>, a node might become <a href="#problematic-node">problematic</a>, to restore balance to the tree so that it remains an <a href="#avl-tree">AVL tree</a> we use <a href="#rotation">rotation</a>s <br/></p>
+<h6 id="rotation"><span class="section-num">6.7.16.4.1</span> rotation</h6>
+<p>to determine which type of <strong>rotation</strong> we need to use to <strong>rebalance</strong> a given tree, we go 2 steps from the <a href="#problematic-node">problematic node</a> towards the newly inserted node which gives us the following 4 cases: <br/></p>
+<ol>
+<li>if we go 2 times to the left, then the <strong>rotation</strong> is of type <a href="#left-left-rotation">LL</a> <br/></li>
+<li>if we go 2 times to the right, then the <strong>rotation</strong> is of type <a href="#right-right-rotation">RR</a> <br/></li>
+<li>if we go left and then right then the <strong>rotation</strong> is of type <a href="#left-right-rotation">LR</a> <br/></li>
+<li>if we go right and then left then the <strong>rotation</strong> is of type <a href="#right-left-rotation">RL</a> <br/></li>
+</ol>
+<!--list-separator-->
+<ol>
+<li>
+<p>simple rotation</p>
+<!--list-separator-->
+<ol>
+<li>
+<p>left left rotation</p>
+<p>let <code>z</code> be the left child of the <a href="#problematic-node">problematic node</a> and <code>x</code> be the problematic node itself <br/>
+in <strong>Left Left</strong> rotation we rotate <code>x</code> to the right, such that the left child of <code>x</code> replaces <code>x</code> and <code>x</code> gets &ldquo;rotated&rdquo; to the right becoming the right child of <code>z</code> and a parent of the previous right child of <code>z</code> <br/></p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+    
+    
+    
+        <h4 class="page-header">Related</h4>
+         <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/20220813151352-probability/">probability</a></h4>
+    <h5>probability theory</h5>
+  August 13, 2022
+    
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/linear_algebra2/">linear algebra</a></h4>
+    <h5>linear algebra</h5>
+  August 12, 2022
+    
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/discrete_maths2/">discrete math</a></h4>
+    <h5>discrete math</h5>
+  June 20, 2022
+    
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
+
+
+
+</div>
+ 
+    
+
+    
+    
+
+</main>
+
+        <footer>
+          
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+

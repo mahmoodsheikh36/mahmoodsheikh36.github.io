@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>homework 8</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.102.1" />
+        
+
+        
+
+        
+            
+        
+
+        
+
+    </head>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">homework 8</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fas fa-envelope"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/username/"><i class="fab fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/username/"><i class="fab fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fab fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/username/"><i class="fab fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div>
+        <h2>homework 8</h2>
+        <h5>June 17, 2022</h5>
+        
+
+    </div>
+
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
+  padding: 2px;
+  border: 1px black solid;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<div class="note">
+<p>all the code ive written and used can be found on my <a href="https://blog.mahmoodsheikh.com/post/data_structures/">blog</a> <br/></p>
+</div>
+<div class="question">
+<p>given the sequence \(3,2,7,9,5,4,3.5,4.5,3.2,4.7,1,10,11,10.5,2.5,3.7,12\) <br/></p>
+<div class="subquestion">
+<p>insert the sequence into a <a href="/post/data_structures/#binary-search-tree">binary search tree</a> step by step <br/></p>
+<div class="answer">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> seq[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3.5</span>,<span style="color:#ae81ff">4.5</span>,<span style="color:#ae81ff">3.2</span>,<span style="color:#ae81ff">4.7</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">10.5</span>,<span style="color:#ae81ff">2.5</span>,<span style="color:#ae81ff">3.7</span>,<span style="color:#ae81ff">12</span>};
+</span></span><span style="display:flex;"><span>  BinarySearchTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> t;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">17</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;inserting &#34;</span> <span style="color:#f92672">&lt;&lt;</span> seq[i] <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    t.insert((<span style="color:#66d9ef">int</span>)(seq[i]<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>), seq[i]);
+</span></span><span style="display:flex;"><span>    print_latex_forest(t.get_root(), true);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;height of the tree: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.height() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>inserting 3 <br/></p>
+<p><figure><img src="/ox-hugo/kPftYhx.png"/>
+</figure>
+ <br/></p>
+<p>inserting 2 <br/></p>
+<p><figure><img src="/ox-hugo/tVy9wZy.png"/>
+</figure>
+ <br/></p>
+<p>inserting 7 <br/></p>
+<p><figure><img src="/ox-hugo/pQNu5ZN.png"/>
+</figure>
+ <br/></p>
+<p>inserting 9 <br/></p>
+<p><figure><img src="/ox-hugo/v1PLHCn.png"/>
+</figure>
+ <br/></p>
+<p>inserting 5 <br/></p>
+<p><figure><img src="/ox-hugo/2VfOz0i.png"/>
+</figure>
+ <br/></p>
+<p>inserting 4 <br/></p>
+<p><figure><img src="/ox-hugo/qXJVsOw.png"/>
+</figure>
+ <br/></p>
+<p>inserting 3.5 <br/></p>
+<p><figure><img src="/ox-hugo/fMZQw47.png"/>
+</figure>
+ <br/></p>
+<p>inserting 4.5 <br/></p>
+<p><figure><img src="/ox-hugo/BpqAJft.png"/>
+</figure>
+ <br/></p>
+<p>inserting 3.2 <br/></p>
+<p><figure><img src="/ox-hugo/jyVx29E.png"/>
+</figure>
+ <br/></p>
+<p>inserting 4.7 <br/></p>
+<p><figure><img src="/ox-hugo/qpgakls.png"/>
+</figure>
+ <br/></p>
+<p>inserting 1 <br/></p>
+<p><figure><img src="/ox-hugo/z9f9dlA.png"/>
+</figure>
+ <br/></p>
+<p>inserting 10 <br/></p>
+<p><figure><img src="/ox-hugo/RYB5Dbz.png"/>
+</figure>
+ <br/></p>
+<p>inserting 11 <br/></p>
+<p><figure><img src="/ox-hugo/WQsHI7a.png"/>
+</figure>
+ <br/></p>
+<p>inserting 10.5 <br/></p>
+<p><figure><img src="/ox-hugo/pBvDN1R.png"/>
+</figure>
+ <br/></p>
+<p>inserting 2.5 <br/></p>
+<p><figure><img src="/ox-hugo/lmrpssr.png"/>
+</figure>
+ <br/></p>
+<p>inserting 3.7 <br/></p>
+<p><figure><img src="/ox-hugo/o02eOFx.png"/>
+</figure>
+ <br/></p>
+<p>inserting 12 <br/></p>
+<p><figure><img src="/ox-hugo/OPazzvO.png"/>
+</figure>
+ <br/></p>
+<p>height of the tree: 6 <br/></p>
+</div>
+</div>
+<div class="subquestion">
+<p>insert the sequence into an <a href="/post/data_structures/#avl-tree">AVL tree</a>, show the steps <br/></p>
+<div class="answer">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> seq[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3.5</span>,<span style="color:#ae81ff">4.5</span>,<span style="color:#ae81ff">3.2</span>,<span style="color:#ae81ff">4.7</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">10.5</span>,<span style="color:#ae81ff">2.5</span>,<span style="color:#ae81ff">3.7</span>,<span style="color:#ae81ff">12</span>};
+</span></span><span style="display:flex;"><span>  AVLTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> t;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">17</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;inserting &#34;</span> <span style="color:#f92672">&lt;&lt;</span> seq[i] <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>    t.insert((<span style="color:#66d9ef">int</span>)(seq[i]<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>), seq[i]);
+</span></span><span style="display:flex;"><span>    print_latex_forest(t.get_root(), true);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;height of the tree: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.height() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>inserting 3 <br/></p>
+<p><figure><img src="/ox-hugo/eHkSf3i.png"/>
+</figure>
+ <br/></p>
+<p>inserting 2 <br/></p>
+<p><figure><img src="/ox-hugo/HzZORuO.png"/>
+</figure>
+ <br/></p>
+<p>inserting 7 <br/></p>
+<p><figure><img src="/ox-hugo/g8IoJyr.png"/>
+</figure>
+ <br/></p>
+<p>inserting 9 <br/></p>
+<p><figure><img src="/ox-hugo/kBPfNdI.png"/>
+</figure>
+ <br/></p>
+<p>inserting 5 <br/></p>
+<p><figure><img src="/ox-hugo/2fx0LHr.png"/>
+</figure>
+ <br/></p>
+<p>inserting 4 <br/>
+right left rotation of 3 <br/></p>
+<p><figure><img src="/ox-hugo/swMVGVn.png"/>
+</figure>
+ <br/></p>
+<p>inserting 3.5 <br/></p>
+<p><figure><img src="/ox-hugo/z5JGQDd.png"/>
+</figure>
+ <br/></p>
+<p>inserting 4.5 <br/></p>
+<p><figure><img src="/ox-hugo/reZwe7H.png"/>
+</figure>
+ <br/></p>
+<p>inserting 3.2 <br/>
+right left rotation of 3 <br/></p>
+<p><figure><img src="/ox-hugo/jo9O6Yz.png"/>
+</figure>
+ <br/></p>
+<p>inserting 4.7 <br/>
+right right rotation of 4 <br/></p>
+<p><figure><img src="/ox-hugo/Jp8X3IG.png"/>
+</figure>
+ <br/></p>
+<p>inserting 1 <br/>
+left left rotation of 5 <br/></p>
+<p><figure><img src="/ox-hugo/xddl1Mx.png"/>
+</figure>
+ <br/></p>
+<p>inserting 10 <br/>
+right right rotation of 7 <br/></p>
+<p><figure><img src="/ox-hugo/OuK7WW8.png"/>
+</figure>
+ <br/></p>
+<p>inserting 11 <br/></p>
+<p><figure><img src="/ox-hugo/Up2coSH.png"/>
+</figure>
+ <br/></p>
+<p>inserting 10.5 <br/>
+right left rotation of 10 <br/></p>
+<p><figure><img src="/ox-hugo/L9YWGOW.png"/>
+</figure>
+ <br/></p>
+<p>inserting 2.5 <br/></p>
+<p><figure><img src="/ox-hugo/ZET3u5d.png"/>
+</figure>
+ <br/></p>
+<p>inserting 3.7 <br/></p>
+<p><figure><img src="/ox-hugo/f4RXWe2.png"/>
+</figure>
+ <br/></p>
+<p>inserting 12 <br/>
+right right rotation of 9 <br/></p>
+<p><figure><img src="/ox-hugo/DXGAJ6t.png"/>
+</figure>
+ <br/></p>
+<p>height of the tree: 5 <br/></p>
+</div>
+</div>
+<div class="subquestion">
+<p>insert the sequence into a <a href="/post/data_structures/#2-3-tree">2-3 tree</a>, show the steps <br/></p>
+<div class="answer">
+<div class="note">
+<p>currently, my implementation of 2-3 trees doesnt allow floats, so i will multiply the numbers by 10 and insert them, we should get the same results <br/></p>
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  TwoThreeTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> t;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> seq[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3.5</span>,<span style="color:#ae81ff">4.5</span>,<span style="color:#ae81ff">3.2</span>,<span style="color:#ae81ff">4.7</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">10.5</span>,<span style="color:#ae81ff">2.5</span>,<span style="color:#ae81ff">3.7</span>,<span style="color:#ae81ff">12</span>};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">17</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;inserting &#34;</span> <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#66d9ef">int</span>)(seq[i]<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; 
+</span></span><span style="display:flex;"><span>    t.add_key_value((<span style="color:#66d9ef">int</span>)(seq[i]<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>), seq[i]);
+</span></span><span style="display:flex;"><span>    print_latex_forest_twothree_tree(t.get_root());
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;height of the tree: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.height() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>inserting 30 <br/></p>
+<p><figure><img src="/ox-hugo/S0R9r4U.png"/>
+</figure>
+ <br/></p>
+<p>inserting 20 <br/>
+adding key 20 to 30 \(\varnothing\) \(\varnothing\) <br/>
+added 20 to 30 \(\varnothing\) \(\varnothing\) and got 20 30 \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/bHUy1qK.png"/>
+</figure>
+ <br/></p>
+<p>inserting 70 <br/>
+adding key 70 to 20 30 \(\varnothing\) <br/>
+balance 20 30 70 <br/>
+root: 20 30 70 <br/>
+created new root 30 \(\varnothing\) \(\varnothing\) to replace 20 30 70, left child: 20 \(\varnothing\) \(\varnothing\), right child: 70 \(\varnothing\) \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/Mczb3G7.png"/>
+</figure>
+ <br/></p>
+<p>inserting 90 <br/>
+adding key 90 to 70 \(\varnothing\) \(\varnothing\) <br/>
+added 90 to 70 \(\varnothing\) \(\varnothing\) and got 70 90 \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/7dcXhWg.png"/>
+</figure>
+ <br/></p>
+<p>inserting 50 <br/>
+adding key 50 to 70 90 \(\varnothing\) <br/>
+balance 50 70 90 <br/>
+root: 30 \(\varnothing\) \(\varnothing\) <br/>
+adding 70 to 30 \(\varnothing\) \(\varnothing\) to get 30 70 \(\varnothing\) <br/>
+split 50 \(\varnothing\) 90 <br/>
+inserting right 90 \(\varnothing\) \(\varnothing\) as a 2th child of 30 70 \(\varnothing\) <br/>
+inserting left 50 \(\varnothing\) \(\varnothing\) as a 1th child of 30 70 \(\varnothing\) <br/>
+balance 30 70 \(\varnothing\) recursively <br/>
+root: 30 70 \(\varnothing\) <br/>
+30 70 \(\varnothing\) is good. <br/></p>
+<p><figure><img src="/ox-hugo/u29946r.png"/>
+</figure>
+ <br/></p>
+<p>inserting 40 <br/>
+adding key 40 to 50 \(\varnothing\) \(\varnothing\) <br/>
+added 40 to 50 \(\varnothing\) \(\varnothing\) and got 40 50 \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/RQaxd2q.png"/>
+</figure>
+ <br/></p>
+<p>inserting 35 <br/>
+adding key 35 to 40 50 \(\varnothing\) <br/>
+balance 35 40 50 <br/>
+root: 30 70 \(\varnothing\) <br/>
+adding 40 to 30 70 \(\varnothing\) to get 30 40 70 <br/>
+split 35 \(\varnothing\) 50 <br/>
+inserting right 50 \(\varnothing\) \(\varnothing\) as a 2th child of 30 40 70 <br/>
+inserting left 35 \(\varnothing\) \(\varnothing\) as a 1th child of 30 40 70 <br/>
+balance 30 40 70 recursively <br/>
+root: 30 40 70 <br/>
+created new root 40 \(\varnothing\) \(\varnothing\) to replace 30 40 70, left child: 30 \(\varnothing\) \(\varnothing\), right child: 70 \(\varnothing\) \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/VpO9Xwp.png"/>
+</figure>
+ <br/></p>
+<p>inserting 45 <br/>
+adding key 45 to 50 \(\varnothing\) \(\varnothing\) <br/>
+added 45 to 50 \(\varnothing\) \(\varnothing\) and got 45 50 \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/Hqe5HfO.png"/>
+</figure>
+ <br/></p>
+<p>inserting 32 <br/>
+adding key 32 to 35 \(\varnothing\) \(\varnothing\) <br/>
+added 32 to 35 \(\varnothing\) \(\varnothing\) and got 32 35 \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/zqrQSyj.png"/>
+</figure>
+ <br/></p>
+<p>inserting 47 <br/>
+adding key 47 to 45 50 \(\varnothing\) <br/>
+balance 45 47 50 <br/>
+root: 40 \(\varnothing\) \(\varnothing\) <br/>
+adding 47 to 70 \(\varnothing\) \(\varnothing\) to get 47 70 \(\varnothing\) <br/>
+split 45 \(\varnothing\) 50 <br/>
+inserting right 50 \(\varnothing\) \(\varnothing\) as a 1th child of 47 70 \(\varnothing\) <br/>
+inserting left 45 \(\varnothing\) \(\varnothing\) as a 0th child of 47 70 \(\varnothing\) <br/>
+balance 47 70 \(\varnothing\) recursively <br/>
+root: 40 \(\varnothing\) \(\varnothing\) <br/>
+47 70 \(\varnothing\) is good. <br/></p>
+<p><figure><img src="/ox-hugo/C2ZrfBJ.png"/>
+</figure>
+ <br/></p>
+<p>inserting 10 <br/>
+adding key 10 to 20 \(\varnothing\) \(\varnothing\) <br/>
+added 10 to 20 \(\varnothing\) \(\varnothing\) and got 10 20 \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/G56s38U.png"/>
+</figure>
+ <br/></p>
+<p>inserting 100 <br/>
+adding key 100 to 90 \(\varnothing\) \(\varnothing\) <br/>
+added 100 to 90 \(\varnothing\) \(\varnothing\) and got 90 100 \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/7myg6kg.png"/>
+</figure>
+ <br/></p>
+<p>inserting 110 <br/>
+adding key 110 to 90 100 \(\varnothing\) <br/>
+balance 90 100 110 <br/>
+root: 40 \(\varnothing\) \(\varnothing\) <br/>
+adding 100 to 47 70 \(\varnothing\) to get 47 70 100 <br/>
+split 90 \(\varnothing\) 110 <br/>
+inserting right 110 \(\varnothing\) \(\varnothing\) as a 3th child of 47 70 100 <br/>
+inserting left 90 \(\varnothing\) \(\varnothing\) as a 2th child of 47 70 100 <br/>
+balance 47 70 100 recursively <br/>
+root: 40 \(\varnothing\) \(\varnothing\) <br/>
+adding 70 to 40 \(\varnothing\) \(\varnothing\) to get 40 70 \(\varnothing\) <br/>
+split 47 \(\varnothing\) 100 <br/>
+inserting right 100 \(\varnothing\) \(\varnothing\) as a 2th child of 40 70 \(\varnothing\) <br/>
+inserting left 47 \(\varnothing\) \(\varnothing\) as a 1th child of 40 70 \(\varnothing\) <br/>
+balance 40 70 \(\varnothing\) recursively <br/>
+root: 40 70 \(\varnothing\) <br/>
+40 70 \(\varnothing\) is good. <br/></p>
+<p><figure><img src="/ox-hugo/yl5IOFW.png"/>
+</figure>
+ <br/></p>
+<p>inserting 105 <br/>
+adding key 105 to 110 \(\varnothing\) \(\varnothing\) <br/>
+added 105 to 110 \(\varnothing\) \(\varnothing\) and got 105 110 \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/tnU0nXJ.png"/>
+</figure>
+ <br/></p>
+<p>inserting 25 <br/>
+adding key 25 to 10 20 \(\varnothing\) <br/>
+balance 10 20 25 <br/>
+root: 40 70 \(\varnothing\) <br/>
+adding 20 to 30 \(\varnothing\) \(\varnothing\) to get 20 30 \(\varnothing\) <br/>
+split 10 \(\varnothing\) 25 <br/>
+inserting right 25 \(\varnothing\) \(\varnothing\) as a 1th child of 20 30 \(\varnothing\) <br/>
+inserting left 10 \(\varnothing\) \(\varnothing\) as a 0th child of 20 30 \(\varnothing\) <br/>
+balance 20 30 \(\varnothing\) recursively <br/>
+root: 40 70 \(\varnothing\) <br/>
+20 30 \(\varnothing\) is good. <br/></p>
+<p><figure><img src="/ox-hugo/zBc6LZW.png"/>
+</figure>
+ <br/></p>
+<p>inserting 37 <br/>
+adding key 37 to 32 35 \(\varnothing\) <br/>
+balance 32 35 37 <br/>
+root: 40 70 \(\varnothing\) <br/>
+adding 35 to 20 30 \(\varnothing\) to get 20 30 35 <br/>
+split 32 \(\varnothing\) 37 <br/>
+inserting right 37 \(\varnothing\) \(\varnothing\) as a 3th child of 20 30 35 <br/>
+inserting left 32 \(\varnothing\) \(\varnothing\) as a 2th child of 20 30 35 <br/>
+balance 20 30 35 recursively <br/>
+root: 40 70 \(\varnothing\) <br/>
+adding 30 to 40 70 \(\varnothing\) to get 30 40 70 <br/>
+split 20 \(\varnothing\) 35 <br/>
+inserting right 35 \(\varnothing\) \(\varnothing\) as a 1th child of 30 40 70 <br/>
+inserting left 20 \(\varnothing\) \(\varnothing\) as a 0th child of 30 40 70 <br/>
+balance 30 40 70 recursively <br/>
+root: 30 40 70 <br/>
+created new root 40 \(\varnothing\) \(\varnothing\) to replace 30 40 70, left child: 30 \(\varnothing\) \(\varnothing\), right child: 70 \(\varnothing\) \(\varnothing\) <br/></p>
+<p><figure><img src="/ox-hugo/Xx32Jef.png"/>
+</figure>
+ <br/></p>
+<p>inserting 120 <br/>
+adding key 120 to 105 110 \(\varnothing\) <br/>
+balance 105 110 120 <br/>
+root: 40 \(\varnothing\) \(\varnothing\) <br/>
+adding 110 to 100 \(\varnothing\) \(\varnothing\) to get 100 110 \(\varnothing\) <br/>
+split 105 \(\varnothing\) 120 <br/>
+inserting right 120 \(\varnothing\) \(\varnothing\) as a 2th child of 100 110 \(\varnothing\) <br/>
+inserting left 105 \(\varnothing\) \(\varnothing\) as a 1th child of 100 110 \(\varnothing\) <br/>
+balance 100 110 \(\varnothing\) recursively <br/>
+root: 40 \(\varnothing\) \(\varnothing\) <br/>
+100 110 \(\varnothing\) is good. <br/></p>
+<p><figure><img src="/ox-hugo/OcWGtM0.png"/>
+</figure>
+ <br/></p>
+<p>height of the tree: 4 <br/></p>
+</div>
+</div>
+</div>
+<div class="question">
+<p>write a function to find the closest key to a given key in an <a href="/post/data_structures/#avl-tree">AVL tree</a> <br/></p>
+<div class="answer">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;climits&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find_closest</span>(BinaryTreeNode<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;*</span> node, <span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>is_leaf()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> node<span style="color:#f92672">-&gt;</span>get_key();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> diff <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>get_key() <span style="color:#f92672">==</span> key <span style="color:#f92672">?</span> INT_MAX : abs(node<span style="color:#f92672">-&gt;</span>get_key() <span style="color:#f92672">-</span> key);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> left_key <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">?</span> find_closest(node<span style="color:#f92672">-&gt;</span>get_left(), key) <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> right_key <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">?</span> find_closest(node<span style="color:#f92672">-&gt;</span>get_right(), key) <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> left_diff <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>has_left() <span style="color:#f92672">&amp;&amp;</span> left_key <span style="color:#f92672">!=</span> key <span style="color:#f92672">?</span> abs(left_key <span style="color:#f92672">-</span> key) <span style="color:#f92672">:</span> INT_MAX;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> right_diff <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>has_right() <span style="color:#f92672">&amp;&amp;</span> right_key <span style="color:#f92672">!=</span> key <span style="color:#f92672">?</span> abs(right_key <span style="color:#f92672">-</span> key) <span style="color:#f92672">:</span> INT_MAX;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> arr[] <span style="color:#f92672">=</span> {diff, left_diff, right_diff};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> min_diff <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>std<span style="color:#f92672">::</span>min_element(arr, arr<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (min_diff <span style="color:#f92672">==</span> diff)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> node<span style="color:#f92672">-&gt;</span>get_key();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (min_diff <span style="color:#f92672">==</span> right_diff)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> right_key;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> left_key;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  AVLTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> t;
+</span></span><span style="display:flex;"><span>  t.insert(<span style="color:#ae81ff">11</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">5</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">4</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">7</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">6</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">20</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">15</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">24</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">16</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">12</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">14</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">13</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">17</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">26</span>);
+</span></span><span style="display:flex;"><span>  print_latex_forest(t.get_root());
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;closest number to 14 is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> find_closest(t.get_root(), <span style="color:#ae81ff">14</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;closest number to 7 is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> find_closest(t.get_root(), <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;closest number to 26 is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> find_closest(t.get_root(), <span style="color:#ae81ff">26</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;closest number to 50 is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> find_closest(t.get_root(), <span style="color:#ae81ff">50</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><figure><img src="/ox-hugo/DIRQS1m.png"/>
+</figure>
+ <br/></p>
+<p>closest number to 14 is: 15 <br/>
+closest number to 7 is: 6 <br/>
+closest number to 26 is: 24 <br/>
+closest number to 50 is: 26 <br/></p>
+</div>
+</div>
+<div class="question">
+<p>write a function to find the closest key to a given key in a <a href="/post/data_structures/#2-3-tree">2-3 tree</a> <br/></p>
+<div class="answer">
+<br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;climits&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find_closest</span>(TwoThreeNode<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;*</span> node, <span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>is_leaf()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> left_key <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>has_left_key() <span style="color:#f92672">?</span> node<span style="color:#f92672">-&gt;</span>get_left_key() <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> right_key <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>has_right_key() <span style="color:#f92672">?</span> node<span style="color:#f92672">-&gt;</span>get_right_key() <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> right_diff <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>has_right_key() <span style="color:#f92672">?</span> abs(key <span style="color:#f92672">-</span> right_key) <span style="color:#f92672">:</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> left_diff <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>has_left_key() <span style="color:#f92672">?</span> abs(key <span style="color:#f92672">-</span> left_key) <span style="color:#f92672">:</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (right_diff <span style="color:#f92672">&lt;</span> left_diff <span style="color:#f92672">&amp;&amp;</span> right_key <span style="color:#f92672">!=</span> key)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> right_key;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> left_key;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> keys[] <span style="color:#f92672">=</span> {node<span style="color:#f92672">-&gt;</span>has_right_key() <span style="color:#f92672">?</span> node<span style="color:#f92672">-&gt;</span>get_right_key() <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>has_left_key() <span style="color:#f92672">?</span> node<span style="color:#f92672">-&gt;</span>get_left_key() <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>has_left_child() <span style="color:#f92672">?</span> find_closest(node<span style="color:#f92672">-&gt;</span>get_left_child(), key) <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>has_mid_child() <span style="color:#f92672">?</span> find_closest(node<span style="color:#f92672">-&gt;</span>get_mid_child(), key) <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>has_right_child() <span style="color:#f92672">?</span> find_closest(node<span style="color:#f92672">-&gt;</span>get_right_child(), key) <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> diff[] <span style="color:#f92672">=</span> {node<span style="color:#f92672">-&gt;</span>has_right_key() <span style="color:#f92672">?</span> abs(key <span style="color:#f92672">-</span> node<span style="color:#f92672">-&gt;</span>get_right_key()) <span style="color:#f92672">:</span> INT_MAX,
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>has_left_key() <span style="color:#f92672">?</span> abs(key <span style="color:#f92672">-</span> node<span style="color:#f92672">-&gt;</span>get_left_key()) <span style="color:#f92672">:</span> INT_MAX,
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>has_left_child() <span style="color:#f92672">?</span> abs(key <span style="color:#f92672">-</span> find_closest(node<span style="color:#f92672">-&gt;</span>get_left_child(), key)) <span style="color:#f92672">:</span> INT_MAX,
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>has_mid_child() <span style="color:#f92672">?</span> abs(key <span style="color:#f92672">-</span> find_closest(node<span style="color:#f92672">-&gt;</span>get_mid_child(), key)) <span style="color:#f92672">:</span> INT_MAX,
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>has_right_child() <span style="color:#f92672">?</span> abs(key <span style="color:#f92672">-</span> find_closest(node<span style="color:#f92672">-&gt;</span>get_right_child(), key)) <span style="color:#f92672">:</span> INT_MAX};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> min_diff_idx <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (min_diff_idx <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> diff[i] <span style="color:#f92672">&lt;</span> diff[min_diff_idx])
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (keys[i] <span style="color:#f92672">!=</span> key)
+</span></span><span style="display:flex;"><span>        min_diff_idx <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> keys[min_diff_idx];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  TwoThreeTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> t;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> seq[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3.5</span>,<span style="color:#ae81ff">4.5</span>,<span style="color:#ae81ff">3.2</span>,<span style="color:#ae81ff">4.7</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">10.5</span>,<span style="color:#ae81ff">2.5</span>,<span style="color:#ae81ff">3.7</span>,<span style="color:#ae81ff">12</span>};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">17</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    t.add_key_value((<span style="color:#66d9ef">int</span>)(seq[i]<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>), seq[i]);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  print_latex_forest_twothree_tree(t.get_root());
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;closest number to 100 is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> find_closest(t.get_root(), <span style="color:#ae81ff">100</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;closest number to 200 is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> find_closest(t.get_root(), <span style="color:#ae81ff">200</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;closest number to 10 is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> find_closest(t.get_root(), <span style="color:#ae81ff">10</span>) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><figure><img src="/ox-hugo/rJZ7Ccg.png"/>
+</figure>
+ <br/></p>
+<p>closest number to 100 is: 105 <br/>
+closest number to 200 is: 120 <br/>
+closest number to 10 is: 20 <br/></p>
+</div>
+</div></div>
+
+    
+    
+    
+
+    
+    
+
+</main>
+
+        <footer>
+          
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+

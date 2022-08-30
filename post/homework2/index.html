@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>networking homework 2</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.102.1" />
+        
+
+        
+
+        
+            
+        
+
+        
+
+    </head>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">networking homework 2</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fas fa-envelope"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/username/"><i class="fab fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/username/"><i class="fab fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fab fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/username/"><i class="fab fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div>
+        <h2>networking homework 2</h2>
+        <h5>January 1, 0001</h5>
+        
+
+    </div>
+
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
+  padding: 2px;
+  border: 1px black solid;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<div class="question">
+<p>the <a href="/post/20220813151352-probability/">probability</a> of a successful transmission of a packet in the first link is 0.56 <br/>
+the probability of a successful transmission of a packet in the second link is 0.24 <br/>
+a packet is delivered in both links for it to arrive successfully at the destination <br/>
+we have 10 packets to transmit <br/></p>
+<div class="subquestion">
+<p>find the probability of 3/10 successful transmissions of packets in both links <br/></p>
+<div class="answer">
+<p>the odds of a successful transmission is \(0.56 \cdot 0.24 = 0.1344\) <br/>
+using <a href="/post/20220813151352-probability/#bernoulli-distribution">Bernoulli distribution</a>: <br/>
+\[
+P(3) = \binom{10}{3}0.1344^3{(1-0.1344)}^{10-3} = 0.106072
+\] <br/></p>
+</div>
+</div>
+<div class="subquestion">
+<p>find the probability for <strong>at most</strong> a single packet to be delivered successfully <br/></p>
+<div class="answer">
+<p>we find the probabilities for 1/10 and 0/10 successful deliveries using Bernoulli distribution and add them <br/>
+\[
+P(1) + P(0) = \binom{10}{1}0.1344^1{(1-0.1344)}^{10-1} + \binom{10}{0}0.1344^0{(1-0.1344)}^{10-0} = 0.602794
+\] <br/></p>
+</div>
+</div>
+<div class="subquestion">
+<p>find the probability for the transmission of a packet to succeed only on one link atleast 4/10 times <br/></p>
+<div class="answer">
+<p>the probability for successful transmission on only one of the lines is \(0.56\cdot(1-0.24)+0.24\cdot(1-0.56)=0.5312\) <br/>
+each event has a \(0.5132\) probability of succeeding, there are 10 events, we use bernoulli distribution: <br/>
+the probability that it wont happen 0/10 times: <br/>
+\[
+\binom{10}{0}0.5132^0{(1-0.5132)}^{10-0} = 7.47318434878e-4
+\] <br/>
+the probability that it wont happen 1/10 times: <br/>
+\[
+\binom{10}{1}0.5132^1{(1-0.5132)}^{10-1} = 7.87846797001e-3
+\] <br/>
+2/10 times: <br/>
+\[
+\binom{10}{2}0.5132^2{(1-0.5132)}^{10-2} = 0.037375788681
+\] <br/>
+3/10 times: <br/>
+\[
+\binom{10}{3}0.5132^3{(1-0.5132)}^{10-3} = 0.105073978368
+\] <br/>
+and so: <br/>
+\[
+P(\text{successes } 4 \to 10) = 1 - P(\text{fails } 0 \to 3) = 0.151075553453888
+\] <br/></p>
+</div>
+</div>
+<div class="subquestion">
+<p>at most 1 packet is successfully transmitted on one of the links on most of the transmission attempts <br/></p>
+<div class="answer">
+<p>we find the probabilities for 6-10/10 cases where at most only one of the links is successful <br/>
+the probability for successful transmission one at most one of the lines is \((1-0.56)\cdot(1-0.24)+0.24\cdot(1-0.56)+0.56\cdot(1-0.24)=0.8656\) <br/></p>
+<p>\begin{gather*}
+\binom{10}{6}0.8656^6{(1-0.8656)}^{10-6} = 0.0288217174413\\
+\binom{10}{7}0.8656^7{(1-0.8656)}^{10-7} = 0.106071762828\\
+\binom{10}{8}0.8656^8{(1-0.8656)}^{10-8} = 0.256182248616\\
+\binom{10}{9}0.8656^9{(1-0.8656)}^{10-9} = 0.366652371695\\
+\binom{10}{10}0.8656^{10}{(1-0.8656)}^{10-10} = 0.236141587009\\
+0.0288217174413 + 0.106071762828 + 0.256182248616 + 0.366652371695 + 0.236141587009 = \boxed{0.9938696875893}
+\end{gather*}</p>
+</div>
+</div>
+</div>
+<div class="question">
+<p>assume a communication channel with the probability \(p\) that the transmission of a bit would fail <br/>
+what are the odds that a packet that consists of \(X\) bits would arrive with \(y\) errors for \(Y=1000\text{ bit},X=20000\text{ bit},p=10^{-8}\) <br/></p>
+<div class="answer">
+<p>\[
+\binom{20000}{1000}{10^{-8}}^{1000}{(1-10^{-8})}^{20000-1000}
+\] <br/></p>
+</div>
+</div></div>
+
+    
+    
+    
+
+    
+    
+
+</main>
+
+        <footer>
+          
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+

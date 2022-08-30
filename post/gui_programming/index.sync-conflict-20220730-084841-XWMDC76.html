@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>programming in C# - Mahmood&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mahmood" /><meta name="description" content="gui programming in C#" /><meta name="keywords" content="mahmood, math, music" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.mahmoodsheikh.com/post/gui_programming/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="programming in C#" />
+<meta property="og:description" content="gui programming in C#" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.mahmoodsheikh.com/post/gui_programming/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-16T21:24:00+03:00" />
+<meta property="article:modified_time" content="2022-07-16T21:24:00+03:00" />
+
+<meta itemprop="name" content="programming in C#">
+<meta itemprop="description" content="gui programming in C#"><meta itemprop="datePublished" content="2022-07-16T21:24:00+03:00" />
+<meta itemprop="dateModified" content="2022-07-16T21:24:00+03:00" />
+<meta itemprop="wordCount" content="790">
+<meta itemprop="keywords" content="" />
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Mahmood</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Posts</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Mahmood</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Posts</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">programming in C#</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-07-16 </span>
+        
+          <span class="more-meta"> 790 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#c-in-emacs-org-mode"><span class="section-num">1</span> C# in emacs&rsquo; org-mode</a></li>
+        <li><a href="#c"><span class="section-num">2</span> C#</a>
+          <ul>
+            <li><a href="#random"><span class="section-num">2.1</span> Random</a></li>
+            <li><a href="#timer"><span class="section-num">2.2</span> Timer</a></li>
+            <li><a href="#delegate"><span class="section-num">2.3</span> Delegate</a></li>
+            <li><a href="#multithreading"><span class="section-num">2.4</span> multithreading</a></li>
+            <li><a href="#windows-forms"><span class="section-num">2.5</span> Windows Forms</a></li>
+            <li><a href="#remoting"><span class="section-num">2.6</span> Remoting</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  border-style: groove;
+  border-width: 3px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-family: cursive;
+  border: 1px solid black;
+  font-size: 13px;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  }
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<p>this document contains my notes on gui programming in C# <br/></p>
+<h2 id="c-in-emacs-org-mode"><span class="section-num">1</span> C# in emacs&rsquo; org-mode</h2>
+<p>the following code allows running C# code in org-babel, given you have mono installed <br/></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;ob</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;csharp-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-babel-tangle-lang-exts</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;csharp&#34;</span> <span class="o">.</span> <span class="s">&#34;cs&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">org-babel-default-header-args:csharp</span> <span class="o">&#39;</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">ob-csharp--build-script-run-command</span> <span class="p">(</span><span class="nv">path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Create run command according to the PATH.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">message</span> <span class="nv">path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;csc %s -r:System.Windows.Forms.dll -r:System.Drawing.dll &gt;/dev/null; mono $(basename %s); rm *.exe&#34;</span> <span class="nv">path</span> <span class="p">(</span><span class="nf">concat</span> <span class="nv">path</span> <span class="s">&#34;.exe&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-babel-execute:csharp</span> <span class="p">(</span><span class="nv">body</span> <span class="nv">params</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">processed-params</span> <span class="p">(</span><span class="nv">org-babel-process-params</span> <span class="nv">params</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">src-temp</span> <span class="p">(</span><span class="nv">org-babel-temp-file</span> <span class="s">&#34;csharp-src-&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">with-temp-file</span> <span class="nv">src-temp</span> <span class="p">(</span><span class="nf">insert</span> <span class="nv">body</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">results</span> <span class="p">(</span><span class="nv">org-babel-eval</span> <span class="p">(</span><span class="nv">ob-csharp--build-script-run-command</span> <span class="nv">src-temp</span><span class="p">)</span> <span class="s">&#34;&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-babel-reassemble-table</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">org-babel-result-cond</span> <span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nf">assoc</span> <span class="nb">:result-params</span> <span class="nv">params</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">org-babel-read</span> <span class="nv">results</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">tmp-file</span> <span class="p">(</span><span class="nv">org-babel-temp-file</span> <span class="s">&#34;c-&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="nb">with-temp-file</span> <span class="nv">tmp-file</span> <span class="p">(</span><span class="nf">insert</span> <span class="nv">results</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="nv">org-babel-import-elisp-from-file</span> <span class="nv">tmp-file</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">org-babel-pick-name</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nf">assoc</span> <span class="nb">:colname-names</span> <span class="nv">params</span><span class="p">))</span> <span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nf">assoc</span> <span class="nb">:colnames</span> <span class="nv">params</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">org-babel-pick-name</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nf">assoc</span> <span class="nb">:rowname-names</span> <span class="nv">params</span><span class="p">))</span> <span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nf">assoc</span> <span class="nb">:rownames</span> <span class="nv">params</span><span class="p">)))))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;ob-csharp</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="c"><span class="section-num">2</span> C#</h2>
+<h3 id="random"><span class="section-num">2.1</span> Random</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Random</span> <span class="n">rnd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="p">=</span> <span class="n">rnd</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="m">256</span><span class="p">);</span> <span class="c1">// random number from 0-255</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="timer"><span class="section-num">2.2</span> Timer</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">num</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Timer</span> <span class="n">timer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Timer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">timer</span><span class="p">.</span><span class="n">Interval</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span> <span class="c1">// 10 milliseconds</span>
+</span></span><span class="line"><span class="cl"><span class="n">timer</span><span class="p">.</span><span class="n">Tick</span> <span class="p">+=</span> <span class="n">TimerTick</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">timer</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// note that the timer will run the TimerTick method asynchronously</span>
+</span></span><span class="line"><span class="cl"><span class="k">void</span> <span class="n">TimerTick</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">num</span><span class="p">++;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="p">==</span> <span class="m">100000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timer</span><span class="p">.</span><span class="n">Stop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="delegate"><span class="section-num">2.3</span> Delegate</h3>
+<p>a <strong>delegate</strong> is basically a class of what we call in a callback function <br/></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">delegate</span> <span class="k">void</span> <span class="n">MyDelegate</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">event</span> <span class="n">MyDelegate</span> <span class="n">callback</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">void</span> <span class="n">HandleClick</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="n">callback</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="multithreading"><span class="section-num">2.4</span> multithreading</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// constructor&#39;s boolean determines whether the event happens once when created</span>
+</span></span><span class="line"><span class="cl"><span class="n">AutoResetEvent</span> <span class="n">e</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AutoResetEvent</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thread</span> <span class="n">t</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">ThreadFunction</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="s">&#34;hello&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">t</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">void</span> <span class="n">ThreadFunction</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">string</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="s">&#34; &#34;</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="windows-forms"><span class="section-num">2.5</span> Windows Forms</h3>
+<h4 id="button"><span class="section-num">2.5.1</span> Button</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyForm</span> <span class="p">:</span> <span class="n">Form</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">void</span> <span class="n">CreateButton</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Button</span> <span class="n">button</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Button</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// setting size can be done using one of these 2 ways:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">button</span><span class="p">.</span><span class="n">Width</span> <span class="p">=</span> <span class="m">40</span><span class="p">;</span> <span class="n">button</span><span class="p">.</span><span class="n">Height</span> <span class="p">=</span> <span class="m">50</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">button</span><span class="p">.</span><span class="n">Size</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Size</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="m">50</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// setting position can be done in one of these 2 ways:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">button</span><span class="p">.</span><span class="n">Left</span> <span class="p">=</span> <span class="m">30</span><span class="p">;</span> <span class="n">button</span><span class="p">.</span><span class="n">Top</span> <span class="p">=</span> <span class="m">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">button</span><span class="p">.</span><span class="n">Location</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Point</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">20</span><span class="p">);</span> <span class="c1">// button.Location.X,button.Location.Y</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// callback for when the function is clicked</span>
+</span></span><span class="line"><span class="cl">    <span class="n">button</span><span class="p">.</span><span class="n">Click</span> <span class="p">+=</span> <span class="n">HandleClick</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">button</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">&#34;0&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">button</span><span class="p">.</span><span class="n">BackColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">Red</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">button</span><span class="p">.</span><span class="n">Visible</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// true by default</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">Controls</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">button</span><span class="p">);</span> <span class="c1">// add button to the form</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">void</span> <span class="n">HandleClick</span><span class="p">(</span><span class="n">Object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Button</span> <span class="n">btn</span> <span class="p">=</span> <span class="p">(</span><span class="n">Button</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">btn</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">btn</span><span class="p">.</span><span class="n">Text</span><span class="p">)</span> <span class="p">+</span> <span class="m">1</span><span class="p">).</span><span class="n">ToString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="label"><span class="section-num">2.5.2</span> Label</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Label</span> <span class="n">l</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">l</span><span class="p">.</span><span class="n">Size</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Size</span><span class="p">(</span><span class="m">32</span><span class="p">,</span> <span class="m">32</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">l</span><span class="p">.</span><span class="n">BackColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">White</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">l</span><span class="p">.</span><span class="n">Location</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Point</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="m">20</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="picturebox"><span class="section-num">2.5.3</span> PictureBox</h4>
+<p>see <a href="#usercontrol">UserControl</a> below <br/></p>
+<h4 id="usercontrol"><span class="section-num">2.5.4</span> UserControl</h4>
+<p>like a div, contains other types of Controls <br/></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyUserControl</span> <span class="p">:</span> <span class="n">UserControl</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="n">PictureBox</span><span class="p">[]</span> <span class="n">myControls</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PictureBox</span><span class="p">[</span><span class="m">20</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">MyUserControl</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">InitializeComponent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">curX</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="p">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PictureBox</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Image</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PictureBox</span><span class="p">(</span><span class="s">&#34;&lt;path_to_image&gt;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Location</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Point</span><span class="p">(</span><span class="n">curX</span><span class="p">,</span> <span class="m">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Size</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Size</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="m">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">SizeMode</span> <span class="p">=</span> <span class="n">PictureBoxSizeMode</span><span class="p">.</span><span class="n">StretchImage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Click</span> <span class="p">+=</span> <span class="n">OnClick</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">curX</span> <span class="p">+=</span> <span class="m">2</span> <span class="p">+</span> <span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Size</span><span class="p">.</span><span class="n">Width</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">Controls</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">myControls</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">void</span> <span class="n">OnClick</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PictureBox</span> <span class="n">p</span> <span class="p">=</span> <span class="p">(</span><span class="n">PictureBox</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="cloning-a-control"><span class="section-num">2.5.5</span> cloning a Control</h4>
+<p>im not yet aware of any way to copy the properties of a Control to another, so i do it manually <br/></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Label</span> <span class="n">l1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Label</span> <span class="n">l2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="s">&#34;hey&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// copy properties of l2 into l1, to make l2 look like l1</span>
+</span></span><span class="line"><span class="cl"><span class="n">l1</span><span class="p">.</span><span class="n">Size</span> <span class="p">=</span> <span class="n">l2</span><span class="p">.</span><span class="n">Size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">l1</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">l2</span><span class="p">.</span><span class="n">Text</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">l1</span><span class="p">.</span><span class="n">Image</span> <span class="p">=</span> <span class="n">l2</span><span class="p">.</span><span class="n">Image</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// note that the following wouldnt work (it would but the GUI wont update the properties properly)</span>
+</span></span><span class="line"><span class="cl"><span class="n">l1</span> <span class="p">=</span> <span class="n">l2</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="remoting"><span class="section-num">2.6</span> Remoting</h3>
+<h4 id="singleton"><span class="section-num">2.6.1</span> SingleTon</h4>
+<ul>
+<li>a single server object serves all clients <br/></li>
+<li>the lifetime of a server object is the lifetime of the server <br/></li>
+<li>the server object can store data for its entire lifetime <br/></li>
+</ul>
+<h4 id="singlecall"><span class="section-num">2.6.2</span> SingleCall</h4>
+<ul>
+<li>every server object belongs to a single client <br/></li>
+<li>the lifetime of a server object is the time it takes to execute the method <br/></li>
+<li>every client request is handled individually <br/></li>
+<li>every server object gets destroyed after the clients request is done <br/></li>
+</ul>
+<h4 id="factor"><span class="section-num">2.6.3</span> Factor</h4>
+<h4 id="serialization"><span class="section-num">2.6.4</span> Serialization</h4>
+<p>just dont fucking name your Serializable classes <code>Entity</code>, this gave me hours of headaches.. fuck im so frustrated i fucking despise C# <br/></p>
+
+    </div>
+
+    <footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/linear_algebra2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">linear algebra</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/data_structures/">
+            <span class="next-text nav-default">data structures</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://blog.mahmoodsheikh.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Mahmood</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
