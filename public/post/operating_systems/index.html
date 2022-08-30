@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         
 
         <meta charset="utf-8">
@@ -22,7 +22,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://blog.mahmoodsheikh.com/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
 
 
 
@@ -66,13 +66,13 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.101.0" />
+ <meta name="generator" content="Hugo 0.102.1" />
         
 
         
 
         
-            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            
         
 
         
@@ -98,11 +98,9 @@
                             
                                 <li><a href="/">Home</a></li>
                             
-                                <li><a href="/about/">About</a></li>
-                            
                                 <li><a href="/post/">Posts</a></li>
                             
-                                <li><a href="/project/">Projects</a></li>
+                                <li><a href="/about/">About</a></li>
                             
                         </ul>
                     
@@ -132,26 +130,154 @@
         <h2>operating systems</h2>
         <h5>January 1, 0001</h5>
         
-<a href="https://blog.mahmoodsheikh.com/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
 
 
     </div>
 
-    <div align="start" class="content"><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h2 id="operating-systems-todos"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> operating systems todos</h2>
-<h4 id="homework-1--homework1-dot-md"><!-- raw HTML omitted -->DONE<!-- raw HTML omitted --> <!-- raw HTML omitted -->1.0.1<!-- raw HTML omitted --> <a href="/post/homework1/">homework 1</a></h4>
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  border-style: groove;
+  border-width: 3px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  }
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<h2 id="operating-systems-todos"><span class="section-num">1</span> operating systems todos</h2>
+<h4 id="homework-1--homework1-dot-md"><span class="org-todo done DONE">DONE</span> <span class="section-num">1.0.1</span> <a href="/post/homework1/">homework 1</a></h4>
 <ul>
-<li>State &ldquo;DONE&rdquo;       from &ldquo;TODO&rdquo;       <!-- raw HTML omitted --><!-- raw HTML omitted -->[2022-08-07 Sun 18:57:00]<!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></li>
-<li>State &ldquo;TODO&rdquo;       from              <!-- raw HTML omitted --><!-- raw HTML omitted -->[2022-08-07 Sun 18:57:00]<!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></li>
+<li>State &ldquo;DONE&rdquo;       from &ldquo;TODO&rdquo;       <span class="timestamp-wrapper"><span class="timestamp">[2022-08-07 Sun 18:57:00]</span></span> <br/></li>
+<li>State &ldquo;TODO&rdquo;       from              <span class="timestamp-wrapper"><span class="timestamp">[2022-08-07 Sun 18:57:00]</span></span> <br/></li>
 </ul>
-<h2 id="write-struct-to-file"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> write struct to file</h2>
+<h2 id="write-struct-to-file"><span class="section-num">2</span> write struct to file</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
@@ -192,7 +318,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="read-struct-from-file"><!-- raw HTML omitted -->3<!-- raw HTML omitted --> read struct from file</h2>
+</span></span></code></pre></div><h2 id="read-struct-from-file"><span class="section-num">3</span> read struct from file</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
@@ -233,9 +359,9 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="open-vs-fopen"><!-- raw HTML omitted -->4<!-- raw HTML omitted --> open vs fopen</h2>
-<p><code>open</code> seems to be os-specific, <code>fopen</code> is the one to be used according to ANSI <!-- raw HTML omitted -->
-i.e. we should be using <code>FILE*</code> instead of file descriptors <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><h2 id="open-vs-fopen"><span class="section-num">4</span> open vs fopen</h2>
+<p><code>open</code> seems to be os-specific, <code>fopen</code> is the one to be used according to ANSI <br/>
+i.e. we should be using <code>FILE*</code> instead of file descriptors <br/></p>
 </div>
 
     
@@ -248,15 +374,14 @@ i.e. we should be using <code>FILE*</code> instead of file descriptors <!-- raw 
     
     
 
-    
-      
-
+  
     <h4><a href="/post/data_structures/">data structures</a></h4>
     <h5>data structures</h5>
+  July 10, 2022
     
-<a href="https://blog.mahmoodsheikh.com/tags/math"><kbd class="item-tag">math</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
 
-<a href="https://blog.mahmoodsheikh.com/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
 
 
 
@@ -270,7 +395,7 @@ i.e. we should be using <code>FILE*</code> instead of file descriptors <!-- raw 
 </main>
 
         <footer>
-            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+          
         </footer>
 
         

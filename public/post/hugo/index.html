@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         
 
         <meta charset="utf-8">
@@ -22,7 +22,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://blog.mahmoodsheikh.com/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
 
 
 
@@ -66,13 +66,13 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.101.0" />
+ <meta name="generator" content="Hugo 0.102.1" />
         
 
         
 
         
-            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            
         
 
         
@@ -98,11 +98,9 @@
                             
                                 <li><a href="/">Home</a></li>
                             
-                                <li><a href="/about/">About</a></li>
-                            
                                 <li><a href="/post/">Posts</a></li>
                             
-                                <li><a href="/project/">Projects</a></li>
+                                <li><a href="/about/">About</a></li>
                             
                         </ul>
                     
@@ -135,20 +133,126 @@
 
     </div>
 
-    <div align="start" class="content"><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h2 id="redirect-404-to-homepage"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> redirect 404 to homepage</h2>
-<p>to do this we create a file <code>404.html</code> in our theme&rsquo;s <code>layout</code> directory with the following content: <!-- raw HTML omitted --></p>
+    <div align="start" class="content"><p style="height:0px; display: none;">\(\DeclareMathOperator{\rank}{rank}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\spn}{span}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\dom}{domain}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\ran}{range}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\rng}{range}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\img}{Im}\)</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  padding: 4px;
+  border-style: groove;
+  border-width: 4px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: white;
+  position: relative;
+  left: -5px;
+  top: -7px;
+  border-radius: 10px 0 10px 0;
+  padding-right: 7px;
+  padding-left: 7px;
+  font-family: cursive;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools']}
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<h2 id="redirect-404-to-homepage"><span class="section-num">1</span> redirect 404 to homepage</h2>
+<p>to do this we create a file <code>404.html</code> in our theme&rsquo;s <code>layout</code> directory with the following content: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ define &#34;content&#34;}}
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">http-equiv</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;refresh&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0; url=https://blog.mahmoodsheikh.com&#34;</span> /&gt;
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">main</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;main&#34;</span>&gt;
@@ -158,8 +262,8 @@
 </span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">main</span>&gt;
 </span></span><span style="display:flex;"><span>{{ end }}
-</span></span></code></pre></div><p><a href="/post/hugo/">hugo</a> by default wont use this file, i use <code>nginx</code> so to make the webserver return this file on 404 errors we add the line <code>error_page 404 /404.html;</code> to <code>/etc/nginx/sites-available/blog</code> <!-- raw HTML omitted -->
-and then use <code>sudo systemctl restart nginx</code> to restart <code>nginx</code> with the new configuration <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a href="/post/hugo/">hugo</a> by default wont use this file, i use <code>nginx</code> so to make the webserver return this file on 404 errors we add the line <code>error_page 404 /404.html;</code> to <code>/etc/nginx/sites-available/blog</code> <br/>
+and then use <code>sudo systemctl restart nginx</code> to restart <code>nginx</code> with the new configuration <br/></p>
 </div>
 
     
@@ -172,7 +276,7 @@ and then use <code>sudo systemctl restart nginx</code> to restart <code>nginx</c
 </main>
 
         <footer>
-            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+          
         </footer>
 
         

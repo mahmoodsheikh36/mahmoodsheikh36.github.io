@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         
 
         <meta charset="utf-8">
@@ -22,7 +22,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://blog.mahmoodsheikh.com/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
 
 
 
@@ -66,13 +66,13 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.101.0" />
+ <meta name="generator" content="Hugo 0.102.1" />
         
 
         
 
         
-            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            
         
 
         
@@ -98,11 +98,9 @@
                             
                                 <li><a href="/">Home</a></li>
                             
-                                <li><a href="/about/">About</a></li>
-                            
                                 <li><a href="/post/">Posts</a></li>
                             
-                                <li><a href="/project/">Projects</a></li>
+                                <li><a href="/about/">About</a></li>
                             
                         </ul>
                     
@@ -132,40 +130,169 @@
         <h2>tikz</h2>
         <h5>June 18, 2022</h5>
         
-<a href="https://blog.mahmoodsheikh.com/tags/language"><kbd class="item-tag">language</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/language"><kbd class="item-tag">language</kbd></a>
 
 
     </div>
 
-    <div align="start" class="content"><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>for reference: <a href="/ox-hugo/tikz_refcard.pdf">refcard</a> <!-- raw HTML omitted --></p>
-<p>tikz is used to draw graphics in latex documents <!-- raw HTML omitted -->
-it can be imported like this: <!-- raw HTML omitted --></p>
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  border-style: groove;
+  border-width: 3px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-family: cursive;
+  border: 1px solid black;
+  font-size: 13px;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  }
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<p>for reference: <a href="/ox-hugo/tikz_refcard.pdf">refcard</a> <br/></p>
+<p>tikz is used to draw graphics in latex documents <br/>
+it can be imported like this: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{tikz}
-</span></span></code></pre></div><h2 id="primitive-shapes"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> primitive shapes</h2>
-<p>drawing primitive shapes like lines/rectangles is very simple <!-- raw HTML omitted --></p>
-<h3 id="lines"><!-- raw HTML omitted -->1.1<!-- raw HTML omitted --> lines</h3>
+</span></span></code></pre></div><h2 id="primitive-shapes"><span class="section-num">1</span> primitive shapes</h2>
+<p>drawing primitive shapes like lines/rectangles is very simple <br/></p>
+<h3 id="lines"><span class="section-num">1.1</span> lines</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tikz\draw</span> (0,0) -- (3,2);
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/tJcTbR.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>here <code>|-</code> generates a broken line while <code>--</code> generates a straight line <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>here <code>|-</code> generates a broken line while <code>--</code> generates a straight line <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tikz\draw</span> (0,0) -- (3,2) -- (5,0) |- (4,3);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tikz\draw</span><span style="color:#a6e22e">[-&gt;]</span> (-2,0) -- (-3,0);
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/E8OU1y.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h3 id="polygons"><!-- raw HTML omitted -->1.2<!-- raw HTML omitted --> polygons</h3>
-<p>tikz has lots of builtin shapes like: <!-- raw HTML omitted --></p>
+ <br/></p>
+<h3 id="polygons"><span class="section-num">1.2</span> polygons</h3>
+<p>tikz has lots of builtin shapes like: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tikz\draw</span> (0,0) circle (10px);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tikz\draw</span><span style="color:#a6e22e">[fill=gray!30!white]</span> (0,0) ellipse (28pt and 20pt);
@@ -173,15 +300,15 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tikz\fill</span><span style="color:#a6e22e">[color=red]</span> (0,0) rectangle (2,1);
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/4GY1Ec.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>and if tikz doesnt have a specific shape we can always use lines to draw it <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>and if tikz doesnt have a specific shape we can always use lines to draw it <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tikz\draw</span> (0,0) -- (4,0) -- (4,4) -- cycle; <span style="color:#75715e">% use cycle instead of manually writing (0,0)
 </span></span></span></code></pre></div><p><figure><img src="/ox-hugo/5kARLC.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h2 id="nodes"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> nodes</h2>
-<p>nodes are used  to represent entities for various purposes including inserting text and connecting entities <!-- raw HTML omitted --></p>
+ <br/></p>
+<h2 id="nodes"><span class="section-num">2</span> nodes</h2>
+<p>nodes are used  to represent entities for various purposes including inserting text and connecting entities <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture} <span style="color:#66d9ef">\draw</span>
 </span></span><span style="display:flex;"><span>  (1,1) node[circle, draw]{A} --
@@ -189,8 +316,8 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/JuXxvo.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>to get a more &ldquo;proper&rdquo; result we use the <code>anchor</code> argument <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>to get a more &ldquo;proper&rdquo; result we use the <code>anchor</code> argument <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture} <span style="color:#66d9ef">\draw</span>
 </span></span><span style="display:flex;"><span>  (1,1) node[anchor=north east, circle, draw]{A} --
@@ -198,7 +325,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/fwDlQd.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture} <span style="color:#66d9ef">\draw</span>
 </span></span><span style="display:flex;"><span>  (0,0) node[anchor=north, rectangle, draw, label=above:Top, label=below:Bottom]{inside rectangle} |-
@@ -206,7 +333,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/vERNnP.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">% draw the sets
@@ -236,7 +363,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/BgY0KZ.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}[
 </span></span><span style="display:flex;"><span>    &gt; = stealth, <span style="color:#75715e">% arrow head style
@@ -271,9 +398,9 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/sP1ObG.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h2 id="2d-plots"><!-- raw HTML omitted -->3<!-- raw HTML omitted --> 2d plots</h2>
-<p>you can play around with the parameters to see how they affect the drawing <!-- raw HTML omitted --></p>
+ <br/></p>
+<h2 id="2d-plots"><span class="section-num">3</span> 2d plots</h2>
+<p>you can play around with the parameters to see how they affect the drawing <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-&gt;]</span> (-3, 0) -- (4.2, 0) node[right] {<span style="color:#e6db74">$</span>x<span style="color:#e6db74">$</span>};
@@ -283,7 +410,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/cdn8lr.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">% drawing the grid
@@ -311,12 +438,12 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/9DtrIs.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h3 id="pgfplots-package"><!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> pgfplots package</h3>
-<p>you can use the <strong>pgfplots</strong> package which is written using <strong>tikz</strong> to make things easier, include it using: <!-- raw HTML omitted --></p>
+ <br/></p>
+<h3 id="pgfplots-package"><span class="section-num">3.1</span> pgfplots package</h3>
+<p>you can use the <strong>pgfplots</strong> package which is written using <strong>tikz</strong> to make things easier, include it using: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{pgfplots}
-</span></span></code></pre></div><p>example usage: <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>example usage: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\begin</span>{axis}[domain=-4:4, samples=100, grid=major,
@@ -331,7 +458,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/gSMHG5.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\usepgfplotslibrary</span>{fillbetween}
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
@@ -355,11 +482,11 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/7c8Bc5.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h2 id="3d-plots"><!-- raw HTML omitted -->4<!-- raw HTML omitted --> 3d plots</h2>
-<p>for 3d plots we use the package <code>tikz-3dplot</code> <!-- raw HTML omitted --></p>
+ <br/></p>
+<h2 id="3d-plots"><span class="section-num">4</span> 3d plots</h2>
+<p>for 3d plots we use the package <code>tikz-3dplot</code> <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{tikz-3dplot}
-</span></span></code></pre></div><p>we start with a simple 3d plot with 3 vectors <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>we start with a simple 3d plot with 3 vectors <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tdplotsetmaincoords</span>{70}{110}
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}[tdplot_main_coords, scale=2]
@@ -375,7 +502,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/EcA741.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tdplotsetmaincoords</span>{70}{130} <span style="color:#75715e">% set initial 3d rotation
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">\begin</span>{tikzpicture}[tdplot_main_coords, scale = 1]
@@ -395,7 +522,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/jAMOqE.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">% set the plot display orientation
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">% syntax: \tdplotsetdisplay{\theta_d}{\phi_d}
@@ -483,7 +610,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/EUmDsX.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}[scale=3,line cap=round]
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\begin</span>{scope}[rotate around y=45,rotate around z=30,canvas is zx plane at y=0]
@@ -519,7 +646,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/ggUg1y.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tdplotsetmaincoords</span>{80}{45}
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\tdplotsetrotatedcoords</span>{-90}{180}{-90}
@@ -556,7 +683,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/o79smS.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\newcommand</span>{<span style="color:#66d9ef">\ve</span>}[1]{<span style="color:#66d9ef">\ensuremath</span>{<span style="color:#66d9ef">\mathbf</span>{#1}}}
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\newcommand</span>{<span style="color:#66d9ef">\ud</span>}[0]{<span style="color:#66d9ef">\mathrm</span>{d}}
@@ -636,10 +763,10 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/mq5YoS.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h2 id="3d-plots-with-pgfplots"><!-- raw HTML omitted -->5<!-- raw HTML omitted --> 3d plots with pgfplots</h2>
-<p>the <code>\addplot3</code> makes drawing 3d graphics much easier, the syntax is simply <code>\addplot {&lt;math expresion of f(x,y)&gt;};</code> which is a shorthand-hand equivalent for <code>\addplot[&lt;options&gt;] expression {&lt;math expression of f(x,y)&gt;};</code> <!-- raw HTML omitted --></p>
-<p>consider this example which plots \(f(x,y) = x^2 - y^2\): <!-- raw HTML omitted --></p>
+ <br/></p>
+<h2 id="3d-plots-with-pgfplots"><span class="section-num">5</span> 3d plots with pgfplots</h2>
+<p>the <code>\addplot3</code> makes drawing 3d graphics much easier, the syntax is simply <code>\addplot {&lt;math expresion of f(x,y)&gt;};</code> which is a shorthand-hand equivalent for <code>\addplot[&lt;options&gt;] expression {&lt;math expression of f(x,y)&gt;};</code> <br/></p>
+<p>consider this example which plots \(f(x,y) = x^2 - y^2\): <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\begin</span>{axis}[colorbar]
@@ -652,17 +779,17 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/4MXkkm.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>the <code>colorbar</code> argument passed to the <code>axis</code> environment simply generates the color bar on the right <!-- raw HTML omitted --></p>
-<p>the <code>surf</code> argument passed to <code>axis</code> environment simply tells it to fill the gaps between the lines to form a solid surface <!-- raw HTML omitted --></p>
-<p>a very useful variant of <code>\addplot3</code> is one that takes 3 math expressions, one for each variable, the syntax is: <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>the <code>colorbar</code> argument passed to the <code>axis</code> environment simply generates the color bar on the right <br/></p>
+<p>the <code>surf</code> argument passed to <code>axis</code> environment simply tells it to fill the gaps between the lines to form a solid surface <br/></p>
+<p>a very useful variant of <code>\addplot3</code> is one that takes 3 math expressions, one for each variable, the syntax is: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\addplot</span>3[&lt;options&gt;] expression {&lt;x expression&gt;, &lt;y expression&gt;, &lt;z expression&gt;};
-</span></span></code></pre></div><p>which for most purposes can be simplified to <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>which for most purposes can be simplified to <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\addplot</span>3{&lt;x expression&gt;, &lt;y expression&gt;, &lt;z expression&gt;};
-</span></span></code></pre></div><p>note that <code>\addplot3(x,y,x^2)</code> is equivalent to <code>\addplot{x^2}</code> <!-- raw HTML omitted --></p>
-<p>consider the following examples <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>note that <code>\addplot3(x,y,x^2)</code> is equivalent to <code>\addplot{x^2}</code> <br/></p>
+<p>consider the following examples <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\begin</span>{axis}[
@@ -677,7 +804,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/8mXtxD.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\begin</span>{axis}[view={60}{30}]
@@ -698,7 +825,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/O4rtO3.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">\begin</span>{axis}
@@ -726,7 +853,7 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/cVNpiY.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
+ <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\pgfmathsetmacro</span>{<span style="color:#66d9ef">\u</span>}{1.5}
@@ -758,12 +885,12 @@ it can be imported like this: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/7XtVM6.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h2 id="forest"><!-- raw HTML omitted -->6<!-- raw HTML omitted --> forest</h2>
-<p>forest is a package used to draw &ldquo;binary tree&rdquo;-like diagrams <!-- raw HTML omitted -->
-it can be imported as: <!-- raw HTML omitted --></p>
+ <br/></p>
+<h2 id="forest"><span class="section-num">6</span> forest</h2>
+<p>forest is a package used to draw &ldquo;binary tree&rdquo;-like diagrams <br/>
+it can be imported as: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#66d9ef">\usepackage</span>{forest}
-</span></span></code></pre></div><h3 id="basic-usage"><!-- raw HTML omitted -->6.1<!-- raw HTML omitted --> basic usage</h3>
+</span></span></code></pre></div><h3 id="basic-usage"><span class="section-num">6.1</span> basic usage</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{forest}
 </span></span><span style="display:flex;"><span>  [10
@@ -775,8 +902,8 @@ it can be imported as: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{forest}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/mQF4R6.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>what you put in the brackets is basically a <code>tikz</code> node and can take any shape, for example this is a binary tree with some basic math expressions and various shapes <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>what you put in the brackets is basically a <code>tikz</code> node and can take any shape, for example this is a binary tree with some basic math expressions and various shapes <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{forest}
 </span></span><span style="display:flex;"><span>  [<span style="color:#e6db74">$</span>n<span style="color:#e6db74">$</span>,rectangle,draw
@@ -793,8 +920,8 @@ it can be imported as: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{forest}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/LOBRBL.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>to insert a node without drawing it so that you get the effect of an empty child but still have correct indentation for other children we use <code>[,phantom]</code> which is a node that gets inserted but not drawn, example: <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>to insert a node without drawing it so that you get the effect of an empty child but still have correct indentation for other children we use <code>[,phantom]</code> which is a node that gets inserted but not drawn, example: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{forest}
 </span></span><span style="display:flex;"><span>  [<span style="color:#e6db74">$</span>n<span style="color:#e6db74">$</span>,rectangle,draw
@@ -810,8 +937,8 @@ it can be imported as: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{forest}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/YQJ95R.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>you can treat the <code>forest</code> environment like <code>tikzpicture</code>, you can freely add more nodes and drawings, to use a node of <code>forest</code> as a tikz node you pass <code>name=&lt;name&gt;</code> to it, example: <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>you can treat the <code>forest</code> environment like <code>tikzpicture</code>, you can freely add more nodes and drawings, to use a node of <code>forest</code> as a tikz node you pass <code>name=&lt;name&gt;</code> to it, example: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{forest}
 </span></span><span style="display:flex;"><span>  [5,circle,draw,name=root
@@ -832,8 +959,8 @@ it can be imported as: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{forest}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/bupAbG.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>a more advanced example: <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>a more advanced example: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{forest}
 </span></span><span style="display:flex;"><span>  [5,circle,draw,name=root
@@ -863,9 +990,9 @@ it can be imported as: <!-- raw HTML omitted --></p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{forest}
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/Yl6ICB.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h3 id="tex-capacity-exceeded-sorry-save-size-80000-dot"><!-- raw HTML omitted -->6.2<!-- raw HTML omitted --> ! TeX capacity exceeded, sorry [save size=80000].</h3>
-<p>to get over this increase the value of <code>save_size</code> in <code>kpsewhich texmf.cnf</code> <!-- raw HTML omitted --></p>
+ <br/></p>
+<h3 id="tex-capacity-exceeded-sorry-save-size-80000-dot"><span class="section-num">6.2</span> ! TeX capacity exceeded, sorry [save size=80000].</h3>
+<p>to get over this increase the value of <code>save_size</code> in <code>kpsewhich texmf.cnf</code> <br/></p>
 </div>
 
     
@@ -878,13 +1005,12 @@ it can be imported as: <!-- raw HTML omitted --></p>
     
     
 
-    
-    
-
+  
     <h4><a href="/post/20220701135110-latex/">latex</a></h4>
-    <h5>January 1, 0001</h5>
+    <h5></h5>
+  January 1, 0001
     
-<a href="https://blog.mahmoodsheikh.com/tags/language"><kbd class="item-tag">language</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/language"><kbd class="item-tag">language</kbd></a>
 
 
 
@@ -895,13 +1021,12 @@ it can be imported as: <!-- raw HTML omitted --></p>
     
     
 
-    
-      
-
+  
     <h4><a href="/post/cpp/">Cpp</a></h4>
     <h5>Cpp</h5>
+  January 1, 0001
     
-<a href="https://blog.mahmoodsheikh.com/tags/language"><kbd class="item-tag">language</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/language"><kbd class="item-tag">language</kbd></a>
 
 
 
@@ -915,7 +1040,7 @@ it can be imported as: <!-- raw HTML omitted --></p>
 </main>
 
         <footer>
-            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+          
         </footer>
 
         

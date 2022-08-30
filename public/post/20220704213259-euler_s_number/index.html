@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         
 
         <meta charset="utf-8">
@@ -22,7 +22,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://blog.mahmoodsheikh.com/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
 
 
 
@@ -66,13 +66,13 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.101.0" />
+ <meta name="generator" content="Hugo 0.102.1" />
         
 
         
 
         
-            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            
         
 
         
@@ -98,11 +98,9 @@
                             
                                 <li><a href="/">Home</a></li>
                             
-                                <li><a href="/about/">About</a></li>
-                            
                                 <li><a href="/post/">Posts</a></li>
                             
-                                <li><a href="/project/">Projects</a></li>
+                                <li><a href="/about/">About</a></li>
                             
                         </ul>
                     
@@ -132,26 +130,154 @@
         <h2>Euler&#39;s Number</h2>
         <h5>January 1, 0001</h5>
         
-<a href="https://blog.mahmoodsheikh.com/tags/math"><kbd class="item-tag">math</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
 
 
     </div>
 
-    <div align="start" class="content"><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Euler&rsquo;s Number is a constant defined as <!-- raw HTML omitted -->
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
+  padding: 2px;
+  border: 1px black solid;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<div class="definition">
+<p>Euler&rsquo;s Number is a constant defined as <br/>
 \[
 e = \lim_{x\to \pm\infty} \left(1+\frac{1}{x}\right)^x
-\] <!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-</div>
+\] <br/></p>
+</div></div>
 
     
     
@@ -163,13 +289,12 @@ e = \lim_{x\to \pm\infty} \left(1+\frac{1}{x}\right)^x
     
     
 
-    
-      
-
+  
     <h4><a href="/post/20220813151352-probability/">probability</a></h4>
     <h5>probability theory</h5>
+  August 13, 2022
     
-<a href="https://blog.mahmoodsheikh.com/tags/math"><kbd class="item-tag">math</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
 
 
 
@@ -180,13 +305,12 @@ e = \lim_{x\to \pm\infty} \left(1+\frac{1}{x}\right)^x
     
     
 
-    
-      
-
+  
     <h4><a href="/post/linear_algebra2/">linear algebra</a></h4>
     <h5>linear algebra</h5>
+  August 12, 2022
     
-<a href="https://blog.mahmoodsheikh.com/tags/math"><kbd class="item-tag">math</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
 
 
 
@@ -197,15 +321,14 @@ e = \lim_{x\to \pm\infty} \left(1+\frac{1}{x}\right)^x
     
     
 
-    
-      
-
+  
     <h4><a href="/post/data_structures/">data structures</a></h4>
     <h5>data structures</h5>
+  July 10, 2022
     
-<a href="https://blog.mahmoodsheikh.com/tags/math"><kbd class="item-tag">math</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/math"><kbd class="item-tag">math</kbd></a>
 
-<a href="https://blog.mahmoodsheikh.com/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
 
 
 
@@ -219,7 +342,7 @@ e = \lim_{x\to \pm\infty} \left(1+\frac{1}{x}\right)^x
 </main>
 
         <footer>
-            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+          
         </footer>
 
         

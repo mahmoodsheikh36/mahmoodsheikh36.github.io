@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         
 
         <meta charset="utf-8">
@@ -22,7 +22,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://blog.mahmoodsheikh.com/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
 
 
 
@@ -66,13 +66,13 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.101.0" />
+ <meta name="generator" content="Hugo 0.102.1" />
         
 
         
 
         
-            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            
         
 
         
@@ -98,11 +98,9 @@
                             
                                 <li><a href="/">Home</a></li>
                             
-                                <li><a href="/about/">About</a></li>
-                            
                                 <li><a href="/post/">Posts</a></li>
                             
-                                <li><a href="/project/">Projects</a></li>
+                                <li><a href="/about/">About</a></li>
                             
                         </ul>
                     
@@ -135,32 +133,161 @@
 
     </div>
 
-    <div align="start" class="content"><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>fractals are a great way to explore mathematical concepts, here i try to explore as many as i can and i guide you through it all step by step <!-- raw HTML omitted --></p>
-<h2 id="mandelbrot"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> mandelbrot</h2>
-<h3 id="characteristics"><!-- raw HTML omitted -->1.1<!-- raw HTML omitted --> characteristics</h3>
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  border-style: groove;
+  border-width: 3px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-family: cursive;
+  border: 1px solid black;
+  font-size: 13px;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  }
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<p>fractals are a great way to explore mathematical concepts, here i try to explore as many as i can and i guide you through it all step by step <br/></p>
+<h2 id="mandelbrot"><span class="section-num">1</span> mandelbrot</h2>
+<h3 id="characteristics"><span class="section-num">1.1</span> characteristics</h3>
 <ul>
-<li>The <strong>Mandelbrot</strong> set is the set of values of c in the <strong>complex plane</strong> for which the orbit of the critical point \(z_{n+1} = {z_n}^2 + c\) remains bounded <!-- raw HTML omitted --></li>
-<li>a complex number c is a member of the Mandelbrot set if, when starting with \(z_0 = 0\) and applying the iteration repeatedly, the absolute value of \(z_n\) remains bounded for all \(n &gt; 0\) <!-- raw HTML omitted --></li>
-<li>For example, for \(c = 1\), the sequence is \(0, 1, 2, 5, 26, \ldots\), which tends to infinity, so 1 is not an element of the Mandelbrot set. On the other hand, for \(c=-1\), the sequence is \(0, -1, 0, -1, 0, \ldots\), which is bounded, so \(-1\) does belong to the set. <!-- raw HTML omitted --></li>
-<li>The Mandelbrot set is a compact set, since it is closed and contained in the closed disk of radius 2 around the origin <!-- raw HTML omitted --></li>
-<li>a point \(c\) belongs to the Mandelbrot set if and only if \(|z_n| \leq 2\) for all \(n \geq 0\)  <!-- raw HTML omitted --></li>
-<li>The absolute value of a complex number is defined as the distance between the origin \((0,0)\) and the point \((a,b)\) in the complex plane. <!-- raw HTML omitted --></li>
+<li>The <strong>Mandelbrot</strong> set is the set of values of c in the <strong>complex plane</strong> for which the orbit of the critical point \(z_{n+1} = {z_n}^2 + c\) remains bounded <br/></li>
+<li>a complex number c is a member of the Mandelbrot set if, when starting with \(z_0 = 0\) and applying the iteration repeatedly, the absolute value of \(z_n\) remains bounded for all \(n &gt; 0\) <br/></li>
+<li>For example, for \(c = 1\), the sequence is \(0, 1, 2, 5, 26, \ldots\), which tends to infinity, so 1 is not an element of the Mandelbrot set. On the other hand, for \(c=-1\), the sequence is \(0, -1, 0, -1, 0, \ldots\), which is bounded, so \(-1\) does belong to the set. <br/></li>
+<li>The Mandelbrot set is a compact set, since it is closed and contained in the closed disk of radius 2 around the origin <br/></li>
+<li>a point \(c\) belongs to the Mandelbrot set if and only if \(|z_n| \leq 2\) for all \(n \geq 0\)  <br/></li>
+<li>The absolute value of a complex number is defined as the distance between the origin \((0,0)\) and the point \((a,b)\) in the complex plane. <br/></li>
 </ul>
-<h3 id="finding-square-of-complex-number"><!-- raw HTML omitted -->1.2<!-- raw HTML omitted --> finding square of complex number</h3>
+<h3 id="finding-square-of-complex-number"><span class="section-num">1.2</span> finding square of complex number</h3>
 <p>\begin{align*}
 c &amp;= (a, b) = a + bi\\
 c^2 &amp;= (a + bi) \cdot (a + bi) = a^2 + abi + abi + b^2i^2 = a^2 + 2abi - b^2 = a^2-b^2 + 2abi
 \end{align*}</p>
-<h3 id="implementation-with-the-decimal-library"><!-- raw HTML omitted -->1.3<!-- raw HTML omitted --> implementation with the <code>decimal</code> library</h3>
-<p>i tried implementing it with floats but i was getting some sort of overflow errors, which means floats are insufficient to hold the values so we use python&rsquo;s <code>decimal</code> library <!-- raw HTML omitted --></p>
+<h3 id="implementation-with-the-decimal-library"><span class="section-num">1.3</span> implementation with the <code>decimal</code> library</h3>
+<p>i tried implementing it with floats but i was getting some sort of overflow errors, which means floats are insufficient to hold the values so we use python&rsquo;s <code>decimal</code> library <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> sqrt
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> decimal <span style="color:#f92672">import</span> Decimal
@@ -197,10 +324,10 @@ c^2 &amp;= (a + bi) \cdot (a + bi) = a^2 + abi + abi + b^2i^2 = a^2 + 2abi - b^2
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> f <span style="color:#75715e"># replace with img.show()</span>
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/4Ol9IB.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h3 id="implementation-with-decimal-and-multithreading"><!-- raw HTML omitted -->1.4<!-- raw HTML omitted --> implementation with <code>decimal</code> and <code>multithreading</code></h3>
-<p>this is a very very slow implementation (its python so we shouldnt be expecting much) <!-- raw HTML omitted -->
-so i tried to use multithreading and even that didnt work&hellip;, its just that the <code>decimal</code> library is very slow <!-- raw HTML omitted --></p>
+ <br/></p>
+<h3 id="implementation-with-decimal-and-multithreading"><span class="section-num">1.4</span> implementation with <code>decimal</code> and <code>multithreading</code></h3>
+<p>this is a very very slow implementation (its python so we shouldnt be expecting much) <br/>
+so i tried to use multithreading and even that didnt work&hellip;, its just that the <code>decimal</code> library is very slow <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> sqrt
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> decimal <span style="color:#f92672">import</span> Decimal
@@ -244,9 +371,9 @@ so i tried to use multithreading and even that didnt work&hellip;, its just that
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> f <span style="color:#75715e"># replace with img.show()</span>
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/tYDI4G.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h3 id="implementation-with-pure-floats"><!-- raw HTML omitted -->1.5<!-- raw HTML omitted --> implementation with pure floats</h3>
-<p>so we try to implement it without <code>decimal</code>: <!-- raw HTML omitted --></p>
+ <br/></p>
+<h3 id="implementation-with-pure-floats"><span class="section-num">1.5</span> implementation with pure floats</h3>
+<p>so we try to implement it without <code>decimal</code>: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> sqrt
 </span></span><span style="display:flex;"><span>
@@ -286,12 +413,12 @@ so i tried to use multithreading and even that didnt work&hellip;, its just that
 </span></span><span style="display:flex;"><span>f <span style="color:#75715e"># replace with img.show()</span>
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/5JM96p.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>this is so much faster, because we&rsquo;re using the float primitive type that python provides ignoring the pixels that result in an overflow <!-- raw HTML omitted --></p>
-<h3 id="zooming-in"><!-- raw HTML omitted -->1.6<!-- raw HTML omitted --> zooming in</h3>
-<p>we wrap the loops in a function to make it easier to draw multiple instances of the mandelbrot zoomed in on different areas <!-- raw HTML omitted -->
-to zoom in we simply shrink the range of the numbers, it was closed under the closed interval \([-2, 2]\), this time we close it under the interval \([-1,1]\) <!-- raw HTML omitted -->
-i have noticed that the pixels that arent in the mandelbrot tend to cause an overflow so i made it so that if a pixel causes an overflow it gets colored black <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>this is so much faster, because we&rsquo;re using the float primitive type that python provides ignoring the pixels that result in an overflow <br/></p>
+<h3 id="zooming-in"><span class="section-num">1.6</span> zooming in</h3>
+<p>we wrap the loops in a function to make it easier to draw multiple instances of the mandelbrot zoomed in on different areas <br/>
+to zoom in we simply shrink the range of the numbers, it was closed under the closed interval \([-2, 2]\), this time we close it under the interval \([-1,1]\) <br/>
+i have noticed that the pixels that arent in the mandelbrot tend to cause an overflow so i made it so that if a pixel causes an overflow it gets colored black <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">scale</span>(num, src_min, src_max, dest_min, dest_max):
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> ((num <span style="color:#f92672">-</span> src_min) <span style="color:#f92672">*</span> (dest_max <span style="color:#f92672">-</span> dest_min) <span style="color:#f92672">+</span> (dest_min <span style="color:#f92672">*</span> src_max) <span style="color:#f92672">-</span>
 </span></span><span style="display:flex;"><span>          (dest_min <span style="color:#f92672">*</span> src_min)) <span style="color:#f92672">/</span> (src_max <span style="color:#f92672">-</span> src_min)
@@ -316,11 +443,11 @@ i have noticed that the pixels that arent in the mandelbrot tend to cause an ove
 </span></span><span style="display:flex;"><span>draw_mandelbrot((<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/cbrK9i.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<h3 id="coloring"><!-- raw HTML omitted -->1.7<!-- raw HTML omitted --> coloring</h3>
-<p>now we need to come up with some coloring technique, one way to get some coloring is by setting the color according to the number of iterations the complex number took to become bigger than 2 <!-- raw HTML omitted -->
-so we rewrite the <code>check_in_mandelbrot</code> function to return the number of iterations, and the <code>draw_mandelbrot</code> function to act accordingly <!-- raw HTML omitted -->
-i found that the mandelbrot looks cool at 30 iterations so thats what im gonna use <!-- raw HTML omitted --></p>
+ <br/></p>
+<h3 id="coloring"><span class="section-num">1.7</span> coloring</h3>
+<p>now we need to come up with some coloring technique, one way to get some coloring is by setting the color according to the number of iterations the complex number took to become bigger than 2 <br/>
+so we rewrite the <code>check_in_mandelbrot</code> function to return the number of iterations, and the <code>draw_mandelbrot</code> function to act accordingly <br/>
+i found that the mandelbrot looks cool at 30 iterations so thats what im gonna use <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ITERATIONS <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_in_mandelbrot</span>(c):
@@ -357,10 +484,10 @@ i found that the mandelbrot looks cool at 30 iterations so thats what im gonna u
 </span></span><span style="display:flex;"><span>draw_mandelbrot((<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/XgPSTh.png"/>
 </figure>
- <!-- raw HTML omitted --></p>
-<p>this looks a little bit better <!-- raw HTML omitted -->
-ofcourse there are better coloring techniques but i&rsquo;ve yet to explore those <!-- raw HTML omitted -->
-we can also try different intervals to zoom around the plot and find interesting patterns, we could also write a continuous zooming animation on the mandelbrot, but i guess thats for the future <!-- raw HTML omitted --></p>
+ <br/></p>
+<p>this looks a little bit better <br/>
+ofcourse there are better coloring techniques but i&rsquo;ve yet to explore those <br/>
+we can also try different intervals to zoom around the plot and find interesting patterns, we could also write a continuous zooming animation on the mandelbrot, but i guess thats for the future <br/></p>
 </div>
 
     
@@ -373,7 +500,7 @@ we can also try different intervals to zoom around the plot and find interesting
 </main>
 
         <footer>
-            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+          
         </footer>
 
         

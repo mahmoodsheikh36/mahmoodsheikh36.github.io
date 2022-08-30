@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         
 
         <meta charset="utf-8">
@@ -22,7 +22,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://blog.mahmoodsheikh.com/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
 
 
 
@@ -66,13 +66,13 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.101.0" />
+ <meta name="generator" content="Hugo 0.102.1" />
         
 
         
 
         
-            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            
         
 
         
@@ -98,11 +98,9 @@
                             
                                 <li><a href="/">Home</a></li>
                             
-                                <li><a href="/about/">About</a></li>
-                            
                                 <li><a href="/post/">Posts</a></li>
                             
-                                <li><a href="/project/">Projects</a></li>
+                                <li><a href="/about/">About</a></li>
                             
                         </ul>
                     
@@ -135,22 +133,128 @@
 
     </div>
 
-    <div align="start" class="content"><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h2 id="global-command"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> global command</h2>
-<h3 id="delete-matching-lines"><!-- raw HTML omitted -->1.1<!-- raw HTML omitted --> delete matching lines</h3>
+    <div align="start" class="content"><p style="height:0px; display: none;">\(\DeclareMathOperator{\rank}{rank}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\spn}{span}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\dom}{domain}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\ran}{range}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\rng}{range}\)</p>
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\img}{Im}\)</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  padding: 4px;
+  border-style: groove;
+  border-width: 4px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: white;
+  position: relative;
+  left: -5px;
+  top: -7px;
+  border-radius: 10px 0 10px 0;
+  padding-right: 7px;
+  padding-left: 7px;
+  font-family: cursive;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools']}
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<h2 id="global-command"><span class="section-num">1</span> global command</h2>
+<h3 id="delete-matching-lines"><span class="section-num">1.1</span> delete matching lines</h3>
 <pre tabindex="0"><code class="language-:noeval" data-lang=":noeval">:g/pattern/d
-</code></pre><h3 id="run-macro-on-matching-lines"><!-- raw HTML omitted -->1.2<!-- raw HTML omitted --> run macro on matching lines</h3>
+</code></pre><h3 id="run-macro-on-matching-lines"><span class="section-num">1.2</span> run macro on matching lines</h3>
 <pre tabindex="0"><code class="language-:noeval" data-lang=":noeval">:g/pattern/normal @q
 </code></pre></div>
 
@@ -164,7 +268,7 @@
 </main>
 
         <footer>
-            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+          
         </footer>
 
         

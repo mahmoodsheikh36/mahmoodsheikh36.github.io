@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         
 
         <meta charset="utf-8">
@@ -22,7 +22,7 @@
 </style>
 
 
-<link rel="stylesheet" href="https://blog.mahmoodsheikh.com/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
 
 
 
@@ -66,13 +66,13 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.101.0" />
+ <meta name="generator" content="Hugo 0.102.1" />
         
 
         
 
         
-            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            
         
 
         
@@ -98,11 +98,9 @@
                             
                                 <li><a href="/">Home</a></li>
                             
-                                <li><a href="/about/">About</a></li>
-                            
                                 <li><a href="/post/">Posts</a></li>
                             
-                                <li><a href="/project/">Projects</a></li>
+                                <li><a href="/about/">About</a></li>
                             
                         </ul>
                     
@@ -132,43 +130,172 @@
         <h2>gpg</h2>
         <h5>August 7, 2022</h5>
         
-<a href="https://blog.mahmoodsheikh.com/tags/program"><kbd class="item-tag">program</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/program"><kbd class="item-tag">program</kbd></a>
 
 
     </div>
 
-    <div align="start" class="content"><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><strong>gnupg</strong> is an encryption tool <!-- raw HTML omitted --></p>
-<h2 id="encrypt-file-with-password"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> encrypt file with password</h2>
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
+  padding: 2px;
+  border: 1px black solid;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<p><strong>gnupg</strong> is an encryption tool <br/></p>
+<h2 id="encrypt-file-with-password"><span class="section-num">1</span> encrypt file with password</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg -o &lt;output-file&gt; -c &lt;file-to-encrypt&gt;
-</span></span></code></pre></div><p>the argument <code>-o</code> takes the path to the output file (the encrypted one) and the flag <code>-c</code> tells <code>gpg</code> that we want to encrypt, you will be prompted to enter a password <!-- raw HTML omitted --></p>
-<h2 id="decrypt-file-with-password"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> decrypt file with password</h2>
+</span></span></code></pre></div><p>the argument <code>-o</code> takes the path to the output file (the encrypted one) and the flag <code>-c</code> tells <code>gpg</code> that we want to encrypt, you will be prompted to enter a password <br/></p>
+<h2 id="decrypt-file-with-password"><span class="section-num">2</span> decrypt file with password</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg -o &lt;output-file&gt; -d &lt;file-to-decrypt&gt;
-</span></span></code></pre></div><p>the argument <code>-o</code> takes the path to the output file (the decrypted one) and the flag <code>-d</code> tells <code>gpg</code> that we want to decrypt <!-- raw HTML omitted --></p>
-<h2 id="encrypt-directory-with-password"><!-- raw HTML omitted -->3<!-- raw HTML omitted --> encrypt directory with password</h2>
-<p>to encrypt a directory, we simply compress it into a file: <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>the argument <code>-o</code> takes the path to the output file (the decrypted one) and the flag <code>-d</code> tells <code>gpg</code> that we want to decrypt <br/></p>
+<h2 id="encrypt-directory-with-password"><span class="section-num">3</span> encrypt directory with password</h2>
+<p>to encrypt a directory, we simply compress it into a file: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -cvf archive.tar &lt;directory&gt;
-</span></span></code></pre></div><p>for faster compression but bigger file size: <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>for faster compression but bigger file size: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar --use-compress-program<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pigz -k -9 &#34;</span> -cf archive.tar &lt;directory-to-compress&gt;
-</span></span></code></pre></div><p>and then <a href="#encrypt-file-with-password">encrypt that file</a> <!-- raw HTML omitted --></p>
-<h2 id="gpg-pinentry-error"><!-- raw HTML omitted -->4<!-- raw HTML omitted --> gpg pinentry error</h2>
-<p>if you get the following error: <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>and then <a href="#encrypt-file-with-password">encrypt that file</a> <br/></p>
+<h2 id="gpg-pinentry-error"><span class="section-num">4</span> gpg pinentry error</h2>
+<p>if you get the following error: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span>gpg: problem with the agent: No pinentry
-</span></span></code></pre></div><p>you might be able to fix this by running this command: <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>you might be able to fix this by running this command: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;pinentry-program /usr/bin/pinentry&#34;</span> &gt; ~/.gnupg/pgp-agent.conf
 </span></span><span style="display:flex;"><span>pkill pgp-agent
-</span></span></code></pre></div><p>and install the program <code>pinentry</code> from using your package manager <!-- raw HTML omitted -->
-or if you&rsquo;re on <a href="/post/20220730010042-nixos/">nixos</a> like myself: <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>and install the program <code>pinentry</code> from using your package manager <br/>
+or if you&rsquo;re on <a href="/post/20220730010042-nixos/">nixos</a> like myself: <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;pinentry-program /run/current-system/sw/bin/pinentry&#34;</span> &gt; ~/.gnupg/pgp-agent.conf
 </span></span><span style="display:flex;"><span>pkill pgp-agent
-</span></span></code></pre></div><p>and add the program <code>pinentry</code> to your <code>environment.systemPackages</code> and run <code>sudo nixos-rebuild switch</code> to build the new configuration <!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p>and add the program <code>pinentry</code> to your <code>environment.systemPackages</code> and run <code>sudo nixos-rebuild switch</code> to build the new configuration <br/></p>
 </div>
 
     
@@ -181,13 +308,12 @@ or if you&rsquo;re on <a href="/post/20220730010042-nixos/">nixos</a> like mysel
     
     
 
-    
-      
-
+  
     <h4><a href="/post/emacs/">emacs</a></h4>
     <h5>emacs</h5>
+  June 28, 2022
     
-<a href="https://blog.mahmoodsheikh.com/tags/program"><kbd class="item-tag">program</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/program"><kbd class="item-tag">program</kbd></a>
 
 
 
@@ -198,13 +324,12 @@ or if you&rsquo;re on <a href="/post/20220730010042-nixos/">nixos</a> like mysel
     
     
 
-    
-      
-
+  
     <h4><a href="/post/sage/">sagemath</a></h4>
     <h5>sagemath</h5>
+  June 18, 2022
     
-<a href="https://blog.mahmoodsheikh.com/tags/program"><kbd class="item-tag">program</kbd></a>
+<a href="https://mahmoodsheikh36.github.iotags/program"><kbd class="item-tag">program</kbd></a>
 
 
 
@@ -218,7 +343,7 @@ or if you&rsquo;re on <a href="/post/20220730010042-nixos/">nixos</a> like mysel
 </main>
 
         <footer>
-            <p class="copyright text-muted">© All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a>.</p>
+          
         </footer>
 
         
