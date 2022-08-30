@@ -1,0 +1,190 @@
++++
+title = "mental health"
+author = ["mahmood"]
+description = "mental health"
+date = 2022-06-18T14:49:00+03:00
+draft = false
++++
+
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\rank}{rank}\)</p>
+
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\spn}{span}\)</p>
+
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\dom}{domain}\)</p>
+
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\ran}{range}\)</p>
+
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\rng}{range}\)</p>
+
+<p style="height:0px; display: none;">\(\DeclareMathOperator{\img}{Im}\)</p>
+
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  padding: 4px;
+  border-style: groove;
+  border-width: 4px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: white;
+  position: relative;
+  left: -5px;
+  top: -7px;
+  border-radius: 10px 0 10px 0;
+  padding-right: 7px;
+  padding-left: 7px;
+  font-family: cursive;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools']}
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+## <span class="section-num">1</span> mental illness {#mental-illness}
+
+unlike physical illness, mental illness is related to problems that start in the brain. the brain is an organ. just like any other organs in our body, it can experience changes (healing or injury) based on life experiences like stress, trauma, rejection, lack of sleep, nutrition... <br/>
+although Psychiatry has advanced so much over the years to provide us with the knowledge and tools to deal with mental illness, nothing, not even science or religion can give us a better understanding of mental illness than [art]({{< relref "art.md" >}}), thats why i will mostly focus on [art]({{< relref "art.md" >}}) rather than on the study of Psychology or Psychiatry <br/>
+
+
+### <span class="section-num">1.1</span> psychological pain {#psychological-pain}
+
+just like a physically healthy person can experience physical pain, a person doesnt have to be mentally ill to experience psychological pain <br/>
+psychological pain can be a result of physical pain just as physical pain can be a result of psychological pain <br/>
+psychological pain is often attributed to psychological factors rather than physical ones, such as beliefs, fears, loneliness, trauma, or emotions in general <br/>
+some people believe psychological pain is worse than physical pain, this isnt directly true, but in my experience, there is some truth to it <br/>
+first of all, such comparison cant be made, because pain cant be measured, everyone has his own experiences with pain, but what causes psychological pain to be so bad isnt in how severe it is, because physical pain can be just as severe, its the stigma surrounding mental illness that makes it so much harder to cope with. <br/>
+psychological pain often comes with feelings of guilt, denial, shame, self hatred, suicidal ideation and since it is often invisible to the eye it makes it so much harder to deal with, being trapped inside ones own mind is a hell of its own that many of those who experience it think [suicide](#suicide) is the only cure, that it is salvation <br/>
+although [suicide](#suicide) is often perceived as a taboo, morally wrong action, there is nothing wrong with having suicidal tendencies, it can even be a coping mechanism to convince ones self that they are still in control of their lives, and it often escalates to self harm, which may eventually lead to actual [suicide](#suicide) attempts <br/>
+which brings us to the subject of self harm, which is another coping mechanism that (mostly) mentally ill people use to relieve their psychological pain as a means of escape, because physical pain can temporarily distract us from our troubled minds and may even provide us with some comfort <br/>
+but those coping mechanisms only worsen mental health in the long run, because they arent really a way to deal with our troubles but to give us a temporary sense of relief, and since the problems arent directly dealt with but often escaped, they worsen, ones mental health worsens, and it all just goes downhill from there, until a person may take his own life, or seek help, which, in its own way, is another hell to go through <br/>
+this kind of pain is ruthless, it is hard to deal with, it is invisible to the eye, it can completely change you and you may lose yourself so easily as mental illness is often a short path to the destruction of ones life <br/>
+im no psychiatrist, nor do i really know how other people experience pain, but i do know how it all feels. <br/>
+
+
+### <span class="section-num">1.2</span> suicide {#suicide}
+
+suicide is taking of ones own life, its often misunderstood and is a topic that has gone through centuries of stigmatization <br/>
+suicide isnt wrong, but more often than not it isnt the right solution, its important to remember that suicide isnt really a solution, its an escape <br/>
+
+
+### <span class="section-num">1.3</span> peer support online {#peer-support-online}
+
+you may find some comfort in [art]({{< relref "art.md" >}}) <br/>
+heres a list of subreddits you can visit to help you cope with mental illness or to help you get a better understanding of it <br/>
+
+| link                                                                               | description                     |
+|------------------------------------------------------------------------------------|---------------------------------|
+| [r/GetMotivated](https://www.reddit.com/r/GetMotivated/top/?t=all)                 | motivation                      |
+| [r/depression](https://www.reddit.com/r/depression/top/?t=all)                     | depression                      |
+| [r/mentalhealth](https://www.reddit.com/r/mentalhealth/top/?t=all)                 | mental health                   |
+| [r/Anxiety](https://www.reddit.com/r/Anxiety/top/?t=all)                           | anxiety                         |
+| [r/SuicideWatch](https://www.reddit.com/r/SuicideWatch/top/?t=all)                 | suicide                         |
+| [r/BipolarReddit](https://www.reddit.com/r/BipolarReddit/top/?t=all)               | bipolar disorder                |
+| [r/Schizoid](https://www.reddit.com/r/Schizoid/top/?t=all)                         | schizoid personality disorder   |
+| [r/raisedbynarcissists](https://www.reddit.com/r/raisedbynarcissists/top/?t=all)   | abuse                           |
+| [r/abusiverelationships](https://www.reddit.com/r/abusiverelationships/top/?t=all) |                                 |
+| [r/NarcissisticAbuse](https://www.reddit.com/r/NarcissisticAbuse/top/?t=all)       |                                 |
+| [r/BPD](https://www.reddit.com/r/BPD/top/?t=all)                                   | borderline personality disorder |
+| [r/ptsd](https://www.reddit.com/r/ptsd/top/?t=all)                                 | Post-traumatic stress disorder  |
+| [r/selfharm](https://www.reddit.com/r/selfharm/top/?t=all)                         | self harm                       |
+| [r/selfhelp](https://www.reddit.com/r/selfhelp/top/?t=all)                         | self help                       |
+| [r/schizophrenia](https://www.reddit.com/r/schizophrenia/top/?t=all)               | schizophrenia                   |
+| [r/ForeverAlone](https://www.reddit.com/r/ForeverAlone/top/?t=all)                 | loneliness                      |
+
+
+### <span class="section-num">1.4</span> severe depression {#severe-depression}
+
+as described by anon <br/>
+![](/ox-hugo/4chan_depression.jpg) <br/>

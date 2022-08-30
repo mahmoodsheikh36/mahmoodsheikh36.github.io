@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>data structures - Mahmood&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mahmood" /><meta name="description" content="data structures" /><meta name="keywords" content="mahmood, math, music" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.101.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.mahmoodsheikh.com/post/data_structures/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="data structures" />
+<meta property="og:description" content="data structures" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.mahmoodsheikh.com/post/data_structures/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-10T08:59:00+03:00" />
+<meta property="article:modified_time" content="2022-07-10T08:59:00+03:00" />
+
+<meta itemprop="name" content="data structures">
+<meta itemprop="description" content="data structures"><meta itemprop="datePublished" content="2022-07-10T08:59:00+03:00" />
+<meta itemprop="dateModified" content="2022-07-10T08:59:00+03:00" />
+<meta itemprop="wordCount" content="3233">
+<meta itemprop="keywords" content="math,computer-science," />
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Mahmood</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Posts</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Mahmood</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Posts</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">data structures</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-07-10 </span>
+        
+          <span class="more-meta"> 3233 words </span>
+          <span class="more-meta"> 16 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#properties-of-floor"><span class="section-num">1</span> properties of floor</a></li>
+        <li><a href="#order-of-growth"><span class="section-num">2</span> order of growth</a></li>
+        <li><a href="#asymptotic-notations"><span class="section-num">3</span> asymptotic notations</a>
+          <ul>
+            <li><a href="#big-o"><span class="section-num">3.1</span> Big O</a></li>
+            <li><a href="#big-theta"><span class="section-num">3.2</span> Big Theta</a></li>
+            <li><a href="#big-omega"><span class="section-num">3.3</span> Big Omega</a></li>
+            <li><a href="#time-complexity"><span class="section-num">3.4</span> time complexity</a></li>
+          </ul>
+        </li>
+        <li><a href="#recursive-functions"><span class="section-num">4</span> recursive functions</a>
+          <ul>
+            <li><a href="#recurrence-relation"><span class="section-num">4.1</span> recurrence relation</a></li>
+            <li><a href="#recursion-tree"><span class="section-num">4.2</span> recursion tree</a></li>
+            <li><a href="#master-theorem"><span class="section-num">4.3</span> Master Theorem</a></li>
+          </ul>
+        </li>
+        <li><a href="#data-structure"><span class="section-num">5</span> data structure</a>
+          <ul>
+            <li><a href="#list"><span class="section-num">5.1</span> List</a></li>
+            <li><a href="#queue"><span class="section-num">5.2</span> Queue</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  border-style: groove;
+  border-width: 3px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-family: cursive;
+  border: 1px solid black;
+  font-size: 13px;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  }
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<h2 id="properties-of-floor"><span class="section-num">1</span> properties of floor</h2>
+<div class="characteristic">
+<p>for every 2 <a href="/post/calculus2/#normal">normal</a> numbers \(m,n\) and every <a href="/post/calculus2/#real">real</a> number \(x\) <br/>
+\[
+\ceil*{\frac{\ceil*{\frac{x}{m}}}{n}} = \ceil*{\frac{x}{m \cdot n}} \qquad \floor*{\frac{\floor*{\frac{x}{m}}}{n}} = \floor*{\frac{x}{m \cdot n}}
+\] <br/></p>
+<div class="my_example">
+<p>\[
+\ceil*{\frac{\ceil*{\frac{x}{2^i}}}{2}} = \ceil*{\frac{x}{2^{i+1}}} \qquad \floor*{\frac{\floor*{\frac{x}{2^i}}}{2}} = \floor*{\frac{x}{2^{i+1}}}
+\] <br/></p>
+</div>
+</div>
+<div class="characteristic">
+<p>the following is true for every normal number \(n\) and any number \(x\) <br/></p>
+<p>\begin{gather}
+\floor*{x}+n = \floor*{x+n} \qquad \ceil*{x}+n=\ceil*{x+n}\\
+n-\floor*{x} = \ceil*{n-x} \qquad n-\ceil*{x} = \floor*{n-x}\\
+\floor*{x} \geq \ceil*{x}-1 \qquad \ceil*{x} \leq \floor*{x}+1\\
+\floor*{x} &gt; x-1 \qquad \ceil*{x} &lt; x+1\\
+\floor*{x} \leq x \qquad \ceil*{x} \geq x\\
+\floor*{x} = n \iff n \leq x &lt; n+1 \qquad \ceil*{x} = n \iff n-1 &lt; x \leq n
+\end{gather}</p>
+</div>
+<h2 id="order-of-growth"><span class="section-num">2</span> order of growth</h2>
+<div class="definition">
+<p>the order of growth of an <a href="/post/20220706211958-algorithm/">algorithm</a> is an approximation of the time required to run a computer program as the input size increases, the order of growth ignores the constant factor needed for fixed operations and focuses instead on the operations that increase proportional to input size <br/>
+an order of growth is a set of functions whose asymptotic growth behavior is considered equivalent. for example, \(2n\), \(100n\) and \(n+1\) belong to the same order of growth, which is written \(O(n)\) in big-oh notation and often called linear because every function in the set grows linearly with \(n\) <br/></p>
+</div>
+<h2 id="asymptotic-notations"><span class="section-num">3</span> asymptotic notations</h2>
+<table>
+<thead>
+<tr>
+<th>notation</th>
+<th>name</th>
+<th>formal definition</th>
+<th>limit definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\(f(n) = O(g(n))\)</td>
+<td>Big Oh</td>
+<td>\(\exists k &gt; 0 \ \exists n_0 \ \forall n &gt; n_0 : \vert f(n) \vert \leq k \cdot g(n)\)</td>
+<td>\(\lim_{n\to\infty} \dfrac{\vert f(n) \vert}{g(n)} = c\), where \(c \geq 0\) is a constant</td>
+</tr>
+<tr>
+<td>\(f(n) = \Omega(g(n))\)</td>
+<td>Big Omega</td>
+<td>\(\exists k &gt; 0 \ \exists n_0 \ \forall n &gt; n_0 : \vert f(n) \vert \geq k \cdot g(n)\)</td>
+<td>\(\lim_{n\to\infty} \dfrac{g(n)}{f(n)} = c\), where \(c \geq 0\) is a constant</td>
+</tr>
+<tr>
+<td>\(f(n) = \Theta(g(n))\)</td>
+<td>Big Theta</td>
+<td>\(\exists k_1 &gt; 0\ \exists k_2 &gt; 0\ \exists n_0\ \forall n &gt; n_0 : k_1 \cdot g(n) \leq \vert f(n) \vert \leq k_2 \cdot g(n)\)</td>
+<td>\(\lim_{n\to\infty} \dfrac{f(n)}{g(n)} = c\), where \(c &gt; 0\) is a constant</td>
+</tr>
+</tbody>
+</table>
+<h3 id="big-o"><span class="section-num">3.1</span> Big O</h3>
+<h3 id="big-theta"><span class="section-num">3.2</span> Big Theta</h3>
+<h3 id="big-omega"><span class="section-num">3.3</span> Big Omega</h3>
+<h3 id="time-complexity"><span class="section-num">3.4</span> time complexity</h3>
+<h2 id="recursive-functions"><span class="section-num">4</span> recursive functions</h2>
+<p>consider factorial <br/></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">fac</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="recurrence-relation"><span class="section-num">4.1</span> recurrence relation</h3>
+<p>to analyze the runtime of such a function we use a mathematical concept called <strong>Recurrence relation</strong> <br/>
+a recurrence defines \(T(n)\) in terms of \(T\) for smaller values <br/>
+example: \(T(n) = T(n-1) + 1\), here \(T(n)\) is defined in terms of \(T(n-1)\) <br/></p>
+<h4 id="initial-condition"><span class="section-num">4.1.1</span> initial condition</h4>
+<p>a <a href="#recurrence-relation">recurrence relation</a> must have <strong>initial conditions</strong>, initial conditions are values of the recurrence for small values of \(n\) <br/>
+the values of \(T(0),T(1)\) are usually sufficient as initial conditions <br/></p>
+<h4 id="closed-form"><span class="section-num">4.1.2</span> closed form</h4>
+<p>to solve a <a href="#recurrence-relation">recurrence</a>, we find a <strong>closed form</strong> for it, a closed form for \(T(n)\) is an equation that defines \(T(n)\) using an expression that does <strong>not</strong> involve \(T\) <br/>
+there is no single method that works for all, we check for patterns and use substitution <br/>
+to get a better understanding, we look at examples <br/></p>
+<div class="my_example">
+<p>consider the following function that returns the factorial of a given number <br/></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fac</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">([</span><span class="n">fac</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>for <code>fac(n)</code>, how many times is <code>fac</code> called? <br/>
+\[ T(n) \leq T(n-1) + C_1 \] <br/>
+\(C_1\) represents the total time of all the operations that take constant time that the function does on every iteration <br/>
+now this is obviously not what we wanna arrive at, we need to arrive at an expression that doesnt have \(T\) in it <br/>
+we can substitute in \(n - 1\) because \(T\) is a function that takes any positive integer <br/></p>
+<p>\begin{align*}
+T(n) &amp;\leq \underbrace{T(n-2) + C_1}_{T(n-1)} + C_1\\
+T(n) &amp;\leq T(n-3) + 3C_1
+\end{align*}</p>
+<p>now you probably already see the pattern here, on every iteration the function takes constant time \(C_1\) to run, until it reaches the last iteration \(k\) at which point it we would&rsquo;ve \(k\) times \(C_1\), e.g.: <br/>
+\[ T(n) \leq T(n-k) + kC_1 \] <br/></p>
+<p>now we know that the total number of times the function calls itself depends on the initial value of \(n\), in this case that number would be \(n - 1\), as in, this function calls itself \(n - 1\) times <br/>
+we substitute \(k = n - 1\) to get the total time this function takes to run <br/></p>
+<p>\begin{align*}
+T(n) &amp;\leq T(n-(n-1)) + (n-1)C_1\\
+&amp;\leq T(1) + (n-1)C_1\\
+&amp;\leq C_1 + (n-1)C_1 &amp;\text{because } C_1 \geq T(1)\\
+&amp;\leq nC_1
+\end{align*}</p>
+<p>so we conclude that <br/>
+\[
+\Theta(n) = nC_1 \implies \Theta(n) = n
+\] <br/></p>
+</div>
+<div class="my_example">
+<p>consider the following function that returns the maximum value in a given array <br/></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">mymax</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="n">r</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">mymax</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">mymax</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>we need to find a recurrence for this function so we can analyze its time complexity <br/>
+first thing we notice is on every iteration we have a constant time (excluding the recursive call), we call it \(C\) <br/>
+we can also notice that the variable &ldquo;\(r\)&rdquo; never changes, so our recurrence should only depends on \(l\) <br/>
+now we can guess that the recurrence equation is: <br/>
+\[ T(l) = T(l-1) + C \] <br/>
+you might be confused (hopefully not) that we wrote \(l-1\) even though in the recursive call its \(l+1\), this is because we dont care about the value of the variable itself but rather about how many times the variable causes the function to call itself <br/>
+now if we had written \(l+1\) this would suggest that given the value \(l\) the function runs \(l+1\) times which is not correct <br/>
+and so this equals to \(\Theta(n)\) (using the same proof as the previous problem) <br/></p>
+</div>
+<div class="my_example">
+<p>consider the following function that returns the fibonacci number at the given index <br/></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span> <span class="k">return</span> <span class="mi">1</span>  
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">print</span><span class="p">([</span><span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>for <code>fib(n)</code>, how many times is <code>fib</code> called? <br/></p>
+<p>\begin{align*}
+T(1) &amp;= 1\\
+T(2) &amp;= 1\\
+T(3) &amp;= T(1) + T(2) + 1 = 1 + 1 + 1 = 3\\
+T(4) &amp;= T(3) + T(2) + 1 = 3 + 1 + 1 = 5\\
+T(5) &amp;= T(4) + T(3) + 1 = 5 + 3 + 1 = 9\\
+T(n) &amp;= T(n-1) + T(n-2) + 1 = 2^n + 1
+\end{align*}</p>
+</div>
+<h3 id="recursion-tree"><span class="section-num">4.2</span> recursion tree</h3>
+<div class="my_example">
+<p>consider the following <a href="#recurrence-relation">recurrence relation</a> <br/>
+\[ T(n) = T\left(\dfrac{n}{3}\right) + T\left(\dfrac{2n}{3}\right) + n \] <br/>
+a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \(T(n)\) <br/>
+with that in mind, the first step would be: <br/></p>
+<p><figure><img src="/ox-hugo/AT4XkK.png"/>
+</figure>
+ <br/></p>
+<p>if we sum all the nodes we can see that indeed \(T(n) = T\left(\dfrac{2n}{3}\right) + T\left(\dfrac{n}{3}\right) + n\) <br/>
+for the next step we need to write \(T\left(\dfrac{2n}{3}\right)\) and \(T\left(\dfrac{n}{3}\right)\) in terms of time complexity for smaller values of \(n\) so we can know what the next row of nodes would be <br/></p>
+<p>\begin{align*}
+T\left(\dfrac{2n}{3}\right) &amp;= T\left(\dfrac{2 \cdot \frac{2n}{3}}{3}\right) + T\left(\dfrac{\frac{2n}{3}}{3}\right) + \dfrac{2n}{3} = T\left(\dfrac{4n}{9}\right) + T\left(\dfrac{2n}{9}\right) + \dfrac{2n}{3}\\
+T\left(\dfrac{n}{3}\right) &amp;= T\left(\dfrac{2 \cdot \frac{n}{3}}{3}\right) + T\left(\dfrac{\frac{n}{3}}{3}\right) + \dfrac{n}{3} = T\left(\dfrac{2n}{9}\right) + T\left(\dfrac{n}{9}\right) + \dfrac{n}{3}
+\end{align*}</p>
+<p>according to this, the tree with the new nodes would be: <br/></p>
+<p><figure><img src="/ox-hugo/e66eVE.png"/>
+</figure>
+ <br/></p>
+<p>we define a <strong>full row</strong> as a row that is full of nodes, in the previous tree the rows \(1,2,3\) are full, we might notice that the sum of all the nodes of a full row is \(n\) <br/>
+let \(y\) be the last full row <br/>
+because the leftmost node is always the smallest in its row, for a row to be full the leftmost node has to be greater or equal to 1 (\(\dfrac{n}{3^y} \geq 1\) in this case) <br/>
+if \(\dfrac{n}{3^y} \geq 1\) is true then the leftmost node in the row \(y+1\) whose value is \(\dfrac{n}{3^y}\) appears in the tree (because nodes with values greater or equal to 1 do appear in the tree), and so the row \(y+1\) is full, which results in a contradiction because \(y\) is the last full row <br/>
+therefore it must be that \(\dfrac{n}{3^y} &lt; 1 \Rightarrow n &lt; 3^y \Rightarrow y &gt; \log_3{n}\) <br/>
+therefore the tree contains atleast \(\log_3{n}\) full rows, and because the sum of every full row is \(n\) we get: <br/>
+\(T(n) =\) sum of all nodes = sum of nodes in full rows + sum of nodes in unfull rows \(\geq\) sum of nodes in full rows \(\geq\) \(n \cdot \log_3{n} = \Theta(n\log{n})\) <br/>
+and therefore \(T(n) = \Omega(n\log{n})\) <br/>
+let \(x\) be the last row in the tree, the value of the rightmost node in row \(x\) would be \({\left(\dfrac23\right)}^{x-1} \cdot n\) <br/>
+if this value is less than 1 then this node doesnt appear in the tree and all the other nodes in row \(x\) that have a smaller value also dont exist which gives us a contradiction because \(x\) is the last row in the tree <br/>
+therefore we get \({\left(\dfrac23\right)}^{x-1}n \geq 1 \Rightarrow n \geq {\left(\dfrac32\right)}^{x-1} \Rightarrow \log_{3/2}n \geq x - 1 \Rightarrow x \leq 1 + \log_{3/2}n\) <br/>
+and therefore in the tree there is at most \(1 + \log_{3/2}n\) rows, and since the sum of every row in the tree is \(n\) we get: <br/>
+\(T(n)\) = sum of all nodes = sum of all nodes in all rows \(\leq n \cdot\) number of rows in the tree \(\leq n \cdot (1+\log_{3/2}n) = \Theta(n\log{n})\) <br/>
+and therefore \(T(n) = O(n\log{n})\) <br/>
+in summery, we proved that \(T(n) = \Theta(n\log{n})\) <br/></p>
+</div>
+<div class="my_example">
+<p>consider the following <a href="#recurrence-relation">recurrence relation</a> <br/>
+\[
+T(n) = 2T\left(\frac{n}{8}\right) + 3T\left(\frac{n}{9}\right) + n
+\] <br/>
+we cant determine \(\Theta\) using the <a href="#master-theorem">Master Theorem</a>, but we can using a recursion tree <br/>
+the first step would be: <br/></p>
+<p><figure><img src="/ox-hugo/0IoNVgg.png"/>
+</figure>
+ <br/></p>
+<p>\begin{align*}
+T\left(\frac{n}{8}\right) &amp;= 2T\left(\frac{n}{8^2}\right) + 3T\left(\frac{n}{8\cdot9}\right) + \frac{n}{8}\\
+T\left(\frac{n}{9}\right) &amp;= 2T\left(\frac{n}{8\cdot9}\right) + 3T\left(\frac{n}{9^2}\right) + \frac{n}{9}
+\end{align*}</p>
+<p><img src="/ox-hugo/8OoGIIt.png" alt=""> <br/>
+the sum of the nodes in level 1 is \(n\), in level 2 its \(n\left(\frac{2}{8}+\frac{3}{9}\right)\), in level 3 its \(n\left(\frac{2}{8}+\frac{3}{9}\right)^2\), and so in level \(i\) it is \(n\left(\frac{2}{8}+\frac{3}{9}\right)^{i-1}\) <br/>
+we denote by \(x\) the last level <br/></p>
+<p>\begin{align*}
+T(n) &amp;= \text{sum of all nodes}\\
+&amp;= \text{sum of all nodes in all levels}\\
+&amp;\leq n+n\left(\frac{2}{8}+\frac{3}{9}\right)+n\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+n\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\\
+&amp;\leq n\left(\left(\frac{2}{8}+\frac{3}{9}\right)+\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\right)\\
+&amp;= n\cdot \frac{1}{1-\left(\frac{2}{8}+\frac{3}{9}\right)}\\
+&amp;= \Theta(n)
+\end{align*}</p>
+<p>note the sum was found using <a href="/post/20220711182517-sum_of_geometric_progression/">geometric progression formula</a> <br/>
+and so we have shown that \(T(n) = O(n)\) <br/>
+\[
+T(n) = \text{sum of all nodes in the tree} \ge \text{root} = n = \Theta(n)
+\] <br/>
+and so we have shown that \(T(n) = \Omega(n)\) <br/>
+and so \(T(n) = \Theta(n)\) <br/></p>
+</div>
+<h3 id="master-theorem"><span class="section-num">4.3</span> Master Theorem</h3>
+<h4 id="dividing-functions"><span class="section-num">4.3.1</span> dividing functions</h4>
+<p>for a given <a href="#recurrence-relation">recurrence relation</a> of the form: <br/>
+\[ T(n) = aT\left(\dfrac{n}{b}\right) + f(n) \text{ where } a \geq 1, b &gt; 1 \] <br/>
+we compare \(f(n)\) with \(n^{\log_b{a}}\) and check which one dominates, the possible outcomes are: <br/></p>
+<p>\begin{align}
+\exists \epsilon &gt; 0 \mid f(n) = O\left(n^{\log_b(a)-\epsilon}\right) &amp;\implies T(n) = \Theta\left(n^{log_b{a}}\right)\\
+f(n) = \Theta\left(n^{\log_b{a}}\right) &amp;\implies T(n) = \Theta\left(n^{\log_b{a}}\log{n}\right)\\
+\exists \epsilon &gt; 0 \mid f(n) = \Omega\left(n^{\log_b(a)+\epsilon}\right) \text{ and } 0 &lt; c &lt; 1 \mid af\left(\dfrac{n}{b}\right) &lt; cf(n) &amp;\implies T(n) = \Theta(f(n))
+\end{align}</p>
+<div class="my_example">
+<p>example of the first possibility <br/></p>
+<p>\begin{gather*}
+T(n) = 8T\left(\dfrac{n}{2}\right) + 1000n^2\\
+a = 8, b = 2, f(n) = 1000n^2
+\end{gather*}</p>
+<p>the conditions of the first possibility are met: <br/>
+\[ n^{\log_b{a}} = n^{\log_2{8}} = n^3 = O\left(1000n^2\right) \] <br/>
+therefore we get: <br/>
+\[ T(n) = \Theta(n^3) \] <br/></p>
+</div>
+<div class="my_example">
+<p>example of the second possibility <br/></p>
+<p>\begin{gather*}
+T(n) = 2T\left(\dfrac{n}{2}\right) + 10n\\
+a = 2, b = 2, f(n) = 10n
+\end{gather*}</p>
+<p>the conditions of the second possibility are met: <br/>
+\[ n^{\log_b{a}} = n^{\log_2{2}} = n^1 = \Theta(10n) \] <br/>
+we get: <br/>
+\[ T(n) = \Theta(n\log{n}) \] <br/></p>
+</div>
+<div class="my_example">
+<p>example of the third possibility <br/></p>
+<p>\begin{gather*}
+T(n) = 2T\left(\dfrac{n}{2}\right) + n^2\\
+a=2,b=2,f(n)=n^2
+\end{gather*}</p>
+<p>the conditions of the third possibility are met: <br/>
+\[ n^{\log_b{a}} = n^{\log_2{2}} = n^1 = \Omega(n^2) \] <br/>
+we get: <br/>
+\[ T(n) = \Theta\left(n^2\right) \] <br/></p>
+</div>
+<h4 id="decreasing-functions"><span class="section-num">4.3.2</span> decreasing functions</h4>
+<p>The master theorem can be used to solve recurrences of the form \(T(n) = aT(n - b) + f(n)\), where \(a \geq 1\) and \(b &gt; 0\) and \(f(n)\) is <em>Asymptotically positive</em>. (Asymptotically positive means that the function is positive for all sufficiently large n.) This recurrence describes an algorithm that divides a problem of size \(n\) into sub problems, each of size \(n-b\), and solves them recursively. <br/>
+the theorem is as follows: <br/>
+if \(T(n) = aT(n-b) + f(n)\), where \(a \geq 1\), \(b &gt; 0\), \(f(n) = O(n^k)\) and \(k \geq 0\) <br/>
+we consider 3 cases: <br/>
+<strong>case 1</strong>, if \(a = 1\) <br/>
+\[ T(n) = O(n \cdot f(n)) \text{ or } O\left(n^{k+1}\right) \] <br/>
+examples: <br/></p>
+<p>\begin{align}
+T(n) = T(n - 1) + 1 &amp;\Rightarrow O(n)\\
+T(n) = T(n - 1) + n &amp;\Rightarrow O(n^2)\\
+T(n) = T(n-1) + \log{n} &amp;\Rightarrow O(n\log{n})
+\end{align}</p>
+<p><strong>case 2</strong>, if \(a &gt; 1\) <br/>
+\[ T(n) = O(a^{\frac{n}{b}} \cdot f(n)) \text{ or } O(a^{\frac{n}{b}} \cdot n^k) \] <br/>
+examples: <br/></p>
+<p>\begin{align}
+T(n) = 2T(n-1)+1 &amp;\Rightarrow O(2^n)\\
+T(n) = 3T(n-1)+1 &amp;\Rightarrow O(3^n)\\
+T(n) = 2T(n-1)+n &amp;\Rightarrow O(n \cdot 2^n)
+\end{align}</p>
+<p><strong>case 3</strong>, if \(a &lt; 1\) <br/>
+\[ T(n) = O(f(n)) \text{ or } O\left(n^k\right) \] <br/></p>
+<h2 id="data-structure"><span class="section-num">5</span> data structure</h2>
+<p><em>data structure</em> is a collection of data and operations on said data, the data is represented as objects, and each object <code>x</code> has: <br/></p>
+<ul>
+<li><code>key(x)</code>: a key that is used to identify the object (usually a number that uniquely identifies the object) <br/></li>
+<li><code>info(x)</code> or <code>value(x)</code>: contains the data needed to store for the object (usually without the key) <br/></li>
+</ul>
+<p>for example, if <code>x</code> is a person, <code>key(x)</code> could be the person&rsquo;s ID, <code>value(x)</code> would be information on said person, like age, height, weight etc.. <br/></p>
+<h3 id="list"><span class="section-num">5.1</span> List</h3>
+<p>a <strong>list</strong> is a dynamically sized (often automatically resized) <em>list of objects</em> that stores as many objects as necessary, each type of list has its own method of dynamic storage <br/></p>
+<h4 id="linked-list"><span class="section-num">5.1.1</span> linked list</h4>
+<h5 id="characteristics"><span class="section-num">5.1.1.1</span> characteristics</h5>
+<ul>
+<li>is the list <strong>sorted</strong>? the nodes are sorted by their <code>key</code> (usually in an ascending order) <br/></li>
+<li>is the list <strong>doubly/singly linked</strong>? in a doubly linked list each node points to the next and previous node whereas in a singly linked list a node only points to the next <br/></li>
+<li>does the list have a <strong>tail</strong>? a pointer <code>tail(x)</code> points to the last node in a linked list <br/></li>
+<li>is the list <strong>circular</strong>? in a circular linked list the last node points to the first whereas in a non-circular linked list it points to NULL (nothing) <br/></li>
+</ul>
+<h5 id="functions"><span class="section-num">5.1.1.2</span> functions</h5>
+<ul>
+<li><code>insert(x)</code>: inserts <code>x</code> <br/></li>
+<li><code>search(k)</code>: returns the node whose key is <code>k</code> <br/></li>
+<li><code>isEmpty()</code>: returns whether list is empty <br/></li>
+<li><code>delete(x)</code>: given the node <code>x</code>, removes it from the list <br/></li>
+</ul>
+<h5 id="implementation--c-plus-plus"><span class="section-num">5.1.1.3</span> implementation (c++)</h5>
+<h6 id="node"><span class="section-num">5.1.1.3.1</span> Node</h6>
+<p><a id="code-snippet--Node"></a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">T</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">next</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">T</span> <span class="nf">get_data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">get_next</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_next</span><span class="p">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">next</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert</span><span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="n">next</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">has_next</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="doublynode"><span class="section-num">5.1.1.3.2</span> DoublyNode</h6>
+<p><a id="code-snippet--DoublyNode"></a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">DoublyNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DoublyNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">left</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DoublyNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">right</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">T</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DoublyNode</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">~</span><span class="n">DoublyNode</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">T</span> <span class="nf">get_data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_left</span><span class="p">(</span><span class="n">DoublyNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">parent</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_right</span><span class="p">(</span><span class="n">DoublyNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">-&gt;</span><span class="n">parent</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DoublyNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">get_right</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DoublyNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">get_left</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">has_right</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">has_left</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="linkedlist"><span class="section-num">5.1.1.3.3</span> LinkedList</h6>
+<p><a id="code-snippet--LinkedList"></a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">LinkedList</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">head</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">~</span><span class="n">LinkedList</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">n</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">next</span> <span class="o">=</span> <span class="n">n</span><span class="o">-&gt;</span><span class="n">get_next</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">delete</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">n</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">get_head</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_head</span><span class="p">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LinkedList</span><span class="o">*</span> <span class="nf">add</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LinkedList</span><span class="o">*</span> <span class="nf">add</span><span class="p">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">is_empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="o">-&gt;</span><span class="n">get_tail</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_next</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">get_tail</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">is_empty</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span> <span class="n">n</span><span class="o">-&gt;</span><span class="n">get_next</span><span class="p">()</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">-&gt;</span><span class="n">get_next</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">is_empty</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">get_node</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">n</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">index</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">-&gt;</span><span class="n">get_next</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;*</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span> <span class="n">n</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">-&gt;</span><span class="n">get_next</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="doublylinkedlist"><span class="section-num">5.1.1.3.4</span> DoublyLinkedList</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="n">to</span> <span class="n">be</span> <span class="n">implemented</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="linkedlistwithtail"><span class="section-num">5.1.1.3.5</span> LinkedListWithTail</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="n">to</span> <span class="n">be</span> <span class="n">implemented</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="circularlinkedlist"><span class="section-num">5.1.1.3.6</span> CircularLinkedList</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="n">to</span> <span class="n">be</span> <span class="n">implemented</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="array-list"><span class="section-num">5.1.2</span> array list</h4>
+<p>an array list contains a fixed-size array initialized to a constant length, when the array gets filled we create a new array whose size is \(n \times c\) where \(n\) is a constant (usually 2), and \(c\) is the previous size of the array, and we copy all the objects to the new array and then we have more space to store more objects <br/></p>
+<h5 id="arraylist"><span class="section-num">5.1.2.1</span> ArrayList</h5>
+<p><a id="code-snippet--ArrayList"></a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define INITIAL_SIZE 3
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define SCALING_FACTOR 2
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">ArrayList</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">actualSize</span><span class="p">;</span> <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">T</span><span class="o">*</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">T</span><span class="o">*</span> <span class="nf">allocateMemory</span><span class="p">(</span><span class="kt">int</span> <span class="n">numOfObjects</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">T</span><span class="o">*</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="p">[</span><span class="n">numOfObjects</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">actualSize</span> <span class="o">=</span> <span class="n">numOfObjects</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">resize</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">T</span><span class="o">*</span> <span class="n">newArr</span> <span class="o">=</span> <span class="n">allocateMemory</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">actualSize</span> <span class="o">*</span> <span class="n">SCALING_FACTOR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">newArr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span><span class="p">[]</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">arr</span> <span class="o">=</span> <span class="n">newArr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ArrayList</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">arr</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">allocateMemory</span><span class="p">(</span><span class="n">INITIAL_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">~</span><span class="n">ArrayList</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span><span class="p">[]</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ArrayList</span><span class="o">*</span> <span class="nf">add</span><span class="p">(</span><span class="n">T</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">actualSize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="o">-&gt;</span><span class="n">resize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">T</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">idx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">remove</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert</span><span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">idx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">idx</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert</span><span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">actualSize</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="o">-&gt;</span><span class="n">resize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="queue"><span class="section-num">5.2</span> Queue</h3>
+<p>a Queue is a linear <a href="#data-structure">data structure</a> in which the operations are performed based on <a href="#fifo">FIFO</a> principle <br/></p>
+<h4 id="fifo"><span class="section-num">5.2.1</span> FIFO</h4>
+<div class="definition">
+<p><strong>FIFO</strong> stands for <strong>first in first out</strong>, which means the first entity that enters would be the first one to exit <br/></p>
+</div>
+<h4 id="circular-queue"><span class="section-num">5.2.2</span> Circular Queue</h4>
+<div class="definition">
+<p>a <strong>Circular Queue</strong> is a <a href="#queue">Queue</a> in which the last element is connected back to the first element to make a circle. <br/></p>
+</div>
+    </div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/math/">math</a>
+          <a href="/tags/computer-science/">computer-science</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/gui_programming/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">programming in C#</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/emacs/">
+            <span class="next-text nav-default">emacs</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://blog.mahmoodsheikh.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Mahmood</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
