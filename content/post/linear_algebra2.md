@@ -181,7 +181,7 @@ a matrix can be constructed over a specific finite/infinite set of numbers for e
 <div class="my_example">
 
 this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
-\\[\left[\begin{array}{rrrr} 1 & 0 & -2 & 1 \\\ -14 & 0 & 0 & -1 \\\ -1 & 5 & 0 & 6 \\\ -1 & 0 & 0 & -3 \\\ 2 & -2 & -1 & 0 \end{array}\right]\\] <br/>
+\\[\left[\begin{array}{rrrr} -3 & 1 & -2 & 0 \\\ -1 & 3 & -1 & 1 \\\ 1 & 7 & 1 & 2 \\\ 1 & 0 & -1 & -3 \\\ 1 & 1 & 0 & 1 \end{array}\right]\\] <br/>
 
 </div>
 
@@ -382,7 +382,7 @@ assuming an \\(n\times n\\) matrix <br/>
 
 <div class="lemma">
 
-interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org77dfebb) and [alternating](#org4eaf5fc) <br/>
+interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org0d7a7d9) and [alternating](#org06b6920) <br/>
 
 </div>
 
@@ -394,7 +394,7 @@ if the columns of the matrix form a [linearly dependant set](#linear-dependance)
 
 <div class="lemma">
 
-adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org77dfebb) and being [alternative](#org4eaf5fc) <br/>
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org0d7a7d9) and being [alternative](#org06b6920) <br/>
 
 </div>
 
@@ -442,7 +442,6 @@ the **Leibniz [formula]({{< relref "20220711175314-formula.md" >}})** for the [d
 \\[
   \begin{vmatrix} a & b & c\\\ d & e & f\\\ g & h & i \end{vmatrix} = a(ei - fh) - b(di - fg) + c(dh - eg)
 \\] <br/>
-hello <br/>
 
 
 #### <span class="section-num">2.10.2</span> rule of Sarrus {#rule-of-sarrus}
@@ -471,7 +470,7 @@ see <https://textbooks.math.gatech.edu/ila/diagonalization.html> <br/>
 
 <div class="definition">
 
-a [square matrix](#square-matrix) \\(A\\) is called **diagonalizable** if it is [similar](#matrix-similarity) to a [Diagonal matrix](#diagonal-matrix), i.e., if there exists an [invertible matrix](#invertible-matrix) \\(P\\) which we may call the **eigenbasis matrix** and a diagonal matrix \\(D\\) such that \\(P^{-1}AP=D\\), or equivalently \\(A=PDP^{-1}\\) <br/>
+a [square matrix](#square-matrix) \\(A\\) is called **diagonalizable** if it is [similar](#matrix-similarity) to a [diagonal matrix](#diagonal-matrix), i.e., if there exists an [invertible matrix](#invertible-matrix) \\(P\\) which we may call the **eigenbasis matrix** and a diagonal matrix \\(D\\) such that \\(P^{-1}AP=D\\), or equivalently \\(A=PDP^{-1}\\) <br/>
 
 <div class="characteristic">
 
@@ -1109,14 +1108,13 @@ for \\(a \in \mathbb{F}\\) <br/>
 
 <div class="lemma">
 
-for \\(v \in \mathbb{V}\\) <br/>
-\\[ (-1) \cdot v = -v \\] <br/>
+\\(v \in \mathbb{V} \implies (-1) \cdot v = -v\\) <br/>
 
 </div>
 
 <div class="lemma">
 
-\\[ v\_1 = -v \ \\& \ v\_2 = -v \implies v\_1 = v\_2 \\] <br/>
+\\(v\_1 = -v \land v\_2 = -v \implies v\_1 = v\_2\\) <br/>
 
 </div>
 
@@ -1285,7 +1283,7 @@ this matrix tells us that we have infinite \\(x,y,z\\) that give us what we want
   u\_2 &= (0,1,0\ldots 0)\\\\
   u\_2 &= (0,0,1\ldots 0)\\\\
   &\vdots\\\\
-  u\_n &= (0,0,0\ldots 1)\\\\
+  u\_n &= (0,0,0\ldots 1)
 \end{align\*}
 
 </div>
@@ -1399,20 +1397,15 @@ so we can manipulate the equation to be: <br/>
 \\[
   v\_1 = -\dfrac{b}{a}v\_2
 \\] <br/>
-
 and therefore \\(v\_1,v\_2\\) are proportional <br/>
-
 **second** we need to prove <br/>
-
 \\[
   v\_1, v\_2 \text{ are proportional} \implies \\{v\_1, v\_2\\} \text{ are linearly dependant}
 \\] <br/>
-\\(v\_1, v\_2\\) being proportional means there exists \\(a \in \mathbb{F}\\) such that$ <br/>
-
+\\(v\_1, v\_2\\) being proportional means there exists \\(a \in \mathbb{F}\\) such that: <br/>
 \\[
   v\_1 = av\_2
 \\] <br/>
-
 now we can manipulate this expression to be: <br/>
 \\[
   v\_1 - av\_2 = \vec0
@@ -1429,18 +1422,15 @@ if \\(S \subset T\\) and both are finite sets, if \\(S\\) is linearly dependant 
 
 <div class="proof">
 
-let \\(S = \\{s\_1, s\_2, \ldots, s\_n\\}\\), \\(T=\\{s\_1,s\_2,\ldots s\_n, t\_{n+1}, \ldots, t\_{k+1}\\}\\) <br/>
+let \\(S = \\{s\_1, s\_2, \ldots, s\_n\\}\\), \\(T=\\{s\_1,s\_2,\ldots, s\_n, t\_{n+1}, \ldots, t\_{k+1}\\}\\) <br/>
 since \\(S\\) is linearly dependant then we have the scalars \\(x\_1,x\_2,\ldots,x\_n \in \mathbb{F}\\) not all zero that give us: <br/>
-
 \\[
   x\_1s\_1 + x\_2s\_2 + \cdots + x\_ns\_n = \vec0
 \\] <br/>
 consider the following sum: <br/>
-
 \\[
   x\_1s\_1 + \cdots + x\_ns\_n + 0 \cdot t\_{n+1} + \cdots + 0 \cdot t\_{n+k} = \vec0
 \\] <br/>
-
 this sum shows just why \\(T\\) would be linearly dependant, because it is a linear combination whose scalars arent all 0 that gives us \\(\vec0\\) <br/>
 
 </div>
@@ -1528,7 +1518,7 @@ in other words, given a dependant set of vectors, there exists a vector in this 
 
 <div class="proof">
 
-according to [this entailment](#org0e21d82), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
+according to [this entailment](#org3b66beb), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
 to prove \\(\spn(s) = \spn(S - \\{s\\})\\) we show that \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) <br/>
 we know that \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) because we can take every linear combination from the former, add \\(0 \cdot s\\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \\(s = s\_1\\) <br/>
@@ -1568,9 +1558,9 @@ for every finite set \\(S \in \mathbb{V}\_\mathbb{F}\\), there exists \\(B \subs
 
 in case \\(S\\) is linearly independant we pick \\(B = S\\) and so \\(B\\) is linearly dependant and \\(\spn(B) = \spn(S)\\) <br/>
 in case \\(S\\) is linearly dependant we got more work to do: <br/>
-according to [this lemma](#orgdec000d), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
+according to [this lemma](#orgcce1cc7), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
 in case \\(S - \\{s\_1\\}\\) is linearly independant then let \\(B = S - \\{s\_1\\}\\) which means \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
-in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#orgdec000d), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
+in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#orgcce1cc7), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
 in case \\(\spn(S - \\{s\_1,s\_2\\})\\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \\(S\\) without changing the span, eventually we would arrive at \\(S - \\{s\_1,s\_2,s\_k\\}\\) that is linearly independant and \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
@@ -1634,7 +1624,7 @@ every **finitely generated vector space** \\(V\_\mathbb{F}\\) has atleast one ba
 <div class="proof">
 
 since \\(V\_\mathbb{F}\\) is finitely generated there exists a finite set \\(S \subseteq V\\) such that \\(\spn(S) = V\\) <br/>
-according to [this lemma](#orgdec000d), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
+according to [this lemma](#orgcce1cc7), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
 
 </div>
 
@@ -1852,7 +1842,7 @@ given \\({V\_\mathbb{F}}^n\\) is finitely spanned, \\(W^n \leq V^n\\) and \\(\di
 
 <div class="proof">
 
-let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgd990421) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
+let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#org10f6940) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
 
 </div>
 
@@ -2254,6 +2244,12 @@ is \\(L\\) a [linear map](#linear-map)? <br/>
 
 we need to prove \\(L((x\_1,y\_1,z\_1)+(x\_2,y\_2,z\_2)) = L(x\_1,y\_1,z\_1) + L(x\_2,y\_2,z\_2)\\) <br/>
 
+<div class="note">
+
+i should be writing \\(L((x,y,z))\\) not \\(L(x,y,z)\\) <br/>
+
+</div>
+
 \begin{align\*}
   L((x\_1,y\_1,z\_1)+(x\_2,y\_2,z\_2)) & = L(x\_1+x\_2,y\_1+y\_2,z\_1+z\_2)\\\\
   &= \begin{pmatrix}
@@ -2334,7 +2330,7 @@ if \\(L: U \to V\\) is a [linear map](#linear-map) then \\(L(\vec0)=\vec0\\) <br
 
 <div class="entailment">
 
-if \\(f: U \to V\\) is a function such that \\(f(\vec0)\neq\vec0\\) then \\(f\\) isnt a [linear map](#linear-map) <br/>
+if \\(f: U \to V\\) is a function such that \\(f(\vec0)\neq\vec0\\) then \\(f\\) isnt a linear map <br/>
 
 </div>
 
@@ -2345,7 +2341,7 @@ if \\(f: U \to V\\) is a function such that \\(f(\vec0)\neq\vec0\\) then \\(f\\)
 if \\(L: U \to V\\) is a [linear map](#linear-map) then: <br/>
 
 1.  the [kernel](#kernel) of \\(L\\) is \\(\ker L = \left\\{u \in U \mid L(u) = \vec0\right\\}\\) <br/>
-2.  the **image** of \\(L\\) is \\(\img L = \left\\{L(u) \mid u \in U\right\\} \le V\\), which means all the values that can be returned by \\(l\\) <br/>
+2.  the **image** of \\(L\\) is \\(\img L = \left\\{L(u) \mid u \in U\right\\} \le V\\), which means all the values that can be returned by \\(L\\), which is also the [column space](#column-space) of its corresponding [transformation matrix](#transformation-matrix) (if it has one) <br/>
 
 </div>
 
@@ -2366,8 +2362,9 @@ find the matrix of \\(L\\) in the basis \\(b\_1=(1,1,1,1),b\_2=(1,-1,0,0),b\_3=(
   L(0,0,1,-1) = (0,1,0,-1)
 \end{gather\*}
 
+on the left columns of the matrix lies the basis and on the right 4 columns lies the image <br/>
 \\[\left[\begin{array}{rrrrrrrr} 1 & 1 & 0 & 0 & 2 & 0 & 1 & 0 \\\ 1 & -1 & 1 & 0 & 2 & -1 & 0 & 1 \\\ 1 & 0 & -1 & 1 & 2 & 0 & -1 & 0 \\\ 1 & 0 & 0 & -1 & 2 & 1 & 0 & -1 \end{array}\right] \implies \left[\begin{array}{rrrrrrrr} 1 & 0 & 0 & 0 & 2 & 0 & 0 & 0 \\\ 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\\ 0 & 0 & 1 & 0 & 0 & -1 & 1 & 1 \\\ 0 & 0 & 0 & 1 & 0 & -1 & 0 & 1 \end{array}\right]\\] <br/>
-and so the basis of \\(\img L\\) is: <br/>
+and so the matrix is: <br/>
 \\[[L]\_A^B = \left[\begin{array}{rrrr} 2 & 0 & 0 & 0 \\\ 0 & 0 & 1 & 0 \\\ 0 & -1 & 1 & 1 \\\ 0 & -1 & 0 & 1 \end{array}\right]\\] <br/>
 
 </div>
@@ -2384,9 +2381,9 @@ find the bases of \\(\ker L, \img L\\) <br/>
 
 finding the basis of \\(\ker L\\) <br/>
 
-\begin{gather\*}
+\begin{gather\*}\\\\
   L(x,y,z,w) = (0,0,0,0)\\\\
-  L(x+y,\ y+z,\ z+w,\ w+x) = (0,0,0,0)\\\\
+  (x+y,\ y+z,\ z+w,\ w+x) = (0,0,0,0)\\\\
   x+y=0\\\\
   y+z=0\\\\
   z+w=0\\\\
@@ -2570,7 +2567,7 @@ here \\(A\\) is a [transformation matrix](#transformation-matrix), \\(v\\) is an
 
 <div class="definition">
 
-considering the [formula]({{< relref "20220711175314-formula.md" >}}) \\(Av = \lambda v, v \neq 0 \in \mathbb{R}^n\\) from the definition of [Eigenvalues and eigenvectors](#eigenvalues-and-eigenvectors): <br/>
+considering the [formula]({{< relref "20220711175314-formula.md" >}}) \\(Av = \lambda v, v \neq 0 \in \mathbb{R}^n\\) from the definition of [eigenvalues and eigenvectors](#eigenvalues-and-eigenvectors): <br/>
 \\[
   Av = \lambda v \implies Av - \lambda v = \vec0 \implies Av - \lambda I v = \vec0 \implies (A-\lambda I)v = \vec0 \land v \neq \vec0 \implies \infty \text{ solutions} \implies |A - \lambda I| = 0
 \\] <br/>
@@ -2583,7 +2580,7 @@ we call \\(p(\lambda) = |A - \lambda I|\\) the **characteristic [polynomial]({{<
 
 <div class="definition">
 
-an **eigenspace** is the collection of [eigenvector](#eigenvalues-and-eigenvectors)s associated with each [eigenvalue](#eigenvalues-and-eigenvectors) for the [linear transformation](#linear-map) applied to the eigenvector. The linear transformation is often a square [matrix](#matrix) <br/>
+an **eigenspace** is the set of [eigenvector](#eigenvalues-and-eigenvectors)s corresponding to the same [eigenvalue](#eigenvalues-and-eigenvectors), plus the zero vector. the [basis](#basis) of an eigenspace is called an **eigenbasis** <br/>
 
 <div class="question">
 
@@ -2594,7 +2591,7 @@ given the matrix <br/>
 
 <div class="subquestion">
 
-find the [Characteristic polynomial](#characteristic-polynomial) and the [eigenvalue](#eigenvalues-and-eigenvectors)s,[eigenvector](#eigenvalues-and-eigenvectors)s, and [Eigenspace](#eigenspace)s of \\(A\\) <br/>
+find the [characteristic polynomial](#characteristic-polynomial) and the [eigenvalue](#eigenvalues-and-eigenvectors)s,[eigenvector](#eigenvalues-and-eigenvectors)s, and [eigenspace](#eigenspace)s of \\(A\\) <br/>
 
 <div class="answer">
 
@@ -2765,7 +2762,7 @@ A = \pmqty{1 & 2 & 1\\\ 0 & 1 & 3\\\ 2 & 7 & 11}
 
 <div class="subquestion">
 
-find the [Characteristic polynomial](#characteristic-polynomial), the [eigenvalue](#eigenvalues-and-eigenvectors)s and the [eigenvector](#eigenvalues-and-eigenvectors)s of \\(A\\) <br/>
+find the [characteristic polynomial](#characteristic-polynomial), the [eigenvalue](#eigenvalues-and-eigenvectors)s and the [eigenvector](#eigenvalues-and-eigenvectors)s of \\(A\\) <br/>
 
 <div class="answer">
 
@@ -2841,4 +2838,15 @@ find the [eigenbasis matrix](#diagonalizable-matrix) of \\(A\\) <br/>
 </div>
 
 
-### <span class="section-num">4.2</span> linear isomorphism {#linear-isomorphism}
+### <span class="section-num">4.2</span> linear map composition {#linear-map-composition}
+
+remember that [linear map](#linear-map)s are just [function]({{< relref "discrete_maths2.md#function" >}})s, so they can be [composed]({{< relref "discrete_maths2.md#composition" >}}) <br/>
+
+<div class="characteristic">
+
+let \\(S,T,U\\) be [linear space](#vector-space)s, let \\(f:S\to T, g:T\to U\\) be functions, if \\(f\\) and \\(g\\) are linear maps, then also the composite transformation \\(g\circ f:S\to U\\) is a linear map and its [transformation matrix](#transformation-matrix) is equal to the matrix of \\(f\\) multiplied by the matrix of \\(g\\) correspondingly <&statlect_linear_map_composition> <br/>
+
+</div>
+
+
+### <span class="section-num">4.3</span> linear isomorphism {#linear-isomorphism}
