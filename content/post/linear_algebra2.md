@@ -19,107 +19,6 @@ draft = false
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
 </p>
 
-<style>
-.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
-  padding: 2px;
-  border: 1px black solid;
-}
-.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
-  background-color: #bbb;
-  position: relative;
-  border-radius: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  border: 1px solid black;
-}
-.lemma {
-  background-color: beige;
-}
-.proof {
-  background-color: moccasin;
-}
-.entailment {
-  background-color: lightsteelblue;
-}
-.lemma:before {
-  content: "lemma:";
-}
-.proof:before {
-  content: "proof:";
-}
-.entailment:before {
-  content: "entailment (logical consequence):";
-}
-.note {
-  background-color: blanchedalmond;
-}
-.note:before {
-  /* content: url(/note.png) "note:"; */
-  content: "note:";
-}
-.my_example {
-  background-color: #e8cfc8; 
-}
-.my_example:before {
-  content: "example:";
-}
-p {
-  margin: 0px;
-  padding: 0px;
-}
-img {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-}
-.hide {
-  display: none;
-}
-.definition {
-  background-color: snow;
-}
-.definition:before {
-  content: "definition:";
-}
-.characteristic {
-  background-color: #dfdada;
-}
-.characteristic:before {
-  content: "characteristic:";
-}
-.assumption {
-  background-color: #65ad98;
-}
-.question {
-  background-color: #e1c6c6;
-}
-.question:before {
-  content: "question:";
-}
-.subquestion {
-  background-color: #e5e2d8;
-}
-.subquestion:before {
-  content: "subquestion:";
-}
-.answer {
-  background-color: #beabc5;
-}
-.answer:before {
-  content: "answer:";
-}
-.step {
-  background-color: #b4d3ad;
-}
-.step:before {
-  content: "step:";
-}
-</style>
-
 <!-- mathjax -->
 <script>
 // auto load modules like cancel
@@ -181,7 +80,7 @@ a matrix can be constructed over a specific finite/infinite set of numbers for e
 <div class="my_example">
 
 this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
-\\[\left[\begin{array}{rrrr} -3 & 1 & -2 & 0 \\\ -1 & 3 & -1 & 1 \\\ 1 & 7 & 1 & 2 \\\ 1 & 0 & -1 & -3 \\\ 1 & 1 & 0 & 1 \end{array}\right]\\] <br/>
+\\[\left[\begin{array}{rrrr} -2 & -1 & -3 & 1 \\\ 0 & 0 & -1 & 1 \\\ -6 & -1 & 0 & 1 \\\ 14 & -1 & 1 & -1 \\\ -1 & 1 & -1 & -22 \end{array}\right]\\] <br/>
 
 </div>
 
@@ -382,7 +281,7 @@ assuming an \\(n\times n\\) matrix <br/>
 
 <div class="lemma">
 
-interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org0d7a7d9) and [alternating](#org06b6920) <br/>
+interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#orgdd45412) and [alternating](#org864aa58) <br/>
 
 </div>
 
@@ -394,7 +293,7 @@ if the columns of the matrix form a [linearly dependant set](#linear-dependance)
 
 <div class="lemma">
 
-adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org0d7a7d9) and being [alternative](#org06b6920) <br/>
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#orgdd45412) and being [alternative](#org864aa58) <br/>
 
 </div>
 
@@ -1518,7 +1417,7 @@ in other words, given a dependant set of vectors, there exists a vector in this 
 
 <div class="proof">
 
-according to [this entailment](#org3b66beb), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
+according to [this entailment](#orge242cb7), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
 to prove \\(\spn(s) = \spn(S - \\{s\\})\\) we show that \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) <br/>
 we know that \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) because we can take every linear combination from the former, add \\(0 \cdot s\\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \\(s = s\_1\\) <br/>
@@ -1558,9 +1457,9 @@ for every finite set \\(S \in \mathbb{V}\_\mathbb{F}\\), there exists \\(B \subs
 
 in case \\(S\\) is linearly independant we pick \\(B = S\\) and so \\(B\\) is linearly dependant and \\(\spn(B) = \spn(S)\\) <br/>
 in case \\(S\\) is linearly dependant we got more work to do: <br/>
-according to [this lemma](#orgcce1cc7), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
+according to [this lemma](#org620d21d), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
 in case \\(S - \\{s\_1\\}\\) is linearly independant then let \\(B = S - \\{s\_1\\}\\) which means \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
-in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#orgcce1cc7), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
+in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org620d21d), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
 in case \\(\spn(S - \\{s\_1,s\_2\\})\\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \\(S\\) without changing the span, eventually we would arrive at \\(S - \\{s\_1,s\_2,s\_k\\}\\) that is linearly independant and \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
@@ -1624,7 +1523,7 @@ every **finitely generated vector space** \\(V\_\mathbb{F}\\) has atleast one ba
 <div class="proof">
 
 since \\(V\_\mathbb{F}\\) is finitely generated there exists a finite set \\(S \subseteq V\\) such that \\(\spn(S) = V\\) <br/>
-according to [this lemma](#orgcce1cc7), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
+according to [this lemma](#org620d21d), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
 
 </div>
 
@@ -1842,7 +1741,7 @@ given \\({V\_\mathbb{F}}^n\\) is finitely spanned, \\(W^n \leq V^n\\) and \\(\di
 
 <div class="proof">
 
-let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#org10f6940) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
+let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgd13196c) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
 
 </div>
 
