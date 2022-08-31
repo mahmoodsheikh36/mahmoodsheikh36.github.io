@@ -1,7 +1,7 @@
 +++
 title = "art"
 author = ["mahmood"]
-description = "art"
+description = "interesting art from the internet"
 date = 2022-06-24T20:44:00+03:00
 draft = false
 +++
