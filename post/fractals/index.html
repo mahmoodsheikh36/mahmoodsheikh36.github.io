@@ -1,512 +1,191 @@
-<!DOCTYPE html>
-<html lang="en-us">
-    <head>
-        
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>fractals</title>
-        
-        <style>
-
-    html body {
-        font-family: 'Raleway', sans-serif;
-        background-color: white;
-    }
-
-    :root {
-        --accent: red;
-        --border-width:  5px ;
-    }
-
-</style>
-
-
-<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
-
-
-
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-
-
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> 
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
- 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.102.1" />
-        
-
-        
-
-        
-            
-        
-
-        
-
-    </head>
-
-    <body>
-        
-
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand visible-xs" href="#">fractals</a>
-                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    
-                        <ul class="nav navbar-nav">
-                            
-                                <li><a href="/">Home</a></li>
-                            
-                                <li><a href="/post/">Posts</a></li>
-                            
-                                <li><a href="/about/">About</a></li>
-                            
-                        </ul>
-                    
-                    
-                        <ul class="nav navbar-nav navbar-right">
-                            
-                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fas fa-envelope"></i></a></li>
-                            
-                                <li class="navbar-icon"><a href="https://github.com/username/"><i class="fab fa-github"></i></a></li>
-                            
-                                <li class="navbar-icon"><a href="https://twitter.com/username/"><i class="fab fa-twitter"></i></a></li>
-                            
-                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fab fa-linkedin"></i></a></li>
-                            
-                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/username/"><i class="fab fa-stack-overflow"></i></a></li>
-                            
-                        </ul>
-                    
-                </div>
-            </div>
-        </nav>
-
-
-<main>
-
-    <div>
-        <h2>fractals</h2>
-        <h5>June 19, 2022</h5>
-        
-
-    </div>
-
-    <div align="start" class="content"><p style="height:0px; display: none;">
-  \(\DeclareMathOperator{\spn}{span}\)
-  \(\DeclareMathOperator{\dom}{domain}\)
-  \(\DeclareMathOperator{\ran}{range}\)
-  \(\DeclareMathOperator{\rng}{range}\)
-  \(\DeclareMathOperator{\img}{Im}\)
-  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
-  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
-  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
-</p>
-<style>
-.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
-  border-radius: 10px;
-  border-style: groove;
-  border-width: 3px;
-}
-.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
-  background-color: #bbb;
-  position: relative;
-  border-radius: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-family: cursive;
-  border: 1px solid black;
-  font-size: 13px;
-}
-.lemma {
-  background-color: beige;
-}
-.proof {
-  background-color: moccasin;
-}
-.entailment {
-  background-color: lightsteelblue;
-}
-.lemma:before {
-  content: "lemma:";
-}
-.proof:before {
-  content: "proof:";
-}
-.entailment:before {
-  content: "entailment (logical consequence):";
-}
-.note {
-  background-color: blanchedalmond;
-}
-.note:before {
-  /* content: url(/note.png) "note:"; */
-  content: "note:";
-}
-.my_example {
-  background-color: #e8cfc8; 
-}
-.my_example:before {
-  content: "example:";
-}
-p {
-  margin: 0px;
-  padding: 0px;
-}
-img {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-}
-.hide {
-  display: none;
-}
-.definition {
-  background-color: snow;
-}
-.definition:before {
-  content: "definition:";
-}
-.characteristic {
-  background-color: #dfdada;
-}
-.characteristic:before {
-  content: "characteristic:";
-}
-.assumption {
-  background-color: #65ad98;
-}
-.question {
-  background-color: #e1c6c6;
-}
-.question:before {
-  content: "question:";
-}
-.subquestion {
-  background-color: #e5e2d8;
-}
-.subquestion:before {
-  content: "subquestion:";
-}
-.answer {
-  background-color: #beabc5;
-}
-.answer:before {
-  content: "answer:";
-}
-.step {
-  background-color: #b4d3ad;
-}
-.step:before {
-  content: "step:";
-}
-</style>
-<!-- mathjax -->
-<script>
-// auto load modules like cancel
-window.MathJax = {
-  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
-  tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
-  }
-};
-/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
-function removeNewlineAfterDisplayMath() {
-    elems = document.querySelectorAll('mjx-container')
-    for (i = 0; i < elems.length; ++i) {
-        elem = elems[i]
-        nextElem = elem.nextElementSibling
-        if (nextElem !== null && nextElem.tagName === 'BR')
-            nextElem.remove()
-    }
-}
-window.onload = function() {
-  removeNewlineAfterDisplayMath()
-}
-</script>
-<script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-</script>
-<p>fractals are a great way to explore mathematical concepts, here i try to explore as many as i can and i guide you through it all step by step <br/></p>
-<h2 id="mandelbrot"><span class="section-num">1</span> mandelbrot</h2>
-<h3 id="characteristics"><span class="section-num">1.1</span> characteristics</h3>
-<ul>
-<li>The <strong>Mandelbrot</strong> set is the set of values of c in the <strong>complex plane</strong> for which the orbit of the critical point \(z_{n+1} = {z_n}^2 + c\) remains bounded <br/></li>
-<li>a complex number c is a member of the Mandelbrot set if, when starting with \(z_0 = 0\) and applying the iteration repeatedly, the absolute value of \(z_n\) remains bounded for all \(n &gt; 0\) <br/></li>
-<li>For example, for \(c = 1\), the sequence is \(0, 1, 2, 5, 26, \ldots\), which tends to infinity, so 1 is not an element of the Mandelbrot set. On the other hand, for \(c=-1\), the sequence is \(0, -1, 0, -1, 0, \ldots\), which is bounded, so \(-1\) does belong to the set. <br/></li>
-<li>The Mandelbrot set is a compact set, since it is closed and contained in the closed disk of radius 2 around the origin <br/></li>
-<li>a point \(c\) belongs to the Mandelbrot set if and only if \(|z_n| \leq 2\) for all \(n \geq 0\)  <br/></li>
-<li>The absolute value of a complex number is defined as the distance between the origin \((0,0)\) and the point \((a,b)\) in the complex plane. <br/></li>
-</ul>
-<h3 id="finding-square-of-complex-number"><span class="section-num">1.2</span> finding square of complex number</h3>
-<p>\begin{align*}
-c &amp;= (a, b) = a + bi\\
-c^2 &amp;= (a + bi) \cdot (a + bi) = a^2 + abi + abi + b^2i^2 = a^2 + 2abi - b^2 = a^2-b^2 + 2abi
-\end{align*}</p>
-<h3 id="implementation-with-the-decimal-library"><span class="section-num">1.3</span> implementation with the <code>decimal</code> library</h3>
-<p>i tried implementing it with floats but i was getting some sort of overflow errors, which means floats are insufficient to hold the values so we use python&rsquo;s <code>decimal</code> library <br/></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> sqrt
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> decimal <span style="color:#f92672">import</span> Decimal
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> decimal <span style="color:#f92672">import</span> getcontext
-</span></span><span style="display:flex;"><span>getcontext()<span style="color:#f92672">.</span>Emax <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000000000000000000000000000000000000</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">complex_square</span>(c):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span>c[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span>c[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">complex_abs</span>(c):
-</span></span><span style="display:flex;"><span>  abs_c <span style="color:#f92672">=</span> (abs(c[<span style="color:#ae81ff">0</span>]), abs(c[<span style="color:#ae81ff">1</span>]))
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> sqrt(abs_c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> abs_c[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_in_mandelbrot</span>(c):
-</span></span><span style="display:flex;"><span>  iterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
-</span></span><span style="display:flex;"><span>  z <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(iterations):
-</span></span><span style="display:flex;"><span>    squared <span style="color:#f92672">=</span> complex_square(z)
-</span></span><span style="display:flex;"><span>    z <span style="color:#f92672">=</span> (squared[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> c[<span style="color:#ae81ff">0</span>], squared[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> c[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> complex_abs(z) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>size <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>
-</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#39;RGB&#39;</span>, (size, size))
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(size):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(size):
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># c[0] is the real part, c[1] is the imaginary part</span>
-</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> (Decimal((i <span style="color:#f92672">-</span> size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> (size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>), Decimal((j <span style="color:#f92672">-</span> size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> (size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>))
-</span></span><span style="display:flex;"><span>    in_mandelbrot <span style="color:#f92672">=</span> check_in_mandelbrot(c)
-</span></span><span style="display:flex;"><span>    color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> in_mandelbrot:
-</span></span><span style="display:flex;"><span>      color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>)
-</span></span><span style="display:flex;"><span>      img<span style="color:#f92672">.</span>putpixel((i,j), color)
-</span></span><span style="display:flex;"><span>img<span style="color:#f92672">.</span>save(f)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> f <span style="color:#75715e"># replace with img.show()</span>
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/4Ol9IB.png"/>
-</figure>
- <br/></p>
-<h3 id="implementation-with-decimal-and-multithreading"><span class="section-num">1.4</span> implementation with <code>decimal</code> and <code>multithreading</code></h3>
-<p>this is a very very slow implementation (its python so we shouldnt be expecting much) <br/>
-so i tried to use multithreading and even that didnt work&hellip;, its just that the <code>decimal</code> library is very slow <br/></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> sqrt
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> decimal <span style="color:#f92672">import</span> Decimal
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> decimal <span style="color:#f92672">import</span> getcontext
-</span></span><span style="display:flex;"><span>getcontext()<span style="color:#f92672">.</span>Emax <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000000000000000000000000000000000000</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> concurrent.futures
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">complex_square</span>(c):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span>c[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span>c[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">complex_abs</span>(c):
-</span></span><span style="display:flex;"><span>  abs_c <span style="color:#f92672">=</span> (abs(c[<span style="color:#ae81ff">0</span>]), abs(c[<span style="color:#ae81ff">1</span>]))
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> sqrt(abs_c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> abs_c[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_in_mandelbrot</span>(c):
-</span></span><span style="display:flex;"><span>  iterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
-</span></span><span style="display:flex;"><span>  z <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(iterations):
-</span></span><span style="display:flex;"><span>    squared <span style="color:#f92672">=</span> complex_square(z)
-</span></span><span style="display:flex;"><span>    z <span style="color:#f92672">=</span> (squared[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> c[<span style="color:#ae81ff">0</span>], squared[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> c[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> complex_abs(z) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_complex_number</span>(c, img, pixel):
-</span></span><span style="display:flex;"><span>  in_mandelbrot <span style="color:#f92672">=</span> check_in_mandelbrot(c)
-</span></span><span style="display:flex;"><span>  color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> in_mandelbrot:
-</span></span><span style="display:flex;"><span>    color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>)
-</span></span><span style="display:flex;"><span>  img<span style="color:#f92672">.</span>putpixel(pixel, color)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>size <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>
-</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#39;RGB&#39;</span>, (size, size))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> concurrent<span style="color:#f92672">.</span>futures<span style="color:#f92672">.</span>ThreadPoolExecutor(max_workers<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">as</span> executor:
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(size):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(size):
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># c[0] is the real part, c[1] is the imaginary part</span>
-</span></span><span style="display:flex;"><span>      c <span style="color:#f92672">=</span> (Decimal((i <span style="color:#f92672">-</span> size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> (size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>), Decimal((j <span style="color:#f92672">-</span> size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> (size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>))
-</span></span><span style="display:flex;"><span>      a <span style="color:#f92672">=</span> executor<span style="color:#f92672">.</span>submit(handle_complex_number, c<span style="color:#f92672">=</span>c, img<span style="color:#f92672">=</span>img, pixel<span style="color:#f92672">=</span>(i,j))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>img<span style="color:#f92672">.</span>save(f)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> f <span style="color:#75715e"># replace with img.show()</span>
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/tYDI4G.png"/>
-</figure>
- <br/></p>
-<h3 id="implementation-with-pure-floats"><span class="section-num">1.5</span> implementation with pure floats</h3>
-<p>so we try to implement it without <code>decimal</code>: <br/></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> sqrt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ITERATIONS <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span> <span style="color:#75715e"># increase for accuracy</span>
-</span></span><span style="display:flex;"><span>SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span> <span style="color:#75715e"># image size</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">complex_square</span>(c):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span>c[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span>c[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">complex_abs</span>(c):
-</span></span><span style="display:flex;"><span>  abs_c <span style="color:#f92672">=</span> (abs(c[<span style="color:#ae81ff">0</span>]), abs(c[<span style="color:#ae81ff">1</span>]))
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> sqrt(abs_c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> abs_c[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_in_mandelbrot</span>(c):
-</span></span><span style="display:flex;"><span>  z <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(ITERATIONS):
-</span></span><span style="display:flex;"><span>    squared <span style="color:#f92672">=</span> complex_square(z)
-</span></span><span style="display:flex;"><span>    z <span style="color:#f92672">=</span> (squared[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> c[<span style="color:#ae81ff">0</span>], squared[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> c[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> complex_abs(z) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#39;RGB&#39;</span>, (SIZE, SIZE))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(SIZE):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(SIZE):
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># c[0] is the real part, c[1] is the imaginary part</span>
-</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> ((i <span style="color:#f92672">-</span> SIZE <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> (SIZE <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, (j <span style="color:#f92672">-</span> SIZE <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> (SIZE <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>      in_mandelbrot <span style="color:#f92672">=</span> check_in_mandelbrot(c)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">continue</span>
-</span></span><span style="display:flex;"><span>    color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> in_mandelbrot:
-</span></span><span style="display:flex;"><span>      color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>)
-</span></span><span style="display:flex;"><span>    img<span style="color:#f92672">.</span>putpixel((i,j), color)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>img<span style="color:#f92672">.</span>save(f)
-</span></span><span style="display:flex;"><span>f <span style="color:#75715e"># replace with img.show()</span>
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/5JM96p.png"/>
-</figure>
- <br/></p>
-<p>this is so much faster, because we&rsquo;re using the float primitive type that python provides ignoring the pixels that result in an overflow <br/></p>
-<h3 id="zooming-in"><span class="section-num">1.6</span> zooming in</h3>
-<p>we wrap the loops in a function to make it easier to draw multiple instances of the mandelbrot zoomed in on different areas <br/>
-to zoom in we simply shrink the range of the numbers, it was closed under the closed interval \([-2, 2]\), this time we close it under the interval \([-1,1]\) <br/>
-i have noticed that the pixels that arent in the mandelbrot tend to cause an overflow so i made it so that if a pixel causes an overflow it gets colored black <br/></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">scale</span>(num, src_min, src_max, dest_min, dest_max):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> ((num <span style="color:#f92672">-</span> src_min) <span style="color:#f92672">*</span> (dest_max <span style="color:#f92672">-</span> dest_min) <span style="color:#f92672">+</span> (dest_min <span style="color:#f92672">*</span> src_max) <span style="color:#f92672">-</span>
-</span></span><span style="display:flex;"><span>          (dest_min <span style="color:#f92672">*</span> src_min)) <span style="color:#f92672">/</span> (src_max <span style="color:#f92672">-</span> src_min)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">draw_mandelbrot</span>(interval):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(SIZE):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(SIZE):
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># c[0] is the real part, c[1] is the imaginary part</span>
-</span></span><span style="display:flex;"><span>      c <span style="color:#f92672">=</span> (scale(i, <span style="color:#ae81ff">0</span>, SIZE, interval[<span style="color:#ae81ff">0</span>], interval[<span style="color:#ae81ff">1</span>]), scale(j, <span style="color:#ae81ff">0</span>, SIZE, interval[<span style="color:#ae81ff">0</span>], interval[<span style="color:#ae81ff">1</span>]))
-</span></span><span style="display:flex;"><span>      in_mandelbrot <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        in_mandelbrot <span style="color:#f92672">=</span> check_in_mandelbrot(c)
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">except</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
-</span></span><span style="display:flex;"><span>      color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> in_mandelbrot:
-</span></span><span style="display:flex;"><span>        color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>)
-</span></span><span style="display:flex;"><span>      img<span style="color:#f92672">.</span>putpixel((i,j), color)
-</span></span><span style="display:flex;"><span>  img<span style="color:#f92672">.</span>save(f)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> f
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>draw_mandelbrot((<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/cbrK9i.png"/>
-</figure>
- <br/></p>
-<h3 id="coloring"><span class="section-num">1.7</span> coloring</h3>
-<p>now we need to come up with some coloring technique, one way to get some coloring is by setting the color according to the number of iterations the complex number took to become bigger than 2 <br/>
-so we rewrite the <code>check_in_mandelbrot</code> function to return the number of iterations, and the <code>draw_mandelbrot</code> function to act accordingly <br/>
-i found that the mandelbrot looks cool at 30 iterations so thats what im gonna use <br/></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ITERATIONS <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_in_mandelbrot</span>(c):
-</span></span><span style="display:flex;"><span>  z <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(ITERATIONS):
-</span></span><span style="display:flex;"><span>    squared <span style="color:#f92672">=</span> complex_square(z)
-</span></span><span style="display:flex;"><span>    z <span style="color:#f92672">=</span> (squared[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> c[<span style="color:#ae81ff">0</span>], squared[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> c[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> complex_abs(z) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> i
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> ITERATIONS
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">draw_mandelbrot</span>(interval):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(SIZE):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(SIZE):
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># c[0] is the real part, c[1] is the imaginary part</span>
-</span></span><span style="display:flex;"><span>      c <span style="color:#f92672">=</span> (scale(i, <span style="color:#ae81ff">0</span>, SIZE, interval[<span style="color:#ae81ff">0</span>], interval[<span style="color:#ae81ff">1</span>]), scale(j, <span style="color:#ae81ff">0</span>, SIZE, interval[<span style="color:#ae81ff">0</span>], interval[<span style="color:#ae81ff">1</span>]))
-</span></span><span style="display:flex;"><span>      color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">=</span> check_in_mandelbrot(c)
-</span></span><span style="display:flex;"><span>        scaled <span style="color:#f92672">=</span> round(scale(num, <span style="color:#ae81ff">0</span>, ITERATIONS <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">250</span>))
-</span></span><span style="display:flex;"><span>        color <span style="color:#f92672">=</span> (scaled, scaled, scaled)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> scaled <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">75</span>:
-</span></span><span style="display:flex;"><span>          color <span style="color:#f92672">=</span> (scaled, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> scaled <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">150</span>:
-</span></span><span style="display:flex;"><span>          color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, scaled, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> scaled <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">200</span>:
-</span></span><span style="display:flex;"><span>          color <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, scaled)
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">except</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
-</span></span><span style="display:flex;"><span>      img<span style="color:#f92672">.</span>putpixel((i,j), color)
-</span></span><span style="display:flex;"><span>  img<span style="color:#f92672">.</span>save(f)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> f <span style="color:#75715e"># replace with img.show()</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>draw_mandelbrot((<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/XgPSTh.png"/>
-</figure>
- <br/></p>
-<p>this looks a little bit better <br/>
-ofcourse there are better coloring techniques but i&rsquo;ve yet to explore those <br/>
-we can also try different intervals to zoom around the plot and find interesting patterns, we could also write a continuous zooming animation on the mandelbrot, but i guess thats for the future <br/></p>
-</div>
-
-    
-    
-    
-
-    
-    
-
-</main>
-
-        <footer>
-          
-        </footer>
-
-        
-
-        
-    </body>
-
-</html>
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>fractals</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.102.1"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>fractals</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/about/>About</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:me@example.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/username/><i class="fab fa-github"></i></a></li><li class=navbar-icon><a href=https://twitter.com/username/><i class="fab fa-twitter"></i></a></li><li class=navbar-icon><a href=https://www.linkedin.com/in/username/><i class="fab fa-linkedin"></i></a></li><li class=navbar-icon><a href=https://www.stackoverflow.com/username/><i class="fab fa-stack-overflow"></i></a></li></ul></div></div></nav><main><div><h2>fractals</h2><h5>June 19, 2022</h5></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
+\(\DeclareMathOperator{\dom}{domain}\)
+\(\DeclareMathOperator{\ran}{range}\)
+\(\DeclareMathOperator{\rng}{range}\)
+\(\DeclareMathOperator{\img}{Im}\)
+\(\newcommand\dif[1]{\:\textrm{d}#1}\)
+\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)</p><style>.lemma,.proof,.entailment,.definition,.note,.my_example,.characteristic,.assumption,.question,.subquestion,.answer,.step{border-radius:10px;border-style:groove;border-width:3px}.lemma:before,.proof:before,.entailment:before,.definition:before,.note:before,.my_example:before,.characteristic:before,.assumption:before,.question:before,.subquestion:before,.answer:before,.step:before{background-color:#bbb;position:relative;border-radius:10px;padding-right:5px;padding-left:5px;padding-top:1px;padding-bottom:1px;font-family:cursive;border:1px solid #000;font-size:13px}.lemma{background-color:beige}.proof{background-color:#ffe4b5}.entailment{background-color:#b0c4de}.lemma:before{content:"lemma:"}.proof:before{content:"proof:"}.entailment:before{content:"entailment (logical consequence):"}.note{background-color:#ffebcd}.note:before{content:"note:"}.my_example{background-color:#e8cfc8}.my_example:before{content:"example:"}p{margin:0;padding:0}img{display:block;margin-left:auto;margin-right:auto}.hide{display:none}.definition{background-color:snow}.definition:before{content:"definition:"}.characteristic{background-color:#dfdada}.characteristic:before{content:"characteristic:"}.assumption{background-color:#65ad98}.question{background-color:#e1c6c6}.question:before{content:"question:"}.subquestion{background-color:#e5e2d8}.subquestion:before{content:"subquestion:"}.answer{background-color:#beabc5}.answer:before{content:"answer:"}.step{background-color:#b4d3ad}.step:before{content:"step:"}</style><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]}}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i)elem=elems[i],nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p>fractals are a great way to explore mathematical concepts, here i try to explore as many as i can and i guide you through it all step by step<br></p><h2 id=mandelbrot><span class=section-num>1</span> mandelbrot</h2><h3 id=characteristics><span class=section-num>1.1</span> characteristics</h3><ul><li>The <strong>Mandelbrot</strong> set is the set of values of c in the <strong>complex plane</strong> for which the orbit of the critical point \(z_{n+1} = {z_n}^2 + c\) remains bounded<br></li><li>a complex number c is a member of the Mandelbrot set if, when starting with \(z_0 = 0\) and applying the iteration repeatedly, the absolute value of \(z_n\) remains bounded for all \(n > 0\)<br></li><li>For example, for \(c = 1\), the sequence is \(0, 1, 2, 5, 26, \ldots\), which tends to infinity, so 1 is not an element of the Mandelbrot set. On the other hand, for \(c=-1\), the sequence is \(0, -1, 0, -1, 0, \ldots\), which is bounded, so \(-1\) does belong to the set.<br></li><li>The Mandelbrot set is a compact set, since it is closed and contained in the closed disk of radius 2 around the origin<br></li><li>a point \(c\) belongs to the Mandelbrot set if and only if \(|z_n| \leq 2\) for all \(n \geq 0\)<br></li><li>The absolute value of a complex number is defined as the distance between the origin \((0,0)\) and the point \((a,b)\) in the complex plane.<br></li></ul><h3 id=finding-square-of-complex-number><span class=section-num>1.2</span> finding square of complex number</h3><p>\begin{align*}
+c &= (a, b) = a + bi\\
+c^2 &= (a + bi) \cdot (a + bi) = a^2 + abi + abi + b^2i^2 = a^2 + 2abi - b^2 = a^2-b^2 + 2abi
+\end{align*}</p><h3 id=implementation-with-the-decimal-library><span class=section-num>1.3</span> implementation with the <code>decimal</code> library</h3><p>i tried implementing it with floats but i was getting some sort of overflow errors, which means floats are insufficient to hold the values so we use python&rsquo;s <code>decimal</code> library<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> PIL <span style=color:#f92672>import</span> Image
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> math <span style=color:#f92672>import</span> sqrt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> decimal <span style=color:#f92672>import</span> Decimal
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> decimal <span style=color:#f92672>import</span> getcontext
+</span></span><span style=display:flex><span>getcontext()<span style=color:#f92672>.</span>Emax <span style=color:#f92672>=</span> <span style=color:#ae81ff>1000000000000000000000000000000000000000</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>complex_square</span>(c):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span><span style=color:#f92672>-</span>c[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span>c[<span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>complex_abs</span>(c):
+</span></span><span style=display:flex><span>  abs_c <span style=color:#f92672>=</span> (abs(c[<span style=color:#ae81ff>0</span>]), abs(c[<span style=color:#ae81ff>1</span>]))
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> sqrt(abs_c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>+</span> abs_c[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>check_in_mandelbrot</span>(c):
+</span></span><span style=display:flex><span>  iterations <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span>
+</span></span><span style=display:flex><span>  z <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(iterations):
+</span></span><span style=display:flex><span>    squared <span style=color:#f92672>=</span> complex_square(z)
+</span></span><span style=display:flex><span>    z <span style=color:#f92672>=</span> (squared[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> c[<span style=color:#ae81ff>0</span>], squared[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> c[<span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> complex_abs(z) <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>size <span style=color:#f92672>=</span> <span style=color:#ae81ff>40</span>
+</span></span><span style=display:flex><span>img <span style=color:#f92672>=</span> Image<span style=color:#f92672>.</span>new(<span style=color:#e6db74>&#39;RGB&#39;</span>, (size, size))
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(size):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(size):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># c[0] is the real part, c[1] is the imaginary part</span>
+</span></span><span style=display:flex><span>    c <span style=color:#f92672>=</span> (Decimal((i <span style=color:#f92672>-</span> size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>/</span> (size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>), Decimal((j <span style=color:#f92672>-</span> size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>/</span> (size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>))
+</span></span><span style=display:flex><span>    in_mandelbrot <span style=color:#f92672>=</span> check_in_mandelbrot(c)
+</span></span><span style=display:flex><span>    color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> in_mandelbrot:
+</span></span><span style=display:flex><span>      color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>)
+</span></span><span style=display:flex><span>      img<span style=color:#f92672>.</span>putpixel((i,j), color)
+</span></span><span style=display:flex><span>img<span style=color:#f92672>.</span>save(f)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>return</span> f <span style=color:#75715e># replace with img.show()</span>
+</span></span></code></pre></div><p><figure><img src=/ox-hugo/4Ol9IB.png></figure><br></p><h3 id=implementation-with-decimal-and-multithreading><span class=section-num>1.4</span> implementation with <code>decimal</code> and <code>multithreading</code></h3><p>this is a very very slow implementation (its python so we shouldnt be expecting much)<br>so i tried to use multithreading and even that didnt work&mldr;, its just that the <code>decimal</code> library is very slow<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> PIL <span style=color:#f92672>import</span> Image
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> math <span style=color:#f92672>import</span> sqrt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> decimal <span style=color:#f92672>import</span> Decimal
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> decimal <span style=color:#f92672>import</span> getcontext
+</span></span><span style=display:flex><span>getcontext()<span style=color:#f92672>.</span>Emax <span style=color:#f92672>=</span> <span style=color:#ae81ff>1000000000000000000000000000000000000000</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> concurrent.futures
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>complex_square</span>(c):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span><span style=color:#f92672>-</span>c[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span>c[<span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>complex_abs</span>(c):
+</span></span><span style=display:flex><span>  abs_c <span style=color:#f92672>=</span> (abs(c[<span style=color:#ae81ff>0</span>]), abs(c[<span style=color:#ae81ff>1</span>]))
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> sqrt(abs_c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>+</span> abs_c[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>check_in_mandelbrot</span>(c):
+</span></span><span style=display:flex><span>  iterations <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span>
+</span></span><span style=display:flex><span>  z <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(iterations):
+</span></span><span style=display:flex><span>    squared <span style=color:#f92672>=</span> complex_square(z)
+</span></span><span style=display:flex><span>    z <span style=color:#f92672>=</span> (squared[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> c[<span style=color:#ae81ff>0</span>], squared[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> c[<span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> complex_abs(z) <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>handle_complex_number</span>(c, img, pixel):
+</span></span><span style=display:flex><span>  in_mandelbrot <span style=color:#f92672>=</span> check_in_mandelbrot(c)
+</span></span><span style=display:flex><span>  color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> in_mandelbrot:
+</span></span><span style=display:flex><span>    color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>)
+</span></span><span style=display:flex><span>  img<span style=color:#f92672>.</span>putpixel(pixel, color)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>size <span style=color:#f92672>=</span> <span style=color:#ae81ff>40</span>
+</span></span><span style=display:flex><span>img <span style=color:#f92672>=</span> Image<span style=color:#f92672>.</span>new(<span style=color:#e6db74>&#39;RGB&#39;</span>, (size, size))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>with</span> concurrent<span style=color:#f92672>.</span>futures<span style=color:#f92672>.</span>ThreadPoolExecutor(max_workers<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>) <span style=color:#66d9ef>as</span> executor:
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(size):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(size):
+</span></span><span style=display:flex><span>      <span style=color:#75715e># c[0] is the real part, c[1] is the imaginary part</span>
+</span></span><span style=display:flex><span>      c <span style=color:#f92672>=</span> (Decimal((i <span style=color:#f92672>-</span> size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>/</span> (size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>), Decimal((j <span style=color:#f92672>-</span> size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>/</span> (size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>))
+</span></span><span style=display:flex><span>      a <span style=color:#f92672>=</span> executor<span style=color:#f92672>.</span>submit(handle_complex_number, c<span style=color:#f92672>=</span>c, img<span style=color:#f92672>=</span>img, pixel<span style=color:#f92672>=</span>(i,j))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>img<span style=color:#f92672>.</span>save(f)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>return</span> f <span style=color:#75715e># replace with img.show()</span>
+</span></span></code></pre></div><p><figure><img src=/ox-hugo/tYDI4G.png></figure><br></p><h3 id=implementation-with-pure-floats><span class=section-num>1.5</span> implementation with pure floats</h3><p>so we try to implement it without <code>decimal</code>:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> PIL <span style=color:#f92672>import</span> Image
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> math <span style=color:#f92672>import</span> sqrt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ITERATIONS <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span> <span style=color:#75715e># increase for accuracy</span>
+</span></span><span style=display:flex><span>SIZE <span style=color:#f92672>=</span> <span style=color:#ae81ff>500</span> <span style=color:#75715e># image size</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>complex_square</span>(c):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span><span style=color:#f92672>-</span>c[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span>c[<span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>complex_abs</span>(c):
+</span></span><span style=display:flex><span>  abs_c <span style=color:#f92672>=</span> (abs(c[<span style=color:#ae81ff>0</span>]), abs(c[<span style=color:#ae81ff>1</span>]))
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> sqrt(abs_c[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>+</span> abs_c[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>check_in_mandelbrot</span>(c):
+</span></span><span style=display:flex><span>  z <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(ITERATIONS):
+</span></span><span style=display:flex><span>    squared <span style=color:#f92672>=</span> complex_square(z)
+</span></span><span style=display:flex><span>    z <span style=color:#f92672>=</span> (squared[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> c[<span style=color:#ae81ff>0</span>], squared[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> c[<span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> complex_abs(z) <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>img <span style=color:#f92672>=</span> Image<span style=color:#f92672>.</span>new(<span style=color:#e6db74>&#39;RGB&#39;</span>, (SIZE, SIZE))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(SIZE):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(SIZE):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># c[0] is the real part, c[1] is the imaginary part</span>
+</span></span><span style=display:flex><span>    c <span style=color:#f92672>=</span> ((i <span style=color:#f92672>-</span> SIZE <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>/</span> (SIZE <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>, (j <span style=color:#f92672>-</span> SIZE <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>/</span> (SIZE <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>      in_mandelbrot <span style=color:#f92672>=</span> check_in_mandelbrot(c)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>except</span>:
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>    color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> in_mandelbrot:
+</span></span><span style=display:flex><span>      color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>)
+</span></span><span style=display:flex><span>    img<span style=color:#f92672>.</span>putpixel((i,j), color)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>img<span style=color:#f92672>.</span>save(f)
+</span></span><span style=display:flex><span>f <span style=color:#75715e># replace with img.show()</span>
+</span></span></code></pre></div><p><figure><img src=/ox-hugo/5JM96p.png></figure><br></p><p>this is so much faster, because we&rsquo;re using the float primitive type that python provides ignoring the pixels that result in an overflow<br></p><h3 id=zooming-in><span class=section-num>1.6</span> zooming in</h3><p>we wrap the loops in a function to make it easier to draw multiple instances of the mandelbrot zoomed in on different areas<br>to zoom in we simply shrink the range of the numbers, it was closed under the closed interval \([-2, 2]\), this time we close it under the interval \([-1,1]\)<br>i have noticed that the pixels that arent in the mandelbrot tend to cause an overflow so i made it so that if a pixel causes an overflow it gets colored black<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>scale</span>(num, src_min, src_max, dest_min, dest_max):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> ((num <span style=color:#f92672>-</span> src_min) <span style=color:#f92672>*</span> (dest_max <span style=color:#f92672>-</span> dest_min) <span style=color:#f92672>+</span> (dest_min <span style=color:#f92672>*</span> src_max) <span style=color:#f92672>-</span>
+</span></span><span style=display:flex><span>          (dest_min <span style=color:#f92672>*</span> src_min)) <span style=color:#f92672>/</span> (src_max <span style=color:#f92672>-</span> src_min)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>draw_mandelbrot</span>(interval):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(SIZE):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(SIZE):
+</span></span><span style=display:flex><span>      <span style=color:#75715e># c[0] is the real part, c[1] is the imaginary part</span>
+</span></span><span style=display:flex><span>      c <span style=color:#f92672>=</span> (scale(i, <span style=color:#ae81ff>0</span>, SIZE, interval[<span style=color:#ae81ff>0</span>], interval[<span style=color:#ae81ff>1</span>]), scale(j, <span style=color:#ae81ff>0</span>, SIZE, interval[<span style=color:#ae81ff>0</span>], interval[<span style=color:#ae81ff>1</span>]))
+</span></span><span style=display:flex><span>      in_mandelbrot <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>        in_mandelbrot <span style=color:#f92672>=</span> check_in_mandelbrot(c)
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>except</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>pass</span>
+</span></span><span style=display:flex><span>      color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> in_mandelbrot:
+</span></span><span style=display:flex><span>        color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>)
+</span></span><span style=display:flex><span>      img<span style=color:#f92672>.</span>putpixel((i,j), color)
+</span></span><span style=display:flex><span>  img<span style=color:#f92672>.</span>save(f)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> f
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>draw_mandelbrot((<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>))
+</span></span></code></pre></div><p><figure><img src=/ox-hugo/cbrK9i.png></figure><br></p><h3 id=coloring><span class=section-num>1.7</span> coloring</h3><p>now we need to come up with some coloring technique, one way to get some coloring is by setting the color according to the number of iterations the complex number took to become bigger than 2<br>so we rewrite the <code>check_in_mandelbrot</code> function to return the number of iterations, and the <code>draw_mandelbrot</code> function to act accordingly<br>i found that the mandelbrot looks cool at 30 iterations so thats what im gonna use<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>ITERATIONS <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>check_in_mandelbrot</span>(c):
+</span></span><span style=display:flex><span>  z <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(ITERATIONS):
+</span></span><span style=display:flex><span>    squared <span style=color:#f92672>=</span> complex_square(z)
+</span></span><span style=display:flex><span>    z <span style=color:#f92672>=</span> (squared[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> c[<span style=color:#ae81ff>0</span>], squared[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> c[<span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> complex_abs(z) <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>2</span>:
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> i
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> ITERATIONS
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>draw_mandelbrot</span>(interval):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(SIZE):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(SIZE):
+</span></span><span style=display:flex><span>      <span style=color:#75715e># c[0] is the real part, c[1] is the imaginary part</span>
+</span></span><span style=display:flex><span>      c <span style=color:#f92672>=</span> (scale(i, <span style=color:#ae81ff>0</span>, SIZE, interval[<span style=color:#ae81ff>0</span>], interval[<span style=color:#ae81ff>1</span>]), scale(j, <span style=color:#ae81ff>0</span>, SIZE, interval[<span style=color:#ae81ff>0</span>], interval[<span style=color:#ae81ff>1</span>]))
+</span></span><span style=display:flex><span>      color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>        num <span style=color:#f92672>=</span> check_in_mandelbrot(c)
+</span></span><span style=display:flex><span>        scaled <span style=color:#f92672>=</span> round(scale(num, <span style=color:#ae81ff>0</span>, ITERATIONS <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>250</span>))
+</span></span><span style=display:flex><span>        color <span style=color:#f92672>=</span> (scaled, scaled, scaled)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> scaled <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>75</span>:
+</span></span><span style=display:flex><span>          color <span style=color:#f92672>=</span> (scaled, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> scaled <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>150</span>:
+</span></span><span style=display:flex><span>          color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>, scaled, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> scaled <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>200</span>:
+</span></span><span style=display:flex><span>          color <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, scaled)
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>except</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>pass</span>
+</span></span><span style=display:flex><span>      img<span style=color:#f92672>.</span>putpixel((i,j), color)
+</span></span><span style=display:flex><span>  img<span style=color:#f92672>.</span>save(f)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> f <span style=color:#75715e># replace with img.show()</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>draw_mandelbrot((<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>))
+</span></span></code></pre></div><p><figure><img src=/ox-hugo/XgPSTh.png></figure><br></p><p>this looks a little bit better<br>ofcourse there are better coloring techniques but i&rsquo;ve yet to explore those<br>we can also try different intervals to zoom around the plot and find interesting patterns, we could also write a continuous zooming animation on the mandelbrot, but i guess thats for the future<br></p></div></main><footer></footer></body></html>
