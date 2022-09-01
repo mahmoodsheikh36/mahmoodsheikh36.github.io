@@ -2,6 +2,7 @@
 title = "networking"
 author = ["mahmood"]
 description = "networking"
+date = 2022-09-02T00:10:00+03:00
 tags = ["todo"]
 draft = false
 +++
@@ -17,107 +18,6 @@ draft = false
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
 </p>
-
-<style>
-.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
-  padding: 2px;
-  border: 1px black solid;
-}
-.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
-  background-color: #bbb;
-  position: relative;
-  border-radius: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  border: 1px solid black;
-}
-.lemma {
-  background-color: beige;
-}
-.proof {
-  background-color: moccasin;
-}
-.entailment {
-  background-color: lightsteelblue;
-}
-.lemma:before {
-  content: "lemma:";
-}
-.proof:before {
-  content: "proof:";
-}
-.entailment:before {
-  content: "entailment (logical consequence):";
-}
-.note {
-  background-color: blanchedalmond;
-}
-.note:before {
-  /* content: url(/note.png) "note:"; */
-  content: "note:";
-}
-.my_example {
-  background-color: #e8cfc8; 
-}
-.my_example:before {
-  content: "example:";
-}
-p {
-  margin: 0px;
-  padding: 0px;
-}
-img {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-}
-.hide {
-  display: none;
-}
-.definition {
-  background-color: snow;
-}
-.definition:before {
-  content: "definition:";
-}
-.characteristic {
-  background-color: #dfdada;
-}
-.characteristic:before {
-  content: "characteristic:";
-}
-.assumption {
-  background-color: #65ad98;
-}
-.question {
-  background-color: #e1c6c6;
-}
-.question:before {
-  content: "question:";
-}
-.subquestion {
-  background-color: #e5e2d8;
-}
-.subquestion:before {
-  content: "subquestion:";
-}
-.answer {
-  background-color: #beabc5;
-}
-.answer:before {
-  content: "answer:";
-}
-.step {
-  background-color: #b4d3ad;
-}
-.step:before {
-  content: "step:";
-}
-</style>
 
 <!-- mathjax -->
 <script>
@@ -145,8 +45,21 @@ window.onload = function() {
   removeNewlineAfterDisplayMath()
 }
 </script>
+
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
+
+<div class="note">
+
+this document is still being constructed, it should not be used for reference yet. <br/>
+
+</div>
 
 
 ## <span class="section-num">1</span> storage units {#storage-units}
@@ -190,9 +103,9 @@ basic units table: <br/>
 
 <div class="definition">
 
-network **bandwidth** is a measurement indicating the maximum capacity of a wired or wireless communications link to transmit data over a network connection in a given amount of time. Typically, bandwidth is represented in the number of bits, kilobits, megabits or gigabits that can be transmitted in 1 second. <br/>
+network **bandwidth** is a measurement indicating the maximum capacity of a wired or wireless communications link to transmit data over a network connection in a given amount of time. typically, bandwidth is represented in the number of bits, kilobits, megabits or gigabits that can be transmitted in 1 second. <br/>
 
-<div class="question">
+<div class="note">
 
 we denote bps (bits per second) by \\(C\\) or \\(R\\) <br/>
 
@@ -274,7 +187,16 @@ a communication **protocol** is a system of rules that allows two or more entiti
 </div>
 
 
-## <span class="section-num">8</span> network {#network}
+## <span class="section-num">8</span> client-server architecture {#client-server-architecture}
+
+
+### <span class="section-num">8.1</span> server {#server}
+
+
+### <span class="section-num">8.2</span> client {#client}
+
+
+## <span class="section-num">9</span> network {#network}
 
 <div class="definition">
 
@@ -283,7 +205,7 @@ a computer **network** is a set of computers sharing resources located on or pro
 </div>
 
 
-### <span class="section-num">8.1</span> network edge {#network-edge}
+### <span class="section-num">9.1</span> network edge {#network-edge}
 
 <div class="definition">
 
@@ -292,7 +214,7 @@ the **network edge** refers to endpoints. it is the first step between endpoints
 </div>
 
 
-### <span class="section-num">8.2</span> network core {#network-core}
+### <span class="section-num">9.2</span> network core {#network-core}
 
 <div class="definition">
 
@@ -301,7 +223,7 @@ the **network core** refers to the components that provide services to those at 
 </div>
 
 
-### <span class="section-num">8.3</span> access network {#access-network}
+### <span class="section-num">9.3</span> access network {#access-network}
 
 <div class="definition">
 
@@ -310,28 +232,52 @@ an **access network** is a type of telecommunications network which connects sub
 </div>
 
 
-#### <span class="section-num">8.3.1</span> digital subscriber line {#digital-subscriber-line}
+#### <span class="section-num">9.3.1</span> digital subscriber line {#digital-subscriber-line}
 
 
-#### <span class="section-num">8.3.2</span> cable network {#cable-network}
+#### <span class="section-num">9.3.2</span> cable network {#cable-network}
 
 
-#### <span class="section-num">8.3.3</span> home network {#home-network}
+#### <span class="section-num">9.3.3</span> home network {#home-network}
 
 
-#### <span class="section-num">8.3.4</span> enterprise access network {#enterprise-access-network}
+#### <span class="section-num">9.3.4</span> enterprise access network {#enterprise-access-network}
 
 
-#### <span class="section-num">8.3.5</span> wireless access network {#wireless-access-network}
+#### <span class="section-num">9.3.5</span> wireless access network {#wireless-access-network}
 
 
-## <span class="section-num">9</span> client-server architecture {#client-server-architecture}
+## <span class="section-num">10</span> http {#http}
 
 
-## <span class="section-num">10</span> p2p architecture {#p2p-architecture}
+### <span class="section-num">10.1</span> GET {#get}
 
 
-## <span class="section-num">11</span> socket {#socket}
+### <span class="section-num">10.2</span> POST {#post}
 
 
-## <span class="section-num">12</span> application layer {#application-layer}
+### <span class="section-num">10.3</span> HEAD {#head}
+
+
+### <span class="section-num">10.4</span> webserver {#webserver}
+
+
+## <span class="section-num">11</span> DNS {#dns}
+
+
+## <span class="section-num">12</span> socket {#socket}
+
+
+## <span class="section-num">13</span> TCP {#tcp}
+
+
+## <span class="section-num">14</span> p2p {#p2p}
+
+
+## <span class="section-num">15</span> IP {#ip}
+
+
+## <span class="section-num">16</span> application layer {#application-layer}
+
+
+## <span class="section-num">17</span> proxy {#proxy}
