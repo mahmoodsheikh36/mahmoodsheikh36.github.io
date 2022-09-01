@@ -18,7 +18,7 @@
   -->
     <h4><a href="{{ .Scratch.Get "link" }}">{{ .Title }}</a></h4>
     <h5>{{ .Description }}</h5>
-  {{ .Page.Lastmod.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+  {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
     {{ partial "tags" . }}
 
 </div>
