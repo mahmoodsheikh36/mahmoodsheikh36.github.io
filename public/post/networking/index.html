@@ -1,23 +1,445 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>networking</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
-<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
-<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.102.1"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>networking</a>
-<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
-<span class=icon-bar></span>
-<span class=icon-bar></span>
-<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/about/>About</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:me@example.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/username/><i class="fab fa-github"></i></a></li><li class=navbar-icon><a href=https://twitter.com/username/><i class="fab fa-twitter"></i></a></li><li class=navbar-icon><a href=https://www.linkedin.com/in/username/><i class="fab fa-linkedin"></i></a></li><li class=navbar-icon><a href=https://www.stackoverflow.com/username/><i class="fab fa-stack-overflow"></i></a></li></ul></div></div></nav><main><div><h2>networking</h2><h5>January 1, 0001</h5><a href=https://mahmoodsheikh36.github.iotags/todo><kbd class=item-tag>todo</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
-\(\DeclareMathOperator{\dom}{domain}\)
-\(\DeclareMathOperator{\ran}{range}\)
-\(\DeclareMathOperator{\rng}{range}\)
-\(\DeclareMathOperator{\img}{Im}\)
-\(\DeclareMathOperator{\adj}{adj}\)
-\(\newcommand\dif[1]{\:\textrm{d}#1}\)
-\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
-\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)</p><style>.lemma,.proof,.entailment,.definition,.note,.my_example,.characteristic,.assumption,.question,.subquestion,.answer,.step{border-radius:10px;box-shadow:10px 10px 15px rgba(0,0,0,.1);padding:2px;border:1px #000 solid}.lemma:before,.proof:before,.entailment:before,.definition:before,.note:before,.my_example:before,.characteristic:before,.assumption:before,.question:before,.subquestion:before,.answer:before,.step:before{background-color:#bbb;position:relative;border-radius:10px;padding-right:5px;padding-left:5px;padding-top:1px;padding-bottom:1px;border:1px solid #000}.lemma{background-color:beige}.proof{background-color:#ffe4b5}.entailment{background-color:#b0c4de}.lemma:before{content:"lemma:"}.proof:before{content:"proof:"}.entailment:before{content:"entailment (logical consequence):"}.note{background-color:#ffebcd}.note:before{content:"note:"}.my_example{background-color:#e8cfc8}.my_example:before{content:"example:"}p{margin:0;padding:0}img{display:block;margin-left:auto;margin-right:auto}.hide{display:none}.definition{background-color:snow}.definition:before{content:"definition:"}.characteristic{background-color:#dfdada}.characteristic:before{content:"characteristic:"}.assumption{background-color:#65ad98}.question{background-color:#e1c6c6}.question:before{content:"question:"}.subquestion{background-color:#e5e2d8}.subquestion:before{content:"subquestion:"}.answer{background-color:#beabc5}.answer:before{content:"answer:"}.step{background-color:#b4d3ad}.step:before{content:"step:"}</style><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><h2 id=storage-units><span class=section-num>1</span> storage units</h2><p>basic units table:<br></p><table><thead><tr><th>unit</th><th>description</th></tr></thead><tbody><tr><td>bit</td><td>1 or 0</td></tr><tr><td>byte</td><td>8 bits</td></tr><tr><td>kilobyte</td><td>1024 bytes</td></tr><tr><td>megabyte</td><td>1024 kilobytes</td></tr><tr><td>gigabyte</td><td>1024 megabytes</td></tr><tr><td>terabyte</td><td>1024 gigabytes</td></tr><tr><td>petabyte</td><td>1024 terabytes</td></tr></tbody></table><h2 id=unit-prefix-table><span class=section-num>2</span> unit prefix table</h2><table><thead><tr><th>prefix</th><th>exponent</th></tr></thead><tbody><tr><td>yocto</td><td>\(10^{-24}\)</td></tr><tr><td>zepto</td><td>\(10^{-21}\)</td></tr><tr><td>atto</td><td>\(10^{-18}\)</td></tr><tr><td>femto</td><td>\(10^{-15}\)</td></tr><tr><td>pico</td><td>\(10^{-12}\)</td></tr><tr><td>nano</td><td>\(10^{-9}\)</td></tr><tr><td>micro</td><td>\(10^{-6}\)</td></tr><tr><td>milli</td><td>\(10^{-3}\)</td></tr><tr><td>kilo</td><td>\(10^3\)</td></tr><tr><td>mega</td><td>\(10^6\)</td></tr><tr><td>giga</td><td>\(10^9\)</td></tr><tr><td>tera</td><td>\(10^{12}\)</td></tr><tr><td>peta</td><td>\(10^{15}\)</td></tr><tr><td>exa</td><td>\(10^{18}\)</td></tr><tr><td>zetta</td><td>\(10^{21}\)</td></tr><tr><td>yotta</td><td>\(10^{24}\)</td></tr></tbody></table><h2 id=bandwidth><span class=section-num>3</span> bandwidth</h2><div class=definition><p>network <strong>bandwidth</strong> is a measurement indicating the maximum capacity of a wired or wireless communications link to transmit data over a network connection in a given amount of time. Typically, bandwidth is represented in the number of bits, kilobits, megabits or gigabits that can be transmitted in 1 second.<br></p><div class=question><p>we denote bps (bits per second) by \(C\) or \(R\)<br></p></div></div><h2 id=transmission-time><span class=section-num>4</span> transmission time</h2><div class=definition><p><strong>transmission time</strong>, denoted by \(T_i\), is the time it takes for the sender to insert the package into the transmission link<br></p><div class=lemma><p>\(T_i = \frac{L}{R} = \frac{L}{C}\)<br></p></div></div><h2 id=signal-propagation-delay><span class=section-num>5</span> signal propagation delay</h2><div class=definition><p><strong>propagation delay</strong>, denoted by \(T_p\), is the time duration taken for a signal to reach its destination.<br></p><div class=lemma><p>we denote the distance between the sender and receiver by \(d\) (in meters)<br>we denote the speed of a bit in the transmission link by \(s\)<br>\(T_p = \frac{d}{s}\)<br>the unit of \(T_p\) is a second<br></p></div></div><h2 id=internet><span class=section-num>6</span> internet</h2><div class=question><p>at home there are 4 computers and a router (therefore, 5 &ldquo;stations&rdquo;) connected to the same channel.<br>as long as only a single station is streaming it will succeed in streaming, if at any given moment more than 1 station try to stream at the same time the streaming for all stations will fail.<br>given that a station is trying to stream with a <a href=/post/20220813151352-probability/>probability</a> \(p\), what is the probability that it is gonna succeed in streaming?<br></p><div class=answer><p>for that station to succeed in streaming the other 4 stations have to not try to stream<br>for a station to try to stream at any given moment the probability is \(p\)<br>so according to <a href=/post/20220813151352-probability/#bernoulli-distribution>Bernoulli distribution</a> the answer is \(\binom{5}{1}p^1(1-p)^4\)<br></p></div><div class=subquestion><p>for the same situation, 2 stations can stream at the same time, what is the odds that a station would succeed in streaming at any given time?<br></p><div class=answer><p>\(\binom{5}{1}p(1-p)^4 + \binom{5}{2}p^2(1-p)^3\)<br></p></div></div></div><h2 id=protocol><span class=section-num>7</span> protocol</h2><div class=definition><p>a communication <strong>protocol</strong> is a system of rules that allows two or more entities of a communications system to transmit information via any kind of variation of a physical quantity. the protocol defines the rules, syntax, semantics and synchronization of communication and possible error recovery methods. protocols may be implemented by hardware, software, or a combination of both.<br></p></div><h2 id=network><span class=section-num>8</span> network</h2><div class=definition><p>a computer <strong>network</strong> is a set of computers sharing resources located on or provided by network nodes. the computers use common communication <a href=#protocol>protocol</a>s over digital interconnections to communicate with each other.<br></p></div><h3 id=network-edge><span class=section-num>8.1</span> network edge</h3><div class=definition><p>the <strong>network edge</strong> refers to endpoints. it is the first step between endpoints and the <a href=#network-core>core</a> of the network. these endpoints include personal computers (PCs), adapters, modems, and the devices that connect to them.<br></p></div><h3 id=network-core><span class=section-num>8.2</span> network core</h3><div class=definition><p>the <strong>network core</strong> refers to the components that provide services to those at the <a href=#network-edge>edge</a>.<br></p></div><h3 id=access-network><span class=section-num>8.3</span> access network</h3><div class=definition><p>an <strong>access network</strong> is a type of telecommunications network which connects subscribers to their immediate service provider. It is contrasted with the core network, which connects local providers to one another.<br></p></div><h4 id=digital-subscriber-line><span class=section-num>8.3.1</span> digital subscriber line</h4><h4 id=cable-network><span class=section-num>8.3.2</span> cable network</h4><h4 id=home-network><span class=section-num>8.3.3</span> home network</h4><h4 id=enterprise-access-network><span class=section-num>8.3.4</span> enterprise access network</h4><h4 id=wireless-access-network><span class=section-num>8.3.5</span> wireless access network</h4><h2 id=client-server-architecture><span class=section-num>9</span> client-server architecture</h2><h2 id=p2p-architecture><span class=section-num>10</span> p2p architecture</h2><h2 id=socket><span class=section-num>11</span> socket</h2><h2 id=application-layer><span class=section-num>12</span> application layer</h2></div><h4 class=page-header>Related</h4><div class=item><h4><a href=/post/20220809153548-sagemacs/>symacs</a></h4><h5>stands for symbolic emacs</h5>hello
-August 15, 2022
-<a href=https://mahmoodsheikh36.github.iotags/todo><kbd class=item-tag>todo</kbd></a></div></main><footer></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>networking</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/org.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.102.3" />
+        
+
+        
+
+        
+            
+        
+
+        
+
+    </head>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">networking</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:mahmod.m2015@gmail.com"><i class="fas fa-envelope"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/mahmoodsheikh36/"><i class="fab fa-github"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div>
+        <h2>networking</h2>
+        <h5>September 3, 2022</h5>
+        
+<a href="https://mahmoodsheikh36.github.io/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
+
+
+    </div>
+
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<div class="note">
+<p>this document is still being constructed, it should not be used for reference yet. <br/></p>
+</div>
+<h2 id="storage-units"><span class="section-num">1</span> storage units</h2>
+<p>basic units table: <br/></p>
+<table>
+<thead>
+<tr>
+<th>unit</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bit</td>
+<td>1 or 0</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>8 bits</td>
+</tr>
+<tr>
+<td>kilobyte</td>
+<td>1024 bytes</td>
+</tr>
+<tr>
+<td>megabyte</td>
+<td>1024 kilobytes</td>
+</tr>
+<tr>
+<td>gigabyte</td>
+<td>1024 megabytes</td>
+</tr>
+<tr>
+<td>terabyte</td>
+<td>1024 gigabytes</td>
+</tr>
+<tr>
+<td>petabyte</td>
+<td>1024 terabytes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="unit-prefix-table"><span class="section-num">2</span> unit prefix table</h2>
+<table>
+<thead>
+<tr>
+<th>prefix</th>
+<th>exponent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yocto</td>
+<td>\(10^{-24}\)</td>
+</tr>
+<tr>
+<td>zepto</td>
+<td>\(10^{-21}\)</td>
+</tr>
+<tr>
+<td>atto</td>
+<td>\(10^{-18}\)</td>
+</tr>
+<tr>
+<td>femto</td>
+<td>\(10^{-15}\)</td>
+</tr>
+<tr>
+<td>pico</td>
+<td>\(10^{-12}\)</td>
+</tr>
+<tr>
+<td>nano</td>
+<td>\(10^{-9}\)</td>
+</tr>
+<tr>
+<td>micro</td>
+<td>\(10^{-6}\)</td>
+</tr>
+<tr>
+<td>milli</td>
+<td>\(10^{-3}\)</td>
+</tr>
+<tr>
+<td>kilo</td>
+<td>\(10^3\)</td>
+</tr>
+<tr>
+<td>mega</td>
+<td>\(10^6\)</td>
+</tr>
+<tr>
+<td>giga</td>
+<td>\(10^9\)</td>
+</tr>
+<tr>
+<td>tera</td>
+<td>\(10^{12}\)</td>
+</tr>
+<tr>
+<td>peta</td>
+<td>\(10^{15}\)</td>
+</tr>
+<tr>
+<td>exa</td>
+<td>\(10^{18}\)</td>
+</tr>
+<tr>
+<td>zetta</td>
+<td>\(10^{21}\)</td>
+</tr>
+<tr>
+<td>yotta</td>
+<td>\(10^{24}\)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bandwidth"><span class="section-num">3</span> bandwidth</h2>
+<div class="definition">
+<p>network <strong>bandwidth</strong> is a measurement indicating the maximum capacity of a wired or wireless communications link to transmit data over a network connection in a given amount of time. typically, bandwidth is represented in the number of bits, kilobits, megabits or gigabits that can be transmitted in 1 second. <br/></p>
+<div class="note">
+<p>we denote bps (bits per second) by \(C\) or \(R\) <br/></p>
+</div>
+</div>
+<h2 id="transmission-time"><span class="section-num">4</span> transmission time</h2>
+<div class="definition">
+<p><strong>transmission time</strong>, denoted by \(T_i\), is the time it takes for the sender to insert the package into the transmission link <br/></p>
+<div class="lemma">
+<p>\(T_i = \frac{L}{R} = \frac{L}{C}\) <br/></p>
+</div>
+</div>
+<h2 id="signal-propagation-delay"><span class="section-num">5</span> signal propagation delay</h2>
+<div class="definition">
+<p><strong>propagation delay</strong>, denoted by \(T_p\), is the time duration taken for a signal to reach its destination. <br/></p>
+<div class="lemma">
+<p>we denote the distance between the sender and receiver by \(d\) (in meters) <br/>
+we denote the speed of a bit in the transmission link by \(s\) <br/>
+\(T_p = \frac{d}{s}\) <br/>
+the unit of \(T_p\) is a second <br/></p>
+</div>
+</div>
+<h2 id="internet"><span class="section-num">6</span> internet</h2>
+<div class="question">
+<p>at home there are 4 computers and a router (therefore, 5 &ldquo;stations&rdquo;) connected to the same channel. <br/>
+as long as only a single station is streaming it will succeed in streaming, if at any given moment more than 1 station try to stream at the same time the streaming for all stations will fail. <br/>
+given that a station is trying to stream with a <a href="/post/20220813151352-probability/">probability</a> \(p\), what is the probability that it is gonna succeed in streaming? <br/></p>
+<div class="answer">
+<p>for that station to succeed in streaming the other 4 stations have to not try to stream <br/>
+for a station to try to stream at any given moment the probability is \(p\) <br/>
+so according to <a href="/post/20220813151352-probability/#bernoulli-distribution">Bernoulli distribution</a> the answer is \(\binom{5}{1}p^1(1-p)^4\) <br/></p>
+</div>
+<div class="subquestion">
+<p>for the same situation, 2 stations can stream at the same time, what is the odds that a station would succeed in streaming at any given time? <br/></p>
+<div class="answer">
+<p>\(\binom{5}{1}p(1-p)^4 + \binom{5}{2}p^2(1-p)^3\) <br/></p>
+</div>
+</div>
+</div>
+<h2 id="protocol"><span class="section-num">7</span> protocol</h2>
+<div class="definition">
+<p>a communication <strong>protocol</strong> is a system of rules that allows two or more entities of a communications system to transmit information via any kind of variation of a physical quantity. the protocol defines the rules, syntax, semantics and synchronization of communication and possible error recovery methods. protocols may be implemented by hardware, software, or a combination of both. <br/></p>
+</div>
+<h2 id="client-server-architecture"><span class="section-num">8</span> client-server architecture</h2>
+<h3 id="server"><span class="section-num">8.1</span> server</h3>
+<h3 id="client"><span class="section-num">8.2</span> client</h3>
+<h2 id="network"><span class="section-num">9</span> network</h2>
+<div class="definition">
+<p>a computer <strong>network</strong> is a set of computers sharing resources located on or provided by network nodes. the computers use common communication <a href="#protocol">protocol</a>s over digital interconnections to communicate with each other. <br/></p>
+</div>
+<h3 id="network-edge"><span class="section-num">9.1</span> network edge</h3>
+<div class="definition">
+<p>the <strong>network edge</strong> refers to endpoints. it is the first step between endpoints and the <a href="#network-core">core</a> of the network. these endpoints include personal computers (PCs), adapters, modems, and the devices that connect to them. <br/></p>
+</div>
+<h3 id="network-core"><span class="section-num">9.2</span> network core</h3>
+<div class="definition">
+<p>the <strong>network core</strong> refers to the components that provide services to those at the <a href="#network-edge">edge</a>. <br/></p>
+</div>
+<h3 id="access-network"><span class="section-num">9.3</span> access network</h3>
+<div class="definition">
+<p>an <strong>access network</strong> is a type of telecommunications network which connects subscribers to their immediate service provider. It is contrasted with the core network, which connects local providers to one another. <br/></p>
+</div>
+<h4 id="digital-subscriber-line"><span class="section-num">9.3.1</span> digital subscriber line</h4>
+<h4 id="cable-network"><span class="section-num">9.3.2</span> cable network</h4>
+<h4 id="home-network"><span class="section-num">9.3.3</span> home network</h4>
+<h4 id="enterprise-access-network"><span class="section-num">9.3.4</span> enterprise access network</h4>
+<h4 id="wireless-access-network"><span class="section-num">9.3.5</span> wireless access network</h4>
+<h2 id="tcp"><span class="section-num">10</span> tcp</h2>
+<h2 id="http"><span class="section-num">11</span> http</h2>
+<p>the HTTP <a href="#protocol">protocol</a> is based on <a href="#tcp">tcp</a> <br/></p>
+<h3 id="get"><span class="section-num">11.1</span> GET</h3>
+<h3 id="post"><span class="section-num">11.2</span> POST</h3>
+<h3 id="head"><span class="section-num">11.3</span> HEAD</h3>
+<h3 id="webserver"><span class="section-num">11.4</span> webserver</h3>
+<h3 id="persistent-http"><span class="section-num">11.5</span> persistent http</h3>
+<p>HTTP persistent connection, also called HTTP keep-alive, or HTTP connection reuse, is the idea of using a single <a href="#tcp">TCP</a> connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair <br/>
+A persistent connection takes 1 RTT for the connection and then transfers as many objects, as wanted, over this single connection. <br/>
+RTT stands for the round-trip time taken for an object request and then its retrieval. In other words, it is the time taken to request the object from the client to the server and then retrieve it from the server back to the client. <br/></p>
+<h4 id="pipelining"><span class="section-num">11.5.1</span> pipelining</h4>
+<p>HTTP pipelining is a feature of HTTP/1.1 which allows multiple HTTP requests to be sent over a single TCP connection without waiting for the corresponding responses. <br/></p>
+<h3 id="non-persistent-http"><span class="section-num">11.6</span> non-persistent http</h3>
+<p>The non-persistent connection has connection type 1.0 <br/>
+such connection takes a total time of 2RTT + file transmission time. It takes the first RTT (round-trip time) to establish the connection between the server and the client. The second RTT is taken to request and return the object. This case stands for a single object transmission. <br/>
+After the client receives the object in non-persistent, the connection is immediately closed. This is the basic difference between persistent and non-persistent. The persistent connection ensures the transfer of ​multiple objects over a single connection. <br/></p>
+<h2 id="dns"><span class="section-num">12</span> DNS</h2>
+<h2 id="socket"><span class="section-num">13</span> socket</h2>
+<h2 id="p2p"><span class="section-num">14</span> p2p</h2>
+<h2 id="ip"><span class="section-num">15</span> IP</h2>
+<h2 id="application-layer"><span class="section-num">16</span> application layer</h2>
+<h2 id="proxy"><span class="section-num">17</span> proxy</h2>
+</div>
+
+    
+    
+    
+        <h4 class="page-header">Related</h4>
+         <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/data_structures/">data structures</a></h4>
+    <h5>college course in data structures and algorithms</h5>
+  July 10, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
+
+<a href="https://mahmoodsheikh36.github.io/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/operating_systems/">operating systems</a></h4>
+    <h5>operating systems</h5>
+  January 1, 0001
+    
+<a href="https://mahmoodsheikh36.github.io/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
+
+
+
+</div>
+ 
+    
+
+    
+    
+
+</main>
+
+        <footer>
+          
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+

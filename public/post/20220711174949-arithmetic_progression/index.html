@@ -1,32 +1,353 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Arithmetic progression</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
-<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
-<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.102.1"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>Arithmetic progression</a>
-<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
-<span class=icon-bar></span>
-<span class=icon-bar></span>
-<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/about/>About</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:me@example.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/username/><i class="fab fa-github"></i></a></li><li class=navbar-icon><a href=https://twitter.com/username/><i class="fab fa-twitter"></i></a></li><li class=navbar-icon><a href=https://www.linkedin.com/in/username/><i class="fab fa-linkedin"></i></a></li><li class=navbar-icon><a href=https://www.stackoverflow.com/username/><i class="fab fa-stack-overflow"></i></a></li></ul></div></div></nav><main><div><h2>Arithmetic progression</h2><h5>January 1, 0001</h5><a href=https://mahmoodsheikh36.github.iotags/math><kbd class=item-tag>math</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
-\(\DeclareMathOperator{\dom}{domain}\)
-\(\DeclareMathOperator{\ran}{range}\)
-\(\DeclareMathOperator{\rng}{range}\)
-\(\DeclareMathOperator{\img}{Im}\)
-\(\DeclareMathOperator{\adj}{adj}\)
-\(\newcommand\dif[1]{\:\textrm{d}#1}\)
-\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
-\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)</p><style>.lemma,.proof,.entailment,.definition,.note,.my_example,.characteristic,.assumption,.question,.subquestion,.answer,.step{border-radius:10px;border-style:groove;border-width:3px}.lemma:before,.proof:before,.entailment:before,.definition:before,.note:before,.my_example:before,.characteristic:before,.assumption:before,.question:before,.subquestion:before,.answer:before,.step:before{background-color:#bbb;position:relative;border-radius:10px;padding-right:5px;padding-left:5px;padding-top:1px;padding-bottom:1px;border:1px solid #000}.lemma{background-color:beige}.proof{background-color:#ffe4b5}.entailment{background-color:#b0c4de}.lemma:before{content:"lemma:"}.proof:before{content:"proof:"}.entailment:before{content:"entailment (logical consequence):"}.note{background-color:#ffebcd}.note:before{content:"note:"}.my_example{background-color:#e8cfc8}.my_example:before{content:"example:"}p{margin:0;padding:0}img{display:block;margin-left:auto;margin-right:auto}.hide{display:none}.definition{background-color:snow}.definition:before{content:"definition:"}.characteristic{background-color:#dfdada}.characteristic:before{content:"characteristic:"}.assumption{background-color:#65ad98}.question{background-color:#e1c6c6}.question:before{content:"question:"}.subquestion{background-color:#e5e2d8}.subquestion:before{content:"subquestion:"}.answer{background-color:#beabc5}.answer:before{content:"answer:"}.step{background-color:#b4d3ad}.step:before{content:"step:"}</style><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]}}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i)elem=elems[i],nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p>An <strong>arithmetic progression</strong> or <strong>arithmetic sequence</strong> is a <a href=/post/20220711175112-sequence/>sequence</a> of <a href=/post/calculus2/#numbers>numbers</a> such that the difference between the consecutive terms is constant<br>if the first number of an arithmetic progression is \(a_{1}\) and the difference of successive numbers is \(d\) then the <a href=/post/20220711175314-formula/>formula</a> for the $n$th number in the sequence is:<br>\[
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Arithmetic progression</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/org.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.102.3" />
+        
+
+        
+
+        
+            
+        
+
+        
+
+    </head>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">Arithmetic progression</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:mahmod.m2015@gmail.com"><i class="fas fa-envelope"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/mahmoodsheikh36/"><i class="fab fa-github"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div>
+        <h2>Arithmetic progression</h2>
+        <h5>January 1, 0001</h5>
+        
+<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
+
+
+    </div>
+
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  border-style: groove;
+  border-width: 3px;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  }
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<p>An <strong>arithmetic progression</strong> or <strong>arithmetic sequence</strong> is a <a href="/post/20220711175112-sequence/">sequence</a> of <a href="/post/calculus2/#numbers">numbers</a> such that the difference between the consecutive terms is constant <br/>
+if the first number of an arithmetic progression is \(a_{1}\) and the difference of successive numbers is \(d\) then the <a href="/post/20220711175314-formula/">formula</a> for the $n$th number in the sequence is: <br/>
+\[
 a_{n} = a_1 + (n-1)d
-\]<br>and the general formula is<br>\[
+\] <br/>
+and the general formula is <br/>
+\[
 a_{n} = a_m + (n-m)d
-\]<br>where \(a_m\) is a number in the sequence at index \(m\)<br></p></div><h4 class=page-header>Related</h4><div class=item><h4><a href=/post/20220813151352-probability/>probability</a></h4><h5>probability theory</h5>hello
-August 25, 2022
-<a href=https://mahmoodsheikh36.github.iotags/math><kbd class=item-tag>math</kbd></a></div><div class=item><h4><a href=/post/linear_algebra2/>linear algebra</a></h4><h5>linear algebra</h5>hello
-August 31, 2022
-<a href=https://mahmoodsheikh36.github.iotags/math><kbd class=item-tag>math</kbd></a></div><div class=item><h4><a href=/post/data_structures/>data structures</a></h4><h5>data structures</h5>hello
-August 31, 2022
-<a href=https://mahmoodsheikh36.github.iotags/math><kbd class=item-tag>math</kbd></a>
-<a href=https://mahmoodsheikh36.github.iotags/computer-science><kbd class=item-tag>computer-science</kbd></a></div></main><footer></footer></body></html>
+\] <br/>
+where \(a_m\) is a number in the sequence at index \(m\) <br/></p>
+</div>
+
+    
+    
+    
+        <h4 class="page-header">Related</h4>
+         <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/20220726153827-rational_root_theorem/">rational root theorem</a></h4>
+    <h5>ratinoal root theorem</h5>
+  September 3, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/theorem"><kbd class="item-tag">theorem</kbd></a>
+
+<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/20220813151352-probability/">probability</a></h4>
+    <h5>probability theory</h5>
+  August 13, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/linear_algebra2/">linear algebra</a></h4>
+    <h5>linear algebra</h5>
+  August 12, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
+
+
+
+</div>
+ 
+    
+
+    
+    
+
+</main>
+
+        <footer>
+          
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+

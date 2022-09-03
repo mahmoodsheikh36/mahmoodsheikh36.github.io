@@ -1,34 +1,350 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>gpg</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
-<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
-<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.102.1"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>gpg</a>
-<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
-<span class=icon-bar></span>
-<span class=icon-bar></span>
-<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/about/>About</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:me@example.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/username/><i class="fab fa-github"></i></a></li><li class=navbar-icon><a href=https://twitter.com/username/><i class="fab fa-twitter"></i></a></li><li class=navbar-icon><a href=https://www.linkedin.com/in/username/><i class="fab fa-linkedin"></i></a></li><li class=navbar-icon><a href=https://www.stackoverflow.com/username/><i class="fab fa-stack-overflow"></i></a></li></ul></div></div></nav><main><div><h2>gpg</h2><h5>August 7, 2022</h5><a href=https://mahmoodsheikh36.github.iotags/program><kbd class=item-tag>program</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
-\(\DeclareMathOperator{\dom}{domain}\)
-\(\DeclareMathOperator{\ran}{range}\)
-\(\DeclareMathOperator{\rng}{range}\)
-\(\DeclareMathOperator{\img}{Im}\)
-\(\DeclareMathOperator{\adj}{adj}\)
-\(\newcommand\dif[1]{\:\textrm{d}#1}\)
-\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
-\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)</p><style>.lemma,.proof,.entailment,.definition,.note,.my_example,.characteristic,.assumption,.question,.subquestion,.answer,.step{border-radius:10px;box-shadow:10px 10px 15px rgba(0,0,0,.1);padding:2px;border:1px #000 solid}.lemma:before,.proof:before,.entailment:before,.definition:before,.note:before,.my_example:before,.characteristic:before,.assumption:before,.question:before,.subquestion:before,.answer:before,.step:before{background-color:#bbb;position:relative;border-radius:10px;padding-right:5px;padding-left:5px;padding-top:1px;padding-bottom:1px;border:1px solid #000}.lemma{background-color:beige}.proof{background-color:#ffe4b5}.entailment{background-color:#b0c4de}.lemma:before{content:"lemma:"}.proof:before{content:"proof:"}.entailment:before{content:"entailment (logical consequence):"}.note{background-color:#ffebcd}.note:before{content:"note:"}.my_example{background-color:#e8cfc8}.my_example:before{content:"example:"}p{margin:0;padding:0}img{display:block;margin-left:auto;margin-right:auto}.hide{display:none}.definition{background-color:snow}.definition:before{content:"definition:"}.characteristic{background-color:#dfdada}.characteristic:before{content:"characteristic:"}.assumption{background-color:#65ad98}.question{background-color:#e1c6c6}.question:before{content:"question:"}.subquestion{background-color:#e5e2d8}.subquestion:before{content:"subquestion:"}.answer{background-color:#beabc5}.answer:before{content:"answer:"}.step{background-color:#b4d3ad}.step:before{content:"step:"}</style><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i)elem=elems[i],nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p><strong>gnupg</strong> is an encryption tool<br></p><h2 id=encrypt-file-with-password><span class=section-num>1</span> encrypt file with password</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gpg -o &lt;output-file&gt; -c &lt;file-to-encrypt&gt;
-</span></span></code></pre></div><p>the argument <code>-o</code> takes the path to the output file (the encrypted one) and the flag <code>-c</code> tells <code>gpg</code> that we want to encrypt, you will be prompted to enter a password<br></p><h2 id=decrypt-file-with-password><span class=section-num>2</span> decrypt file with password</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gpg -o &lt;output-file&gt; -d &lt;file-to-decrypt&gt;
-</span></span></code></pre></div><p>the argument <code>-o</code> takes the path to the output file (the decrypted one) and the flag <code>-d</code> tells <code>gpg</code> that we want to decrypt<br></p><h2 id=encrypt-directory-with-password><span class=section-num>3</span> encrypt directory with password</h2><p>to encrypt a directory, we simply compress it into a file:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>tar -cvf archive.tar &lt;directory&gt;
-</span></span></code></pre></div><p>for faster compression but bigger file size:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>tar --use-compress-program<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;pigz -k -9 &#34;</span> -cf archive.tar &lt;directory-to-compress&gt;
-</span></span></code></pre></div><p>and then <a href=#encrypt-file-with-password>encrypt that file</a><br></p><h2 id=gpg-pinentry-error><span class=section-num>4</span> gpg pinentry error</h2><p>if you get the following error:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C><span style=display:flex><span>gpg: problem with the agent: No pinentry
-</span></span></code></pre></div><p>you might be able to fix this by running this command:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>echo <span style=color:#e6db74>&#34;pinentry-program /usr/bin/pinentry&#34;</span> &gt; ~/.gnupg/pgp-agent.conf
-</span></span><span style=display:flex><span>pkill pgp-agent
-</span></span></code></pre></div><p>and install the program <code>pinentry</code> from using your package manager<br>or if you&rsquo;re on <a href=/post/20220730010042-nixos/>nixos</a> like myself:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>echo <span style=color:#e6db74>&#34;pinentry-program /run/current-system/sw/bin/pinentry&#34;</span> &gt; ~/.gnupg/pgp-agent.conf
-</span></span><span style=display:flex><span>pkill pgp-agent
-</span></span></code></pre></div><p>and add the program <code>pinentry</code> to your <code>environment.systemPackages</code> and run <code>sudo nixos-rebuild switch</code> to build the new configuration<br></p></div><h4 class=page-header>Related</h4><div class=item><h4><a href=/post/emacs/>emacs</a></h4><h5>emacs</h5>hello
-July 8, 2022
-<a href=https://mahmoodsheikh36.github.iotags/program><kbd class=item-tag>program</kbd></a></div><div class=item><h4><a href=/post/sage/>sagemath</a></h4><h5>sagemath</h5>hello
-July 27, 2022
-<a href=https://mahmoodsheikh36.github.iotags/program><kbd class=item-tag>program</kbd></a></div></main><footer></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>gpg</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/main.css">
+<link rel="stylesheet" href="https://mahmoodsheikh36.github.io/css/org.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.102.3" />
+        
+
+        
+
+        
+            
+        
+
+        
+
+    </head>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">gpg</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:mahmod.m2015@gmail.com"><i class="fas fa-envelope"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/mahmoodsheikh36/"><i class="fab fa-github"></i></a></li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div>
+        <h2>gpg</h2>
+        <h5>August 7, 2022</h5>
+        
+<a href="https://mahmoodsheikh36.github.io/tags/program"><kbd class="item-tag">program</kbd></a>
+
+
+    </div>
+
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+</p>
+<style>
+.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
+  padding: 2px;
+  border: 1px black solid;
+}
+.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
+  background-color: #bbb;
+  position: relative;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid black;
+}
+.lemma {
+  background-color: beige;
+}
+.proof {
+  background-color: moccasin;
+}
+.entailment {
+  background-color: lightsteelblue;
+}
+.lemma:before {
+  content: "lemma:";
+}
+.proof:before {
+  content: "proof:";
+}
+.entailment:before {
+  content: "entailment (logical consequence):";
+}
+.note {
+  background-color: blanchedalmond;
+}
+.note:before {
+  /* content: url(/note.png) "note:"; */
+  content: "note:";
+}
+.my_example {
+  background-color: #e8cfc8; 
+}
+.my_example:before {
+  content: "example:";
+}
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+.hide {
+  display: none;
+}
+.definition {
+  background-color: snow;
+}
+.definition:before {
+  content: "definition:";
+}
+.characteristic {
+  background-color: #dfdada;
+}
+.characteristic:before {
+  content: "characteristic:";
+}
+.assumption {
+  background-color: #65ad98;
+}
+.question {
+  background-color: #e1c6c6;
+}
+.question:before {
+  content: "question:";
+}
+.subquestion {
+  background-color: #e5e2d8;
+}
+.subquestion:before {
+  content: "subquestion:";
+}
+.answer {
+  background-color: #beabc5;
+}
+.answer:before {
+  content: "answer:";
+}
+.step {
+  background-color: #b4d3ad;
+}
+.step:before {
+  content: "step:";
+}
+</style>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+    elems = document.querySelectorAll('mjx-container')
+    for (i = 0; i < elems.length; ++i) {
+        elem = elems[i]
+        nextElem = elem.nextElementSibling
+        if (nextElem !== null && nextElem.tagName === 'BR')
+            nextElem.remove()
+    }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<p><strong>gnupg</strong> is an encryption tool <br/></p>
+<h2 id="encrypt-file-with-password"><span class="section-num">1</span> encrypt file with password</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg -o &lt;output-file&gt; -c &lt;file-to-encrypt&gt;
+</span></span></code></pre></div><p>the argument <code>-o</code> takes the path to the output file (the encrypted one) and the flag <code>-c</code> tells <code>gpg</code> that we want to encrypt, you will be prompted to enter a password <br/></p>
+<h2 id="decrypt-file-with-password"><span class="section-num">2</span> decrypt file with password</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gpg -o &lt;output-file&gt; -d &lt;file-to-decrypt&gt;
+</span></span></code></pre></div><p>the argument <code>-o</code> takes the path to the output file (the decrypted one) and the flag <code>-d</code> tells <code>gpg</code> that we want to decrypt <br/></p>
+<h2 id="encrypt-directory-with-password"><span class="section-num">3</span> encrypt directory with password</h2>
+<p>to encrypt a directory, we simply compress it into a file: <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -cvf archive.tar &lt;directory&gt;
+</span></span></code></pre></div><p>for faster compression but bigger file size: <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar --use-compress-program<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pigz -k -9 &#34;</span> -cf archive.tar &lt;directory-to-compress&gt;
+</span></span></code></pre></div><p>and then <a href="#encrypt-file-with-password">encrypt that file</a> <br/></p>
+<h2 id="gpg-pinentry-error"><span class="section-num">4</span> gpg pinentry error</h2>
+<p>if you get the following error: <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span>gpg: problem with the agent: No pinentry
+</span></span></code></pre></div><p>you might be able to fix this by running this command: <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;pinentry-program /usr/bin/pinentry&#34;</span> &gt; ~/.gnupg/pgp-agent.conf
+</span></span><span style="display:flex;"><span>pkill pgp-agent
+</span></span></code></pre></div><p>and install the program <code>pinentry</code> from using your package manager <br/>
+or if you&rsquo;re on <a href="/post/20220730010042-nixos/">nixos</a> like myself: <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;pinentry-program /run/current-system/sw/bin/pinentry&#34;</span> &gt; ~/.gnupg/pgp-agent.conf
+</span></span><span style="display:flex;"><span>pkill pgp-agent
+</span></span></code></pre></div><p>and add the program <code>pinentry</code> to your <code>environment.systemPackages</code> and run <code>sudo nixos-rebuild switch</code> to build the new configuration <br/></p>
+</div>
+
+    
+    
+    
+        <h4 class="page-header">Related</h4>
+         <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/emacs/">emacs</a></h4>
+    <h5>emacs</h5>
+  June 28, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/program"><kbd class="item-tag">program</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/sage/">sagemath</a></h4>
+    <h5>sagemath</h5>
+  June 18, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/program"><kbd class="item-tag">program</kbd></a>
+
+
+
+</div>
+ 
+    
+
+    
+    
+
+</main>
+
+        <footer>
+          
+        </footer>
+
+        
+
+        
+    </body>
+
+</html>
+
