@@ -1,9 +1,9 @@
 +++
 title = "networking"
 author = ["mahmood"]
-description = "networking"
-date = 2022-09-02T00:10:00+03:00
-tags = ["todo"]
+description = "college course in computer networking"
+date = 2022-09-03T12:32:00+03:00
+tags = ["computer-science"]
 draft = false
 +++
 
@@ -247,28 +247,49 @@ an **access network** is a type of telecommunications network which connects sub
 #### <span class="section-num">9.3.5</span> wireless access network {#wireless-access-network}
 
 
-## <span class="section-num">10</span> http {#http}
+## <span class="section-num">10</span> tcp {#tcp}
 
 
-### <span class="section-num">10.1</span> GET {#get}
+## <span class="section-num">11</span> http {#http}
+
+the HTTP [protocol](#protocol) is based on [tcp](#tcp) <br/>
 
 
-### <span class="section-num">10.2</span> POST {#post}
+### <span class="section-num">11.1</span> GET {#get}
 
 
-### <span class="section-num">10.3</span> HEAD {#head}
+### <span class="section-num">11.2</span> POST {#post}
 
 
-### <span class="section-num">10.4</span> webserver {#webserver}
+### <span class="section-num">11.3</span> HEAD {#head}
 
 
-## <span class="section-num">11</span> DNS {#dns}
+### <span class="section-num">11.4</span> webserver {#webserver}
 
 
-## <span class="section-num">12</span> socket {#socket}
+### <span class="section-num">11.5</span> persistent http {#persistent-http}
+
+HTTP persistent connection, also called HTTP keep-alive, or HTTP connection reuse, is the idea of using a single [TCP](#tcp) connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair <br/>
+A persistent connection takes 1 RTT for the connection and then transfers as many objects, as wanted, over this single connection. <br/>
+RTT stands for the round-trip time taken for an object request and then its retrieval. In other words, it is the time taken to request the object from the client to the server and then retrieve it from the server back to the client. <br/>
 
 
-## <span class="section-num">13</span> TCP {#tcp}
+#### <span class="section-num">11.5.1</span> pipelining {#pipelining}
+
+HTTP pipelining is a feature of HTTP/1.1 which allows multiple HTTP requests to be sent over a single TCP connection without waiting for the corresponding responses. <br/>
+
+
+### <span class="section-num">11.6</span> non-persistent http {#non-persistent-http}
+
+The non-persistent connection has connection type 1.0 <br/>
+such connection takes a total time of 2RTT + file transmission time. It takes the first RTT (round-trip time) to establish the connection between the server and the client. The second RTT is taken to request and return the object. This case stands for a single object transmission. <br/>
+After the client receives the object in non-persistent, the connection is immediately closed. This is the basic difference between persistent and non-persistent. The persistent connection ensures the transfer of ​multiple objects over a single connection. <br/>
+
+
+## <span class="section-num">12</span> DNS {#dns}
+
+
+## <span class="section-num">13</span> socket {#socket}
 
 
 ## <span class="section-num">14</span> p2p {#p2p}

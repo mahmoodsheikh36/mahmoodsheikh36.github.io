@@ -1,8 +1,8 @@
 +++
 title = "rational root theorem"
 author = ["mahmood"]
-description = "Ratinoal root theorem"
-date = 2022-09-01T20:17:00+03:00
+description = "ratinoal root theorem"
+date = 2022-09-03T12:33:00+03:00
 tags = ["theorem", "math"]
 draft = false
 +++
