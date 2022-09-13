@@ -2,7 +2,7 @@
 title = "networking"
 author = ["mahmood"]
 description = "college course in computer networking"
-date = 2022-09-03T12:32:00+03:00
+date = 2022-09-12T19:05:00+03:00
 tags = ["computer-science"]
 draft = false
 +++
@@ -274,31 +274,173 @@ A persistent connection takes 1 RTT for the connection and then transfers as man
 RTT stands for the round-trip time taken for an object request and then its retrieval. In other words, it is the time taken to request the object from the client to the server and then retrieve it from the server back to the client. <br/>
 
 
-#### <span class="section-num">11.5.1</span> pipelining {#pipelining}
+### <span class="section-num">11.6</span> cache proxy server {#cache-proxy-server}
+
+a [proxy](#proxy) that is used as a cache, where the user makes all the requests to it and if it doesnt have a specific object it requests it from the origin server and returns it (and often stores it for future requests) <br/>
+
+
+#### <span class="section-num">11.6.1</span> pipelining {#pipelining}
 
 HTTP pipelining is a feature of HTTP/1.1 which allows multiple HTTP requests to be sent over a single TCP connection without waiting for the corresponding responses. <br/>
 
 
-### <span class="section-num">11.6</span> non-persistent http {#non-persistent-http}
+### <span class="section-num">11.7</span> non-persistent http {#non-persistent-http}
 
 The non-persistent connection has connection type 1.0 <br/>
 such connection takes a total time of 2RTT + file transmission time. It takes the first RTT (round-trip time) to establish the connection between the server and the client. The second RTT is taken to request and return the object. This case stands for a single object transmission. <br/>
 After the client receives the object in non-persistent, the connection is immediately closed. This is the basic difference between persistent and non-persistent. The persistent connection ensures the transfer of ​multiple objects over a single connection. <br/>
 
 
-## <span class="section-num">12</span> DNS {#dns}
+## <span class="section-num">12</span> domain name {#domain-name}
 
 
-## <span class="section-num">13</span> socket {#socket}
+## <span class="section-num">13</span> IP {#ip}
 
 
-## <span class="section-num">14</span> p2p {#p2p}
+## <span class="section-num">14</span> DNS {#dns}
+
+**domain name system** is a protocol that allows identifying machines with [domain name](#domain-name) by converting them into [IP](#ip) addresses <br/>
 
 
-## <span class="section-num">15</span> IP {#ip}
+### <span class="section-num">14.1</span> name server {#name-server}
+
+a **[DNS](#dns) [server](#server)** keeps records of DNS entries that map domain names to their corresponding IP addresses which can be served to other machines <br/>
+when a client wants to to communicate with a machine using its domain name, it makes a request to a dns server, if the server has a record of said domain name, it returns sends it back to the client, if it doesnt, it either sends back an IP to another dns server that has that record or it makes a request to that dns server itself and sends back the response to the client <br/>
+
+{{< figure src="/ox-hugo/1btUy2d.svg" >}} <br/>
+
+<div class="my_example">
+
+a client wants the IP for www.amazon.com; 1st approximation would be: <br/>
+
+-   client queries root server to find com DNS server <br/>
+-   client queries .com DNS server to get amazon.com DNS server <br/>
+-   client queries amazon.com DNS server to get IP address for www.amazon.com <br/>
+
+</div>
 
 
-## <span class="section-num">16</span> application layer {#application-layer}
+### <span class="section-num">14.2</span> root name server {#root-name-server}
+
+contacted by local name server that can not resolve name <br/>
+a root server contacts authoritative name server if name mapping not known and returns the mapping to the local name server <br/>
+there are 13 root name "servers" worldwide <br/>
 
 
-## <span class="section-num">17</span> proxy {#proxy}
+### <span class="section-num">14.3</span> resource record {#resource-record}
+
+the format for an RR is `(name, value, type, ttl)` <br/>
+when `type=A`: <br/>
+
+-   **name** is **hostname** <br/>
+-   **value** is [IP](#ip) address <br/>
+
+when `type=NS`: <br/>
+
+-   **name** is [domain name](#domain-name) <br/>
+-   **value** is hostname of [authoritative name server](#authoritative-name-server) for this domain <br/>
+
+when `type=CNAME`: <br/>
+
+-   name is alias name for some “canonical” (the real) name <br/>
+-   www.ibm.com is really servereast.backup2.ibm.com <br/>
+-   value is canonical name <br/>
+
+when `type=MX`: <br/>
+
+-   **value** is canonical name <br/>
+
+
+### <span class="section-num">14.4</span> top level domain {#top-level-domain}
+
+a top-level [domain]({{< relref "discrete_maths2.md#domain" >}}) is one of the domains at the highest level in the hierarchical [DNS](#dns) of the [internet](#internet) after the root domain, a TLD server is responsible for these domains, examples include com,org,net,edu,aero. <br/>
+
+
+### <span class="section-num">14.5</span> authoritative name server {#authoritative-name-server}
+
+an organization’s own DNS servers, providing authoritative hostname to IP mappings for the organization’s named hosts <br/>
+can be maintained by an organization or a service provider <br/>
+
+
+### <span class="section-num">14.6</span> local name server {#local-name-server}
+
+does not strictly belong to hierarchy <br/>
+each ISP (residential ISP, company, university) has one <br/>
+also called “default name server” <br/>
+when host makes DNS query, query is sent to its local DNS server <br/>
+has local cache of recent name-to-address translation pairs (but may be out of date!) <br/>
+acts as proxy, forwards query into hierarchy <br/>
+
+
+### <span class="section-num">14.7</span> dns caching {#dns-caching}
+
+a server/client can store a record of a domain name and its corresponding IP address for a specific amount of time so that it wont have to make the same request to a dns server over and over again <br/>
+
+
+### <span class="section-num">14.8</span> dns practice problems {#dns-practice-problems}
+
+<div class="question">
+
+how can we make sure that in the [DNS](#dns) system that for a canonical name and its aliases are identical and consistent? such that all the names that refer to the same host would have the same corresponding [IP](#ip) <br/>
+
+<div class="answer">
+
+by making it so that for any given [domain name](#domain-name) that has a corresponding `CNAME` we cant save any additional information <br/>
+
+</div>
+
+</div>
+
+<div class="question">
+
+assume that a [dns server](#name-server) receives a query for an IP of a specific host but it cant find an `RR` entry for it, how should the dns server behave in this situation? <br/>
+
+<div class="answer">
+
+it should check whether it has a `CNAME` entry for it, and if it does it renew the search for a domain name that is the canonical name for the original requested domain name <br/>
+
+</div>
+
+</div>
+
+<div class="question">
+
+what problem can be a result of the solution to the previous question that stems from a configuration fault in the dns system <br/>
+
+<div class="answer">
+
+the search through the `CNAME` entries could enter a loop <br/>
+
+</div>
+
+</div>
+
+<div class="question">
+
+a dns server for a given `zone` holds the names of the dns servers of `subzones` and their IPs, one of the reasons that IPs are saved is efficiency, a domain name of a dns server should be passed along with its IP, but there is another reason for this which is related to the accuracy of the functioning of the dns system for which we have to save those IPs, what is it? <br/>
+
+<div class="answer">
+
+if the dns server of a subzone belongs to another subzone itself, to find its IP we have to make a request using the address we're searching for <br/>
+
+</div>
+
+</div>
+
+
+## <span class="section-num">15</span> socket {#socket}
+
+
+## <span class="section-num">16</span> p2p {#p2p}
+
+
+## <span class="section-num">17</span> application layer {#application-layer}
+
+
+## <span class="section-num">18</span> proxy {#proxy}
+
+
+## <span class="section-num">19</span> citations {#citations}
+
+credit where credit is due <br/>
+<https://en.wikipedia.org/wiki/Top-level_domain> <br/>

@@ -2,7 +2,7 @@
 title = "linear algebra"
 author = ["mahmood"]
 description = "linear algebra"
-date = 2022-08-12T17:58:00+03:00
+date = 2022-09-05T13:58:00+03:00
 tags = ["math"]
 draft = false
 +++
@@ -57,7 +57,7 @@ window.onload = function() {
 
 <div class="note">
 
-this document needs some refactoring <br/>
+this document needs some refactoring, some of the proofs may be incomplete <br/>
 
 </div>
 
@@ -69,7 +69,7 @@ this document needs some refactoring <br/>
 
 <div class="definition">
 
-a **Matrix** is a rectangular array or table of numbers, symbols, or expressions, arranged in rows and columns, which is used to represent a mathematical object or a property of such an object <br/>
+a **matrix** is a rectangular array or table of numbers, symbols, or expressions, arranged in rows and columns, which is used to represent a mathematical object or a property of such an object <br/>
 
 <div class="characteristic">
 
@@ -79,22 +79,39 @@ a matrix can be constructed over a specific finite/infinite set of numbers for e
 
 <div class="my_example">
 
-this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
-\\[\left[\begin{array}{rrrr} -2 & -1 & -3 & 1 \\\ 0 & 0 & -1 & 1 \\\ -6 & -1 & 0 & 1 \\\ 14 & -1 & 1 & -1 \\\ -1 & 1 & -1 & -22 \end{array}\right]\\] <br/>
+consider this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
+\\[\left[\begin{array}{rrrr} 1 & 1 & 0 & -24 \\\ 2 & 1 & 2 & 11 \\\ 3 & 0 & 0 & 3 \\\ -1 & 1 & -1 & 1 \\\ -2 & 1 & 0 & 0 \end{array}\right]\\] <br/>
 
 </div>
 
-<div class="characteristic">
+</div>
+
+
+### <span class="section-num">2.1</span> matrix multiplication {#matrix-multiplication}
+
+<div class="definition">
 
 let \\(A,\ B\\) be matrices <br/>
-**Matrix multiplication** is possible if and only if the matrices have the dimensions \\(A\_{m \times n},\ B\_{n \times m}\\) <br/>
+**matrix multiplication** is possible if and only if the matrices have the dimensions \\(A\_{m \times n},\ B\_{n \times m}\\) <br/>
 ![](/ox-hugo/matrix-multiplication.gif) <br/>
-
-</div>
 
 <div class="characteristic">
 
-**Matrix addition** is defined as the addition of 2 matrices with the same dimensions \\(A\_{m \times n},\ B\_{m \times n}\\) <br/>
+matrices can be **multiplied by constants**, let \\(A\\) be a matrix and \\(c\\) be a constant, the definition of such multiplication is: <br/>
+\\[
+  A \cdot c = B \iff A\_{i,j} \cdot c = B\_{i,j}
+\\] <br/>
+
+</div>
+
+</div>
+
+
+### <span class="section-num">2.2</span> matrix addition {#matrix-addition}
+
+<div class="definition">
+
+**matrix addition** is defined as the addition of 2 matrices with the same dimensions \\(A\_{m \times n},\ B\_{m \times n}\\) <br/>
 \\[
   A + B = C \iff A\_{i,j} + B\_{i,j} = C\_{i,j}
 \\] <br/>
@@ -109,22 +126,11 @@ let \\(A,\ B\\) be matrices <br/>
 
 </div>
 
-<div class="characteristic">
 
-matrices can be **multiplied by constants**, let \\(A\\) be a matrix and \\(c\\) be a constant, the definition of such multiplication is: <br/>
-\\[
-  A \cdot c = B \iff A\_{i,j} \cdot c = B\_{i,j}
-\\] <br/>
-
-</div>
-
-</div>
+### <span class="section-num">2.3</span> elementary row operation {#elementary-row-operation}
 
 
-### <span class="section-num">2.1</span> elementary row operation {#elementary-row-operation}
-
-
-### <span class="section-num">2.2</span> augmented matrix {#augmented-matrix}
+### <span class="section-num">2.4</span> augmented matrix {#augmented-matrix}
 
 <div class="definition">
 
@@ -141,7 +147,7 @@ for a given system of equation, an **augmented matrix** is the system of equatio
 </div>
 
 
-### <span class="section-num">2.3</span> square matrix {#square-matrix}
+### <span class="section-num">2.5</span> square matrix {#square-matrix}
 
 <div class="definition">
 
@@ -150,13 +156,13 @@ a **square matrix** is a [matrix](#matrix) whose width is the same as its height
 </div>
 
 
-### <span class="section-num">2.4</span> identity matrix {#identity-matrix}
+### <span class="section-num">2.6</span> identity matrix {#identity-matrix}
 
 
-### <span class="section-num">2.5</span> triangular matrix {#triangular-matrix}
+### <span class="section-num">2.7</span> triangular matrix {#triangular-matrix}
 
 
-### <span class="section-num">2.6</span> row echelon form {#row-echelon-form}
+### <span class="section-num">2.8</span> row echelon form {#row-echelon-form}
 
 <div class="characteristic">
 
@@ -220,16 +226,16 @@ where one of the rows zeros out which makes the third variable in the correspond
 </div>
 
 
-### <span class="section-num">2.7</span> invertible matrix {#invertible-matrix}
+### <span class="section-num">2.9</span> invertible matrix {#invertible-matrix}
 
 
-### <span class="section-num">2.8</span> transpose {#transpose}
+### <span class="section-num">2.10</span> transpose {#transpose}
 
 
-### <span class="section-num">2.9</span> matrix similarity {#matrix-similarity}
+### <span class="section-num">2.11</span> matrix similarity {#matrix-similarity}
 
 
-### <span class="section-num">2.10</span> determinant {#determinant}
+### <span class="section-num">2.12</span> determinant {#determinant}
 
 see <https://en.wikipedia.org/wiki/Determinant> <br/>
 
@@ -275,13 +281,13 @@ the determinant is a [homogeneous function]({{< relref "20220801201746-homogeneo
 \\[
   \det(cA) = c^n\det(A)
 \\] <br/>
-assuming an \\(n\times n\\) matrix <br/>
+assuming \\(A\\) is an \\(n\times n\\) matrix <br/>
 
 </div>
 
 <div class="lemma">
 
-interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#orgdd45412) and [alternating](#org864aa58) <br/>
+interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#orgacc86c8) and [alternating](#org598a7c5) <br/>
 
 </div>
 
@@ -293,7 +299,7 @@ if the columns of the matrix form a [linearly dependant set](#linear-dependance)
 
 <div class="lemma">
 
-adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#orgdd45412) and being [alternative](#org864aa58) <br/>
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#orgacc86c8) and being [alternative](#org598a7c5) <br/>
 
 </div>
 
@@ -326,7 +332,7 @@ the determinant of the [transpose](#transpose) of a matrix equals the determinan
 <div class="lemma">
 
 \\[
-  \det A^{-1} = \frac{1}{\det A} = \det(A)^{-1}
+  \det\left(A^{-1}\right) = \frac{1}{\det A} = \det(A)^{-1}
 \\] <br/>
 
 </div>
@@ -334,7 +340,7 @@ the determinant of the [transpose](#transpose) of a matrix equals the determinan
 </div>
 
 
-#### <span class="section-num">2.10.1</span> Leibniz formula {#leibniz-formula}
+#### <span class="section-num">2.12.1</span> Leibniz formula {#leibniz-formula}
 
 see <https://en.wikipedia.org/wiki/Determinant> <br/>
 the **Leibniz [formula]({{< relref "20220711175314-formula.md" >}})** for the [determinant](#determinant) of a \\(3\times3\\) [matrix](#matrix) is the following: <br/>
@@ -343,7 +349,7 @@ the **Leibniz [formula]({{< relref "20220711175314-formula.md" >}})** for the [d
 \\] <br/>
 
 
-#### <span class="section-num">2.10.2</span> rule of Sarrus {#rule-of-sarrus}
+#### <span class="section-num">2.12.2</span> rule of Sarrus {#rule-of-sarrus}
 
 see <https://en.wikipedia.org/wiki/Rule_of_Sarrus> <br/>
 the **rule of Sarrus** is a mnemonic of [Leibniz formula](#leibniz-formula) <br/>
@@ -354,7 +360,7 @@ the **rule of Sarrus** is a mnemonic of [Leibniz formula](#leibniz-formula) <br/
 \\] <br/>
 
 
-### <span class="section-num">2.11</span> diagonal matrix {#diagonal-matrix}
+### <span class="section-num">2.13</span> diagonal matrix {#diagonal-matrix}
 
 <div class="definition">
 
@@ -363,13 +369,13 @@ a **diagonal matrix** is a [matrix](#matrix) in which the entries outside the ma
 </div>
 
 
-### <span class="section-num">2.12</span> diagonalizable matrix {#diagonalizable-matrix}
+### <span class="section-num">2.14</span> diagonalizable matrix {#diagonalizable-matrix}
 
 see <https://textbooks.math.gatech.edu/ila/diagonalization.html> <br/>
 
 <div class="definition">
 
-a [square matrix](#square-matrix) \\(A\\) is called **diagonalizable** if it is [similar](#matrix-similarity) to a [diagonal matrix](#diagonal-matrix), i.e., if there exists an [invertible matrix](#invertible-matrix) \\(P\\) which we may call the **eigenbasis matrix** and a diagonal matrix \\(D\\) such that \\(P^{-1}AP=D\\), or equivalently \\(A=PDP^{-1}\\) <br/>
+a [square matrix](#square-matrix) \\(A\\) is called **diagonalizable** if it is [similar](#matrix-similarity) to a [diagonal matrix](#diagonal-matrix), i.e., if there exists an [invertible matrix](#invertible-matrix) \\(P\\) which we may call the **eigenbasis matrix** or **eigenmatrix** and a diagonal matrix \\(D\\) such that \\(P^{-1}AP=D\\), or equivalently \\(A=PDP^{-1}\\) <br/>
 
 <div class="characteristic">
 
@@ -422,7 +428,7 @@ any [diagonal matrix](#diagonal-matrix) is [diagonalizable](#diagonalizable-matr
 </div>
 
 
-#### <span class="section-num">2.12.1</span> diagonalization theorem {#diagonalization-theorem}
+#### <span class="section-num">2.14.1</span> diagonalization theorem {#diagonalization-theorem}
 
 a fundamental question about a matrix is whether or not it is [diagonalizable](#diagonalizable-matrix). the following is the primary criterion for diagonalizability. it shows that diagonalizability is an [eigenvalue](#eigenvalues-and-eigenvectors) problem. <br/>
 
@@ -444,7 +450,7 @@ the eigenvectors \\(\lambda\_1,\lambda\_2,\ldots,\lambda\_n\\) dont have to be u
 </div>
 
 
-### <span class="section-num">2.13</span> minor {#minor}
+### <span class="section-num">2.15</span> minor {#minor}
 
 <div class="definition">
 
@@ -453,7 +459,7 @@ a **minor** of a [matrix](#matrix) \\(A\\) is the determinant of some smaller [s
 </div>
 
 
-#### <span class="section-num">2.13.1</span> first minor {#first-minor}
+#### <span class="section-num">2.15.1</span> first minor {#first-minor}
 
 <div class="definition">
 
@@ -462,10 +468,10 @@ if \\(A\\) is a [square matrix](#square-matrix), then the minor of the entry in 
 </div>
 
 
-### <span class="section-num">2.14</span> laplace expansion {#laplace-expansion}
+### <span class="section-num">2.16</span> laplace expansion {#laplace-expansion}
 
 
-### <span class="section-num">2.15</span> conjugate transpose {#conjugate-transpose}
+### <span class="section-num">2.17</span> conjugate transpose {#conjugate-transpose}
 
 see <https://en.wikipedia.org/wiki/Conjugate_transpose> <br/>
 
@@ -477,7 +483,7 @@ For real matrices, the conjugate transpose is just the [transpose](#transpose), 
 </div>
 
 
-### <span class="section-num">2.16</span> cofactor matrix {#cofactor-matrix}
+### <span class="section-num">2.18</span> cofactor matrix {#cofactor-matrix}
 
 <div class="definition">
 
@@ -492,7 +498,7 @@ the cofator matrix is useful to find the [adjugate](#adjugate-matrix) and the [i
 </div>
 
 
-#### <span class="section-num">2.16.1</span> cofactor {#cofactor}
+#### <span class="section-num">2.18.1</span> cofactor {#cofactor}
 
 <div class="definition">
 
@@ -501,7 +507,7 @@ the \\((i,j)\\) **cofactor** of a [matrix](#matrix), often denoted \\(C\_{i,j}\\
 </div>
 
 
-### <span class="section-num">2.17</span> adjugate matrix {#adjugate-matrix}
+### <span class="section-num">2.19</span> adjugate matrix {#adjugate-matrix}
 
 <div class="definition">
 
@@ -532,7 +538,7 @@ for any \\(n\times n\\) matrix \\(A\\), [elementary row operation](#elementary-r
 <div class="lemma">
 
 \\[
-  \adj(A^T) = \adj(A)^T
+  \adj\left(A^T\right) = \adj(A)^T
 \\] <br/>
 
 </div>
@@ -581,10 +587,10 @@ if \\(A\\) is [invertible]({{< relref "discrete_maths2.md#inverse-function" >}})
 </div>
 
 
-### <span class="section-num">2.18</span> matrix from the perspective of vector {#matrix-from-the-perspective-of-vector}
+### <span class="section-num">2.20</span> matrix from the perspective of vector {#matrix-from-the-perspective-of-vector}
 
 
-#### <span class="section-num">2.18.1</span> row space {#row-space}
+#### <span class="section-num">2.20.1</span> row space {#row-space}
 
 <div class="definition">
 
@@ -601,7 +607,7 @@ here we are basically looking at the matrix as a column of rows where each row r
 </div>
 
 
-#### <span class="section-num">2.18.2</span> column space {#column-space}
+#### <span class="section-num">2.20.2</span> column space {#column-space}
 
 <div class="definition">
 
@@ -777,7 +783,7 @@ therefore <br/>
 </div>
 
 
-#### <span class="section-num">2.18.3</span> rank {#rank}
+#### <span class="section-num">2.20.3</span> rank {#rank}
 
 <div class="definition">
 
@@ -823,7 +829,7 @@ To find a basis for the span of a set of vectors, write the vectors as rows of a
 </div>
 
 
-#### <span class="section-num">2.18.4</span> kernel {#kernel}
+#### <span class="section-num">2.20.4</span> kernel {#kernel}
 
 <div class="definition">
 
@@ -838,7 +844,7 @@ the kernel of a matrix doesnt change when an [elementary row operation](#element
 </div>
 
 
-#### <span class="section-num">2.18.5</span> image {#image}
+#### <span class="section-num">2.20.5</span> image {#image}
 
 <div class="definition">
 
@@ -854,23 +860,23 @@ The **image** of a [linear transformation](#linear-map) or [matrix](#matrix) is 
 
 <div class="definition">
 
-let \\(V\\) be a non-empty [set]({{< relref "discrete_maths2.md#set" >}}) of [vector](#vector)s containing numbers from the [field](#field) \\(\mathbb{F}\\), consider the 2 operations addition and scalar multiplication, \\(\mathbb{V}\_\mathbb{F}\\) is a vector space only if it abides by the following axioms: <br/>
+let \\(V\\) be a non-empty [set]({{< relref "discrete_maths2.md#set" >}}) of [vector](#vector)s containing numbers from the [field](#field) \\(\mathbb{F}\\), consider the 2 operations addition and scalar multiplication, \\(V\_\mathbb{F}\\) is a vector space only if it abides by the following axioms: <br/>
 **addition axioms**: <br/>
 
--   addition closure: for every \\(\vec{v}\_1, \vec{v}\_2 \in \mathbb{V}\\) we have \\(\vec{v}\_1 + \vec{v}\_2 \in \mathbb{V}\\) <br/>
--   associative addition: for every \\(\vec{v}\_1, \vec{v}\_2, \vec{v}\_3 \in \mathbb{V}\\) we have \\((\vec{v}\_1 + \vec{v}\_2) + \vec{v}\_3 = \vec{v}\_1 + (\vec{v}\_2 + \vec{v}\_3)\\) <br/>
+-   addition closure: for every \\(\vec{v}\_1, \vec{v}\_2 \in V\\) we have \\(\vec{v}\_1 + \vec{v}\_2 \in V\\) <br/>
+-   associative addition: for every \\(\vec{v}\_1, \vec{v}\_2, \vec{v}\_3 \in V\\) we have \\((\vec{v}\_1 + \vec{v}\_2) + \vec{v}\_3 = \vec{v}\_1 + (\vec{v}\_2 + \vec{v}\_3)\\) <br/>
 -   commutative addition: \\(\vec{v}\_1 + \vec{v}\_2 = \vec{v}\_2 + \vec{v}\_1\\) <br/>
--   zero vector: \\(\vec{0} \in \mathbb{V}\\) so that \\(\vec{0} + \vec{v} = \vec{v}\\) <br/>
--   negative vector: for every \\(\vec{v} \in \mathbb{V}\\) there exists \\(-\vec{v}\\) so that \\(\vec{v} + (-\vec{v}) = \vec{0}\\) <br/>
+-   zero vector: \\(\vec{0} \in V\\) so that \\(\vec{0} + \vec{v} = \vec{v}\\) <br/>
+-   negative vector: for every \\(\vec{v} \in V\\) there exists \\(-\vec{v}\\) so that \\(\vec{v} + (-\vec{v}) = \vec{0}\\) <br/>
 
 **multiplication axioms**: <br/>
 
--   multiplication closure: for every \\(\vec{v} \in \mathbb{V}\\) and \\(a \in \mathbb{F}\\) we have \\(a \cdot \vec{v} \in V\\) <br/>
--   associative multiplication: for every \\(\vec{v} \in \mathbb{V}\\) and \\(a,b \in \mathbb{F}\\) we have \\((a \cdot b) \cdot \vec{v} = a \cdot (b \cdot \vec{v})\\) <br/>
--   identity vector: for every \\(\vec{v} \in \mathbb{V}\\) we have \\(\vec{1} \cdot \vec{v} = \vec{v}\\) <br/>
--   identity law: for every \\(\vec{v} \in \mathbb{V}\\) we have \\(1 \cdot \vec{v} = \vec{v}\\) <br/>
--   first distributive law: for every \\(a,b \in \mathbb{F}\\) and \\(\vec{v} \in \mathbb{V}\\) we can have \\((a + b) \cdot v = a \cdot v + b \cdot v\\) <br/>
--   second distributive law: for every \\(a \in \mathbb{F}\\) and \\(\vec{v}\_1, \vec{v}\_2 \in \mathbb{V}\\) we can have \\(a \cdot (\vec{v}\_1 + \vec{v}\_2) = a \cdot \vec{v}\_1 + a \cdot \vec{v}\_2\\) <br/>
+-   multiplication closure: for every \\(\vec{v} \in V\\) and \\(a \in \mathbb{F}\\) we have \\(a \cdot \vec{v} \in V\\) <br/>
+-   associative multiplication: for every \\(\vec{v} \in V\\) and \\(a,b \in \mathbb{F}\\) we have \\((a \cdot b) \cdot \vec{v} = a \cdot (b \cdot \vec{v})\\) <br/>
+-   identity vector: for every \\(\vec{v} \in V\\) we have \\(\vec{1} \cdot \vec{v} = \vec{v}\\) <br/>
+-   identity law: for every \\(\vec{v} \in V\\) we have \\(1 \cdot \vec{v} = \vec{v}\\) <br/>
+-   first distributive law: for every \\(a,b \in \mathbb{F}\\) and \\(\vec{v} \in V\\) we can have \\((a + b) \cdot v = a \cdot v + b \cdot v\\) <br/>
+-   second distributive law: for every \\(a \in \mathbb{F}\\) and \\(\vec{v}\_1, \vec{v}\_2 \in V\\) we can have \\(a \cdot (\vec{v}\_1 + \vec{v}\_2) = a \cdot \vec{v}\_1 + a \cdot \vec{v}\_2\\) <br/>
 
 <div class="my_example">
 
@@ -887,8 +893,8 @@ v = \\{(x\_1, x\_2, x\_3, \ldots x\_n) \ | \ x\_i \in \mathbb{F}, i = 1 \ldots n
 the definition of summation would be: <br/>
 
 \begin{gather\*}
-  v = (v\_1, v\_2, \ldots v\_n) \in \mathbb{V}\\\\
-  u = (u\_1, u\_2, \ldots u\_n) \in \mathbb{V}\\\\
+  v = (v\_1, v\_2, \ldots v\_n) \in V\\\\
+  u = (u\_1, u\_2, \ldots u\_n) \in V\\\\
   u \oplus v = (u\_1 + v\_1, u\_2 + v\_2, \ldots u\_n + v\_n)
 \end{gather\*}
 
@@ -964,7 +970,7 @@ this line doesnt represent a vector space because it doesnt contain the vector \
 <div class="lemma">
 
 **reduction law** <br/>
-for every \\(y,v,w \in \mathbb{V}\\) <br/>
+for every \\(y,v,w \in V\\) <br/>
 \\[ u + w = v + w \implies u = v \\] <br/>
 
 <div class="proof">
@@ -982,7 +988,7 @@ for every \\(y,v,w \in \mathbb{V}\\) <br/>
 
 <div class="lemma">
 
-for \\(v \in \mathbb{V}\\): <br/>
+for \\(v \in V\\): <br/>
 \\[ 0 \cdot v = \vec{0} \\] <br/>
 
 </div>
@@ -1007,7 +1013,7 @@ for \\(a \in \mathbb{F}\\) <br/>
 
 <div class="lemma">
 
-\\(v \in \mathbb{V} \implies (-1) \cdot v = -v\\) <br/>
+\\(v \in V \implies (-1) \cdot v = -v\\) <br/>
 
 </div>
 
@@ -1019,7 +1025,7 @@ for \\(a \in \mathbb{F}\\) <br/>
 
 <div class="lemma">
 
-for \\(a \in \mathbb{F}\\) and \\(v \in \mathbb{V}\\) <br/>
+for \\(a \in \mathbb{F}\\) and \\(v \in V\\) <br/>
 \\[ a \cdot v = \vec0 \iff (a = 0 \text{ or } v = \vec0) \\] <br/>
 
 </div>
@@ -1106,19 +1112,19 @@ let \\(V\_\mathbb{F}\\) be a [vector space](#vector-space), let \\(A = \\{\vec{v
 
 <div class="lemma">
 
-let \\(A = \\{\vec{v\_1} \ldots \vec{v\_n}\\} \subseteq \mathbb{V}\_\mathbb{F}\\), then \\(\spn(A) = \spn\\{\vec{v}\_1 \ldots \vec{v}\_n\\} \leq \mathbb{V}\_\mathbb{F}\\) <br/>
+let \\(A = \\{\vec{v\_1},\ldots,\vec{v\_n}\\} \subseteq V\_\mathbb{F}\\), then \\(\spn(A) = \spn\\{\vec{v}\_1,\ldots,\vec{v}\_n\\} \leq V\_\mathbb{F}\\) <br/>
 
 <div class="proof">
 
 let \\(\vec{v} \in \spn(A),\ \vec{x} \in \mathbb{F}\\) <br/>
 
 \begin{align\*}
-  x\_iv\_i &\in \mathbb{V} &\text{ multiplication closure of } \mathbb{V}\\\\
-  \vec{v} = \sum\_{i=1}^{n} x\_iv\_i &\in \mathbb{V} &\text{addition closure of } \mathbb{V}\\\\
-  \spn(A) &\subseteq \mathbb{V} &\text{ because every } \vec{v} \in \spn(A) \text{ is also } \vec{v} \in \mathbb{V}
+  x\_iv\_i &\in V &\text{ multiplication closure of } V\\\\
+  \vec{v} = \sum\_{i=1}^{n} x\_iv\_i &\in V &\text{addition closure of } V\\\\
+  \spn(A) &\subseteq V &\text{ because every } \vec{v} \in \spn(A) \text{ is also } \vec{v} \in V
 \end{align\*}
 
-we have proved that \\(\spn(A)\\) is a subset of \\(\mathbb{V}\\), now with that out of the way we need to check the 3 conditions that need to be satisfied for a subset to be a subspace<br />
+we have proven that \\(\spn(A)\\) is a subset of \\(V\\), now with that out of the way we need to check the 3 conditions that need to be satisfied for a subset to be a subspace <br/>
 condition 1: \\(\vec0 \in \spn(A)\\) <br/>
 \\[ \vec{x} = \vec0 \implies \sum\_{i=1}^{n} 0 \cdot v\_i = \vec0 \in \spn(A) \\] <br/>
 condition 2: addition closure <br/>
@@ -1128,12 +1134,12 @@ let \\(\vec{v}, \vec{w} \in \spn(A)\\) so there exist \\(\vec{x}, \vec{y} \in \m
   \vec{v} &= x\_1\vec{v}\_1 + x\_2\vec{v}\_2 + \ldots + x\_n\vec{v}\_n\\\\
   \vec{w} &= y\_1\vec{v}\_1 + y\_2\vec{v}\_2 + \ldots + y\_n\vec{v}\_n\\\\
   \vec{v} + \vec{w} &= (x\_1\vec{v}\_1 + \ldots + x\_n\vec{v}\_n) + (y\_1\vec{v}\_1 + \ldots + y\_n\vec{v}\_n)\\\\
-    &= \underbrace{(x\_1+y\_1)\vec{v}\_1}\_{(x\_1+y\_1)\vec{v}\_1 \in \mathbb{V}} + \ldots + (\underbrace{x\_n+y\_n}\_{x\_n+y\_n \in \mathbb{F}})\vec{v}\_n \in \spn(A)
+    &= \underbrace{(x\_1+y\_1)\vec{v}\_1}\_{(x\_1+y\_1)\vec{v}\_1 \in V} + \ldots + (\underbrace{x\_n+y\_n}\_{x\_n+y\_n \in \mathbb{F}})\vec{v}\_n \in \spn(A)
 \end{align\*}
 
 condition 3: multiplication closure <br/>
 let \\(\vec{v} \in \spn\\{\vec{v}\_1 \ldots \vec{v}\_n\\}, a \in \mathbb{F}\\) so there exist \\(x\_1 \ldots x\_n \in \mathbb{F}\\), such that \\(\vec{v} = \sum\_{k=1}^{n} x\_k\vec{v}\_k\\) <br/>
-\\[ a\vec{v} = a \sum\_{k=1}^{n} x\_k\vec{v}\_k = \underbrace{(ax\_1)}\_{ax\_1 \in \mathbb{F}}\vec{v}\_1 + (ax\_2)\vec{v}\_2 + \ldots + (ax\_n)\vec{v}\_n \in \spn\\{\vec{v}\_1 \ldots \vec{v}\_n\\} \\] <br/>
+\\[ a\vec{v} = a \sum\_{k=1}^{n} x\_k\vec{v}\_k = \underbrace{(ax\_1)}\_{ax\_1 \in \mathbb{F}}\vec{v}\_1 + (ax\_2)\vec{v}\_2 + \ldots + (ax\_n)\vec{v}\_n \in \spn\\{\vec{v}\_1,\ldots,\vec{v}\_n\\} \\] <br/>
 
 </div>
 
@@ -1417,7 +1423,7 @@ in other words, given a dependant set of vectors, there exists a vector in this 
 
 <div class="proof">
 
-according to [this entailment](#orge242cb7), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
+according to [this entailment](#org1b15c95), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
 to prove \\(\spn(s) = \spn(S - \\{s\\})\\) we show that \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) <br/>
 we know that \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) because we can take every linear combination from the former, add \\(0 \cdot s\\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \\(s = s\_1\\) <br/>
@@ -1448,7 +1454,7 @@ and since \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \su
 
 <div class="lemma">
 
-for every finite set \\(S \in \mathbb{V}\_\mathbb{F}\\), there exists \\(B \subseteq S\\) such that: <br/>
+for every finite set \\(S \in V\_\mathbb{F}\\), there exists \\(B \subseteq S\\) such that: <br/>
 
 1.  \\(B\\) is linearly indepenedant <br/>
 2.  \\(\spn(B) = \spn(S)\\) <br/>
@@ -1457,9 +1463,9 @@ for every finite set \\(S \in \mathbb{V}\_\mathbb{F}\\), there exists \\(B \subs
 
 in case \\(S\\) is linearly independant we pick \\(B = S\\) and so \\(B\\) is linearly dependant and \\(\spn(B) = \spn(S)\\) <br/>
 in case \\(S\\) is linearly dependant we got more work to do: <br/>
-according to [this lemma](#org620d21d), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
+according to [this lemma](#org310c0f6), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
 in case \\(S - \\{s\_1\\}\\) is linearly independant then let \\(B = S - \\{s\_1\\}\\) which means \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
-in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org620d21d), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
+in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org310c0f6), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
 in case \\(\spn(S - \\{s\_1,s\_2\\})\\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \\(S\\) without changing the span, eventually we would arrive at \\(S - \\{s\_1,s\_2,s\_k\\}\\) that is linearly independant and \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
@@ -1523,7 +1529,7 @@ every **finitely generated vector space** \\(V\_\mathbb{F}\\) has atleast one ba
 <div class="proof">
 
 since \\(V\_\mathbb{F}\\) is finitely generated there exists a finite set \\(S \subseteq V\\) such that \\(\spn(S) = V\\) <br/>
-according to [this lemma](#org620d21d), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
+according to [this lemma](#org310c0f6), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
 
 </div>
 
@@ -1672,18 +1678,18 @@ we write \\(\dim V\_\mathbb{F} = |B|\\) where \\(B\\) is a basis of \\(V\\) <br/
 
 <div class="lemma">
 
-let \\(V\_\mathbb{F}\\) be a vector space of dimension \\(n\\), for every subset \\(S \subseteq \mathbb{V}\\) that has \\(n\\) elements the following statements are equal <br/>
+let \\(V\_\mathbb{F}\\) be a vector space of dimension \\(n\\), for every subset \\(S \subseteq V\\) that has \\(n\\) elements the following statements are equal <br/>
 
 1.  \\(S\\) is linearly independant <br/>
-2.  \\(\spn(S) = \mathbb{V}\\) <br/>
+2.  \\(\spn(S) = V\\) <br/>
 
 <div class="proof">
 
 <div class="step">
 
 we prove \\(\text{statement } 1 \Longrightarrow \text{statement } 2\\) <br/>
-given \\(S = \\{s\_1,s\_2\ldots s\_n\\} \subseteq \mathbb{V}^n\\) is linearly independant, we need to prove \\(\spn(S) = \mathbb{V}\\) <br/>
-let \\(v \in V\\), \\(B\\) a basis of \\(\mathbb{V}\\), \\(|B| = n\\) <br/>
+given \\(S = \\{s\_1,s\_2\ldots s\_n\\} \subseteq V^n\\) is linearly independant, we need to prove \\(\spn(S) = V\\) <br/>
+let \\(v \in V\\), \\(B\\) a basis of \\(V\\), \\(|B| = n\\) <br/>
 let \\(T = \\{s\_1,s\_2\ldots s\_n, v\\}\\) <br/>
 we know according to previous lemmas that \\(|T| > n\\) therefore \\(T\\) is linearly dependant <br/>
 since \\(T\\) is linearly dependant then we have the following non-trivial linear combination that gives us \\(\vec0\\): <br/>
@@ -1695,14 +1701,14 @@ by manipulating the expression we get: <br/>
 \\[
   \sum\_{i=1}^n \frac{x\_i}{x\_{n+1}} \cdot s\_i = v
 \\] <br/>
-therefore \\(v \in \spn(S)\\) therefore \\(\spn(S) = \mathbb{V}\\) <br/>
+therefore \\(v \in \spn(S)\\) therefore \\(\spn(S) = V\\) <br/>
 
 </div>
 
 <div class="step">
 
 we prove \\(\text{statement } 2 \Longrightarrow \text{statement } 1\\) <br/>
-given \\(\spn(S) = \mathbb{V}^n\\) <br/>
+given \\(\spn(S) = V^n\\) <br/>
 assume in contradiction that \\(S\\) is linearly dependant <br/>
 according to a previous lemma we there exists \\(B \subset S\\) that is linearly independant such that \\(\spn(B) = \spn(S)\\) therefore \\(B\\) is a basis therefore \\(|B| = n\\) <br/>
 we arrived at a contradiction becacuse \\(|B| < |S| = n\\) <br/>
@@ -1713,7 +1719,7 @@ we arrived at a contradiction becacuse \\(|B| < |S| = n\\) <br/>
 
 <div class="entailment" id="n_subset_is_basis">
 
-if \\(\dim \mathbb{V} = m\\) and \\(B = \\{u\_1,u\_2 \ldots u\_m\\}\\), if \\(\spn(B) = \mathbb{V}\\) or \\(B\\) is linearly independant then \\(B\\) is a basis of \\(V\_\mathbb{F}\\) <br/>
+if \\(\dim V = m\\) and \\(B = \\{u\_1,u\_2 \ldots u\_m\\}\\), if \\(\spn(B) = V\\) or \\(B\\) is linearly independant then \\(B\\) is a basis of \\(V\_\mathbb{F}\\) <br/>
 
 </div>
 
@@ -1741,7 +1747,7 @@ given \\({V\_\mathbb{F}}^n\\) is finitely spanned, \\(W^n \leq V^n\\) and \\(\di
 
 <div class="proof">
 
-let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgd13196c) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
+let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#org348642f) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
 
 </div>
 
@@ -1749,7 +1755,7 @@ let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1
 
 <div class="lemma">
 
-if \\(V\_\mathbb{F}\\) is finitely spanned and \\(W \leq V\\) then for every basis \\(B\\) of \\(W\\) there exists a basis \\(A\\) of \\(B\\) such that \\(B \subseteq A\\) <br/>
+if \\(V\_\mathbb{F}\\) is finitely spanned and \\(W \leq V\\) then for every basis \\(B\\) of \\(W\\) there exists a basis \\(A\\) of \\(V\\) such that \\(B \subseteq A\\) <br/>
 we call this operation as complementing the basis \\(B\\) to the basis \\(A\\) <br/>
 
 <div class="proof">
@@ -2066,7 +2072,7 @@ to find the corresponding equations of \\(U\\) we reduce the following matrix: <
 \\] <br/>
 and so \\(U=\spn(\\{(1,2,1,2,1),(2,1,2,1,2)\\}),\ \dim U = 2\\), and: <br/>
 \\[
-U = \left\\{(x\_1,x\_2,x\_3,x\_4,x\_5) \ \middle|\ \begin{aligned} x\_3-x\_1=0\\\ x\_4-x\_2=0\\\ x\_5-x\_1=0 \end{aligned}\right\\}
+U = \left\\{\bmqty{x\_1\\\x\_2\\\x\_3\\\x\_4\\\x\_5} \ \middle|\ \begin{aligned} x\_3-x\_1=0\\\ x\_4-x\_2=0\\\ x\_5-x\_1=0 \end{aligned}\right\\}
 \\] <br/>
 
 </div>
@@ -2079,7 +2085,7 @@ now to find the corresponding equations of \\(V\\) we reduce the following matri
 \\] <br/>
 and so \\(V=\spn(\\{(3,2,1,0,3),(0,1,2,3,0)\\}),\ \dim V = 2\\), and: <br/>
 \\[
-  V = \left\\{(x\_1,x\_2,x\_3,x\_4,x\_5) \ \middle|\ \begin{aligned} x\_1-2x\_2+x\_3=0\\\ x\_2-2x\_3+x\_4=0\\\ -2x\_2+x\_3+x\_5=0 \end{aligned}\right\\}
+  V = \left\\{\bmqty{x\_1\\\x\_2\\\x\_3\\\x\_4\\\x\_5} \ \middle|\ \begin{aligned} x\_1-2x\_2+x\_3=0\\\ x\_2-2x\_3+x\_4=0\\\ -2x\_2+x\_3+x\_5=0 \end{aligned}\right\\}
 \\] <br/>
 
 </div>
@@ -2087,7 +2093,7 @@ and so \\(V=\spn(\\{(3,2,1,0,3),(0,1,2,3,0)\\}),\ \dim V = 2\\), and: <br/>
 <div class="step">
 
 \\[
-  U \cap V = \left\\{(x\_1,x\_2,x\_3,x\_4,x\_5) \ \middle|\ \begin{aligned} x\_3-x\_1=0\\\ x\_4-x\_2=0\\\ x\_5-x\_1=0\\\ x\_1-2x\_2+x\_3=0\\\ x\_2-2x\_3+x\_4=0\\\ -2x\_2+x\_3+x\_5=0 \end{aligned}\right\\}
+  U \cap V = \left\\{\bmqty{x\_1\\\x\_2\\\x\_3\\\x\_4\\\x\_5} \ \middle|\ \begin{aligned} x\_3-x\_1=0\\\ x\_4-x\_2=0\\\ x\_5-x\_1=0\\\ x\_1-2x\_2+x\_3=0\\\ x\_2-2x\_3+x\_4=0\\\ -2x\_2+x\_3+x\_5=0 \end{aligned}\right\\}
 \\] <br/>
 we put these equations in a matrix and reduce it: <br/>
 \\[
