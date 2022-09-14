@@ -2,7 +2,7 @@
 title = "sagemath"
 author = ["mahmood"]
 description = "sagemath"
-date = 2022-06-18T14:15:00+03:00
+date = 2022-09-15T00:18:00+03:00
 tags = ["program"]
 draft = false
 +++
@@ -13,112 +13,11 @@ draft = false
   \(\DeclareMathOperator{\ran}{range}\)
   \(\DeclareMathOperator{\rng}{range}\)
   \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
 </p>
-
-<style>
-.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
-  border-radius: 10px;
-  border-style: groove;
-  border-width: 3px;
-}
-.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
-  background-color: #bbb;
-  position: relative;
-  border-radius: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-family: cursive;
-  border: 1px solid black;
-  font-size: 13px;
-}
-.lemma {
-  background-color: beige;
-}
-.proof {
-  background-color: moccasin;
-}
-.entailment {
-  background-color: lightsteelblue;
-}
-.lemma:before {
-  content: "lemma:";
-}
-.proof:before {
-  content: "proof:";
-}
-.entailment:before {
-  content: "entailment (logical consequence):";
-}
-.note {
-  background-color: blanchedalmond;
-}
-.note:before {
-  /* content: url(/note.png) "note:"; */
-  content: "note:";
-}
-.my_example {
-  background-color: #e8cfc8; 
-}
-.my_example:before {
-  content: "example:";
-}
-p {
-  margin: 0px;
-  padding: 0px;
-}
-img {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-}
-.hide {
-  display: none;
-}
-.definition {
-  background-color: snow;
-}
-.definition:before {
-  content: "definition:";
-}
-.characteristic {
-  background-color: #dfdada;
-}
-.characteristic:before {
-  content: "characteristic:";
-}
-.assumption {
-  background-color: #65ad98;
-}
-.question {
-  background-color: #e1c6c6;
-}
-.question:before {
-  content: "question:";
-}
-.subquestion {
-  background-color: #e5e2d8;
-}
-.subquestion:before {
-  content: "subquestion:";
-}
-.answer {
-  background-color: #beabc5;
-}
-.answer:before {
-  content: "answer:";
-}
-.step {
-  background-color: #b4d3ad;
-}
-.step:before {
-  content: "step:";
-}
-</style>
 
 <!-- mathjax -->
 <script>
@@ -127,24 +26,33 @@ window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
     packages: {'[+]': ['autoload', 'mathtools', 'physics']}
-  }
+  },
+  tex2jax: {preview: "none"}
 };
 /* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
 function removeNewlineAfterDisplayMath() {
-    elems = document.querySelectorAll('mjx-container')
-    for (i = 0; i < elems.length; ++i) {
-        elem = elems[i]
-        nextElem = elem.nextElementSibling
-        if (nextElem !== null && nextElem.tagName === 'BR')
-            nextElem.remove()
-    }
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
 }
 window.onload = function() {
   removeNewlineAfterDisplayMath()
 }
 </script>
-<script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
 <div class="note">
@@ -167,9 +75,11 @@ its basically a python interface to a collection of mathematical software like M
 interval = [1, 8.5]
 interval_fill = [2, 8]
 f(x) = (x-3)*(x-5)*(x-7)+40
-try: open_left
+import os.path
+
+try: _ = open_left
 except: open_left = False
-try: open_right
+try: _ = open_right
 except: open_right = False
 
 if not open_left:
@@ -177,21 +87,24 @@ if not open_left:
 if not open_right:
   my_plot += line([(interval_fill[1], 0),(interval_fill[1], f(interval_fill[1]))], color='black')
 my_plot += plot(f, (interval_fill[0], interval_fill[1]), fill=True) + plot(f, (interval[0], interval[1]), thickness=2)
-my_plot.show(transparent=True)
+my_plot.save(filename=os.path.expanduser(filename), transparent=True)
+print(os.path.expanduser(filename))
 
 open_left = False
 open_right = False
 ```
 
-{{< figure src="/ox-hugo/Mqv2WA.png" >}} <br/>
+{{< figure src="/ox-hugo/Mqv2WA.svg" >}} <br/>
 
 ```sage
 interval = [2, 8.5]
 interval_fill = [3, 8]
 f(x) = 1/x^2
-try: open_left
+import os.path
+
+try: _ = open_left
 except: open_left = False
-try: open_right
+try: _ = open_right
 except: open_right = False
 
 if not open_left:
@@ -199,7 +112,8 @@ if not open_left:
 if not open_right:
   my_plot += line([(interval_fill[1], 0),(interval_fill[1], f(interval_fill[1]))], color='black')
 my_plot += plot(f, (interval_fill[0], interval_fill[1]), fill=True) + plot(f, (interval[0], interval[1]), thickness=2)
-my_plot.show(transparent=True)
+my_plot.save(filename=os.path.expanduser(filename), transparent=True)
+print(os.path.expanduser(filename))
 
 open_left = False
 open_right = False
@@ -259,7 +173,7 @@ my_plot = animate(frames).interactive()
 <iframe style="width: 100%; height: 4in" src="/more/oB72QW.html"></iframe>
 
 ```sage
-sines = [plot(c*sin(x), (-2*pi,2*pi), color=Color(c,0,0), ymin=-1, ymax=1,transparent=True) for c in sxrange(0,1,.1)]
+sines = [plot(c*sin(x), (-2*pi,2*pi), color=Color(c,0,0), ymin=-1, ymax=1,transparent=False) for c in sxrange(0,1,.1)]
 a = animate(sines)
 a.save(f)
 print(f)
@@ -279,8 +193,8 @@ for i in srange(0,2*pi,0.2):
     unitcircle += circle((circ_x,circ_y),1, color="blue", figsize=[2,2], axes=False)
     sin_frames.append(singraph)
     circ_frames.append(unitcircle)
-A1 = animate(sin_frames,transparent=True)
-A2 = animate(circ_frames,transparent=True)
+A1 = animate(sin_frames)
+A2 = animate(circ_frames)
 (A1 + A2).save(f)
 print(f)
 ```
@@ -299,7 +213,7 @@ for argx in srange(0,max,5):
   dp = plot(f(argx) + (df(argx)*(x-argx)),x,0,max,color="#006000")
   xp = point((argx,f(argx)),rgbcolor='#800000')    
   ga.append(p+lblp+lbldp+dp+xp)
-a = animate(ga,ymin=0,ymax=max,axes_labels=['x','y'],fontsize=12,figsize=(4,3),transparent=True)
+a = animate(ga,ymin=0,ymax=max,axes_labels=['x','y'],fontsize=12,figsize=(4,3))
 a.save(out_file)
 print(out_file)
 ```
@@ -317,7 +231,7 @@ my_plot = plot([f,g,h],-2,3,fill={0:g,1:h,2:0})
 
 ```
 
-{{< figure src="/ox-hugo/9s9RNl.png" >}} <br/>
+{{< figure src="/more/9s9RNl.png" >}} <br/>
 
 
 ### <span class="section-num">1.7</span> more filling {#more-filling}
@@ -327,7 +241,7 @@ my_plot = plot(1.13*log(x), 1, 100, fill = lambda a: nth_prime(a)/floor(a), fill
 
 ```
 
-{{< figure src="/ox-hugo/efTJka.png" >}} <br/>
+{{< figure src="/more/efTJka.png" >}} <br/>
 
 ```sage
 #plot(x,(x,0,1),fill=x^2)
@@ -335,7 +249,7 @@ my_plot = plot([x,x^2],(x,-0.5,1),fill={0:[1]})
 
 ```
 
-{{< figure src="/ox-hugo/gYDdhB.png" >}} <br/>
+{{< figure src="/more/gYDdhB.png" >}} <br/>
 
 
 ## <span class="section-num">2</span> examples {#examples}
@@ -834,9 +748,4 @@ tex = r"\frac{d}{dx}(x^{2}+x)"
 # Or you can use '\mathrm{d}' to replace 'd'
 print(latex2sympy(tex))
 print(latex2latex(tex))
-```
-
-```text
-Derivative(x**2 + x, x)
-2 x + 1
 ```
