@@ -2,7 +2,7 @@
 title = "calculus"
 author = ["mahmood"]
 description = "calculus"
-date = 2022-09-15T18:41:00+03:00
+date = 2022-09-15T18:46:00+03:00
 tags = ["math"]
 draft = false
 +++
@@ -1404,7 +1404,7 @@ the following image shows the area split into \\(n=8\\) rectangles <br/>
 you can probably tell that the sum of the areas of these rectangles isnt really close to the area we want to find <br/>
 to be more accurate we increase the number of rectangles to \\(n=70\\) and we get a nicer result: <br/>
 
-{{< figure src="/ox-hugo/zdfpeYv.svg" >}} <br/>
+{{< figure src="/ox-hugo/5SZ0x8R.svg" >}} <br/>
 
 you can probably already tell that since this is a "narrower" coverage of the area, the sum of the rectangles would be closer to the value of the actual area <br/>
 and now that we know that the more rectangles we have the more accurate we get, we know we should be aiming at \\(\infty\\) rectangles <br/>
