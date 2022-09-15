@@ -2,7 +2,7 @@
 title = "calculus"
 author = ["mahmood"]
 description = "calculus"
-date = 2022-09-15T18:46:00+03:00
+date = 2022-09-15T18:56:00+03:00
 tags = ["math"]
 draft = false
 +++
@@ -1572,7 +1572,7 @@ improper integral of type 1 – when the limits of integration are infinite <br/
 
 consider the area below the function \\(f(x)=\frac1x\\) in the interval \\([1,\infty]\\): <br/>
 
-{{< figure src="/ox-hugo/yg17D3.png" >}} <br/>
+{{< figure src="/ox-hugo/yg17D3.svg" >}} <br/>
 
 to calculate the area we use the integration method: <br/>
 
