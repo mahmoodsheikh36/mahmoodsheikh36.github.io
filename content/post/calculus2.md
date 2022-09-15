@@ -2,7 +2,7 @@
 title = "calculus"
 author = ["mahmood"]
 description = "calculus"
-date = 2022-06-20T00:45:00+03:00
+date = 2022-09-15T18:41:00+03:00
 tags = ["math"]
 draft = false
 +++
@@ -129,7 +129,7 @@ denoted by \\(\mathbb{R}\\), represents all numbers <br/>
 ### <span class="section-num">3.5</span> complex {#complex}
 
 
-## <span class="section-num">4</span> functions {#functions}
+## <span class="section-num">4</span> [function]({{< relref "discrete_maths2.md#function" >}})s {#function--discrete-maths2-dot-md--s}
 
 
 ### <span class="section-num">4.1</span> linear {#linear}
@@ -185,17 +185,17 @@ the **logarithmic function** \\(g(x) = log\_a(x)\\) is the inverse of the [expon
 
 #### <span class="section-num">4.7.1</span> cosine {#cosine}
 
-{{< figure src="/ox-hugo/SoAVfVQ.png" >}} <br/>
+{{< figure src="/ox-hugo/IRCODD.svg" >}} <br/>
 
 
 #### <span class="section-num">4.7.2</span> sine {#sine}
 
-{{< figure src="/ox-hugo/iuB55xL.png" >}} <br/>
+{{< figure src="/ox-hugo/nhJjBHv.svg" >}} <br/>
 
 
 #### <span class="section-num">4.7.3</span> tangent {#tangent}
 
-{{< figure src="/ox-hugo/fOZaUtQ.png" >}} <br/>
+{{< figure src="/ox-hugo/JAIRcvb.svg" >}} <br/>
 
 
 ### <span class="section-num">4.8</span> even function {#even-function}
@@ -449,7 +449,7 @@ let \\(f(x)\\) be a function, the derivative of \\(f(x)\\), denoted by \\(f'(x)\
 ### <span class="section-num">6.2</span> chain rule {#chain-rule}
 
 
-## <span class="section-num">7</span> Integral {#integral}
+## <span class="section-num">7</span> integral {#integral}
 
 <div class="definition">
 
@@ -1399,12 +1399,12 @@ consider the area below the function \\(e^{-x}\\) in the interval \\([1,2]\\) <b
 we split the shape into rectangles that are as narrow as possible as the more rectangles we use the more accurate the result <br/>
 the following image shows the area split into \\(n=8\\) rectangles <br/>
 
-{{< figure src="/ox-hugo/GBkUIt.png" >}} <br/>
+{{< figure src="/ox-hugo/JAIRcvb.svg" >}} <br/>
 
 you can probably tell that the sum of the areas of these rectangles isnt really close to the area we want to find <br/>
 to be more accurate we increase the number of rectangles to \\(n=70\\) and we get a nicer result: <br/>
 
-{{< figure src="/ox-hugo/3TOsCo.png" >}} <br/>
+{{< figure src="/ox-hugo/zdfpeYv.svg" >}} <br/>
 
 you can probably already tell that since this is a "narrower" coverage of the area, the sum of the rectangles would be closer to the value of the actual area <br/>
 and now that we know that the more rectangles we have the more accurate we get, we know we should be aiming at \\(\infty\\) rectangles <br/>
