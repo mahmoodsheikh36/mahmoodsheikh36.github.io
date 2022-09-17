@@ -123,7 +123,7 @@
 
     <div>
         <h2>sagemath</h2>
-        <h5>June 18, 2022</h5>
+        <h5>September 15, 2022</h5>
         
 <a href="https://mahmoodsheikh36.github.io/tags/program"><kbd class="item-tag">program</kbd></a>
 
@@ -136,111 +136,11 @@
   \(\DeclareMathOperator{\ran}{range}\)
   \(\DeclareMathOperator{\rng}{range}\)
   \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
 </p>
-<style>
-.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
-  border-radius: 10px;
-  border-style: groove;
-  border-width: 3px;
-}
-.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
-  background-color: #bbb;
-  position: relative;
-  border-radius: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-family: cursive;
-  border: 1px solid black;
-  font-size: 13px;
-}
-.lemma {
-  background-color: beige;
-}
-.proof {
-  background-color: moccasin;
-}
-.entailment {
-  background-color: lightsteelblue;
-}
-.lemma:before {
-  content: "lemma:";
-}
-.proof:before {
-  content: "proof:";
-}
-.entailment:before {
-  content: "entailment (logical consequence):";
-}
-.note {
-  background-color: blanchedalmond;
-}
-.note:before {
-  /* content: url(/note.png) "note:"; */
-  content: "note:";
-}
-.my_example {
-  background-color: #e8cfc8; 
-}
-.my_example:before {
-  content: "example:";
-}
-p {
-  margin: 0px;
-  padding: 0px;
-}
-img {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-}
-.hide {
-  display: none;
-}
-.definition {
-  background-color: snow;
-}
-.definition:before {
-  content: "definition:";
-}
-.characteristic {
-  background-color: #dfdada;
-}
-.characteristic:before {
-  content: "characteristic:";
-}
-.assumption {
-  background-color: #65ad98;
-}
-.question {
-  background-color: #e1c6c6;
-}
-.question:before {
-  content: "question:";
-}
-.subquestion {
-  background-color: #e5e2d8;
-}
-.subquestion:before {
-  content: "subquestion:";
-}
-.answer {
-  background-color: #beabc5;
-}
-.answer:before {
-  content: "answer:";
-}
-.step {
-  background-color: #b4d3ad;
-}
-.step:before {
-  content: "step:";
-}
-</style>
 <!-- mathjax -->
 <script>
 // auto load modules like cancel
@@ -248,24 +148,31 @@ window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
     packages: {'[+]': ['autoload', 'mathtools', 'physics']}
-  }
+  },
+  tex2jax: {preview: "none"}
 };
 /* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
 function removeNewlineAfterDisplayMath() {
-    elems = document.querySelectorAll('mjx-container')
-    for (i = 0; i < elems.length; ++i) {
-        elem = elems[i]
-        nextElem = elem.nextElementSibling
-        if (nextElem !== null && nextElem.tagName === 'BR')
-            nextElem.remove()
-    }
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
 }
 window.onload = function() {
   removeNewlineAfterDisplayMath()
 }
 </script>
-<script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 <div class="note">
 <p>video demonstrating sagemath+org-mode workflow: <br/>
@@ -278,9 +185,11 @@ its basically a python interface to a collection of mathematical software like M
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sage" data-lang="sage"><span style="display:flex;"><span>interval <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">8.5</span>]
 </span></span><span style="display:flex;"><span>interval_fill <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">8</span>]
 </span></span><span style="display:flex;"><span>f(x) <span style="color:#f92672">=</span> (x<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">40</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>: open_left
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os.path
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>: _ <span style="color:#f92672">=</span> open_left
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span>: open_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>: open_right
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>: _ <span style="color:#f92672">=</span> open_right
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span>: open_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> open_left:
@@ -288,19 +197,22 @@ its basically a python interface to a collection of mathematical software like M
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> open_right:
 </span></span><span style="display:flex;"><span>  my_plot <span style="color:#f92672">+=</span> line([(interval_fill[<span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">0</span>),(interval_fill[<span style="color:#ae81ff">1</span>], f(interval_fill[<span style="color:#ae81ff">1</span>]))], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)
 </span></span><span style="display:flex;"><span>my_plot <span style="color:#f92672">+=</span> plot(f, (interval_fill[<span style="color:#ae81ff">0</span>], interval_fill[<span style="color:#ae81ff">1</span>]), fill<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#f92672">+</span> plot(f, (interval[<span style="color:#ae81ff">0</span>], interval[<span style="color:#ae81ff">1</span>]), thickness<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>my_plot<span style="color:#f92672">.</span>show(transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>my_plot<span style="color:#f92672">.</span>save(filename<span style="color:#f92672">=</span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>expanduser(filename), transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>print(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>expanduser(filename))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>open_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
 </span></span><span style="display:flex;"><span>open_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/Mqv2WA.png"/>
+</span></span></code></pre></div><p><figure><img src="/ox-hugo/Mqv2WA.svg"/>
 </figure>
  <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sage" data-lang="sage"><span style="display:flex;"><span>interval <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">8.5</span>]
 </span></span><span style="display:flex;"><span>interval_fill <span style="color:#f92672">=</span> [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>]
 </span></span><span style="display:flex;"><span>f(x) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>: open_left
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os.path
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>: _ <span style="color:#f92672">=</span> open_left
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span>: open_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>: open_right
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>: _ <span style="color:#f92672">=</span> open_right
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span>: open_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> open_left:
@@ -308,7 +220,8 @@ its basically a python interface to a collection of mathematical software like M
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> open_right:
 </span></span><span style="display:flex;"><span>  my_plot <span style="color:#f92672">+=</span> line([(interval_fill[<span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">0</span>),(interval_fill[<span style="color:#ae81ff">1</span>], f(interval_fill[<span style="color:#ae81ff">1</span>]))], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)
 </span></span><span style="display:flex;"><span>my_plot <span style="color:#f92672">+=</span> plot(f, (interval_fill[<span style="color:#ae81ff">0</span>], interval_fill[<span style="color:#ae81ff">1</span>]), fill<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#f92672">+</span> plot(f, (interval[<span style="color:#ae81ff">0</span>], interval[<span style="color:#ae81ff">1</span>]), thickness<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>my_plot<span style="color:#f92672">.</span>show(transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>my_plot<span style="color:#f92672">.</span>save(filename<span style="color:#f92672">=</span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>expanduser(filename), transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>print(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>expanduser(filename))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>open_left <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
 </span></span><span style="display:flex;"><span>open_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
@@ -337,7 +250,7 @@ its basically a python interface to a collection of mathematical software like M
 </span></span><span style="display:flex;"><span>frames <span style="color:#f92672">=</span> [build_frame(t) <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> (<span style="color:#ae81ff">0</span>, pi<span style="color:#f92672">/</span><span style="color:#ae81ff">32</span>, pi<span style="color:#f92672">/</span><span style="color:#ae81ff">16</span>, <span style="color:#f92672">..</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>pi)]
 </span></span><span style="display:flex;"><span>my_plot <span style="color:#f92672">=</span> animate(frames)<span style="color:#f92672">.</span>interactive()
 </span></span></code></pre></div><iframe style="width: 100%; height: 4in" src="/more/oB72QW.html"></iframe>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sage" data-lang="sage"><span style="display:flex;"><span>sines <span style="color:#f92672">=</span> [plot(c<span style="color:#f92672">*</span>sin(x), (<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>pi,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>pi), color<span style="color:#f92672">=</span>Color(c,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>), ymin<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>, ymax<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> sxrange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">.1</span>)]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sage" data-lang="sage"><span style="display:flex;"><span>sines <span style="color:#f92672">=</span> [plot(c<span style="color:#f92672">*</span>sin(x), (<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>pi,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>pi), color<span style="color:#f92672">=</span>Color(c,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>), ymin<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>, ymax<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> sxrange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">.1</span>)]
 </span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> animate(sines)
 </span></span><span style="display:flex;"><span>a<span style="color:#f92672">.</span>save(f)
 </span></span><span style="display:flex;"><span>print(f)
@@ -355,8 +268,8 @@ its basically a python interface to a collection of mathematical software like M
 </span></span><span style="display:flex;"><span>    unitcircle <span style="color:#f92672">+=</span> circle((circ_x,circ_y),<span style="color:#ae81ff">1</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>, figsize<span style="color:#f92672">=</span>[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>], axes<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
 </span></span><span style="display:flex;"><span>    sin_frames<span style="color:#f92672">.</span>append(singraph)
 </span></span><span style="display:flex;"><span>    circ_frames<span style="color:#f92672">.</span>append(unitcircle)
-</span></span><span style="display:flex;"><span>A1 <span style="color:#f92672">=</span> animate(sin_frames,transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>A2 <span style="color:#f92672">=</span> animate(circ_frames,transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>A1 <span style="color:#f92672">=</span> animate(sin_frames)
+</span></span><span style="display:flex;"><span>A2 <span style="color:#f92672">=</span> animate(circ_frames)
 </span></span><span style="display:flex;"><span>(A1 <span style="color:#f92672">+</span> A2)<span style="color:#f92672">.</span>save(f)
 </span></span><span style="display:flex;"><span>print(f)
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/Sg63BY.gif"/>
@@ -373,7 +286,7 @@ its basically a python interface to a collection of mathematical software like M
 </span></span><span style="display:flex;"><span>  dp <span style="color:#f92672">=</span> plot(f(argx) <span style="color:#f92672">+</span> (df(argx)<span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span>argx)),x,<span style="color:#ae81ff">0</span>,max,color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#006000&#34;</span>)
 </span></span><span style="display:flex;"><span>  xp <span style="color:#f92672">=</span> point((argx,f(argx)),rgbcolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;#800000&#39;</span>)    
 </span></span><span style="display:flex;"><span>  ga<span style="color:#f92672">.</span>append(p<span style="color:#f92672">+</span>lblp<span style="color:#f92672">+</span>lbldp<span style="color:#f92672">+</span>dp<span style="color:#f92672">+</span>xp)
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> animate(ga,ymin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,ymax<span style="color:#f92672">=</span>max,axes_labels<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;x&#39;</span>,<span style="color:#e6db74">&#39;y&#39;</span>],fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>,figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>),transparent<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> animate(ga,ymin<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,ymax<span style="color:#f92672">=</span>max,axes_labels<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;x&#39;</span>,<span style="color:#e6db74">&#39;y&#39;</span>],fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>,figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>))
 </span></span><span style="display:flex;"><span>a<span style="color:#f92672">.</span>save(out_file)
 </span></span><span style="display:flex;"><span>print(out_file)
 </span></span></code></pre></div><p><figure><img src="/ox-hugo/yAyHE1.gif"/>
@@ -384,17 +297,17 @@ its basically a python interface to a collection of mathematical software like M
 </span></span><span style="display:flex;"><span>g(x) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x
 </span></span><span style="display:flex;"><span>h(x) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>
 </span></span><span style="display:flex;"><span>my_plot <span style="color:#f92672">=</span> plot([f,g,h],<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,fill<span style="color:#f92672">=</span>{<span style="color:#ae81ff">0</span>:g,<span style="color:#ae81ff">1</span>:h,<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">0</span>})
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/9s9RNl.png"/>
+</span></span></code></pre></div><p><figure><img src="/more/9s9RNl.png"/>
 </figure>
  <br/></p>
 <h3 id="more-filling"><span class="section-num">1.7</span> more filling</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sage" data-lang="sage"><span style="display:flex;"><span>my_plot <span style="color:#f92672">=</span> plot(<span style="color:#ae81ff">1.13</span><span style="color:#f92672">*</span>log(x), <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>, fill <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> a: nth_prime(a)<span style="color:#f92672">/</span>floor(a), fillcolor <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;red&#39;</span>)
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/efTJka.png"/>
+</span></span></code></pre></div><p><figure><img src="/more/efTJka.png"/>
 </figure>
  <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sage" data-lang="sage"><span style="display:flex;"><span><span style="color:#75715e">#plot(x,(x,0,1),fill=x^2)</span>
 </span></span><span style="display:flex;"><span>my_plot <span style="color:#f92672">=</span> plot([x,x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>],(x,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>,<span style="color:#ae81ff">1</span>),fill<span style="color:#f92672">=</span>{<span style="color:#ae81ff">0</span>:[<span style="color:#ae81ff">1</span>]})
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/gYDdhB.png"/>
+</span></span></code></pre></div><p><figure><img src="/more/gYDdhB.png"/>
 </figure>
  <br/></p>
 <h2 id="examples"><span class="section-num">2</span> examples</h2>
@@ -779,8 +692,6 @@ here im using the <code>SR</code> field (short for Symbolic Ring) <br/></p>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Or you can use &#39;\mathrm{d}&#39; to replace &#39;d&#39;</span>
 </span></span><span style="display:flex;"><span>print(latex2sympy(tex))
 </span></span><span style="display:flex;"><span>print(latex2latex(tex))
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Derivative(x**2 + x, x)
-</span></span><span style="display:flex;"><span>2 x + 1
 </span></span></code></pre></div></div>
 
     
