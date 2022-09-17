@@ -2,7 +2,7 @@
 title = "linear algebra"
 author = ["mahmood"]
 description = "linear algebra"
-date = 2022-09-05T13:58:00+03:00
+date = 2022-09-15T22:05:00+03:00
 tags = ["math"]
 draft = false
 +++
@@ -80,7 +80,7 @@ a matrix can be constructed over a specific finite/infinite set of numbers for e
 <div class="my_example">
 
 consider this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
-\\[\left[\begin{array}{rrrr} 1 & 1 & 0 & -24 \\\ 2 & 1 & 2 & 11 \\\ 3 & 0 & 0 & 3 \\\ -1 & 1 & -1 & 1 \\\ -2 & 1 & 0 & 0 \end{array}\right]\\] <br/>
+\\[\left[\begin{array}{rrrr} 0 & 0 & 26 & 1 \\\ 0 & -2 & 0 & 2 \\\ -3 & 0 & 1 & -1 \\\ 16 & -1 & -1 & -2 \\\ 2 & 20 & 0 & -1 \end{array}\right]\\] <br/>
 
 </div>
 
@@ -95,14 +95,14 @@ let \\(A,\ B\\) be matrices <br/>
 **matrix multiplication** is possible if and only if the matrices have the dimensions \\(A\_{m \times n},\ B\_{n \times m}\\) <br/>
 ![](/ox-hugo/matrix-multiplication.gif) <br/>
 
-<div class="characteristic">
+</div>
+
+<div class="definition">
 
 matrices can be **multiplied by constants**, let \\(A\\) be a matrix and \\(c\\) be a constant, the definition of such multiplication is: <br/>
 \\[
   A \cdot c = B \iff A\_{i,j} \cdot c = B\_{i,j}
 \\] <br/>
-
-</div>
 
 </div>
 
@@ -139,7 +139,7 @@ for a given system of equation, an **augmented matrix** is the system of equatio
 <div class="my_example">
 
 \\[
-  \begin{aligned} 2x+5y=10\\\ 3x+4y=24 \end{aligned} \ \longrightarrow{}\ \left[\begin{array}{cc|c} 2 & 5 & 10\\\ 3 & 4 & 24 \end{array}\right]
+  \begin{aligned} 2x+5y=10\\\ 3x+4y=24 \end{aligned} \\,\iff\\, \left[\begin{array}{cc|c} 2 & 5 & 10\\\ 3 & 4 & 24 \end{array}\right]
 \\] <br/>
 
 </div>
@@ -287,7 +287,7 @@ assuming \\(A\\) is an \\(n\times n\\) matrix <br/>
 
 <div class="lemma">
 
-interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#orgacc86c8) and [alternating](#org598a7c5) <br/>
+interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org8f1c7fd) and [alternating](#org857f071) <br/>
 
 </div>
 
@@ -299,7 +299,7 @@ if the columns of the matrix form a [linearly dependant set](#linear-dependance)
 
 <div class="lemma">
 
-adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#orgacc86c8) and being [alternative](#org598a7c5) <br/>
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org8f1c7fd) and being [alternative](#org857f071) <br/>
 
 </div>
 
@@ -848,7 +848,7 @@ the kernel of a matrix doesnt change when an [elementary row operation](#element
 
 <div class="definition">
 
-The **image** of a [linear transformation](#linear-map) or [matrix](#matrix) is the [span](#span) of the [vector](#vector)s of the linear transformation. (think of it as what you can get from applying the linear transformation or multiplying the matrix by a vector.) it can be written as \\(\img(A)\\) <br/>
+The **image** of a [linear transformation](#linear-map) or [matrix](#matrix) is the [span](#span) of the column [vector](#vector)s of the linear transformation. (think of it as what you can get from applying the linear transformation or multiplying the matrix by a vector.) it can be written as \\(\img(A)\\) <br/>
 
 </div>
 
@@ -1423,7 +1423,7 @@ in other words, given a dependant set of vectors, there exists a vector in this 
 
 <div class="proof">
 
-according to [this entailment](#org1b15c95), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
+according to [this entailment](#org53385bc), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
 to prove \\(\spn(s) = \spn(S - \\{s\\})\\) we show that \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) <br/>
 we know that \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) because we can take every linear combination from the former, add \\(0 \cdot s\\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \\(s = s\_1\\) <br/>
@@ -1463,9 +1463,9 @@ for every finite set \\(S \in V\_\mathbb{F}\\), there exists \\(B \subseteq S\\)
 
 in case \\(S\\) is linearly independant we pick \\(B = S\\) and so \\(B\\) is linearly dependant and \\(\spn(B) = \spn(S)\\) <br/>
 in case \\(S\\) is linearly dependant we got more work to do: <br/>
-according to [this lemma](#org310c0f6), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
+according to [this lemma](#org964082c), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
 in case \\(S - \\{s\_1\\}\\) is linearly independant then let \\(B = S - \\{s\_1\\}\\) which means \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
-in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org310c0f6), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
+in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org964082c), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
 in case \\(\spn(S - \\{s\_1,s\_2\\})\\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \\(S\\) without changing the span, eventually we would arrive at \\(S - \\{s\_1,s\_2,s\_k\\}\\) that is linearly independant and \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
@@ -1529,7 +1529,7 @@ every **finitely generated vector space** \\(V\_\mathbb{F}\\) has atleast one ba
 <div class="proof">
 
 since \\(V\_\mathbb{F}\\) is finitely generated there exists a finite set \\(S \subseteq V\\) such that \\(\spn(S) = V\\) <br/>
-according to [this lemma](#org310c0f6), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
+according to [this lemma](#org964082c), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
 
 </div>
 
@@ -1747,7 +1747,7 @@ given \\({V\_\mathbb{F}}^n\\) is finitely spanned, \\(W^n \leq V^n\\) and \\(\di
 
 <div class="proof">
 
-let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#org348642f) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
+let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgd3e8f63) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
 
 </div>
 
