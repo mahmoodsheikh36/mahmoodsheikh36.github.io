@@ -2,7 +2,7 @@
 title = "linear algebra"
 author = ["mahmood"]
 description = "linear algebra"
-date = 2022-09-15T22:05:00+03:00
+date = 2022-09-18T10:10:00+03:00
 tags = ["math"]
 draft = false
 +++
@@ -80,7 +80,7 @@ a matrix can be constructed over a specific finite/infinite set of numbers for e
 <div class="my_example">
 
 consider this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
-\\[\left[\begin{array}{rrrr} 0 & 0 & 26 & 1 \\\ 0 & -2 & 0 & 2 \\\ -3 & 0 & 1 & -1 \\\ 16 & -1 & -1 & -2 \\\ 2 & 20 & 0 & -1 \end{array}\right]\\] <br/>
+\\[\left[\begin{array}{rrrr} 10 & 1 & -2 & 2 \\\ 0 & 1 & -2 & -11 \\\ 0 & -1 & 2 & -7 \\\ -2 & 1 & 0 & 1 \\\ -1 & 0 & -1 & -2 \end{array}\right]\\] <br/>
 
 </div>
 
@@ -243,15 +243,17 @@ see <https://en.wikipedia.org/wiki/Determinant> <br/>
 
 the **determinant** is a [scalar]({{< relref "20220727110413-scalar.md" >}}) value that is a function of the entries of a [square matrix](#square-matrix), it is nonzero if and only if the [matrix](#matrix) is [invertible](#invertible-matrix) and the [linear map](#linear-map) represented by the matrix is an [isomorphism](#linear-isomorphism). the determinant of a matrix A is denoted \\(\det(A)\\), \\(\det A\\), or \\(|A|\\). <br/>
 in the case of a \\(2\times2\\) matrix the determinant can be defined as <br/>
+\\[ <br/>
 
-\begin{gather\*}
-  |A| = \begin{vmatrix} a & b\\\ c & d \end{vmatrix} = ad - bc
-\end{gather\*}
+|   |                                                                   |
+|---|-------------------------------------------------------------------|
+| A | = \begin{vmatrix} a &amp; b\\\\ c &amp; d \end{vmatrix} = ad - bc |
 
+\\] <br/>
 similarly, for a \\(3\times3\\) matrix \\(A\\), its determinant is <br/>
 
 \begin{align\*}
-  |A| = \begin{vmatrix} a & b & c\\\ d & e & f\\\ g & h & i \end{vmatrix} &= a\begin{vmatrix} e & f\\\ h & i \end{vmatrix} - b\begin{vmatrix} d & f\\\ g & i \end{vmatrix} + \begin{vmatrix} d & e\\\ g & h \end{vmatrix}\\\\
+  |A| = \begin{vmatrix} a & b & c\\\ d & e & f\\\ g & h & i \end{vmatrix} &= a\begin{vmatrix} e & f\\\ h & i \end{vmatrix} - b\begin{vmatrix} d & f\\\ g & i \end{vmatrix} + c\begin{vmatrix} d & e\\\ g & h \end{vmatrix}\\\\
   &= aei + bfg + cdh - ceg - bdi - afh
 \end{align\*}
 
@@ -287,7 +289,7 @@ assuming \\(A\\) is an \\(n\times n\\) matrix <br/>
 
 <div class="lemma">
 
-interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org8f1c7fd) and [alternating](#org857f071) <br/>
+interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org44f39ed) and [alternating](#orgb1d840d) <br/>
 
 </div>
 
@@ -299,7 +301,7 @@ if the columns of the matrix form a [linearly dependant set](#linear-dependance)
 
 <div class="lemma">
 
-adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org8f1c7fd) and being [alternative](#org857f071) <br/>
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org44f39ed) and being [alternative](#orgb1d840d) <br/>
 
 </div>
 
@@ -1423,7 +1425,7 @@ in other words, given a dependant set of vectors, there exists a vector in this 
 
 <div class="proof">
 
-according to [this entailment](#org53385bc), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
+according to [this entailment](#org44ebb5e), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
 to prove \\(\spn(s) = \spn(S - \\{s\\})\\) we show that \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) <br/>
 we know that \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) because we can take every linear combination from the former, add \\(0 \cdot s\\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \\(s = s\_1\\) <br/>
@@ -1463,9 +1465,9 @@ for every finite set \\(S \in V\_\mathbb{F}\\), there exists \\(B \subseteq S\\)
 
 in case \\(S\\) is linearly independant we pick \\(B = S\\) and so \\(B\\) is linearly dependant and \\(\spn(B) = \spn(S)\\) <br/>
 in case \\(S\\) is linearly dependant we got more work to do: <br/>
-according to [this lemma](#org964082c), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
+according to [this lemma](#org98349fb), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
 in case \\(S - \\{s\_1\\}\\) is linearly independant then let \\(B = S - \\{s\_1\\}\\) which means \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
-in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org964082c), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
+in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org98349fb), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
 in case \\(\spn(S - \\{s\_1,s\_2\\})\\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \\(S\\) without changing the span, eventually we would arrive at \\(S - \\{s\_1,s\_2,s\_k\\}\\) that is linearly independant and \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
@@ -1529,7 +1531,7 @@ every **finitely generated vector space** \\(V\_\mathbb{F}\\) has atleast one ba
 <div class="proof">
 
 since \\(V\_\mathbb{F}\\) is finitely generated there exists a finite set \\(S \subseteq V\\) such that \\(\spn(S) = V\\) <br/>
-according to [this lemma](#org964082c), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
+according to [this lemma](#org98349fb), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
 
 </div>
 
@@ -1747,7 +1749,7 @@ given \\({V\_\mathbb{F}}^n\\) is finitely spanned, \\(W^n \leq V^n\\) and \\(\di
 
 <div class="proof">
 
-let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgd3e8f63) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
+let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orga25ded4) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
 
 </div>
 
