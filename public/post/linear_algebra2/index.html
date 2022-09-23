@@ -123,7 +123,7 @@
 
     <div>
         <h2>linear algebra</h2>
-        <h5>September 15, 2022</h5>
+        <h5>September 18, 2022</h5>
         
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
@@ -186,7 +186,7 @@ window.onload = function() {
 </div>
 <div class="my_example">
 <p>consider this matrix over the field \(\mathbb{Z}\), where all the numbers are integers <br/>
-\[\left[\begin{array}{rrrr} 0 &amp; 0 &amp; 26 &amp; 1 \\ 0 &amp; -2 &amp; 0 &amp; 2 \\ -3 &amp; 0 &amp; 1 &amp; -1 \\ 16 &amp; -1 &amp; -1 &amp; -2 \\ 2 &amp; 20 &amp; 0 &amp; -1 \end{array}\right]\] <br/></p>
+\[\left[\begin{array}{rrrr} 10 &amp; 1 &amp; -2 &amp; 2 \\ 0 &amp; 1 &amp; -2 &amp; -11 \\ 0 &amp; -1 &amp; 2 &amp; -7 \\ -2 &amp; 1 &amp; 0 &amp; 1 \\ -1 &amp; 0 &amp; -1 &amp; -2 \end{array}\right]\] <br/></p>
 </div>
 </div>
 <h3 id="matrix-multiplication"><span class="section-num">2.1</span> matrix multiplication</h3>
@@ -282,13 +282,26 @@ x_3 = 5
 <p>see <a href="https://en.wikipedia.org/wiki/Determinant">https://en.wikipedia.org/wiki/Determinant</a> <br/></p>
 <div class="definition">
 <p>the <strong>determinant</strong> is a <a href="/post/20220727110413-scalar/">scalar</a> value that is a function of the entries of a <a href="#square-matrix">square matrix</a>, it is nonzero if and only if the <a href="#matrix">matrix</a> is <a href="#invertible-matrix">invertible</a> and the <a href="#linear-map">linear map</a> represented by the matrix is an <a href="#linear-isomorphism">isomorphism</a>. the determinant of a matrix A is denoted \(\det(A)\), \(\det A\), or \(|A|\). <br/>
-in the case of a \(2\times2\) matrix the determinant can be defined as <br/></p>
-<p>\begin{gather*}
-|A| = \begin{vmatrix} a &amp; b\\ c &amp; d \end{vmatrix} = ad - bc
-\end{gather*}</p>
-<p>similarly, for a \(3\times3\) matrix \(A\), its determinant is <br/></p>
+in the case of a \(2\times2\) matrix the determinant can be defined as <br/>
+\[ <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>= \begin{vmatrix} a &amp; b\\ c &amp; d \end{vmatrix} = ad - bc</td>
+</tr>
+</tbody>
+</table>
+<p>\] <br/>
+similarly, for a \(3\times3\) matrix \(A\), its determinant is <br/></p>
 <p>\begin{align*}
-|A| = \begin{vmatrix} a &amp; b &amp; c\\ d &amp; e &amp; f\\ g &amp; h &amp; i \end{vmatrix} &amp;= a\begin{vmatrix} e &amp; f\\ h &amp; i \end{vmatrix} - b\begin{vmatrix} d &amp; f\\ g &amp; i \end{vmatrix} + \begin{vmatrix} d &amp; e\\ g &amp; h \end{vmatrix}\\
+|A| = \begin{vmatrix} a &amp; b &amp; c\\ d &amp; e &amp; f\\ g &amp; h &amp; i \end{vmatrix} &amp;= a\begin{vmatrix} e &amp; f\\ h &amp; i \end{vmatrix} - b\begin{vmatrix} d &amp; f\\ g &amp; i \end{vmatrix} + c\begin{vmatrix} d &amp; e\\ g &amp; h \end{vmatrix}\\
 &amp;= aei + bfg + cdh - ceg - bdi - afh
 \end{align*}</p>
 <p>each determinant of a \(2\times2\) matrix in this equation is called a <a href="#minor">minor</a> of the matrix \(A\). this procedure can be extended to give a recursive definition for the determinant of an \(n\times n\) matrix, known as <a href="#laplace-expansion">laplace expansion</a> <br/></p>
@@ -309,13 +322,13 @@ in the case of a \(2\times2\) matrix the determinant can be defined as <br/></p>
 assuming \(A\) is an \(n\times n\) matrix <br/></p>
 </div>
 <div class="lemma">
-<p>interchanging any pair of columns of a matrix multiplies its determinant by \(-1\). This follows from the determinant being <a href="#org8f1c7fd">multilinear</a> and <a href="#org857f071">alternating</a> <br/></p>
+<p>interchanging any pair of columns of a matrix multiplies its determinant by \(-1\). This follows from the determinant being <a href="#org44f39ed">multilinear</a> and <a href="#orgb1d840d">alternating</a> <br/></p>
 </div>
 <div class="lemma">
 <p>if the columns of the matrix form a <a href="#linear-dependance">linearly dependant set</a>, the determinant is 0 <br/></p>
 </div>
 <div class="lemma">
-<p>adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of <a href="#org8f1c7fd">multilinearity</a> and being <a href="#org857f071">alternative</a> <br/></p>
+<p>adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of <a href="#org44f39ed">multilinearity</a> and being <a href="#orgb1d840d">alternative</a> <br/></p>
 </div>
 <div class="lemma">
 <p>if \(A\) is a <a href="#triangular-matrix">triangular matrix</a> then its determinant equals the product of the diagonal entries: <br/>
@@ -1044,7 +1057,7 @@ in other words, if a given sequence of vectors is linearly dependant then it has
 <p>let \(S = \{s_1,s_2,\ldots,s_n\}\), if \(S \subseteq V\) is a dependant set then there exists \(\vec s \in S\) such that \(\spn(s) = \spn(S - \{s\})\) <br/>
 in other words, given a dependant set of vectors, there exists a vector in this set that is possible to drop without changing the span of the set <br/></p>
 <div class="proof">
-<p>according to <a href="#org53385bc">this entailment</a>, there exists \(s \in S\) such that \(s \in \spn(S - \{s\})\) <br/>
+<p>according to <a href="#org44ebb5e">this entailment</a>, there exists \(s \in S\) such that \(s \in \spn(S - \{s\})\) <br/>
 to prove \(\spn(s) = \spn(S - \{s\})\) we show that \(\spn(s) \subseteq \spn(S - \{s\})\) and \(\spn(S - \{s\}) \subseteq \spn(s)\) <br/>
 we know that \(\spn(S - \{s\}) \subseteq \spn(s)\) because we can take every linear combination from the former, add \(0 \cdot s\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \(s = s_1\) <br/>
@@ -1077,9 +1090,9 @@ and since \(\spn(s) \subseteq \spn(S - \{s\})\) and \(\spn(S - \{s\}) \subseteq 
 <div class="proof">
 <p>in case \(S\) is linearly independant we pick \(B = S\) and so \(B\) is linearly dependant and \(\spn(B) = \spn(S)\) <br/>
 in case \(S\) is linearly dependant we got more work to do: <br/>
-according to <a href="#org964082c">this lemma</a>, \(\spn(S) = \spn(S - \{s_1\})\) <br/>
+according to <a href="#org98349fb">this lemma</a>, \(\spn(S) = \spn(S - \{s_1\})\) <br/>
 in case \(S - \{s_1\}\) is linearly independant then let \(B = S - \{s_1\}\) which means \(B \subseteq S\) and \(\spn(B) = \spn(S)\) <br/>
-in case \(S - \{s_1\}\) is linearly dependant, according to <a href="#org964082c">this lemma</a>, \(\spn(S - \{s_1,s_2\}) = \spn(S - \{s_1\}) = \spn(S)\) <br/>
+in case \(S - \{s_1\}\) is linearly dependant, according to <a href="#org98349fb">this lemma</a>, \(\spn(S - \{s_1,s_2\}) = \spn(S - \{s_1\}) = \spn(S)\) <br/>
 in case \(\spn(S - \{s_1,s_2\})\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \(S\) without changing the span, eventually we would arrive at \(S - \{s_1,s_2,s_k\}\) that is linearly independant and \(B \subseteq S\) and \(\spn(B) = \spn(S)\) <br/></p>
@@ -1125,7 +1138,7 @@ this is necessarily true because \(x_i\) has to be 0 for \(u_i\) to zero out and
 <p>every <strong>finitely generated vector space</strong> \(V_\mathbb{F}\) has atleast one basis <br/></p>
 <div class="proof">
 <p>since \(V_\mathbb{F}\) is finitely generated there exists a finite set \(S \subseteq V\) such that \(\spn(S) = V\) <br/>
-according to <a href="#org964082c">this lemma</a>, there exists \(B \subseteq S\) where \(B\) is linearly independant and \(\spn(B) = V\), therefore \(B\) is a basis <br/></p>
+according to <a href="#org98349fb">this lemma</a>, there exists \(B \subseteq S\) where \(B\) is linearly independant and \(\spn(B) = V\), therefore \(B\) is a basis <br/></p>
 </div>
 </div>
 <div class="my_example">
@@ -1262,7 +1275,7 @@ assume \(\{w_1\ldots w_m\}\) where \(m &gt; n\) is a basis of \(W\), then we kno
 <div class="lemma">
 <p>given \({V_\mathbb{F}}^n\) is finitely spanned, \(W^n \leq V^n\) and \(\dim W = \dim V\) then \(W = V\) <br/></p>
 <div class="proof">
-<p>let \(w_1\ldots w_n\) be a basis of \(W\) and so \(n = |V|\) and \(w_1\ldots w_n\) is linearly independant therefore according to <a href="#orgd3e8f63">this lemma</a> \(\spn\{w_1\ldots w_n\} = V = W\) and since it spans \(V\) and is of size \(n = |V|\) then it is a basis of \(V\) <br/></p>
+<p>let \(w_1\ldots w_n\) be a basis of \(W\) and so \(n = |V|\) and \(w_1\ldots w_n\) is linearly independant therefore according to <a href="#orga25ded4">this lemma</a> \(\spn\{w_1\ldots w_n\} = V = W\) and since it spans \(V\) and is of size \(n = |V|\) then it is a basis of \(V\) <br/></p>
 </div>
 </div>
 <div class="lemma">
