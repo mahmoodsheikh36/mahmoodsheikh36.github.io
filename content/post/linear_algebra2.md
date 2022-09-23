@@ -2,7 +2,7 @@
 title = "linear algebra"
 author = ["mahmood"]
 description = "linear algebra"
-date = 2022-09-23T17:56:00+03:00
+date = 2022-09-23T19:47:00+03:00
 tags = ["public", "math"]
 draft = false
 +++
@@ -80,7 +80,7 @@ a matrix can be constructed over a specific finite/infinite set of numbers for e
 <div class="my_example">
 
 consider this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
-\\[\left[\begin{array}{rrrr} 1 & -1 & -1 & -1 \\\ 2 & 4 & -2 & -2 \\\ 0 & -1 & -1 & -28 \\\ -4 & 1 & 1 & -3 \\\ 1 & -1 & -1 & 1 \end{array}\right]\\] <br/>
+\\[\left[\begin{array}{rrrr} -1 & -2 & 2 & 0 \\\ -2 & 1 & 2 & 0 \\\ 0 & -1 & -33 & 3 \\\ 1 & -1 & -1 & 0 \\\ -1 & 0 & 1 & -1 \end{array}\right]\\] <br/>
 
 </div>
 
@@ -287,7 +287,7 @@ assuming \\(A\\) is an \\(n\times n\\) matrix <br/>
 
 <div class="lemma">
 
-interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#orge94a422) and [alternating](#orgc299526) <br/>
+interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org29bd2db) and [alternating](#orgf77de85) <br/>
 
 </div>
 
@@ -299,7 +299,7 @@ if the columns of the matrix form a [linearly dependant set](#linear-dependance)
 
 <div class="lemma">
 
-adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#orge94a422) and being [alternative](#orgc299526) <br/>
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org29bd2db) and being [alternative](#orgf77de85) <br/>
 
 </div>
 
@@ -902,7 +902,8 @@ multiplication of a vector by a negative scalar evidently can change both the [m
 
 the addition of 2 vectors is simply described in the following drawing: <br/>
 
-![](/ox-hugo/BlOGLgM.svg) <br/>
+{{< figure src="/ox-hugo/BlOGLgM.svg" >}} <br/>
+
 the rule is: to add B to A, place the tail of B at the head of A. the sum is a vector from the tail of A to the head of B <br/>
 since \\(A-B=A+(-B)\\), in order to subtract B from A we can simply multiply it by -1 and then add, so in a sense, we're "rotating" B and adding it to A to get \\(A-B\\): <br/>
 
@@ -1473,7 +1474,7 @@ in other words, given a dependant set of vectors, there exists a vector in this 
 
 <div class="proof">
 
-according to [this entailment](#org111aa20), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
+according to [this entailment](#org1ef5033), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
 to prove \\(\spn(s) = \spn(S - \\{s\\})\\) we show that \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) <br/>
 we know that \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) because we can take every linear combination from the former, add \\(0 \cdot s\\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \\(s = s\_1\\) <br/>
@@ -1513,9 +1514,9 @@ for every finite set \\(S \in V\_\mathbb{F}\\), there exists \\(B \subseteq S\\)
 
 in case \\(S\\) is linearly independant we pick \\(B = S\\) and so \\(B\\) is linearly dependant and \\(\spn(B) = \spn(S)\\) <br/>
 in case \\(S\\) is linearly dependant we got more work to do: <br/>
-according to [this lemma](#org1d0e534), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
+according to [this lemma](#org1e493ea), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
 in case \\(S - \\{s\_1\\}\\) is linearly independant then let \\(B = S - \\{s\_1\\}\\) which means \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
-in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org1d0e534), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
+in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org1e493ea), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
 in case \\(\spn(S - \\{s\_1,s\_2\\})\\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \\(S\\) without changing the span, eventually we would arrive at \\(S - \\{s\_1,s\_2,s\_k\\}\\) that is linearly independant and \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
@@ -1579,7 +1580,7 @@ every **finitely generated vector space** \\(V\_\mathbb{F}\\) has atleast one ba
 <div class="proof">
 
 since \\(V\_\mathbb{F}\\) is finitely generated there exists a finite set \\(S \subseteq V\\) such that \\(\spn(S) = V\\) <br/>
-according to [this lemma](#org1d0e534), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
+according to [this lemma](#org1e493ea), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
 
 </div>
 
@@ -1797,7 +1798,7 @@ given \\({V\_\mathbb{F}}^n\\) is finitely spanned, \\(W^n \leq V^n\\) and \\(\di
 
 <div class="proof">
 
-let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgc1ed569) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
+let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgcd1e6b5) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
 
 </div>
 
