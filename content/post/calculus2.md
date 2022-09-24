@@ -2,8 +2,8 @@
 title = "calculus"
 author = ["mahmood"]
 description = "calculus"
-date = 2022-09-15T18:56:00+03:00
-tags = ["math"]
+date = 2022-09-24T13:13:00+03:00
+tags = ["public", "math"]
 draft = false
 +++
 
@@ -195,7 +195,7 @@ the **logarithmic function** \\(g(x) = log\_a(x)\\) is the inverse of the [expon
 
 #### <span class="section-num">4.7.3</span> tangent {#tangent}
 
-{{< figure src="/ox-hugo/JAIRcvb.svg" >}} <br/>
+{{< figure src="/ox-hugo/n4JY5wF.svg" >}} <br/>
 
 
 ### <span class="section-num">4.8</span> even function {#even-function}
@@ -1979,6 +1979,12 @@ the sum \\(\sum\_{n=1}^\infty \frac{1}{n^\alpha}\\) converges when \\(\alpha > 1
 
 
 ### <span class="section-num">8.2</span> convergence tests {#convergence-tests}
+
+<div class="note">
+
+need to add citation for this image <br/>
+
+</div>
 
 {{< figure src="/ox-hugo/tests.jpg" >}} <br/>
 
