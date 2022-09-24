@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+ .links line {
+   stroke: #999;
+   stroke-opacity: 0.6;
+ }
+
+ .nodes circle {
+   stroke: #fff;
+   stroke-width: 1.5px;
+ }
+
+ text {
+   font-family: sans-serif;
+   font-size: 7px;
+ }
+
+ svg {
+   background-color: #777;
+ }
+</style>
+<svg width="960" height="600"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+ var svg = d3.select("svg"),
+     width = svg.attr("width"),
+     height = svg.attr("height");
+
+ var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+ var simulation = d3.forceSimulation()
+                    .force("link", d3.forceLink().id(function(d) { return d.id; }))
+                    .force("charge", d3.forceManyBody())
+                    .force("center", d3.forceCenter(width / 2, height / 2));
+
+ var zoom_handler = d3.zoom()
+                      .on("zoom", zoom_action);
+ zoom_handler(svg);     
+ function zoom_action() {
+   svg.selectAll('g').attr('transform', d3.event.transform)
+ }
+
+ d3.json("graph.json", function(error, graph) {
+   if (error) throw error;
+
+   var link = svg.append("g")
+                 .attr("class", "links")
+                 .selectAll("line")
+                 .data(graph.links)
+                 .enter().append("line")
+                 .attr("stroke-width", function(d) { return Math.sqrt(d.level); });
+
+   var node = svg.append("g")
+                 .attr("class", "nodes")
+                 .selectAll("g")
+                 .data(graph.nodes)
+                 .enter().append("g")
+
+   var circle = node.append("circle")
+                    .attr("r", function(d) { return d.level+2; })
+                    .attr("fill", function(d) { return color(d.level); });
+
+   // create a drag handler and append it to the node object
+   var drag_handler = d3.drag()
+                        .on("start", dragstarted)
+                        .on("drag", dragged)
+                        .on("end", dragended);
+
+   drag_handler(node);
+   
+   var label = node.append("text")
+                   .text(function(d) {
+                     return d.title;
+                   })
+                   .attr('x', 6)
+                   .attr('y', 3);
+
+   simulation
+     .nodes(graph.nodes)
+     .on("tick", ticked);
+
+   simulation.force("link")
+             .links(graph.links);
+
+   function ticked() {
+     link
+       .attr("x1", function(d) { return d.source.x; })
+       .attr("y1", function(d) { return d.source.y; })
+       .attr("x2", function(d) { return d.target.x; })
+       .attr("y2", function(d) { return d.target.y; });
+
+     node
+       .attr("transform", function(d) {
+         return "translate(" + d.x + "," + d.y + ")";
+       })
+   }
+ });
+
+ function dragstarted(d) {
+   if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+   d.fx = d.x;
+   d.fy = d.y;
+ }
+
+ function dragged(d) {
+   d.fx = d3.event.x;
+   d.fy = d3.event.y;
+ }
+
+ function dragended(d) {
+   if (!d3.event.active) simulation.alphaTarget(0);
+   d.fx = null;
+   d.fy = null;
+ }
+
+ /* sometimes when webpage isnt focused the simulations stops and all the nodes stack up... this should fix it */
+ svg.on('mouseover', function (d, i) {
+   if (!d3.event.active) simulation.alphaTarget(0.01).restart();
+ });
+</script>
