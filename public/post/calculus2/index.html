@@ -123,7 +123,7 @@
 
     <div>
         <h2>calculus</h2>
-        <h5>September 24, 2022</h5>
+        <h5>September 26, 2022</h5>
         
 <a href="https://mahmoodsheikh36.github.io/tags/public"><kbd class="item-tag">public</kbd></a>
 
@@ -142,6 +142,9 @@
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{\i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{\j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
 </p>
 <!-- mathjax -->
 <script>
@@ -418,32 +421,115 @@ and since this limit is equal to the original limit, we finally get: <br/>
 </div>
 <h2 id="derivative"><span class="section-num">6</span> derivative</h2>
 <div class="definition">
-<p>let \(f(x)\) be a function, the derivative of \(f(x)\), denoted by \(f&rsquo;(x)\) is the function that describes the slope of \(f(x)\) <br/></p>
+<p>let \(f(x)\) be a <a href="/post/discrete_maths2/#function">function</a>, the <strong>derivative</strong> of \(f(x)\), denoted by \(f&rsquo;(x)=\frac{df(x)}{dx}\) is the function that describes the slope of \(f(x)\) <br/></p>
+<div class="note">
+<p>to denote an nth derivative of a function we write \(\frac{d^nf(x)}{dx^n}\), this reads &ldquo;the nth derivative of \(f(x)\) with respect to \(x\)&rdquo; <br/></p>
+</div>
 </div>
 <h3 id="derivative-table"><span class="section-num">6.1</span> derivative table</h3>
 <table>
 <thead>
 <tr>
-<th>\(f(x)\)</th>
-<th>\(f&rsquo;(x)\)</th>
+<th>function</th>
+<th>derivative</th>
+<th>rule name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>c</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>\(cx^n\)</td>
+<td>\(ncx^{n-1}\)</td>
+<td>power rule</td>
+</tr>
+<tr>
+<td>\(f(x)+g(x)\)</td>
+<td>\(f&rsquo;(x)+g&rsquo;(x)\)</td>
+<td>sum rule</td>
+</tr>
+<tr>
+<td>\(f(x)-g(x)\)</td>
+<td>\(f&rsquo;(x)-g&rsquo;(x)\)</td>
+<td>difference rule</td>
+</tr>
+<tr>
+<td>\(f(x)\cdot g(x)\)</td>
+<td>\(f(x)g&rsquo;(x)+f&rsquo;(x)g(x)\)</td>
+<td>product rule</td>
+</tr>
+<tr>
+<td>\(f(x)/g(x)\)</td>
+<td>\(\frac{f&rsquo;(x)g(x)-g&rsquo;(x)f(x)}{g^2(x)}\)</td>
+<td>quotient rule</td>
+</tr>
+<tr>
+<td>\(f(g(x))\)</td>
+<td>\(f&rsquo;(g(x))g&rsquo;(x)\)</td>
+<td>chain rule</td>
+</tr>
+<tr>
+<td>\(ke^{cx}\)</td>
+<td>\(cke^{cx}\)</td>
+<td></td>
+</tr>
+<tr>
 <td>\(a^x\)</td>
 <td>\(a^x\ln a\)</td>
+<td></td>
 </tr>
 <tr>
 <td>\(\ln x\)</td>
 <td>\(\frac{1}{x}\)</td>
+<td></td>
 </tr>
 <tr>
 <td>\(\log_a x\)</td>
-<td>\(\frac{1}{\ln{ax}}\)</td>
+<td>\(\frac{1}{x\ln{a}}\)</td>
+<td></td>
+</tr>
+<tr>
+<td>\(\sin x\)</td>
+<td>\(\cos x\)</td>
+<td></td>
+</tr>
+<tr>
+<td>\(\cos x\)</td>
+<td>\(-\sin x\)</td>
+<td></td>
+</tr>
+<tr>
+<td>\(\tan x\)</td>
+<td>\(\sec^2 x\)</td>
+<td></td>
+</tr>
+<tr>
+<td>\(\sin^{-1} x\)</td>
+<td>\(\frac{1}{\sqrt{1-x^2}}\)</td>
+<td></td>
+</tr>
+<tr>
+<td>\(\cos^{-1} x\)</td>
+<td>\(\frac{-1}{\sqrt{1-x^2}}\)</td>
+<td></td>
+</tr>
+<tr>
+<td>\(\tan^{-1} x\)</td>
+<td>\(\frac{1}{1+x^2}\)</td>
+<td></td>
+</tr>
+<tr>
+<td>\(\frac{1}{f(x)}\)</td>
+<td>\(\frac{-f&rsquo;(x)}{f(x)^2}\)</td>
+<td>reciprocal Rule</td>
 </tr>
 </tbody>
 </table>
 <h3 id="chain-rule"><span class="section-num">6.2</span> chain rule</h3>
+<p>see <a href="#derivative-table">derivative table</a> <br/></p>
 <h2 id="integral"><span class="section-num">7</span> integral</h2>
 <div class="definition">
 <p>integral is the inverse of the derivative <br/>

@@ -211,7 +211,7 @@ S = (x_2-x_1,\ y_2-y_1,\ z_2-z_1)
 the SI unit for acceleration is metre per second (\(\frac{\mathrm{m}}{\mathrm{s}}\)) <br/>
 velocity can also be defined as the <a href="/post/calculus2/#derivative">derivative</a> of position with respect to time, as it is the <a href="/post/calculus2/#limit">limit</a> of the <a href="#average-velocity">average velocity</a> as the time interval approaches zero: <br/>
 \[
-v = \lim_{\Delta t \to 0} \frac{x(t+\Delta t)-x(t)}{\Delta t} = \frac{\Delta x}{\Delta t} = \frac{dx}{dt}
+v = \lim_{\Delta t \to 0} \frac{x(t+\Delta t)-x(t)}{\Delta t} = \frac{dx}{dt}
 \] <br/>
 using notation due to Gottfried Leibniz, who independently invented <a href="/post/calculus2/">calculus</a>. as Newton would have written <br/>
 \[
@@ -235,9 +235,6 @@ where the dot stands for \(\frac{d}{dt}\) <br/></p>
 <p><strong>acceleration</strong> is the rate of change of the <a href="#instantaneous-velocity">velocity</a> of an object with respect to time <br/>
 it can also be defined as the <a href="/post/calculus2/#derivative">derivative</a> of velocity with respect to time or the second derivative of <a href="#position-vector--linear-algebra2-dot-md">position</a> with respect to time <br/>
 the SI unit for acceleration is metre per second squared (\(\frac{\mathrm{m}}{\mathrm{s}^2}\)) <br/></p>
-<div class="characteristic">
-<br/>
-</div>
 </div>
 <h3 id="average-acceleration"><span class="section-num">5.1</span> average acceleration</h3>
 <p>an object&rsquo;s <strong>average acceleration</strong> over a period of time is its change in <a href="#instantaneous-velocity">velocity</a>, \(\Delta v\), divided by the duration of the period, \(\Delta t\): <br/>
@@ -247,10 +244,29 @@ the SI unit for acceleration is metre per second squared (\(\frac{\mathrm{m}}{\m
 <h3 id="instantaneous-acceleration"><span class="section-num">5.2</span> instantaneous acceleration</h3>
 <p><strong>instantaneous acceleration</strong> is a continuous <a href="/post/discrete_maths2/#function">function</a> of time and gives the acceleration at a single point in time and space: <br/>
 \[
-a = \lim_{\Delta t \to 0} \frac{v(t+\Delta t)-v(t)}{\Delta t} = \frac{\Delta v}{\Delta t} = \frac{dv}{dt} = \frac{d^2x}{dt^2}
+a = \lim_{\Delta t \to 0} \frac{v(t+\Delta t)-v(t)}{\Delta t} = \frac{dv}{dt} = \frac{d^2r}{dt^2}
 \] <br/></p>
 <h2 id="motion"><span class="section-num">6</span> motion</h2>
+<div class="my_question">
+<p>suppose that the position of a particle is given by <br/>
+\[
+r = A(e^{\alpha t}\ihat + e^{-\alpha t}\jhat)
+\] <br/>
+where A and \(\alpha\) are constants, find the <a href="#instantaneous-velocity">velocity</a> and sketch the trajectory <br/></p>
+<div class="answer">
+<p>\begin{align*}
+v &amp;= \frac{dr}{dt}\\
+&amp;= A(\alpha e^{\alpha t}\ihat - ae^{-\alpha t}\jhat)\\
+v_x &amp;= A\alpha e^{\alpha t}\\
+v_y &amp;= -A\alpha e^{-\alpha t}
+\end{align*}</p>
+<p>the <a href="/post/linear_algebra2/#magnitude">magnitude</a> of \(v\) is <br/></p>
+<p>\begin{align*}
+|v| &amp;= \sqrt{v_x^2 + v_y^2}\\
+&amp;= A\alpha\sqrt{e^{2\alpha t} + e^{-2\alpha t}}
+\end{align*}</p>
 </div>
+</div></div>
 
     
     
