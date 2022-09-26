@@ -123,8 +123,10 @@
 
     <div>
         <h2>linear algebra</h2>
-        <h5>September 18, 2022</h5>
+        <h5>September 26, 2022</h5>
         
+<a href="https://mahmoodsheikh36.github.io/tags/public"><kbd class="item-tag">public</kbd></a>
+
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
 
@@ -186,7 +188,7 @@ window.onload = function() {
 </div>
 <div class="my_example">
 <p>consider this matrix over the field \(\mathbb{Z}\), where all the numbers are integers <br/>
-\[\left[\begin{array}{rrrr} 10 &amp; 1 &amp; -2 &amp; 2 \\ 0 &amp; 1 &amp; -2 &amp; -11 \\ 0 &amp; -1 &amp; 2 &amp; -7 \\ -2 &amp; 1 &amp; 0 &amp; 1 \\ -1 &amp; 0 &amp; -1 &amp; -2 \end{array}\right]\] <br/></p>
+\[\left[\begin{array}{rrrr} 1 &amp; -3 &amp; -9 &amp; -37 \\ -8 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; -1 &amp; -1 \\ -1 &amp; -1 &amp; -2 &amp; 0 \\ 5 &amp; 0 &amp; 0 &amp; 1 \end{array}\right]\] <br/></p>
 </div>
 </div>
 <h3 id="matrix-multiplication"><span class="section-num">2.1</span> matrix multiplication</h3>
@@ -282,24 +284,11 @@ x_3 = 5
 <p>see <a href="https://en.wikipedia.org/wiki/Determinant">https://en.wikipedia.org/wiki/Determinant</a> <br/></p>
 <div class="definition">
 <p>the <strong>determinant</strong> is a <a href="/post/20220727110413-scalar/">scalar</a> value that is a function of the entries of a <a href="#square-matrix">square matrix</a>, it is nonzero if and only if the <a href="#matrix">matrix</a> is <a href="#invertible-matrix">invertible</a> and the <a href="#linear-map">linear map</a> represented by the matrix is an <a href="#linear-isomorphism">isomorphism</a>. the determinant of a matrix A is denoted \(\det(A)\), \(\det A\), or \(|A|\). <br/>
-in the case of a \(2\times2\) matrix the determinant can be defined as <br/>
-\[ <br/></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>= \begin{vmatrix} a &amp; b\\ c &amp; d \end{vmatrix} = ad - bc</td>
-</tr>
-</tbody>
-</table>
-<p>\] <br/>
-similarly, for a \(3\times3\) matrix \(A\), its determinant is <br/></p>
+in the case of a \(2\times2\) matrix the determinant can be defined as <br/></p>
+<p>\begin{gather*}
+|A| = \begin{vmatrix} a &amp; b\\ c &amp; d \end{vmatrix} = ad - bc
+\end{gather*}</p>
+<p>similarly, for a \(3\times3\) matrix \(A\), its determinant is <br/></p>
 <p>\begin{align*}
 |A| = \begin{vmatrix} a &amp; b &amp; c\\ d &amp; e &amp; f\\ g &amp; h &amp; i \end{vmatrix} &amp;= a\begin{vmatrix} e &amp; f\\ h &amp; i \end{vmatrix} - b\begin{vmatrix} d &amp; f\\ g &amp; i \end{vmatrix} + c\begin{vmatrix} d &amp; e\\ g &amp; h \end{vmatrix}\\
 &amp;= aei + bfg + cdh - ceg - bdi - afh
@@ -322,13 +311,13 @@ similarly, for a \(3\times3\) matrix \(A\), its determinant is <br/></p>
 assuming \(A\) is an \(n\times n\) matrix <br/></p>
 </div>
 <div class="lemma">
-<p>interchanging any pair of columns of a matrix multiplies its determinant by \(-1\). This follows from the determinant being <a href="#org44f39ed">multilinear</a> and <a href="#orgb1d840d">alternating</a> <br/></p>
+<p>interchanging any pair of columns of a matrix multiplies its determinant by \(-1\). This follows from the determinant being <a href="#orgde8a683">multilinear</a> and <a href="#orge8251c8">alternating</a> <br/></p>
 </div>
 <div class="lemma">
 <p>if the columns of the matrix form a <a href="#linear-dependance">linearly dependant set</a>, the determinant is 0 <br/></p>
 </div>
 <div class="lemma">
-<p>adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of <a href="#org44f39ed">multilinearity</a> and being <a href="#orgb1d840d">alternative</a> <br/></p>
+<p>adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of <a href="#orgde8a683">multilinearity</a> and being <a href="#orge8251c8">alternative</a> <br/></p>
 </div>
 <div class="lemma">
 <p>if \(A\) is a <a href="#triangular-matrix">triangular matrix</a> then its determinant equals the product of the diagonal entries: <br/>
@@ -543,7 +532,7 @@ R(AB) \leq R(B)
 <div class="entailment">
 <p>\begin{align*}
 \dim C(AB) \leq \dim C(A)\\
-\dim R(AB) \leq \dim R(B)<br>
+\dim R(AB) \leq \dim R(B)
 \end{align*}</p>
 </div>
 <div class="entailment">
@@ -614,7 +603,7 @@ therefore <br/>
 we substitute \(A\) inplace of \(A^t\) in the lemma and we get: <br/></p>
 <p>\begin{align*}
 \dim C(A^t) \leq \dim R(A^t)\\
-\dim R(A) \leq \dim C(A)<br>
+\dim R(A) \leq \dim C(A)
 \end{align*}</p>
 <p>therefore <br/>
 \[
@@ -660,9 +649,73 @@ we substitute \(A\) inplace of \(A^t\) in the lemma and we get: <br/></p>
 <p>The <strong>image</strong> of a <a href="#linear-map">linear transformation</a> or <a href="#matrix">matrix</a> is the <a href="#span">span</a> of the column <a href="#vector">vector</a>s of the linear transformation. (think of it as what you can get from applying the linear transformation or multiplying the matrix by a vector.) it can be written as \(\img(A)\) <br/></p>
 </div>
 <h2 id="vector"><span class="section-num">3</span> vector</h2>
-<h3 id="vector-space"><span class="section-num">3.1</span> vector space</h3>
+<p>anything can be a vector, so long as we define sensible addition and scalar multiplication operations that abide by the axioms of a <a href="#vector-space">vector space</a> <br/>
+a <strong>vector</strong> can be represented using its components or using length and direction <br/></p>
+<h3 id="magnitude"><span class="section-num">3.1</span> magnitude</h3>
 <div class="definition">
-<p>let \(V\) be a non-empty <a href="/post/discrete_maths2/#set">set</a> of <a href="#vector">vector</a>s containing numbers from the <a href="#field">field</a> \(\mathbb{F}\), consider the 2 operations addition and scalar multiplication, \(V_\mathbb{F}\) is a vector space only if it abides by the following axioms: <br/>
+<p>the <strong>magnitude</strong> of a <a href="#vector">vector</a> \(A\) is its length, denoted by \(|A|\) or \(\left\Vert A \right\Vert\), it can be calculated from the square root of the total of the squares of of the individual vector components <br/></p>
+</div>
+<h3 id="unit-vector"><span class="section-num">3.2</span> unit vector</h3>
+<div class="definition">
+<p>a vector whose <a href="#magnitude">magnitude</a> is equal to 1, laballed by a caret, e.g. \(\hat A\) <br/></p>
+<div class="lemma">
+<p>\(\hat A = \frac{A}{|A|}\) <br/></p>
+</div>
+</div>
+<h3 id="vector-scalar-multiplication"><span class="section-num">3.3</span> vector scalar multiplication</h3>
+<div class="lemma">
+<p>if we multiply a <a href="#vector">vector</a> \(A\) by a positive <a href="/post/20220727110413-scalar/">scalar</a> \(b\), the result is a new vector \(C = bA\). The vector C is parallel to A, and its length is \(b\) times greater, thus \(\hat C = \hat A\) (<a href="#unit-vector">unit vector</a>s) and \(|C| = b|A|\) <br/></p>
+</div>
+<div class="lemma">
+<p>the result of multiplying a vector by \(-1\) is a new vector opposite in direction to the original vector <br/>
+multiplication of a vector by a negative scalar evidently can change both the <a href="#magnitude">magnitude</a> and the direction sense <br/></p>
+</div>
+<h3 id="vector-addition-and-subtraction"><span class="section-num">3.4</span> vector addition and subtraction</h3>
+<p>the addition of 2 vectors is simply described in the following drawing: <br/></p>
+<p><figure><img src="/ox-hugo/BlOGLgM.svg"/>
+</figure>
+ <br/></p>
+<p>the rule is: to add B to A, place the tail of B at the head of A. the sum is a vector from the tail of A to the head of B <br/>
+since \(A-B=A+(-B)\), in order to subtract B from A we can simply multiply it by -1 and then add, so in a sense, we&rsquo;re &ldquo;rotating&rdquo; B and adding it to A to get \(A-B\): <br/></p>
+<p><img src="/ox-hugo/WnuzbR0.svg" alt=""> <br/>
+vector addition is <strong>commutative</strong>, <a href="/post/20220923212917-associative/">associative</a> and <a href="/post/20220923212922-distributive/">distributive</a> <br/></p>
+<h3 id="dot-product"><span class="section-num">3.5</span> dot product</h3>
+<div class="definition">
+<p>the scalar product of 2 vectors A and B is defined as \(A \cdot B = |A||B|\cos\theta\) where \(\theta\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \(\theta\) is always taken as the angle smaller than \(\pi\)): <br/></p>
+<p><figure><img src="/ox-hugo/dVIhILj.svg"/>
+</figure>
+ <br/></p>
+<p>when the vectors are in the form of a list of components, e.g. \((x,y,z)\) then the dot product is the sum of the products of corresponding components, i.e. given two vectors \(A=(A_1,\dots,A_n),B=(B_1,\dots,B_n)\), their dot product is \(A\cdot B=A_1B_1+\dots+A_nB_n\) <br/></p>
+<div class="question">
+<p>find a unit vector in the \(xy\) plane which is perpendicular to \(A=(3,5,1)\) <br/></p>
+<div class="answer">
+<p>we denote the perpendicular vector by \(B=(B_x,B_y,B_z)\), since \(B\) is in the \(xy\) plane, \(B_z=0\), for B to be perpendicular to A, we have \(A\cdot B=0\) because \(\cos90=0\), so: <br/></p>
+<p>\begin{align*}
+A \cdot B &amp;= 3B_x + 5B_y\\
+&amp;= 0
+\end{align*}</p>
+<p>hence \(B_y=-\frac{3}{5}B_x\), however, B is a <a href="#unit-vector">unit vector</a>, which means that \(\sqrt{B_x^2+B_y^2}=1\) <br/>
+combining these gives \(B_x^2+\frac{9}{25}B_x^2=1\), or \(B_x=\sqrt{\frac{25}{34}}=\pm0.857\) and \(B_y=-\frac{3}{5}B_x=\pm0.514\) <br/>
+the ambiguity in sign of \(B_x\) and \(B_y\) indicates that B can point along a line perpendicular to A in either of two directions <br/></p>
+</div>
+</div>
+</div>
+<h3 id="cross-product"><span class="section-num">3.6</span> cross product</h3>
+<p>unlike the <a href="#dot-product">dot product</a> which gives us a scalar as a result, the <strong>cross product</strong> results in a <a href="#vector">vector</a>, so we get a <a href="#magnitude">magnitude</a> and a direction that represent the vector <br/>
+the cross product is defined by the formula: <br/>
+\(A \times B = \left\Vert A \right\Vert \left\Vert B \right\Vert\sin(\theta)n\) <br/>
+where \(\theta\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \(\theta\) is always taken as the angle smaller than \(\pi\)) <br/>
+when we draw A and B tail to tail, they determine a plane, we define \(n\) to be a <a href="#unit-vector">unit vector</a> that is perpendicular to that plane, which means \(A\times B\) is in that same direction as the unit vector <br/>
+imagine a right hand coordinate system with \(A\) and \(B\) in the \(xy\) plane, A lies on the \(x\) axis and \(B\) lies toward the \(y\) axis, \(A\), \(B\) and \(n\) should form what is called a right hand triple such that \(n\) would be represented by the thumb <br/></p>
+<p><figure><img src="/ox-hugo/MCw787K.svg"/>
+</figure>
+ <br/></p>
+<p>a result of our definition of the cross product is that: <br/>
+\(B\times A=-A\times B\) <br/>
+and so obviously cross product isnt <a href="/post/20220923212910-commutative/">commutative</a> but rather anticommutative <br/></p>
+<h3 id="vector-space"><span class="section-num">3.7</span> vector space</h3>
+<div class="definition">
+<p>let \(V\) be a non-empty <a href="/post/discrete_maths2/#set">set</a> of <a href="#vector">vector</a>s containing numbers from the <a href="#field">field</a> \(\mathbb{F}\), consider the 2 operations addition and scalar multiplication, \(V_\mathbb{F}\) is a <strong>vector space</strong> only if it abides by the following axioms: <br/>
 <strong>addition axioms</strong>: <br/></p>
 <ul>
 <li>addition closure: for every \(\vec{v}_1, \vec{v}_2 \in V\) we have \(\vec{v}_1 + \vec{v}_2 \in V\) <br/></li>
@@ -686,18 +739,18 @@ we substitute \(A\) inplace of \(A^t\) in the lemma and we get: <br/></p>
 <div class="my_example">
 <p>over some \(n \in \mathbb{N}\) and some field \(\mathbb{F}\): <br/>
 \[
-v = \{(x_1, x_2, x_3, \ldots x_n) \ | \ x_i \in \mathbb{F}, i = 1 \ldots n\}
+v = \{(x_1, x_2, x_3, \ldots x_n) \ | \ x_i \in \mathbb{F}, i = 1, \ldots, n\}
 \] <br/>
 the definition of summation would be: <br/></p>
 <p>\begin{gather*}
-v = (v_1, v_2, \ldots v_n) \in V\\
-u = (u_1, u_2, \ldots u_n) \in V\\
-u \oplus v = (u_1 + v_1, u_2 + v_2, \ldots u_n + v_n)
+v = (v_1, v_2, \dots, v_n) \in V\\
+u = (u_1, u_2, \dots, u_n) \in V\\
+u \oplus v = (u_1 + v_1, u_2 + v_2, \dots, u_n + v_n)
 \end{gather*}</p>
-<p>and for some \(a \in \mathbb{F}\) the definition of multiplication would be: <br/></p>
-<p>\begin{gather*}
-a \odot v = (a \cdot v_1, a \cdot v_2, \ldots a \cdot v_n)
-\end{gather*}</p>
+<p>and for some \(a \in \mathbb{F}\) the definition of multiplication would be: <br/>
+\[
+a \odot v = (a \cdot v_1, a \cdot v_2, \dots, a \cdot v_n)
+\] <br/></p>
 </div>
 <div class="my_example">
 <p>this is an example of the 1st addition axiom <br/>
@@ -731,7 +784,7 @@ if \(n &gt; m\): <br/></p>
 \deg(f+g) &amp;= n
 \end{align*}</p>
 <p>if \(n = m\): <br/>
-\[ \deg(f+g) = \text{cant be known, depends on the polynomials} \] <br/></p>
+\[ \deg(f+g) = \text{cant be predetermined, depends on the polynomials} \] <br/></p>
 </div>
 <div class="my_example">
 <p>a vector space could look something like this: <br/></p>
@@ -786,7 +839,7 @@ a \cdot \vec0 &amp;= a \cdot \vec0 + a \cdot \vec0\\
 \[ a \cdot v = \vec0 \iff (a = 0 \text{ or } v = \vec0) \] <br/></p>
 </div>
 </div>
-<h4 id="vector-subspace"><span class="section-num">3.1.1</span> vector subspace</h4>
+<h4 id="vector-subspace"><span class="section-num">3.7.1</span> vector subspace</h4>
 <div class="definition">
 <p>let \(V_\mathbb{F}\) be a <a href="#vector-space">vector space</a> <br/>
 if \(U \subseteq V_\mathbb{F}\) we say \(U\) is a <strong>subspace</strong> of \(V\) and we write \(U \leq V\) only if the following is true: <br/></p>
@@ -827,12 +880,12 @@ kx + ky &amp;= k(x + y) = 0 \ \checkmark
 \end{align*}</p>
 </div>
 </div>
-<h4 id="linear-combination"><span class="section-num">3.1.2</span> linear combination</h4>
+<h4 id="linear-combination"><span class="section-num">3.7.2</span> linear combination</h4>
 <div class="definition">
 <p>let \(V_\mathbb{F}\) be a <a href="#vector-space">vector space</a>, let \(A = \{\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n\} \subseteq V_\mathbb{F}\) and \(x_1, x_2, \ldots, x_n \in \mathbb{F}\), then \(x_1\vec{v}_1 + x_2\vec{v}_2 + \cdots + x_n\vec{v}_n\) is a <strong>linear combination</strong> of elements of \(A\) <br/>
 although the term <strong>linear combination</strong> is somewhat ambiguous as it can refer to either the combination of vectors and coefficients itself or (in most cases) to its value, i.e. \(v = x_1\vec{v}_1 + x_2\vec{v}_2 + \cdots + x_n\vec{v}_n\) means the <a href="#vector">vector</a> \(v\) is a linear combination of the vectors in the <a href="/post/discrete_maths2/#set">set</a> \(A\) <br/></p>
 </div>
-<h4 id="span"><span class="section-num">3.1.3</span> span</h4>
+<h4 id="span"><span class="section-num">3.7.3</span> span</h4>
 <div class="definition">
 <p>the <strong>span</strong> of a given <a href="/post/discrete_maths2/#set">set</a> of <a href="#vector">vector</a>s is the collection of all the possible <a href="#linear-combination">linear combination</a>s of the vectors of the set, i.e.: <br/>
 let \(V_\mathbb{F}\) be a <a href="#vector-space">vector space</a>, let \(A = \{\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n\} \subseteq V_\mathbb{F}\) and \(x_1, x_2, \ldots, x_n \in \mathbb{F}\), then \(\spn(\{\vec{v}_1, \ldots, \vec{v}_n\}) = \{x_1\vec{v}_1, x_2\vec{v}_2, \ldots, x_n\vec{v}_n \}\) <br/></p>
@@ -862,7 +915,7 @@ let \(\vec{v} \in \spn\{\vec{v}_1 \ldots \vec{v}_n\}, a \in \mathbb{F}\) so ther
 </div>
 </div>
 </div>
-<h5 id="spanning-set"><span class="section-num">3.1.3.1</span> spanning set</h5>
+<h5 id="spanning-set"><span class="section-num">3.7.3.1</span> spanning set</h5>
 <div class="definition">
 <p>consider the <a href="#vector-space">vector space</a> \(V\), let \(w \subseteq V_\mathbb{F},\ |w| \in \mathbb{N},\ \spn(w)=V\), then \(w\) is a <strong>spanning set</strong> of \(V\) and \(V\) is a <strong>finitely spanned set</strong> <br/></p>
 <div class="my_example">
@@ -914,7 +967,7 @@ let \(m\) be the polynomial with the highest degree, \(m = max\{deg(p_{1 \righta
 <p>if \(V_\mathbb{F}\) is finitely spanned, if \(W \leq V\) then \(W\) is finitely spanned too <br/></p>
 </div>
 </div>
-<h5 id="linear-dependance"><span class="section-num">3.1.3.2</span> linear dependance</h5>
+<h5 id="linear-dependance"><span class="section-num">3.7.3.2</span> linear dependance</h5>
 <div class="definition">
 <p>a <a href="/post/discrete_maths2/#set">set</a> of vectors \(v_1, v_2, \ldots, v_k\) from a <a href="#vector-space">vector space</a> is said to be <strong>linearly dependant</strong> if there exists a non-trivial (not all zeros) set of <a href="/post/20220727110413-scalar/">scalar</a>s \(a_1,a_2,\ldots,a_k\), such that: <br/>
 \[
@@ -951,7 +1004,7 @@ and that \(a\) can just be \(a = 1\) which would give us \(1 \cdot \vec v = \vec
 </div>
 </div>
 </div>
-<h6 id="proportionality"><span class="section-num">3.1.3.2.1</span> proportionality</h6>
+<h6 id="proportionality"><span class="section-num">3.7.3.2.1</span> proportionality</h6>
 <div class="definition">
 <p>\(v_1, v_2\) are called <strong>proportional</strong> if there exists \(a \in \mathbb{F}\) such that \(v_1 = a \cdot v_2\) <br/></p>
 <div class="lemma">
@@ -1057,7 +1110,7 @@ in other words, if a given sequence of vectors is linearly dependant then it has
 <p>let \(S = \{s_1,s_2,\ldots,s_n\}\), if \(S \subseteq V\) is a dependant set then there exists \(\vec s \in S\) such that \(\spn(s) = \spn(S - \{s\})\) <br/>
 in other words, given a dependant set of vectors, there exists a vector in this set that is possible to drop without changing the span of the set <br/></p>
 <div class="proof">
-<p>according to <a href="#org44ebb5e">this entailment</a>, there exists \(s \in S\) such that \(s \in \spn(S - \{s\})\) <br/>
+<p>according to <a href="#orgdb29de8">this entailment</a>, there exists \(s \in S\) such that \(s \in \spn(S - \{s\})\) <br/>
 to prove \(\spn(s) = \spn(S - \{s\})\) we show that \(\spn(s) \subseteq \spn(S - \{s\})\) and \(\spn(S - \{s\}) \subseteq \spn(s)\) <br/>
 we know that \(\spn(S - \{s\}) \subseteq \spn(s)\) because we can take every linear combination from the former, add \(0 \cdot s\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \(s = s_1\) <br/>
@@ -1090,16 +1143,16 @@ and since \(\spn(s) \subseteq \spn(S - \{s\})\) and \(\spn(S - \{s\}) \subseteq 
 <div class="proof">
 <p>in case \(S\) is linearly independant we pick \(B = S\) and so \(B\) is linearly dependant and \(\spn(B) = \spn(S)\) <br/>
 in case \(S\) is linearly dependant we got more work to do: <br/>
-according to <a href="#org98349fb">this lemma</a>, \(\spn(S) = \spn(S - \{s_1\})\) <br/>
+according to <a href="#orge2f1caa">this lemma</a>, \(\spn(S) = \spn(S - \{s_1\})\) <br/>
 in case \(S - \{s_1\}\) is linearly independant then let \(B = S - \{s_1\}\) which means \(B \subseteq S\) and \(\spn(B) = \spn(S)\) <br/>
-in case \(S - \{s_1\}\) is linearly dependant, according to <a href="#org98349fb">this lemma</a>, \(\spn(S - \{s_1,s_2\}) = \spn(S - \{s_1\}) = \spn(S)\) <br/>
+in case \(S - \{s_1\}\) is linearly dependant, according to <a href="#orge2f1caa">this lemma</a>, \(\spn(S - \{s_1,s_2\}) = \spn(S - \{s_1\}) = \spn(S)\) <br/>
 in case \(\spn(S - \{s_1,s_2\})\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \(S\) without changing the span, eventually we would arrive at \(S - \{s_1,s_2,s_k\}\) that is linearly independant and \(B \subseteq S\) and \(\spn(B) = \spn(S)\) <br/></p>
 </div>
 </div>
 </div>
-<h5 id="visual-explanation"><span class="section-num">3.1.3.3</span> visual explanation</h5>
+<h5 id="visual-explanation"><span class="section-num">3.7.3.3</span> visual explanation</h5>
 <p>by definition of <strong>span</strong>, a span of a set of vectors is the collection of all the possible linear combinations using said vectors <br/>
 the span of a single vector would just be its own line expanded across the entire 3d region, because we cant reach other dimensions by constant multiplication or by addition of the vector to itself <br/></p>
 <p><figure><img src="/ox-hugo/DuGLXT.svg"/>
@@ -1114,7 +1167,7 @@ for simplicity, we take the relatively simple vectors \(\begin{bmatrix} 0\\1.3\\
 <p><figure><img src="/ox-hugo/mW0Cqb.svg"/>
 </figure>
  <br/></p>
-<h4 id="basis"><span class="section-num">3.1.4</span> basis</h4>
+<h4 id="basis"><span class="section-num">3.7.4</span> basis</h4>
 <div class="definition">
 <p>assuming a <a href="#vector-space">vector space</a> \(V\), let \(B \subseteq V\) be a finite, <a href="#linear-dependance">linearly independant</a> and <a href="#spanning-set">spanning set</a> of \(V\) which we call a <strong>basis</strong> <br/>
 let \(B = \{u_1,\ldots,u_i,\ldots,u_n\}\) be a basis of \(\mathbb{R}^n\): <br/></p>
@@ -1138,7 +1191,7 @@ this is necessarily true because \(x_i\) has to be 0 for \(u_i\) to zero out and
 <p>every <strong>finitely generated vector space</strong> \(V_\mathbb{F}\) has atleast one basis <br/></p>
 <div class="proof">
 <p>since \(V_\mathbb{F}\) is finitely generated there exists a finite set \(S \subseteq V\) such that \(\spn(S) = V\) <br/>
-according to <a href="#org98349fb">this lemma</a>, there exists \(B \subseteq S\) where \(B\) is linearly independant and \(\spn(B) = V\), therefore \(B\) is a basis <br/></p>
+according to <a href="#orge2f1caa">this lemma</a>, there exists \(B \subseteq S\) where \(B\) is linearly independant and \(\spn(B) = V\), therefore \(B\) is a basis <br/></p>
 </div>
 </div>
 <div class="my_example">
@@ -1193,7 +1246,7 @@ therefore \(|B| = |A|\) <br/></p>
 </div>
 </div>
 </div>
-<h5 id="standard-basis"><span class="section-num">3.1.4.1</span> standard basis</h5>
+<h5 id="standard-basis"><span class="section-num">3.7.4.1</span> standard basis</h5>
 <div class="definition">
 <p>the <strong>standard basis</strong> (also called <strong>natural basis</strong> or <strong>canonical basis</strong>) of a coordinate vector space is the set of vectors whose components are all zero, except one that equals 1. <br/></p>
 <div class="my_example">
@@ -1211,7 +1264,7 @@ which is an identity matrix of the 3rd degree <br/>
 </div>
 </div>
 </div>
-<h4 id="dimension"><span class="section-num">3.1.5</span> dimension</h4>
+<h4 id="dimension"><span class="section-num">3.7.5</span> dimension</h4>
 <div class="definition">
 <p>the <strong>dimension</strong> of a <a href="#vector-space">vector space</a> \(V_\mathbb{F}\) is the number of elements in one of its <a href="#basis">bases</a> <br/>
 we write \(\dim V_\mathbb{F} = |B|\) where \(B\) is a basis of \(V\) <br/></p>
@@ -1275,7 +1328,7 @@ assume \(\{w_1\ldots w_m\}\) where \(m &gt; n\) is a basis of \(W\), then we kno
 <div class="lemma">
 <p>given \({V_\mathbb{F}}^n\) is finitely spanned, \(W^n \leq V^n\) and \(\dim W = \dim V\) then \(W = V\) <br/></p>
 <div class="proof">
-<p>let \(w_1\ldots w_n\) be a basis of \(W\) and so \(n = |V|\) and \(w_1\ldots w_n\) is linearly independant therefore according to <a href="#orga25ded4">this lemma</a> \(\spn\{w_1\ldots w_n\} = V = W\) and since it spans \(V\) and is of size \(n = |V|\) then it is a basis of \(V\) <br/></p>
+<p>let \(w_1\ldots w_n\) be a basis of \(W\) and so \(n = |V|\) and \(w_1\ldots w_n\) is linearly independant therefore according to <a href="#orgb455b5d">this lemma</a> \(\spn\{w_1\ldots w_n\} = V = W\) and since it spans \(V\) and is of size \(n = |V|\) then it is a basis of \(V\) <br/></p>
 </div>
 </div>
 <div class="lemma">
@@ -1306,7 +1359,7 @@ to be continued&hellip; <br/></p>
 </div>
 </div>
 </div>
-<h4 id="coordinate-vector"><span class="section-num">3.1.6</span> coordinate vector</h4>
+<h4 id="coordinate-vector"><span class="section-num">3.7.6</span> coordinate vector</h4>
 <div class="definition">
 <p>let \(V_F\) be a vector space such that \(\dim V = m\), and \(B=\{v_1,v_2\ldots v_m\}\) be a basis of \(V\) and \(u \in V\) <br/>
 the <strong>coordinate vector</strong> of \(u\) relative to the basis \(B\) is defined as \([u]_B=(k_1,k_2\ldots k_m)\) such that \(k_1v_1+k_2v_2+\cdots+k_mv_m=u\) <br/></p>
@@ -1367,7 +1420,7 @@ the <strong>coordinate vector</strong> of \(u\) relative to the basis \(B\) is d
 </div>
 </div>
 </div>
-<h5 id="transformation-matrix"><span class="section-num">3.1.6.1</span> transformation matrix</h5>
+<h5 id="transformation-matrix"><span class="section-num">3.7.6.1</span> transformation matrix</h5>
 <div class="definition">
 <p>let \(V_F\) be a vector space such that \(\dim v = m\) and let \(A=\{u_1,u_2\ldots u_m\},B=\{v_1,v_2\ldots v_m\}\) be bases of V, the <strong>transformation matrix</strong> from \(B\) to \(A\) is defined as \(_BT_A=([u_1]_B^T,[u_2]_B^T,\ldots,[u_m]_B^T)\) <br/></p>
 <div class="question">
@@ -1427,7 +1480,7 @@ v_1 &amp; v_2 &amp; v_3 &amp; u_1 &amp; u_2 &amp; u_3\\
 </ol>
 </div>
 </div>
-<h4 id="vector-space-addition"><span class="section-num">3.1.7</span> vector space addition</h4>
+<h4 id="vector-space-addition"><span class="section-num">3.7.7</span> vector space addition</h4>
 <div class="definition">
 <p>given the <a href="#vector-space">vector space</a>s \(U,W\) that are <a href="#vector-subspace">subspace</a>s of the vector space \(V_\mathbb{F}\) (meaning \(U,W \leq V\)), then the addition of \(U\) and \(W\) is defined as: <br/>
 \[
@@ -1482,7 +1535,7 @@ we put these vectors in a matrix and reduce it to find out how many linearly ind
 which means that only the first 3 vectors are linearly independant so \(U+V = \spn(\{(1,2,1,2,1),(2,1,2,1,2),(0,1,2,3,0)\})\) and \(\dim(U+V)=3\) <br/></p>
 </div>
 </div>
-<h4 id="vector-space-intersection"><span class="section-num">3.1.8</span> vector space intersection</h4>
+<h4 id="vector-space-intersection"><span class="section-num">3.7.8</span> vector space intersection</h4>
 <div class="definition">
 <p>given the <a href="#vector-space">vector space</a>s \(U,W\) that are <a href="#vector-subspace">subspace</a>s of the vector space \(V_\mathbb{F}\) (meaning \(U,W \leq V\)), then the intersection of \(U\) and \(W\) is defined as: <br/>
 \[
@@ -1546,7 +1599,7 @@ x_4=x_5\\
 </div>
 </div>
 </div>
-<h4 id="vector-space-union"><span class="section-num">3.1.9</span> vector space union</h4>
+<h4 id="vector-space-union"><span class="section-num">3.7.9</span> vector space union</h4>
 <h2 id="linear-map"><span class="section-num">4</span> linear map</h2>
 <div class="definition">
 <p>let \(U,V\) be <a href="#vector-space">vector spaces</a> over the <a href="#field">field</a> \(\mathbb{F}\), and let \(L: U \to V\) be a <a href="/post/discrete_maths2/#function">function</a> which would be called a <strong>linear map</strong> if: <br/></p>
@@ -1990,9 +2043,9 @@ y = -3z\\
     
 
   
-    <h4><a href="/post/20220813152209-average/">average</a></h4>
+    <h4><a href="/post/20220923212910-commutative/">commutative</a></h4>
     <h5></h5>
-  September 18, 2022
+  September 26, 2022
     
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
@@ -2006,9 +2059,9 @@ y = -3z\\
     
 
   
-    <h4><a href="/post/calculus2/">calculus</a></h4>
-    <h5>calculus</h5>
-  September 15, 2022
+    <h4><a href="/post/20220923212917-associative/">associative</a></h4>
+    <h5></h5>
+  September 26, 2022
     
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
@@ -2022,12 +2075,10 @@ y = -3z\\
     
 
   
-    <h4><a href="/post/20220726153827-rational_root_theorem/">rational root theorem</a></h4>
-    <h5>ratinoal root theorem</h5>
-  September 3, 2022
+    <h4><a href="/post/20220923212922-distributive/">distributive</a></h4>
+    <h5></h5>
+  September 26, 2022
     
-<a href="https://mahmoodsheikh36.github.io/tags/theorem"><kbd class="item-tag">theorem</kbd></a>
-
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
 
