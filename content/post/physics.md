@@ -2,7 +2,7 @@
 title = "mechanics"
 author = ["mahmood"]
 description = "mechanics (physics)"
-date = 2022-09-26T17:34:00+03:00
+date = 2022-09-26T19:37:00+03:00
 tags = ["todo"]
 draft = false
 +++
@@ -114,7 +114,7 @@ a displacement vector is a [true physics vector](#true-physics-vector) <br/>
 the SI unit for acceleration is metre per second (\\(\frac{\mathrm{m}}{\mathrm{s}}\\)) <br/>
 velocity can also be defined as the [derivative]({{< relref "calculus2.md#derivative" >}}) of position with respect to time, as it is the [limit]({{< relref "calculus2.md#limit" >}}) of the [average velocity](#average-velocity) as the time interval approaches zero: <br/>
 \\[
-v = \lim\_{\Delta t \to 0} \frac{x(t+\Delta t)-x(t)}{\Delta t} = \frac{\Delta x}{\Delta t} = \frac{dx}{dt}
+v = \lim\_{\Delta t \to 0} \frac{x(t+\Delta t)-x(t)}{\Delta t} = \frac{dx}{dt}
 \\] <br/>
 using notation due to Gottfried Leibniz, who independently invented [calculus]({{< relref "calculus2.md" >}}). as Newton would have written <br/>
 \\[
@@ -154,12 +154,6 @@ the concept of speed is sometimes useful. speed is simply the [magnitude]({{< re
 it can also be defined as the [derivative]({{< relref "calculus2.md#derivative" >}}) of velocity with respect to time or the second derivative of [position](#position-vector--linear-algebra2-dot-md) with respect to time <br/>
 the SI unit for acceleration is metre per second squared (\\(\frac{\mathrm{m}}{\mathrm{s}^2}\\)) <br/>
 
-<div class="characteristic">
-
-<br/>
-
-</div>
-
 </div>
 
 
@@ -175,8 +169,36 @@ an object's **average acceleration** over a period of time is its change in [vel
 
 **instantaneous acceleration** is a continuous [function]({{< relref "discrete_maths2.md#function" >}}) of time and gives the acceleration at a single point in time and space: <br/>
 \\[
-a = \lim\_{\Delta t \to 0} \frac{v(t+\Delta t)-v(t)}{\Delta t} = \frac{\Delta v}{\Delta t} = \frac{dv}{dt} = \frac{d^2x}{dt^2}
+a = \lim\_{\Delta t \to 0} \frac{v(t+\Delta t)-v(t)}{\Delta t} = \frac{dv}{dt} = \frac{d^2r}{dt^2}
 \\] <br/>
 
 
 ## <span class="section-num">6</span> motion {#motion}
+
+<div class="my_question">
+
+suppose that the position of a particle is given by <br/>
+\\[
+r = A(e^{\alpha t}\ihat + e^{-\alpha t}\jhat)
+\\] <br/>
+where A and \\(\alpha\\) are constants, find the [velocity](#instantaneous-velocity) and sketch the trajectory <br/>
+
+<div class="answer">
+
+\begin{align\*}
+  v &= \frac{dr}{dt}\\\\
+  &= A(\alpha e^{\alpha t}\ihat - ae^{-\alpha t}\jhat)\\\\
+  v\_x &= A\alpha e^{\alpha t}\\\\
+  v\_y &= -A\alpha e^{-\alpha t}
+\end{align\*}
+
+the [magnitude]({{< relref "linear_algebra2.md#magnitude" >}}) of \\(v\\) is <br/>
+
+\begin{align\*}
+  |v| &= \sqrt{v\_x^2 + v\_y^2}\\\\
+  &= A\alpha\sqrt{e^{2\alpha t} + e^{-2\alpha t}}
+\end{align\*}
+
+</div>
+
+</div>

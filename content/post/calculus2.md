@@ -2,7 +2,7 @@
 title = "calculus"
 author = ["mahmood"]
 description = "calculus"
-date = 2022-09-24T13:13:00+03:00
+date = 2022-09-26T20:29:00+03:00
 tags = ["public", "math"]
 draft = false
 +++
@@ -17,6 +17,9 @@ draft = false
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{\i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{\j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
 </p>
 
 <!-- mathjax -->
@@ -432,21 +435,44 @@ and since this limit is equal to the original limit, we finally get: <br/>
 
 <div class="definition">
 
-let \\(f(x)\\) be a function, the derivative of \\(f(x)\\), denoted by \\(f'(x)\\) is the function that describes the slope of \\(f(x)\\) <br/>
+let \\(f(x)\\) be a [function]({{< relref "discrete_maths2.md#function" >}}), the **derivative** of \\(f(x)\\), denoted by \\(f'(x)=\frac{df(x)}{dx}\\) is the function that describes the slope of \\(f(x)\\) <br/>
+
+<div class="note">
+
+to denote an nth derivative of a function we write \\(\frac{d^nf(x)}{dx^n}\\), this reads "the nth derivative of \\(f(x)\\) with respect to \\(x\\)" <br/>
+
+</div>
 
 </div>
 
 
 ### <span class="section-num">6.1</span> derivative table {#derivative-table}
 
-| \\(f(x)\\)      | \\(f'(x)\\)             |
-|-----------------|-------------------------|
-| \\(a^x\\)       | \\(a^x\ln a\\)          |
-| \\(\ln x\\)     | \\(\frac{1}{x}\\)       |
-| \\(\log\_a x\\) | \\(\frac{1}{\ln{ax}}\\) |
+| function             | derivative                               | rule name       |
+|----------------------|------------------------------------------|-----------------|
+| c                    | 0                                        |                 |
+| \\(cx^n\\)           | \\(ncx^{n-1}\\)                          | power rule      |
+| \\(f(x)+g(x)\\)      | \\(f'(x)+g'(x)\\)                        | sum rule        |
+| \\(f(x)-g(x)\\)      | \\(f'(x)-g'(x)\\)                        | difference rule |
+| \\(f(x)\cdot g(x)\\) | \\(f(x)g'(x)+f'(x)g(x)\\)                | product rule    |
+| \\(f(x)/g(x)\\)      | \\(\frac{f'(x)g(x)-g'(x)f(x)}{g^2(x)}\\) | quotient rule   |
+| \\(f(g(x))\\)        | \\(f'(g(x))g'(x)\\)                      | chain rule      |
+| \\(ke^{cx}\\)        | \\(cke^{cx}\\)                           |                 |
+| \\(a^x\\)            | \\(a^x\ln a\\)                           |                 |
+| \\(\ln x\\)          | \\(\frac{1}{x}\\)                        |                 |
+| \\(\log\_a x\\)      | \\(\frac{1}{x\ln{a}}\\)                  |                 |
+| \\(\sin x\\)         | \\(\cos x\\)                             |                 |
+| \\(\cos x\\)         | \\(-\sin x\\)                            |                 |
+| \\(\tan x\\)         | \\(\sec^2 x\\)                           |                 |
+| \\(\sin^{-1} x\\)    | \\(\frac{1}{\sqrt{1-x^2}}\\)             |                 |
+| \\(\cos^{-1} x\\)    | \\(\frac{-1}{\sqrt{1-x^2}}\\)            |                 |
+| \\(\tan^{-1} x\\)    | \\(\frac{1}{1+x^2}\\)                    |                 |
+| \\(\frac{1}{f(x)}\\) | \\(\frac{-f'(x)}{f(x)^2}\\)              | reciprocal Rule |
 
 
 ### <span class="section-num">6.2</span> chain rule {#chain-rule}
+
+see [derivative table](#derivative-table) <br/>
 
 
 ## <span class="section-num">7</span> integral {#integral}
