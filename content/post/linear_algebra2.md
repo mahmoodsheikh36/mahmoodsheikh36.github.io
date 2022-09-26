@@ -2,7 +2,7 @@
 title = "linear algebra"
 author = ["mahmood"]
 description = "linear algebra"
-date = 2022-09-23T19:47:00+03:00
+date = 2022-09-26T00:26:00+03:00
 tags = ["public", "math"]
 draft = false
 +++
@@ -80,7 +80,7 @@ a matrix can be constructed over a specific finite/infinite set of numbers for e
 <div class="my_example">
 
 consider this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
-\\[\left[\begin{array}{rrrr} -1 & -2 & 2 & 0 \\\ -2 & 1 & 2 & 0 \\\ 0 & -1 & -33 & 3 \\\ 1 & -1 & -1 & 0 \\\ -1 & 0 & 1 & -1 \end{array}\right]\\] <br/>
+\\[\left[\begin{array}{rrrr} 1 & -3 & -9 & -37 \\\ -8 & 1 & 0 & 0 \\\ 1 & 1 & -1 & -1 \\\ -1 & -1 & -2 & 0 \\\ 5 & 0 & 0 & 1 \end{array}\right]\\] <br/>
 
 </div>
 
@@ -287,7 +287,7 @@ assuming \\(A\\) is an \\(n\times n\\) matrix <br/>
 
 <div class="lemma">
 
-interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org29bd2db) and [alternating](#orgf77de85) <br/>
+interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#orgde8a683) and [alternating](#orge8251c8) <br/>
 
 </div>
 
@@ -299,7 +299,7 @@ if the columns of the matrix form a [linearly dependant set](#linear-dependance)
 
 <div class="lemma">
 
-adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org29bd2db) and being [alternative](#orgf77de85) <br/>
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#orgde8a683) and being [alternative](#orge8251c8) <br/>
 
 </div>
 
@@ -669,7 +669,7 @@ the rows of \\(B\\) span the rows of \\(AB\\) <br/>
 
 \begin{align\*}
   \dim C(AB) \leq \dim C(A)\\\\
-  \dim R(AB) \leq \dim R(B)  
+  \dim R(AB) \leq \dim R(B)
 \end{align\*}
 
 </div>
@@ -768,7 +768,7 @@ we substitute \\(A\\) inplace of \\(A^t\\) in the lemma and we get: <br/>
 
 \begin{align\*}
   \dim C(A^t) \leq \dim R(A^t)\\\\
-  \dim R(A) \leq \dim C(A)  
+  \dim R(A) \leq \dim C(A)
 \end{align\*}
 
 therefore <br/>
@@ -855,6 +855,7 @@ The **image** of a [linear transformation](#linear-map) or [matrix](#matrix) is 
 
 ## <span class="section-num">3</span> vector {#vector}
 
+anything can be a vector, so long as we define sensible addition and scalar multiplication operations that abide by the axioms of a [vector space](#vector-space) <br/>
 a **vector** can be represented using its components or using length and direction <br/>
 
 
@@ -862,7 +863,7 @@ a **vector** can be represented using its components or using length and directi
 
 <div class="definition">
 
-the **magnitude** of a [vector](#vector) \\(A\\) is its length, denoted by \\(|A|\\), it can be calculated from the square root of the total of the squares of of the individual vector components <br/>
+the **magnitude** of a [vector](#vector) \\(A\\) is its length, denoted by \\(|A|\\) or \\(\left\Vert A \right\Vert\\), it can be calculated from the square root of the total of the squares of of the individual vector components <br/>
 
 </div>
 
@@ -907,14 +908,65 @@ the addition of 2 vectors is simply described in the following drawing: <br/>
 the rule is: to add B to A, place the tail of B at the head of A. the sum is a vector from the tail of A to the head of B <br/>
 since \\(A-B=A+(-B)\\), in order to subtract B from A we can simply multiply it by -1 and then add, so in a sense, we're "rotating" B and adding it to A to get \\(A-B\\): <br/>
 
-{{< figure src="/ox-hugo/WnuzbR0.svg" >}} <br/>
+![](/ox-hugo/WnuzbR0.svg) <br/>
+vector addition is **commutative**, [associative]({{< relref "20220923212917-associative.md" >}}) and [distributive]({{< relref "20220923212922-distributive.md" >}}) <br/>
 
 
-### <span class="section-num">3.5</span> vector space {#vector-space}
+### <span class="section-num">3.5</span> dot product {#dot-product}
 
 <div class="definition">
 
-let \\(V\\) be a non-empty [set]({{< relref "discrete_maths2.md#set" >}}) of [vector](#vector)s containing numbers from the [field](#field) \\(\mathbb{F}\\), consider the 2 operations addition and scalar multiplication, \\(V\_\mathbb{F}\\) is a vector space only if it abides by the following axioms: <br/>
+the scalar product of 2 vectors A and B is defined as \\(A \cdot B = |A||B|\cos\theta\\) where \\(\theta\\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \\(\theta\\) is always taken as the angle smaller than \\(\pi\\)): <br/>
+
+{{< figure src="/ox-hugo/dVIhILj.svg" >}} <br/>
+
+when the vectors are in the form of a list of components, e.g. \\((x,y,z)\\) then the dot product is the sum of the products of corresponding components, i.e. given two vectors \\(A=(A\_1,\dots,A\_n),B=(B\_1,\dots,B\_n)\\), their dot product is \\(A\cdot B=A\_1B\_1+\dots+A\_nB\_n\\) <br/>
+
+<div class="question">
+
+find a unit vector in the \\(xy\\) plane which is perpendicular to \\(A=(3,5,1)\\) <br/>
+
+<div class="answer">
+
+we denote the perpendicular vector by \\(B=(B\_x,B\_y,B\_z)\\), since \\(B\\) is in the \\(xy\\) plane, \\(B\_z=0\\), for B to be perpendicular to A, we have \\(A\cdot B=0\\) because \\(\cos90=0\\), so: <br/>
+
+\begin{align\*}
+  A \cdot B &= 3B\_x + 5B\_y\\\\
+  &= 0
+\end{align\*}
+
+hence \\(B\_y=-\frac{3}{5}B\_x\\), however, B is a [unit vector](#unit-vector), which means that \\(\sqrt{B\_x^2+B\_y^2}=1\\) <br/>
+combining these gives \\(B\_x^2+\frac{9}{25}B\_x^2=1\\), or \\(B\_x=\sqrt{\frac{25}{34}}=\pm0.857\\) and \\(B\_y=-\frac{3}{5}B\_x=\pm0.514\\) <br/>
+the ambiguity in sign of \\(B\_x\\) and \\(B\_y\\) indicates that B can point along a line perpendicular to A in either of two directions <br/>
+
+</div>
+
+</div>
+
+</div>
+
+
+### <span class="section-num">3.6</span> cross product {#cross-product}
+
+unlike the [dot product](#dot-product) which gives us a scalar as a result, the **cross product** results in a [vector](#vector), so we get a [magnitude](#magnitude) and a direction that represent the vector <br/>
+the cross product is defined by the formula: <br/>
+\\(A \times B = \left\Vert A \right\Vert \left\Vert B \right\Vert\sin(\theta)n\\) <br/>
+where \\(\theta\\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \\(\theta\\) is always taken as the angle smaller than \\(\pi\\)) <br/>
+when we draw A and B tail to tail, they determine a plane, we define \\(n\\) to be a [unit vector](#unit-vector) that is perpendicular to that plane, which means \\(A\times B\\) is in that same direction as the unit vector <br/>
+imagine a right hand coordinate system with \\(A\\) and \\(B\\) in the \\(xy\\) plane, A lies on the \\(x\\) axis and \\(B\\) lies toward the \\(y\\) axis, \\(A\\), \\(B\\) and \\(n\\) should form what is called a right hand triple such that \\(n\\) would be represented by the thumb <br/>
+
+{{< figure src="/ox-hugo/MCw787K.svg" >}} <br/>
+
+a result of our definition of the cross product is that: <br/>
+\\(B\times A=-A\times B\\) <br/>
+and so obviously cross product isnt [commutative]({{< relref "20220923212910-commutative.md" >}}) but rather anticommutative <br/>
+
+
+### <span class="section-num">3.7</span> vector space {#vector-space}
+
+<div class="definition">
+
+let \\(V\\) be a non-empty [set]({{< relref "discrete_maths2.md#set" >}}) of [vector](#vector)s containing numbers from the [field](#field) \\(\mathbb{F}\\), consider the 2 operations addition and scalar multiplication, \\(V\_\mathbb{F}\\) is a **vector space** only if it abides by the following axioms: <br/>
 **addition axioms**: <br/>
 
 -   addition closure: for every \\(\vec{v}\_1, \vec{v}\_2 \in V\\) we have \\(\vec{v}\_1 + \vec{v}\_2 \in V\\) <br/>
@@ -947,9 +999,9 @@ v = \\{(x\_1, x\_2, x\_3, \ldots x\_n) \ | \ x\_i \in \mathbb{F}, i = 1, \ldots,
 the definition of summation would be: <br/>
 
 \begin{gather\*}
-  v = (v\_1, v\_2, \ldots v\_n) \in V\\\\
-  u = (u\_1, u\_2, \ldots u\_n) \in V\\\\
-  u \oplus v = (u\_1 + v\_1, u\_2 + v\_2, \ldots u\_n + v\_n)
+  v = (v\_1, v\_2, \dots, v\_n) \in V\\\\
+  u = (u\_1, u\_2, \dots, u\_n) \in V\\\\
+  u \oplus v = (u\_1 + v\_1, u\_2 + v\_2, \dots, u\_n + v\_n)
 \end{gather\*}
 
 and for some \\(a \in \mathbb{F}\\) the definition of multiplication would be: <br/>
@@ -1006,14 +1058,16 @@ if \\(n = m\\): <br/>
 
 a vector space could look something like this: <br/>
 
-![](/ox-hugo/BdNZek.svg) <br/>
+{{< figure src="/ox-hugo/BdNZek.svg" >}} <br/>
+
 all the vectors that lie on the blue line represent a vector space, because the multiplication of a line would just make it longer (or shorter) it wouldnt make it move out of the blue line, and addition of any 2 vectors that lie on the blue line would also result in a longer (or shorter) vector that lies on the same line which expands across the entire 2d space <br/>
 
 </div>
 
 <div class="my_example">
 
-![](/ox-hugo/xt5Zoo.svg) <br/>
+{{< figure src="/ox-hugo/xt5Zoo.svg" >}} <br/>
+
 this line doesnt represent a vector space because it doesnt contain the vector \\(\begin{bmatrix} 0\\\ 0 \end{bmatrix}\\) <br/>
 
 </div>
@@ -1084,7 +1138,7 @@ for \\(a \in \mathbb{F}\\) and \\(v \in V\\) <br/>
 </div>
 
 
-#### <span class="section-num">3.5.1</span> vector subspace {#vector-subspace}
+#### <span class="section-num">3.7.1</span> vector subspace {#vector-subspace}
 
 <div class="definition">
 
@@ -1144,7 +1198,7 @@ condition 3: multiplication closure, meaning if \\(\vec{v} \in V, k \in \mathbb{
 </div>
 
 
-#### <span class="section-num">3.5.2</span> linear combination {#linear-combination}
+#### <span class="section-num">3.7.2</span> linear combination {#linear-combination}
 
 <div class="definition">
 
@@ -1154,7 +1208,7 @@ although the term **linear combination** is somewhat ambiguous as it can refer t
 </div>
 
 
-#### <span class="section-num">3.5.3</span> span {#span}
+#### <span class="section-num">3.7.3</span> span {#span}
 
 <div class="definition">
 
@@ -1199,7 +1253,7 @@ let \\(\vec{v} \in \spn\\{\vec{v}\_1 \ldots \vec{v}\_n\\}, a \in \mathbb{F}\\) s
 </div>
 
 
-##### <span class="section-num">3.5.3.1</span> spanning set {#spanning-set}
+##### <span class="section-num">3.7.3.1</span> spanning set {#spanning-set}
 
 <div class="definition">
 
@@ -1274,7 +1328,7 @@ if \\(V\_\mathbb{F}\\) is finitely spanned, if \\(W \leq V\\) then \\(W\\) is fi
 </div>
 
 
-##### <span class="section-num">3.5.3.2</span> linear dependance {#linear-dependance}
+##### <span class="section-num">3.7.3.2</span> linear dependance {#linear-dependance}
 
 <div class="definition">
 
@@ -1331,7 +1385,7 @@ and that \\(a\\) can just be \\(a = 1\\) which would give us \\(1 \cdot \vec v =
 </div>
 
 
-###### <span class="section-num">3.5.3.2.1</span> proportionality {#proportionality}
+###### <span class="section-num">3.7.3.2.1</span> proportionality {#proportionality}
 
 <div class="definition">
 
@@ -1474,7 +1528,7 @@ in other words, given a dependant set of vectors, there exists a vector in this 
 
 <div class="proof">
 
-according to [this entailment](#org1ef5033), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
+according to [this entailment](#orgdb29de8), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
 to prove \\(\spn(s) = \spn(S - \\{s\\})\\) we show that \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) <br/>
 we know that \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) because we can take every linear combination from the former, add \\(0 \cdot s\\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \\(s = s\_1\\) <br/>
@@ -1514,9 +1568,9 @@ for every finite set \\(S \in V\_\mathbb{F}\\), there exists \\(B \subseteq S\\)
 
 in case \\(S\\) is linearly independant we pick \\(B = S\\) and so \\(B\\) is linearly dependant and \\(\spn(B) = \spn(S)\\) <br/>
 in case \\(S\\) is linearly dependant we got more work to do: <br/>
-according to [this lemma](#org1e493ea), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
+according to [this lemma](#orge2f1caa), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
 in case \\(S - \\{s\_1\\}\\) is linearly independant then let \\(B = S - \\{s\_1\\}\\) which means \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
-in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org1e493ea), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
+in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#orge2f1caa), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
 in case \\(\spn(S - \\{s\_1,s\_2\\})\\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \\(S\\) without changing the span, eventually we would arrive at \\(S - \\{s\_1,s\_2,s\_k\\}\\) that is linearly independant and \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
@@ -1528,7 +1582,7 @@ you might already see the pattern here, we keep dropping vectors from \\(S\\) wi
 </div>
 
 
-##### <span class="section-num">3.5.3.3</span> visual explanation {#visual-explanation}
+##### <span class="section-num">3.7.3.3</span> visual explanation {#visual-explanation}
 
 by definition of **span**, a span of a set of vectors is the collection of all the possible linear combinations using said vectors <br/>
 the span of a single vector would just be its own line expanded across the entire 3d region, because we cant reach other dimensions by constant multiplication or by addition of the vector to itself <br/>
@@ -1545,7 +1599,7 @@ for simplicity, we take the relatively simple vectors \\(\begin{bmatrix} 0\\\1.3
 {{< figure src="/ox-hugo/mW0Cqb.svg" >}} <br/>
 
 
-#### <span class="section-num">3.5.4</span> basis {#basis}
+#### <span class="section-num">3.7.4</span> basis {#basis}
 
 <div class="definition">
 
@@ -1580,7 +1634,7 @@ every **finitely generated vector space** \\(V\_\mathbb{F}\\) has atleast one ba
 <div class="proof">
 
 since \\(V\_\mathbb{F}\\) is finitely generated there exists a finite set \\(S \subseteq V\\) such that \\(\spn(S) = V\\) <br/>
-according to [this lemma](#org1e493ea), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
+according to [this lemma](#orge2f1caa), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
 
 </div>
 
@@ -1664,7 +1718,7 @@ therefore \\(|B| = |A|\\) <br/>
 </div>
 
 
-##### <span class="section-num">3.5.4.1</span> standard basis {#standard-basis}
+##### <span class="section-num">3.7.4.1</span> standard basis {#standard-basis}
 
 <div class="definition">
 
@@ -1696,7 +1750,7 @@ which is an identity matrix of the 3rd degree <br/>
 </div>
 
 
-#### <span class="section-num">3.5.5</span> dimension {#dimension}
+#### <span class="section-num">3.7.5</span> dimension {#dimension}
 
 <div class="definition">
 
@@ -1798,7 +1852,7 @@ given \\({V\_\mathbb{F}}^n\\) is finitely spanned, \\(W^n \leq V^n\\) and \\(\di
 
 <div class="proof">
 
-let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgcd1e6b5) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
+let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#orgb455b5d) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
 
 </div>
 
@@ -1850,7 +1904,7 @@ to be continued... <br/>
 </div>
 
 
-#### <span class="section-num">3.5.6</span> coordinate vector {#coordinate-vector}
+#### <span class="section-num">3.7.6</span> coordinate vector {#coordinate-vector}
 
 <div class="definition">
 
@@ -1924,7 +1978,7 @@ which means \\([(18,21,20)]\_B = (2,-3,4)\\) <br/>
 </div>
 
 
-##### <span class="section-num">3.5.6.1</span> transformation matrix {#transformation-matrix}
+##### <span class="section-num">3.7.6.1</span> transformation matrix {#transformation-matrix}
 
 <div class="definition">
 
@@ -1997,7 +2051,7 @@ let \\(V\_F\\) be a vector space such that \\(\dim V = m\\) and let \\(A=\\{u\_1
 </div>
 
 
-#### <span class="section-num">3.5.7</span> vector space addition {#vector-space-addition}
+#### <span class="section-num">3.7.7</span> vector space addition {#vector-space-addition}
 
 <div class="definition">
 
@@ -2080,7 +2134,7 @@ which means that only the first 3 vectors are linearly independant so \\(U+V = \
 </div>
 
 
-#### <span class="section-num">3.5.8</span> vector space intersection {#vector-space-intersection}
+#### <span class="section-num">3.7.8</span> vector space intersection {#vector-space-intersection}
 
 <div class="definition">
 
@@ -2169,7 +2223,7 @@ and so \\(U \cap V = \spn(\\{(1,1,1,1,1)\\})\\) and \\(\dim(U \cap V) = 1\\) <br
 </div>
 
 
-#### <span class="section-num">3.5.9</span> vector space union {#vector-space-union}
+#### <span class="section-num">3.7.9</span> vector space union {#vector-space-union}
 
 
 ## <span class="section-num">4</span> linear map {#linear-map}
