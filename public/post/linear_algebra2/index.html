@@ -142,6 +142,9 @@
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{\i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{\j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
 </p>
 <!-- mathjax -->
 <script>
@@ -188,7 +191,7 @@ window.onload = function() {
 </div>
 <div class="my_example">
 <p>consider this matrix over the field \(\mathbb{Z}\), where all the numbers are integers <br/>
-\[\left[\begin{array}{rrrr} 1 &amp; -3 &amp; -9 &amp; -37 \\ -8 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; -1 &amp; -1 \\ -1 &amp; -1 &amp; -2 &amp; 0 \\ 5 &amp; 0 &amp; 0 &amp; 1 \end{array}\right]\] <br/></p>
+\[\left[\begin{array}{rrrr} 5 &amp; -3 &amp; 0 &amp; -20 \\ 1 &amp; -2 &amp; -14 &amp; -2 \\ -64 &amp; -1 &amp; 3 &amp; -1 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ -1 &amp; -2 &amp; 1 &amp; -3 \end{array}\right]\] <br/></p>
 </div>
 </div>
 <h3 id="matrix-multiplication"><span class="section-num">2.1</span> matrix multiplication</h3>
@@ -311,13 +314,13 @@ in the case of a \(2\times2\) matrix the determinant can be defined as <br/></p>
 assuming \(A\) is an \(n\times n\) matrix <br/></p>
 </div>
 <div class="lemma">
-<p>interchanging any pair of columns of a matrix multiplies its determinant by \(-1\). This follows from the determinant being <a href="#orgde8a683">multilinear</a> and <a href="#orge8251c8">alternating</a> <br/></p>
+<p>interchanging any pair of columns of a matrix multiplies its determinant by \(-1\). This follows from the determinant being <a href="#org06ce80a">multilinear</a> and <a href="#org38fa390">alternating</a> <br/></p>
 </div>
 <div class="lemma">
 <p>if the columns of the matrix form a <a href="#linear-dependance">linearly dependant set</a>, the determinant is 0 <br/></p>
 </div>
 <div class="lemma">
-<p>adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of <a href="#orgde8a683">multilinearity</a> and being <a href="#orge8251c8">alternative</a> <br/></p>
+<p>adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of <a href="#org06ce80a">multilinearity</a> and being <a href="#org38fa390">alternative</a> <br/></p>
 </div>
 <div class="lemma">
 <p>if \(A\) is a <a href="#triangular-matrix">triangular matrix</a> then its determinant equals the product of the diagonal entries: <br/>
@@ -677,8 +680,10 @@ multiplication of a vector by a negative scalar evidently can change both the <a
  <br/></p>
 <p>the rule is: to add B to A, place the tail of B at the head of A. the sum is a vector from the tail of A to the head of B <br/>
 since \(A-B=A+(-B)\), in order to subtract B from A we can simply multiply it by -1 and then add, so in a sense, we&rsquo;re &ldquo;rotating&rdquo; B and adding it to A to get \(A-B\): <br/></p>
-<p><img src="/ox-hugo/WnuzbR0.svg" alt=""> <br/>
-vector addition is <strong>commutative</strong>, <a href="/post/20220923212917-associative/">associative</a> and <a href="/post/20220923212922-distributive/">distributive</a> <br/></p>
+<p><figure><img src="/ox-hugo/WnuzbR0.svg"/>
+</figure>
+ <br/></p>
+<p>vector addition is <strong>commutative</strong>, <a href="/post/20220923212917-associative/">associative</a> and <a href="/post/20220923212922-distributive/">distributive</a> <br/></p>
 <h3 id="dot-product"><span class="section-num">3.5</span> dot product</h3>
 <div class="definition">
 <p>the scalar product of 2 vectors A and B is defined as \(A \cdot B = |A||B|\cos\theta\) where \(\theta\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \(\theta\) is always taken as the angle smaller than \(\pi\)): <br/></p>
@@ -706,11 +711,8 @@ the cross product is defined by the formula: <br/>
 \(A \times B = \left\Vert A \right\Vert \left\Vert B \right\Vert\sin(\theta)n\) <br/>
 where \(\theta\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \(\theta\) is always taken as the angle smaller than \(\pi\)) <br/>
 when we draw A and B tail to tail, they determine a plane, we define \(n\) to be a <a href="#unit-vector">unit vector</a> that is perpendicular to that plane, which means \(A\times B\) is in that same direction as the unit vector <br/>
-imagine a right hand coordinate system with \(A\) and \(B\) in the \(xy\) plane, A lies on the \(x\) axis and \(B\) lies toward the \(y\) axis, \(A\), \(B\) and \(n\) should form what is called a right hand triple such that \(n\) would be represented by the thumb <br/></p>
-<p><figure><img src="/ox-hugo/MCw787K.svg"/>
-</figure>
- <br/></p>
-<p>a result of our definition of the cross product is that: <br/>
+imagine a right hand coordinate system with \(A\) and \(B\) in the \(xy\) plane, A lies on the \(x\) axis and \(B\) lies toward the \(y\) axis, \(A\), \(B\) and \(n\) should form what is called a right hand triple such that \(n\) would be represented by the thumb <br/>
+a result of our definition of the cross product is that: <br/>
 \(B\times A=-A\times B\) <br/>
 and so obviously cross product isnt <a href="/post/20220923212910-commutative/">commutative</a> but rather anticommutative <br/></p>
 <h3 id="vector-space"><span class="section-num">3.7</span> vector space</h3>
@@ -1110,7 +1112,7 @@ in other words, if a given sequence of vectors is linearly dependant then it has
 <p>let \(S = \{s_1,s_2,\ldots,s_n\}\), if \(S \subseteq V\) is a dependant set then there exists \(\vec s \in S\) such that \(\spn(s) = \spn(S - \{s\})\) <br/>
 in other words, given a dependant set of vectors, there exists a vector in this set that is possible to drop without changing the span of the set <br/></p>
 <div class="proof">
-<p>according to <a href="#orgdb29de8">this entailment</a>, there exists \(s \in S\) such that \(s \in \spn(S - \{s\})\) <br/>
+<p>according to <a href="#orgd1ab2f2">this entailment</a>, there exists \(s \in S\) such that \(s \in \spn(S - \{s\})\) <br/>
 to prove \(\spn(s) = \spn(S - \{s\})\) we show that \(\spn(s) \subseteq \spn(S - \{s\})\) and \(\spn(S - \{s\}) \subseteq \spn(s)\) <br/>
 we know that \(\spn(S - \{s\}) \subseteq \spn(s)\) because we can take every linear combination from the former, add \(0 \cdot s\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \(s = s_1\) <br/>
@@ -1143,9 +1145,9 @@ and since \(\spn(s) \subseteq \spn(S - \{s\})\) and \(\spn(S - \{s\}) \subseteq 
 <div class="proof">
 <p>in case \(S\) is linearly independant we pick \(B = S\) and so \(B\) is linearly dependant and \(\spn(B) = \spn(S)\) <br/>
 in case \(S\) is linearly dependant we got more work to do: <br/>
-according to <a href="#orge2f1caa">this lemma</a>, \(\spn(S) = \spn(S - \{s_1\})\) <br/>
+according to <a href="#org10f3de5">this lemma</a>, \(\spn(S) = \spn(S - \{s_1\})\) <br/>
 in case \(S - \{s_1\}\) is linearly independant then let \(B = S - \{s_1\}\) which means \(B \subseteq S\) and \(\spn(B) = \spn(S)\) <br/>
-in case \(S - \{s_1\}\) is linearly dependant, according to <a href="#orge2f1caa">this lemma</a>, \(\spn(S - \{s_1,s_2\}) = \spn(S - \{s_1\}) = \spn(S)\) <br/>
+in case \(S - \{s_1\}\) is linearly dependant, according to <a href="#org10f3de5">this lemma</a>, \(\spn(S - \{s_1,s_2\}) = \spn(S - \{s_1\}) = \spn(S)\) <br/>
 in case \(\spn(S - \{s_1,s_2\})\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \(S\) without changing the span, eventually we would arrive at \(S - \{s_1,s_2,s_k\}\) that is linearly independant and \(B \subseteq S\) and \(\spn(B) = \spn(S)\) <br/></p>
@@ -1169,7 +1171,7 @@ for simplicity, we take the relatively simple vectors \(\begin{bmatrix} 0\\1.3\\
  <br/></p>
 <h4 id="basis"><span class="section-num">3.7.4</span> basis</h4>
 <div class="definition">
-<p>assuming a <a href="#vector-space">vector space</a> \(V\), let \(B \subseteq V\) be a finite, <a href="#linear-dependance">linearly independant</a> and <a href="#spanning-set">spanning set</a> of \(V\) which we call a <strong>basis</strong> <br/>
+<p>assuming a <a href="#vector-space">vector space</a> \(V\), let \(B \subseteq V\) be a finite, <a href="#linear-dependance">linearly independant</a> and <a href="#spanning-set">spanning set</a> of \(V\) which we call a <strong>basis</strong>, each vector in a basis is called a <strong>basis vector</strong> <br/>
 let \(B = \{u_1,\ldots,u_i,\ldots,u_n\}\) be a basis of \(\mathbb{R}^n\): <br/></p>
 <p>\begin{align*}
 u_1 &amp;= (1,0,\ldots,0)\\
@@ -1191,7 +1193,7 @@ this is necessarily true because \(x_i\) has to be 0 for \(u_i\) to zero out and
 <p>every <strong>finitely generated vector space</strong> \(V_\mathbb{F}\) has atleast one basis <br/></p>
 <div class="proof">
 <p>since \(V_\mathbb{F}\) is finitely generated there exists a finite set \(S \subseteq V\) such that \(\spn(S) = V\) <br/>
-according to <a href="#orge2f1caa">this lemma</a>, there exists \(B \subseteq S\) where \(B\) is linearly independant and \(\spn(B) = V\), therefore \(B\) is a basis <br/></p>
+according to <a href="#org10f3de5">this lemma</a>, there exists \(B \subseteq S\) where \(B\) is linearly independant and \(\spn(B) = V\), therefore \(B\) is a basis <br/></p>
 </div>
 </div>
 <div class="my_example">
@@ -1248,7 +1250,7 @@ therefore \(|B| = |A|\) <br/></p>
 </div>
 <h5 id="standard-basis"><span class="section-num">3.7.4.1</span> standard basis</h5>
 <div class="definition">
-<p>the <strong>standard basis</strong> (also called <strong>natural basis</strong> or <strong>canonical basis</strong>) of a coordinate vector space is the set of vectors whose components are all zero, except one that equals 1. <br/></p>
+<p>the <strong>standard basis</strong> of a <a href="#vector-space">vector space</a> is the set of vectors whose components are all zero, except one that equals 1. <br/></p>
 <div class="my_example">
 <p>consider the set \(\{(1,0),(0,1)\}\) which is a standard basis of the vector space \(\mathbb{R}^2\) <br/>
 also the dimension of this set is 2 <br/></p>
@@ -1258,11 +1260,30 @@ also the dimension of this set is 2 <br/></p>
 <div class="my_example">
 <p>consider the set \(A = \{(1,0,0),(0,1,0),(0,0,1)\}\) which is a standard basis of the vector space \(\mathbb{R}^3\) <br/>
 we put the vectors in a matrix: <br/>
-\[\left[\begin{array}{rrr} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{array}\right]\] <br/>
+\[
+\bmqty{1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 1}
+\] <br/>
 which is an identity matrix of the 3rd degree <br/>
 \(\dim A = 3\) <br/></p>
 </div>
 </div>
+</div>
+<h5 id="basis-of-the-cartesian-coordinate-system"><span class="section-num">3.7.4.2</span> basis of the cartesian coordinate system</h5>
+<p>the <a href="#standard-basis">standard basis</a> of the familiar three dimensional coordinate system consists of the <a href="#unit-vector">unit vector</a>s that lie along the x, y, and z axes <br/>
+the x unit vector is denoted by \(\ihat\), the y unit vector by \(\jhat\), and the z unit vector by \(\khat\) <br/></p>
+<p><figure><img src="/ox-hugo/YzTbRCF.svg"/>
+</figure>
+ <br/></p>
+<div class="characteristic">
+<p>\begin{align*}
+\ihat \cdot \ihat &amp;= \jhat \cdot \jhat = \khat \cdot \khat = 1\\
+\ihat \cdot \jhat &amp;= \jhat \cdot \khat = \khat \cdot \ihat = 0\\
+\ihat \times \jhat &amp;= \khat\\
+\jhat \times \khat &amp;= \ihat\\
+\khat \times \ihat &amp;= \jhat
+\end{align*}</p>
+<p>we can write any vector in terms of the base vectors <br/>
+\(A = A_x\ihat + A_y\jhat + A_z\khat\) <br/></p>
 </div>
 <h4 id="dimension"><span class="section-num">3.7.5</span> dimension</h4>
 <div class="definition">
@@ -1328,7 +1349,7 @@ assume \(\{w_1\ldots w_m\}\) where \(m &gt; n\) is a basis of \(W\), then we kno
 <div class="lemma">
 <p>given \({V_\mathbb{F}}^n\) is finitely spanned, \(W^n \leq V^n\) and \(\dim W = \dim V\) then \(W = V\) <br/></p>
 <div class="proof">
-<p>let \(w_1\ldots w_n\) be a basis of \(W\) and so \(n = |V|\) and \(w_1\ldots w_n\) is linearly independant therefore according to <a href="#orgb455b5d">this lemma</a> \(\spn\{w_1\ldots w_n\} = V = W\) and since it spans \(V\) and is of size \(n = |V|\) then it is a basis of \(V\) <br/></p>
+<p>let \(w_1\ldots w_n\) be a basis of \(W\) and so \(n = |V|\) and \(w_1\ldots w_n\) is linearly independant therefore according to <a href="#org127e517">this lemma</a> \(\spn\{w_1\ldots w_n\} = V = W\) and since it spans \(V\) and is of size \(n = |V|\) then it is a basis of \(V\) <br/></p>
 </div>
 </div>
 <div class="lemma">
