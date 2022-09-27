@@ -2,7 +2,7 @@
 title = "mechanics"
 author = ["mahmood"]
 description = "mechanics (physics)"
-date = 2022-09-26T19:37:00+03:00
+date = 2022-09-27T21:33:00+03:00
 tags = ["todo"]
 draft = false
 +++
@@ -175,13 +175,13 @@ a = \lim\_{\Delta t \to 0} \frac{v(t+\Delta t)-v(t)}{\Delta t} = \frac{dv}{dt} =
 
 ## <span class="section-num">6</span> motion {#motion}
 
-<div class="my_question">
+<div class="question">
 
 suppose that the position of a particle is given by <br/>
 \\[
 r = A(e^{\alpha t}\ihat + e^{-\alpha t}\jhat)
 \\] <br/>
-where A and \\(\alpha\\) are constants, find the [velocity](#instantaneous-velocity) and sketch the trajectory <br/>
+where \\(A\\) and \\(\alpha\\) are constants, find the [velocity](#instantaneous-velocity) and sketch the trajectory <br/>
 
 <div class="answer">
 
@@ -198,6 +198,18 @@ the [magnitude]({{< relref "linear_algebra2.md#magnitude" >}}) of \\(v\\) is <br
   |v| &= \sqrt{v\_x^2 + v\_y^2}\\\\
   &= A\alpha\sqrt{e^{2\alpha t} + e^{-2\alpha t}}
 \end{align\*}
+
+to sketch the trajectory it is often helpful to look at limiting cases, at \\(t=0\\) we have <br/>
+
+\begin{align\*}
+  r(0) &= A(\ihat+\jhat)\\\\
+  v(0) &= \alpha A(\ihat-\jhat)
+\end{align\*}
+
+note that \\(v(0)\\) is perpendicular to \\(r(0)\\) <br/>
+
+![](/ox-hugo/sketch1.png) <br/>
+as \\(t\to\infty\\), \\(e^{\alpha t}\to\infty\\) and \\(e^{-\alpha t}\to0\\), in this limit \\(r\to Ae^{\alpha t}\ihat\\), which is a vector along the \\(x\\) axis, and \\(v\to\alpha Ae^{\alpha t}\ihat\\); in this unrealistic example, the point rushes along the \\(x\\) axis and the speed increases without limit <br/>
 
 </div>
 
