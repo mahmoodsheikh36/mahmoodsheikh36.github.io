@@ -6,11 +6,11 @@
 <script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
 <script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
 <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
-<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.104.0"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>mechanics</a>
+<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.104.1"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>mechanics</a>
 <button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
 <span class=icon-bar></span>
 <span class=icon-bar></span>
-<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/about/>About</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:mahmod.m2015@gmail.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/mahmoodsheikh36/><i class="fab fa-github"></i></a></li></ul></div></div></nav><main><div><h2>mechanics</h2><h5>September 26, 2022</h5><a href=https://mahmoodsheikh36.github.io/tags/todo><kbd class=item-tag>todo</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/about/>About</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:mahmod.m2015@gmail.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/mahmoodsheikh36/><i class="fab fa-github"></i></a></li></ul></div></div></nav><main><div><h2>mechanics</h2><h5>September 27, 2022</h5><a href=https://mahmoodsheikh36.github.io/tags/todo><kbd class=item-tag>todo</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
 \(\DeclareMathOperator{\dom}{domain}\)
 \(\DeclareMathOperator{\ran}{range}\)
 \(\DeclareMathOperator{\rng}{range}\)
@@ -35,9 +35,9 @@ v = \dot x
 \bar a = \frac{\Delta v}{\Delta t}
 \]<br></p><h3 id=instantaneous-acceleration><span class=section-num>5.2</span> instantaneous acceleration</h3><p><strong>instantaneous acceleration</strong> is a continuous <a href=/post/discrete_maths2/#function>function</a> of time and gives the acceleration at a single point in time and space:<br>\[
 a = \lim_{\Delta t \to 0} \frac{v(t+\Delta t)-v(t)}{\Delta t} = \frac{dv}{dt} = \frac{d^2r}{dt^2}
-\]<br></p><h2 id=motion><span class=section-num>6</span> motion</h2><div class=my_question><p>suppose that the position of a particle is given by<br>\[
+\]<br></p><h2 id=motion><span class=section-num>6</span> motion</h2><div class=question><p>suppose that the position of a particle is given by<br>\[
 r = A(e^{\alpha t}\ihat + e^{-\alpha t}\jhat)
-\]<br>where A and \(\alpha\) are constants, find the <a href=#instantaneous-velocity>velocity</a> and sketch the trajectory<br></p><div class=answer><p>\begin{align*}
+\]<br>where \(A\) and \(\alpha\) are constants, find the <a href=#instantaneous-velocity>velocity</a> and sketch the trajectory<br></p><div class=answer><p>\begin{align*}
 v &= \frac{dr}{dt}\\
 &= A(\alpha e^{\alpha t}\ihat - ae^{-\alpha t}\jhat)\\
 v_x &= A\alpha e^{\alpha t}\\
@@ -45,5 +45,8 @@ v_y &= -A\alpha e^{-\alpha t}
 \end{align*}</p><p>the <a href=/post/linear_algebra2/#magnitude>magnitude</a> of \(v\) is<br></p><p>\begin{align*}
 |v| &= \sqrt{v_x^2 + v_y^2}\\
 &= A\alpha\sqrt{e^{2\alpha t} + e^{-2\alpha t}}
-\end{align*}</p></div></div></div><h4 class=page-header>Related</h4><div class=item><h4><a href=/post/20220809153548-sagemacs/>symacs</a></h4><h5>stands for symbolic emacs</h5>August 11, 2022
+\end{align*}</p><p>to sketch the trajectory it is often helpful to look at limiting cases, at \(t=0\) we have<br></p><p>\begin{align*}
+r(0) &= A(\ihat+\jhat)\\
+v(0) &= \alpha A(\ihat-\jhat)
+\end{align*}</p><p>note that \(v(0)\) is perpendicular to \(r(0)\)<br></p><p><img src=/ox-hugo/sketch1.png alt><br>as \(t\to\infty\), \(e^{\alpha t}\to\infty\) and \(e^{-\alpha t}\to0\), in this limit \(r\to Ae^{\alpha t}\ihat\), which is a vector along the \(x\) axis, and \(v\to\alpha Ae^{\alpha t}\ihat\); in this unrealistic example, the point rushes along the \(x\) axis and the speed increases without limit<br></p></div></div></div><h4 class=page-header>Related</h4><div class=item><h4><a href=/post/20220809153548-sagemacs/>symacs</a></h4><h5>stands for symbolic emacs</h5>August 11, 2022
 <a href=https://mahmoodsheikh36.github.io/tags/todo><kbd class=item-tag>todo</kbd></a></div></main><footer></footer></body></html>
