@@ -2,7 +2,7 @@
 title = "Cylindrical coordinate system"
 author = ["mahmood"]
 description = "Cylindrical coordinate system"
-date = 2022-09-28T01:32:00+03:00
+date = 2022-09-28T21:58:00+03:00
 draft = false
 +++
 
@@ -64,3 +64,7 @@ we see that <br/>
   r &= \sqrt{x^2+y^2}\\\\
   \theta &= \arctan\left(\frac{y}{x}\right)
 \end{align\*}
+
+{{< figure src="/ox-hugo/mOFGQtH.gif" caption="<span class=\"figure-number\">Figure 1: </span>two-dimensional polar coordinate system" >}} <br/>
+
+{{< figure src="/ox-hugo/n9Brin6.gif" >}} <br/>
