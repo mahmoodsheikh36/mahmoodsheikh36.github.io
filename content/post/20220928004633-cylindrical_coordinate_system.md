@@ -1,8 +1,8 @@
 +++
-title = "Cylindrical coordinate system"
+title = "cylindrical coordinate system"
 author = ["mahmood"]
-description = "Cylindrical coordinate system"
-date = 2022-09-28T21:58:00+03:00
+description = "cylindrical coordinate system"
+date = 2022-09-29T00:19:00+03:00
 draft = false
 +++
 
@@ -57,14 +57,4 @@ window.onload = function() {
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
-the \\(z\\) axis of the **cylindrical system** is identical to that of the [cartesian coordinate system]({{< relref "linear_algebra2.md#basis-of-the-cartesian-coordinate-system" >}}), however points in the \\(x-y\\) plane are described not by \\(x-y\\) coordinates but by \\(r-\theta\\) coordinates where \\(r\\) is the distance from the origin and \\(\theta\\) is the angle between \\(r\\) and the \\(x\\) axis <br/>
-we see that <br/>
-
-\begin{align\*}
-  r &= \sqrt{x^2+y^2}\\\\
-  \theta &= \arctan\left(\frac{y}{x}\right)
-\end{align\*}
-
-{{< figure src="/ox-hugo/mOFGQtH.gif" caption="<span class=\"figure-number\">Figure 1: </span>two-dimensional polar coordinate system" >}} <br/>
-
-{{< figure src="/ox-hugo/n9Brin6.gif" >}} <br/>
+a simple extension of the [polar coordinate system]({{< relref "20220928235804-polar_coordinate_system.md" >}}) that adds a third axis named \\(z\\) to form a three dimensional [coordinate system]({{< relref "20220929000626-coordinate_system.md" >}}) <br/>
