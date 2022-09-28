@@ -1,8 +1,8 @@
 +++
-title = "polar coordinate system polar coordinate system"
+title = "polar coordinate system"
 author = ["mahmood"]
 description = "polar coordinate system"
-date = 2022-09-29T01:18:00+03:00
+date = 2022-09-29T01:20:00+03:00
 draft = false
 +++
 
