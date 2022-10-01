@@ -2,7 +2,7 @@
 title = "polar coordinate system"
 author = ["mahmood"]
 description = "polar coordinate system"
-date = 2022-10-01T19:03:00+03:00
+date = 2022-10-01T22:10:00+03:00
 draft = false
 +++
 
@@ -16,9 +16,11 @@ draft = false
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
-  \(\newcommand{\ihat}{\hat{\textbf{\i}}}\)
-  \(\newcommand{\jhat}{\hat{\textbf{\j}}}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
 
 <!-- mathjax -->
