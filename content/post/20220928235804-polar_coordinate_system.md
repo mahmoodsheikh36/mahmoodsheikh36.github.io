@@ -2,7 +2,7 @@
 title = "polar coordinate system"
 author = ["mahmood"]
 description = "polar coordinate system"
-date = 2022-09-29T01:20:00+03:00
+date = 2022-10-01T19:03:00+03:00
 draft = false
 +++
 
@@ -58,11 +58,18 @@ window.onload = function() {
 </script>
 
 a 2d [coordinate system]({{< relref "20220929000626-coordinate_system.md" >}}) <br/>
-points in the \\(x,y\\) plane are described not by \\((x,y)\\) coordinates but by \\((r,\theta)\\) coordinates, respectively, where \\(r\\) is the [magnitude]({{< relref "linear_algebra2.md#magnitude" >}}) and \\(\theta\\) is the angle between a [vector]({{< relref "linear_algebra2.md#vector" >}}) and the \\(x\\) axis <br/>
+points in the \\(x,y\\) plane are described not by \\((x,y)\\) coordinates but by \\((r,\theta)\\) coordinates, respectively, where \\(r\\) is the [magnitude]({{< relref "linear_algebra2.md#magnitude" >}}) and \\(\theta\\) is the angle between the [vector]({{< relref "linear_algebra2.md#vector" >}}) and the \\(x\\) axis <br/>
 
 \begin{align\*}
   r &= \sqrt{x^2+y^2}\\\\
   \theta &= \arctan\left(\frac{y}{x}\right)
+\end{align\*}
+
+the [base vector]({{< relref "linear_algebra2.md#basis" >}})s of this coordinate system are usually denoted by \\(\rhat\\) and \\(\thetahat\\) <br/>
+
+\begin{align\*}
+  \rhat(\theta) &= \cos\theta\ihat + \sin\theta\jhat\\\\
+  \thetahat(\theta) &= -\sin\theta\ihat + \cos\theta\jhat
 \end{align\*}
 
 {{< figure src="/ox-hugo/mOFGQtH.gif" caption="<span class=\"figure-number\">Figure 1: </span>two-dimensional polar coordinate system" >}} <br/>
