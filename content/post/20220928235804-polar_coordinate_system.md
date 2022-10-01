@@ -2,7 +2,8 @@
 title = "polar coordinate system"
 author = ["mahmood"]
 description = "polar coordinate system"
-date = 2022-10-01T22:10:00+03:00
+date = 2022-10-01T22:11:00+03:00
+tags = ["math"]
 draft = false
 +++
 
