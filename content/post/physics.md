@@ -2,8 +2,8 @@
 title = "mechanics"
 author = ["mahmood"]
 description = "mechanics (physics)"
-date = 2022-09-27T21:33:00+03:00
-tags = ["todo"]
+date = 2022-10-02T23:48:00+03:00
+tags = ["physics", "math"]
 draft = false
 +++
 
@@ -17,9 +17,11 @@ draft = false
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
-  \(\newcommand{\ihat}{\hat{\textbf{\i}}}\)
-  \(\newcommand{\jhat}{\hat{\textbf{\j}}}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
 
 <!-- mathjax -->
@@ -173,7 +175,25 @@ a = \lim\_{\Delta t \to 0} \frac{v(t+\Delta t)-v(t)}{\Delta t} = \frac{dv}{dt} =
 \\] <br/>
 
 
-## <span class="section-num">6</span> motion {#motion}
+## <span class="section-num">6</span> position in polar form {#position-in-polar-form}
+
+<div class="note">
+
+although the directions of \\(\rhat\\) and \\(\thetahat\\) vary with position, the directions depend on \\(\theta\\) only, not on \\(r\\). As a reminder of this $&theta;$-dependence, we sometimes show it explicitly by writing \\(\rhat(\theta)\\) and \\(\thetahat(\theta)\\) <br/>
+
+</div>
+
+the [position](#position-vector--linear-algebra2-dot-md) in a [polar coordinate system]({{< relref "20220928235804-polar_coordinate_system.md" >}}) is represented by <br/>
+\\[
+\vec r = r\rhat(\theta)
+\\] <br/>
+using the [chain rule]({{< relref "calculus2.md#chain-rule" >}}) we get <br/>
+\\[
+\frac{d\vec r}{dt} = \frac{dr}{dt}\rhat(\theta) + r \frac{d\rhat(\theta)}{dt}
+\\] <br/>
+
+
+## <span class="section-num">7</span> motion {#motion}
 
 <div class="question">
 
@@ -214,3 +234,56 @@ as \\(t\to\infty\\), \\(e^{\alpha t}\to\infty\\) and \\(e^{-\alpha t}\to0\\), in
 </div>
 
 </div>
+
+
+## <span class="section-num">8</span> mass {#mass}
+
+
+## <span class="section-num">9</span> force {#force}
+
+
+## <span class="section-num">10</span> gravity {#gravity}
+
+<div class="definition">
+
+according to Newton’s law of **gravitation**, two particles attract each other with a [force](#force) that is proportional to the product of their [mass](#mass)es and inversely proportional to the square of the distance between them. gravity is always attractive. <br/>
+
+</div>
+
+consider two particles, \\(a\\) and \\(b\\), with masses \\(M\_a\\) and \\(M\_b\\), respectively, separated by distance \\(d\\), let \\(F\_{b,a}\\) be the force exerted on particle \\(b\\) by particle \\(a\\), our verbal description of the [magnitude]({{< relref "linear_algebra2.md#magnitude" >}}) of the gravitational force can be expressed mathematically as <br/>
+\\[ <br/>
+
+|                 |                         |
+|-----------------|-------------------------|
+| F<sub>b,a</sub> | = \frac{GM\_aM\_b}{d^2} |
+
+\\] <br/>
+where \\(G\\) is the [gravitational constant](#gravitational-constant) <br/>
+the gravitational force between two particles is a central force because it is directed along the line joining them. vector notation is ideally suited for describing these properties mathematically. by convention, we introduce the vector \\(r\_{b,a}\\) that extends from the particle exerting the force, particle \\(a\\) in this case, to the particle experiencing the force, particle \\(b\\). it is evident that \\(r\_{b,a}=-r\_{a,b}\\). note that \\(|r\_{b,a}|=d\\), introducing the unit vector \\(\rhat\_{b,a}=r\_{b,a}/d\\), we have <br/>
+\\[
+F\_{b,a} = -\frac{GM\_aM\_b}{d^2}\rhat\_{b,a}
+\\] <br/>
+the negative sign indicates that the force on particle \\(b\\) is directed toward particle \\(a\\), that is, the force is attractive. the force on \\(a\\) due to \\(b\\) is <br/>
+\\[
+F\_{a,b} = -\frac{GM\_aM\_b}{d^2}\rhat\_{b,a} = +\frac{GM\_aM\_b}{d^2}\rhat\_{a,b} = -F\_{b,a}
+\\] <br/>
+where we have used \\(\rhat\_{b,a}=-\rhat\_{a,b}\\). thus the forces on the two particles are equal and opposite, as Newton’s third law requires <br/>
+
+
+### <span class="section-num">10.1</span> gravitational constant {#gravitational-constant}
+
+the **gravitational constant**, denoted by \\(G\\), can be found by measuring the [force](#force) between [mass](#mass)es in a known geometry <br/>
+the value of \\(G\\) for earth is \\(6.673(10) \times 10^{-11}m^3kg^{-1}s^{-2}\\) <br/>
+
+
+### <span class="section-num">10.2</span> sphere gravity {#sphere-gravity}
+
+because [force](#force) obeys the law of superposition, the force due to a collection of particles is the vector sum of the forces exerted by the particles individually. this allows us to mentally divide the body into a collection of small elements that can be treated as particles. we can then sum the forces from all the particles using standard methods from [integral calculus]({{< relref "calculus2.md#integral" >}}) <br/>
+the force between a particle of mass \\(m\\) and a uniform thin spherical shell of mass \\(M\\) and radius R is <br/>
+
+\begin{align\*}
+  F &= -G\frac{Mm}{r^2}\rhat & d > R\\\\
+  F &= 0 & d < R
+\end{align\*}
+
+where \\(d\\) is the distance from the center of the shell to the particle. if the particle lies outside the shell \\(d > R\\), the force is the same as if all the [mass](#mass) of the shell were concentrated at its center. if the particle lies inside, the force vanishes <br/>
