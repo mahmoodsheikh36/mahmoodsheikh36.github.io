@@ -2,7 +2,7 @@
 title = "mechanics"
 author = ["mahmood"]
 description = "mechanics (physics)"
-date = 2022-10-02T23:48:00+03:00
+date = 2022-10-02T23:57:00+03:00
 tags = ["physics", "math"]
 draft = false
 +++
@@ -251,13 +251,7 @@ according to Newton’s law of **gravitation**, two particles attract each other
 </div>
 
 consider two particles, \\(a\\) and \\(b\\), with masses \\(M\_a\\) and \\(M\_b\\), respectively, separated by distance \\(d\\), let \\(F\_{b,a}\\) be the force exerted on particle \\(b\\) by particle \\(a\\), our verbal description of the [magnitude]({{< relref "linear_algebra2.md#magnitude" >}}) of the gravitational force can be expressed mathematically as <br/>
-\\[ <br/>
-
-|                 |                         |
-|-----------------|-------------------------|
-| F<sub>b,a</sub> | = \frac{GM\_aM\_b}{d^2} |
-
-\\] <br/>
+\\[ |F\_{b,a}| = \frac{GM\_aM\_b}{d^2} \\] <br/>
 where \\(G\\) is the [gravitational constant](#gravitational-constant) <br/>
 the gravitational force between two particles is a central force because it is directed along the line joining them. vector notation is ideally suited for describing these properties mathematically. by convention, we introduce the vector \\(r\_{b,a}\\) that extends from the particle exerting the force, particle \\(a\\) in this case, to the particle experiencing the force, particle \\(b\\). it is evident that \\(r\_{b,a}=-r\_{a,b}\\). note that \\(|r\_{b,a}|=d\\), introducing the unit vector \\(\rhat\_{b,a}=r\_{b,a}/d\\), we have <br/>
 \\[
