@@ -2,8 +2,8 @@
 title = "data structures"
 author = ["mahmood"]
 description = "college course in data structures and algorithms"
-date = 2022-10-05T17:00:00+03:00
-tags = ["public", "math", "computer-science"]
+date = 2022-10-05T22:08:00+03:00
+tags = ["math", "computer-science"]
 draft = false
 +++
 
