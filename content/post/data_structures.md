@@ -2,8 +2,8 @@
 title = "data structures"
 author = ["mahmood"]
 description = "college course in data structures and algorithms"
-date = 2022-07-10T08:59:00+03:00
-tags = ["math", "computer-science"]
+date = 2022-10-05T17:00:00+03:00
+tags = ["public", "math", "computer-science"]
 draft = false
 +++
 
@@ -17,6 +17,11 @@ draft = false
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
 
 <!-- mathjax -->
@@ -266,7 +271,7 @@ consider the following function that returns the fibonacci number at the given i
 
 ```python
 def fib(n):
-  if n in [1, 2]: return 1  
+  if n in [1, 2]: return 1
   else: return fib(n-1) + fib(n-2)
 print([fib(i) for i in range(1,10)])
 ```
@@ -614,6 +619,8 @@ Describe verbally how all the above actions are performed. <br/>
 
 </div>
 
+<div class="my_example">
+
 ```java
 import java.util.*;
 import java.util.HashSet;
@@ -625,7 +632,7 @@ import java.util.TreeMap;
 public class ADT {
   public static boolean findK(Integer[] A, Integer k) {
     Set<Integer> s = new HashSet<Integer>();
-    for (int i = 0; i < A.length; i++){
+    for (int i = 0; i < A.length; i++) {
       if (s.contains(k-A[i]))
         return true;
       s.add(A[i]);
@@ -671,6 +678,21 @@ public class ADT {
       System.out.println(i);
   }
 }
+```
+
+</div>
+
+```text
+false
+true
+5
+6
+true
+2
+2
+3
+2
+3
 ```
 
 </div>
@@ -1786,9 +1808,9 @@ is this tree balanced?: 0 <br/>
 the height of this tree is: 6 <br/>
 the balance factor of the root is: -1 <br/>
 
-{{< figure src="/ox-hugo/AIKDEjD.svg" >}} <br/>
+{{< figure src="/ox-hugo/8NDCYwz.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/D6Xb7GP.svg" >}} <br/>
+{{< figure src="/ox-hugo/6jHzEt3.svg" >}} <br/>
 
 
 #### <span class="section-num">6.7.16</span> AVL tree {#avl-tree}
@@ -2026,7 +2048,7 @@ int main() {
 }
 ```
 
-{{< figure src="/ox-hugo/yxH7njU.svg" >}} <br/>
+{{< figure src="/ox-hugo/X2xd3y4.svg" >}} <br/>
 
 
 #### <span class="section-num">6.7.17</span> 2-3 tree {#2-3-tree}
@@ -2557,7 +2579,7 @@ balance 100 110 \\(\varnothing\\) recursively <br/>
 root: 40 \\(\varnothing\\) \\(\varnothing\\) <br/>
 100 110 \\(\varnothing\\) is good. <br/>
 
-{{< figure src="/ox-hugo/qMZGsuN.svg" >}} <br/>
+{{< figure src="/ox-hugo/hzKd6I1.svg" >}} <br/>
 
 
 #### <span class="section-num">6.7.18</span> algorithms {#algorithms}
@@ -2653,13 +2675,13 @@ int main() {
 }
 ```
 
-{{< figure src="/ox-hugo/QNsSNOQ.svg" >}} <br/>
+{{< figure src="/ox-hugo/Xne7Net.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/POjHAHy.svg" >}} <br/>
+{{< figure src="/ox-hugo/tLFWmrT.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/nK8YJz4.svg" >}} <br/>
+{{< figure src="/ox-hugo/eZS7TVb.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/wpP05mC.svg" >}} <br/>
+{{< figure src="/ox-hugo/2pgkRoy.svg" >}} <br/>
 
 </div>
 
@@ -2690,7 +2712,7 @@ a **Heap** is an [abstract data type](#abstract-data-type) <br/>
 
 <div class="definition">
 
-a **min heap** is a [Heap](#heap) in which each [node](#node) is less than or equal to both its children <br/>
+a **min heap** is a [heap](#heap) in which each [node](#node) is less than or equal to both its children <br/>
 
 </div>
 
@@ -2699,7 +2721,7 @@ a **min heap** is a [Heap](#heap) in which each [node](#node) is less than or eq
 
 <div class="definition">
 
-a **max heap** is a [Heap](#heap) in which each node is bigger than or equal to both its children <br/>
+a **max heap** is a [heap](#heap) in which each node is bigger than or equal to both its children <br/>
 
 </div>
 
@@ -2973,43 +2995,43 @@ int main() {
 
 inserting 0 <br/>
 
-{{< figure src="/ox-hugo/kzK4BZG.svg" >}} <br/>
+{{< figure src="/ox-hugo/fz6PZSQ.svg" >}} <br/>
 
 inserting 1 <br/>
 
-{{< figure src="/ox-hugo/PeiMpRL.svg" >}} <br/>
+{{< figure src="/ox-hugo/7Eg7cjC.svg" >}} <br/>
 
 inserting 2 <br/>
 
-{{< figure src="/ox-hugo/MIe1zUu.svg" >}} <br/>
+{{< figure src="/ox-hugo/T1K8nYP.svg" >}} <br/>
 
 inserting 3 <br/>
 
-{{< figure src="/ox-hugo/OTaVrui.svg" >}} <br/>
+{{< figure src="/ox-hugo/2ZHnhRq.svg" >}} <br/>
 
 inserting 4 <br/>
 
-{{< figure src="/ox-hugo/7TC0Vdy.svg" >}} <br/>
+{{< figure src="/ox-hugo/vzKlOp9.svg" >}} <br/>
 
 inserting 5 <br/>
 
-{{< figure src="/ox-hugo/3jKPdi1.svg" >}} <br/>
+{{< figure src="/ox-hugo/uVldADa.svg" >}} <br/>
 
 inserting 6 <br/>
 
-{{< figure src="/ox-hugo/qu6RpF6.svg" >}} <br/>
+{{< figure src="/ox-hugo/r9SYJai.svg" >}} <br/>
 
 inserting 7 <br/>
 
-{{< figure src="/ox-hugo/KNOL1UV.svg" >}} <br/>
+{{< figure src="/ox-hugo/3gg3g4e.svg" >}} <br/>
 
 inserting 8 <br/>
 
-{{< figure src="/ox-hugo/A9er3Fw.svg" >}} <br/>
+{{< figure src="/ox-hugo/zGyn5ir.svg" >}} <br/>
 
 inserting 9 <br/>
 
-{{< figure src="/ox-hugo/Z0cQitq.svg" >}} <br/>
+{{< figure src="/ox-hugo/hgQnv0o.svg" >}} <br/>
 
 
 ##### <span class="section-num">6.8.3.7</span> algorithms {#algorithms}
@@ -3480,61 +3502,63 @@ int main() {
 
 inserting 0 <br/>
 
-{{< figure src="/ox-hugo/GbLSoJE.svg" >}} <br/>
+{{< figure src="/ox-hugo/M7XiAG7.svg" >}} <br/>
 
 inserting 1 <br/>
 
-{{< figure src="/ox-hugo/H9N1gdG.svg" >}} <br/>
+{{< figure src="/ox-hugo/NOxYVZg.svg" >}} <br/>
 
 inserting 2 <br/>
 
-{{< figure src="/ox-hugo/f0MrwS7.svg" >}} <br/>
+{{< figure src="/ox-hugo/AgDm1ZB.svg" >}} <br/>
 
 inserting 3 <br/>
 
-{{< figure src="/ox-hugo/JmN3yJE.svg" >}} <br/>
+{{< figure src="/ox-hugo/pZnLYkK.svg" >}} <br/>
 
 inserting 4 <br/>
 
-{{< figure src="/ox-hugo/JsfTOq6.svg" >}} <br/>
+{{< figure src="/ox-hugo/GqkzbLZ.svg" >}} <br/>
 
 inserting 5 <br/>
 
-{{< figure src="/ox-hugo/f6rpcHk.svg" >}} <br/>
+{{< figure src="/ox-hugo/k408h72.svg" >}} <br/>
 
 inserting 6 <br/>
 
-{{< figure src="/ox-hugo/nHd6nOU.svg" >}} <br/>
+{{< figure src="/ox-hugo/AHDijqI.svg" >}} <br/>
 
 inserting 7 <br/>
 
-{{< figure src="/ox-hugo/hg3ZZGm.svg" >}} <br/>
+{{< figure src="/ox-hugo/2KBOTdl.svg" >}} <br/>
 
 inserting 8 <br/>
 
-{{< figure src="/ox-hugo/wLRHNpM.svg" >}} <br/>
+{{< figure src="/ox-hugo/RZtO6E9.svg" >}} <br/>
 
 inserting 9 <br/>
 
-{{< figure src="/ox-hugo/TRlAq2A.svg" >}} <br/>
+{{< figure src="/ox-hugo/qGE1e92.svg" >}} <br/>
 
 inserting 10 <br/>
 
-{{< figure src="/ox-hugo/6TdFKUX.svg" >}} <br/>
+{{< figure src="/ox-hugo/COzTKlm.svg" >}} <br/>
 
 inserting 11 <br/>
 
-{{< figure src="/ox-hugo/gv9dDwK.svg" >}} <br/>
+{{< figure src="/ox-hugo/QrU1zmQ.svg" >}} <br/>
 
 inserting 12 <br/>
 
-{{< figure src="/ox-hugo/FW9uTtC.svg" >}} <br/>
+{{< figure src="/ox-hugo/MGjqWXd.svg" >}} <br/>
 
 inserting 13 <br/>
 
-{{< figure src="/ox-hugo/06Q5VF9.svg" >}} <br/>
+{{< figure src="/ox-hugo/Z0U2Beo.svg" >}} <br/>
 
 inserting 14 <br/>
+
+{{< figure src="/ox-hugo/rMY59VD.svg" >}} <br/>
 
 
 #### <span class="section-num">6.8.5</span> algorithms {#algorithms}
