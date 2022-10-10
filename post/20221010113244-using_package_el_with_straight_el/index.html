@@ -1,0 +1,43 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>using package.el with straight.el</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/org.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.104.3"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>using package.el with straight.el</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/about/>About</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:mahmod.m2015@gmail.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/mahmoodsheikh36/><i class="fab fa-github"></i></a></li></ul></div></div></nav><main><div><h2>using package.el with straight.el</h2><h5>October 10, 2022</h5></div><div align=start class=content><p>i was using <code>straight.el</code> for all my package management until i had enough of having bugs in <a href=/post/emacs/#org-mode>org mode</a> because straight.el fetches the most recent versions of packages<br>so i decided to use the builtin <code>package.el</code> package manager with the <code>use-package</code> macro as the default package management solution and <code>straight.el</code> for packages that arent available for straight.el, e.g. github packages<br></p><h2 id=straight-dot-el-snippet>straight.el snippet</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span><span style=color:#75715e>;; setup straight.el package manager</span>
+</span></span><span style=display:flex><span>(defvar bootstrap-version)
+</span></span><span style=display:flex><span>(let ((bootstrap-file
+</span></span><span style=display:flex><span>       (<span style=color:#a6e22e>expand-file-name</span> <span style=color:#e6db74>&#34;straight/repos/straight.el/bootstrap.el&#34;</span> user-emacs-directory))
+</span></span><span style=display:flex><span>      (bootstrap-version <span style=color:#ae81ff>5</span>))
+</span></span><span style=display:flex><span>  (unless (<span style=color:#a6e22e>file-exists-p</span> bootstrap-file)
+</span></span><span style=display:flex><span>    (with-current-buffer
+</span></span><span style=display:flex><span>        (url-retrieve-synchronously
+</span></span><span style=display:flex><span>         <span style=color:#e6db74>&#34;https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el&#34;</span>
+</span></span><span style=display:flex><span>         <span style=color:#e6db74>&#39;silent</span> <span style=color:#e6db74>&#39;inhibit-cookies</span>)
+</span></span><span style=display:flex><span>      (<span style=color:#a6e22e>goto-char</span> (<span style=color:#a6e22e>point-max</span>))
+</span></span><span style=display:flex><span>      (eval-print-last-sexp)))
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>load</span> bootstrap-file <span style=color:#66d9ef>nil</span> <span style=color:#e6db74>&#39;nomessage</span>))
+</span></span><span style=display:flex><span>(setq <span style=color:#75715e>;; package-enable-at-startup nil</span>
+</span></span><span style=display:flex><span>      <span style=color:#75715e>;; straight-use-package-by-default t</span>
+</span></span><span style=display:flex><span>      native-comp-async-report-warnings-errors <span style=color:#66d9ef>nil</span>)
+</span></span></code></pre></div><p>to install a package from github with straight.el simply use:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span>(use-package icicles
+</span></span><span style=display:flex><span>  :straight (:repo <span style=color:#e6db74>&#34;emacsmirror/icicles&#34;</span> :host github))
+</span></span></code></pre></div><h2 id=package-dot-el-snippet>package.el snippet</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span>(require <span style=color:#e6db74>&#39;package</span>)
+</span></span><span style=display:flex><span>(add-to-list <span style=color:#e6db74>&#39;package-archives</span> <span style=color:#f92672>&#39;</span>(<span style=color:#e6db74>&#34;gnu&#34;</span>   <span style=color:#f92672>.</span> <span style=color:#e6db74>&#34;https://elpa.gnu.org/packages/&#34;</span>))
+</span></span><span style=display:flex><span>(add-to-list <span style=color:#e6db74>&#39;package-archives</span> <span style=color:#f92672>&#39;</span>(<span style=color:#e6db74>&#34;melpa&#34;</span> <span style=color:#f92672>.</span> <span style=color:#e6db74>&#34;https://melpa.org/packages/&#34;</span>))
+</span></span><span style=display:flex><span>(package-initialize)
+</span></span><span style=display:flex><span>(unless (package-installed-p <span style=color:#e6db74>&#39;use-package</span>)
+</span></span><span style=display:flex><span>  (package-refresh-contents)
+</span></span><span style=display:flex><span>  (package-install <span style=color:#e6db74>&#39;use-package</span>))
+</span></span><span style=display:flex><span>(eval-and-compile
+</span></span><span style=display:flex><span>  (setq use-package-always-ensure <span style=color:#66d9ef>t</span>
+</span></span><span style=display:flex><span>        use-package-expand-minimally <span style=color:#66d9ef>t</span>))
+</span></span><span style=display:flex><span>(require <span style=color:#e6db74>&#39;use-package</span>)
+</span></span></code></pre></div><p>to install a package with package.el simply use:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span>(use-package org-modern) 
+</span></span></code></pre></div></div></main><footer></footer></body></html>
