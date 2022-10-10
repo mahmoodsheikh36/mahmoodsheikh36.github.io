@@ -6,14 +6,41 @@
     <description>Recent content on mahmood</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 Oct 2022 22:10:00 +0300</lastBuildDate><atom:link href="https://mahmoodsheikh36.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Oct 2022 11:38:00 +0300</lastBuildDate><atom:link href="https://mahmoodsheikh36.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>using package.el with straight.el</title>
+      <link>https://mahmoodsheikh36.github.io/post/20221010113244-using_package_el_with_straight_el/</link>
+      <pubDate>Mon, 10 Oct 2022 11:38:00 +0300</pubDate>
+      
+      <guid>https://mahmoodsheikh36.github.io/post/20221010113244-using_package_el_with_straight_el/</guid>
+      <description>i was using straight.el for all my package management until i had enough of having bugs in org mode because straight.el fetches the most recent versions of packages so i decided to use the builtin package.el package manager with the use-package macro as the default package management solution and straight.el for packages that arent available for straight.el, e.g. github packages straight.el snippet ;; setup straight.el package manager (defvar bootstrap-version) (let ((bootstrap-file (expand-file-name &amp;#34;straight/repos/straight.</description>
+    </item>
+    
+    <item>
+      <title>data structures</title>
+      <link>https://mahmoodsheikh36.github.io/post/data_structures/</link>
+      <pubDate>Wed, 05 Oct 2022 22:08:00 +0300</pubDate>
+      
+      <guid>https://mahmoodsheikh36.github.io/post/data_structures/</guid>
+      <description>\(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) \(\newcommand{\ihat}{\hat{\textbf{i}}}\) \(\newcommand{\jhat}{\hat{\textbf{j}}}\) \(\newcommand{\khat}{\hat{\textbf{k}}}\) \(\newcommand{\rhat}{\hat{\textbf{r}}}\) \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\) for most data structures i havent implemented deletion yet.. also its good to note that most of the code isnt optimized to hell, but it doesnt really matter since its only for education purposes and you should probably be using the data structures provided by the programming language&amp;rsquo;s standard library 1 properties of floor for every 2 normal numbers \(m,n\) and every real number \(x\) \[ \ceil*{\frac{\ceil*{\frac{x}{m}}}{n}} = \ceil*{\frac{x}{m \cdot n}} \qquad \floor*{\frac{\floor*{\frac{x}{m}}}{n}} = \floor*{\frac{x}{m \cdot n}} \] \[ \ceil*{\frac{\ceil*{\frac{x}{2^i}}}{2}} = \ceil*{\frac{x}{2^{i+1}}} \qquad \floor*{\frac{\floor*{\frac{x}{2^i}}}{2}} = \floor*{\frac{x}{2^{i+1}}} \] the following is true for every normal number \(n\) and any number \(x\) \begin{gather} \floor*{x}+n = \floor*{x+n} \qquad \ceil*{x}+n=\ceil*{x+n}\\ n-\floor*{x} = \ceil*{n-x} \qquad n-\ceil*{x} = \floor*{n-x}\\ \floor*{x} \geq \ceil*{x}-1 \qquad \ceil*{x} \leq \floor*{x}+1\\ \floor*{x} &amp;gt; x-1 \qquad \ceil*{x} &amp;lt; x+1\\ \floor*{x} \leq x \qquad \ceil*{x} \geq x\\ \floor*{x} = n \iff n \leq x &amp;lt; n+1 \qquad \ceil*{x} = n \iff n-1 &amp;lt; x \leq n \end{gather}</description>
+    </item>
+    
+    <item>
+      <title>mechanics</title>
+      <link>https://mahmoodsheikh36.github.io/post/physics/</link>
+      <pubDate>Sun, 02 Oct 2022 23:57:00 +0300</pubDate>
+      
+      <guid>https://mahmoodsheikh36.github.io/post/physics/</guid>
+      <description>\(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) \(\newcommand{\ihat}{\hat{\textbf{i}}}\) \(\newcommand{\jhat}{\hat{\textbf{j}}}\) \(\newcommand{\khat}{\hat{\textbf{k}}}\) \(\newcommand{\rhat}{\hat{\textbf{r}}}\) \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\) &amp;lt;&amp;amp;kleppner1973&amp;gt; 1 true physics vector a vector in physics may differ a bit from that of a math vector a &amp;ldquo;true&amp;rdquo; physics vector is independant of the coordinate system we pick while a non-true physics vector may be dependant and its values may change when we change the coordinate system 2 position vector the position of an arbitrary point P at \((x,y,z)\) is written as \[ r = (x,y,z) = x\ihat + y\jhat + z\khat \] the position vector isnt a true physics vector, because it doesnt really have a direction since it just represents a position in space and so the position vector of a specific point in space may differ from one coordinate system to another, as we can pick any coordinate system we want and it wouldnt affect the position of a point 3 displacement vector if we move from the point \(x_1,y_1,z_1\) to some new position \(x_2,y_2,z_2\) then the displacement defines a &amp;ldquo;true&amp;rdquo; vector \(S\) with coordinates \[ S = (x_2-x_1,\ y_2-y_1,\ z_2-z_1) \] a displacement vector is a true physics vector 4 instantaneous velocity instantaneous velocity, usually called just velocity is a quantity that tells us how fast an object is moving at a single point in time and space the SI unit for acceleration is metre per second (\(\frac{\mathrm{m}}{\mathrm{s}}\)) velocity can also be defined as the derivative of position with respect to time, as it is the limit of the average velocity as the time interval approaches zero: \[ v = \lim_{\Delta t \to 0} \frac{x(t+\Delta t)-x(t)}{\Delta t} = \frac{dx}{dt} \] using notation due to Gottfried Leibniz, who independently invented calculus.</description>
+    </item>
+    
     <item>
       <title>polar coordinate system</title>
       <link>https://mahmoodsheikh36.github.io/post/20220928235804-polar_coordinate_system/</link>
-      <pubDate>Sat, 01 Oct 2022 22:10:00 +0300</pubDate>
+      <pubDate>Sat, 01 Oct 2022 22:12:00 +0300</pubDate>
       
       <guid>https://mahmoodsheikh36.github.io/post/20220928235804-polar_coordinate_system/</guid>
-      <description>\(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) \(\newcommand{\ihat}{\hat{\textbf{i}}}\) \(\newcommand{\jhat}{\hat{\textbf{j}}}\) \(\newcommand{\khat}{\hat{\textbf{k}}}\) \(\newcommand{\rhat}{\hat{\textbf{r}}}\) \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\) a 2d coordinate system points in the \(x,y\) plane are described not by \((x,y)\) coordinates but by \((r,\theta)\) coordinates, respectively, where \(r\) is the magnitude and \(\theta\) is the angle between the vector and the \(x\) axis \begin{align*} r &amp;amp;= \sqrt{x^2+y^2}\\ \theta &amp;amp;= \arctan\left(\frac{y}{x}\right) \end{align*}
+      <description>\(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) \(\newcommand{\ihat}{\hat{\textbf{i}}}\) \(\newcommand{\jhat}{\hat{\textbf{j}}}\) \(\newcommand{\khat}{\hat{\textbf{k}}}\) \(\newcommand{\rhat}{\hat{\textbf{r}}}\) \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\) a 2d coordinate system points in the \(x,y\) plane are described not by \((x,y)\) coordinates but by \((r,\theta)\) coordinates, where \(r\) is the magnitude and \(\theta\) is the angle between the vector and the \(x\) axis \begin{align*} r &amp;amp;= \sqrt{x^2+y^2}\\ \theta &amp;amp;= \arctan\left(\frac{y}{x}\right) \end{align*}
 the base vectors of this coordinate system are usually denoted by \(\rhat\) and \(\thetahat\) \begin{align*} \rhat(\theta) &amp;amp;= \cos\theta\ihat + \sin\theta\jhat\\ \thetahat(\theta) &amp;amp;= -\sin\theta\ihat + \cos\theta\jhat \end{align*}</description>
     </item>
     
@@ -60,15 +87,6 @@ the base vectors of this coordinate system are usually denoted by \(\rhat\) and 
       
       <guid>https://mahmoodsheikh36.github.io/post/20220701191204-love/</guid>
       <description> what is grief, if not love persevering? </description>
-    </item>
-    
-    <item>
-      <title>mechanics</title>
-      <link>https://mahmoodsheikh36.github.io/post/physics/</link>
-      <pubDate>Tue, 27 Sep 2022 21:33:00 +0300</pubDate>
-      
-      <guid>https://mahmoodsheikh36.github.io/post/physics/</guid>
-      <description>\(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) \(\newcommand{\ihat}{\hat{\textbf{\i}}}\) \(\newcommand{\jhat}{\hat{\textbf{\j}}}\) \(\newcommand{\khat}{\hat{\textbf{k}}}\) &amp;lt;&amp;amp;kleppner1973&amp;gt; 1 true physics vector a vector in physics may differ a bit from that of a math vector a &amp;ldquo;true&amp;rdquo; physics vector is independant of the coordinate system we pick while a non-true physics vector may be dependant and its values may change when we change the coordinate system 2 position vector the position of an arbitrary point P at \((x,y,z)\) is written as \[ r = (x,y,z) = x\ihat + y\jhat + z\khat \] the position vector isnt a true physics vector, because it doesnt really have a direction since it just represents a position in space and so the position vector of a specific point in space may differ from one coordinate system to another, as we can pick any coordinate system we want and it wouldnt affect the position of a point 3 displacement vector if we move from the point \(x_1,y_1,z_1\) to some new position \(x_2,y_2,z_2\) then the displacement defines a &amp;ldquo;true&amp;rdquo; vector \(S\) with coordinates \[ S = (x_2-x_1,\ y_2-y_1,\ z_2-z_1) \] a displacement vector is a true physics vector 4 instantaneous velocity instantaneous velocity, usually called just velocity is a quantity that tells us how fast an object is moving at a single point in time and space the SI unit for acceleration is metre per second (\(\frac{\mathrm{m}}{\mathrm{s}}\)) velocity can also be defined as the derivative of position with respect to time, as it is the limit of the average velocity as the time interval approaches zero: \[ v = \lim_{\Delta t \to 0} \frac{x(t+\Delta t)-x(t)}{\Delta t} = \frac{dx}{dt} \] using notation due to Gottfried Leibniz, who independently invented calculus.</description>
     </item>
     
     <item>
@@ -223,15 +241,6 @@ the base vectors of this coordinate system are usually denoted by \(\rhat\) and 
       
       <guid>https://mahmoodsheikh36.github.io/post/gui_programming/</guid>
       <description>\(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) this document contains my notes on gui programming in C# 1 C# in emacs&amp;rsquo; org-mode the following code allows running C# code in org-babel, given you have mono installed (require &amp;#39;ob) (require &amp;#39;csharp-mode) (add-to-list &amp;#39;org-babel-tangle-lang-exts &amp;#39;(&amp;#34;csharp&amp;#34; . &amp;#34;cs&amp;#34;)) (defvar org-babel-default-header-args:csharp &amp;#39;()) (defun ob-csharp--build-script-run-command (path) &amp;#34;Create run command according to the PATH.&amp;#34; (message path) (format &amp;#34;csc %s -r:System.Windows.Forms.dll -r:System.Drawing.dll &amp;gt;/dev/null; mono $(basename %s); rm *.</description>
-    </item>
-    
-    <item>
-      <title>data structures</title>
-      <link>https://mahmoodsheikh36.github.io/post/data_structures/</link>
-      <pubDate>Sun, 10 Jul 2022 08:59:00 +0300</pubDate>
-      
-      <guid>https://mahmoodsheikh36.github.io/post/data_structures/</guid>
-      <description>\(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) for most data structures i havent implemented deletion yet.. also its good to note that most of the code isnt optimized to hell, but it doesnt really matter since its only for education purposes and you should probably be using the data structures provided by the programming language&amp;rsquo;s standard library 1 properties of floor for every 2 normal numbers \(m,n\) and every real number \(x\) \[ \ceil*{\frac{\ceil*{\frac{x}{m}}}{n}} = \ceil*{\frac{x}{m \cdot n}} \qquad \floor*{\frac{\floor*{\frac{x}{m}}}{n}} = \floor*{\frac{x}{m \cdot n}} \] \[ \ceil*{\frac{\ceil*{\frac{x}{2^i}}}{2}} = \ceil*{\frac{x}{2^{i+1}}} \qquad \floor*{\frac{\floor*{\frac{x}{2^i}}}{2}} = \floor*{\frac{x}{2^{i+1}}} \] the following is true for every normal number \(n\) and any number \(x\) \begin{gather} \floor*{x}+n = \floor*{x+n} \qquad \ceil*{x}+n=\ceil*{x+n}\\ n-\floor*{x} = \ceil*{n-x} \qquad n-\ceil*{x} = \floor*{n-x}\\ \floor*{x} \geq \ceil*{x}-1 \qquad \ceil*{x} \leq \floor*{x}+1\\ \floor*{x} &amp;gt; x-1 \qquad \ceil*{x} &amp;lt; x+1\\ \floor*{x} \leq x \qquad \ceil*{x} \geq x\\ \floor*{x} = n \iff n \leq x &amp;lt; n+1 \qquad \ceil*{x} = n \iff n-1 &amp;lt; x \leq n \end{gather}</description>
     </item>
     
     <item>

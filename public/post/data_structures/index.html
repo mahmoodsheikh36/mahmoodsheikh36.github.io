@@ -67,7 +67,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.102.3" />
+ <meta name="generator" content="Hugo 0.104.3" />
         
 
         
@@ -123,7 +123,7 @@
 
     <div>
         <h2>data structures</h2>
-        <h5>July 10, 2022</h5>
+        <h5>October 5, 2022</h5>
         
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
@@ -142,6 +142,11 @@
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
 <!-- mathjax -->
 <script>
@@ -325,7 +330,7 @@ and so this equals to \(\Theta(n)\) (using the same proof as the previous proble
 <div class="my_example">
 <p>consider the following function that returns the fibonacci number at the given index <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> n <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>]: <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> n <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>]: <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>: <span style="color:#66d9ef">return</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
 </span></span><span style="display:flex;"><span>print([fib(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)])
 </span></span></code></pre></div><p>for <code>fib(n)</code>, how many times is <code>fib</code> called? <br/></p>
@@ -585,6 +590,7 @@ T(n) = 2T(n-1)+n &amp;\implies O(n \cdot 2^n)
 </ul>
 <p>Describe verbally how all the above actions are performed. <br/></p>
 </div>
+<div class="my_example">
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.*<span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashSet<span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map<span style="color:#f92672">;</span>
@@ -595,7 +601,7 @@ T(n) = 2T(n-1)+n &amp;\implies O(n \cdot 2^n)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ADT</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">findK</span><span style="color:#f92672">(</span>Integer<span style="color:#f92672">[]</span> A<span style="color:#f92672">,</span> Integer k<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>    Set<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> s <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">contains</span><span style="color:#f92672">(</span>k<span style="color:#f92672">-</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]))</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span>      s<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
@@ -641,6 +647,17 @@ T(n) = 2T(n-1)+n &amp;\implies O(n \cdot 2^n)
 </span></span><span style="display:flex;"><span>      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>false
+</span></span><span style="display:flex;"><span>true
+</span></span><span style="display:flex;"><span>5
+</span></span><span style="display:flex;"><span>6
+</span></span><span style="display:flex;"><span>true
+</span></span><span style="display:flex;"><span>2
+</span></span><span style="display:flex;"><span>2
+</span></span><span style="display:flex;"><span>3
+</span></span><span style="display:flex;"><span>2
+</span></span><span style="display:flex;"><span>3
 </span></span></code></pre></div></div>
 <h3 id="concrete-data-type"><span class="section-num">6.3</span> concrete data type</h3>
 <div class="definition">
@@ -1514,10 +1531,10 @@ this is the algorithm we&rsquo;ll be using because its simpler <br/>
 </span></span></code></pre></div><p>is this tree balanced?: 0 <br/>
 the height of this tree is: 6 <br/>
 the balance factor of the root is: -1 <br/></p>
-<p><figure><img src="/ox-hugo/AIKDEjD.svg"/>
+<p><figure><img src="/ox-hugo/8NDCYwz.svg"/>
 </figure>
  <br/></p>
-<p><figure><img src="/ox-hugo/D6Xb7GP.svg"/>
+<p><figure><img src="/ox-hugo/6jHzEt3.svg"/>
 </figure>
  <br/></p>
 <h4 id="avl-tree"><span class="section-num">6.7.16</span> AVL tree</h4>
@@ -1761,7 +1778,7 @@ image taken from <a href="https://www.codesdope.com/course/data-structures-red-b
 </span></span><span style="display:flex;"><span>  t.insert(<span style="color:#ae81ff">11</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">5</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">4</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">7</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">6</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">20</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">15</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">24</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">16</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">12</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">14</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">13</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">17</span>)<span style="color:#f92672">-&gt;</span>insert(<span style="color:#ae81ff">26</span>);
 </span></span><span style="display:flex;"><span>  print_latex_forest(t.get_root());
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/yxH7njU.svg"/>
+</span></span></code></pre></div><p><figure><img src="/ox-hugo/X2xd3y4.svg"/>
 </figure>
  <br/></p>
 <h4 id="2-3-tree"><span class="section-num">6.7.17</span> 2-3 tree</h4>
@@ -2252,7 +2269,7 @@ inserting left 105 \(\varnothing\) \(\varnothing\) as a 1th child of 100 110 \(\
 balance 100 110 \(\varnothing\) recursively <br/>
 root: 40 \(\varnothing\) \(\varnothing\) <br/>
 100 110 \(\varnothing\) is good. <br/></p>
-<p><figure><img src="/ox-hugo/qMZGsuN.svg"/>
+<p><figure><img src="/ox-hugo/hzKd6I1.svg"/>
 </figure>
  <br/></p>
 <h4 id="algorithms"><span class="section-num">6.7.18</span> algorithms</h4>
@@ -2350,16 +2367,16 @@ prove whether an equal tree is necessary balanced? <br/></p>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> bt;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><figure><img src="/ox-hugo/QNsSNOQ.svg"/>
+</span></span></code></pre></div><p><figure><img src="/ox-hugo/Xne7Net.svg"/>
 </figure>
  <br/></p>
-<p><figure><img src="/ox-hugo/POjHAHy.svg"/>
+<p><figure><img src="/ox-hugo/tLFWmrT.svg"/>
 </figure>
  <br/></p>
-<p><figure><img src="/ox-hugo/nK8YJz4.svg"/>
+<p><figure><img src="/ox-hugo/eZS7TVb.svg"/>
 </figure>
  <br/></p>
-<p><figure><img src="/ox-hugo/wpP05mC.svg"/>
+<p><figure><img src="/ox-hugo/2pgkRoy.svg"/>
 </figure>
  <br/></p>
 </div>
@@ -2376,11 +2393,11 @@ but a better solution would be to go through the array once and find the minimum
 </div>
 <h4 id="min-heap"><span class="section-num">6.8.1</span> min heap</h4>
 <div class="definition">
-<p>a <strong>min heap</strong> is a <a href="#heap">Heap</a> in which each <a href="#node">node</a> is less than or equal to both its children <br/></p>
+<p>a <strong>min heap</strong> is a <a href="#heap">heap</a> in which each <a href="#node">node</a> is less than or equal to both its children <br/></p>
 </div>
 <h4 id="max-heap"><span class="section-num">6.8.2</span> max heap</h4>
 <div class="definition">
-<p>a <strong>max heap</strong> is a <a href="#heap">Heap</a> in which each node is bigger than or equal to both its children <br/></p>
+<p>a <strong>max heap</strong> is a <a href="#heap">heap</a> in which each node is bigger than or equal to both its children <br/></p>
 </div>
 <p>this is the implementation we&rsquo;ll be using <br/></p>
 <h4 id="binary-heap"><span class="section-num">6.8.3</span> binary heap</h4>
@@ -2589,43 +2606,43 @@ to be continued <br/></p>
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>inserting 0 <br/></p>
-<p><figure><img src="/ox-hugo/kzK4BZG.svg"/>
+<p><figure><img src="/ox-hugo/fz6PZSQ.svg"/>
 </figure>
  <br/></p>
 <p>inserting 1 <br/></p>
-<p><figure><img src="/ox-hugo/PeiMpRL.svg"/>
+<p><figure><img src="/ox-hugo/7Eg7cjC.svg"/>
 </figure>
  <br/></p>
 <p>inserting 2 <br/></p>
-<p><figure><img src="/ox-hugo/MIe1zUu.svg"/>
+<p><figure><img src="/ox-hugo/T1K8nYP.svg"/>
 </figure>
  <br/></p>
 <p>inserting 3 <br/></p>
-<p><figure><img src="/ox-hugo/OTaVrui.svg"/>
+<p><figure><img src="/ox-hugo/2ZHnhRq.svg"/>
 </figure>
  <br/></p>
 <p>inserting 4 <br/></p>
-<p><figure><img src="/ox-hugo/7TC0Vdy.svg"/>
+<p><figure><img src="/ox-hugo/vzKlOp9.svg"/>
 </figure>
  <br/></p>
 <p>inserting 5 <br/></p>
-<p><figure><img src="/ox-hugo/3jKPdi1.svg"/>
+<p><figure><img src="/ox-hugo/uVldADa.svg"/>
 </figure>
  <br/></p>
 <p>inserting 6 <br/></p>
-<p><figure><img src="/ox-hugo/qu6RpF6.svg"/>
+<p><figure><img src="/ox-hugo/r9SYJai.svg"/>
 </figure>
  <br/></p>
 <p>inserting 7 <br/></p>
-<p><figure><img src="/ox-hugo/KNOL1UV.svg"/>
+<p><figure><img src="/ox-hugo/3gg3g4e.svg"/>
 </figure>
  <br/></p>
 <p>inserting 8 <br/></p>
-<p><figure><img src="/ox-hugo/A9er3Fw.svg"/>
+<p><figure><img src="/ox-hugo/zGyn5ir.svg"/>
 </figure>
  <br/></p>
 <p>inserting 9 <br/></p>
-<p><figure><img src="/ox-hugo/Z0cQitq.svg"/>
+<p><figure><img src="/ox-hugo/hgQnv0o.svg"/>
 </figure>
  <br/></p>
 <h5 id="algorithms"><span class="section-num">6.8.3.7</span> algorithms</h5>
@@ -3031,62 +3048,65 @@ a variant of the binomial heap, the skew binomial heap, achieves constant worst 
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>inserting 0 <br/></p>
-<p><figure><img src="/ox-hugo/GbLSoJE.svg"/>
+<p><figure><img src="/ox-hugo/M7XiAG7.svg"/>
 </figure>
  <br/></p>
 <p>inserting 1 <br/></p>
-<p><figure><img src="/ox-hugo/H9N1gdG.svg"/>
+<p><figure><img src="/ox-hugo/NOxYVZg.svg"/>
 </figure>
  <br/></p>
 <p>inserting 2 <br/></p>
-<p><figure><img src="/ox-hugo/f0MrwS7.svg"/>
+<p><figure><img src="/ox-hugo/AgDm1ZB.svg"/>
 </figure>
  <br/></p>
 <p>inserting 3 <br/></p>
-<p><figure><img src="/ox-hugo/JmN3yJE.svg"/>
+<p><figure><img src="/ox-hugo/pZnLYkK.svg"/>
 </figure>
  <br/></p>
 <p>inserting 4 <br/></p>
-<p><figure><img src="/ox-hugo/JsfTOq6.svg"/>
+<p><figure><img src="/ox-hugo/GqkzbLZ.svg"/>
 </figure>
  <br/></p>
 <p>inserting 5 <br/></p>
-<p><figure><img src="/ox-hugo/f6rpcHk.svg"/>
+<p><figure><img src="/ox-hugo/k408h72.svg"/>
 </figure>
  <br/></p>
 <p>inserting 6 <br/></p>
-<p><figure><img src="/ox-hugo/nHd6nOU.svg"/>
+<p><figure><img src="/ox-hugo/AHDijqI.svg"/>
 </figure>
  <br/></p>
 <p>inserting 7 <br/></p>
-<p><figure><img src="/ox-hugo/hg3ZZGm.svg"/>
+<p><figure><img src="/ox-hugo/2KBOTdl.svg"/>
 </figure>
  <br/></p>
 <p>inserting 8 <br/></p>
-<p><figure><img src="/ox-hugo/wLRHNpM.svg"/>
+<p><figure><img src="/ox-hugo/RZtO6E9.svg"/>
 </figure>
  <br/></p>
 <p>inserting 9 <br/></p>
-<p><figure><img src="/ox-hugo/TRlAq2A.svg"/>
+<p><figure><img src="/ox-hugo/qGE1e92.svg"/>
 </figure>
  <br/></p>
 <p>inserting 10 <br/></p>
-<p><figure><img src="/ox-hugo/6TdFKUX.svg"/>
+<p><figure><img src="/ox-hugo/COzTKlm.svg"/>
 </figure>
  <br/></p>
 <p>inserting 11 <br/></p>
-<p><figure><img src="/ox-hugo/gv9dDwK.svg"/>
+<p><figure><img src="/ox-hugo/QrU1zmQ.svg"/>
 </figure>
  <br/></p>
 <p>inserting 12 <br/></p>
-<p><figure><img src="/ox-hugo/FW9uTtC.svg"/>
+<p><figure><img src="/ox-hugo/MGjqWXd.svg"/>
 </figure>
  <br/></p>
 <p>inserting 13 <br/></p>
-<p><figure><img src="/ox-hugo/06Q5VF9.svg"/>
+<p><figure><img src="/ox-hugo/Z0U2Beo.svg"/>
 </figure>
  <br/></p>
 <p>inserting 14 <br/></p>
+<p><figure><img src="/ox-hugo/rMY59VD.svg"/>
+</figure>
+ <br/></p>
 <h4 id="algorithms"><span class="section-num">6.8.5</span> algorithms</h4>
 <h3 id="hash-table"><span class="section-num">6.9</span> hash table</h3>
 <div class="definition">
@@ -3441,46 +3461,46 @@ method: compare key against middle entry <br/></p>
     
 
   
+    <h4><a href="/post/physics/">mechanics</a></h4>
+    <h5>mechanics (physics)</h5>
+  October 2, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/physics"><kbd class="item-tag">physics</kbd></a>
+
+<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/20220928235804-polar_coordinate_system/">polar coordinate system</a></h4>
+    <h5>polar coordinate system</h5>
+  October 1, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
     <h4><a href="/post/linear_algebra2/">linear algebra</a></h4>
     <h5>linear algebra</h5>
   September 26, 2022
     
 <a href="https://mahmoodsheikh36.github.io/tags/public"><kbd class="item-tag">public</kbd></a>
 
-<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
-
-
-
-</div>
-  <div class="item">
-
-    
-    
-    
-
-  
-    <h4><a href="/post/calculus2/">calculus</a></h4>
-    <h5>calculus</h5>
-  September 26, 2022
-    
-<a href="https://mahmoodsheikh36.github.io/tags/public"><kbd class="item-tag">public</kbd></a>
-
-<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
-
-
-
-</div>
-  <div class="item">
-
-    
-    
-    
-
-  
-    <h4><a href="/post/20220923212910-commutative/">commutative</a></h4>
-    <h5></h5>
-  September 26, 2022
-    
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
 
