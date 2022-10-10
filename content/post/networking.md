@@ -2,7 +2,7 @@
 title = "networking"
 author = ["mahmood"]
 description = "college course in computer networking"
-date = 2022-10-10T11:44:00+03:00
+date = 2022-10-10T19:56:00+03:00
 tags = ["todo", "computer-science"]
 draft = false
 +++
@@ -68,7 +68,7 @@ this document is still being constructed, it should not be used for reference ye
 
 <div class="note">
 
-i have yet to add citations from the syllabus of the course <br/>
+i have yet to add citations from the syllabus of the course from `syllabus.docx` <br/>
 
 </div>
 
@@ -630,6 +630,9 @@ In Figure 1, a datagram from Machine A being delivered to Machine C would be usi
 #### <span class="section-num">13.5.1</span> udp checksum {#udp-checksum}
 
 
+### <span class="section-num">13.6</span> acknowledgement {#acknowledgement}
+
+
 ## <span class="section-num">14</span> reliable connection {#reliable-connection}
 
 for a connection to be reliable: <br/>
@@ -668,7 +671,7 @@ u = \frac{T\_i}{\frac{1}{1-p}(T\_i+T\_\text{out})} = \frac{(1-p)T\_i}{T\_i+T\_\t
 
 #### <span class="section-num">14.1.1</span> stop and wait efficiency {#stop-and-wait-efficiency}
 
-the efficiency is the [transmission delay](#transmission-delay) over the time taken for a successful transmission on [average]({{< relref "20220813152209-average.md" >}}) <br/>
+the efficiency is the [transmission delay](#transmission-delay) over the time taken for a successful transmission <br/>
 \\[
 u = \frac{T\_i}{T\_v} = \frac{T\_i}{\frac{1}{1-p}(T\_i+T\_\text{out})}
 \\] <br/>
@@ -801,22 +804,25 @@ assume that instead of adding the stop and wait protocol to the connection we co
 ## <span class="section-num">18</span> proxy {#proxy}
 
 
-## <span class="section-num">19</span> FDMA {#fdma}
+## <span class="section-num">19</span> cyclic redundancy check {#cyclic-redundancy-check}
 
 
-## <span class="section-num">20</span> TDMA {#tdma}
-
-
-## <span class="section-num">21</span> cyclic redundancy check {#cyclic-redundancy-check}
-
-
-## <span class="section-num">22</span> network bridge {#network-bridge}
+## <span class="section-num">20</span> network bridge {#network-bridge}
 
 A network bridge is a computer networking device that creates a single, aggregate network from multiple communication networks or network segments. This function is called **network bridging**. Bridging is distinct from [routing](#ip-routing). Routing allows multiple networks to communicate independently and yet remain separate, whereas bridging connects two separate networks as if they were a single network. In the OSI model, bridging is performed in the data link layer (layer 2). If one or more segments of the bridged network are wireless, the device is known as a wireless bridge. <br/>
 from the perspective of the [internet](#internet), this a network represents forms a single network with a single ip address <br/>
 
 
-### <span class="section-num">22.1</span> transparent bridge {#transparent-bridge}
+### <span class="section-num">20.1</span> transparent bridge {#transparent-bridge}
+
+
+## <span class="section-num">21</span> piggybacking {#piggybacking}
+
+piggbacking refers to the technique of waiting after receiving a packet until the network layer moves to the next data packet and then responding with an [ack](#acknowledgement) packet <br/>
+basically it refers to the process of delaying an ack packet <br/>
+
+
+## <span class="section-num">22</span> FDMA {#fdma}
 
 
 ## <span class="section-num">23</span> citations {#citations}
@@ -824,4 +830,7 @@ from the perspective of the [internet](#internet), this a network represents for
 credit where credit is due <br/>
 <https://en.wikipedia.org/wiki/Top-level_domain> <br/>
 <https://ns1.com/resources/what-is-dns> <br/>
+
+
+## <span class="section-num">24</span> TDMA {#tdma}
 
