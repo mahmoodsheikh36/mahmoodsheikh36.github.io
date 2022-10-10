@@ -1,7 +1,8 @@
 +++
 title = "using package.el with straight.el"
 author = ["user"]
-date = 2022-10-10T11:38:00+03:00
+date = 2022-10-10T11:45:00+03:00
+tags = ["emacs"]
 draft = false
 +++
 
