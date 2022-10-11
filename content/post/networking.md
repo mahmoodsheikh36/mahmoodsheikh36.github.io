@@ -2,7 +2,7 @@
 title = "networking"
 author = ["mahmood"]
 description = "college course in computer networking"
-date = 2022-10-10T19:56:00+03:00
+date = 2022-10-11T10:40:00+03:00
 tags = ["todo", "computer-science"]
 draft = false
 +++
@@ -400,7 +400,7 @@ some status codes: <br/>
 a **[DNS](#dns) [server](#server)** keeps records of DNS entries that map domain names to their corresponding IP addresses which can be served to other machines <br/>
 when a client wants to to communicate with a machine using its domain name, it makes a request to a dns server, if the server has a record of said domain name, it returns sends it back to the client, if it doesnt, it either sends back an IP to another dns server that has that record or it makes a request to that dns server itself and sends back the response to the client <br/>
 
-{{< figure src="~/.emacs.d/latex/1btUy2d.svg" >}} <br/>
+{{< figure src="/ox-hugo/1btUy2d.svg" >}} <br/>
 
 <div class="my_example">
 
@@ -671,7 +671,7 @@ u = \frac{T\_i}{\frac{1}{1-p}(T\_i+T\_\text{out})} = \frac{(1-p)T\_i}{T\_i+T\_\t
 
 #### <span class="section-num">14.1.1</span> stop and wait efficiency {#stop-and-wait-efficiency}
 
-the efficiency is the [transmission delay](#transmission-delay) over the time taken for a successful transmission <br/>
+the efficiency is the [transmission delay](#transmission-delay) over the time taken for a successful transmission on [average]({{< relref "20220813152209-average.md" >}}) <br/>
 \\[
 u = \frac{T\_i}{T\_v} = \frac{T\_i}{\frac{1}{1-p}(T\_i+T\_\text{out})}
 \\] <br/>
@@ -825,12 +825,12 @@ basically it refers to the process of delaying an ack packet <br/>
 ## <span class="section-num">22</span> FDMA {#fdma}
 
 
-## <span class="section-num">23</span> citations {#citations}
+## <span class="section-num">23</span> TDMA {#tdma}
+
+
+## <span class="section-num">24</span> citations {#citations}
 
 credit where credit is due <br/>
 <https://en.wikipedia.org/wiki/Top-level_domain> <br/>
 <https://ns1.com/resources/what-is-dns> <br/>
-
-
-## <span class="section-num">24</span> TDMA {#tdma}
 
