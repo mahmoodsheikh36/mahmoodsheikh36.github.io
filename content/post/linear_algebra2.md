@@ -2,8 +2,8 @@
 title = "linear algebra"
 author = ["mahmood"]
 description = "linear algebra"
-date = 2022-09-26T21:43:00+03:00
-tags = ["public", "math"]
+date = 2022-10-11T08:59:00+03:00
+tags = ["math"]
 draft = false
 +++
 
@@ -17,9 +17,11 @@ draft = false
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
-  \(\newcommand{\ihat}{\hat{\textbf{\i}}}\)
-  \(\newcommand{\jhat}{\hat{\textbf{\j}}}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
 
 <!-- mathjax -->
@@ -83,7 +85,7 @@ a matrix can be constructed over a specific finite/infinite set of numbers for e
 <div class="my_example">
 
 consider this matrix over the field \\(\mathbb{Z}\\), where all the numbers are integers <br/>
-\\[\left[\begin{array}{rrrr} 5 & -3 & 0 & -20 \\\ 1 & -2 & -14 & -2 \\\ -64 & -1 & 3 & -1 \\\ 0 & 0 & 0 & 1 \\\ -1 & -2 & 1 & -3 \end{array}\right]\\] <br/>
+\\[\left[\begin{array}{rrrr} 2 & 1 & -1 & 2 \\\ -2 & -3 & -3 & 2 \\\ 1 & 0 & -5 & 3 \\\ 1 & -3 & 2 & 1 \\\ 14 & -1 & -1 & 1 \end{array}\right]\\] <br/>
 
 </div>
 
@@ -290,7 +292,7 @@ assuming \\(A\\) is an \\(n\times n\\) matrix <br/>
 
 <div class="lemma">
 
-interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#org06ce80a) and [alternating](#org38fa390) <br/>
+interchanging any pair of columns of a matrix multiplies its determinant by \\(-1\\). This follows from the determinant being [multilinear](#orgc6d11c8) and [alternating](#org3c1ebec) <br/>
 
 </div>
 
@@ -302,7 +304,7 @@ if the columns of the matrix form a [linearly dependant set](#linear-dependance)
 
 <div class="lemma">
 
-adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#org06ce80a) and being [alternative](#org38fa390) <br/>
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of [multilinearity](#orgc6d11c8) and being [alternative](#org3c1ebec) <br/>
 
 </div>
 
@@ -605,7 +607,7 @@ here we are basically looking at the matrix as a column of rows where each row r
 
 </div>
 
-{{< figure src="/ox-hugo/8C0g6w.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/8C0g6w.svg" >}} <br/>
 
 </div>
 
@@ -618,7 +620,7 @@ the [span](#span) of the columns of a [matrix](#matrix) \\(A\\), denoted by \\(C
 generally when referring to a span of a matrix we refer to the **column space** <br/>
 here we are basically looking at the matrix as a row of columns where each column represents a vector <br/>
 
-{{< figure src="/ox-hugo/3cVWJn.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/3cVWJn.svg" >}} <br/>
 
 <div class="note">
 
@@ -875,11 +877,12 @@ the **magnitude** of a [vector](#vector) \\(A\\) is its length, denoted by \\(|A
 
 <div class="definition">
 
-a vector whose [magnitude](#magnitude) is equal to 1, laballed by a caret, e.g. \\(\hat A\\) <br/>
+a [vector](#vector) whose [magnitude](#magnitude) is equal to 1, laballed by a caret, e.g. \\(\ihat\\) <br/>
 
 <div class="lemma">
 
-\\(\hat A = \frac{A}{|A|}\\) <br/>
+\\(\ihat = \frac{i}{|i|}\\) <br/>
+where \\(i\\) is some vector and \\(\ihat\\) is the corresponding unit vector <br/>
 
 </div>
 
@@ -906,12 +909,12 @@ multiplication of a vector by a negative scalar evidently can change both the [m
 
 the addition of 2 vectors is simply described in the following drawing: <br/>
 
-{{< figure src="/ox-hugo/BlOGLgM.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/BlOGLgM.svg" >}} <br/>
 
 the rule is: to add B to A, place the tail of B at the head of A. the sum is a vector from the tail of A to the head of B <br/>
 since \\(A-B=A+(-B)\\), in order to subtract B from A we can simply multiply it by -1 and then add, so in a sense, we're "rotating" B and adding it to A to get \\(A-B\\): <br/>
 
-{{< figure src="/ox-hugo/WnuzbR0.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/WnuzbR0.svg" >}} <br/>
 
 vector addition is **commutative**, [associative]({{< relref "20220923212917-associative.md" >}}) and [distributive]({{< relref "20220923212922-distributive.md" >}}) <br/>
 
@@ -922,7 +925,7 @@ vector addition is **commutative**, [associative]({{< relref "20220923212917-ass
 
 the scalar product of 2 vectors A and B is defined as \\(A \cdot B = |A||B|\cos\theta\\) where \\(\theta\\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \\(\theta\\) is always taken as the angle smaller than \\(\pi\\)): <br/>
 
-{{< figure src="/ox-hugo/dVIhILj.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/dVIhILj.svg" >}} <br/>
 
 when the vectors are in the form of a list of components, e.g. \\((x,y,z)\\) then the dot product is the sum of the products of corresponding components, i.e. given two vectors \\(A=(A\_1,\dots,A\_n),B=(B\_1,\dots,B\_n)\\), their dot product is \\(A\cdot B=A\_1B\_1+\dots+A\_nB\_n\\) <br/>
 
@@ -1059,7 +1062,7 @@ if \\(n = m\\): <br/>
 
 a vector space could look something like this: <br/>
 
-{{< figure src="/ox-hugo/BdNZek.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/BdNZek.svg" >}} <br/>
 
 all the vectors that lie on the blue line represent a vector space, because the multiplication of a line would just make it longer (or shorter) it wouldnt make it move out of the blue line, and addition of any 2 vectors that lie on the blue line would also result in a longer (or shorter) vector that lies on the same line which expands across the entire 2d space <br/>
 
@@ -1067,7 +1070,7 @@ all the vectors that lie on the blue line represent a vector space, because the 
 
 <div class="my_example">
 
-{{< figure src="/ox-hugo/xt5Zoo.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/xt5Zoo.svg" >}} <br/>
 
 this line doesnt represent a vector space because it doesnt contain the vector \\(\begin{bmatrix} 0\\\ 0 \end{bmatrix}\\) <br/>
 
@@ -1248,6 +1251,23 @@ let \\(\vec{v} \in \spn\\{\vec{v}\_1 \ldots \vec{v}\_n\\}, a \in \mathbb{F}\\) s
 \\[ a\vec{v} = a \sum\_{k=1}^{n} x\_k\vec{v}\_k = \underbrace{(ax\_1)}\_{ax\_1 \in \mathbb{F}}\vec{v}\_1 + (ax\_2)\vec{v}\_2 + \ldots + (ax\_n)\vec{v}\_n \in \spn\\{\vec{v}\_1,\ldots,\vec{v}\_n\\} \\] <br/>
 
 </div>
+
+</div>
+
+<div class="my_example">
+
+by definition of **span**, a span of a set of vectors is the collection of all the possible linear combinations using said vectors <br/>
+the span of a single vector would just be its own line expanded across the entire 3d region, because we cant reach other dimensions by constant multiplication or by addition of the vector to itself <br/>
+
+{{< figure src="~/.emacs.d/latex/DuGLXT.svg" >}} <br/>
+
+
+the span of 2 **linearly independant** vectors is however more interesting because it would be visualized as a grid across the 3d space <br/>
+for simplicity, we take the relatively simple vectors \\(\begin{bmatrix} 0\\\1.3\\\1.8 \end{bmatrix}, \begin{bmatrix} 0\\\ -0.9\\\ 0.9 \end{bmatrix}\\) that lie on the \\(x=0\\) grid which covers the \\(y\\) and \\(z\\) axes <br/>
+
+{{< figure src="~/.emacs.d/latex/BkRBEU.svg" >}} <br/>
+
+{{< figure src="~/.emacs.d/latex/mW0Cqb.svg" >}} <br/>
 
 </div>
 
@@ -1529,7 +1549,7 @@ in other words, given a dependant set of vectors, there exists a vector in this 
 
 <div class="proof">
 
-according to [this entailment](#orgd1ab2f2), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
+according to [this entailment](#org0208813), there exists \\(s \in S\\) such that \\(s \in \spn(S - \\{s\\})\\) <br/>
 to prove \\(\spn(s) = \spn(S - \\{s\\})\\) we show that \\(\spn(s) \subseteq \spn(S - \\{s\\})\\) and \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) <br/>
 we know that \\(\spn(S - \\{s\\}) \subseteq \spn(s)\\) because we can take every linear combination from the former, add \\(0 \cdot s\\) to it, and it would be a linear combination of the latter <br/>
 without loss of generality, assume \\(s = s\_1\\) <br/>
@@ -1569,9 +1589,9 @@ for every finite set \\(S \in V\_\mathbb{F}\\), there exists \\(B \subseteq S\\)
 
 in case \\(S\\) is linearly independant we pick \\(B = S\\) and so \\(B\\) is linearly dependant and \\(\spn(B) = \spn(S)\\) <br/>
 in case \\(S\\) is linearly dependant we got more work to do: <br/>
-according to [this lemma](#org10f3de5), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
+according to [this lemma](#orgac671bd), \\(\spn(S) = \spn(S - \\{s\_1\\})\\) <br/>
 in case \\(S - \\{s\_1\\}\\) is linearly independant then let \\(B = S - \\{s\_1\\}\\) which means \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
-in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#org10f3de5), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
+in case \\(S - \\{s\_1\\}\\) is linearly dependant, according to [this lemma](#orgac671bd), \\(\spn(S - \\{s\_1,s\_2\\}) = \spn(S - \\{s\_1\\}) = \spn(S)\\) <br/>
 in case \\(\spn(S - \\{s\_1,s\_2\\})\\) is linearly independant then the proof is over <br/>
 in case it isnt, we repeat the same step of removing a vector <br/>
 you might already see the pattern here, we keep dropping vectors from \\(S\\) without changing the span, eventually we would arrive at \\(S - \\{s\_1,s\_2,s\_k\\}\\) that is linearly independant and \\(B \subseteq S\\) and \\(\spn(B) = \spn(S)\\) <br/>
@@ -1581,23 +1601,6 @@ you might already see the pattern here, we keep dropping vectors from \\(S\\) wi
 </div>
 
 </div>
-
-
-##### <span class="section-num">3.7.3.3</span> visual explanation {#visual-explanation}
-
-by definition of **span**, a span of a set of vectors is the collection of all the possible linear combinations using said vectors <br/>
-the span of a single vector would just be its own line expanded across the entire 3d region, because we cant reach other dimensions by constant multiplication or by addition of the vector to itself <br/>
-
-{{< figure src="/ox-hugo/DuGLXT.svg" >}} <br/>
-
-<iframe style="width: 100%; height: 4in" src="/more/vJ75y0.html"></iframe>
-
-the span of 2 **linearly independant** vectors is however more interesting because it would be visualized as a grid across the 3d space <br/>
-for simplicity, we take the relatively simple vectors \\(\begin{bmatrix} 0\\\1.3\\\1.8 \end{bmatrix}, \begin{bmatrix} 0\\\ -0.9\\\ 0.9 \end{bmatrix}\\) that lie on the \\(x=0\\) grid which covers the \\(y\\) and \\(z\\) axes <br/>
-
-{{< figure src="/ox-hugo/BkRBEU.svg" >}} <br/>
-
-{{< figure src="/ox-hugo/mW0Cqb.svg" >}} <br/>
 
 
 #### <span class="section-num">3.7.4</span> basis {#basis}
@@ -1635,7 +1638,7 @@ every **finitely generated vector space** \\(V\_\mathbb{F}\\) has atleast one ba
 <div class="proof">
 
 since \\(V\_\mathbb{F}\\) is finitely generated there exists a finite set \\(S \subseteq V\\) such that \\(\spn(S) = V\\) <br/>
-according to [this lemma](#org10f3de5), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
+according to [this lemma](#orgac671bd), there exists \\(B \subseteq S\\) where \\(B\\) is linearly independant and \\(\spn(B) = V\\), therefore \\(B\\) is a basis <br/>
 
 </div>
 
@@ -1755,10 +1758,10 @@ which is an identity matrix of the 3rd degree <br/>
 
 ##### <span class="section-num">3.7.4.2</span> basis of the cartesian coordinate system {#basis-of-the-cartesian-coordinate-system}
 
-the [standard basis](#standard-basis) of the familiar three dimensional coordinate system consists of the [unit vector](#unit-vector)s that lie along the x, y, and z axes <br/>
+the [standard basis](#standard-basis) of the [cartesian coordinate system]({{< relref "20220929001304-cartesian_coordinate_system.md" >}}) consists of the [unit vector](#unit-vector)s that lie along the x, y, and z axes <br/>
 the x unit vector is denoted by \\(\ihat\\), the y unit vector by \\(\jhat\\), and the z unit vector by \\(\khat\\) <br/>
 
-{{< figure src="/ox-hugo/YzTbRCF.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/YzTbRCF.svg" >}} <br/>
 
 <div class="characteristic">
 
@@ -1878,7 +1881,7 @@ given \\({V\_\mathbb{F}}^n\\) is finitely spanned, \\(W^n \leq V^n\\) and \\(\di
 
 <div class="proof">
 
-let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#org127e517) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
+let \\(w\_1\ldots w\_n\\) be a basis of \\(W\\) and so \\(n = |V|\\) and \\(w\_1\ldots w\_n\\) is linearly independant therefore according to [this lemma](#org20c229f) \\(\spn\\{w\_1\ldots w\_n\\} = V = W\\) and since it spans \\(V\\) and is of size \\(n = |V|\\) then it is a basis of \\(V\\) <br/>
 
 </div>
 
@@ -2886,3 +2889,4 @@ let \\(S,T,U\\) be [linear space](#vector-space)s, let \\(f:S\to T, g:T\to U\\) 
 
 
 ### <span class="section-num">4.3</span> linear isomorphism {#linear-isomorphism}
+
