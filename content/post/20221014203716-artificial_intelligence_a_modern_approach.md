@@ -2,8 +2,8 @@
 title = "Artificial Intelligence: A Modern Approach"
 author = ["mahmood"]
 description = "my notes on reading the book"
-date = 2022-10-15T10:05:00+03:00
-tags = ["math"]
+date = 2022-10-16T00:19:00+03:00
+tags = ["todo", "math"]
 draft = false
 +++
 
@@ -60,6 +60,8 @@ window.onload = function() {
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
+these are my notes on reading the book which covers the science of [artificial intelligence]({{< relref "20221003133908-artificial_intelligence.md" >}}) extensively <br/>
+
 
 ## <span class="section-num">1</span> solving problems by searching {#solving-problems-by-searching}
 
@@ -107,8 +109,16 @@ given a training set of \\(N\\) example input-output pairs \\((x\_1,y\_1),(x\_2,
 
 </div>
 
-here \\(x\\) and \\(y\\) can be any value; they need not be numbers. the function \\(h\\) is a hypothesis from the [hypothesis space](#hypothesis-space) and it sometimes could be stochastic and what we have to learn is a [conditional probability]({{< relref "20220813151352-probability.md#conditional-probability" >}}) distribution, \\(P(Y\mid x)\\) <br/>
-simply put, our task here is to find the function that fits best the data we have <br/>
+here \\(x\\) and \\(y\\) can be any value; they need not be numbers. the function \\(h\\) is a hypothesis from a [hypothesis space](#hypothesis-space), denoted by \\(H\\) ,and it sometimes could be stochastic and what we have to learn is a [conditional probability]({{< relref "20220813151352-probability.md#conditional-probability" >}}) distribution, \\(P(Y\mid x)\\) <br/>
+
+supervised learning can be done by choosing the hypothesis \\(h^\*\\) that is most probable given the data: <br/>
+\\[
+h^\* = \underset{h \in H}{\text{argmax}}\ P(h|data)
+\\] <br/>
+by Bayes' rule this is equivalent to <br/>
+\\[
+h^\* = \underset{h \in H}{\text{argmax}}\ P(data|h)\ P(h)
+\\] <br/>
 
 
 ### <span class="section-num">2.2</span> hypothesis space {#hypothesis-space}
@@ -116,6 +126,24 @@ simply put, our task here is to find the function that fits best the data we hav
 <div class="definition">
 
 **hypothesis space** is the [set]({{< relref "discrete_maths2.md#set" >}}) of all the possible legal hypothesis. this is the set from which the machine learning algorithm would determine the best possible (only one) which would best describe the target function or the outputs <br/>
+
+</div>
+
+
+### <span class="section-num">2.3</span> descision tree {#descision-tree}
+
+<div class="definition">
+
+a **decision tree** represents a [function]({{< relref "discrete_maths2.md#function" >}}) that takes as input a [vector]({{< relref "linear_algebra2.md#vector" >}}) of attribute values and returns a “decision”--a single output value. the input and output values can be [discrete or continuous]({{< relref "20221015110034-discrete_continuous_data.md" >}}) <br/>
+
+</div>
+
+
+### <span class="section-num">2.4</span> boolean classification {#boolean-classification}
+
+<div class="definition">
+
+problems where the inputs have [discrete values]({{< relref "20221015110034-discrete_continuous_data.md" >}}) and the output has exactly two possible values where each example input will be classified as true (a positive example) or false (a negative example). <br/>
 
 </div>
 
