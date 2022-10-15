@@ -5,7 +5,7 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Euler&#39;s Number</title>
+        <title>Artificial Intelligence: A Modern Approach</title>
         
         <style>
 
@@ -86,7 +86,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand visible-xs" href="#">Euler&#39;s Number</a>
+                    <a class="navbar-brand visible-xs" href="#">Artificial Intelligence: A Modern Approach</a>
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -122,8 +122,8 @@
 <main>
 
     <div>
-        <h2>Euler&#39;s Number</h2>
-        <h5>January 1, 0001</h5>
+        <h2>Artificial Intelligence: A Modern Approach</h2>
+        <h5>October 15, 2022</h5>
         
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
@@ -140,107 +140,12 @@
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
-<style>
-.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,.1);
-  padding: 2px;
-  border: 1px black solid;
-}
-.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
-  background-color: #bbb;
-  position: relative;
-  border-radius: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  border: 1px solid black;
-}
-.lemma {
-  background-color: beige;
-}
-.proof {
-  background-color: moccasin;
-}
-.entailment {
-  background-color: lightsteelblue;
-}
-.lemma:before {
-  content: "lemma:";
-}
-.proof:before {
-  content: "proof:";
-}
-.entailment:before {
-  content: "entailment (logical consequence):";
-}
-.note {
-  background-color: blanchedalmond;
-}
-.note:before {
-  /* content: url(/note.png) "note:"; */
-  content: "note:";
-}
-.my_example {
-  background-color: #e8cfc8; 
-}
-.my_example:before {
-  content: "example:";
-}
-p {
-  margin: 0px;
-  padding: 0px;
-}
-img {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-}
-.hide {
-  display: none;
-}
-.definition {
-  background-color: snow;
-}
-.definition:before {
-  content: "definition:";
-}
-.characteristic {
-  background-color: #dfdada;
-}
-.characteristic:before {
-  content: "characteristic:";
-}
-.assumption {
-  background-color: #65ad98;
-}
-.question {
-  background-color: #e1c6c6;
-}
-.question:before {
-  content: "question:";
-}
-.subquestion {
-  background-color: #e5e2d8;
-}
-.subquestion:before {
-  content: "subquestion:";
-}
-.answer {
-  background-color: #beabc5;
-}
-.answer:before {
-  content: "answer:";
-}
-.step {
-  background-color: #b4d3ad;
-}
-.step:before {
-  content: "step:";
-}
-</style>
 <!-- mathjax -->
 <script>
 // auto load modules like cancel
@@ -253,48 +158,73 @@ window.MathJax = {
 };
 /* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
 function removeNewlineAfterDisplayMath() {
-    elems = document.querySelectorAll('mjx-container')
-    for (i = 0; i < elems.length; ++i) {
-        elem = elems[i]
-        nextElem = elem.nextElementSibling
-        if (nextElem !== null && nextElem.tagName === 'BR')
-            nextElem.remove()
-    }
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
 }
 window.onload = function() {
   removeNewlineAfterDisplayMath()
 }
 </script>
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
+<h2 id="solving-problems-by-searching"><span class="section-num">1</span> solving problems by searching</h2>
+<p>a solution is an action sequence, so search algorithms work by considering various possible action sequences. the possible action sequences starting at the <strong>initial state</strong> form a <strong>search tree</strong> with the initial state at the <strong>root</strong>; the branches are actions and the nodes correspond to states in the state space of the problem <br/></p>
+<p>\begin{algorithmic}
+\Function{TREE-SEARCH}{{\it problem}} \textbf{returns} a solution, or failure
+\State initialize the frontier using the initial state of problem
+\Loop
+\State \textbf{if} the frontier is empty \textbf{then return} failure
+\State choose a leaf node and remove it from the frontier
+\State \textbf{if} the node contains a goal state \textbf{then return} the corresponding solution
+\State expand the chosen node, adding the resulting nodes to the frontier
+\EndLoop
+\EndFunction
+\end{algorithmic}</p>
+<p>an additional <a href="/post/data_structures/">data structures</a> could be used to keep track of nodes that have been already visited in the tree to prevent redundant repetitions, demonstrated in the <code>GRAPH-SEARCH</code> algorithm which expands on the <code>TREE-SEARCH</code> algorithm (the new lines are highlighted) <br/></p>
+<p>\begin{algorithmic}
+\Function{GRAPH-SEARCH}{{\it problem}} \textbf{returns} a solution, or failure
+\State initialize the frontier using the initial state of {\it problem}
+\Loop
+\State \textbf{if} the frontier is empty \textbf{then return} failure
+\State choose a leaf node and remove it from the frontier
+\State \textbf{if} the node contains a goal state \textbf{then return} the corresponding solution
+\State {\it \textbf{add the node to the explored set}}
+\State expand the chosen node, adding the resulting nodes to the frontier
+\State \quad {\it \textbf{only if not in the frontier or explored set}}
+\EndLoop
+\EndFunction
+\end{algorithmic}</p>
+<h2 id="machine-learning"><span class="section-num">2</span> machine learning</h2>
+<h3 id="supervised-learning"><span class="section-num">2.1</span> supervised learning</h3>
+<p>the task of <strong>supervisted learning</strong> is this: <br/></p>
+<div class="question">
+<p>given a training set of \(N\) example input-output pairs \((x_1,y_1),(x_2,y_2),\dots,(x_N,y_N)\), where each \(y_j\) was generated by an unknown <a href="/post/discrete_maths2/#function">function</a> \(y=f(x)\), discover a function \(h\) that approximates the true function \(f\). <br/></p>
+</div>
+<p>here \(x\) and \(y\) can be any value; they need not be numbers. the function \(h\) is a hypothesis from the <a href="#hypothesis-space">hypothesis space</a> and it sometimes could be stochastic and what we have to learn is a <a href="/post/20220813151352-probability/#conditional-probability">conditional probability</a> distribution, \(P(Y\mid x)\) <br/>
+simply put, our task here is to find the function that fits best the data we have <br/></p>
+<h3 id="hypothesis-space"><span class="section-num">2.2</span> hypothesis space</h3>
 <div class="definition">
-<p>Euler&rsquo;s Number is a constant defined as <br/>
-\[
-e = \lim_{x\to \pm\infty} \left(1+\frac{1}{x}\right)^x
-\] <br/></p>
-</div></div>
+<p><strong>hypothesis space</strong> is the <a href="/post/discrete_maths2/#set">set</a> of all the possible legal hypothesis. this is the set from which the machine learning algorithm would determine the best possible (only one) which would best describe the target function or the outputs <br/></p>
+</div>
+</div>
 
     
     
     
         <h4 class="page-header">Related</h4>
          <div class="item">
-
-    
-    
-    
-
-  
-    <h4><a href="/post/20221014203716-artificial_intelligence_a_modern_approach/">Artificial Intelligence: A Modern Approach</a></h4>
-    <h5>my notes on reading the book</h5>
-  October 15, 2022
-    
-<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
-
-
-
-</div>
-  <div class="item">
 
     
     
@@ -324,6 +254,24 @@ e = \lim_{x\to \pm\infty} \left(1+\frac{1}{x}\right)^x
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
 <a href="https://mahmoodsheikh36.github.io/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
+
+
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+  
+    <h4><a href="/post/physics/">mechanics</a></h4>
+    <h5>mechanics (physics)</h5>
+  October 2, 2022
+    
+<a href="https://mahmoodsheikh36.github.io/tags/physics"><kbd class="item-tag">physics</kbd></a>
+
+<a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
 
 
 
