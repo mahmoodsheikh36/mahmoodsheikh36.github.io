@@ -1,0 +1,53 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Artificial Intelligence: A Modern Approach</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/org.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.104.3"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>Artificial Intelligence: A Modern Approach</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/about/>About</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:mahmod.m2015@gmail.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/mahmoodsheikh36/><i class="fab fa-github"></i></a></li></ul></div></div></nav><main><div><h2>Artificial Intelligence: A Modern Approach</h2><h5>October 15, 2022</h5><a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
+\(\DeclareMathOperator{\dom}{domain}\)
+\(\DeclareMathOperator{\ran}{range}\)
+\(\DeclareMathOperator{\rng}{range}\)
+\(\DeclareMathOperator{\img}{Im}\)
+\(\DeclareMathOperator{\adj}{adj}\)
+\(\newcommand\dif[1]{\:\textrm{d}#1}\)
+\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+\(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+\(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+\(\newcommand{\khat}{\hat{\textbf{k}}}\)
+\(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+\(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><h2 id=solving-problems-by-searching><span class=section-num>1</span> solving problems by searching</h2><p>a solution is an action sequence, so search algorithms work by considering various possible action sequences. the possible action sequences starting at the <strong>initial state</strong> form a <strong>search tree</strong> with the initial state at the <strong>root</strong>; the branches are actions and the nodes correspond to states in the state space of the problem<br></p><p>\begin{algorithmic}
+\Function{TREE-SEARCH}{{\it problem}} \textbf{returns} a solution, or failure
+\State initialize the frontier using the initial state of problem
+\Loop
+\State \textbf{if} the frontier is empty \textbf{then return} failure
+\State choose a leaf node and remove it from the frontier
+\State \textbf{if} the node contains a goal state \textbf{then return} the corresponding solution
+\State expand the chosen node, adding the resulting nodes to the frontier
+\EndLoop
+\EndFunction
+\end{algorithmic}</p><p>an additional <a href=/post/data_structures/>data structures</a> could be used to keep track of nodes that have been already visited in the tree to prevent redundant repetitions, demonstrated in the <code>GRAPH-SEARCH</code> algorithm which expands on the <code>TREE-SEARCH</code> algorithm (the new lines are highlighted)<br></p><p>\begin{algorithmic}
+\Function{GRAPH-SEARCH}{{\it problem}} \textbf{returns} a solution, or failure
+\State initialize the frontier using the initial state of {\it problem}
+\Loop
+\State \textbf{if} the frontier is empty \textbf{then return} failure
+\State choose a leaf node and remove it from the frontier
+\State \textbf{if} the node contains a goal state \textbf{then return} the corresponding solution
+\State {\it \textbf{add the node to the explored set}}
+\State expand the chosen node, adding the resulting nodes to the frontier
+\State \quad {\it \textbf{only if not in the frontier or explored set}}
+\EndLoop
+\EndFunction
+\end{algorithmic}</p><h2 id=machine-learning><span class=section-num>2</span> machine learning</h2><h3 id=supervised-learning><span class=section-num>2.1</span> supervised learning</h3><p>the task of <strong>supervisted learning</strong> is this:<br></p><div class=question><p>given a training set of \(N\) example input-output pairs \((x_1,y_1),(x_2,y_2),\dots,(x_N,y_N)\), where each \(y_j\) was generated by an unknown <a href=/post/discrete_maths2/#function>function</a> \(y=f(x)\), discover a function \(h\) that approximates the true function \(f\).<br></p></div><p>here \(x\) and \(y\) can be any value; they need not be numbers. the function \(h\) is a hypothesis from the <a href=#hypothesis-space>hypothesis space</a> and it sometimes could be stochastic and what we have to learn is a <a href=/post/20220813151352-probability/#conditional-probability>conditional probability</a> distribution, \(P(Y\mid x)\)<br>simply put, our task here is to find the function that fits best the data we have<br></p><h3 id=hypothesis-space><span class=section-num>2.2</span> hypothesis space</h3><div class=definition><p><strong>hypothesis space</strong> is the <a href=/post/discrete_maths2/#set>set</a> of all the possible legal hypothesis. this is the set from which the machine learning algorithm would determine the best possible (only one) which would best describe the target function or the outputs<br></p></div></div><h4 class=page-header>Related</h4><div class=item><h4><a href=/post/linear_algebra2/>linear algebra</a></h4><h5>linear algebra</h5>October 11, 2022
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div><div class=item><h4><a href=/post/data_structures/>data structures</a></h4><h5>college course in data structures and algorithms</h5>October 5, 2022
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a>
+<a href=https://mahmoodsheikh36.github.io/tags/computer-science><kbd class=item-tag>computer-science</kbd></a></div><div class=item><h4><a href=/post/physics/>mechanics</a></h4><h5>mechanics (physics)</h5>October 2, 2022
+<a href=https://mahmoodsheikh36.github.io/tags/physics><kbd class=item-tag>physics</kbd></a>
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div></main><footer></footer></body></html>
