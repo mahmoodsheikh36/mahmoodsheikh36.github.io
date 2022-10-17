@@ -2,7 +2,7 @@
 title = "Artificial Intelligence: A Modern Approach"
 author = ["mahmood"]
 description = "my notes on reading the book"
-date = 2022-10-16T00:19:00+03:00
+date = 2022-10-17T12:43:00+03:00
 tags = ["todo", "math"]
 draft = false
 +++
@@ -67,33 +67,11 @@ these are my notes on reading the book which covers the science of [artificial i
 
 a solution is an action sequence, so search algorithms work by considering various possible action sequences. the possible action sequences starting at the **initial state** form a **search tree** with the initial state at the **root**; the branches are actions and the nodes correspond to states in the state space of the problem <br/>
 
-\begin{algorithmic}
-\Function{TREE-SEARCH}{{\it problem}} \textbf{returns} a solution, or failure
-  \State initialize the frontier using the initial state of problem
-  \Loop
-    \State \textbf{if} the frontier is empty \textbf{then return} failure
-    \State choose a leaf node and remove it from the frontier
-    \State \textbf{if} the node contains a goal state \textbf{then return} the corresponding solution
-    \State expand the chosen node, adding the resulting nodes to the frontier
-  \EndLoop
-\EndFunction
-\end{algorithmic}
+{{< figure src="/ox-hugo/jTizJca.svg" >}} <br/>
 
 an additional [data structures]({{< relref "data_structures.md" >}}) could be used to keep track of nodes that have been already visited in the tree to prevent redundant repetitions, demonstrated in the `GRAPH-SEARCH` algorithm which expands on the `TREE-SEARCH` algorithm (the new lines are highlighted) <br/>
 
-\begin{algorithmic}
-\Function{GRAPH-SEARCH}{{\it problem}} \textbf{returns} a solution, or failure
-  \State initialize the frontier using the initial state of {\it problem}
-  \Loop
-    \State \textbf{if} the frontier is empty \textbf{then return} failure
-    \State choose a leaf node and remove it from the frontier
-    \State \textbf{if} the node contains a goal state \textbf{then return} the corresponding solution
-    \State {\it \textbf{add the node to the explored set}}
-    \State expand the chosen node, adding the resulting nodes to the frontier
-    \State \quad {\it \textbf{only if not in the frontier or explored set}}
-  \EndLoop
-\EndFunction
-\end{algorithmic}
+{{< figure src="/ox-hugo/9Kli4Je.svg" >}} <br/>
 
 
 ## <span class="section-num">2</span> machine learning {#machine-learning}
@@ -101,7 +79,7 @@ an additional [data structures]({{< relref "data_structures.md" >}}) could be us
 
 ### <span class="section-num">2.1</span> supervised learning {#supervised-learning}
 
-the task of **supervisted learning** is this: <br/>
+the task of **supervised learning** is this: <br/>
 
 <div class="question">
 
@@ -137,6 +115,19 @@ h^\* = \underset{h \in H}{\text{argmax}}\ P(data|h)\ P(h)
 a **decision tree** represents a [function]({{< relref "discrete_maths2.md#function" >}}) that takes as input a [vector]({{< relref "linear_algebra2.md#vector" >}}) of attribute values and returns a “decision”--a single output value. the input and output values can be [discrete or continuous]({{< relref "20221015110034-discrete_continuous_data.md" >}}) <br/>
 
 </div>
+
+
+#### <span class="section-num">2.3.1</span> inducing decision trees from examples {#inducing-decision-trees-from-examples}
+
+no matter how we measure size, it is an intractable problem to find the smallest consistent tree;there is no way to efficiently search through the \\({2^2}^n\\) trees. with some simple heuristics, however, we can find a good approximate solution: a small (but not smallest) consistent tree. The `DECISION-TREE-LEARNING` algorithm adopts a greedy [divide-and-conquer]({{< relref "20220706211939-divide_and_conquer_algorithm.md" >}}) strategy: always test the most important attribute first. this test divides the problem up into smaller subproblems that can then be solved recursively. by “most important attribute,” we mean the one that makes the most difference to the classification of an example. that way, we hope to get to the correct classification with a small number of tests, meaning that all paths in the tree will be short and the tree as a whole will be shallow. <br/>
+in general, after the first attribute test splits up the examples, each outcome is a new decision tree learning problem in itself, with fewer examples and one less attribute. there are four cases to consider for these recursive problems: <br/>
+
+1.  if the remaining examples are all positive (or all negative), then we are done: we can answer Yes or No <br/>
+2.  if there are some positive and some negative examples, then choose the best attribute to split them. <br/>
+3.  if there are no examples left, it means that no example has been observed for this combination of attribute values, and we return a default value calculated from the plurality classification of all the examples that were used in constructing the node’s parent. these are passed along in the variable _parent_examples_ <br/>
+4.  if there are no attributes left, but both positive and negative examples, it means that these examples have exactly the same description, but different classifications. this can happen because there is an error or noise in the data; because the domain is nondeterministic; or because we can’t observe an attribute that would distinguish the examples. the best we can do is return the plurality classification of the remaining examples. <br/>
+
+{{< figure src="/ox-hugo/6LtByrw.svg" >}} <br/>
 
 
 ### <span class="section-num">2.4</span> boolean classification {#boolean-classification}
