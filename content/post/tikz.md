@@ -2,8 +2,8 @@
 title = "tikz"
 author = ["mahmood"]
 description = "tikz"
-date = 2022-06-18T14:17:00+03:00
-tags = ["language"]
+date = 2022-10-17T16:18:00+03:00
+tags = ["math", "code", "language"]
 draft = false
 +++
 
@@ -13,112 +13,16 @@ draft = false
   \(\DeclareMathOperator{\ran}{range}\)
   \(\DeclareMathOperator{\rng}{range}\)
   \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
-
-<style>
-.lemma, .proof, .entailment, .definition, .note, .my_example, .characteristic, .assumption, .question, .subquestion, .answer, .step {
-  border-radius: 10px;
-  border-style: groove;
-  border-width: 3px;
-}
-.lemma:before, .proof:before, .entailment:before, .definition:before, .note:before, .my_example:before, .characteristic:before, .assumption:before, .question:before, .subquestion:before, .answer:before, .step:before {
-  background-color: #bbb;
-  position: relative;
-  border-radius: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-family: cursive;
-  border: 1px solid black;
-  font-size: 13px;
-}
-.lemma {
-  background-color: beige;
-}
-.proof {
-  background-color: moccasin;
-}
-.entailment {
-  background-color: lightsteelblue;
-}
-.lemma:before {
-  content: "lemma:";
-}
-.proof:before {
-  content: "proof:";
-}
-.entailment:before {
-  content: "entailment (logical consequence):";
-}
-.note {
-  background-color: blanchedalmond;
-}
-.note:before {
-  /* content: url(/note.png) "note:"; */
-  content: "note:";
-}
-.my_example {
-  background-color: #e8cfc8; 
-}
-.my_example:before {
-  content: "example:";
-}
-p {
-  margin: 0px;
-  padding: 0px;
-}
-img {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-}
-.hide {
-  display: none;
-}
-.definition {
-  background-color: snow;
-}
-.definition:before {
-  content: "definition:";
-}
-.characteristic {
-  background-color: #dfdada;
-}
-.characteristic:before {
-  content: "characteristic:";
-}
-.assumption {
-  background-color: #65ad98;
-}
-.question {
-  background-color: #e1c6c6;
-}
-.question:before {
-  content: "question:";
-}
-.subquestion {
-  background-color: #e5e2d8;
-}
-.subquestion:before {
-  content: "subquestion:";
-}
-.answer {
-  background-color: #beabc5;
-}
-.answer:before {
-  content: "answer:";
-}
-.step {
-  background-color: #b4d3ad;
-}
-.step:before {
-  content: "step:";
-}
-</style>
 
 <!-- mathjax -->
 <script>
@@ -127,24 +31,33 @@ window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
     packages: {'[+]': ['autoload', 'mathtools', 'physics']}
-  }
+  },
+  tex2jax: {preview: "none"}
 };
 /* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
 function removeNewlineAfterDisplayMath() {
-    elems = document.querySelectorAll('mjx-container')
-    for (i = 0; i < elems.length; ++i) {
-        elem = elems[i]
-        nextElem = elem.nextElementSibling
-        if (nextElem !== null && nextElem.tagName === 'BR')
-            nextElem.remove()
-    }
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
 }
 window.onload = function() {
   removeNewlineAfterDisplayMath()
 }
 </script>
-<script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
 for reference: [refcard](/ox-hugo/tikz_refcard.pdf) <br/>
@@ -164,12 +77,7 @@ drawing primitive shapes like lines/rectangles is very simple <br/>
 
 ### <span class="section-num">1.1</span> lines {#lines}
 
-```latex
-
-\tikz\draw (0,0) -- (3,2);
-```
-
-{{< figure src="/ox-hugo/tJcTbR.png" >}} <br/>
+{{< figure src="/ox-hugo/tJcTbR.svg" >}} <br/>
 
 here `|-` generates a broken line while `--` generates a straight line <br/>
 
@@ -179,7 +87,7 @@ here `|-` generates a broken line while `--` generates a straight line <br/>
 \tikz\draw[->] (-2,0) -- (-3,0);
 ```
 
-{{< figure src="/ox-hugo/E8OU1y.png" >}} <br/>
+{{< figure src="/ox-hugo/E8OU1y.svg" >}} <br/>
 
 
 ### <span class="section-num">1.2</span> polygons {#polygons}
@@ -194,16 +102,17 @@ tikz has lots of builtin shapes like: <br/>
 \tikz\fill[color=red] (0,0) rectangle (2,1);
 ```
 
-{{< figure src="/ox-hugo/4GY1Ec.png" >}} <br/>
+{{< figure src="/ox-hugo/4GY1Ec.svg" >}} <br/>
 
 and if tikz doesnt have a specific shape we can always use lines to draw it <br/>
 
 ```latex
 
-\tikz\draw (0,0) -- (4,0) -- (4,4) -- cycle; % use cycle instead of manually writing (0,0)
+% use cycle instead of manually writing (0,0)
+\tikz\draw (0,0) -- (4,0) -- (4,4) -- cycle;
 ```
 
-{{< figure src="/ox-hugo/5kARLC.png" >}} <br/>
+{{< figure src="/ox-hugo/5kARLC.svg" >}} <br/>
 
 
 ## <span class="section-num">2</span> nodes {#nodes}
@@ -218,7 +127,7 @@ nodes are used  to represent entities for various purposes including inserting t
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/JuXxvo.png" >}} <br/>
+{{< figure src="/ox-hugo/JuXxvo.svg" >}} <br/>
 
 to get a more "proper" result we use the `anchor` argument <br/>
 
@@ -230,7 +139,7 @@ to get a more "proper" result we use the `anchor` argument <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/fwDlQd.png" >}} <br/>
+{{< figure src="/ox-hugo/fwDlQd.svg" >}} <br/>
 
 ```latex
 
@@ -240,7 +149,7 @@ to get a more "proper" result we use the `anchor` argument <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/vERNnP.png" >}} <br/>
+{{< figure src="/ox-hugo/vERNnP.svg" >}} <br/>
 
 ```latex
 
@@ -272,7 +181,7 @@ to get a more "proper" result we use the `anchor` argument <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/BgY0KZ.png" >}} <br/>
+{{< figure src="/ox-hugo/BgY0KZ.svg" >}} <br/>
 
 ```latex
 
@@ -309,7 +218,7 @@ to get a more "proper" result we use the `anchor` argument <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/sP1ObG.png" >}} <br/>
+{{< figure src="/ox-hugo/sP1ObG.svg" >}} <br/>
 
 
 ## <span class="section-num">3</span> 2d plots {#2d-plots}
@@ -326,7 +235,7 @@ you can play around with the parameters to see how they affect the drawing <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/cdn8lr.png" >}} <br/>
+{{< figure src="/ox-hugo/cdn8lr.svg" >}} <br/>
 
 ```latex
 
@@ -356,10 +265,10 @@ you can play around with the parameters to see how they affect the drawing <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/9DtrIs.png" >}} <br/>
+{{< figure src="/ox-hugo/9DtrIs.svg" >}} <br/>
 
 
-### <span class="section-num">3.1</span> pgfplots package {#pgfplots-package}
+### <span class="section-num">3.1</span> pgfplots {#pgfplots}
 
 you can use the **pgfplots** package which is written using **tikz** to make things easier, include it using: <br/>
 
@@ -385,7 +294,7 @@ example usage: <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/gSMHG5.png" >}} <br/>
+{{< figure src="/ox-hugo/gSMHG5.svg" >}} <br/>
 
 ```latex
 
@@ -411,7 +320,7 @@ example usage: <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/7c8Bc5.png" >}} <br/>
+{{< figure src="/ox-hugo/7c8Bc5.svg" >}} <br/>
 
 
 ## <span class="section-num">4</span> 3d plots {#3d-plots}
@@ -440,7 +349,7 @@ we start with a simple 3d plot with 3 vectors <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/EcA741.png" >}} <br/>
+{{< figure src="/ox-hugo/EcA741.svg" >}} <br/>
 
 ```latex
 
@@ -462,7 +371,7 @@ we start with a simple 3d plot with 3 vectors <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/jAMOqE.png" >}} <br/>
+{{< figure src="/ox-hugo/jAMOqE.svg" >}} <br/>
 
 ```latex
 
@@ -552,7 +461,7 @@ we start with a simple 3d plot with 3 vectors <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/EUmDsX.png" >}} <br/>
+{{< figure src="/ox-hugo/EUmDsX.svg" >}} <br/>
 
 ```latex
 
@@ -590,7 +499,7 @@ we start with a simple 3d plot with 3 vectors <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/ggUg1y.png" >}} <br/>
+{{< figure src="/ox-hugo/ggUg1y.svg" >}} <br/>
 
 ```latex
 
@@ -629,7 +538,7 @@ we start with a simple 3d plot with 3 vectors <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/o79smS.png" >}} <br/>
+{{< figure src="/ox-hugo/o79smS.svg" >}} <br/>
 
 ```latex
 
@@ -711,7 +620,7 @@ we start with a simple 3d plot with 3 vectors <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/mq5YoS.png" >}} <br/>
+{{< figure src="/ox-hugo/mq5YoS.svg" >}} <br/>
 
 
 ## <span class="section-num">5</span> 3d plots with pgfplots {#3d-plots-with-pgfplots}
@@ -733,7 +642,7 @@ consider this example which plots \\(f(x,y) = x^2 - y^2\\): <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/4MXkkm.png" >}} <br/>
+{{< figure src="/ox-hugo/4MXkkm.svg" >}} <br/>
 
 the `colorbar` argument passed to the `axis` environment simply generates the color bar on the right <br/>
 
@@ -772,7 +681,7 @@ consider the following examples <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/8mXtxD.png" >}} <br/>
+{{< figure src="/ox-hugo/8mXtxD.svg" >}} <br/>
 
 ```latex
 
@@ -795,7 +704,7 @@ consider the following examples <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/O4rtO3.png" >}} <br/>
+{{< figure src="/ox-hugo/O4rtO3.svg" >}} <br/>
 
 ```latex
 
@@ -825,7 +734,7 @@ consider the following examples <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/cVNpiY.png" >}} <br/>
+{{< figure src="/ox-hugo/cVNpiY.svg" >}} <br/>
 
 ```latex
 
@@ -859,7 +768,7 @@ consider the following examples <br/>
 \end{tikzpicture}
 ```
 
-{{< figure src="/ox-hugo/7XtVM6.png" >}} <br/>
+{{< figure src="/ox-hugo/7XtVM6.svg" >}} <br/>
 
 
 ## <span class="section-num">6</span> forest {#forest}
@@ -886,7 +795,7 @@ it can be imported as: <br/>
 \end{forest}
 ```
 
-{{< figure src="/ox-hugo/mQF4R6.png" >}} <br/>
+{{< figure src="/ox-hugo/mQF4R6.svg" >}} <br/>
 
 what you put in the brackets is basically a `tikz` node and can take any shape, for example this is a binary tree with some basic math expressions and various shapes <br/>
 
@@ -907,7 +816,7 @@ what you put in the brackets is basically a `tikz` node and can take any shape, 
 \end{forest}
 ```
 
-{{< figure src="/ox-hugo/LOBRBL.png" >}} <br/>
+{{< figure src="/ox-hugo/LOBRBL.svg" >}} <br/>
 
 to insert a node without drawing it so that you get the effect of an empty child but still have correct indentation for other children we use `[,phantom]` which is a node that gets inserted but not drawn, example: <br/>
 
@@ -927,7 +836,7 @@ to insert a node without drawing it so that you get the effect of an empty child
 \end{forest}
 ```
 
-{{< figure src="/ox-hugo/YQJ95R.png" >}} <br/>
+{{< figure src="/ox-hugo/YQJ95R.svg" >}} <br/>
 
 you can treat the `forest` environment like `tikzpicture`, you can freely add more nodes and drawings, to use a node of `forest` as a tikz node you pass `name=<name>` to it, example: <br/>
 
@@ -952,7 +861,7 @@ you can treat the `forest` environment like `tikzpicture`, you can freely add mo
 \end{forest}
 ```
 
-{{< figure src="/ox-hugo/bupAbG.png" >}} <br/>
+{{< figure src="/ox-hugo/bupAbG.svg" >}} <br/>
 
 a more advanced example: <br/>
 
@@ -986,9 +895,21 @@ a more advanced example: <br/>
 \end{forest}
 ```
 
-{{< figure src="/ox-hugo/Yl6ICB.png" >}} <br/>
+{{< figure src="/ox-hugo/Yl6ICB.svg" >}} <br/>
 
 
 ### <span class="section-num">6.2</span> ! TeX capacity exceeded, sorry [save size=80000]. {#tex-capacity-exceeded-sorry-save-size-80000-dot}
 
 to get over this increase the value of `save_size` in `kpsewhich texmf.cnf` <br/>
+
+
+## <span class="section-num">7</span> calc projection {#calc-projection}
+
+<https://tex.stackexchange.com/questions/25342/how-to-draw-orthogonal-vectors-using-tikz> <br/>
+the projection syntax from the calc library also takes an optional angle: (\\((A)!(P)!90:(B)\\)) is the projection of point (P) on the line from (A) to (B) after that line has been rotated 90 degrees around point (A). This makes it easy to draw the vector components: <br/>
+
+
+## <span class="section-num">8</span> animation {#animation}
+
+{{< figure src="/ox-hugo/e3xkrhv.gif" >}} <br/>
+

@@ -2,7 +2,7 @@
 title = "Artificial Intelligence: A Modern Approach"
 author = ["mahmood"]
 description = "my notes on reading the book"
-date = 2022-10-17T12:54:00+03:00
+date = 2022-10-17T14:45:00+03:00
 tags = ["todo", "math"]
 draft = false
 +++
@@ -69,7 +69,7 @@ a solution is an action sequence, so search algorithms work by considering vario
 
 {{< figure src="/ox-hugo/jTizJca.svg" >}} <br/>
 
-an additional [data structures]({{< relref "data_structures.md" >}}) could be used to keep track of nodes that have been already visited in the tree to prevent redundant repetitions, demonstrated in the `GRAPH-SEARCH` algorithm which expands on the `TREE-SEARCH` algorithm (the new lines are highlighted) <br/>
+an additional [data structure]({{< relref "data_structures.md#data-structure" >}}) could be used to keep track of nodes that have been already visited in the tree to prevent redundant repetitions, demonstrated in the `GRAPH-SEARCH` algorithm which expands on the `TREE-SEARCH` algorithm (the new lines are highlighted) <br/>
 
 {{< figure src="/ox-hugo/9Kli4Je.svg" >}} <br/>
 
