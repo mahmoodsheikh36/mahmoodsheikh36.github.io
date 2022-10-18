@@ -2,7 +2,7 @@
 title = "tikz"
 author = ["mahmood"]
 description = "tikz"
-date = 2022-10-17T16:18:00+03:00
+date = 2022-10-18T06:01:00+03:00
 tags = ["math", "code", "language"]
 draft = false
 +++
@@ -82,7 +82,6 @@ drawing primitive shapes like lines/rectangles is very simple <br/>
 here `|-` generates a broken line while `--` generates a straight line <br/>
 
 ```latex
-
 \tikz\draw (0,0) -- (3,2) -- (5,0) |- (4,3);
 \tikz\draw[->] (-2,0) -- (-3,0);
 ```
@@ -95,7 +94,6 @@ here `|-` generates a broken line while `--` generates a straight line <br/>
 tikz has lots of builtin shapes like: <br/>
 
 ```latex
-
 \tikz\draw (0,0) circle (10px);
 \tikz\draw[fill=gray!30!white] (0,0) ellipse (28pt and 20pt);
 \tikz\draw[line width=2mm] (0,0) arc (30:200:1cm);
@@ -107,7 +105,6 @@ tikz has lots of builtin shapes like: <br/>
 and if tikz doesnt have a specific shape we can always use lines to draw it <br/>
 
 ```latex
-
 % use cycle instead of manually writing (0,0)
 \tikz\draw (0,0) -- (4,0) -- (4,4) -- cycle;
 ```
@@ -120,7 +117,6 @@ and if tikz doesnt have a specific shape we can always use lines to draw it <br/
 nodes are used  to represent entities for various purposes including inserting text and connecting entities <br/>
 
 ```latex
-
 \begin{tikzpicture} \draw
   (1,1) node[circle, draw]{A} --
   (2,2) node[circle, draw]{B};
@@ -132,7 +128,6 @@ nodes are used  to represent entities for various purposes including inserting t
 to get a more "proper" result we use the `anchor` argument <br/>
 
 ```latex
-
 \begin{tikzpicture} \draw
   (1,1) node[anchor=north east, circle, draw]{A} --
   (2,2) node[anchor=south west, circle, draw]{B};
@@ -142,7 +137,6 @@ to get a more "proper" result we use the `anchor` argument <br/>
 {{< figure src="/ox-hugo/fwDlQd.svg" >}} <br/>
 
 ```latex
-
 \begin{tikzpicture} \draw
   (0,0) node[anchor=north, rectangle, draw, label=above:Top, label=below:Bottom]{inside rectangle} |-
   (3,3) node[anchor=west, rectangle, draw, label=above:Top, label=below:Bottom]{another rectangle};
@@ -152,7 +146,6 @@ to get a more "proper" result we use the `anchor` argument <br/>
 {{< figure src="/ox-hugo/vERNnP.svg" >}} <br/>
 
 ```latex
-
 \begin{tikzpicture}
   % draw the sets
   \filldraw[fill=blue!20, draw=blue!60] (-1.5,0) circle (1cm);
@@ -184,7 +177,6 @@ to get a more "proper" result we use the `anchor` argument <br/>
 {{< figure src="/ox-hugo/BgY0KZ.svg" >}} <br/>
 
 ```latex
-
 \begin{tikzpicture}[
     > = stealth, % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -226,7 +218,6 @@ to get a more "proper" result we use the `anchor` argument <br/>
 you can play around with the parameters to see how they affect the drawing <br/>
 
 ```latex
-
 \begin{tikzpicture}
   \draw[->] (-3, 0) -- (4.2, 0) node[right] {$x$};
   \draw[->] (0, -3) -- (0, 4.2) node[above] {$y$};
@@ -238,7 +229,6 @@ you can play around with the parameters to see how they affect the drawing <br/>
 {{< figure src="/ox-hugo/cdn8lr.svg" >}} <br/>
 
 ```latex
-
 \begin{tikzpicture}
   % drawing the grid
   \draw[thick, color = gray, step = 1cm, dashed] (-1,-1) grid (5,5);
@@ -273,20 +263,18 @@ you can play around with the parameters to see how they affect the drawing <br/>
 you can use the **pgfplots** package which is written using **tikz** to make things easier, include it using: <br/>
 
 ```latex
-
 \usepackage{pgfplots}
 ```
 
 example usage: <br/>
 
 ```latex
-
 \begin{tikzpicture}
   \begin{axis}[domain=-4:4, samples=100, grid=major,
     restrict y to domain=0:4, xlabel=$x$, ylabel=$y(x)$, legend pos=north west]
     \addplot [color=red]    {2*exp(x)};
     \addplot [color=green]  {exp(x)};
-    \addplot [color=purple] {exp(-x)}; 
+    \addplot [color=purple] {exp(-x)};
     \addplot [color=blue]   {2*exp(-x)};
 
     \legend{$2e^x$, $e^x$, $e^{-x}$, $2e^{-x}$}
@@ -297,7 +285,6 @@ example usage: <br/>
 {{< figure src="/ox-hugo/gSMHG5.svg" >}} <br/>
 
 ```latex
-
 \usepgfplotslibrary{fillbetween}
 \begin{tikzpicture}
   \begin{axis}[
@@ -334,7 +321,6 @@ for 3d plots we use the package `tikz-3dplot` <br/>
 we start with a simple 3d plot with 3 vectors <br/>
 
 ```latex
-
 \tdplotsetmaincoords{70}{110}
 \begin{tikzpicture}[tdplot_main_coords, scale=2]
   % draw main axes
@@ -352,7 +338,6 @@ we start with a simple 3d plot with 3 vectors <br/>
 {{< figure src="/ox-hugo/EcA741.svg" >}} <br/>
 
 ```latex
-
 \tdplotsetmaincoords{70}{130} % set initial 3d rotation
 \begin{tikzpicture}[tdplot_main_coords, scale = 1]
   % draw the main axes
@@ -374,7 +359,6 @@ we start with a simple 3d plot with 3 vectors <br/>
 {{< figure src="/ox-hugo/jAMOqE.svg" >}} <br/>
 
 ```latex
-
 % set the plot display orientation
 % syntax: \tdplotsetdisplay{\theta_d}{\phi_d}
 \tdplotsetmaincoords{60}{110}
@@ -388,7 +372,7 @@ we start with a simple 3d plot with 3 vectors <br/>
 % use the tdplot_main_coords style to implement the display the coordinate transformation provided by 3dplot
 \begin{tikzpicture}[scale=5,tdplot_main_coords]
 
-  % set up some coordinates 
+  % set up some coordinates
   % -----------------------
   \node (O) at (0,0,0);
 
@@ -464,7 +448,6 @@ we start with a simple 3d plot with 3 vectors <br/>
 {{< figure src="/ox-hugo/EUmDsX.svg" >}} <br/>
 
 ```latex
-
 \begin{tikzpicture}[scale=3,line cap=round]
   \begin{scope}[rotate around y=45,rotate around z=30,canvas is zx plane at y=0]
     \draw [green!50!black, dashed, ultra thick] (-1,0) arc (180:360:1);
@@ -502,7 +485,6 @@ we start with a simple 3d plot with 3 vectors <br/>
 {{< figure src="/ox-hugo/ggUg1y.svg" >}} <br/>
 
 ```latex
-
 \tdplotsetmaincoords{80}{45}
 \tdplotsetrotatedcoords{-90}{180}{-90}
 
@@ -541,7 +523,6 @@ we start with a simple 3d plot with 3 vectors <br/>
 {{< figure src="/ox-hugo/o79smS.svg" >}} <br/>
 
 ```latex
-
 \newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
 \newcommand{\ud}[0]{\mathrm{d}}
 
@@ -630,7 +611,6 @@ the `\addplot3` makes drawing 3d graphics much easier, the syntax is simply `\ad
 consider this example which plots \\(f(x,y) = x^2 - y^2\\): <br/>
 
 ```latex
-
 \begin{tikzpicture}
   \begin{axis}[colorbar]
     \addplot3 [
@@ -651,14 +631,12 @@ the `surf` argument passed to `axis` environment simply tells it to fill the gap
 a very useful variant of `\addplot3` is one that takes 3 math expressions, one for each variable, the syntax is: <br/>
 
 ```latex
-
 \addplot3[<options>] expression {<x expression>, <y expression>, <z expression>};
 ```
 
 which for most purposes can be simplified to <br/>
 
 ```latex
-
 \addplot3{<x expression>, <y expression>, <z expression>};
 ```
 
@@ -667,7 +645,6 @@ note that `\addplot3(x,y,x^2)` is equivalent to `\addplot{x^2}` <br/>
 consider the following examples <br/>
 
 ```latex
-
 \begin{tikzpicture}
   \begin{axis}[
     axis lines=center,
@@ -684,7 +661,6 @@ consider the following examples <br/>
 {{< figure src="/ox-hugo/8mXtxD.svg" >}} <br/>
 
 ```latex
-
   \begin{tikzpicture}
     \begin{axis}[view={60}{30}]
     \addplot3[surf,shader=flat,
@@ -707,7 +683,6 @@ consider the following examples <br/>
 {{< figure src="/ox-hugo/O4rtO3.svg" >}} <br/>
 
 ```latex
-
   \begin{tikzpicture}
     \begin{axis}
     [   view={45}{20},
@@ -737,7 +712,6 @@ consider the following examples <br/>
 {{< figure src="/ox-hugo/cVNpiY.svg" >}} <br/>
 
 ```latex
-
 \begin{tikzpicture}
   \pgfmathsetmacro{\u}{1.5}
   \begin{axis}[set layers,
@@ -784,7 +758,6 @@ it can be imported as: <br/>
 ### <span class="section-num">6.1</span> basic usage {#basic-usage}
 
 ```latex
-
 \begin{forest}
   [10
     [50
@@ -800,7 +773,6 @@ it can be imported as: <br/>
 what you put in the brackets is basically a `tikz` node and can take any shape, for example this is a binary tree with some basic math expressions and various shapes <br/>
 
 ```latex
-
 \begin{forest}
   [$n$,rectangle,draw
     [$\dfrac{n}{3}$,circle,draw
@@ -821,7 +793,6 @@ what you put in the brackets is basically a `tikz` node and can take any shape, 
 to insert a node without drawing it so that you get the effect of an empty child but still have correct indentation for other children we use `[,phantom]` which is a node that gets inserted but not drawn, example: <br/>
 
 ```latex
-
 \begin{forest}
   [$n$,rectangle,draw
     [$\dfrac{n}{3}$,circle,draw
@@ -841,7 +812,6 @@ to insert a node without drawing it so that you get the effect of an empty child
 you can treat the `forest` environment like `tikzpicture`, you can freely add more nodes and drawings, to use a node of `forest` as a tikz node you pass `name=<name>` to it, example: <br/>
 
 ```latex
-
 \begin{forest}
   [5,circle,draw,name=root
     [3,circle,draw
@@ -866,7 +836,6 @@ you can treat the `forest` environment like `tikzpicture`, you can freely add mo
 a more advanced example: <br/>
 
 ```latex
-
 \begin{forest}
   [5,circle,draw,name=root
     [3,circle,draw,name=n4
@@ -908,8 +877,51 @@ to get over this increase the value of `save_size` in `kpsewhich texmf.cnf` <br/
 <https://tex.stackexchange.com/questions/25342/how-to-draw-orthogonal-vectors-using-tikz> <br/>
 the projection syntax from the calc library also takes an optional angle: (\\((A)!(P)!90:(B)\\)) is the projection of point (P) on the line from (A) to (B) after that line has been rotated 90 degrees around point (A). This makes it easy to draw the vector components: <br/>
 
+```latex
+\node [dot=A,gray] at (1,4) {};
+\node [dot=B,gray] at (2,2) {};
+\node [dot=P] at (4,3) {};
+\node [dot=P2,cyan] at (3,2.5) {};
+\draw [->] (A) -- (B);
+\draw [->,red] (A) -- ($(A)!(B)!(P)$);
+\draw [->,red] (A) -- ($(A)!(B)!90:(P)$);
+\draw [->,cyan] (A) -- ($(A)!(B)!(P2)$);
+\draw [->,cyan] (A) -- ($(A)!(B)!90:(P2)$);
+```
+
+[[<\node> [dot=A,gray] at (1,4) {}; <br/>
+\node [dot=B,gray] at (2,2) {}; <br/>
+\node [dot=P] at (4,3) {}; <br/>
+\node [dot=P2,cyan] at (3,2.5) {}; <br/>
+\draw [-&gt;] (A) -- (B); <br/>
+\draw [-&gt;,red] (A) -- (\\((A)!(B)!(P)\\)); <br/>
+\draw [-&gt;,red] (A) -- (\\((A)!(B)!90:(P)\\)); <br/>
+\draw [-&gt;,cyan] (A) -- (\\((A)!(B)!(P2)\\)); <br/>
+\draw [-&gt;,cyan] (A) -- (\\((A)!(B)!90:(P2)\\));]] <br/>
+[[<\node> [dot=A,gray] at (1,4) {}; <br/>
+\node [dot=B,gray] at (2,2) {}; <br/>
+\node [dot=P] at (4,3) {}; <br/>
+\node [dot=P2,cyan] at (3,2.5) {}; <br/>
+\draw [-&gt;] (A) -- (B); <br/>
+\draw [-&gt;,red] (A) -- (\\((A)!(B)!(P)\\)); <br/>
+\draw [-&gt;,red] (A) -- (\\((A)!(B)!90:(P)\\)); <br/>
+\draw [-&gt;,cyan] (A) -- (\\((A)!(B)!(P2)\\)); <br/>
+\draw [-&gt;,cyan] (A) -- (\\((A)!(B)!90:(P2)\\));]] <br/>
+
 
 ## <span class="section-num">8</span> animation {#animation}
+
+```latex
+\foreach \v in {0,0.5,...,5}
+{
+\begin{tikzpicture}
+  \draw[->] (-3, 0) -- (4.2, 0) node[right] {$x$};
+  \draw[->] (0, -3) -- (0, 4.2) node[above] {$y$};
+  \draw[scale=0.5, domain=-3:3, smooth, variable=\x, blue] plot ({\x+\v}, {\x*\x});
+  \draw[scale=0.5, domain=-3:3, smooth, variable=\y, red]  plot ({\y*\y}, {\y+\v});
+\end{tikzpicture}
+}
+```
 
 {{< figure src="/ox-hugo/e3xkrhv.gif" >}} <br/>
 
