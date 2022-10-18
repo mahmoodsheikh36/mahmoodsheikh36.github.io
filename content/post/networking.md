@@ -2,8 +2,8 @@
 title = "networking"
 author = ["mahmood"]
 description = "college course in computer networking"
-date = 2022-10-11T10:40:00+03:00
-tags = ["todo", "computer-science"]
+date = 2022-10-18T06:02:00+03:00
+tags = ["todo", "math", "computer-science"]
 draft = false
 +++
 
@@ -168,7 +168,12 @@ here we use the unit bps (bits per second) and denote bandwidth by \\(C\\) or \\
 </div>
 
 
-## <span class="section-num">7</span> transmission delay {#transmission-delay}
+## <span class="section-num">7</span> maximum transmission unit {#maximum-transmission-unit}
+
+the maximum packet size that can pass through a link <br/>
+
+
+## <span class="section-num">8</span> transmission delay {#transmission-delay}
 
 <div class="definition">
 
@@ -184,12 +189,12 @@ it is denoted by \\(T\_i\\) and its unit is bps (bit per second) <br/>
 </div>
 
 
-## <span class="section-num">8</span> propagation speed {#propagation-speed}
+## <span class="section-num">9</span> propagation speed {#propagation-speed}
 
 the speed of a bit in a transmission link, denoted by \\(s\\), and its unit is \\(m/s\\) (meters per second) <br/>
 
 
-## <span class="section-num">9</span> propagation delay {#propagation-delay}
+## <span class="section-num">10</span> propagation delay {#propagation-delay}
 
 <div class="definition">
 
@@ -207,21 +212,26 @@ the unit of \\(T\_p\\) is the second <br/>
 </div>
 
 
-## <span class="section-num">10</span> window size {#window-size}
+## <span class="section-num">11</span> round-trip delay {#round-trip-delay}
 
-when the receiver sends an acknowledgment, it will tell the sender how much data it can transmit before the receiver will send an acknowledgment. we call this the window size. basically, the window size indicates the size of the receive buffer. <br/>
-
-
-## <span class="section-num">11</span> client-server architecture {#client-server-architecture}
+**round-trip delay** is the amount of time it takes for a signal to be sent plus ([propagation delay](#propagation-delay)) the amount of time it takes for [acknowledgement](#acknowledgement) of that signal having been received. <br/>
 
 
-### <span class="section-num">11.1</span> server {#server}
+## <span class="section-num">12</span> window size {#window-size}
+
+the size of the buffer of the sender/receiver (how many bytes they can handle at once) <br/>
 
 
-### <span class="section-num">11.2</span> client {#client}
+## <span class="section-num">13</span> client-server architecture {#client-server-architecture}
 
 
-## <span class="section-num">12</span> network {#network}
+### <span class="section-num">13.1</span> server {#server}
+
+
+### <span class="section-num">13.2</span> client {#client}
+
+
+## <span class="section-num">14</span> network {#network}
 
 <div class="definition">
 
@@ -230,10 +240,10 @@ a computer **network** is a set of computers sharing resources located on or pro
 </div>
 
 
-### <span class="section-num">12.1</span> local area network {#local-area-network}
+### <span class="section-num">14.1</span> local area network {#local-area-network}
 
 
-### <span class="section-num">12.2</span> network edge {#network-edge}
+### <span class="section-num">14.2</span> network edge {#network-edge}
 
 <div class="definition">
 
@@ -242,7 +252,7 @@ the **network edge** refers to endpoints. it is the first step between endpoints
 </div>
 
 
-### <span class="section-num">12.3</span> network core {#network-core}
+### <span class="section-num">14.3</span> network core {#network-core}
 
 <div class="definition">
 
@@ -261,7 +271,7 @@ the network core has 2 key functions: <br/>
 </div>
 
 
-#### <span class="section-num">12.3.1</span> packet switching {#packet-switching}
+#### <span class="section-num">14.3.1</span> packet switching {#packet-switching}
 
 hosts break application-layer messages into packets <br/>
 
@@ -275,30 +285,30 @@ hosts break application-layer messages into packets <br/>
     -   packets can be dropped (lost) if memory (buffer) fills up <br/>
 
 
-#### <span class="section-num">12.3.2</span> circuit switching {#circuit-switching}
+#### <span class="section-num">14.3.2</span> circuit switching {#circuit-switching}
 
 **circuit switching** is a method of implementing a telecommunications network in which two network nodes establish a dedicated communications channel (circuit) through the network before the nodes may communicate. The circuit guarantees the full bandwidth of the channel and remains connected for the duration of the communication session. The circuit functions as if the nodes were physically connected as with an electrical circuit. Circuit switching originated in analog telephone networks where the network created a dedicated circuit between two telephones for the duration of a telephone call. It contrasts with message switching and packet switching used in modern digital networks in which the trunklines between switching centers carry data between many different nodes in the form of data packets without dedicated circuits. <br/>
 
 
-### <span class="section-num">12.4</span> access network {#access-network}
+### <span class="section-num">14.4</span> access network {#access-network}
 
 
-#### <span class="section-num">12.4.1</span> digital subscriber line {#digital-subscriber-line}
+#### <span class="section-num">14.4.1</span> digital subscriber line {#digital-subscriber-line}
 
 
-#### <span class="section-num">12.4.2</span> cable network {#cable-network}
+#### <span class="section-num">14.4.2</span> cable network {#cable-network}
 
 
-#### <span class="section-num">12.4.3</span> home network {#home-network}
+#### <span class="section-num">14.4.3</span> home network {#home-network}
 
 
-#### <span class="section-num">12.4.4</span> enterprise access network {#enterprise-access-network}
+#### <span class="section-num">14.4.4</span> enterprise access network {#enterprise-access-network}
 
 
-#### <span class="section-num">12.4.5</span> wireless access network {#wireless-access-network}
+#### <span class="section-num">14.4.5</span> wireless access network {#wireless-access-network}
 
 
-### <span class="section-num">12.5</span> frequency division multiplexing {#frequency-division-multiplexing}
+### <span class="section-num">14.5</span> frequency division multiplexing {#frequency-division-multiplexing}
 
 different channels transmitted in different frequency bands in a cable <br/>
 
@@ -309,7 +319,7 @@ an **access network** is a type of telecommunications network which connects sub
 </div>
 
 
-## <span class="section-num">13</span> osi model {#osi-model}
+## <span class="section-num">15</span> osi model {#osi-model}
 
 | name         | protocols                   |
 |--------------|-----------------------------|
@@ -322,48 +332,48 @@ an **access network** is a type of telecommunications network which connects sub
 | physical     |                             |
 
 
-### <span class="section-num">13.1</span> application layer {#application-layer}
+### <span class="section-num">15.1</span> application layer {#application-layer}
 
 
-#### <span class="section-num">13.1.1</span> http {#http}
+#### <span class="section-num">15.1.1</span> http {#http}
 
 the HTTP [protocol](#protocol) is based on [tcp](#tcp) <br/>
 
 
-##### <span class="section-num">13.1.1.1</span> http methods {#http-methods}
+##### <span class="section-num">15.1.1.1</span> http methods {#http-methods}
 
 http/1.0 has the methods GET,POST,HEAD <br/>
 http/1.1 has the methods GET,POST,HEAD,PUT,DELETE <br/>
 
 
-##### <span class="section-num">13.1.1.2</span> webserver {#webserver}
+##### <span class="section-num">15.1.1.2</span> webserver {#webserver}
 
 
-##### <span class="section-num">13.1.1.3</span> persistent http {#persistent-http}
+##### <span class="section-num">15.1.1.3</span> persistent http {#persistent-http}
 
 HTTP persistent connection, also called HTTP keep-alive, or HTTP connection reuse, is the idea of using a single [TCP](#tcp) connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair <br/>
 A persistent connection takes 1 RTT for the connection and then transfers as many objects as wanted over this single connection. <br/>
 RTT stands for the round-trip time taken for an object request and then its retrieval. In other words, it is the time taken to request the object from the client to the server and then retrieve it from the server back to the client. <br/>
 
 
-##### <span class="section-num">13.1.1.4</span> non-persistent http {#non-persistent-http}
+##### <span class="section-num">15.1.1.4</span> non-persistent http {#non-persistent-http}
 
 The non-persistent connection has connection type 1.0 <br/>
 such connection takes a total time of 2RTT + file [transmission delay](#transmission-delay). It takes the first RTT (round-trip time) to establish the connection between the server and the client. The second RTT is taken to request and return the object. This case stands for a single object transmission. <br/>
 After the client receives the object in non-persistent, the connection is immediately closed. This is the basic difference between persistent and non-persistent. The persistent connection ensures the transfer of multiple objects over a single connection. <br/>
 
 
-##### <span class="section-num">13.1.1.5</span> cache proxy server {#cache-proxy-server}
+##### <span class="section-num">15.1.1.5</span> cache proxy server {#cache-proxy-server}
 
 a [proxy](#proxy) that is used as a cache, where the user makes all the requests to it and if it doesnt have a specific object it requests it from the origin server and returns it (and often stores it for future requests) <br/>
 
 
-##### <span class="section-num">13.1.1.6</span> pipelining {#pipelining}
+##### <span class="section-num">15.1.1.6</span> pipelining {#pipelining}
 
 HTTP pipelining is a feature of HTTP/1.1 which allows multiple HTTP requests to be sent over a single TCP connection without waiting for the corresponding responses. <br/>
 
 
-##### <span class="section-num">13.1.1.7</span> form input {#form-input}
+##### <span class="section-num">15.1.1.7</span> form input {#form-input}
 
 using **POST method**: <br/>
 web page often includes form input <br/>
@@ -373,7 +383,7 @@ uses GET method <br/>
 input is uploaded in URL field of request line, e.g. www.somesite.com/animalsearch?monkeys&amp;banana <br/>
 
 
-##### <span class="section-num">13.1.1.8</span> status code {#status-code}
+##### <span class="section-num">15.1.1.8</span> status code {#status-code}
 
 **status code** appears in 1st line in server-to-client response message. <br/>
 some status codes: <br/>
@@ -387,20 +397,20 @@ some status codes: <br/>
 | 505  | HTTP Version Not Supported |                                                                              |
 
 
-#### <span class="section-num">13.1.2</span> dns {#dns}
+#### <span class="section-num">15.1.2</span> dns {#dns}
 
 **domain name system** is a protocol that allows identifying machines with [domain name](#domain-name) by converting them into [IP](#ip) addresses <br/>
 
 
-##### <span class="section-num">13.1.2.1</span> domain name {#domain-name}
+##### <span class="section-num">15.1.2.1</span> domain name {#domain-name}
 
 
-##### <span class="section-num">13.1.2.2</span> name server {#name-server}
+##### <span class="section-num">15.1.2.2</span> name server {#name-server}
 
 a **[DNS](#dns) [server](#server)** keeps records of DNS entries that map domain names to their corresponding IP addresses which can be served to other machines <br/>
 when a client wants to to communicate with a machine using its domain name, it makes a request to a dns server, if the server has a record of said domain name, it returns sends it back to the client, if it doesnt, it either sends back an IP to another dns server that has that record or it makes a request to that dns server itself and sends back the response to the client <br/>
 
-{{< figure src="/ox-hugo/1btUy2d.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/1btUy2d.svg" >}} <br/>
 
 <div class="my_example">
 
@@ -413,14 +423,14 @@ a client wants the IP for www.amazon.com; 1st approximation would be: <br/>
 </div>
 
 
-##### <span class="section-num">13.1.2.3</span> root name server {#root-name-server}
+##### <span class="section-num">15.1.2.3</span> root name server {#root-name-server}
 
 contacted by local name server that can not resolve name <br/>
 a root server contacts authoritative name server if name mapping not known and returns the mapping to the local name server <br/>
 there are 13 root name "servers" worldwide <br/>
 
 
-##### <span class="section-num">13.1.2.4</span> resource record {#resource-record}
+##### <span class="section-num">15.1.2.4</span> resource record {#resource-record}
 
 the format for an RR is `(name, value, type, ttl)` <br/>
 when `type=A`: <br/>
@@ -444,18 +454,18 @@ when `type=MX`: <br/>
 -   **value** is canonical name <br/>
 
 
-##### <span class="section-num">13.1.2.5</span> top level domain {#top-level-domain}
+##### <span class="section-num">15.1.2.5</span> top level domain {#top-level-domain}
 
 a top-level [domain]({{< relref "discrete_maths2.md#domain" >}}) is one of the domains at the highest level in the hierarchical [DNS](#dns) of the [internet](#internet) after the root domain, a TLD server is responsible for these domains, examples include com,org,net,edu,aero. <br/>
 
 
-##### <span class="section-num">13.1.2.6</span> authoritative name server {#authoritative-name-server}
+##### <span class="section-num">15.1.2.6</span> authoritative name server {#authoritative-name-server}
 
 an organization’s own DNS servers, providing authoritative hostname to IP mappings for the organization’s named hosts <br/>
 can be maintained by an organization or a service provider <br/>
 
 
-##### <span class="section-num">13.1.2.7</span> local name server {#local-name-server}
+##### <span class="section-num">15.1.2.7</span> local name server {#local-name-server}
 
 does not strictly belong to hierarchy <br/>
 each ISP (residential ISP, company, university) has one <br/>
@@ -465,12 +475,12 @@ has local cache of recent name-to-address translation pairs (but may be out of d
 acts as proxy, forwards query into hierarchy <br/>
 
 
-##### <span class="section-num">13.1.2.8</span> dns caching {#dns-caching}
+##### <span class="section-num">15.1.2.8</span> dns caching {#dns-caching}
 
 a server/client can store a record of a domain name and its corresponding IP address for a specific amount of time so that it wont have to make the same request to a dns server over and over again <br/>
 
 
-##### <span class="section-num">13.1.2.9</span> dns practice problems {#dns-practice-problems}
+##### <span class="section-num">15.1.2.9</span> dns practice problems {#dns-practice-problems}
 
 <div class="question">
 
@@ -549,91 +559,96 @@ no, the system admin of `U.W` decides which name server `U.W` uses <br/>
 </div>
 
 
-##### <span class="section-num">13.1.2.10</span> dns resolver {#dns-resolver}
+##### <span class="section-num">15.1.2.10</span> dns resolver {#dns-resolver}
 
 a DNS resolver, also called a recursive resolver, is a server designed to receive DNS queries from web browsers and other applications. The resolver receives a hostname - for example, www.example.com - and is responsible for tracking down the IP address for that hostname. <br/>
 
 
-##### <span class="section-num">13.1.2.11</span> iterative query {#iterative-query}
+##### <span class="section-num">15.1.2.11</span> iterative query {#iterative-query}
 
 contacted server replies with name of server to contact "I don’t know this name, but ask this server" <br/>
 
 
-##### <span class="section-num">13.1.2.12</span> recursive query {#recursive-query}
+##### <span class="section-num">15.1.2.12</span> recursive query {#recursive-query}
 
 puts burden of name resolution on contacted name server <br/>
 heavy load at upper levels of hierarchy? <br/>
 
 
-#### <span class="section-num">13.1.3</span> dhcp {#dhcp}
+#### <span class="section-num">15.1.3</span> dhcp {#dhcp}
 
 
-### <span class="section-num">13.2</span> transport layer {#transport-layer}
+### <span class="section-num">15.2</span> transport layer {#transport-layer}
 
 
-#### <span class="section-num">13.2.1</span> multiplexing {#multiplexing}
+#### <span class="section-num">15.2.1</span> multiplexing {#multiplexing}
 
 the sender handles data from multiple [socket](#socket)s, and adds transport header (later used for [demultiplexing](#demultiplexing)) <br/>
 
 
-#### <span class="section-num">13.2.2</span> demultiplexing {#demultiplexing}
+#### <span class="section-num">15.2.2</span> demultiplexing {#demultiplexing}
 
 the receiver uses header info to deliver received segments to correct socket <br/>
 
 
-### <span class="section-num">13.3</span> network layer {#network-layer}
+### <span class="section-num">15.3</span> network layer {#network-layer}
 
 
-#### <span class="section-num">13.3.1</span> ip {#ip}
+#### <span class="section-num">15.3.1</span> ip {#ip}
 
 
-##### <span class="section-num">13.3.1.1</span> ip fragmentation {#ip-fragmentation}
+##### <span class="section-num">15.3.1.1</span> ip fragmentation {#ip-fragmentation}
 
-IP fragmentation is an [ip](#ip) process that breaks packets into smaller pieces (fragments), so that the resulting pieces can pass through a link with a smaller maximum transmission unit (MTU) than the original packet size. The fragments are reassembled by the receiving host. <br/>
+IP fragmentation is an [ip](#ip) process that breaks [packet](#packet)s into smaller pieces (fragments), so that the resulting pieces can pass through a link with a smaller [MTU](#maximum-transmission-unit) than the original packet size. The fragments are reassembled by the receiving host. <br/>
 
 
-##### <span class="section-num">13.3.1.2</span> ip routing {#ip-routing}
+##### <span class="section-num">15.3.1.2</span> ip routing {#ip-routing}
 
 <https://www.ibm.com/docs/en/zos/2.4.0?topic=internetworking-ip-routing> <br/>
 IP routing is based on routing tables held within a router or internet host. These tables contain routes which can either be static or dynamic. Typically, static routes are predefined within a configuration file, and dynamic routes are learned from the network, using a routing protocol. <br/>
 
 
-###### <span class="section-num">13.3.1.2.1</span> direct routing {#direct-routing}
+###### <span class="section-num">15.3.1.2.1</span> direct routing {#direct-routing}
 
 direct routing can take place when two hosts are directly connected to the same physical network. This can be a bridged token-ring network, a bridged Ethernet, or a bridged token-ring network and Ethernet. The distinction between direct routing and indirect routing is that, with direct routing, an IP datagram can be delivered to the remote host without subsequent interpretation of the IP address, by an intermediate host or router. <br/>
 
 
-###### <span class="section-num">13.3.1.2.2</span> indirect routing {#indirect-routing}
+###### <span class="section-num">15.3.1.2.2</span> indirect routing {#indirect-routing}
 
 indirect routing takes place when the destination is not on a directly attached IP network, forcing the sender to forward the datagram to a router for delivery. <br/>
 In Figure 1, a datagram from Machine A being delivered to Machine C would be using indirect routing, with Machine D acting as the router (or gateway). <br/>
 
 
-#### <span class="section-num">13.3.2</span> arp {#arp}
+#### <span class="section-num">15.3.2</span> arp {#arp}
 
 
-### <span class="section-num">13.4</span> tcp {#tcp}
+### <span class="section-num">15.4</span> tcp {#tcp}
 
 **reliable transport** between sending and receiving process <br/>
-**flow control**: sender won’t overwhelm receiver <br/>
-**congestion control**: throttle sender when network overloaded <br/>
+**flow control**: sender won’t overwhelm receiver **congestion control**: throttle sender when network overloaded <br/>
 **does not provide**: timing, minimum throughput guarantee, security <br/>
 **connection-oriented**: setup required between client and server processes <br/>
 
+<div class="characteristic">
 
-### <span class="section-num">13.5</span> udp {#udp}
+the setting of **tcp timeout** is directly affected by [ip fragmentation](#ip-fragmentation) <br/>
+
+</div>
+
+
+### <span class="section-num">15.5</span> udp {#udp}
 
 **unreliable data transfer** between sending and receiving process <br/>
 **does not provide**: reliability, flow control, congestion control, timing, throughput guarantee, security, orconnection setup <br/>
 
 
-#### <span class="section-num">13.5.1</span> udp checksum {#udp-checksum}
+#### <span class="section-num">15.5.1</span> udp checksum {#udp-checksum}
 
 
-### <span class="section-num">13.6</span> acknowledgement {#acknowledgement}
+### <span class="section-num">15.6</span> acknowledgement {#acknowledgement}
 
 
-## <span class="section-num">14</span> reliable connection {#reliable-connection}
+## <span class="section-num">16</span> reliable connection {#reliable-connection}
 
 for a connection to be reliable: <br/>
 
@@ -642,14 +657,19 @@ for a connection to be reliable: <br/>
 3.  the data is received in the order it wasnt sent <br/>
 
 
-### <span class="section-num">14.1</span> stop and wait {#stop-and-wait}
+### <span class="section-num">16.1</span> efficiency of a protocol {#efficiency-of-a-protocol}
+
+the **efficiency** of a [protocol](#protocol) is the [transmission delay](#transmission-delay) over the time taken for a successful transmission on [average]({{< relref "20220813152209-average.md" >}}) <br/>
+
+
+### <span class="section-num">16.2</span> stop and wait {#stop-and-wait}
 
 a [protocol](#protocol) designed for reliability such that it keeps resending a packet until it is delivered successfully, controlled by a `timeout`, denoted by \\(T\_\text{out}\\) <br/>
 assuming a transmission failure [probability]({{< relref "20220813151352-probability.md" >}}) of \\(p\\), the [average]({{< relref "20220813152209-average.md" >}}) time for a successful transmission is found using [geometric distribution]({{< relref "20220813151352-probability.md#geometric-distribution" >}}) <br/>
 \\[
 T\_v = \frac{1}{1-p}(T\_i+T\_\text{out})
 \\] <br/>
-the efficiency is <br/>
+the [efficiency](#efficiency-of-a-protocol) is <br/>
 \\[
 u = \frac{T\_i}{T\_v} = \frac{T\_i}{\frac{1}{1-p}(T\_i+T\_\text{out})}
 \\] <br/>
@@ -669,29 +689,70 @@ u = \frac{T\_i}{\frac{1}{1-p}(T\_i+T\_\text{out})} = \frac{(1-p)T\_i}{T\_i+T\_\t
 </div>
 
 
-#### <span class="section-num">14.1.1</span> stop and wait efficiency {#stop-and-wait-efficiency}
+#### <span class="section-num">16.2.1</span> stop and wait efficiency {#stop-and-wait-efficiency}
 
-the efficiency is the [transmission delay](#transmission-delay) over the time taken for a successful transmission on [average]({{< relref "20220813152209-average.md" >}}) <br/>
+recall the definition of [efficiency of a protocol](#efficiency-of-a-protocol) <br/>
 \\[
 u = \frac{T\_i}{T\_v} = \frac{T\_i}{\frac{1}{1-p}(T\_i+T\_\text{out})}
 \\] <br/>
 
 
-### <span class="section-num">14.2</span> go-back-n {#go-back-n}
+### <span class="section-num">16.3</span> go-back-n {#go-back-n}
 
 in the **go-back-n** [protocol](#protocol) the sender doesnt wait for an `ack` packet but keeps sending continuous packets each with its own `time-out`, if a `time-out` of a packet expires or if the sender receives a `nack` packet, it resends the packet and then all the packets that were sent after it <br/>
 the sender only drops a packet if it knows it has arrived successfully <br/>
 
+<div class="question">
 
-#### <span class="section-num">14.2.1</span> go-back-n efficiency {#go-back-n-efficiency}
+consider 3 nodes S,T,D where S sends packets to D through T <br/>
+on the line from S to T runs the protocol GBN with a [window size](#window-size) of 2 packets and between D and T runs the S&amp;W protocol <br/>
+when T receives the first packet from S it sends it to D <br/>
+once T receives the ack for the first packet from D, T sends it the next packet from S and so on. <br/>
+T receives in full a packet from S before starting to send it to D <br/>
+given: <br/>
+
+1.  the probability of an unsuccessful transmission of a packet on the line between T and D is p <br/>
+2.  packets always arrive successfully from S to T <br/>
+3.  ack packets always arrive successfully in both lines and their transmission delay is negligable <br/>
+4.  the [transmission delay](#transmission-delay) of a packet on each of the lines is \\(T\_i\\) <br/>
+5.  the [propagation delay](#propagation-delay) on each of the lines in each direction is \\(T\_p\\) <br/>
+6.  the timeout for the S&amp;W protocol that acts between T and D is \\(2T\_p\\) <br/>
+
+<div class="subquestion">
+
+what is the minimal timeout that S has to set for the GBN protocol that runs between it and T? you have to give 3 values, for the first packet that is sent, the second packet and every packet after the second <br/>
+
+<div class="answer">
+
+for the first packet it is the time that the packet takes to travel from T to and S which is \\(T\_p\\) plus the time it takes for a successful transfer from S to D to finally happen which is \\(\frac{1}{1-p}(T\_i+2T\_p)\\) plus the time it takes for the actual transfer of the package from S to D which is \\(T\_p\\) and so in total it is \\(2T\_p+\frac{1}{1-p}(T\_i+2T\_p)\\) <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+what is the efficiency of the communication between S and D? <br/>
+
+</div>
+
+<div class="subquestion">
+
+would the efficiency between S and D be different if the window size of S was to increase from 2 to 3? explain <br/>
+
+</div>
+
+</div>
+
+
+#### <span class="section-num">16.3.1</span> go-back-n efficiency {#go-back-n-efficiency}
 
 assuming a transmission failure [probability]({{< relref "20220813151352-probability.md" >}}) of \\(p\\), and \\(a\\) as the number of times \\(T\_i\\) is contained in \\(T\_v\\) ([average]({{< relref "20220813152209-average.md" >}}) time for a successful delivery), the efficiency of the [go-back-n](#go-back-n) protocol is defined as <br/>
 \\[
 u = \frac{T\_i}{T\_v} = \frac{1-p}{1-p+ap}
 \\] <br/>
 we denote by \\(x\\) the number of [packet](#packet)s that we can transmit in a timespan \\(T\_\text{total}\\) <br/>
-a reminder that if we have transmissions all through \\(T\_\text{out}\\) then \\(x=a\\) <br/>
-so we can conclude that in such a case the efficiency is: <br/>
+if we have transmissions all through \\(T\_\text{out}\\) then \\(x=a\\) <br/>
 \\[
 u = \frac{1-p}{1-p+xp} \cdot \frac{x}{a},\\, x < a
 \\] <br/>
@@ -780,10 +841,10 @@ assume that instead of adding the stop and wait protocol to the connection we co
 </div>
 
 
-#### <span class="section-num">14.2.2</span> selective repeat {#selective-repeat}
+#### <span class="section-num">16.3.2</span> selective repeat {#selective-repeat}
 
 
-## <span class="section-num">15</span> protocols of some popular applications {#protocols-of-some-popular-applications}
+## <span class="section-num">17</span> protocols of some popular applications {#protocols-of-some-popular-applications}
 
 | application            | application layer protocol    | underlying transport protocol |
 |------------------------|-------------------------------|-------------------------------|
@@ -795,40 +856,40 @@ assume that instead of adding the stop and wait protocol to the connection we co
 | internet telephony     | SIP,RTP,proprietary protocols | TCP/UDP                       |
 
 
-## <span class="section-num">16</span> socket {#socket}
+## <span class="section-num">18</span> socket {#socket}
 
 
-## <span class="section-num">17</span> p2p {#p2p}
+## <span class="section-num">19</span> p2p {#p2p}
 
 
-## <span class="section-num">18</span> proxy {#proxy}
+## <span class="section-num">20</span> proxy {#proxy}
 
 
-## <span class="section-num">19</span> cyclic redundancy check {#cyclic-redundancy-check}
+## <span class="section-num">21</span> cyclic redundancy check {#cyclic-redundancy-check}
 
 
-## <span class="section-num">20</span> network bridge {#network-bridge}
+## <span class="section-num">22</span> network bridge {#network-bridge}
 
 A network bridge is a computer networking device that creates a single, aggregate network from multiple communication networks or network segments. This function is called **network bridging**. Bridging is distinct from [routing](#ip-routing). Routing allows multiple networks to communicate independently and yet remain separate, whereas bridging connects two separate networks as if they were a single network. In the OSI model, bridging is performed in the data link layer (layer 2). If one or more segments of the bridged network are wireless, the device is known as a wireless bridge. <br/>
 from the perspective of the [internet](#internet), this a network represents forms a single network with a single ip address <br/>
 
 
-### <span class="section-num">20.1</span> transparent bridge {#transparent-bridge}
+### <span class="section-num">22.1</span> transparent bridge {#transparent-bridge}
 
 
-## <span class="section-num">21</span> piggybacking {#piggybacking}
+## <span class="section-num">23</span> piggybacking {#piggybacking}
 
 piggbacking refers to the technique of waiting after receiving a packet until the network layer moves to the next data packet and then responding with an [ack](#acknowledgement) packet <br/>
 basically it refers to the process of delaying an ack packet <br/>
 
 
-## <span class="section-num">22</span> FDMA {#fdma}
+## <span class="section-num">24</span> FDMA {#fdma}
 
 
-## <span class="section-num">23</span> TDMA {#tdma}
+## <span class="section-num">25</span> TDMA {#tdma}
 
 
-## <span class="section-num">24</span> citations {#citations}
+## <span class="section-num">26</span> citations {#citations}
 
 credit where credit is due <br/>
 <https://en.wikipedia.org/wiki/Top-level_domain> <br/>
