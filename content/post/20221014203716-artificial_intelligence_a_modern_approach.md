@@ -2,7 +2,7 @@
 title = "Artificial Intelligence: A Modern Approach"
 author = ["mahmood"]
 description = "my notes on reading the book"
-date = 2022-10-17T14:45:00+03:00
+date = 2022-10-19T10:29:00+03:00
 tags = ["todo", "math"]
 draft = false
 +++
