@@ -2,7 +2,7 @@
 title = "tikz"
 author = ["mahmood"]
 description = "tikz"
-date = 2022-10-18T06:01:00+03:00
+date = 2022-10-19T10:26:00+03:00
 tags = ["math", "code", "language"]
 draft = false
 +++
@@ -876,37 +876,6 @@ to get over this increase the value of `save_size` in `kpsewhich texmf.cnf` <br/
 
 <https://tex.stackexchange.com/questions/25342/how-to-draw-orthogonal-vectors-using-tikz> <br/>
 the projection syntax from the calc library also takes an optional angle: (\\((A)!(P)!90:(B)\\)) is the projection of point (P) on the line from (A) to (B) after that line has been rotated 90 degrees around point (A). This makes it easy to draw the vector components: <br/>
-
-```latex
-\node [dot=A,gray] at (1,4) {};
-\node [dot=B,gray] at (2,2) {};
-\node [dot=P] at (4,3) {};
-\node [dot=P2,cyan] at (3,2.5) {};
-\draw [->] (A) -- (B);
-\draw [->,red] (A) -- ($(A)!(B)!(P)$);
-\draw [->,red] (A) -- ($(A)!(B)!90:(P)$);
-\draw [->,cyan] (A) -- ($(A)!(B)!(P2)$);
-\draw [->,cyan] (A) -- ($(A)!(B)!90:(P2)$);
-```
-
-[[<\node> [dot=A,gray] at (1,4) {}; <br/>
-\node [dot=B,gray] at (2,2) {}; <br/>
-\node [dot=P] at (4,3) {}; <br/>
-\node [dot=P2,cyan] at (3,2.5) {}; <br/>
-\draw [-&gt;] (A) -- (B); <br/>
-\draw [-&gt;,red] (A) -- (\\((A)!(B)!(P)\\)); <br/>
-\draw [-&gt;,red] (A) -- (\\((A)!(B)!90:(P)\\)); <br/>
-\draw [-&gt;,cyan] (A) -- (\\((A)!(B)!(P2)\\)); <br/>
-\draw [-&gt;,cyan] (A) -- (\\((A)!(B)!90:(P2)\\));]] <br/>
-[[<\node> [dot=A,gray] at (1,4) {}; <br/>
-\node [dot=B,gray] at (2,2) {}; <br/>
-\node [dot=P] at (4,3) {}; <br/>
-\node [dot=P2,cyan] at (3,2.5) {}; <br/>
-\draw [-&gt;] (A) -- (B); <br/>
-\draw [-&gt;,red] (A) -- (\\((A)!(B)!(P)\\)); <br/>
-\draw [-&gt;,red] (A) -- (\\((A)!(B)!90:(P)\\)); <br/>
-\draw [-&gt;,cyan] (A) -- (\\((A)!(B)!(P2)\\)); <br/>
-\draw [-&gt;,cyan] (A) -- (\\((A)!(B)!90:(P2)\\));]] <br/>
 
 
 ## <span class="section-num">8</span> animation {#animation}
