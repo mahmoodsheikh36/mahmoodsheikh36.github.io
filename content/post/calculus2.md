@@ -2,8 +2,8 @@
 title = "calculus"
 author = ["mahmood"]
 description = "calculus"
-date = 2022-09-26T20:29:00+03:00
-tags = ["public", "math"]
+date = 2022-10-23T12:54:00+03:00
+tags = ["math"]
 draft = false
 +++
 
@@ -17,9 +17,11 @@ draft = false
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
-  \(\newcommand{\ihat}{\hat{\textbf{\i}}}\)
-  \(\newcommand{\jhat}{\hat{\textbf{\j}}}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
 
 <!-- mathjax -->
@@ -58,7 +60,17 @@ window.onload = function() {
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
+<div class="note">
+
 its important to read the exercises provided on every subject because i explain important things with exercises <br/>
+
+</div>
+
+<div class="note">
+
+headlines without content act as placeholders for now. <br/>
+
+</div>
 
 
 ## <span class="section-num">1</span> factoring formulas {#factoring-formulas}
@@ -188,17 +200,17 @@ the **logarithmic function** \\(g(x) = log\_a(x)\\) is the inverse of the [expon
 
 #### <span class="section-num">4.7.1</span> cosine {#cosine}
 
-{{< figure src="/ox-hugo/IRCODD.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/latex/IRCODD.svg" >}} <br/>
 
 
 #### <span class="section-num">4.7.2</span> sine {#sine}
 
-{{< figure src="/ox-hugo/nhJjBHv.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/latex/nhJjBHv.svg" >}} <br/>
 
 
 #### <span class="section-num">4.7.3</span> tangent {#tangent}
 
-{{< figure src="/ox-hugo/n4JY5wF.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/latex/n4JY5wF.svg" >}} <br/>
 
 
 ### <span class="section-num">4.8</span> even function {#even-function}
@@ -1149,7 +1161,7 @@ notice that the definition says \\([a,b]\\) in which \\(f \geq g\\) or \\(g \geq
 
 consider the area \\(S\\) in the interval \\([0,3]\\) between \\(f(x)=x^2\\) and the \\(x\\) axis (\\(g(x)=0\\)) <br/>
 
-{{< figure src="/ox-hugo/p44azc.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/p44azc.svg" >}} <br/>
 
 we calculate using the formula, i didnt mind the fact that the result should be turned to its absolute value because i know the \\(f(x) \geq g(x)\\) <br/>
 
@@ -1163,7 +1175,7 @@ we calculate using the formula, i didnt mind the fact that the result should be 
 
 consider the area \\(S\_1 + S\_2\\) in red between the polynomials <br/>
 
-{{< figure src="/ox-hugo/PzjSrV.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/PzjSrV.svg" >}} <br/>
 
 we split the area into 2 because if we tried to find the area without splitting we would be adding a negative value to a positive value whereas the areas should be positive, we wouldnt mind this when working with functions that dont cross because we can always take the absolute value of the result <br/>
 
@@ -1256,11 +1268,11 @@ if the functions rotate around the \\(y\\) axis, the formula is <br/>
 
 we start with a simple example, consider the function \\(y = x\\) <br/>
 
-{{< figure src="/ox-hugo/dbBobk.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/dbBobk.svg" >}} <br/>
 
 if we were to rotate this function around the \\(x\\) axis we would get a **Right Circular Cone**: <br/>
 
-{{< figure src="/ox-hugo/AeXpjL.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/AeXpjL.svg" >}} <br/>
 
 to find the volume of this cone we use the disc integration formula, in this case \\(g(x)=0\\) <br/>
 
@@ -1280,7 +1292,7 @@ assume the function stopped at \\(x=a\\) and started at \\(x=0\\) so we find the
 
 a circle is defined as \\({(x-a)}^2+{(y-b)}^2=r^2\\), consider the circle \\({(x-1)}^2+{(y-1)}^2=1^2\\) <br/>
 
-{{< figure src="/ox-hugo/4C0eoS.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/4C0eoS.svg" >}} <br/>
 
 if we were to rotate the circle \\(360^{\circ}\\) around the \\(x\\) axis we would get a **ball** <br/>
 
@@ -1288,11 +1300,11 @@ the upright quarter of a circle is defined as \\(y=\sqrt{r^2-x^2}\\) <br/>
 
 consider the quarter of that circle whose formula is \\(y=\sqrt{1^2-x^2}\\) <br/>
 
-{{< figure src="/ox-hugo/Ni02n3.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/Ni02n3.svg" >}} <br/>
 
 if we were to rotate this around the \\(x\\) axis we would get half a ball and since this is easier to find the volume of we just find the volume using this quarter and multiply by 2 because it generates half a ball <br/>
 
-{{< figure src="/ox-hugo/krbfz1.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/krbfz1.svg" >}} <br/>
 
 in this case \\(g(x)=0\\), we find the volume using the formula: <br/>
 
@@ -1313,7 +1325,7 @@ so the volume of the ball is \\(\frac{4\pi r^3}{3}\\) <br/>
 
 find the volume of produced by rotating the function \\(f(x)=e^x\\) around the \\(y\\) axis in the interval \\([0,1]\\) <br/>
 
-{{< figure src="/ox-hugo/iryXEl.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/iryXEl.svg" >}} <br/>
 
 \begin{align\*}
   V &= 2\pi \int\_0^1 xe^x \text{ dx}\\\\
@@ -1425,12 +1437,12 @@ consider the area below the function \\(e^{-x}\\) in the interval \\([1,2]\\) <b
 we split the shape into rectangles that are as narrow as possible as the more rectangles we use the more accurate the result <br/>
 the following image shows the area split into \\(n=8\\) rectangles <br/>
 
-{{< figure src="/ox-hugo/JAIRcvb.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/latex/JAIRcvb.svg" >}} <br/>
 
 you can probably tell that the sum of the areas of these rectangles isnt really close to the area we want to find <br/>
 to be more accurate we increase the number of rectangles to \\(n=70\\) and we get a nicer result: <br/>
 
-{{< figure src="/ox-hugo/5SZ0x8R.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/latex/5SZ0x8R.svg" >}} <br/>
 
 you can probably already tell that since this is a "narrower" coverage of the area, the sum of the rectangles would be closer to the value of the actual area <br/>
 and now that we know that the more rectangles we have the more accurate we get, we know we should be aiming at \\(\infty\\) rectangles <br/>
@@ -1598,7 +1610,7 @@ improper integral of type 1 – when the limits of integration are infinite <br/
 
 consider the area below the function \\(f(x)=\frac1x\\) in the interval \\([1,\infty]\\): <br/>
 
-{{< figure src="/ox-hugo/yg17D3.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/latex/yg17D3.svg" >}} <br/>
 
 to calculate the area we use the integration method: <br/>
 
@@ -2403,3 +2415,4 @@ we check the conditions of the [Alternating series test](#alternating-series-tes
 and since \\(\frac{1}{n}\\) meets all the conditions, we can apply the test to \\(\sum\_{n=1}^{\infty} (-1)^n\frac{1}{n}\\) and find that it converges <br/>
 
 </div>
+
