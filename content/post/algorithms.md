@@ -2,7 +2,7 @@
 title = "algorithms"
 author = ["mahmood"]
 description = "algorithms course from college"
-date = 2022-11-03T23:26:00+02:00
+date = 2022-11-03T23:29:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -61,16 +61,7 @@ window.onload = function() {
 </script>
 
 
-## <span class="section-num">1</span> important timestamps {#important-timestamps}
-
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2022-11-03 Thu 19:26:00&gt; </span></span> on [induction]({{< relref "20220707193301-mathematical_induction.md" >}}) <br/>
-
-{{< figure src="/ox-hugo/6LtByrw.svg" >}} <br/>
-
-{{< figure src="/ox-hugo/fC4XdVw.svg" >}} <br/>
-
-
-## <span class="section-num">2</span> algorithm correctness {#algorithm-correctness}
+## <span class="section-num">1</span> algorithm correctness {#algorithm-correctness}
 
 <div class="definition">
 
@@ -79,7 +70,7 @@ an algorithm is totally correct if it receives valid input, terminates, and alwa
 </div>
 
 
-### <span class="section-num">2.1</span> proving algorithm correctness by induction {#proving-algorithm-correctness-by-induction}
+### <span class="section-num">1.1</span> proving algorithm correctness by induction {#proving-algorithm-correctness-by-induction}
 
 the only way to prove the correctness of an algorithm over all possible inputs is by reasoning formally or mathematically about it. <br/>
 here we'll be using [induction]({{< relref "20220707193301-mathematical_induction.md" >}}) <br/>
