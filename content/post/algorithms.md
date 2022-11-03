@@ -2,7 +2,7 @@
 title = "algorithms"
 author = ["mahmood"]
 description = "algorithms course from college"
-date = 2022-11-03T23:29:00+02:00
+date = 2022-11-03T23:30:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -82,7 +82,7 @@ consider the following algorithm: <br/>
 {{< figure src="/ox-hugo/QW3OLMD.svg" >}} <br/>
 
 we can **observe** that \\(A[1] \geq A[j]\\) for \\(1 \leq j \leq i-1\\) <br/>
-we can prove this by [induction]({{< relref "20220707193301-mathematical_induction.md" >}}) <br/>
+we can prove this by induction <br/>
 we assume that our "observation" is true for \\(i=k\\), i.e. \\(A[1] \geq A[j]\\) for \\(1 \leq j \leq k-1\\) <br/>
 we assume that we arrived to this point when \\(i=k+1\\), hence, since we arrived at this point then we know the condition hasnt been met yet so \\(A[k] \leq A[1]\\), then for \\(1 \leq j \leq k\\) we know \\(A[1] \geq A[j]\\), which is what we wanted to prove <br/>
 
