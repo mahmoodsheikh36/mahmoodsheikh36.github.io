@@ -2,8 +2,8 @@
 title = "Artificial Intelligence: A Modern Approach"
 author = ["mahmood"]
 description = "my notes on reading the book"
-date = 2022-10-19T10:29:00+03:00
-tags = ["todo", "math"]
+date = 2022-11-04T16:55:00+02:00
+tags = ["math", "computer-science"]
 draft = false
 +++
 
@@ -87,7 +87,7 @@ given a training set of \\(N\\) example input-output pairs \\((x\_1,y\_1),(x\_2,
 
 </div>
 
-here \\(x\\) and \\(y\\) can be any value; they need not be numbers. the function \\(h\\) is a hypothesis from a [hypothesis space](#hypothesis-space), denoted by \\(H\\) ,and it sometimes could be stochastic and what we have to learn is a [conditional probability]({{< relref "20220813151352-probability.md#conditional-probability" >}}) distribution, \\(P(Y\mid x)\\) <br/>
+here \\(x\\) and \\(y\\) can be any value; they need not be numbers. the function \\(h\\) is a hypothesis from a [hypothesis space](#hypothesis-space), denoted by \\(H\\) ,and it sometimes could be stochastic and what we have to learn is a distribution, \\(P(Y\mid x)\\) <br/>
 
 supervised learning can be done by choosing the hypothesis \\(h^\*\\) that is most probable given the data: <br/>
 \\[
@@ -112,7 +112,13 @@ h^\* = \underset{h \in H}{\text{argmax}}\ P(data|h)\ P(h)
 
 <div class="definition">
 
-a **decision tree** represents a [function]({{< relref "discrete_maths2.md#function" >}}) that takes as input a [vector]({{< relref "linear_algebra2.md#vector" >}}) of attribute values and returns a “decision”--a single output value. the input and output values can be [discrete or continuous]({{< relref "20221015110034-discrete_continuous_data.md" >}}) <br/>
+a **decision tree** represents a [function]({{< relref "discrete_maths2.md#function" >}}) that takes as input a [vector]({{< relref "linear_algebra2.md#vector" >}}) of attribute values and returns a "decision"--a single output value. the input and output values can be [discrete or continuous]({{< relref "20221015110034-discrete_continuous_data.md" >}}) <br/>
+
+<div class="characteristic">
+
+for a wide variety of problems, the decision tree yields a nice, concise result. but some functions cannot be represented concisely, for example, the majority function, which returns true if and only if more than half of the inputs are true, requires an exponentially large decision tree. <br/>
+
+</div>
 
 </div>
 
@@ -127,7 +133,24 @@ in general, after the first attribute test splits up the examples, each outcome 
 3.  if there are no examples left, it means that no example has been observed for this combination of attribute values, and we return a default value calculated from the plurality classification of all the examples that were used in constructing the node’s parent. these are passed along in the variable _parent_examples_ <br/>
 4.  if there are no attributes left, but both positive and negative examples, it means that these examples have exactly the same description, but different classifications. this can happen because there is an error or noise in the data; because the domain is nondeterministic; or because we can’t observe an attribute that would distinguish the examples. the best we can do is return the plurality classification of the remaining examples. <br/>
 
-{{< figure src="/ox-hugo/6LtByrw.svg" >}} <br/>
+{{< figure src="/ox-hugo/PrkHDOF.svg" >}} <br/>
+
+<a id="table--learning-examples"></a>
+
+| example | alt | bar | fri | hun | pat  | price | rain | res | type    | est    | goal |
+|---------|-----|-----|-----|-----|------|-------|------|-----|---------|--------|------|
+| x_1     | yes | no  | no  | yes | some | $$$   | no   | yes | french  | 0-10   | yes  |
+| x_2     | yes | no  | no  | yes | full | $     | no   | no  | thai    | 30-60  | no   |
+| x_3     | no  | yes | no  | no  | some | $     | no   | no  | burger  | 0-10   | yes  |
+| x_4     | yes | no  | yes | yes | full | $     | yes  | no  | thai    | 10-30  | yes  |
+| x_5     | yes | no  | yes | no  | full | $$$   | no   | yes | french  | &gt;60 | no   |
+| x_6     | no  | yes | no  | yes | some | $$    | yes  | yes | italian | 0-10   | yes  |
+| x_7     | no  | yes | no  | no  | none | $     | yes  | no  | burger  | 0-10   | no   |
+| x_8     | no  | no  | no  | yes | some | $$    | yes  | yes | thai    | 0-10   | yes  |
+| x_9     | no  | yes | yes | no  | full | $     | yes  | no  | burger  | &gt;60 | no   |
+| x_10    | yes | yes | yes | yes | full | $$$   | no   | yes | italian | 10-30  | no   |
+| x_11    | no  | no  | no  | no  | none | $     | no   | no  | thai    | 0-10   | no   |
+| x_12    | yes | yes | yes | yes | full | $     | no   | no  | burger  | 30-60  | yes  |
 
 
 ### <span class="section-num">2.4</span> boolean classification {#boolean-classification}
