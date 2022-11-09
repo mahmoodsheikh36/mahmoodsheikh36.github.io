@@ -1,7 +1,7 @@
 +++
 title = "algorithm correctness"
 author = ["mahmood"]
-date = 2022-11-09T20:54:00+02:00
+date = 2022-11-09T22:14:00+02:00
 tags = ["math", "computer-science"]
 draft = false
 +++
@@ -21,6 +21,7 @@ draft = false
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
   \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
   \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
+  \(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\)
 </p>
 
 <!-- mathjax -->
