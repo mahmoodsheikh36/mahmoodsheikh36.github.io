@@ -1,8 +1,8 @@
 +++
 title = "algorithm correctness"
 author = ["user"]
-date = 2022-11-09T20:48:00+02:00
-tags = ["math"]
+date = 2022-11-09T20:53:00+02:00
+tags = ["math", "computer-science"]
 draft = false
 +++
 
