@@ -5,7 +5,7 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>algorithm correctness</title>
+        <title>algorithms homework 1</title>
         
         <style>
 
@@ -86,7 +86,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand visible-xs" href="#">algorithm correctness</a>
+                    <a class="navbar-brand visible-xs" href="#">algorithms homework 1</a>
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -122,12 +122,10 @@
 <main>
 
     <div>
-        <h2>algorithm correctness</h2>
-        <h5>November 9, 2022</h5>
+        <h2>algorithms homework 1</h2>
+        <h5>November 11, 2022</h5>
         
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
-
-<a href="https://mahmoodsheikh36.github.io/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
 
 
     </div>
@@ -182,39 +180,41 @@ window.onload = function() {
 <!--     onload="renderMathInElement(document.body);"></script> -->
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
-<div class="definition">
+<p>homework 1 of the <a href="/post/algorithms/">algorithms</a> course, on the subject of <a href="/post/20221104220603-algorithm_correctness/">algorithm correctness</a> <br/></p>
+<div class="question">
+<p>given the <a href="/post/20220728190531-array/">array</a> <code>A</code> that contains <code>N</code> integers <br/>
+given the following algorithm: <br/></p>
+<p><figure><img src="/ox-hugo/yEdcB40.svg"/>
+</figure>
+ <br/></p>
+<div class="subquestion">
+<p>describe what the algorithm does <br/></p>
+<div class="answer">
+<p>returns the index of the biggest element in the array <br/></p>
+</div>
+</div>
+<div class="subquestion">
+<p>state the law of correctness <br/></p>
+<div class="answer">
 <p>an algorithm is totally correct if it receives valid input, terminates, and always returns the correct output <br/></p>
 </div>
-<h2 id="proving-algorithm-correctness-by-induction"><span class="section-num">1</span> proving algorithm correctness by induction</h2>
-<p>the only way to prove the <a href="/post/20221104220603-algorithm_correctness/">correctness of an algorithm</a> over all possible inputs is by reasoning formally or mathematically about it. <br/>
-here we&rsquo;ll be using <a href="/post/20220707193301-mathematical_induction/">mathematical induction</a> <br/></p>
-<div class="my_example">
-<p><figure><img src="/ox-hugo/cueVWTf.svg"/>
-</figure>
- <br/></p>
-<p>we need to prove the correctness of this algorithm, and we do so using induction <br/>
-for each \(i=1,2,\dots,k\), when the algorithm arrives to the end of the loop for the <code>i</code>&lsquo;th time, the following <a href="/post/20221104221055-loop_invariant/">loop invariant</a> holds true: <br/>
-\[
-sum = \sum_{j=1}^{i} A[j]
-\] <br/>
-with the loop invariant in mind, we use induction <br/>
-on the <code>i+1</code>&lsquo;th iteration, we would be adding the value <code>A[i+1]</code> to the variable <code>sum</code>, so we know on the <code>i+1</code>&lsquo;th iteration the following is true: <br/>
-\[
-sum = \sum_{j=1}^{i} A[j] + A[i+1] = \sum_{j=1}^{i+1} A[j]
-\] <br/>
-which is what we needed to prove <br/></p>
 </div>
-<h2 id="correctness-of-recursive-algorithms"><span class="section-num">2</span> correctness of recursive algorithms</h2>
-<div class="my_example">
-<p>consider the following function <br/></p>
-<p><figure><img src="/ox-hugo/e8I9jOY.svg"/>
-</figure>
- <br/></p>
-<p><span class="underline">proof that the algorithm terminates</span>: <br/>
-assume that \(\textsc{Recursive-Sum}\) runs on an array <code>A</code>, on each recursive call, the size of the input array <code>A</code> is halved, its obvious that at the end of every sequence of calls the size of the input array would arrive to 1 which is the edge case that would cause the function to terminate <br/>
-<span class="underline">proof of correctness</span>: <br/>
-we prove this by induction on the number of elements in the array <br/>
-for \(|A|=1\) which is the edge case, the algorithm returns \(A[1]\), the only element in \(A\), its obvious that the output is correct <br/></p>
+<div class="subquestion">
+<p>give a <a href="/post/20221104221055-loop_invariant/">loop invariant</a> and prove it using <a href="/post/20220707193301-mathematical_induction/">induction</a> <br/></p>
+<div class="answer">
+<p>\[
+(\forall 1 \le i \le N)[A[i] \le A[m]]
+\] <br/>
+for each \(N=1,2,\dots,k\), when the algorithm arrives to the end of the loop for the <code>N</code>&lsquo;th time, the loop invariant holds true <br/>
+on the <code>N+1</code>&lsquo;th iteration, we would be comparing checking whether \(A[N+1]\) is bigger than \(A[m]\) and if so we would be changing the value of \(m\) to \(N+1\) and so it would become true that \((\forall 1 \le i \le N+1)[A[i] \le A[m]]\) <br/></p>
+</div>
+</div>
+<div class="subquestion">
+<p>use the loop invariant to prove the correctness of the algorithm <br/></p>
+<div class="answer">
+<p>we have proven that \((\forall 1 \le i \le N)[A[i] \le A[m]]\), so for any input that the algorithm receives it terminates with the correct value \(m\) and so it is a correct algorithm by definition because for all input it terminates and returns the correct output <br/></p>
+</div>
+</div>
 </div>
 </div>
 
@@ -229,11 +229,13 @@ for \(|A|=1\) which is the edge case, the algorithm returns \(A[1]\), the only e
     
 
   
-    <h4><a href="/post/20221108230747-algorithms_homework_1/">algorithms homework 1</a></h4>
-    <h5>algorithms homework 1</h5>
-  November 11, 2022
+    <h4><a href="/post/20221104220603-algorithm_correctness/">algorithm correctness</a></h4>
+    <h5></h5>
+  November 9, 2022
     
 <a href="https://mahmoodsheikh36.github.io/tags/math"><kbd class="item-tag">math</kbd></a>
+
+<a href="https://mahmoodsheikh36.github.io/tags/computer-science"><kbd class="item-tag">computer-science</kbd></a>
 
 
 

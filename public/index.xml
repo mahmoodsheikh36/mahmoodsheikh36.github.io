@@ -6,7 +6,25 @@
     <description>Recent content on mahmood</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Nov 2022 20:51:00 +0200</lastBuildDate><atom:link href="https://mahmoodsheikh36.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Nov 2022 21:22:00 +0200</lastBuildDate><atom:link href="https://mahmoodsheikh36.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>algorithms homework 1</title>
+      <link>https://mahmoodsheikh36.github.io/post/20221108230747-algorithms_homework_1/</link>
+      <pubDate>Fri, 11 Nov 2022 21:22:00 +0200</pubDate>
+      
+      <guid>https://mahmoodsheikh36.github.io/post/20221108230747-algorithms_homework_1/</guid>
+      <description> \(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) \(\newcommand{\ihat}{\hat{\textbf{i}}}\) \(\newcommand{\jhat}{\hat{\textbf{j}}}\) \(\newcommand{\khat}{\hat{\textbf{k}}}\) \(\newcommand{\rhat}{\hat{\textbf{r}}}\) \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\) \(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\) homework 1 of the algorithms course, on the subject of algorithm correctness given the array A that contains N integers given the following algorithm: describe what the algorithm does returns the index of the biggest element in the array state the law of correctness an algorithm is totally correct if it receives valid input, terminates, and always returns the correct output give a loop invariant and prove it using induction \[ (\forall 1 \le i \le N)[A[i] \le A[m]] \] for each \(N=1,2,\dots,k\), when the algorithm arrives to the end of the loop for the N&amp;lsquo;th time, the loop invariant holds true on the N+1&amp;lsquo;th iteration, we would be comparing checking whether \(A[N+1]\) is bigger than \(A[m]\) and if so we would be changing the value of \(m\) to \(N+1\) and so it would become true that \((\forall 1 \le i \le N+1)[A[i] \le A[m]]\) use the loop invariant to prove the correctness of the algorithm we have proven that \((\forall 1 \le i \le N)[A[i] \le A[m]]\), so for any input that the algorithm receives it terminates with the correct value \(m\) and so it is a correct algorithm by definition because for all input it terminates and returns the correct output </description>
+    </item>
+    
+    <item>
+      <title>algorithm correctness</title>
+      <link>https://mahmoodsheikh36.github.io/post/20221104220603-algorithm_correctness/</link>
+      <pubDate>Wed, 09 Nov 2022 22:14:00 +0200</pubDate>
+      
+      <guid>https://mahmoodsheikh36.github.io/post/20221104220603-algorithm_correctness/</guid>
+      <description> \(\DeclareMathOperator{\spn}{span}\) \(\DeclareMathOperator{\dom}{domain}\) \(\DeclareMathOperator{\ran}{range}\) \(\DeclareMathOperator{\rng}{range}\) \(\DeclareMathOperator{\img}{Im}\) \(\DeclareMathOperator{\adj}{adj}\) \(\newcommand\dif[1]{\:\textrm{d}#1}\) \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\) \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\) \(\newcommand{\ihat}{\hat{\textbf{i}}}\) \(\newcommand{\jhat}{\hat{\textbf{j}}}\) \(\newcommand{\khat}{\hat{\textbf{k}}}\) \(\newcommand{\rhat}{\hat{\textbf{r}}}\) \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\) \(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\) an algorithm is totally correct if it receives valid input, terminates, and always returns the correct output 1 proving algorithm correctness by induction the only way to prove the correctness of an algorithm over all possible inputs is by reasoning formally or mathematically about it. here we&amp;rsquo;ll be using mathematical induction we need to prove the correctness of this algorithm, and we do so using induction for each \(i=1,2,\dots,k\), when the algorithm arrives to the end of the loop for the i&amp;lsquo;th time, the following loop invariant holds true: \[ sum = \sum_{j=1}^{i} A[j] \] with the loop invariant in mind, we use induction on the i+1&amp;lsquo;th iteration, we would be adding the value A[i+1] to the variable sum, so we know on the i+1&amp;lsquo;th iteration the following is true: \[ sum = \sum_{j=1}^{i} A[j] + A[i+1] = \sum_{j=1}^{i+1} A[j] \] which is what we needed to prove 2 correctness of recursive algorithms consider the following function proof that the algorithm terminates: assume that \(\textsc{Recursive-Sum}\) runs on an array A, on each recursive call, the size of the input array A is halved, its obvious that at the end of every sequence of calls the size of the input array would arrive to 1 which is the edge case that would cause the function to terminate proof of correctness: we prove this by induction on the number of elements in the array for \(|A|=1\) which is the edge case, the algorithm returns \(A[1]\), the only element in \(A\), its obvious that the output is correct </description>
+    </item>
+    
     <item>
       <title>loop invariant</title>
       <link>https://mahmoodsheikh36.github.io/post/20221104221055-loop_invariant/</link>
@@ -14,15 +32,6 @@
       
       <guid>https://mahmoodsheikh36.github.io/post/20221104221055-loop_invariant/</guid>
       <description> a boolean expression that is necessarily true immediately before and immediately after each iteration of a loop </description>
-    </item>
-    
-    <item>
-      <title>algorithm correctness</title>
-      <link>https://mahmoodsheikh36.github.io/post/20221104220603-algorithm_correctness/</link>
-      <pubDate>Wed, 09 Nov 2022 20:48:00 +0200</pubDate>
-      
-      <guid>https://mahmoodsheikh36.github.io/post/20221104220603-algorithm_correctness/</guid>
-      <description> an algorithm is totally correct if it receives valid input, terminates, and always returns the correct output proving algorithm correctness by induction the only way to prove the correctness of an algorithm over all possible inputs is by reasoning formally or mathematically about it. here we&amp;rsquo;ll be using mathematical induction we need to prove the correctness of this algorithm, and we do so using induction for each \(i=1,2,\dots,k\), when the algorithm arrives to the end of the loop for the i&amp;lsquo;th time, the following loop invariant holds true: \[ sum = \sum_{j=1}^{i} A[j] \] with the loop invariant in mind, we use induction on the i+1&amp;lsquo;th iteration, we would be adding the value A[i+1] to the variable sum, so we know on the i+1&amp;lsquo;th iteration the following is true: \[ sum = \sum_{j=1}^{i} A[j] + A[i+1] = \sum_{j=1}^{i+1} A[j] \] which is what we needed to prove correctness of recursive algorithms consider the following function proof that the algorithm terminates: assume that \(\textsc{Recursive-Sum}\) runs on an array A, on each recursive call, the size of the input array A is halved, its obvious that at the end of every sequence of calls the size of the input array would arrive to 1 which is the edge case that would cause the function to terminate proof of correctness: we prove this by induction on the number of elements in the array for \(|A|=1\) which is the edge case, the algorithm returns \(A[1]\), the only element in \(A\), its obvious that the output is correct </description>
     </item>
     
     <item>
