@@ -2,7 +2,7 @@
 title = "algorithms homework 1"
 author = ["mahmood"]
 description = "algorithms homework 1"
-date = 2022-11-11T21:22:00+02:00
+date = 2022-11-13T15:13:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -63,6 +63,12 @@ window.onload = function() {
 
 homework 1 of the [algorithms]({{< relref "algorithms.md" >}}) course, on the subject of [algorithm correctness]({{< relref "20221104220603-algorithm_correctness.md" >}}) <br/>
 
+<div class="note">
+
+i've mostly ignored the base step of induction when proving loop invariants cuz its too obvious what happens when \\(i=1\\) <br/>
+
+</div>
+
 <div class="question">
 
 given the [array]({{< relref "20220728190531-array.md" >}}) `A` that contains `N` integers <br/>
@@ -96,7 +102,7 @@ an algorithm is totally correct if it receives valid input, terminates, and alwa
 
 <div class="subquestion">
 
-give a [loop invariant]({{< relref "20221104221055-loop_invariant.md" >}}) and prove it using [induction]({{< relref "20220707193301-mathematical_induction.md" >}}) <br/>
+give a loop invariant and prove it using induction <br/>
 
 <div class="answer">
 
@@ -117,6 +123,185 @@ use the loop invariant to prove the correctness of the algorithm <br/>
 <div class="answer">
 
 we have proven that \\((\forall 1 \le i \le N)[A[i] \le A[m]]\\), so for any input that the algorithm receives it terminates with the correct value \\(m\\) and so it is a correct algorithm by definition because for all input it terminates and returns the correct output <br/>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="question">
+
+{{< figure src="/ox-hugo/BBWfyIN.svg" >}} <br/>
+
+<div class="subquestion">
+
+describe what the algorithm returns <br/>
+
+<div class="answer">
+
+returns the number of times the number 17 appears in the array <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+state the law of correctness <br/>
+
+<div class="answer">
+
+an algorithm is totally correct if it receives valid input, terminates, and always returns the correct output <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+give a loop invariant and prove it using induction <br/>
+
+<div class="answer">
+
+at the end of the \\(i\\)'th iteration, \\(m\\) equals the number of 17's in \\(A[1..i]\\) <br/>
+on the \\(i+1\\)'th iteration, the number \\(A[i+1]\\) is checked if equal to 17 and if so, \\(m\\) is incremented by 1, so it would become \\(m+1\\) only if \\(A[i+1]\\) is equal to 17, otherwise it would stay as \\(m\\) <br/>
+and so the loop invariant has to be true <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+use the loop invariant to prove the correctness of the algorithm <br/>
+
+<div class="answer">
+
+for each input (array) that the function receives it finishes with the correct value of \\(m\\) (the number of 17's <br/>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="question">
+
+{{< figure src="/ox-hugo/qii1Qmi.svg" >}} <br/>
+
+<div class="subquestion">
+
+find the [time complexity]({{< relref "data_structures.md#time-complexity" >}}) of the algorithm <br/>
+
+<div class="answer">
+
+\begin{gather\*}
+\text{time} = \sum\_{i=1}^{n} \sum\_{j=1}^{i} \sum\_{k=j}^{n} 1 = \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6}\\\\
+\Theta\left(\frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6}\right) = n^3
+\end{gather\*}
+
+so the time complexity is \\(\Theta(n^3)\\) <br/>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="question">
+
+{{< figure src="/ox-hugo/TGpSaHc.svg" >}} <br/>
+
+<div class="subquestion">
+
+describe what the algorithm returns <br/>
+
+<div class="answer">
+
+returns the length of the descending sequence of numbers starting from 1 up until N-1 <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+state the law of correctness <br/>
+
+<div class="answer">
+
+an algorithm is totally correct if it receives valid input, terminates, and always returns the correct output <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+give a loop invariant that is true after the `if` statement and prove it using induction <br/>
+
+<div class="answer">
+
+at the end of each iteration, \\(i\\) equals the length of the longest descending sequence starting at 1 <br/>
+on the \\(i+1\\)'th iteration, the check \\(A[i] \ge A[i+1]\\) is applied, and if it is false, the loop terminates, and \\(i\\) would still equal the length of \\(A[1,\dots,i]\\) which is the longest descending sequence starting at 1, otherwise it would equal the length of \\(A[1,\dots,i+1]\\) which equals \\(i+1\\), which then would be the longest descending sequence starting at 1 <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+use the loop invariant to prove the correctness of the algorithm <br/>
+
+<div class="answer">
+
+for each array that the algorithm runs on the loop terminates with the \\(i\\) containing the length of the descending sequence starting at 1 and the function returns that <br/>
+and since for each input it terminates and returns the correct output it is correct <br/>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="question">
+
+{{< figure src="/ox-hugo/9VhLqTx.svg" >}} <br/>
+
+<div class="subquestion">
+
+define the returned value \\(m\\) <br/>
+
+<div class="answer">
+
+\\(m\\) returns the number of descending pairs of numbers that are next to each other in the array <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+give a loop invariant that is true after the `if` statement and prove it using induction <br/>
+
+<div class="answer">
+
+after the \\(i\\)'th iteration the value of \\(m\\) equals the number of descending pairs of consecutive numbers <br/>
+it is true for \\(i=1\\) as \\(m\\) would equal 1 if \\(A[1] > A[2]\\) <br/>
+on the \\(i+1\\)'th iteraiton the value of \\(m\\) is incremented only if \\(A[i+1] > A[i+2]\\) which proves the loop invariant true <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+prove the hypothesis you described above about the value of \\(m\\) <br/>
+
+<div class="answer">
+
+after the loop the value of \\(m\\) is returned which we've proved to equal the number of descending pairs of consecutive numbers <br/>
 
 </div>
 
