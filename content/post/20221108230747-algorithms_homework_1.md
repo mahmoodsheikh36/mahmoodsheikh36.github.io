@@ -2,7 +2,7 @@
 title = "algorithms homework 1"
 author = ["mahmood"]
 description = "algorithms homework 1"
-date = 2022-11-13T15:13:00+02:00
+date = 2022-11-13T22:20:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -198,7 +198,7 @@ find the [time complexity]({{< relref "data_structures.md#time-complexity" >}}) 
 
 \begin{gather\*}
 \text{time} = \sum\_{i=1}^{n} \sum\_{j=1}^{i} \sum\_{k=j}^{n} 1 = \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6}\\\\
-\Theta\left(\frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6}\right) = n^3
+\Theta\left(\frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6}\right) \Rightarrow \Theta(n^3)
 \end{gather\*}
 
 so the time complexity is \\(\Theta(n^3)\\) <br/>
