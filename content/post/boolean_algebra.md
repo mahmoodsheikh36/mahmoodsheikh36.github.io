@@ -2,7 +2,7 @@
 title = "boolean algebra (old)"
 author = ["mahmood"]
 description = "boolean algebra course"
-date = 2022-11-14T17:14:00+02:00
+date = 2022-11-14T17:34:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -609,7 +609,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
   t = a \bullet b
 \\] <br/>
 
-{{< figure src="~/.emacs.d/latex/bKKN1Bx.svg" >}} <br/>
+{{< figure src="/ox-hugo/bKKN1Bx.svg" >}} <br/>
 
 
 ### <span class="section-num">12.2</span> OR gate {#or-gate}
@@ -618,7 +618,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
   t = a + b + c
 \\] <br/>
 
-{{< figure src="~/.emacs.d/latex/JEh5DG2.svg" >}} <br/>
+{{< figure src="/ox-hugo/JEh5DG2.svg" >}} <br/>
 
 
 ### <span class="section-num">12.3</span> NAND gate {#nand-gate}
@@ -627,7 +627,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
   t = \overline{(a \bullet b \bullet c)}
 \\] <br/>
 
-{{< figure src="~/.emacs.d/latex/cINGfRg.svg" >}} <br/>
+{{< figure src="/ox-hugo/cINGfRg.svg" >}} <br/>
 
 
 ### <span class="section-num">12.4</span> NOR gate {#nor-gate}
@@ -636,7 +636,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
   t = \overline{(a + b)}
 \\] <br/>
 
-{{< figure src="~/.emacs.d/latex/g8ASPWI.svg" >}} <br/>
+{{< figure src="/ox-hugo/g8ASPWI.svg" >}} <br/>
 
 
 ### <span class="section-num">12.5</span> XOR gate {#xor-gate}
@@ -645,7 +645,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
   t = a \oplus b
 \\] <br/>
 
-{{< figure src="~/.emacs.d/latex/FLVi83R.svg" >}} <br/>
+{{< figure src="/ox-hugo/FLVi83R.svg" >}} <br/>
 
 
 ### <span class="section-num">12.6</span> NOT gate {#not-gate}
@@ -654,7 +654,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
   b = \overline{a}
 \\] <br/>
 
-{{< figure src="~/.emacs.d/latex/f4X1VZI.svg" >}} <br/>
+{{< figure src="/ox-hugo/f4X1VZI.svg" >}} <br/>
 
 
 ## <span class="section-num">13</span> logic circuits {#logic-circuits}
@@ -669,7 +669,7 @@ the exit of a logical circuit depends only on the current combination of values 
   A = T \bullet (H + W) + \overline{W} \bullet P
 \\] <br/>
 
-{{< figure src="~/.emacs.d/latex/PCw1P6a.svg" >}} <br/>
+{{< figure src="/ox-hugo/PCw1P6a.svg" >}} <br/>
 
 
 ## <span class="section-num">14</span> Digital abstraction {#digital-abstraction}
@@ -742,7 +742,7 @@ inputs: \\(a,b,C\_{in}\\) <br/>
 
 outputs: \\(S,C\_{out}\\) <br/>
 
-{{< figure src="~/.emacs.d/latex/TWyPIBB.svg" >}} <br/>
+{{< figure src="/ox-hugo/TWyPIBB.svg" >}} <br/>
 
 it executes \\(a+b+C\_{in}\\), puts the result of the addition in output \\(S\\) and the carry bit in \\(C\_{out}\\) <br/>
 
@@ -790,11 +790,11 @@ outputs: \\(a-e-b\_{n}\\) - gives the result in \\(S\\) and borrow in \\(b\_{out
 
 karnaugh map of \\(b\_{out}\\): <br/>
 
-{{< figure src="~/.emacs.d/latex/YLUqZrh.svg" >}} <br/>
+{{< figure src="/ox-hugo/YLUqZrh.svg" >}} <br/>
 
 karnaugh map of \\(S\_{FS}\\) <br/>
 
-{{< figure src="~/.emacs.d/latex/iBziQBH.svg" >}} <br/>
+{{< figure src="/ox-hugo/iBziQBH.svg" >}} <br/>
 
 \begin{align\*}
   S\_{FS}(a,e,b\_{in}) &= S\_{FA}(a,e,b\_{in}) = \bar{S}\_{FA}(\bar{a},e,b\_{in})\\\\
@@ -828,7 +828,7 @@ also called _Selector_, an Encoder receives a decimal input and outputs the corr
 
 we implement the switching function \\(f(w,x,y,z) = \sum(3,4,9,12,13,14)\\) as an example <br/>
 
-{{< figure src="~/.emacs.d/latex/CvEk44N.svg" >}} <br/>
+{{< figure src="/ox-hugo/CvEk44N.svg" >}} <br/>
 
 
 ### <span class="section-num">15.7</span> Modulo {#modulo}
@@ -873,7 +873,7 @@ we can implement this module using two _Decoder/s of the type \\(4 \rightarrow 1
 
 ### <span class="section-num">16.1</span> SR Latch {#sr-latch}
 
-{{< figure src="~/.emacs.d/latex/gXdWqIj.svg" >}} <br/>
+{{< figure src="/ox-hugo/gXdWqIj.svg" >}} <br/>
 
 
 ## <span class="section-num">17</span> times/delays {#times-delays}
