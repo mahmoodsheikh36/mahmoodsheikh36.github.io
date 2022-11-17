@@ -130,7 +130,57 @@
 
     </div>
 
-    <div align="start" class="content"><h2 id="introduction"><span class="section-num">1</span> introduction</h2>
+    <div align="start" class="content"><p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
+  \(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\)
+</p>
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<h2 id="introduction"><span class="section-num">1</span> introduction</h2>
 <p>a variable can only be \(x \in \{0, 1\}\) <br/></p>
 <h2 id="basic-operations"><span class="section-num">2</span> basic operations</h2>
 <h3 id="and"><span class="section-num">2.1</span> AND</h3>
@@ -735,42 +785,42 @@ f(x,y,z) = \sum(0,2,3,4,5,7)
 <p>\[
 t = a \bullet b
 \] <br/></p>
-<p><figure><img src="~/.emacs.d/latex/bKKN1Bx.svg"/>
+<p><figure><img src="/ox-hugo/bKKN1Bx.svg"/>
 </figure>
  <br/></p>
 <h3 id="or-gate"><span class="section-num">12.2</span> OR gate</h3>
 <p>\[
 t = a + b + c
 \] <br/></p>
-<p><figure><img src="~/.emacs.d/latex/JEh5DG2.svg"/>
+<p><figure><img src="/ox-hugo/JEh5DG2.svg"/>
 </figure>
  <br/></p>
 <h3 id="nand-gate"><span class="section-num">12.3</span> NAND gate</h3>
 <p>\[
 t = \overline{(a \bullet b \bullet c)}
 \] <br/></p>
-<p><figure><img src="~/.emacs.d/latex/cINGfRg.svg"/>
+<p><figure><img src="/ox-hugo/cINGfRg.svg"/>
 </figure>
  <br/></p>
 <h3 id="nor-gate"><span class="section-num">12.4</span> NOR gate</h3>
 <p>\[
 t = \overline{(a + b)}
 \] <br/></p>
-<p><figure><img src="~/.emacs.d/latex/g8ASPWI.svg"/>
+<p><figure><img src="/ox-hugo/g8ASPWI.svg"/>
 </figure>
  <br/></p>
 <h3 id="xor-gate"><span class="section-num">12.5</span> XOR gate</h3>
 <p>\[
 t = a \oplus b
 \] <br/></p>
-<p><figure><img src="~/.emacs.d/latex/FLVi83R.svg"/>
+<p><figure><img src="/ox-hugo/FLVi83R.svg"/>
 </figure>
  <br/></p>
 <h3 id="not-gate"><span class="section-num">12.6</span> NOT gate</h3>
 <p>\[
 b = \overline{a}
 \] <br/></p>
-<p><figure><img src="~/.emacs.d/latex/f4X1VZI.svg"/>
+<p><figure><img src="/ox-hugo/f4X1VZI.svg"/>
 </figure>
  <br/></p>
 <h2 id="logic-circuits"><span class="section-num">13</span> logic circuits</h2>
@@ -780,7 +830,7 @@ b = \overline{a}
 <p>\[
 A = T \bullet (H + W) + \overline{W} \bullet P
 \] <br/></p>
-<p><figure><img src="~/.emacs.d/latex/PCw1P6a.svg"/>
+<p><figure><img src="/ox-hugo/PCw1P6a.svg"/>
 </figure>
  <br/></p>
 <h2 id="digital-abstraction"><span class="section-num">14</span> Digital abstraction</h2>
@@ -858,7 +908,7 @@ C_{out} = ab
 <p>this component adds 3 input bits <br/></p>
 <p>inputs: \(a,b,C_{in}\) <br/></p>
 <p>outputs: \(S,C_{out}\) <br/></p>
-<p><figure><img src="~/.emacs.d/latex/TWyPIBB.svg"/>
+<p><figure><img src="/ox-hugo/TWyPIBB.svg"/>
 </figure>
  <br/></p>
 <p>it executes \(a+b+C_{in}\), puts the result of the addition in output \(S\) and the carry bit in \(C_{out}\) <br/></p>
@@ -1021,11 +1071,11 @@ C_{out} = ab + aC_{in} + bC_{in}
 </tbody>
 </table>
 <p>karnaugh map of \(b_{out}\): <br/></p>
-<p><figure><img src="~/.emacs.d/latex/YLUqZrh.svg"/>
+<p><figure><img src="/ox-hugo/YLUqZrh.svg"/>
 </figure>
  <br/></p>
 <p>karnaugh map of \(S_{FS}\) <br/></p>
-<p><figure><img src="~/.emacs.d/latex/iBziQBH.svg"/>
+<p><figure><img src="/ox-hugo/iBziQBH.svg"/>
 </figure>
  <br/></p>
 <p>\begin{align*}
@@ -1046,7 +1096,7 @@ b_{out}(a,e,b_{in}) &amp;= C_{out}(\bar{a},e,b_{in})
 <h3 id="encoder"><span class="section-num">15.6</span> Encoder</h3>
 <p>also called <em>Selector</em>, an Encoder receives a decimal input and outputs the corresponding bit <br/></p>
 <p>we implement the switching function \(f(w,x,y,z) = \sum(3,4,9,12,13,14)\) as an example <br/></p>
-<p><figure><img src="~/.emacs.d/latex/CvEk44N.svg"/>
+<p><figure><img src="/ox-hugo/CvEk44N.svg"/>
 </figure>
  <br/></p>
 <h3 id="modulo"><span class="section-num">15.7</span> Modulo</h3>
@@ -1207,7 +1257,7 @@ f_2(x_0,x_1,x_2,x_3) &amp;= \sum(1,4,7,10,13)\\
  <br/></p>
 <h2 id="memory-circuits"><span class="section-num">16</span> memory circuits</h2>
 <h3 id="sr-latch"><span class="section-num">16.1</span> SR Latch</h3>
-<p><figure><img src="~/.emacs.d/latex/gXdWqIj.svg"/>
+<p><figure><img src="/ox-hugo/gXdWqIj.svg"/>
 </figure>
  <br/></p>
 <h2 id="times-delays"><span class="section-num">17</span> times/delays</h2>
