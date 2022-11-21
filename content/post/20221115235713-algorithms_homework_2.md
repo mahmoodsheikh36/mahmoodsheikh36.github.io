@@ -1,8 +1,8 @@
 +++
-title = "proving algorithms with nested loops"
+title = "algorithms homework 2"
 author = ["mahmood"]
-description = "algorithms homework 2"
-date = 2022-11-20T23:54:00+02:00
+description = "proving algorithms with nested loops"
+date = 2022-11-22T00:27:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -66,6 +66,50 @@ homework 2 of the [algorithms]({{< relref "algorithms.md" >}}) course, on the su
 <div class="question">
 
 {{< figure src="/ox-hugo/8hsU9UW.svg" >}} <br/>
+
+<div class="subquestion">
+
+what is the problem that \\(\textsc{Alg1}\\) solves? <br/>
+
+<div class="answer">
+
+imagine the array `A` displayed as a \\(i\times j\\) [matrix]({{< relref "linear_algebra2.md#matrix" >}}), then the algorithm would be returning the smallest of the biggest number of each row, i.e. the smallest number in the list of numbers that are each the biggest in the row they correspond to <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+state the law of correctness for \\(\textsc{Alg1}\\) <br/>
+
+<div class="answer">
+
+\\(\textsc{Alg1}\\) is correct if for every given array it terminates and returns the value that is the smallest in the list of numbers that are each the biggest in the subarray they correspond to <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+propose a [loop invariant]({{< relref "20221104221055-loop_invariant.md" >}}) for the inner loop and prove it using [induction]({{< relref "20220707193301-mathematical_induction.md" >}}) <br/>
+
+<div class="answer">
+
+after the `j`'th iteration, the following would hold true: (note that `i` here is constant) <br/>
+\\[
+(\forall 1 \le x \le j)[b \ge A[i,x]]
+\\] <br/>
+we prove this using induction: <br/>
+
+1.  the condition for the base case is met: \\(j=1 \implies b=A[i,1]\\), in this case `x` would be only tested for the case `x=1` in which it has to be true that \\(x=1 \implies b \ge A[i,1]\\), which it is <br/>
+2.  assume truth for the `j`'th iteration <br/>
+3.  prove truth for the `j+1`'th iteration <br/>
+
+</div>
+
+</div>
 
 </div>
 
