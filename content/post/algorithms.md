@@ -2,8 +2,8 @@
 title = "algorithms"
 author = ["mahmood"]
 description = "algorithms course from college"
-date = 2022-11-03T23:30:00+02:00
-tags = ["math"]
+date = 2022-11-22T12:50:00+02:00
+tags = ["todo"]
 draft = false
 +++
 
@@ -22,6 +22,7 @@ draft = false
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
   \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
   \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
+  \(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\)
 </p>
 
 <!-- mathjax -->
@@ -61,30 +62,13 @@ window.onload = function() {
 </script>
 
 
-## <span class="section-num">1</span> algorithm correctness {#algorithm-correctness}
+## <span class="section-num">1</span> study guide {#study-guide}
 
-<div class="definition">
+in order: <br/>
 
-an algorithm is totally correct if it receives valid input, terminates, and always returns the correct output <br/>
-
-</div>
-
-
-### <span class="section-num">1.1</span> proving algorithm correctness by induction {#proving-algorithm-correctness-by-induction}
-
-the only way to prove the correctness of an algorithm over all possible inputs is by reasoning formally or mathematically about it. <br/>
-here we'll be using [induction]({{< relref "20220707193301-mathematical_induction.md" >}}) <br/>
-
-<div class="my_example">
-
-consider the following algorithm: <br/>
-
-{{< figure src="/ox-hugo/QW3OLMD.svg" >}} <br/>
-
-we can **observe** that \\(A[1] \geq A[j]\\) for \\(1 \leq j \leq i-1\\) <br/>
-we can prove this by induction <br/>
-we assume that our "observation" is true for \\(i=k\\), i.e. \\(A[1] \geq A[j]\\) for \\(1 \leq j \leq k-1\\) <br/>
-we assume that we arrived to this point when \\(i=k+1\\), hence, since we arrived at this point then we know the condition hasnt been met yet so \\(A[k] \leq A[1]\\), then for \\(1 \leq j \leq k\\) we know \\(A[1] \geq A[j]\\), which is what we wanted to prove <br/>
-
-</div>
+-   [algorithm correctness]({{< relref "20221104220603-algorithm_correctness.md" >}}), without the recursion part <br/>
+-   [asymptotic notations]({{< relref "data_structures.md#asymptotic-notations" >}}) and [time complexity]({{< relref "data_structures.md#time-complexity" >}}) <br/>
+-   [selection sort]({{< relref "data_structures.md#selection-sort" >}}), [bubble sort]({{< relref "data_structures.md#bubble-sort" >}}) <br/>
+-   [recursion]({{< relref "20221105001640-recursive_function.md" >}}) <br/>
+-   [correctness of recursive algorithms]({{< relref "20221104220603-algorithm_correctness.md#correctness-of-recursive-algorithms" >}}) <br/>
 
