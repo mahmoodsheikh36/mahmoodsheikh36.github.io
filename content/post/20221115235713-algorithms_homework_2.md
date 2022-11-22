@@ -2,7 +2,7 @@
 title = "algorithms homework 2"
 author = ["mahmood"]
 description = "proving algorithms with nested loops"
-date = 2022-11-22T00:27:00+02:00
+date = 2022-11-22T11:18:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -104,8 +104,8 @@ after the `j`'th iteration, the following would hold true: (note that `i` here i
 we prove this using induction: <br/>
 
 1.  the condition for the base case is met: \\(j=1 \implies b=A[i,1]\\), in this case `x` would be only tested for the case `x=1` in which it has to be true that \\(x=1 \implies b \ge A[i,1]\\), which it is <br/>
-2.  assume truth for the `j`'th iteration <br/>
-3.  prove truth for the `j+1`'th iteration <br/>
+2.  assume truth for the `j`'th iteration, \\((\forall 1 \le x \le j)[b \ge A[i,x]]\\) <br/>
+3.  prove truth for the `j+1`'th iteration: on the `j+1`'th iteration, we check whether \\(A[i,j+1] > b\\), and if it is true, we assign the value of \\(A[i,j+1]\\) to \\(b\\), this way it would remain true that \\(b\\) is bigger than all elements \\(A[i,1\dots i,j+1]\\) and so \\((\forall 1 \le x \le j+1)[b \ge A[i,x]]\\) <br/>
 
 </div>
 
