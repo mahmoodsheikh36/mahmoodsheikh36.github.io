@@ -2,7 +2,7 @@
 title = "recursion"
 author = ["mahmood"]
 description = "recursive functions"
-date = 2022-11-26T14:03:00+02:00
+date = 2022-11-26T14:10:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -198,7 +198,7 @@ consider the following [recurrence relation](#recurrence-relation) <br/>
 a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \\(T(n)\\) <br/>
 with that in mind, the first step would be: <br/>
 
-{{< figure src="~/.emacs.d/latex/AT4XkK.svg" >}} <br/>
+{{< figure src="/ox-hugo/AT4XkK.svg" >}} <br/>
 
 if we sum all the nodes we can see that indeed \\(T(n) = T\left(\frac{2n}{3}\right) + T\left(\frac{n}{3}\right) + n\\) <br/>
 for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\left(\frac{n}{3}\right)\\) in terms of time complexity for smaller values of \\(n\\) so we can know what the next row of nodes would be <br/>
@@ -210,7 +210,7 @@ for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\lef
 
 according to this, the tree with the new nodes would be: <br/>
 
-{{< figure src="~/.emacs.d/latex/e66eVE.svg" >}} <br/>
+{{< figure src="/ox-hugo/e66eVE.svg" >}} <br/>
 
 we define a **full row** as a row that is full of nodes, in the previous tree the rows \\(1,2,3\\) are full, we might notice that the sum of all the nodes of a full row is \\(n\\) <br/>
 let \\(y\\) be the last full row <br/>
@@ -239,14 +239,14 @@ consider the following [recurrence relation](#recurrence-relation) <br/>
 we cant determine \\(\Theta\\) using the [Master Theorem](#master-theorem), but we can using a recursion tree <br/>
 the first step would be: <br/>
 
-{{< figure src="~/.emacs.d/latex/0IoNVgg.svg" >}} <br/>
+{{< figure src="/ox-hugo/0IoNVgg.svg" >}} <br/>
 
 \begin{align\*}
   T\left(\frac{n}{8}\right) &= 2T\left(\frac{n}{8^2}\right) + 3T\left(\frac{n}{8\cdot9}\right) + \frac{n}{8}\\\\
   T\left(\frac{n}{9}\right) &= 2T\left(\frac{n}{8\cdot9}\right) + 3T\left(\frac{n}{9^2}\right) + \frac{n}{9}
 \end{align\*}
 
-{{< figure src="~/.emacs.d/latex/8OoGIIt.svg" >}} <br/>
+{{< figure src="/ox-hugo/8OoGIIt.svg" >}} <br/>
 
 \begin{align\*}
   T(n) &= \text{sum of all nodes}\\\\
@@ -304,7 +304,7 @@ we proved \\(T(n) = O(2^n)\\), now we try showing \\(T(n) = \Omega(2^n)\\) <br/>
 and so we showed that \\(T(n) = \Omega\left(2^{n/2}\right)\\), which means there isnt a tight bound on the of this function <br/>
 using a [recursion tree](#recursion-tree): <br/>
 
-{{< figure src="~/.emacs.d/latex/QIrzGtq.svg" >}} <br/>
+{{< figure src="/ox-hugo/QIrzGtq.svg" >}} <br/>
 
 \begin{align\*}
   T(n) &= \text{sum of all nodes}\\\\
