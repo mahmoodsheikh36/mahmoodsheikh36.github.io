@@ -1,10 +1,64 @@
 +++
-title = "recursive function"
-author = ["user"]
-date = 2022-11-22T13:01:00+02:00
+title = "recursion"
+author = ["mahmood"]
+description = "recursive functions"
+date = 2022-11-26T14:03:00+02:00
 tags = ["math"]
 draft = false
 +++
+
+<p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
+</p>
+
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
 
 <div class="definition">
 
@@ -25,20 +79,20 @@ def fac(n):
 </div>
 
 
-## recurrence relation {#recurrence-relation}
+## <span class="section-num">1</span> recurrence relation {#recurrence-relation}
 
-to analyze the [time complexity]({{< relref "data_structures.md#time-complexity" >}}) of [recursive function]({{< relref "20221105001640-recursive_function.md" >}})s we use a mathematical concept called **recurrence relation** <br/>
+to analyze the of [recursive function]({{< relref "20221105001640-recursive_function.md" >}})s we use a mathematical concept called **recurrence relation** <br/>
 a recurrence defines \\(T(n)\\) in terms of \\(T\\) for smaller values <br/>
 example: \\(T(n) = T(n-1) + 1\\), here \\(T(n)\\) is defined in terms of \\(T(n-1)\\) <br/>
 
 
-### initial condition {#initial-condition}
+### <span class="section-num">1.1</span> initial condition {#initial-condition}
 
 a [recurrence relation](#recurrence-relation) must have **initial conditions**, initial conditions are values of the recurrence for small values of \\(n\\) <br/>
 the values of \\(T(0),T(1)\\) are usually sufficient as initial conditions <br/>
 
 
-### closed form {#closed-form}
+### <span class="section-num">1.2</span> closed form {#closed-form}
 
 to solve a [recurrence](#recurrence-relation), we find a **closed form** for it, a closed form for \\(T(n)\\) is an equation that defines \\(T(n)\\) using an expression that does **not** involve \\(T\\) <br/>
 there is no single method that works for all, we check for patterns and use substitution <br/>
@@ -135,7 +189,7 @@ for `fib(n)`, how many times is `fib` called? <br/>
 </div>
 
 
-## recursion tree {#recursion-tree}
+## <span class="section-num">2</span> recursion tree {#recursion-tree}
 
 <div class="my_example">
 
@@ -144,7 +198,7 @@ consider the following [recurrence relation](#recurrence-relation) <br/>
 a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \\(T(n)\\) <br/>
 with that in mind, the first step would be: <br/>
 
-{{< figure src="/ox-hugo/AT4XkK.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/AT4XkK.svg" >}} <br/>
 
 if we sum all the nodes we can see that indeed \\(T(n) = T\left(\frac{2n}{3}\right) + T\left(\frac{n}{3}\right) + n\\) <br/>
 for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\left(\frac{n}{3}\right)\\) in terms of time complexity for smaller values of \\(n\\) so we can know what the next row of nodes would be <br/>
@@ -156,7 +210,7 @@ for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\lef
 
 according to this, the tree with the new nodes would be: <br/>
 
-{{< figure src="/ox-hugo/e66eVE.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/e66eVE.svg" >}} <br/>
 
 we define a **full row** as a row that is full of nodes, in the previous tree the rows \\(1,2,3\\) are full, we might notice that the sum of all the nodes of a full row is \\(n\\) <br/>
 let \\(y\\) be the last full row <br/>
@@ -185,14 +239,14 @@ consider the following [recurrence relation](#recurrence-relation) <br/>
 we cant determine \\(\Theta\\) using the [Master Theorem](#master-theorem), but we can using a recursion tree <br/>
 the first step would be: <br/>
 
-{{< figure src="/ox-hugo/0IoNVgg.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/0IoNVgg.svg" >}} <br/>
 
 \begin{align\*}
   T\left(\frac{n}{8}\right) &= 2T\left(\frac{n}{8^2}\right) + 3T\left(\frac{n}{8\cdot9}\right) + \frac{n}{8}\\\\
   T\left(\frac{n}{9}\right) &= 2T\left(\frac{n}{8\cdot9}\right) + 3T\left(\frac{n}{9^2}\right) + \frac{n}{9}
 \end{align\*}
 
-{{< figure src="/ox-hugo/8OoGIIt.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/8OoGIIt.svg" >}} <br/>
 
 \begin{align\*}
   T(n) &= \text{sum of all nodes}\\\\
@@ -203,7 +257,7 @@ the first step would be: <br/>
   &= \Theta(n)
 \end{align\*}
 
-note the sum was found using [geometric progression formula]({{< relref "20220711182517-sum_of_geometric_progression.md" >}}) <br/>
+note the sum was found using  <br/>
 and so we have shown that \\(T(n) = O(n)\\) <br/>
 \\[
   T(n) = \text{sum of all nodes in the tree} \ge \text{root} = n = \Theta(n)
@@ -247,10 +301,10 @@ we proved \\(T(n) = O(2^n)\\), now we try showing \\(T(n) = \Omega(2^n)\\) <br/>
   &\ge 2^{n/2} = \Theta\left(2^{n/2}\right)
 \end{align\*}
 
-and so we showed that \\(T(n) = \Omega\left(2^{n/2}\right)\\), which means there isnt a tight bound on the [time complexity]({{< relref "data_structures.md#time-complexity" >}}) of this function <br/>
+and so we showed that \\(T(n) = \Omega\left(2^{n/2}\right)\\), which means there isnt a tight bound on the of this function <br/>
 using a [recursion tree](#recursion-tree): <br/>
 
-{{< figure src="/ox-hugo/QIrzGtq.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/QIrzGtq.svg" >}} <br/>
 
 \begin{align\*}
   T(n) &= \text{sum of all nodes}\\\\
@@ -274,10 +328,10 @@ the division by 2 doesnt affect big omega so \\(T(n) = \Omega\left(2^{n/2}\right
 </div>
 
 
-## master theorem {#master-theorem}
+## <span class="section-num">3</span> master theorem {#master-theorem}
 
 
-### dividing functions {#dividing-functions}
+### <span class="section-num">3.1</span> dividing functions {#dividing-functions}
 
 to solve a [recurrence relation](#recurrence-relation) of the form: <br/>
 \\[ T(n) = aT\left(\frac{n}{b}\right) + f(n) \text{ where } a \geq 1, b > 1 \\] <br/>
@@ -338,7 +392,7 @@ we get: <br/>
 </div>
 
 
-### decreasing functions {#decreasing-functions}
+### <span class="section-num">3.2</span> decreasing functions {#decreasing-functions}
 
 the **master theorem** can be used to solve recurrences of the form \\(T(n) = aT(n - b) + f(n)\\), where \\(a \geq 1\\) and \\(b > 0\\) and \\(f(n)\\) is **asymptotically positive**. (asymptotically positive means that the function is positive for all sufficiently large n.) this recurrence describes an algorithm that divides a problem of size \\(n\\) into sub problems, each of size \\(n-b\\), and solves them recursively. <br/>
 the theorem is as follows: <br/>
