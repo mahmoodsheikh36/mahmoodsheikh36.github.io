@@ -74,6 +74,27 @@ write a recursive algorithm that finds the 2 biggest numbers in a given array th
 
 {{< figure src="/ox-hugo/HuER61P.svg" >}} <br/>
 
+python version of the algorithm: <br/>
+
+```python
+def biggest_two(arr):
+    if len(arr) == 1:
+        return arr[0], -1000
+    if len(arr) == 2:
+        return arr[0], arr[1]
+    left_1, left_2 = biggest_two(arr[0:len(arr)//2])
+    right_1, right_2 = biggest_two(arr[len(arr)//2:len(arr)])
+    biggest_1 = max({left_1, left_2, right_1, right_2})
+    biggest_2 = max({left_1, left_2, right_1, right_2} - {biggest_1})
+    return biggest_1, biggest_2
+
+print(biggest_two([10, 20, 30, 35, 2, 17]))
+```
+
+```text
+(35, 30)
+```
+
 </div>
 
 <div class="subquestion">
