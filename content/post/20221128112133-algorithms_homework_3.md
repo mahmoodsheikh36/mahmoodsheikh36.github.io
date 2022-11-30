@@ -2,7 +2,7 @@
 title = "algorithms homework 3"
 author = ["mahmood"]
 description = "third homework of the [[id:72B5136A-9984-48DF-9163-11E21A2CF654][algorithms]] course, on the subject of [[id:BEE67DFC-857B-461C-A283-BD00134EBFCE][recursion]]"
-date = 2022-11-30T02:46:00+02:00
+date = 2022-11-30T03:40:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -138,9 +138,50 @@ find the time complexity of the following algorithm <br/>
 <div class="answer">
 
 at first glance this seems like a \\(\Theta(n^2)\\) algorithm but its time complexity is actually \\(\Theta(n)\\) <br/>
-we track the value of the variable `i`: on each iteration in the main loop, the variable `i` gets incremented as many times as the inner loop runs plus one (`j` is assigned back to `i` so we're basically acting on `i` itself), \\(i\\) can be at most incremented `N` times before both loops wouldnt execute anymore, and since on each iteration of either loop \\(i\\) gets incremented both loops are bound by `N` iterations at most so the total time complexity is \\(\Theta(N)\\) <br/>
+we track the value of the variable `i`: on each iteration in the main loop, the variable `i` gets incremented as many times as the inner loop runs plus one (`j` is assigned back to `i` so we're basically acting on `i` itself), `i` can be at most incremented `N` times before both loops wouldnt execute anymore, and since on each iteration of either loop \\(i\\) gets incremented both loops are bound by `N` iterations at most so the total time complexity is \\(\Theta(N)\\) <br/>
 
 </div>
+
+</div>
+
+<div class="question">
+
+find the time complexity of the following algorithm <br/>
+
+![](/ox-hugo/yx1C6jB.svg) <br/>
+on the first iteration the inner loop runs and sets all the elements of the array to the value `A[i]` and so the `while` loop would never run again on next iterations of the `for` loop, so for `N-1` iterations of the `for` loop we're doing constant work (all except the first iteration) which amounts to a time complexity of \\(\Theta(N)\\) <br/>
+adding the \\(\Theta(N)\\) from the first iteration we get \\(\Theta(N) + \Theta(N) \Rightarrow \Theta(N)\\) <br/>
+so the time complexity is \\(\Theta(N)\\) <br/>
+
+</div>
+
+<div class="question">
+
+given a function `P(A,l,k)` that sorts `k` elements in `A` starting at index `l` <br/>
+the algorithm runs as follows: <br/>
+
+1.  if k&lt;10 sort using [bubble sort]({{< relref "20221105005344-sorting_algorithm.md#bubble-sort" >}}) <br/>
+2.  run `P(A, l, 3k/4)` <br/>
+3.  run `P(A, l+k/4, 3k/4)` <br/>
+4.  run `P(A, l, 3k/4)` <br/>
+
+<div class="subquestion">
+
+prove/disprove whether the algorithm actually sorts <br/>
+
+</div>
+
+<div class="subquestion">
+
+find the time complexity of the algorithm using  <br/>
+
+</div>
+
+</div>
+
+<div class="question">
+
+modify the `merge` algorithm such that it merges without using elements that have a value of \\(\infty\\) <br/>
 
 </div>
 
