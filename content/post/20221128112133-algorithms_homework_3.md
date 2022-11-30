@@ -2,7 +2,7 @@
 title = "algorithms homework 3"
 author = ["mahmood"]
 description = "third homework of the [[id:72B5136A-9984-48DF-9163-11E21A2CF654][algorithms]] course, on the subject of [[id:BEE67DFC-857B-461C-A283-BD00134EBFCE][recursion]]"
-date = 2022-11-29T23:08:00+02:00
+date = 2022-11-30T02:46:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -99,7 +99,7 @@ print(biggest_two([10, 20, 30, 35, 2, 17]))
 
 <div class="subquestion">
 
-find the of the algorithm <br/>
+find the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of the algorithm <br/>
 
 <div class="answer">
 
@@ -134,6 +134,13 @@ note that although it doesnt matter, \\(C\_1\\) differs a from \\(C\\) as \\(C\_
 find the time complexity of the following algorithm <br/>
 
 {{< figure src="/ox-hugo/h7AJcrd.svg" >}} <br/>
+
+<div class="answer">
+
+at first glance this seems like a \\(\Theta(n^2)\\) algorithm but its time complexity is actually \\(\Theta(n)\\) <br/>
+we track the value of the variable `i`: on each iteration in the main loop, the variable `i` gets incremented as many times as the inner loop runs plus one (`j` is assigned back to `i` so we're basically acting on `i` itself), \\(i\\) can be at most incremented `N` times before both loops wouldnt execute anymore, and since on each iteration of either loop \\(i\\) gets incremented both loops are bound by `N` iterations at most so the total time complexity is \\(\Theta(N)\\) <br/>
+
+</div>
 
 </div>
 
