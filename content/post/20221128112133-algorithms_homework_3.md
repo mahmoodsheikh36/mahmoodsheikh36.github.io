@@ -2,7 +2,7 @@
 title = "algorithms homework 3"
 author = ["mahmood"]
 description = "third homework of the [[id:72B5136A-9984-48DF-9163-11E21A2CF654][algorithms]] course, on the subject of [[id:BEE67DFC-857B-461C-A283-BD00134EBFCE][recursion]]"
-date = 2022-11-30T03:40:00+02:00
+date = 2022-11-30T04:06:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -173,7 +173,7 @@ prove/disprove whether the algorithm actually sorts <br/>
 
 <div class="subquestion">
 
-find the time complexity of the algorithm using  <br/>
+find the time complexity of the algorithm using , find the number of nodes in each level and the number of levels <br/>
 
 </div>
 
