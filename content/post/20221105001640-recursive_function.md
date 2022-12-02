@@ -2,7 +2,7 @@
 title = "recursion"
 author = ["mahmood"]
 description = "recursive functions"
-date = 2022-11-26T14:10:00+02:00
+date = 2022-12-02T16:41:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -81,7 +81,7 @@ def fac(n):
 
 ## <span class="section-num">1</span> recurrence relation {#recurrence-relation}
 
-to analyze the of [recursive function]({{< relref "20221105001640-recursive_function.md" >}})s we use a mathematical concept called **recurrence relation** <br/>
+to analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of [recursive function]({{< relref "20221105001640-recursive_function.md" >}})s we use a mathematical concept called **recurrence relation** <br/>
 a recurrence defines \\(T(n)\\) in terms of \\(T\\) for smaller values <br/>
 example: \\(T(n) = T(n-1) + 1\\), here \\(T(n)\\) is defined in terms of \\(T(n-1)\\) <br/>
 
@@ -110,14 +110,14 @@ print([fac(i) for i in range(1,10)])
 ```
 
 for `fac(n)`, how many times is `fac` called? <br/>
-\\[ T(n) \leq T(n-1) + C\_1 \\] <br/>
+\\[ T(n) = T(n-1) + C\_1 \\] <br/>
 \\(C\_1\\) represents the total time of all the operations that take constant time that the function does on every iteration <br/>
 now this is obviously not what we wanna arrive at, we need to arrive at an expression that doesnt have \\(T\\) in it <br/>
 we can substitute in \\(n - 1\\) because \\(T\\) is a function that takes any positive integer <br/>
 
 \begin{align\*}
-  T(n) &\leq \underbrace{T(n-2) + C\_1}\_{T(n-1)} + C\_1\\\\
-  T(n) &\leq T(n-3) + 3C\_1
+  T(n) &= \underbrace{T(n-2) + C\_1}\_{T(n-1)} + C\_1\\\\
+  T(n) &= T(n-3) + 3C\_1
 \end{align\*}
 
 now you probably already see the pattern here, on every iteration the function takes constant time \\(C\_1\\) to run, until it reaches the last iteration \\(k\\) at which point it we would've \\(k\\) times \\(C\_1\\), e.g.: <br/>
@@ -127,10 +127,10 @@ now we know that the total number of times the function calls itself depends on 
 we substitute \\(k = n - 1\\) to get the total time this function takes to run <br/>
 
 \begin{align\*}
- T(n) &\leq T(n-(n-1)) + (n-1)C\_1\\\\
-      &\leq T(1) + (n-1)C\_1\\\\
-      &\leq C\_1 + (n-1)C\_1 &\text{because } C\_1 \geq T(1)\\\\
-      &\leq nC\_1
+ T(n) &= T(n-(n-1)) + (n-1)C\_1\\\\
+      &= T(1) + (n-1)C\_1\\\\
+      &= C\_1 + (n-1)C\_1 &\text{because } C\_1 \geq T(1)\\\\
+      &= nC\_1
 \end{align\*}
 
 so we conclude that <br/>
@@ -301,7 +301,7 @@ we proved \\(T(n) = O(2^n)\\), now we try showing \\(T(n) = \Omega(2^n)\\) <br/>
   &\ge 2^{n/2} = \Theta\left(2^{n/2}\right)
 \end{align\*}
 
-and so we showed that \\(T(n) = \Omega\left(2^{n/2}\right)\\), which means there isnt a tight bound on the of this function <br/>
+and so we showed that \\(T(n) = \Omega\left(2^{n/2}\right)\\), which means there isnt a tight bound on the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this function <br/>
 using a [recursion tree](#recursion-tree): <br/>
 
 {{< figure src="/ox-hugo/QIrzGtq.svg" >}} <br/>
