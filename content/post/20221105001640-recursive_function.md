@@ -2,7 +2,7 @@
 title = "recursion"
 author = ["mahmood"]
 description = "recursive functions"
-date = 2022-12-03T10:04:00+02:00
+date = 2022-12-03T10:26:00+02:00
 tags = ["math"]
 draft = false
 +++
