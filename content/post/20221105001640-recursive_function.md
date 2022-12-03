@@ -2,7 +2,7 @@
 title = "recursion"
 author = ["mahmood"]
 description = "recursive functions"
-date = 2022-12-02T16:41:00+02:00
+date = 2022-12-03T10:04:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -210,8 +210,7 @@ for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\lef
 
 according to this, the tree with the new nodes would be: <br/>
 
-{{< figure src="/ox-hugo/e66eVE.svg" >}} <br/>
-
+![](/ox-hugo/e66eVE.svg) <br/>
 we define a **full row** as a row that is full of nodes, in the previous tree the rows \\(1,2,3\\) are full, we might notice that the sum of all the nodes of a full row is \\(n\\) <br/>
 let \\(y\\) be the last full row <br/>
 because the leftmost node is always the smallest in its row, for a row to be full the leftmost node has to be greater or equal to 1 (\\(\frac{n}{3^y} \geq 1\\) in this case) <br/>
@@ -250,7 +249,7 @@ the first step would be: <br/>
 
 \begin{align\*}
   T(n) &= \text{sum of all nodes}\\\\
-  &= \text{sum of all nodes in all levels}\\\\
+  &= \text{sum of all nodes in all full rows}\\\\
   &\leq n+n\left(\frac{2}{8}+\frac{3}{9}\right)+n\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+n\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\\\\
   &\leq n\left(\left(\frac{2}{8}+\frac{3}{9}\right)+\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\right)\\\\
   &= n\cdot \frac{1}{1-\left(\frac{2}{8}+\frac{3}{9}\right)}\\\\
