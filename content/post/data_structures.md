@@ -2,7 +2,7 @@
 title = "data structures"
 author = ["mahmood"]
 description = "college course in data structures and algorithms"
-date = 2022-12-03T18:55:00+02:00
+date = 2022-12-03T21:58:00+02:00
 tags = ["math", "code", "computer-science"]
 draft = false
 +++
@@ -68,11 +68,11 @@ also its good to note that most of the code isnt optimized to hell, but it doesn
 </div>
 
 
-## <span class="section-num">1</span> properties of  {#properties-of}
+## <span class="section-num">1</span> properties of [floor]({{< relref "discrete_maths2.md#floor" >}}) {#properties-of-floor--discrete-maths2-dot-md}
 
 <div class="characteristic">
 
-for every 2 numbers \\(m,n\\) and every number \\(x\\) <br/>
+for every 2 [normal]({{< relref "calculus2.md#normal" >}}) numbers \\(m,n\\) and every [real]({{< relref "calculus2.md#real" >}}) number \\(x\\) <br/>
 \\[
   \ceil\*{\frac{\ceil\*{\frac{x}{m}}}{n}} = \ceil\*{\frac{x}{m \cdot n}} \qquad \floor\*{\frac{\floor\*{\frac{x}{m}}}{n}} = \floor\*{\frac{x}{m \cdot n}}
 \\] <br/>
@@ -162,7 +162,7 @@ public:
 
 <div class="definition">
 
-**abstract data types**, commonly abbreviated \*ADT\*s, are a way of classifying [data structure](#data-structure)s based on how they are used and the behaviors they provide. they do not specify how the data structure must be implemented or laid out in memory, but simply provide a minimal expected interface and set of behaviors. for example, a [stack](#stack) is an abstract data type that specifies a linear data structure with [LIFO](#lifo) behavior. stacks are commonly implemented using s or [linked list](#linked-list)s, but a needlessly complicated implementation using a [binary search tree](#binary-search-tree) is still a valid implementation. to be clear, it is incorrect to say that stacks are arrays or vice versa. an array can be used as a stack. likewise, a stack can be implemented using an array. <br/>
+**abstract data types**, commonly abbreviated \*ADT\*s, are a way of classifying [data structure](#data-structure)s based on how they are used and the behaviors they provide. they do not specify how the data structure must be implemented or laid out in memory, but simply provide a minimal expected interface and set of behaviors. for example, a [stack](#stack) is an abstract data type that specifies a linear data structure with [LIFO](#lifo) behavior. stacks are commonly implemented using [array]({{< relref "20220728190531-array.md" >}})s or [linked list](#linked-list)s, but a needlessly complicated implementation using a [binary search tree](#binary-search-tree) is still a valid implementation. to be clear, it is incorrect to say that stacks are arrays or vice versa. an array can be used as a stack. likewise, a stack can be implemented using an array. <br/>
 
 <div class="characteristic">
 
@@ -487,7 +487,7 @@ to be implemented
 
 <div class="definition">
 
-a **linked list** is a [concrete data type](#concrete-data-type) that is an implementation of a [list](#list) based on an that is dynamically continuously reconstructed on insertions to hold as many objects as necessary <br/>
+a **linked list** is a [concrete data type](#concrete-data-type) that is an implementation of a [list](#list) based on an [array]({{< relref "20220728190531-array.md" >}}) that is dynamically continuously reconstructed on insertions to hold as many objects as necessary <br/>
 
 <div class="note">
 
@@ -674,7 +674,7 @@ the **balance factor** of a [node](#node) `x`, denoted by `balance(x)` or `BF(x)
 \\] <br/>
 see for example this tree, the balance factor of each node is written above it <br/>
 
-{{< figure src="~/.emacs.d/latex/gXx4ZR.svg" >}} <br/>
+{{< figure src="/ox-hugo/gXx4ZR.svg" >}} <br/>
 
 
 #### <span class="section-num">2.7.2</span> height {#height}
@@ -753,7 +753,7 @@ a **descendant** of a given [node](#node) is a node that is at a lower level of 
 
 for some [binary tree](#binary-tree) `T` and a node `x` of said tree we denote \\(T\_x\\) as the **subtree** whose [root](#root) is `x`, and the left **subtree** of `x` is the tree whose root is the left child of `x` denoted by \\(T\_{\text{left}(x)}\\) and the right subtree of `x` is the tree whose root is the right child of `x` denoted by \\(T\_{\text{right}(x)}\\) <br/>
 
-{{< figure src="~/.emacs.d/latex/vD1CJC.svg" >}} <br/>
+{{< figure src="/ox-hugo/vD1CJC.svg" >}} <br/>
 
 the height of this tree is 4 <br/>
 
@@ -1259,7 +1259,7 @@ a **binary search tree** is a [binary tree](#binary-tree) that has the following
 
 for example the following tree is a binary search tree: <br/>
 
-{{< figure src="~/.emacs.d/latex/a0JkT1.svg" >}} <br/>
+{{< figure src="/ox-hugo/a0JkT1.svg" >}} <br/>
 
 
 ##### <span class="section-num">2.7.16.1</span> insertion {#insertion}
@@ -1386,9 +1386,9 @@ is this tree balanced?: 0 <br/>
 the height of this tree is: 6 <br/>
 the balance factor of the root is: -1 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/3TjzZFC.svg" >}} <br/>
+{{< figure src="/ox-hugo/v5wXfns.svg" >}} <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/G6rZlhA.svg" >}} <br/>
+{{< figure src="/ox-hugo/DimK7tW.svg" >}} <br/>
 
 
 #### <span class="section-num">2.7.17</span> AVL tree {#avl-tree}
@@ -1400,7 +1400,7 @@ an **AVL tree** is a [binary search tree](#binary-search-tree) in which every no
 every node `x` of this tree holds an extra field called `balance` which holds the [balance factor](#balance-factor) of said node <br/>
 for example, the following tree is an AVL tree: <br/>
 
-{{< figure src="~/.emacs.d/latex/CRLd0L.svg" >}} <br/>
+{{< figure src="/ox-hugo/CRLd0L.svg" >}} <br/>
 
 if we were to remove the node with value 14 or with value 9 this wouldnt be an AVL tree <br/>
 
@@ -1523,23 +1523,23 @@ to determine which type of **rotation** we need to use to **rebalance** a given 
         
         consider the following [AVL tree](#avl-tree): <br/>
         
-        {{< figure src="~/.emacs.d/latex/OCEhdh.svg" >}} <br/>
+        {{< figure src="/ox-hugo/OCEhdh.svg" >}} <br/>
         
         after inserting a new [node](#node) with the value 2 this is how the tree would look: <br/>
         
-        {{< figure src="~/.emacs.d/latex/nMREes.svg" >}} <br/>
+        {{< figure src="/ox-hugo/nMREes.svg" >}} <br/>
         
         the [node](#node) with the value 7 whose [balance factor](#balance-factor) is 2 is [problematic](#problematic-node) because its causing imbalance in the [tree](#avl-tree), so we apply the [rotation](#rotation) to its subtree to rebalance it <br/>
         
-        {{< figure src="~/.emacs.d/latex/ZIzaCe.svg" >}} <br/>
+        {{< figure src="/ox-hugo/ZIzaCe.svg" >}} <br/>
         
         the [subtree](#subtree) after the [rotation](#rotation): <br/>
         
-        {{< figure src="~/.emacs.d/latex/diNERQ.svg" >}} <br/>
+        {{< figure src="/ox-hugo/diNERQ.svg" >}} <br/>
         
         and so the original tree would become: <br/>
         
-        {{< figure src="~/.emacs.d/latex/pBO906.svg" >}} <br/>
+        {{< figure src="/ox-hugo/pBO906.svg" >}} <br/>
         
         </div>
     
@@ -1626,7 +1626,7 @@ int main() {
 }
 ```
 
-{{< figure src="/Users/user/.emacs.d/tmp/W0Gav8F.svg" >}} <br/>
+{{< figure src="/ox-hugo/WeIpZa6.svg" >}} <br/>
 
 
 #### <span class="section-num">2.7.18</span> 2-3 tree {#2-3-tree}
@@ -2157,7 +2157,7 @@ balance 100 110 \\(\varnothing\\) recursively <br/>
 root: 40 \\(\varnothing\\) \\(\varnothing\\) <br/>
 100 110 \\(\varnothing\\) is good. <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/GXpyO4s.svg" >}} <br/>
+{{< figure src="/ox-hugo/ModNGVL.svg" >}} <br/>
 
 
 #### <span class="section-num">2.7.19</span> algorithms {#algorithms}
@@ -2253,13 +2253,13 @@ int main() {
 }
 ```
 
-{{< figure src="/Users/user/.emacs.d/tmp/iHRcakF.svg" >}} <br/>
+{{< figure src="/ox-hugo/TzGqehC.svg" >}} <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/K7xol9M.svg" >}} <br/>
+{{< figure src="/ox-hugo/oZWWLS5.svg" >}} <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/HuHyDjg.svg" >}} <br/>
+{{< figure src="/ox-hugo/pot364K.svg" >}} <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/mHFxNUG.svg" >}} <br/>
+{{< figure src="/ox-hugo/swUdtLQ.svg" >}} <br/>
 
 </div>
 
@@ -2347,7 +2347,7 @@ moving a [node](#node) up/down a heap to get it to its correct position <br/>
 ###### <span class="section-num">2.8.3.1.2</span> bubble down {#bubble-down}
 
 [bubbling](#bubbling) a node **downards** consists of recursively switching it with one of its children until it gets to its correct position <br/>
-this is a pseudocode for the : <br/>
+this is a pseudocode for the [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
 
 ```C
 l = left(i) // index of left child
@@ -2399,10 +2399,10 @@ the array should hold 2 values, `array-size`, which is the size of the array, an
 
 ##### <span class="section-num">2.8.3.5</span> construction of binary heap from array {#construction-of-binary-heap-from-array}
 
-given some random , e.g. `A=[10,20,30,40,50,70,35,60,80]`, we need to reorganize its elements such that it [represents a binary heap](#binary-heap-array-representation) <br/>
+given some random [array]({{< relref "20220728190531-array.md" >}}), e.g. `A=[10,20,30,40,50,70,35,60,80]`, we need to reorganize its elements such that it [represents a binary heap](#binary-heap-array-representation) <br/>
 to achieve this we apply [bubble down](#bubble-down) to the first half of the array **in reverse** (because the [leaf](#leaf) nodes need not be heapified as they already follow the heap property) <br/>
 e.g. for the given array we apply `bubble(A, i)` such that \\(i = 3 \to 0\\) <br/>
-this is the constructing in pseudocode: <br/>
+this is the constructing [algorithm]({{< relref "20220706211958-algorithm.md" >}}) in pseudocode: <br/>
 
 ```C
 Build-Heap(A)
@@ -2573,43 +2573,43 @@ int main() {
 
 inserting 0 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/n7hiwtF.svg" >}} <br/>
+{{< figure src="/ox-hugo/UG4wO7f.svg" >}} <br/>
 
 inserting 1 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/QtVmFa6.svg" >}} <br/>
+{{< figure src="/ox-hugo/KwSoQco.svg" >}} <br/>
 
 inserting 2 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/jwzE4yi.svg" >}} <br/>
+{{< figure src="/ox-hugo/HkFDSNG.svg" >}} <br/>
 
 inserting 3 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/AEcB127.svg" >}} <br/>
+{{< figure src="/ox-hugo/N0o6fGT.svg" >}} <br/>
 
 inserting 4 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/JQ3ZtDD.svg" >}} <br/>
+{{< figure src="/ox-hugo/uMAUG2r.svg" >}} <br/>
 
 inserting 5 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/5rVNF3x.svg" >}} <br/>
+{{< figure src="/ox-hugo/UrrpZJW.svg" >}} <br/>
 
 inserting 6 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/nGJCqTM.svg" >}} <br/>
+{{< figure src="/ox-hugo/MHMvZ3P.svg" >}} <br/>
 
 inserting 7 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/pF9ncoT.svg" >}} <br/>
+{{< figure src="/ox-hugo/WzGEce9.svg" >}} <br/>
 
 inserting 8 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/RxJZm6A.svg" >}} <br/>
+{{< figure src="/ox-hugo/pDalJ34.svg" >}} <br/>
 
 inserting 9 <br/>
 
-{{< figure src="/Users/user/.emacs.d/tmp/4aIn0SK.svg" >}} <br/>
+{{< figure src="/ox-hugo/c2Scgyl.svg" >}} <br/>
 
 
 ##### <span class="section-num">2.8.3.7</span> binary heap algorithms {#binary-heap-algorithms}
@@ -2619,9 +2619,9 @@ inserting 9 <br/>
 
 initial inefficient solution: <br/>
 
-{{< figure src="~/.emacs.d/latex/tHkzZWu.svg" >}} <br/>
+{{< figure src="/ox-hugo/tHkzZWu.svg" >}} <br/>
 
-we analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this : <br/>
+we analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
 \\[
   T(n) \leq C\_1 \cdot (\log n+\log(n-1) + \cdots + \log(n-(k-1))) \leq C\_1 \cdot (\log n + \log n + \cdots + \log n) = C\_1 \cdot k\log n
 \\] <br/>
@@ -2629,9 +2629,9 @@ which means that the time complexity is \\(T(n) = O(k\log n)\\) <br/>
 we cant arrive at [Big Theta]({{< relref "20221203185351-asymptotic_notations.md#big-theta" >}}) for this algorithm <br/>
 we suggest another algorithm that is more efficient: <br/>
 
-{{< figure src="~/.emacs.d/latex/7kcwMR4.svg" >}} <br/>
+{{< figure src="/ox-hugo/7kcwMR4.svg" >}} <br/>
 
-we analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this : <br/>
+we analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
 \\[
   T(n) \leq C\_1 \cdot (3\log2 + 3\log3 + \cdots + 3\log(k+1)) \leq C\_1 \cdot 3k\log(k+1) = \Theta(k\log k)
 \\] <br/>
@@ -2712,7 +2712,7 @@ this property implies that a binomial heap with \\(n\\) nodes consists of at mos
 
 a binomial heap of order 3: <br/>
 
-{{< figure src="~/.emacs.d/latex/mmqMhmW.svg" >}} <br/>
+{{< figure src="/ox-hugo/mmqMhmW.svg" >}} <br/>
 
 </div>
 
@@ -2722,13 +2722,13 @@ this is an example binomial heap that consists of 13 nodes and 3 binomial trees 
 
 <a id="figure--binomial-heap-three-orders"></a>
 
-{{< figure src="~/.emacs.d/latex/ejJXe51.svg" >}} <br/>
+{{< figure src="/ox-hugo/ejJXe51.svg" >}} <br/>
 
 </div>
 
 <div class="characteristic">
 
-a binomial tree of order \\(k\\) has \\(2^{k}\\) nodes and height \\(k\\). the name comes from the shape: a binomial tree of order k has \\(\binom{k}{d}\\) nodes at depth \\(d\\), a . because of its structure, a binomial tree of order \\(k\\) can be constructed from two trees of order \\(k-1\\) by attaching one of them as the leftmost child of the root of the other tree. This feature is central to the [merge](#union) operation of a binomial heap, which is its major advantage over other conventional heaps. <br/>
+a binomial tree of order \\(k\\) has \\(2^{k}\\) nodes and height \\(k\\). the name comes from the shape: a binomial tree of order k has \\(\binom{k}{d}\\) nodes at depth \\(d\\), a [binomial coefficient]({{< relref "discrete_maths2.md#binomial-coefficient" >}}). because of its structure, a binomial tree of order \\(k\\) can be constructed from two trees of order \\(k-1\\) by attaching one of them as the leftmost child of the root of the other tree. This feature is central to the [merge](#union) operation of a binomial heap, which is its major advantage over other conventional heaps. <br/>
 
 </div>
 
