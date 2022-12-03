@@ -2,7 +2,7 @@
 title = "data structures"
 author = ["mahmood"]
 description = "college course in data structures and algorithms"
-date = 2022-12-03T21:58:00+02:00
+date = 2022-12-03T22:03:00+02:00
 tags = ["math", "code", "computer-science"]
 draft = false
 +++
@@ -68,42 +68,7 @@ also its good to note that most of the code isnt optimized to hell, but it doesn
 </div>
 
 
-## <span class="section-num">1</span> properties of [floor]({{< relref "discrete_maths2.md#floor" >}}) {#properties-of-floor--discrete-maths2-dot-md}
-
-<div class="characteristic">
-
-for every 2 [normal]({{< relref "calculus2.md#normal" >}}) numbers \\(m,n\\) and every [real]({{< relref "calculus2.md#real" >}}) number \\(x\\) <br/>
-\\[
-  \ceil\*{\frac{\ceil\*{\frac{x}{m}}}{n}} = \ceil\*{\frac{x}{m \cdot n}} \qquad \floor\*{\frac{\floor\*{\frac{x}{m}}}{n}} = \floor\*{\frac{x}{m \cdot n}}
-\\] <br/>
-
-<div class="my_example">
-
-\\[
-  \ceil\*{\frac{\ceil\*{\frac{x}{2^i}}}{2}} = \ceil\*{\frac{x}{2^{i+1}}} \qquad \floor\*{\frac{\floor\*{\frac{x}{2^i}}}{2}} = \floor\*{\frac{x}{2^{i+1}}}
-\\] <br/>
-
-</div>
-
-</div>
-
-<div class="characteristic">
-
-the following is true for every normal number \\(n\\) and any number \\(x\\) <br/>
-
-\begin{gather}
-  \floor\*{x}+n = \floor\*{x+n} \qquad \ceil\*{x}+n=\ceil\*{x+n}\\\\
-  n-\floor\*{x} = \ceil\*{n-x} \qquad n-\ceil\*{x} = \floor\*{n-x}\\\\
-  \floor\*{x} \geq \ceil\*{x}-1 \qquad \ceil\*{x} \leq \floor\*{x}+1\\\\
-  \floor\*{x} > x-1 \qquad \ceil\*{x} < x+1\\\\
-  \floor\*{x} \leq x \qquad \ceil\*{x} \geq x\\\\
-  \floor\*{x} = n \iff n \leq x < n+1 \qquad \ceil\*{x} = n \iff n-1 < x \leq n
-\end{gather}
-
-</div>
-
-
-## <span class="section-num">2</span> data structure {#data-structure}
+## <span class="section-num">1</span> data structure {#data-structure}
 
 <div class="definition">
 
@@ -121,7 +86,7 @@ for example, if `x` is a person, `key(x)` could be the person's ID, `value(x)` w
 </div>
 
 
-### <span class="section-num">2.1</span> KeyValue {#keyvalue}
+### <span class="section-num">1.1</span> KeyValue {#keyvalue}
 
 <a id="code-snippet--KeyValue"></a>
 ```C++
@@ -158,7 +123,7 @@ public:
 ```
 
 
-### <span class="section-num">2.2</span> abstract data type {#abstract-data-type}
+### <span class="section-num">1.2</span> abstract data type {#abstract-data-type}
 
 <div class="definition">
 
@@ -267,7 +232,7 @@ true
 </div>
 
 
-### <span class="section-num">2.3</span> concrete data type {#concrete-data-type}
+### <span class="section-num">1.3</span> concrete data type {#concrete-data-type}
 
 <div class="definition">
 
@@ -277,7 +242,7 @@ i.e. it is the actual [data structure](#data-structure) we use in programming <b
 </div>
 
 
-### <span class="section-num">2.4</span> list {#list}
+### <span class="section-num">1.4</span> list {#list}
 
 <div class="definition">
 
@@ -286,7 +251,7 @@ a **list** is an [abstract data type](#abstract-data-type) that is dynamically s
 </div>
 
 
-#### <span class="section-num">2.4.1</span> linked list {#linked-list}
+#### <span class="section-num">1.4.1</span> linked list {#linked-list}
 
 <div class="definition">
 
@@ -295,7 +260,7 @@ a **linked list** is a [concrete data type](#concrete-data-type) that is an impl
 </div>
 
 
-##### <span class="section-num">2.4.1.1</span> characteristics {#characteristics}
+##### <span class="section-num">1.4.1.1</span> characteristics {#characteristics}
 
 -   is the list **sorted**? the nodes are sorted by their `key` (usually in an ascending order) <br/>
 -   is the list **doubly/singly linked**? in a doubly linked list each node points to the next and previous node whereas in a singly linked list a node only points to the next <br/>
@@ -303,7 +268,7 @@ a **linked list** is a [concrete data type](#concrete-data-type) that is an impl
 -   is the list **circular**? in a circular linked list the last node points to the first whereas in a non-circular linked list it points to NULL (nothing) <br/>
 
 
-##### <span class="section-num">2.4.1.2</span> functions {#functions}
+##### <span class="section-num">1.4.1.2</span> functions {#functions}
 
 -   `insert(x)`: inserts `x` <br/>
 -   `search(k)`: returns the node whose key is `k` <br/>
@@ -311,10 +276,10 @@ a **linked list** is a [concrete data type](#concrete-data-type) that is an impl
 -   `delete(x)`: given the node `x`, removes it from the list <br/>
 
 
-##### <span class="section-num">2.4.1.3</span> implementation (c++) {#implementation--c-plus-plus}
+##### <span class="section-num">1.4.1.3</span> implementation (c++) {#implementation--c-plus-plus}
 
 
-###### <span class="section-num">2.4.1.3.1</span> Node {#node}
+###### <span class="section-num">1.4.1.3.1</span> Node {#node}
 
 <a id="code-snippet--Node"></a>
 ```C++
@@ -348,7 +313,7 @@ public:
 ```
 
 
-###### <span class="section-num">2.4.1.3.2</span> DoublyNode {#doublynode}
+###### <span class="section-num">1.4.1.3.2</span> DoublyNode {#doublynode}
 
 <a id="code-snippet--DoublyNode"></a>
 ```C++
@@ -398,7 +363,7 @@ public:
 ```
 
 
-###### <span class="section-num">2.4.1.3.3</span> LinkedList {#linkedlist}
+###### <span class="section-num">1.4.1.3.3</span> LinkedList {#linkedlist}
 
 <a id="code-snippet--LinkedList"></a>
 ```C++
@@ -462,28 +427,28 @@ public:
 ```
 
 
-###### <span class="section-num">2.4.1.3.4</span> DoublyLinkedList {#doublylinkedlist}
+###### <span class="section-num">1.4.1.3.4</span> DoublyLinkedList {#doublylinkedlist}
 
 ```C++
 to be implemented
 ```
 
 
-###### <span class="section-num">2.4.1.3.5</span> LinkedListWithTail {#linkedlistwithtail}
+###### <span class="section-num">1.4.1.3.5</span> LinkedListWithTail {#linkedlistwithtail}
 
 ```C++
 to be implemented
 ```
 
 
-###### <span class="section-num">2.4.1.3.6</span> CircularLinkedList {#circularlinkedlist}
+###### <span class="section-num">1.4.1.3.6</span> CircularLinkedList {#circularlinkedlist}
 
 ```C++
 to be implemented
 ```
 
 
-#### <span class="section-num">2.4.2</span> array list {#array-list}
+#### <span class="section-num">1.4.2</span> array list {#array-list}
 
 <div class="definition">
 
@@ -504,7 +469,7 @@ an array list contains a fixed-size array initialized to a constant length, when
 </div>
 
 
-##### <span class="section-num">2.4.2.1</span> ArrayList {#arraylist}
+##### <span class="section-num">1.4.2.1</span> ArrayList {#arraylist}
 
 <a id="code-snippet--ArrayList"></a>
 ```C++
@@ -590,7 +555,7 @@ public:
 ```
 
 
-### <span class="section-num">2.5</span> stack {#stack}
+### <span class="section-num">1.5</span> stack {#stack}
 
 <div class="definition">
 
@@ -599,10 +564,10 @@ a **stack** is an [abstract data type](#abstract-data-type) <br/>
 </div>
 
 
-#### <span class="section-num">2.5.1</span> LIFO {#lifo}
+#### <span class="section-num">1.5.1</span> LIFO {#lifo}
 
 
-### <span class="section-num">2.6</span> queue {#queue}
+### <span class="section-num">1.6</span> queue {#queue}
 
 <div class="definition">
 
@@ -611,7 +576,7 @@ a **queue** is a linear [abstract data type](#abstract-data-type) in which the o
 </div>
 
 
-#### <span class="section-num">2.6.1</span> FIFO {#fifo}
+#### <span class="section-num">1.6.1</span> FIFO {#fifo}
 
 <div class="definition">
 
@@ -620,7 +585,7 @@ a **queue** is a linear [abstract data type](#abstract-data-type) in which the o
 </div>
 
 
-#### <span class="section-num">2.6.2</span> Circular Queue {#circular-queue}
+#### <span class="section-num">1.6.2</span> Circular Queue {#circular-queue}
 
 <div class="definition">
 
@@ -629,12 +594,12 @@ a **Circular Queue** is a [Queue](#queue) in which the last element is connected
 </div>
 
 
-#### <span class="section-num">2.6.3</span> priority queue {#priority-queue}
+#### <span class="section-num">1.6.3</span> priority queue {#priority-queue}
 
 a **priority queue** is an [abstract data type]({{< relref "data_structures.md#abstract-data-type" >}}) similar to a regular [queue](#queue) or [stack](#stack) in which each element additionally has a priority associated with it. in a priority queue, an element with high priority is served before an element with low priority <br/>
 
 
-### <span class="section-num">2.7</span> tree {#tree}
+### <span class="section-num">1.7</span> tree {#tree}
 
 <div class="definition">
 
@@ -643,7 +608,7 @@ a **tree** is an [abstract data type](#abstract-data-type) which stores data in 
 </div>
 
 
-#### <span class="section-num">2.7.1</span> node {#node}
+#### <span class="section-num">1.7.1</span> node {#node}
 
 trees store data as **nodes**, meaning each item in a tree is called a node <br/>
 each node `x` has the following fields <br/>
@@ -657,7 +622,7 @@ each node `x` has the following fields <br/>
 every node in a [binary tree](#binary-tree) has from 0 to 2 children <br/>
 
 
-##### <span class="section-num">2.7.1.1</span> height {#height}
+##### <span class="section-num">1.7.1.1</span> height {#height}
 
 <div class="definition">
 
@@ -666,7 +631,7 @@ the **height** of a [node](#node) `x` is defined as the [height of subtree](#hei
 </div>
 
 
-##### <span class="section-num">2.7.1.2</span> balance factor {#balance-factor}
+##### <span class="section-num">1.7.1.2</span> balance factor {#balance-factor}
 
 the **balance factor** of a [node](#node) `x`, denoted by `balance(x)` or `BF(x)`, is defined as the height of the [subtree](#subtree) of the left child of `x`, denoted by \\(T\_{\text{left}(x)}\\) minus the height of the subtree of the right child of `x` denoted by \\(T\_{\text{right}(x)}\\), in short: <br/>
 \\[
@@ -677,7 +642,7 @@ see for example this tree, the balance factor of each node is written above it <
 {{< figure src="/ox-hugo/gXx4ZR.svg" >}} <br/>
 
 
-#### <span class="section-num">2.7.2</span> height {#height}
+#### <span class="section-num">1.7.2</span> height {#height}
 
 <div class="definition">
 
@@ -686,7 +651,7 @@ the **height** of a tree is the number of the [node](#node)s in the longest path
 </div>
 
 
-#### <span class="section-num">2.7.3</span> level {#level}
+#### <span class="section-num">1.7.3</span> level {#level}
 
 <div class="definition">
 
@@ -695,7 +660,7 @@ the **level** of a row in the tree is its distance from the root whose level is 
 </div>
 
 
-#### <span class="section-num">2.7.4</span> root {#root}
+#### <span class="section-num">1.7.4</span> root {#root}
 
 <div class="definition">
 
@@ -704,7 +669,7 @@ the tree itself `T` (not for every node) contains a pointer `root(T)` that point
 </div>
 
 
-#### <span class="section-num">2.7.5</span> leaf {#leaf}
+#### <span class="section-num">1.7.5</span> leaf {#leaf}
 
 <div class="definition">
 
@@ -713,7 +678,7 @@ a [node](#node) that doesnt have children is called a **leaf** <br/>
 </div>
 
 
-#### <span class="section-num">2.7.6</span> internal node {#internal-node}
+#### <span class="section-num">1.7.6</span> internal node {#internal-node}
 
 <div class="definition">
 
@@ -722,7 +687,7 @@ a [node](#node) that has atleast one child is called an **internal node** <br/>
 </div>
 
 
-#### <span class="section-num">2.7.7</span> sibling {#sibling}
+#### <span class="section-num">1.7.7</span> sibling {#sibling}
 
 <div class="definition">
 
@@ -731,7 +696,7 @@ a [node](#node) that has atleast one child is called an **internal node** <br/>
 </div>
 
 
-#### <span class="section-num">2.7.8</span> ancestor {#ancestor}
+#### <span class="section-num">1.7.8</span> ancestor {#ancestor}
 
 <div class="definition">
 
@@ -740,7 +705,7 @@ an **ancestor** of a given [node](#node) is a node that is at an upper level of 
 </div>
 
 
-#### <span class="section-num">2.7.9</span> descendant {#descendant}
+#### <span class="section-num">1.7.9</span> descendant {#descendant}
 
 <div class="definition">
 
@@ -749,7 +714,7 @@ a **descendant** of a given [node](#node) is a node that is at a lower level of 
 </div>
 
 
-#### <span class="section-num">2.7.10</span> subtree {#subtree}
+#### <span class="section-num">1.7.10</span> subtree {#subtree}
 
 for some [binary tree](#binary-tree) `T` and a node `x` of said tree we denote \\(T\_x\\) as the **subtree** whose [root](#root) is `x`, and the left **subtree** of `x` is the tree whose root is the left child of `x` denoted by \\(T\_{\text{left}(x)}\\) and the right subtree of `x` is the tree whose root is the right child of `x` denoted by \\(T\_{\text{right}(x)}\\) <br/>
 
@@ -758,7 +723,7 @@ for some [binary tree](#binary-tree) `T` and a node `x` of said tree we denote \
 the height of this tree is 4 <br/>
 
 
-#### <span class="section-num">2.7.11</span> complete tree {#complete-tree}
+#### <span class="section-num">1.7.11</span> complete tree {#complete-tree}
 
 <div class="definition">
 
@@ -767,7 +732,7 @@ a **complete** [binary tree](#binary-tree) is a binary tree in which every [node
 </div>
 
 
-#### <span class="section-num">2.7.12</span> almost complete tree {#almost-complete-tree}
+#### <span class="section-num">1.7.12</span> almost complete tree {#almost-complete-tree}
 
 <div class="definition">
 
@@ -812,21 +777,21 @@ the number of nodes at height \\(i\\) is \\(\ceil\*{\frac{n}{2i+1}}\\) <br/>
 </div>
 
 
-#### <span class="section-num">2.7.13</span> breadth-first search {#breadth-first-search}
+#### <span class="section-num">1.7.13</span> breadth-first search {#breadth-first-search}
 
 **breadth-first search** or **BFS** for short, explores each level before moving onto the next one <br/>
 extra memory, usually a [queue](#queue), is needed to keep track of the child nodes that were encountered but not yet explored. <br/>
 ![](/ox-hugo/Animated_BFS.gif) <br/>
 
 
-#### <span class="section-num">2.7.14</span> depth-first search {#depth-first-search}
+#### <span class="section-num">1.7.14</span> depth-first search {#depth-first-search}
 
 **depth-first search** or **DFS** for short, consists of exploring branches as far as possible before [backtracking](#backtracking) and exploring branches of other nodes <br/>
 this is the algorithm we'll be using because its simpler <br/>
 ![](/ox-hugo/bfs_dfs.gif) <br/>
 
 
-##### <span class="section-num">2.7.14.1</span> inorder traversal {#inorder-traversal}
+##### <span class="section-num">1.7.14.1</span> inorder traversal {#inorder-traversal}
 
 left, parent, right <br/>
 
@@ -844,7 +809,7 @@ note that before printing a child will always call `inorder(left-child)`, so the
 </div>
 
 
-##### <span class="section-num">2.7.14.2</span> preorder traversal {#preorder-traversal}
+##### <span class="section-num">1.7.14.2</span> preorder traversal {#preorder-traversal}
 
 parent, left, right <br/>
 
@@ -856,7 +821,7 @@ Algorithm preorder(tree)
 ```
 
 
-##### <span class="section-num">2.7.14.3</span> postorder traversal {#postorder-traversal}
+##### <span class="section-num">1.7.14.3</span> postorder traversal {#postorder-traversal}
 
 left, right, parent <br/>
 
@@ -868,7 +833,7 @@ Algorithm postorder(tree)
 ```
 
 
-#### <span class="section-num">2.7.15</span> binary tree {#binary-tree}
+#### <span class="section-num">1.7.15</span> binary tree {#binary-tree}
 
 <div class="definition">
 
@@ -877,7 +842,7 @@ a **binary tree** is a [concrete data type](#concrete-data-type) that is an impl
 </div>
 
 
-##### <span class="section-num">2.7.15.1</span> BinaryTreeNode {#binarytreenode}
+##### <span class="section-num">1.7.15.1</span> BinaryTreeNode {#binarytreenode}
 
 <a id="code-snippet--BinaryTreeNode"></a>
 ```C++
@@ -1099,7 +1064,7 @@ public:
 ```
 
 
-##### <span class="section-num">2.7.15.2</span> BinaryTree {#binarytree}
+##### <span class="section-num">1.7.15.2</span> BinaryTree {#binarytree}
 
 <a id="code-snippet--BinaryTree"></a>
 ```C++
@@ -1204,7 +1169,7 @@ public:
 ```
 
 
-##### <span class="section-num">2.7.15.3</span> algorithms {#algorithms}
+##### <span class="section-num">1.7.15.3</span> algorithms {#algorithms}
 
 <div class="question">
 
@@ -1250,7 +1215,7 @@ this code runs in \\(O(2n) \sim O(n)\\) time <br/>
 </div>
 
 
-#### <span class="section-num">2.7.16</span> binary search tree {#binary-search-tree}
+#### <span class="section-num">1.7.16</span> binary search tree {#binary-search-tree}
 
 a **binary search tree** is a [binary tree](#binary-tree) that has the following restrictions: <br/>
 
@@ -1262,12 +1227,12 @@ for example the following tree is a binary search tree: <br/>
 {{< figure src="/ox-hugo/a0JkT1.svg" >}} <br/>
 
 
-##### <span class="section-num">2.7.16.1</span> insertion {#insertion}
+##### <span class="section-num">1.7.16.1</span> insertion {#insertion}
 
 a new key is always inserted as a [leaf](#leaf). we start from the [root](#root), making our way downwards by comparing the new key to the key of the current node to decide which child to move to on each iteration, until we hit a leaf node, then we add the new node as its child <br/>
 
 
-##### <span class="section-num">2.7.16.2</span> BinarySearchTree {#binarysearchtree}
+##### <span class="section-num">1.7.16.2</span> BinarySearchTree {#binarysearchtree}
 
 <a id="code-snippet--BinarySearchTree"></a>
 ```C++
@@ -1391,7 +1356,7 @@ the balance factor of the root is: -1 <br/>
 {{< figure src="/ox-hugo/DimK7tW.svg" >}} <br/>
 
 
-#### <span class="section-num">2.7.17</span> AVL tree {#avl-tree}
+#### <span class="section-num">1.7.17</span> AVL tree {#avl-tree}
 
 an **AVL tree** is a [binary search tree](#binary-search-tree) in which every node `x` has a [balance factor](#balance-factor) of \\(0,1,-1\\), meaning: <br/>
 \\[
@@ -1411,7 +1376,7 @@ let `T` be an AVL tree with `n` nodes and height \\(h\\), then \\(h = \Theta(\lo
 </div>
 
 
-##### <span class="section-num">2.7.17.1</span> minimal form {#minimal-form}
+##### <span class="section-num">1.7.17.1</span> minimal form {#minimal-form}
 
 <div class="definition">
 
@@ -1476,7 +1441,7 @@ return [(i,find(i)) for i in range(1,15)]
 </div>
 
 
-##### <span class="section-num">2.7.17.2</span> problematic node {#problematic-node}
+##### <span class="section-num">1.7.17.2</span> problematic node {#problematic-node}
 
 <div class="definition">
 
@@ -1485,18 +1450,18 @@ a **problematic node** is a [node](#node) whose [balance factor](#balance-factor
 </div>
 
 
-##### <span class="section-num">2.7.17.3</span> insertion {#insertion}
+##### <span class="section-num">1.7.17.3</span> insertion {#insertion}
 
 the process of inserting a node to an AVL tree starts with inserting it using the same insertion method we used for a [binary search tree](#binary-search-tree), after said insertion we start going up the tree starting at the new node we just inserted and updating the [balance factor](#balance-factor) for every node we encounter as we go <br/>
 if we arrive at [problematic node](#problematic-node), we apply the proper [rotation](#rotation) to [rebalance](#rebalancing) the tree <br/>
 
 
-##### <span class="section-num">2.7.17.4</span> rebalancing {#rebalancing}
+##### <span class="section-num">1.7.17.4</span> rebalancing {#rebalancing}
 
 during a modifying operation of a [binary tree](#binary-tree), a node might become [problematic](#problematic-node), to restore balance to the tree so that it remains an [AVL tree](#avl-tree) we use [rotation](#rotation)s <br/>
 
 
-###### <span class="section-num">2.7.17.4.1</span> rotation {#rotation}
+###### <span class="section-num">1.7.17.4.1</span> rotation {#rotation}
 
 to determine which type of **rotation** we need to use to **rebalance** a given tree, we go 2 steps from the [problematic node](#problematic-node) towards the newly inserted node which gives us the following 4 cases: <br/>
 
@@ -1572,7 +1537,7 @@ to determine which type of **rotation** we need to use to **rebalance** a given 
         this method consists of 2 steps, first is applying an [LL](#left-left-rotation) rotation over the right child of the [problematic node](#problematic-node), then applying a [RR](#right-right-rotation) rotation to the [problematic node](#problematic-node) <br/>
 
 
-##### <span class="section-num">2.7.17.5</span> AVLTree {#avltree}
+##### <span class="section-num">1.7.17.5</span> AVLTree {#avltree}
 
 <a id="code-snippet--AVLTree"></a>
 ```C++
@@ -1629,7 +1594,7 @@ int main() {
 {{< figure src="/ox-hugo/WeIpZa6.svg" >}} <br/>
 
 
-#### <span class="section-num">2.7.18</span> 2-3 tree {#2-3-tree}
+#### <span class="section-num">1.7.18</span> 2-3 tree {#2-3-tree}
 
 a **2–3 tree** is a [tree](#tree) [concrete data type](#concrete-data-type) where every [internal node](#internal-node) is either a [2-node](#2-node) or [3-node](#3-node) <br/>
 an exceptional case is when the tree contains only one element in which case the only node in the tree (which is the [root](#root)) holds only one element <br/>
@@ -1653,7 +1618,7 @@ keys are always ordered from left to right in ascending order <br/>
 </div>
 
 
-##### <span class="section-num">2.7.18.1</span> 2-node {#2-node}
+##### <span class="section-num">1.7.18.1</span> 2-node {#2-node}
 
 <div class="definition">
 
@@ -1662,7 +1627,7 @@ we say that an [internal node](#internal-node) is a **2-node** if it holds one v
 </div>
 
 
-##### <span class="section-num">2.7.18.2</span> 3-node {#3-node}
+##### <span class="section-num">1.7.18.2</span> 3-node {#3-node}
 
 <div class="definition">
 
@@ -1671,7 +1636,7 @@ we say that an [internal node](#internal-node) is a **3-node** if it holds two v
 </div>
 
 
-##### <span class="section-num">2.7.18.3</span> insertion {#insertion}
+##### <span class="section-num">1.7.18.3</span> insertion {#insertion}
 
 an important property to keep in mind is that insertion **always** occurs in one of the [leaves](#leaf) <br/>
 
@@ -1679,7 +1644,7 @@ an important property to keep in mind is that insertion **always** occurs in one
 <&opengenus_twothree_tree> <br/>
 
 
-##### <span class="section-num">2.7.18.4</span> TwoThreeNode {#twothreenode}
+##### <span class="section-num">1.7.18.4</span> TwoThreeNode {#twothreenode}
 
 <a id="code-snippet--TwoThreeNode"></a>
 ```C++
@@ -1939,7 +1904,7 @@ public:
 ```
 
 
-##### <span class="section-num">2.7.18.5</span> TwoThreeTree {#twothreetree}
+##### <span class="section-num">1.7.18.5</span> TwoThreeTree {#twothreetree}
 
 <a id="code-snippet--TwoThreeTree"></a>
 ```C++
@@ -2160,15 +2125,15 @@ root: 40 \\(\varnothing\\) \\(\varnothing\\) <br/>
 {{< figure src="/ox-hugo/ModNGVL.svg" >}} <br/>
 
 
-#### <span class="section-num">2.7.19</span> algorithms {#algorithms}
+#### <span class="section-num">1.7.19</span> algorithms {#algorithms}
 
 
-##### <span class="section-num">2.7.19.1</span> backtracking {#backtracking}
+##### <span class="section-num">1.7.19.1</span> backtracking {#backtracking}
 
 **Backtracking** is an algorithm that incrementally builds candidates to the solutions, and abandons a candidate as soon as it determines that the candidate cannot possibly be completed to a valid solution, see <https://en.wikipedia.org/wiki/Backtracking> <br/>
 
 
-##### <span class="section-num">2.7.19.2</span> pattern {#pattern}
+##### <span class="section-num">1.7.19.2</span> pattern {#pattern}
 
 this includes the [backtracking](#backtracking) algorithm <br/>
 after solving a few problems i saw a pattern that makes it much easier to solve recursion problems related to binary trees <br/>
@@ -2187,7 +2152,7 @@ note that its **important** that we gather info as we go on every node we visit 
 words arent the best way to put it so hopefully ill provide a better visual explanation in the future <br/>
 
 
-##### <span class="section-num">2.7.19.3</span> reverse inorder {#reverse-inorder}
+##### <span class="section-num">1.7.19.3</span> reverse inorder {#reverse-inorder}
 
 given a [binary tree](#binary-tree), write a function to reverse its [inorder traversal](#inorder-traversal) output <br/>
 this algorithm runs in `O(n)` time <br/>
@@ -2228,7 +2193,7 @@ int main() {
 | 20 | 15 | 11 | 7 | 6 | 5 | 4 | 3  | 2  | 1  |
 
 
-#### <span class="section-num">2.7.20</span> other practice questions {#other-practice-questions}
+#### <span class="section-num">1.7.20</span> other practice questions {#other-practice-questions}
 
 <div class="question">
 
@@ -2277,7 +2242,7 @@ but a better solution would be to go through the array once and find the minimum
 </div>
 
 
-### <span class="section-num">2.8</span> heap {#heap}
+### <span class="section-num">1.8</span> heap {#heap}
 
 <div class="definition">
 
@@ -2286,7 +2251,7 @@ a **Heap** is an [abstract data type](#abstract-data-type) <br/>
 </div>
 
 
-#### <span class="section-num">2.8.1</span> min heap {#min-heap}
+#### <span class="section-num">1.8.1</span> min heap {#min-heap}
 
 <div class="definition">
 
@@ -2295,7 +2260,7 @@ a **min heap** is a [heap](#heap) in which each [node](#node) is less than or eq
 </div>
 
 
-#### <span class="section-num">2.8.2</span> max heap {#max-heap}
+#### <span class="section-num">1.8.2</span> max heap {#max-heap}
 
 <div class="definition">
 
@@ -2306,7 +2271,7 @@ a **max heap** is a [heap](#heap) in which each node is bigger than or equal to 
 this is the implementation we'll be using <br/>
 
 
-#### <span class="section-num">2.8.3</span> binary heap {#binary-heap}
+#### <span class="section-num">1.8.3</span> binary heap {#binary-heap}
 
 <div class="definition">
 
@@ -2330,7 +2295,7 @@ in a heap the keys arent necessarily sorted like in [binary search tree](#binary
 </div>
 
 
-##### <span class="section-num">2.8.3.1</span> bubbling {#bubbling}
+##### <span class="section-num">1.8.3.1</span> bubbling {#bubbling}
 
 <div class="definition">
 
@@ -2339,12 +2304,12 @@ moving a [node](#node) up/down a heap to get it to its correct position <br/>
 </div>
 
 
-###### <span class="section-num">2.8.3.1.1</span> bubble up {#bubble-up}
+###### <span class="section-num">1.8.3.1.1</span> bubble up {#bubble-up}
 
 [bubbling](#bubbling) a node **upwards** consists of recursively switching it with its parent until its parent is bigger/smaller than it (depending on whether we're using a [min heap](#min-heap) or a [max heap](#max-heap)) <br/>
 
 
-###### <span class="section-num">2.8.3.1.2</span> bubble down {#bubble-down}
+###### <span class="section-num">1.8.3.1.2</span> bubble down {#bubble-down}
 
 [bubbling](#bubbling) a node **downards** consists of recursively switching it with one of its children until it gets to its correct position <br/>
 this is a pseudocode for the [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
@@ -2366,18 +2331,18 @@ if largest != i
 [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) is \\(O(\log n)\\) <br/>
 
 
-##### <span class="section-num">2.8.3.2</span> insertion {#insertion}
+##### <span class="section-num">1.8.3.2</span> insertion {#insertion}
 
 inserting a new [node](#node) to the heap consists of adding it as a [leaf](#leaf) such that the heap remains [almost complete](#almost-complete-tree) and [bubbling up](#bubble-up) the newly added node so that the keys in the tree remain sorted <br/>
 if the heap is in [array representation](#binary-heap-array-representation), we insert the new node to the end of the array and heapify it upwards (bubble up) <br/>
 
 
-##### <span class="section-num">2.8.3.3</span> deletion {#deletion}
+##### <span class="section-num">1.8.3.3</span> deletion {#deletion}
 
 deletion of a node consists of replacing the rightmost leaf with it and bubble it [downwards](#bubble-down) if its smaller than one of its children or [upwards](#bubble-up) if its bigger than its parent <br/>
 
 
-##### <span class="section-num">2.8.3.4</span> binary heap array representation {#binary-heap-array-representation}
+##### <span class="section-num">1.8.3.4</span> binary heap array representation {#binary-heap-array-representation}
 
 <div class="note">
 
@@ -2397,7 +2362,7 @@ in other words, the nodes are taken from the root to the last level from left to
 the array should hold 2 values, `array-size`, which is the size of the array, and `heap-size`, which is the number of elements of the heap in the array <br/>
 
 
-##### <span class="section-num">2.8.3.5</span> construction of binary heap from array {#construction-of-binary-heap-from-array}
+##### <span class="section-num">1.8.3.5</span> construction of binary heap from array {#construction-of-binary-heap-from-array}
 
 given some random [array]({{< relref "20220728190531-array.md" >}}), e.g. `A=[10,20,30,40,50,70,35,60,80]`, we need to reorganize its elements such that it [represents a binary heap](#binary-heap-array-representation) <br/>
 to achieve this we apply [bubble down](#bubble-down) to the first half of the array **in reverse** (because the [leaf](#leaf) nodes need not be heapified as they already follow the heap property) <br/>
@@ -2433,7 +2398,7 @@ to be continued <br/>
 </div>
 
 
-##### <span class="section-num">2.8.3.6</span> BinaryHeap {#binaryheap}
+##### <span class="section-num">1.8.3.6</span> BinaryHeap {#binaryheap}
 
 <div class="note">
 
@@ -2612,10 +2577,10 @@ inserting 9 <br/>
 {{< figure src="/ox-hugo/c2Scgyl.svg" >}} <br/>
 
 
-##### <span class="section-num">2.8.3.7</span> binary heap algorithms {#binary-heap-algorithms}
+##### <span class="section-num">1.8.3.7</span> binary heap algorithms {#binary-heap-algorithms}
 
 
-###### <span class="section-num">2.8.3.7.1</span> biggest k nodes {#biggest-k-nodes}
+###### <span class="section-num">1.8.3.7.1</span> biggest k nodes {#biggest-k-nodes}
 
 initial inefficient solution: <br/>
 
@@ -2643,7 +2608,7 @@ which implies \\(T(n) = \Omega(k\log k)\\) <br/>
 and therefore \\(T(n) = \Theta(k\log k)\\) <br/>
 
 
-###### <span class="section-num">2.8.3.7.2</span> check if array represents a binary heap {#check-if-array-represents-a-binary-heap}
+###### <span class="section-num">1.8.3.7.2</span> check if array represents a binary heap {#check-if-array-represents-a-binary-heap}
 
 ```C++
 #include <iostream>
@@ -2668,7 +2633,7 @@ int main() {
 ```
 
 
-#### <span class="section-num">2.8.4</span> binomial heap {#binomial-heap}
+#### <span class="section-num">1.8.4</span> binomial heap {#binomial-heap}
 
 some info taken from <http://staff.ustc.edu.cn/~csli/graduate/algorithms/book6/chap20.htm> <br/>
 
@@ -2685,7 +2650,7 @@ a **binomial heap** is a [concrete data type](#concrete-data-type) that implemen
 </div>
 
 
-##### <span class="section-num">2.8.4.1</span> binomial tree {#binomial-tree}
+##### <span class="section-num">1.8.4.1</span> binomial tree {#binomial-tree}
 
 <div class="definition">
 
@@ -2735,7 +2700,7 @@ a binomial tree of order \\(k\\) has \\(2^{k}\\) nodes and height \\(k\\). the n
 </div>
 
 
-##### <span class="section-num">2.8.4.2</span> implementation {#implementation}
+##### <span class="section-num">1.8.4.2</span> implementation {#implementation}
 
 because no operation requires random access to the root nodes of the binomial trees, the roots of the binomial trees can be stored in a [linked list](#linked-list), ordered by increasing order of the tree. because the number of children for each node is variable, it does not work well for each node to have separate links to each of its children, as would be common in a [binary tree](#binary-tree); instead, it is possible to implement this tree using links from each node to its highest-order child in the tree, and to its sibling of the next smaller order than it. these sibling pointers can be interpreted as the next pointers in a linked list of the children of each node, but with the opposite order from the linked list of roots: from largest to smallest order, rather than vice versa. this representation allows two trees of the same order to be linked together, making a tree of the next larger order, in constant time. <br/>
 each node `x` has a key field and contains pointers `parent(x)` to its parent, `child(x)` to its leftmost child, and `sibling(x)` to the sibling of x immediately to its right. if node x is a root, then `parent(x) = nil`. if node x has no children, then `child(x) = nil`, and if x is the rightmost child of its parent, then `sibling(x) = nil`. each node x also contains the field `degree(x)`, which is the number of children of x. <br/>
@@ -2743,12 +2708,12 @@ the roots of the binomial trees within a binomial heap are organized in a linked
 a given binomial heap `h` is accessed by the field `head(h)`, which is simply a pointer to the first root in the root list of h. if binomial heap H has no elements, then `head[h] = nil`. <br/>
 
 
-###### <span class="section-num">2.8.4.2.1</span> create {#create}
+###### <span class="section-num">1.8.4.2.1</span> create {#create}
 
 to make an empty binomial heap, the `MAKE-BINOMIAL-HEAP` procedure simply allocates and returns an object `h`, where `head[h] = nil`. the running time is \\(O(1)\\). <br/>
 
 
-###### <span class="section-num">2.8.4.2.2</span> union {#union}
+###### <span class="section-num">1.8.4.2.2</span> union {#union}
 
 the operation of uniting two binomial heaps is used as a subroutine by most of the remaining operations. merging of binomial trees is done by comparing the keys at the roots of two trees, and the root node with the larger key will become the child of the root with the smaller key. the time complexity for finding a union is \\(O(\log n)\\). <br/>
 to perform the union of two binomial heaps, first we **merge** the heaps into one, such that the trees in the resulting heap would be in monotonically ascending order, then we traverse through the roots of the binomial trees, we consider the following cases where `x` denotes the current root: <br/>
@@ -2762,16 +2727,16 @@ because each binomial tree in a binomial heap corresponds to a bit in the binary
 each binomial tree's traversal during merge only involves roots, hence making the time taken at the biggest order \\(\log\_2n\\) and therefore the running time is \\(O(\log n)\\). <br/>
 
 
-###### <span class="section-num">2.8.4.2.3</span> insert {#insert}
+###### <span class="section-num">1.8.4.2.3</span> insert {#insert}
 
 inserting a new element to a heap can be done by creating a new heap containing only this element and then [merging](#union) it with the original heap. because of the merge, a single insertion takes time \\(O(\log n)\\). however, this can be sped up using a merge procedure that shortcuts the merge after it reaches a point where only one of the merged heaps has trees of larger order. with this speedup, across a series of \\(k\\) consecutive insertions, the total time for the insertions is \\(O(k+\log n)\\). another way of stating this is that (after logarithmic overhead for the first insertion in a sequence) each successive insert has an amortized time of \\(O(1)\\) (i.e. constant time) per insertion. <br/>
 a variant of the binomial heap, the skew binomial heap, achieves constant worst case insertion time by using forests whose tree sizes are based on the skew binary number system rather than on the binary number system. <br/>
 
 
-###### <span class="section-num">2.8.4.2.4</span> delete {#delete}
+###### <span class="section-num">1.8.4.2.4</span> delete {#delete}
 
 
-##### <span class="section-num">2.8.4.3</span> BinomialHeapNode {#binomialheapnode}
+##### <span class="section-num">1.8.4.3</span> BinomialHeapNode {#binomialheapnode}
 
 <a id="code-snippet--BinomialHeapNode"></a>
 ```C++
@@ -2873,7 +2838,7 @@ public:
 ```
 
 
-##### <span class="section-num">2.8.4.4</span> BinomialHeap {#binomialheap}
+##### <span class="section-num">1.8.4.4</span> BinomialHeap {#binomialheap}
 
 <a id="code-snippet--BinomialHeap"></a>
 ```C++
@@ -3095,7 +3060,7 @@ inserting 13 <br/>
 inserting 14 <br/>
 
 
-### <span class="section-num">2.9</span> hash table {#hash-table}
+### <span class="section-num">1.9</span> hash table {#hash-table}
 
 <div class="definition">
 
@@ -3109,7 +3074,7 @@ it contains the following functions: <br/>
 </div>
 
 
-### <span class="section-num">2.10</span> theorems {#theorems}
+### <span class="section-num">1.10</span> theorems {#theorems}
 
 <div class="lemma">
 
@@ -3215,7 +3180,7 @@ for every almost complete tree with \\(n\\) nodes and height \\(h\\), \\(2^{h-2}
 </div>
 
 
-### <span class="section-num">2.11</span> data structures average time complexity table {#data-structures-average-time-complexity-table}
+### <span class="section-num">1.11</span> data structures average time complexity table {#data-structures-average-time-complexity-table}
 
 <div class="note">
 
