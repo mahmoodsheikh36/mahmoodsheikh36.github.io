@@ -2,8 +2,8 @@
 title = "data structures"
 author = ["mahmood"]
 description = "college course in data structures and algorithms"
-date = 2022-10-05T22:08:00+03:00
-tags = ["math", "computer-science"]
+date = 2022-12-03T18:55:00+02:00
+tags = ["math", "code", "computer-science"]
 draft = false
 +++
 
@@ -68,11 +68,11 @@ also its good to note that most of the code isnt optimized to hell, but it doesn
 </div>
 
 
-## <span class="section-num">1</span> properties of floor {#properties-of-floor}
+## <span class="section-num">1</span> properties of  {#properties-of}
 
 <div class="characteristic">
 
-for every 2 [normal]({{< relref "calculus2.md#normal" >}}) numbers \\(m,n\\) and every [real]({{< relref "calculus2.md#real" >}}) number \\(x\\) <br/>
+for every 2 numbers \\(m,n\\) and every number \\(x\\) <br/>
 \\[
   \ceil\*{\frac{\ceil\*{\frac{x}{m}}}{n}} = \ceil\*{\frac{x}{m \cdot n}} \qquad \floor\*{\frac{\floor\*{\frac{x}{m}}}{n}} = \floor\*{\frac{x}{m \cdot n}}
 \\] <br/>
@@ -103,438 +103,7 @@ the following is true for every normal number \\(n\\) and any number \\(x\\) <br
 </div>
 
 
-## <span class="section-num">2</span> order of growth {#order-of-growth}
-
-<div class="definition">
-
-the order of growth of an [algorithm]({{< relref "20220706211958-algorithm.md" >}}) is an approximation of the time required to run a computer program as the input size increases, the order of growth ignores the constant factor needed for fixed operations and focuses instead on the operations that increase proportional to input size <br/>
-an order of growth is a set of functions whose asymptotic growth behavior is considered equivalent. for example, \\(2n\\), \\(100n\\) and \\(n+1\\) belong to the same order of growth, which is written \\(O(n)\\) in big-oh notation and often called linear because every function in the set grows linearly with \\(n\\) <br/>
-
-</div>
-
-
-## <span class="section-num">3</span> asymptotic notations {#asymptotic-notations}
-
-| notation                  | name      | formal definition                                                                                                                     | limit definition                                                                               |
-|---------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| \\(f(n) = O(g(n))\\)      | Big Oh    | \\(\exists k > 0 \ \exists n\_0 \ \forall n > n\_0 : \vert f(n) \vert \leq k \cdot g(n)\\)                                            | \\(\lim\_{n\to\infty} \frac{\vert f(n) \vert}{g(n)} = c\\), where \\(c \geq 0\\) is a constant |
-| \\(f(n) = \Omega(g(n))\\) | Big Omega | \\(\exists k > 0 \ \exists n\_0 \ \forall n > n\_0 : \vert f(n) \vert \geq k \cdot g(n)\\)                                            | \\(\lim\_{n\to\infty} \frac{g(n)}{f(n)} = c\\), where \\(c \geq 0\\) is a constant             |
-| \\(f(n) = \Theta(g(n))\\) | Big Theta | \\(\exists k\_1 > 0\ \exists k\_2 > 0\ \exists n\_0\ \forall n > n\_0 : k\_1 \cdot g(n) \leq \vert f(n) \vert \leq k\_2 \cdot g(n)\\) | \\(\lim\_{n\to\infty} \frac{f(n)}{g(n)} = c\\), where \\(c > 0\\) is a constant                |
-
-
-### <span class="section-num">3.1</span> Big O {#big-o}
-
-<div class="definition">
-
-**Big O** of a [function]({{< relref "discrete_maths2.md#function" >}}) \\(f\\), denoted by \\(O(f)\\), is an upper asymptotic bound of \\(f\\) <br/>
-
-</div>
-
-
-### <span class="section-num">3.2</span> Big Omega {#big-omega}
-
-<div class="definition">
-
-**Big Omega** of a [function]({{< relref "discrete_maths2.md#function" >}}) \\(f\\), denoted by \\(\Omega(f)\\), is a lower asymptotic bound of \\(f\\) <br/>
-
-</div>
-
-
-### <span class="section-num">3.3</span> Big Theta {#big-theta}
-
-<div class="definition">
-
-**Big Theta** of a [function]({{< relref "discrete_maths2.md#function" >}}) \\(f\\), denoted by \\(\Theta(f)\\), is tight bound of \\(f\\), so it is both [Big Omega](#big-omega) and [Big O](#big-o) <br/>
-
-</div>
-
-
-## <span class="section-num">4</span> time complexity {#time-complexity}
-
-the following definitions differ and shouldnt be confused with [asymptotic notations](#asymptotic-notations) like [Big O](#big-o), as they arent directly related but might have some similarities <br/>
-
-
-### <span class="section-num">4.1</span> best case {#best-case}
-
-
-### <span class="section-num">4.2</span> average case {#average-case}
-
-<div class="definition">
-
-the average-case complexity of an [algorithm]({{< relref "20220706211958-algorithm.md" >}}) is the amount of some computational resource (typically time) used by the algorithm, averaged over all possible inputs. <br/>
-
-</div>
-
-
-### <span class="section-num">4.3</span> worst case {#worst-case}
-
-
-## <span class="section-num">5</span> recursive functions {#recursive-functions}
-
-consider factorial <br/>
-
-```python
-def fac(n):
-  if n == 1: return 1
-  else: return fac(n-1) * n
-```
-
-
-### <span class="section-num">5.1</span> recurrence relation {#recurrence-relation}
-
-to analyze the runtime of such a function we use a mathematical concept called **Recurrence relation** <br/>
-a recurrence defines \\(T(n)\\) in terms of \\(T\\) for smaller values <br/>
-example: \\(T(n) = T(n-1) + 1\\), here \\(T(n)\\) is defined in terms of \\(T(n-1)\\) <br/>
-
-
-#### <span class="section-num">5.1.1</span> initial condition {#initial-condition}
-
-a [recurrence relation](#recurrence-relation) must have **initial conditions**, initial conditions are values of the recurrence for small values of \\(n\\) <br/>
-the values of \\(T(0),T(1)\\) are usually sufficient as initial conditions <br/>
-
-
-#### <span class="section-num">5.1.2</span> closed form {#closed-form}
-
-to solve a [recurrence](#recurrence-relation), we find a **closed form** for it, a closed form for \\(T(n)\\) is an equation that defines \\(T(n)\\) using an expression that does **not** involve \\(T\\) <br/>
-there is no single method that works for all, we check for patterns and use substitution <br/>
-to get a better understanding, we look at examples <br/>
-
-<div class="my_example">
-
-consider the following function that returns the factorial of a given number <br/>
-
-```python
-def fac(n):
-  if n == 1: return 1
-  else: return n * fac(n-1)
-print([fac(i) for i in range(1,10)])
-```
-
-for `fac(n)`, how many times is `fac` called? <br/>
-\\[ T(n) \leq T(n-1) + C\_1 \\] <br/>
-\\(C\_1\\) represents the total time of all the operations that take constant time that the function does on every iteration <br/>
-now this is obviously not what we wanna arrive at, we need to arrive at an expression that doesnt have \\(T\\) in it <br/>
-we can substitute in \\(n - 1\\) because \\(T\\) is a function that takes any positive integer <br/>
-
-\begin{align\*}
-  T(n) &\leq \underbrace{T(n-2) + C\_1}\_{T(n-1)} + C\_1\\\\
-  T(n) &\leq T(n-3) + 3C\_1
-\end{align\*}
-
-now you probably already see the pattern here, on every iteration the function takes constant time \\(C\_1\\) to run, until it reaches the last iteration \\(k\\) at which point it we would've \\(k\\) times \\(C\_1\\), e.g.: <br/>
-\\[ T(n) \leq T(n-k) + kC\_1 \\] <br/>
-
-now we know that the total number of times the function calls itself depends on the initial value of \\(n\\), in this case that number would be \\(n - 1\\), as in, this function calls itself \\(n - 1\\) times <br/>
-we substitute \\(k = n - 1\\) to get the total time this function takes to run <br/>
-
-\begin{align\*}
- T(n) &\leq T(n-(n-1)) + (n-1)C\_1\\\\
-      &\leq T(1) + (n-1)C\_1\\\\
-      &\leq C\_1 + (n-1)C\_1 &\text{because } C\_1 \geq T(1)\\\\
-      &\leq nC\_1
-\end{align\*}
-
-so we conclude that <br/>
-\\[
-  \Theta(n) = nC\_1 \implies \Theta(n) = n
-\\] <br/>
-
-</div>
-
-<div class="my_example">
-
-consider the following function that returns the maximum value in a given array <br/>
-
-```python
-def mymax(arr, l, r):
-  if l == r:
-    return arr[l]
-  return max(arr[l], mymax(arr, l+1, r))
-arr = [3, 10, 81, 30, 58, 0, -10]
-print(mymax(arr, 0, len(arr)-1))
-```
-
-we need to find a recurrence for this function so we can analyze its time complexity <br/>
-first thing we notice is on every iteration we have a constant time (excluding the recursive call), we call it \\(C\\) <br/>
-we can also notice that the variable "\\(r\\)" never changes, so our recurrence should only depends on \\(l\\) <br/>
-now we can guess that the recurrence equation is: <br/>
-\\[ T(l) = T(l-1) + C \\] <br/>
-you might be confused (hopefully not) that we wrote \\(l-1\\) even though in the recursive call its \\(l+1\\), this is because we dont care about the value of the variable itself but rather about how many times the variable causes the function to call itself <br/>
-now if we had written \\(l+1\\) this would suggest that given the value \\(l\\) the function runs \\(l+1\\) times which is not correct <br/>
-and so this equals to \\(\Theta(n)\\) (using the same proof as the previous problem) <br/>
-
-</div>
-
-<div class="my_example">
-
-consider the following function that returns the fibonacci number at the given index <br/>
-
-```python
-def fib(n):
-  if n in [1, 2]: return 1
-  else: return fib(n-1) + fib(n-2)
-print([fib(i) for i in range(1,10)])
-```
-
-for `fib(n)`, how many times is `fib` called? <br/>
-
-\begin{align\*}
-  T(1) &= 1\\\\
-  T(2) &= 1\\\\
-  T(3) &= T(1) + T(2) + 1 = 1 + 1 + 1 = 3\\\\
-  T(4) &= T(3) + T(2) + 1 = 3 + 1 + 1 = 5\\\\
-  T(5) &= T(4) + T(3) + 1 = 5 + 3 + 1 = 9\\\\
-  T(n) &= T(n-1) + T(n-2) + 1 = 2^n + 1
-\end{align\*}
-
-</div>
-
-
-### <span class="section-num">5.2</span> recursion tree {#recursion-tree}
-
-<div class="my_example">
-
-consider the following [recurrence relation](#recurrence-relation) <br/>
-\\[ T(n) = T\left(\frac{n}{3}\right) + T\left(\frac{2n}{3}\right) + n \\] <br/>
-a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \\(T(n)\\) <br/>
-with that in mind, the first step would be: <br/>
-
-{{< figure src="/ox-hugo/AT4XkK.svg" >}} <br/>
-
-if we sum all the nodes we can see that indeed \\(T(n) = T\left(\frac{2n}{3}\right) + T\left(\frac{n}{3}\right) + n\\) <br/>
-for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\left(\frac{n}{3}\right)\\) in terms of time complexity for smaller values of \\(n\\) so we can know what the next row of nodes would be <br/>
-
-\begin{align\*}
-  T\left(\frac{2n}{3}\right) &= T\left(\frac{2 \cdot \frac{2n}{3}}{3}\right) + T\left(\frac{\frac{2n}{3}}{3}\right) + \frac{2n}{3} = T\left(\frac{4n}{9}\right) + T\left(\frac{2n}{9}\right) + \frac{2n}{3}\\\\
-  T\left(\frac{n}{3}\right) &= T\left(\frac{2 \cdot \frac{n}{3}}{3}\right) + T\left(\frac{\frac{n}{3}}{3}\right) + \frac{n}{3} = T\left(\frac{2n}{9}\right) + T\left(\frac{n}{9}\right) + \frac{n}{3}
-\end{align\*}
-
-according to this, the tree with the new nodes would be: <br/>
-
-{{< figure src="/ox-hugo/e66eVE.svg" >}} <br/>
-
-we define a **full row** as a row that is full of nodes, in the previous tree the rows \\(1,2,3\\) are full, we might notice that the sum of all the nodes of a full row is \\(n\\) <br/>
-let \\(y\\) be the last full row <br/>
-because the leftmost node is always the smallest in its row, for a row to be full the leftmost node has to be greater or equal to 1 (\\(\frac{n}{3^y} \geq 1\\) in this case) <br/>
-if \\(\frac{n}{3^y} \geq 1\\) is true then the leftmost node in the row \\(y+1\\) whose value is \\(\frac{n}{3^y}\\) appears in the tree (because nodes with values greater or equal to 1 do appear in the tree), and so the row \\(y+1\\) is full, which results in a contradiction because \\(y\\) is the last full row <br/>
-therefore it must be that \\(\frac{n}{3^y} < 1 \implies n < 3^y \implies y > \log\_3{n}\\) <br/>
-therefore the tree contains atleast \\(\log\_3{n}\\) full rows, and because the sum of every full row is \\(n\\) we get: <br/>
-\\(T(n) =\\) sum of all nodes = sum of nodes in full rows + sum of nodes in unfull rows \\(\geq\\) sum of nodes in full rows \\(\geq\\) \\(n \cdot \log\_3{n} = \Theta(n\log{n})\\) <br/>
-and therefore \\(T(n) = \Omega(n\log{n})\\) <br/>
-let \\(x\\) be the last row in the tree, the value of the rightmost node in row \\(x\\) would be \\({\left(\frac23\right)}^{x-1} \cdot n\\) <br/>
-if this value is less than 1 then this node doesnt appear in the tree and all the other nodes in row \\(x\\) that have a smaller value also dont exist which gives us a contradiction because \\(x\\) is the last row in the tree <br/>
-therefore we get \\({\left(\frac23\right)}^{x-1}n \geq 1 \implies n \geq {\left(\frac32\right)}^{x-1} \implies \log\_{3/2}n \geq x - 1 \implies x \leq 1 + \log\_{3/2}n\\) <br/>
-and therefore in the tree there is at most \\(1 + \log\_{3/2}n\\) rows, and since the sum of every row in the tree is \\(n\\) we get: <br/>
-\\(T(n)\\) = sum of all nodes = sum of all nodes in all rows \\(\leq n \cdot\\) number of rows in the tree \\(\leq n \cdot (1+\log\_{3/2}n) = \Theta(n\log{n})\\) <br/>
-and therefore \\(T(n) = O(n\log{n})\\) <br/>
-in summery, we proved that \\(T(n) = \Theta(n\log{n})\\) <br/>
-
-</div>
-
-<div class="my_example">
-
-consider the following [recurrence relation](#recurrence-relation) <br/>
-\\[
-  T(n) = 2T\left(\frac{n}{8}\right) + 3T\left(\frac{n}{9}\right) + n
-\\] <br/>
-we cant determine \\(\Theta\\) using the [Master Theorem](#master-theorem), but we can using a recursion tree <br/>
-the first step would be: <br/>
-
-{{< figure src="/ox-hugo/0IoNVgg.svg" >}} <br/>
-
-\begin{align\*}
-  T\left(\frac{n}{8}\right) &= 2T\left(\frac{n}{8^2}\right) + 3T\left(\frac{n}{8\cdot9}\right) + \frac{n}{8}\\\\
-  T\left(\frac{n}{9}\right) &= 2T\left(\frac{n}{8\cdot9}\right) + 3T\left(\frac{n}{9^2}\right) + \frac{n}{9}
-\end{align\*}
-
-{{< figure src="/ox-hugo/8OoGIIt.svg" >}} <br/>
-
-\begin{align\*}
-  T(n) &= \text{sum of all nodes}\\\\
-  &= \text{sum of all nodes in all levels}\\\\
-  &\leq n+n\left(\frac{2}{8}+\frac{3}{9}\right)+n\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+n\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\\\\
-  &\leq n\left(\left(\frac{2}{8}+\frac{3}{9}\right)+\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\right)\\\\
-  &= n\cdot \frac{1}{1-\left(\frac{2}{8}+\frac{3}{9}\right)}\\\\
-  &= \Theta(n)
-\end{align\*}
-
-note the sum was found using [geometric progression formula]({{< relref "20220711182517-sum_of_geometric_progression.md" >}}) <br/>
-and so we have shown that \\(T(n) = O(n)\\) <br/>
-\\[
-  T(n) = \text{sum of all nodes in the tree} \ge \text{root} = n = \Theta(n)
-\\] <br/>
-and so we have shown that \\(T(n) = \Omega(n)\\) <br/>
-and so \\(T(n) = \Theta(n)\\) <br/>
-
-</div>
-
-<div class="my_example">
-
-```C
-best_sum(A, i) {
-  if i > size(A)
-    return 0
-  return max(best_sum(A, i+1), A[i] + best_sum(A, i+2))
-}
-```
-
-\begin{align\*}
-  T(n) &= T(n-1) + T(n-2) + C\\\\
-  &\le 2T(n-1) + C\\\\
-  &\le 2(2T(n-2)+C) + C = 4T(n-2) + 3C\\\\
-  &\le 4(2T(n-3) + C) + 3C = 8T(n-3) + 7C\\\\
-  &\vdots\\\\
-  &\le 2^{n-1}T(n-(n-1)) + \left(2^{n-1}-1\right)C\\\\
-  &\le 2^{n-1}T(1) + \left(2^{n-1}-1\right)C\\\\
-  &\leq 2^n = \Theta(2^n)
-\end{align\*}
-
-we proved \\(T(n) = O(2^n)\\), now we try showing \\(T(n) = \Omega(2^n)\\) <br/>
-
-\begin{align\*}
-  T(n) &= T(n-1) + T(n-2) + C\\\\
-  &\ge 2T(n-2) + C\\\\
-  &\ge 2(2T(n-4) + C) + C = 4T(n-4) + 3C\\\\
-  &\ge 4(2T(n-6) + C) + 3C = 8T(n-6) + 7C\\\\
-  &\vdots\\\\
-  &\ge 2^{n/2}T(n-(n-2)) + \left(2^{n/2}-1\right)C\\\\
-  &\ge 2^{n/2}T(2) + \left(2^{n/2}-1\right)C\\\\
-  &\ge 2^{n/2} = \Theta\left(2^{n/2}\right)
-\end{align\*}
-
-and so we showed that \\(T(n) = \Omega\left(2^{n/2}\right)\\), which means there isnt a tight bound on the [time complexity](#time-complexity) of this function <br/>
-using a [recursion tree](#recursion-tree): <br/>
-
-{{< figure src="/ox-hugo/QIrzGtq.svg" >}} <br/>
-
-\begin{align\*}
-  T(n) &= \text{sum of all nodes}\\\\
-  &= \text{sum of all nodes in all levels}\\\\
-  &\le 2^{x-1}\\\\
-  &\le 2^{x} = \Theta(2^x)
-\end{align\*}
-
-we denote by \\(y\\) the last level with a full row, for this row to exist, \\(n-2(y-1) \ge 0 \implies n+2 \ge 2y \implies \frac{n+2}{2} \ge y\\), so we have \\(\frac{n+2}{2}\\) full rows <br/>
-
-\begin{align\*}
-  T(n) &= \text{sum of all nodes}\\\\
-  &\ge \text{sum of full rows}\\\\
-  &\ge \sum\_{i=1}^{\frac{n+2}{2}} 2^{i-1}\\\\
-  &\ge 2^{\frac12n+1}-1\\\\
-  &\ge \frac{2^{n/2}}{2}-1
-\end{align\*}
-
-the division by 2 doesnt affect big omega so \\(T(n) = \Omega\left(2^{n/2}\right)\\) <br/>
-
-</div>
-
-
-### <span class="section-num">5.3</span> Master theorem {#master-theorem}
-
-
-#### <span class="section-num">5.3.1</span> dividing functions {#dividing-functions}
-
-to solve a [recurrence relation](#recurrence-relation) of the form: <br/>
-\\[ T(n) = aT\left(\frac{n}{b}\right) + f(n) \text{ where } a \geq 1, b > 1 \\] <br/>
-we compare \\(f(n)\\) with \\(n^{\log\_b{a}}\\) and check which one dominates, the possible outcomes are: <br/>
-
-\begin{align}
-  \exists \epsilon > 0 \mid f(n) = O\left(n^{\log\_b(a)-\epsilon}\right) &\implies T(n) = \Theta\left(n^{\log\_b{a}}\right)\\\\
-  f(n) = \Theta\left(n^{\log\_b{a}}\right) &\implies T(n) = \Theta\left(n^{\log\_b{a}}\log{n}\right)\\\\
-  \exists \epsilon > 0 \mid f(n) = \Omega\left(n^{\log\_b(a)+\epsilon}\right) \text{ and } 0 < c < 1 \mid af\left(\frac{n}{b}\right) < cf(n) &\implies T(n) = \Theta(f(n))
-\end{align}
-
-<div class="my_example">
-
-example of the first possibility <br/>
-
-\begin{gather\*}
-  T(n) = 8T\left(\frac{n}{2}\right) + 1000n^2\\\\
-  a = 8,\ b = 2,\ f(n) = 1000n^2
-\end{gather\*}
-
-the conditions of the first possibility are met: <br/>
-\\[ n^{\log\_b{a}} = n^{\log\_2{8}} = n^3 = O\left(1000n^2\right) \\] <br/>
-therefore we get: <br/>
-\\[ T(n) = \Theta(n^3) \\] <br/>
-
-</div>
-
-<div class="my_example">
-
-example of the second possibility <br/>
-
-\begin{gather\*}
-  T(n) = 2T\left(\frac{n}{2}\right) + 10n\\\\
-  a = 2, b = 2, f(n) = 10n
-\end{gather\*}
-
-the conditions of the second possibility are met: <br/>
-\\[ n^{\log\_b{a}} = n^{\log\_2{2}} = n^1 = \Theta(10n) \\] <br/>
-we get: <br/>
-\\[ T(n) = \Theta(n\log{n}) \\] <br/>
-
-</div>
-
-<div class="my_example">
-
-example of the third possibility <br/>
-
-\begin{gather\*}
-  T(n) = 2T\left(\frac{n}{2}\right) + n^2\\\\
-  a=2,b=2,f(n)=n^2
-\end{gather\*}
-
-the conditions of the third possibility are met: <br/>
-\\[ n^{\log\_b{a}} = n^{\log\_2{2}} = n^1 = \Omega(n^2) \\] <br/>
-we get: <br/>
-\\[ T(n) = \Theta\left(n^2\right) \\] <br/>
-
-</div>
-
-
-#### <span class="section-num">5.3.2</span> decreasing functions {#decreasing-functions}
-
-The **master theorem** can be used to solve recurrences of the form \\(T(n) = aT(n - b) + f(n)\\), where \\(a \geq 1\\) and \\(b > 0\\) and \\(f(n)\\) is **asymptotically positive**. (asymptotically positive means that the function is positive for all sufficiently large n.) this recurrence describes an algorithm that divides a problem of size \\(n\\) into sub problems, each of size \\(n-b\\), and solves them recursively. <br/>
-the theorem is as follows: <br/>
-if \\(T(n) = aT(n-b) + f(n)\\), where \\(a \geq 1\\), \\(b > 0\\), \\(f(n) = O(n^k)\\) and \\(k \geq 0\\) <br/>
-we consider 3 cases: <br/>
-**case 1**, if \\(a = 1\\) <br/>
-\\[ T(n) = O(n \cdot f(n)) \text{ or } O\left(n^{k+1}\right) \\] <br/>
-
-<div class="my_example">
-
-\begin{align}
-  T(n) = T(n - 1) + 1 &\implies O(n)\\\\
-  T(n) = T(n - 1) + n &\implies O(n^2)\\\\
-  T(n) = T(n-1) + \log{n} &\implies O(n\log{n})
-\end{align}
-
-</div>
-
-**case 2**, if \\(a > 1\\) <br/>
-\\[ T(n) = O\left(a^{\frac{n}{b}} \cdot f(n)\right) \text{ or } O\left(a^{\frac{n}{b}} \cdot n^k\right) \\] <br/>
-
-<div class="my_example">
-
-\begin{align}
-  T(n) = 2T(n-1)+1 &\implies O(2^n)\\\\
-  T(n) = 3T(n-1)+1 &\implies O(3^n)\\\\
-  T(n) = 2T(n-1)+n &\implies O(n \cdot 2^n)
-\end{align}
-
-</div>
-
-**case 3**, if \\(a < 1\\) <br/>
-
-<div class="my_example">
-
-\\[ T(n) = O(f(n)) \text{ or } O\left(n^k\right) \\] <br/>
-
-</div>
-
-
-## <span class="section-num">6</span> data structure {#data-structure}
+## <span class="section-num">2</span> data structure {#data-structure}
 
 <div class="definition">
 
@@ -552,7 +121,7 @@ for example, if `x` is a person, `key(x)` could be the person's ID, `value(x)` w
 </div>
 
 
-### <span class="section-num">6.1</span> KeyValue {#keyvalue}
+### <span class="section-num">2.1</span> KeyValue {#keyvalue}
 
 <a id="code-snippet--KeyValue"></a>
 ```C++
@@ -589,15 +158,15 @@ public:
 ```
 
 
-### <span class="section-num">6.2</span> abstract data type {#abstract-data-type}
+### <span class="section-num">2.2</span> abstract data type {#abstract-data-type}
 
 <div class="definition">
 
-**abstract data types**, commonly abbreviated \*ADT\*s, are a way of classifying [data structure](#data-structure)s based on how they are used and the behaviors they provide. they do not specify how the data structure must be implemented or laid out in memory, but simply provide a minimal expected interface and set of behaviors. for example, a [stack](#stack) is an abstract data type that specifies a linear data structure with [LIFO](#lifo) behavior. stacks are commonly implemented using [array]({{< relref "20220728190531-array.md" >}})s or [linked list](#linked-list)s, but a needlessly complicated implementation using a [binary search tree](#binary-search-tree) is still a valid implementation. to be clear, it is incorrect to say that stacks are arrays or vice versa. an array can be used as a stack. likewise, a stack can be implemented using an array. <br/>
+**abstract data types**, commonly abbreviated \*ADT\*s, are a way of classifying [data structure](#data-structure)s based on how they are used and the behaviors they provide. they do not specify how the data structure must be implemented or laid out in memory, but simply provide a minimal expected interface and set of behaviors. for example, a [stack](#stack) is an abstract data type that specifies a linear data structure with [LIFO](#lifo) behavior. stacks are commonly implemented using s or [linked list](#linked-list)s, but a needlessly complicated implementation using a [binary search tree](#binary-search-tree) is still a valid implementation. to be clear, it is incorrect to say that stacks are arrays or vice versa. an array can be used as a stack. likewise, a stack can be implemented using an array. <br/>
 
 <div class="characteristic">
 
-since abstract data types dont specify an implementation, this means its also incorrect to talk about the [time complexity](#time-complexity) of a given abstract data type. an associative array may or may not have \\(O(1)\\) average search times. An associative array that is implemented by a [hash table](#hash-table) does have \\(O(1)\\) average search times. <br/>
+since abstract data types dont specify an implementation, this means its also incorrect to talk about the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of a given abstract data type. an associative array may or may not have \\(O(1)\\) average search times. An associative array that is implemented by a [hash table](#hash-table) does have \\(O(1)\\) average search times. <br/>
 
 </div>
 
@@ -698,7 +267,7 @@ true
 </div>
 
 
-### <span class="section-num">6.3</span> concrete data type {#concrete-data-type}
+### <span class="section-num">2.3</span> concrete data type {#concrete-data-type}
 
 <div class="definition">
 
@@ -708,7 +277,7 @@ i.e. it is the actual [data structure](#data-structure) we use in programming <b
 </div>
 
 
-### <span class="section-num">6.4</span> list {#list}
+### <span class="section-num">2.4</span> list {#list}
 
 <div class="definition">
 
@@ -717,7 +286,7 @@ a **list** is an [abstract data type](#abstract-data-type) that is dynamically s
 </div>
 
 
-#### <span class="section-num">6.4.1</span> linked list {#linked-list}
+#### <span class="section-num">2.4.1</span> linked list {#linked-list}
 
 <div class="definition">
 
@@ -726,7 +295,7 @@ a **linked list** is a [concrete data type](#concrete-data-type) that is an impl
 </div>
 
 
-##### <span class="section-num">6.4.1.1</span> characteristics {#characteristics}
+##### <span class="section-num">2.4.1.1</span> characteristics {#characteristics}
 
 -   is the list **sorted**? the nodes are sorted by their `key` (usually in an ascending order) <br/>
 -   is the list **doubly/singly linked**? in a doubly linked list each node points to the next and previous node whereas in a singly linked list a node only points to the next <br/>
@@ -734,7 +303,7 @@ a **linked list** is a [concrete data type](#concrete-data-type) that is an impl
 -   is the list **circular**? in a circular linked list the last node points to the first whereas in a non-circular linked list it points to NULL (nothing) <br/>
 
 
-##### <span class="section-num">6.4.1.2</span> functions {#functions}
+##### <span class="section-num">2.4.1.2</span> functions {#functions}
 
 -   `insert(x)`: inserts `x` <br/>
 -   `search(k)`: returns the node whose key is `k` <br/>
@@ -742,10 +311,10 @@ a **linked list** is a [concrete data type](#concrete-data-type) that is an impl
 -   `delete(x)`: given the node `x`, removes it from the list <br/>
 
 
-##### <span class="section-num">6.4.1.3</span> implementation (c++) {#implementation--c-plus-plus}
+##### <span class="section-num">2.4.1.3</span> implementation (c++) {#implementation--c-plus-plus}
 
 
-###### <span class="section-num">6.4.1.3.1</span> Node {#node}
+###### <span class="section-num">2.4.1.3.1</span> Node {#node}
 
 <a id="code-snippet--Node"></a>
 ```C++
@@ -779,7 +348,7 @@ public:
 ```
 
 
-###### <span class="section-num">6.4.1.3.2</span> DoublyNode {#doublynode}
+###### <span class="section-num">2.4.1.3.2</span> DoublyNode {#doublynode}
 
 <a id="code-snippet--DoublyNode"></a>
 ```C++
@@ -829,7 +398,7 @@ public:
 ```
 
 
-###### <span class="section-num">6.4.1.3.3</span> LinkedList {#linkedlist}
+###### <span class="section-num">2.4.1.3.3</span> LinkedList {#linkedlist}
 
 <a id="code-snippet--LinkedList"></a>
 ```C++
@@ -893,32 +462,32 @@ public:
 ```
 
 
-###### <span class="section-num">6.4.1.3.4</span> DoublyLinkedList {#doublylinkedlist}
+###### <span class="section-num">2.4.1.3.4</span> DoublyLinkedList {#doublylinkedlist}
 
 ```C++
 to be implemented
 ```
 
 
-###### <span class="section-num">6.4.1.3.5</span> LinkedListWithTail {#linkedlistwithtail}
+###### <span class="section-num">2.4.1.3.5</span> LinkedListWithTail {#linkedlistwithtail}
 
 ```C++
 to be implemented
 ```
 
 
-###### <span class="section-num">6.4.1.3.6</span> CircularLinkedList {#circularlinkedlist}
+###### <span class="section-num">2.4.1.3.6</span> CircularLinkedList {#circularlinkedlist}
 
 ```C++
 to be implemented
 ```
 
 
-#### <span class="section-num">6.4.2</span> array list {#array-list}
+#### <span class="section-num">2.4.2</span> array list {#array-list}
 
 <div class="definition">
 
-a **linked list** is a [concrete data type](#concrete-data-type) that is an implementation of a [list](#list) based on an [array]({{< relref "20220728190531-array.md" >}}) that is dynamically continuously reconstructed on insertions to hold as many objects as necessary <br/>
+a **linked list** is a [concrete data type](#concrete-data-type) that is an implementation of a [list](#list) based on an that is dynamically continuously reconstructed on insertions to hold as many objects as necessary <br/>
 
 <div class="note">
 
@@ -935,7 +504,7 @@ an array list contains a fixed-size array initialized to a constant length, when
 </div>
 
 
-##### <span class="section-num">6.4.2.1</span> ArrayList {#arraylist}
+##### <span class="section-num">2.4.2.1</span> ArrayList {#arraylist}
 
 <a id="code-snippet--ArrayList"></a>
 ```C++
@@ -1021,7 +590,7 @@ public:
 ```
 
 
-### <span class="section-num">6.5</span> stack {#stack}
+### <span class="section-num">2.5</span> stack {#stack}
 
 <div class="definition">
 
@@ -1030,10 +599,10 @@ a **stack** is an [abstract data type](#abstract-data-type) <br/>
 </div>
 
 
-#### <span class="section-num">6.5.1</span> LIFO {#lifo}
+#### <span class="section-num">2.5.1</span> LIFO {#lifo}
 
 
-### <span class="section-num">6.6</span> queue {#queue}
+### <span class="section-num">2.6</span> queue {#queue}
 
 <div class="definition">
 
@@ -1042,7 +611,7 @@ a **queue** is a linear [abstract data type](#abstract-data-type) in which the o
 </div>
 
 
-#### <span class="section-num">6.6.1</span> FIFO {#fifo}
+#### <span class="section-num">2.6.1</span> FIFO {#fifo}
 
 <div class="definition">
 
@@ -1051,7 +620,7 @@ a **queue** is a linear [abstract data type](#abstract-data-type) in which the o
 </div>
 
 
-#### <span class="section-num">6.6.2</span> Circular Queue {#circular-queue}
+#### <span class="section-num">2.6.2</span> Circular Queue {#circular-queue}
 
 <div class="definition">
 
@@ -1060,12 +629,12 @@ a **Circular Queue** is a [Queue](#queue) in which the last element is connected
 </div>
 
 
-#### <span class="section-num">6.6.3</span> priority queue {#priority-queue}
+#### <span class="section-num">2.6.3</span> priority queue {#priority-queue}
 
 a **priority queue** is an [abstract data type]({{< relref "data_structures.md#abstract-data-type" >}}) similar to a regular [queue](#queue) or [stack](#stack) in which each element additionally has a priority associated with it. in a priority queue, an element with high priority is served before an element with low priority <br/>
 
 
-### <span class="section-num">6.7</span> tree {#tree}
+### <span class="section-num">2.7</span> tree {#tree}
 
 <div class="definition">
 
@@ -1074,7 +643,7 @@ a **tree** is an [abstract data type](#abstract-data-type) which stores data in 
 </div>
 
 
-#### <span class="section-num">6.7.1</span> node {#node}
+#### <span class="section-num">2.7.1</span> node {#node}
 
 trees store data as **nodes**, meaning each item in a tree is called a node <br/>
 each node `x` has the following fields <br/>
@@ -1088,7 +657,7 @@ each node `x` has the following fields <br/>
 every node in a [binary tree](#binary-tree) has from 0 to 2 children <br/>
 
 
-##### <span class="section-num">6.7.1.1</span> height {#height}
+##### <span class="section-num">2.7.1.1</span> height {#height}
 
 <div class="definition">
 
@@ -1097,7 +666,7 @@ the **height** of a [node](#node) `x` is defined as the [height of subtree](#hei
 </div>
 
 
-##### <span class="section-num">6.7.1.2</span> balance factor {#balance-factor}
+##### <span class="section-num">2.7.1.2</span> balance factor {#balance-factor}
 
 the **balance factor** of a [node](#node) `x`, denoted by `balance(x)` or `BF(x)`, is defined as the height of the [subtree](#subtree) of the left child of `x`, denoted by \\(T\_{\text{left}(x)}\\) minus the height of the subtree of the right child of `x` denoted by \\(T\_{\text{right}(x)}\\), in short: <br/>
 \\[
@@ -1105,10 +674,10 @@ the **balance factor** of a [node](#node) `x`, denoted by `balance(x)` or `BF(x)
 \\] <br/>
 see for example this tree, the balance factor of each node is written above it <br/>
 
-{{< figure src="/ox-hugo/gXx4ZR.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/gXx4ZR.svg" >}} <br/>
 
 
-#### <span class="section-num">6.7.2</span> height {#height}
+#### <span class="section-num">2.7.2</span> height {#height}
 
 <div class="definition">
 
@@ -1117,7 +686,16 @@ the **height** of a tree is the number of the [node](#node)s in the longest path
 </div>
 
 
-#### <span class="section-num">6.7.3</span> root {#root}
+#### <span class="section-num">2.7.3</span> level {#level}
+
+<div class="definition">
+
+the **level** of a row in the tree is its distance from the root whose level is 1 <br/>
+
+</div>
+
+
+#### <span class="section-num">2.7.4</span> root {#root}
 
 <div class="definition">
 
@@ -1126,7 +704,7 @@ the tree itself `T` (not for every node) contains a pointer `root(T)` that point
 </div>
 
 
-#### <span class="section-num">6.7.4</span> leaf {#leaf}
+#### <span class="section-num">2.7.5</span> leaf {#leaf}
 
 <div class="definition">
 
@@ -1135,7 +713,7 @@ a [node](#node) that doesnt have children is called a **leaf** <br/>
 </div>
 
 
-#### <span class="section-num">6.7.5</span> internal node {#internal-node}
+#### <span class="section-num">2.7.6</span> internal node {#internal-node}
 
 <div class="definition">
 
@@ -1144,7 +722,7 @@ a [node](#node) that has atleast one child is called an **internal node** <br/>
 </div>
 
 
-#### <span class="section-num">6.7.6</span> sibling {#sibling}
+#### <span class="section-num">2.7.7</span> sibling {#sibling}
 
 <div class="definition">
 
@@ -1153,7 +731,7 @@ a [node](#node) that has atleast one child is called an **internal node** <br/>
 </div>
 
 
-#### <span class="section-num">6.7.7</span> ancestor {#ancestor}
+#### <span class="section-num">2.7.8</span> ancestor {#ancestor}
 
 <div class="definition">
 
@@ -1162,7 +740,7 @@ an **ancestor** of a given [node](#node) is a node that is at an upper level of 
 </div>
 
 
-#### <span class="section-num">6.7.8</span> descendant {#descendant}
+#### <span class="section-num">2.7.9</span> descendant {#descendant}
 
 <div class="definition">
 
@@ -1171,16 +749,16 @@ a **descendant** of a given [node](#node) is a node that is at a lower level of 
 </div>
 
 
-#### <span class="section-num">6.7.9</span> subtree {#subtree}
+#### <span class="section-num">2.7.10</span> subtree {#subtree}
 
 for some [binary tree](#binary-tree) `T` and a node `x` of said tree we denote \\(T\_x\\) as the **subtree** whose [root](#root) is `x`, and the left **subtree** of `x` is the tree whose root is the left child of `x` denoted by \\(T\_{\text{left}(x)}\\) and the right subtree of `x` is the tree whose root is the right child of `x` denoted by \\(T\_{\text{right}(x)}\\) <br/>
 
-{{< figure src="/ox-hugo/vD1CJC.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/vD1CJC.svg" >}} <br/>
 
 the height of this tree is 4 <br/>
 
 
-#### <span class="section-num">6.7.10</span> complete tree {#complete-tree}
+#### <span class="section-num">2.7.11</span> complete tree {#complete-tree}
 
 <div class="definition">
 
@@ -1189,7 +767,7 @@ a **complete** [binary tree](#binary-tree) is a binary tree in which every [node
 </div>
 
 
-#### <span class="section-num">6.7.11</span> almost complete tree {#almost-complete-tree}
+#### <span class="section-num">2.7.12</span> almost complete tree {#almost-complete-tree}
 
 <div class="definition">
 
@@ -1234,21 +812,21 @@ the number of nodes at height \\(i\\) is \\(\ceil\*{\frac{n}{2i+1}}\\) <br/>
 </div>
 
 
-#### <span class="section-num">6.7.12</span> breadth-first search {#breadth-first-search}
+#### <span class="section-num">2.7.13</span> breadth-first search {#breadth-first-search}
 
 **breadth-first search** or **BFS** for short, explores each level before moving onto the next one <br/>
 extra memory, usually a [queue](#queue), is needed to keep track of the child nodes that were encountered but not yet explored. <br/>
 ![](/ox-hugo/Animated_BFS.gif) <br/>
 
 
-#### <span class="section-num">6.7.13</span> depth-first search {#depth-first-search}
+#### <span class="section-num">2.7.14</span> depth-first search {#depth-first-search}
 
 **depth-first search** or **DFS** for short, consists of exploring branches as far as possible before [backtracking](#backtracking) and exploring branches of other nodes <br/>
 this is the algorithm we'll be using because its simpler <br/>
 ![](/ox-hugo/bfs_dfs.gif) <br/>
 
 
-##### <span class="section-num">6.7.13.1</span> inorder traversal {#inorder-traversal}
+##### <span class="section-num">2.7.14.1</span> inorder traversal {#inorder-traversal}
 
 left, parent, right <br/>
 
@@ -1266,7 +844,7 @@ note that before printing a child will always call `inorder(left-child)`, so the
 </div>
 
 
-##### <span class="section-num">6.7.13.2</span> preorder traversal {#preorder-traversal}
+##### <span class="section-num">2.7.14.2</span> preorder traversal {#preorder-traversal}
 
 parent, left, right <br/>
 
@@ -1278,7 +856,7 @@ Algorithm preorder(tree)
 ```
 
 
-##### <span class="section-num">6.7.13.3</span> postorder traversal {#postorder-traversal}
+##### <span class="section-num">2.7.14.3</span> postorder traversal {#postorder-traversal}
 
 left, right, parent <br/>
 
@@ -1290,7 +868,7 @@ Algorithm postorder(tree)
 ```
 
 
-#### <span class="section-num">6.7.14</span> binary tree {#binary-tree}
+#### <span class="section-num">2.7.15</span> binary tree {#binary-tree}
 
 <div class="definition">
 
@@ -1299,7 +877,7 @@ a **binary tree** is a [concrete data type](#concrete-data-type) that is an impl
 </div>
 
 
-##### <span class="section-num">6.7.14.1</span> BinaryTreeNode {#binarytreenode}
+##### <span class="section-num">2.7.15.1</span> BinaryTreeNode {#binarytreenode}
 
 <a id="code-snippet--BinaryTreeNode"></a>
 ```C++
@@ -1521,7 +1099,7 @@ public:
 ```
 
 
-##### <span class="section-num">6.7.14.2</span> BinaryTree {#binarytree}
+##### <span class="section-num">2.7.15.2</span> BinaryTree {#binarytree}
 
 <a id="code-snippet--BinaryTree"></a>
 ```C++
@@ -1626,7 +1204,7 @@ public:
 ```
 
 
-##### <span class="section-num">6.7.14.3</span> algorithms {#algorithms}
+##### <span class="section-num">2.7.15.3</span> algorithms {#algorithms}
 
 <div class="question">
 
@@ -1672,7 +1250,7 @@ this code runs in \\(O(2n) \sim O(n)\\) time <br/>
 </div>
 
 
-#### <span class="section-num">6.7.15</span> binary search tree {#binary-search-tree}
+#### <span class="section-num">2.7.16</span> binary search tree {#binary-search-tree}
 
 a **binary search tree** is a [binary tree](#binary-tree) that has the following restrictions: <br/>
 
@@ -1681,15 +1259,15 @@ a **binary search tree** is a [binary tree](#binary-tree) that has the following
 
 for example the following tree is a binary search tree: <br/>
 
-{{< figure src="/ox-hugo/a0JkT1.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/a0JkT1.svg" >}} <br/>
 
 
-##### <span class="section-num">6.7.15.1</span> insertion {#insertion}
+##### <span class="section-num">2.7.16.1</span> insertion {#insertion}
 
 a new key is always inserted as a [leaf](#leaf). we start from the [root](#root), making our way downwards by comparing the new key to the key of the current node to decide which child to move to on each iteration, until we hit a leaf node, then we add the new node as its child <br/>
 
 
-##### <span class="section-num">6.7.15.2</span> BinarySearchTree {#binarysearchtree}
+##### <span class="section-num">2.7.16.2</span> BinarySearchTree {#binarysearchtree}
 
 <a id="code-snippet--BinarySearchTree"></a>
 ```C++
@@ -1808,12 +1386,12 @@ is this tree balanced?: 0 <br/>
 the height of this tree is: 6 <br/>
 the balance factor of the root is: -1 <br/>
 
-{{< figure src="/ox-hugo/8NDCYwz.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/3TjzZFC.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/6jHzEt3.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/G6rZlhA.svg" >}} <br/>
 
 
-#### <span class="section-num">6.7.16</span> AVL tree {#avl-tree}
+#### <span class="section-num">2.7.17</span> AVL tree {#avl-tree}
 
 an **AVL tree** is a [binary search tree](#binary-search-tree) in which every node `x` has a [balance factor](#balance-factor) of \\(0,1,-1\\), meaning: <br/>
 \\[
@@ -1822,7 +1400,7 @@ an **AVL tree** is a [binary search tree](#binary-search-tree) in which every no
 every node `x` of this tree holds an extra field called `balance` which holds the [balance factor](#balance-factor) of said node <br/>
 for example, the following tree is an AVL tree: <br/>
 
-{{< figure src="/ox-hugo/CRLd0L.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/CRLd0L.svg" >}} <br/>
 
 if we were to remove the node with value 14 or with value 9 this wouldnt be an AVL tree <br/>
 
@@ -1833,7 +1411,7 @@ let `T` be an AVL tree with `n` nodes and height \\(h\\), then \\(h = \Theta(\lo
 </div>
 
 
-##### <span class="section-num">6.7.16.1</span> minimal form {#minimal-form}
+##### <span class="section-num">2.7.17.1</span> minimal form {#minimal-form}
 
 <div class="definition">
 
@@ -1841,7 +1419,7 @@ a minimal form of an [AVL tree](#avl-tree) with a given height \\(h\\) is one wh
 
 <div class="lemma">
 
-the minimal number of nodes for a tree of height \\(h\\) is given by the following [recurrence relation](#recurrence-relation) <br/>
+the minimal number of nodes for a tree of height \\(h\\) is given by the following [recurrence relation]({{< relref "20221105001640-recursive_function.md#recurrence-relation" >}}) <br/>
 
 \begin{align\*}
   N(h)&=N(h-1) + N(h-2) + 1\\\\
@@ -1898,7 +1476,7 @@ return [(i,find(i)) for i in range(1,15)]
 </div>
 
 
-##### <span class="section-num">6.7.16.2</span> problematic node {#problematic-node}
+##### <span class="section-num">2.7.17.2</span> problematic node {#problematic-node}
 
 <div class="definition">
 
@@ -1907,18 +1485,18 @@ a **problematic node** is a [node](#node) whose [balance factor](#balance-factor
 </div>
 
 
-##### <span class="section-num">6.7.16.3</span> insertion {#insertion}
+##### <span class="section-num">2.7.17.3</span> insertion {#insertion}
 
 the process of inserting a node to an AVL tree starts with inserting it using the same insertion method we used for a [binary search tree](#binary-search-tree), after said insertion we start going up the tree starting at the new node we just inserted and updating the [balance factor](#balance-factor) for every node we encounter as we go <br/>
 if we arrive at [problematic node](#problematic-node), we apply the proper [rotation](#rotation) to [rebalance](#rebalancing) the tree <br/>
 
 
-##### <span class="section-num">6.7.16.4</span> rebalancing {#rebalancing}
+##### <span class="section-num">2.7.17.4</span> rebalancing {#rebalancing}
 
 during a modifying operation of a [binary tree](#binary-tree), a node might become [problematic](#problematic-node), to restore balance to the tree so that it remains an [AVL tree](#avl-tree) we use [rotation](#rotation)s <br/>
 
 
-###### <span class="section-num">6.7.16.4.1</span> rotation {#rotation}
+###### <span class="section-num">2.7.17.4.1</span> rotation {#rotation}
 
 to determine which type of **rotation** we need to use to **rebalance** a given tree, we go 2 steps from the [problematic node](#problematic-node) towards the newly inserted node which gives us the following 4 cases: <br/>
 
@@ -1945,23 +1523,23 @@ to determine which type of **rotation** we need to use to **rebalance** a given 
         
         consider the following [AVL tree](#avl-tree): <br/>
         
-        {{< figure src="/ox-hugo/OCEhdh.svg" >}} <br/>
+        {{< figure src="~/.emacs.d/latex/OCEhdh.svg" >}} <br/>
         
         after inserting a new [node](#node) with the value 2 this is how the tree would look: <br/>
         
-        {{< figure src="/ox-hugo/nMREes.svg" >}} <br/>
+        {{< figure src="~/.emacs.d/latex/nMREes.svg" >}} <br/>
         
         the [node](#node) with the value 7 whose [balance factor](#balance-factor) is 2 is [problematic](#problematic-node) because its causing imbalance in the [tree](#avl-tree), so we apply the [rotation](#rotation) to its subtree to rebalance it <br/>
         
-        {{< figure src="/ox-hugo/ZIzaCe.svg" >}} <br/>
+        {{< figure src="~/.emacs.d/latex/ZIzaCe.svg" >}} <br/>
         
         the [subtree](#subtree) after the [rotation](#rotation): <br/>
         
-        {{< figure src="/ox-hugo/diNERQ.svg" >}} <br/>
+        {{< figure src="~/.emacs.d/latex/diNERQ.svg" >}} <br/>
         
         and so the original tree would become: <br/>
         
-        {{< figure src="/ox-hugo/pBO906.svg" >}} <br/>
+        {{< figure src="~/.emacs.d/latex/pBO906.svg" >}} <br/>
         
         </div>
     
@@ -1994,7 +1572,7 @@ to determine which type of **rotation** we need to use to **rebalance** a given 
         this method consists of 2 steps, first is applying an [LL](#left-left-rotation) rotation over the right child of the [problematic node](#problematic-node), then applying a [RR](#right-right-rotation) rotation to the [problematic node](#problematic-node) <br/>
 
 
-##### <span class="section-num">6.7.16.5</span> AVLTree {#avltree}
+##### <span class="section-num">2.7.17.5</span> AVLTree {#avltree}
 
 <a id="code-snippet--AVLTree"></a>
 ```C++
@@ -2048,10 +1626,10 @@ int main() {
 }
 ```
 
-{{< figure src="/ox-hugo/X2xd3y4.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/W0Gav8F.svg" >}} <br/>
 
 
-#### <span class="section-num">6.7.17</span> 2-3 tree {#2-3-tree}
+#### <span class="section-num">2.7.18</span> 2-3 tree {#2-3-tree}
 
 a **2–3 tree** is a [tree](#tree) [concrete data type](#concrete-data-type) where every [internal node](#internal-node) is either a [2-node](#2-node) or [3-node](#3-node) <br/>
 an exceptional case is when the tree contains only one element in which case the only node in the tree (which is the [root](#root)) holds only one element <br/>
@@ -2075,7 +1653,7 @@ keys are always ordered from left to right in ascending order <br/>
 </div>
 
 
-##### <span class="section-num">6.7.17.1</span> 2-node {#2-node}
+##### <span class="section-num">2.7.18.1</span> 2-node {#2-node}
 
 <div class="definition">
 
@@ -2084,7 +1662,7 @@ we say that an [internal node](#internal-node) is a **2-node** if it holds one v
 </div>
 
 
-##### <span class="section-num">6.7.17.2</span> 3-node {#3-node}
+##### <span class="section-num">2.7.18.2</span> 3-node {#3-node}
 
 <div class="definition">
 
@@ -2093,7 +1671,7 @@ we say that an [internal node](#internal-node) is a **3-node** if it holds two v
 </div>
 
 
-##### <span class="section-num">6.7.17.3</span> insertion {#insertion}
+##### <span class="section-num">2.7.18.3</span> insertion {#insertion}
 
 an important property to keep in mind is that insertion **always** occurs in one of the [leaves](#leaf) <br/>
 
@@ -2101,7 +1679,7 @@ an important property to keep in mind is that insertion **always** occurs in one
 <&opengenus_twothree_tree> <br/>
 
 
-##### <span class="section-num">6.7.17.4</span> TwoThreeNode {#twothreenode}
+##### <span class="section-num">2.7.18.4</span> TwoThreeNode {#twothreenode}
 
 <a id="code-snippet--TwoThreeNode"></a>
 ```C++
@@ -2361,7 +1939,7 @@ public:
 ```
 
 
-##### <span class="section-num">6.7.17.5</span> TwoThreeTree {#twothreetree}
+##### <span class="section-num">2.7.18.5</span> TwoThreeTree {#twothreetree}
 
 <a id="code-snippet--TwoThreeTree"></a>
 ```C++
@@ -2579,18 +2157,18 @@ balance 100 110 \\(\varnothing\\) recursively <br/>
 root: 40 \\(\varnothing\\) \\(\varnothing\\) <br/>
 100 110 \\(\varnothing\\) is good. <br/>
 
-{{< figure src="/ox-hugo/hzKd6I1.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/GXpyO4s.svg" >}} <br/>
 
 
-#### <span class="section-num">6.7.18</span> algorithms {#algorithms}
+#### <span class="section-num">2.7.19</span> algorithms {#algorithms}
 
 
-##### <span class="section-num">6.7.18.1</span> backtracking {#backtracking}
+##### <span class="section-num">2.7.19.1</span> backtracking {#backtracking}
 
 **Backtracking** is an algorithm that incrementally builds candidates to the solutions, and abandons a candidate as soon as it determines that the candidate cannot possibly be completed to a valid solution, see <https://en.wikipedia.org/wiki/Backtracking> <br/>
 
 
-##### <span class="section-num">6.7.18.2</span> pattern {#pattern}
+##### <span class="section-num">2.7.19.2</span> pattern {#pattern}
 
 this includes the [backtracking](#backtracking) algorithm <br/>
 after solving a few problems i saw a pattern that makes it much easier to solve recursion problems related to binary trees <br/>
@@ -2609,7 +2187,7 @@ note that its **important** that we gather info as we go on every node we visit 
 words arent the best way to put it so hopefully ill provide a better visual explanation in the future <br/>
 
 
-##### <span class="section-num">6.7.18.3</span> reverse inorder {#reverse-inorder}
+##### <span class="section-num">2.7.19.3</span> reverse inorder {#reverse-inorder}
 
 given a [binary tree](#binary-tree), write a function to reverse its [inorder traversal](#inorder-traversal) output <br/>
 this algorithm runs in `O(n)` time <br/>
@@ -2650,7 +2228,7 @@ int main() {
 | 20 | 15 | 11 | 7 | 6 | 5 | 4 | 3  | 2  | 1  |
 
 
-#### <span class="section-num">6.7.19</span> other practice questions {#other-practice-questions}
+#### <span class="section-num">2.7.20</span> other practice questions {#other-practice-questions}
 
 <div class="question">
 
@@ -2675,13 +2253,13 @@ int main() {
 }
 ```
 
-{{< figure src="/ox-hugo/Xne7Net.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/iHRcakF.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/tLFWmrT.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/K7xol9M.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/eZS7TVb.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/HuHyDjg.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/2pgkRoy.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/mHFxNUG.svg" >}} <br/>
 
 </div>
 
@@ -2699,7 +2277,7 @@ but a better solution would be to go through the array once and find the minimum
 </div>
 
 
-### <span class="section-num">6.8</span> heap {#heap}
+### <span class="section-num">2.8</span> heap {#heap}
 
 <div class="definition">
 
@@ -2708,7 +2286,7 @@ a **Heap** is an [abstract data type](#abstract-data-type) <br/>
 </div>
 
 
-#### <span class="section-num">6.8.1</span> min heap {#min-heap}
+#### <span class="section-num">2.8.1</span> min heap {#min-heap}
 
 <div class="definition">
 
@@ -2717,7 +2295,7 @@ a **min heap** is a [heap](#heap) in which each [node](#node) is less than or eq
 </div>
 
 
-#### <span class="section-num">6.8.2</span> max heap {#max-heap}
+#### <span class="section-num">2.8.2</span> max heap {#max-heap}
 
 <div class="definition">
 
@@ -2728,7 +2306,7 @@ a **max heap** is a [heap](#heap) in which each node is bigger than or equal to 
 this is the implementation we'll be using <br/>
 
 
-#### <span class="section-num">6.8.3</span> binary heap {#binary-heap}
+#### <span class="section-num">2.8.3</span> binary heap {#binary-heap}
 
 <div class="definition">
 
@@ -2752,7 +2330,7 @@ in a heap the keys arent necessarily sorted like in [binary search tree](#binary
 </div>
 
 
-##### <span class="section-num">6.8.3.1</span> bubbling {#bubbling}
+##### <span class="section-num">2.8.3.1</span> bubbling {#bubbling}
 
 <div class="definition">
 
@@ -2761,15 +2339,15 @@ moving a [node](#node) up/down a heap to get it to its correct position <br/>
 </div>
 
 
-###### <span class="section-num">6.8.3.1.1</span> bubble up {#bubble-up}
+###### <span class="section-num">2.8.3.1.1</span> bubble up {#bubble-up}
 
 [bubbling](#bubbling) a node **upwards** consists of recursively switching it with its parent until its parent is bigger/smaller than it (depending on whether we're using a [min heap](#min-heap) or a [max heap](#max-heap)) <br/>
 
 
-###### <span class="section-num">6.8.3.1.2</span> bubble down {#bubble-down}
+###### <span class="section-num">2.8.3.1.2</span> bubble down {#bubble-down}
 
 [bubbling](#bubbling) a node **downards** consists of recursively switching it with one of its children until it gets to its correct position <br/>
-this is a pseudocode for the [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
+this is a pseudocode for the : <br/>
 
 ```C
 l = left(i) // index of left child
@@ -2785,21 +2363,21 @@ if largest != i
   heapify(A, largest)
 ```
 
-[time complexity](#time-complexity) is \\(O(\log n)\\) <br/>
+[time complexity]({{< relref "20221130014441-time_complexity.md" >}}) is \\(O(\log n)\\) <br/>
 
 
-##### <span class="section-num">6.8.3.2</span> insertion {#insertion}
+##### <span class="section-num">2.8.3.2</span> insertion {#insertion}
 
 inserting a new [node](#node) to the heap consists of adding it as a [leaf](#leaf) such that the heap remains [almost complete](#almost-complete-tree) and [bubbling up](#bubble-up) the newly added node so that the keys in the tree remain sorted <br/>
 if the heap is in [array representation](#binary-heap-array-representation), we insert the new node to the end of the array and heapify it upwards (bubble up) <br/>
 
 
-##### <span class="section-num">6.8.3.3</span> deletion {#deletion}
+##### <span class="section-num">2.8.3.3</span> deletion {#deletion}
 
 deletion of a node consists of replacing the rightmost leaf with it and bubble it [downwards](#bubble-down) if its smaller than one of its children or [upwards](#bubble-up) if its bigger than its parent <br/>
 
 
-##### <span class="section-num">6.8.3.4</span> binary heap array representation {#binary-heap-array-representation}
+##### <span class="section-num">2.8.3.4</span> binary heap array representation {#binary-heap-array-representation}
 
 <div class="note">
 
@@ -2819,12 +2397,12 @@ in other words, the nodes are taken from the root to the last level from left to
 the array should hold 2 values, `array-size`, which is the size of the array, and `heap-size`, which is the number of elements of the heap in the array <br/>
 
 
-##### <span class="section-num">6.8.3.5</span> construction of binary heap from array {#construction-of-binary-heap-from-array}
+##### <span class="section-num">2.8.3.5</span> construction of binary heap from array {#construction-of-binary-heap-from-array}
 
-given some random [array]({{< relref "20220728190531-array.md" >}}), e.g. `A=[10,20,30,40,50,70,35,60,80]`, we need to reorganize its elements such that it [represents a binary heap](#binary-heap-array-representation) <br/>
+given some random , e.g. `A=[10,20,30,40,50,70,35,60,80]`, we need to reorganize its elements such that it [represents a binary heap](#binary-heap-array-representation) <br/>
 to achieve this we apply [bubble down](#bubble-down) to the first half of the array **in reverse** (because the [leaf](#leaf) nodes need not be heapified as they already follow the heap property) <br/>
 e.g. for the given array we apply `bubble(A, i)` such that \\(i = 3 \to 0\\) <br/>
-this is the constructing [algorithm]({{< relref "20220706211958-algorithm.md" >}}) in pseudocode: <br/>
+this is the constructing in pseudocode: <br/>
 
 ```C
 Build-Heap(A)
@@ -2855,7 +2433,7 @@ to be continued <br/>
 </div>
 
 
-##### <span class="section-num">6.8.3.6</span> BinaryHeap {#binaryheap}
+##### <span class="section-num">2.8.3.6</span> BinaryHeap {#binaryheap}
 
 <div class="note">
 
@@ -2995,65 +2573,65 @@ int main() {
 
 inserting 0 <br/>
 
-{{< figure src="/ox-hugo/fz6PZSQ.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/n7hiwtF.svg" >}} <br/>
 
 inserting 1 <br/>
 
-{{< figure src="/ox-hugo/7Eg7cjC.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/QtVmFa6.svg" >}} <br/>
 
 inserting 2 <br/>
 
-{{< figure src="/ox-hugo/T1K8nYP.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/jwzE4yi.svg" >}} <br/>
 
 inserting 3 <br/>
 
-{{< figure src="/ox-hugo/2ZHnhRq.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/AEcB127.svg" >}} <br/>
 
 inserting 4 <br/>
 
-{{< figure src="/ox-hugo/vzKlOp9.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/JQ3ZtDD.svg" >}} <br/>
 
 inserting 5 <br/>
 
-{{< figure src="/ox-hugo/uVldADa.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/5rVNF3x.svg" >}} <br/>
 
 inserting 6 <br/>
 
-{{< figure src="/ox-hugo/r9SYJai.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/nGJCqTM.svg" >}} <br/>
 
 inserting 7 <br/>
 
-{{< figure src="/ox-hugo/3gg3g4e.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/pF9ncoT.svg" >}} <br/>
 
 inserting 8 <br/>
 
-{{< figure src="/ox-hugo/zGyn5ir.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/RxJZm6A.svg" >}} <br/>
 
 inserting 9 <br/>
 
-{{< figure src="/ox-hugo/hgQnv0o.svg" >}} <br/>
+{{< figure src="/Users/user/.emacs.d/tmp/4aIn0SK.svg" >}} <br/>
 
 
-##### <span class="section-num">6.8.3.7</span> algorithms {#algorithms}
+##### <span class="section-num">2.8.3.7</span> binary heap algorithms {#binary-heap-algorithms}
 
 
-###### <span class="section-num">6.8.3.7.1</span> biggest k nodes {#biggest-k-nodes}
+###### <span class="section-num">2.8.3.7.1</span> biggest k nodes {#biggest-k-nodes}
 
 initial inefficient solution: <br/>
 
-{{< figure src="/ox-hugo/tHkzZWu.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/tHkzZWu.svg" >}} <br/>
 
-we analyze the [time complexity](#time-complexity) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
+we analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this : <br/>
 \\[
   T(n) \leq C\_1 \cdot (\log n+\log(n-1) + \cdots + \log(n-(k-1))) \leq C\_1 \cdot (\log n + \log n + \cdots + \log n) = C\_1 \cdot k\log n
 \\] <br/>
 which means that the time complexity is \\(T(n) = O(k\log n)\\) <br/>
-we cant arrive at [Big Theta](#big-theta) for this algorithm <br/>
+we cant arrive at [Big Theta]({{< relref "20221203185351-asymptotic_notations.md#big-theta" >}}) for this algorithm <br/>
 we suggest another algorithm that is more efficient: <br/>
 
-{{< figure src="/ox-hugo/7kcwMR4.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/7kcwMR4.svg" >}} <br/>
 
-we analyze the [time complexity](#time-complexity) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
+we analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this : <br/>
 \\[
   T(n) \leq C\_1 \cdot (3\log2 + 3\log3 + \cdots + 3\log(k+1)) \leq C\_1 \cdot 3k\log(k+1) = \Theta(k\log k)
 \\] <br/>
@@ -3065,7 +2643,7 @@ which implies \\(T(n) = \Omega(k\log k)\\) <br/>
 and therefore \\(T(n) = \Theta(k\log k)\\) <br/>
 
 
-###### <span class="section-num">6.8.3.7.2</span> check if array represents a binary heap {#check-if-array-represents-a-binary-heap}
+###### <span class="section-num">2.8.3.7.2</span> check if array represents a binary heap {#check-if-array-represents-a-binary-heap}
 
 ```C++
 #include <iostream>
@@ -3090,7 +2668,7 @@ int main() {
 ```
 
 
-#### <span class="section-num">6.8.4</span> binomial heap {#binomial-heap}
+#### <span class="section-num">2.8.4</span> binomial heap {#binomial-heap}
 
 some info taken from <http://staff.ustc.edu.cn/~csli/graduate/algorithms/book6/chap20.htm> <br/>
 
@@ -3107,7 +2685,7 @@ a **binomial heap** is a [concrete data type](#concrete-data-type) that implemen
 </div>
 
 
-##### <span class="section-num">6.8.4.1</span> binomial tree {#binomial-tree}
+##### <span class="section-num">2.8.4.1</span> binomial tree {#binomial-tree}
 
 <div class="definition">
 
@@ -3134,7 +2712,7 @@ this property implies that a binomial heap with \\(n\\) nodes consists of at mos
 
 a binomial heap of order 3: <br/>
 
-{{< figure src="/ox-hugo/mmqMhmW.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/mmqMhmW.svg" >}} <br/>
 
 </div>
 
@@ -3144,20 +2722,20 @@ this is an example binomial heap that consists of 13 nodes and 3 binomial trees 
 
 <a id="figure--binomial-heap-three-orders"></a>
 
-{{< figure src="/ox-hugo/ejJXe51.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/ejJXe51.svg" >}} <br/>
 
 </div>
 
 <div class="characteristic">
 
-a binomial tree of order \\(k\\) has \\(2^{k}\\) nodes and height \\(k\\). the name comes from the shape: a binomial tree of order k has \\(\binom{k}{d}\\) nodes at depth \\(d\\), a [binomial coefficient]({{< relref "discrete_maths2.md#binomial-coefficient" >}}). because of its structure, a binomial tree of order \\(k\\) can be constructed from two trees of order \\(k-1\\) by attaching one of them as the leftmost child of the root of the other tree. This feature is central to the [merge](#union) operation of a binomial heap, which is its major advantage over other conventional heaps. <br/>
+a binomial tree of order \\(k\\) has \\(2^{k}\\) nodes and height \\(k\\). the name comes from the shape: a binomial tree of order k has \\(\binom{k}{d}\\) nodes at depth \\(d\\), a . because of its structure, a binomial tree of order \\(k\\) can be constructed from two trees of order \\(k-1\\) by attaching one of them as the leftmost child of the root of the other tree. This feature is central to the [merge](#union) operation of a binomial heap, which is its major advantage over other conventional heaps. <br/>
 
 </div>
 
 </div>
 
 
-##### <span class="section-num">6.8.4.2</span> implementation {#implementation}
+##### <span class="section-num">2.8.4.2</span> implementation {#implementation}
 
 because no operation requires random access to the root nodes of the binomial trees, the roots of the binomial trees can be stored in a [linked list](#linked-list), ordered by increasing order of the tree. because the number of children for each node is variable, it does not work well for each node to have separate links to each of its children, as would be common in a [binary tree](#binary-tree); instead, it is possible to implement this tree using links from each node to its highest-order child in the tree, and to its sibling of the next smaller order than it. these sibling pointers can be interpreted as the next pointers in a linked list of the children of each node, but with the opposite order from the linked list of roots: from largest to smallest order, rather than vice versa. this representation allows two trees of the same order to be linked together, making a tree of the next larger order, in constant time. <br/>
 each node `x` has a key field and contains pointers `parent(x)` to its parent, `child(x)` to its leftmost child, and `sibling(x)` to the sibling of x immediately to its right. if node x is a root, then `parent(x) = nil`. if node x has no children, then `child(x) = nil`, and if x is the rightmost child of its parent, then `sibling(x) = nil`. each node x also contains the field `degree(x)`, which is the number of children of x. <br/>
@@ -3165,12 +2743,12 @@ the roots of the binomial trees within a binomial heap are organized in a linked
 a given binomial heap `h` is accessed by the field `head(h)`, which is simply a pointer to the first root in the root list of h. if binomial heap H has no elements, then `head[h] = nil`. <br/>
 
 
-###### <span class="section-num">6.8.4.2.1</span> create {#create}
+###### <span class="section-num">2.8.4.2.1</span> create {#create}
 
 to make an empty binomial heap, the `MAKE-BINOMIAL-HEAP` procedure simply allocates and returns an object `h`, where `head[h] = nil`. the running time is \\(O(1)\\). <br/>
 
 
-###### <span class="section-num">6.8.4.2.2</span> union {#union}
+###### <span class="section-num">2.8.4.2.2</span> union {#union}
 
 the operation of uniting two binomial heaps is used as a subroutine by most of the remaining operations. merging of binomial trees is done by comparing the keys at the roots of two trees, and the root node with the larger key will become the child of the root with the smaller key. the time complexity for finding a union is \\(O(\log n)\\). <br/>
 to perform the union of two binomial heaps, first we **merge** the heaps into one, such that the trees in the resulting heap would be in monotonically ascending order, then we traverse through the roots of the binomial trees, we consider the following cases where `x` denotes the current root: <br/>
@@ -3184,16 +2762,16 @@ because each binomial tree in a binomial heap corresponds to a bit in the binary
 each binomial tree's traversal during merge only involves roots, hence making the time taken at the biggest order \\(\log\_2n\\) and therefore the running time is \\(O(\log n)\\). <br/>
 
 
-###### <span class="section-num">6.8.4.2.3</span> insert {#insert}
+###### <span class="section-num">2.8.4.2.3</span> insert {#insert}
 
 inserting a new element to a heap can be done by creating a new heap containing only this element and then [merging](#union) it with the original heap. because of the merge, a single insertion takes time \\(O(\log n)\\). however, this can be sped up using a merge procedure that shortcuts the merge after it reaches a point where only one of the merged heaps has trees of larger order. with this speedup, across a series of \\(k\\) consecutive insertions, the total time for the insertions is \\(O(k+\log n)\\). another way of stating this is that (after logarithmic overhead for the first insertion in a sequence) each successive insert has an amortized time of \\(O(1)\\) (i.e. constant time) per insertion. <br/>
 a variant of the binomial heap, the skew binomial heap, achieves constant worst case insertion time by using forests whose tree sizes are based on the skew binary number system rather than on the binary number system. <br/>
 
 
-###### <span class="section-num">6.8.4.2.4</span> delete {#delete}
+###### <span class="section-num">2.8.4.2.4</span> delete {#delete}
 
 
-##### <span class="section-num">6.8.4.3</span> BinomialHeapNode {#binomialheapnode}
+##### <span class="section-num">2.8.4.3</span> BinomialHeapNode {#binomialheapnode}
 
 <a id="code-snippet--BinomialHeapNode"></a>
 ```C++
@@ -3288,14 +2866,14 @@ public:
     int degree = 0;
     for (n = this; n->get_child() != nullptr; n = n->get_child()) {
       degree++;
-    } 
+    }
     return degree;
   }
 };
 ```
 
 
-##### <span class="section-num">6.8.4.4</span> BinomialHeap {#binomialheap}
+##### <span class="section-num">2.8.4.4</span> BinomialHeap {#binomialheap}
 
 <a id="code-snippet--BinomialHeap"></a>
 ```C++
@@ -3390,7 +2968,7 @@ public:
     int degree = 0;
     for (n = this; n->get_child() != nullptr; n = n->get_child()) {
       degree++;
-    } 
+    }
     return degree;
   }
 };
@@ -3501,70 +3079,23 @@ int main() {
 ```
 
 inserting 0 <br/>
-
-{{< figure src="/ox-hugo/M7XiAG7.svg" >}} <br/>
-
 inserting 1 <br/>
-
-{{< figure src="/ox-hugo/NOxYVZg.svg" >}} <br/>
-
 inserting 2 <br/>
-
-{{< figure src="/ox-hugo/AgDm1ZB.svg" >}} <br/>
-
 inserting 3 <br/>
-
-{{< figure src="/ox-hugo/pZnLYkK.svg" >}} <br/>
-
 inserting 4 <br/>
-
-{{< figure src="/ox-hugo/GqkzbLZ.svg" >}} <br/>
-
 inserting 5 <br/>
-
-{{< figure src="/ox-hugo/k408h72.svg" >}} <br/>
-
 inserting 6 <br/>
-
-{{< figure src="/ox-hugo/AHDijqI.svg" >}} <br/>
-
 inserting 7 <br/>
-
-{{< figure src="/ox-hugo/2KBOTdl.svg" >}} <br/>
-
 inserting 8 <br/>
-
-{{< figure src="/ox-hugo/RZtO6E9.svg" >}} <br/>
-
 inserting 9 <br/>
-
-{{< figure src="/ox-hugo/qGE1e92.svg" >}} <br/>
-
 inserting 10 <br/>
-
-{{< figure src="/ox-hugo/COzTKlm.svg" >}} <br/>
-
 inserting 11 <br/>
-
-{{< figure src="/ox-hugo/QrU1zmQ.svg" >}} <br/>
-
 inserting 12 <br/>
-
-{{< figure src="/ox-hugo/MGjqWXd.svg" >}} <br/>
-
 inserting 13 <br/>
-
-{{< figure src="/ox-hugo/Z0U2Beo.svg" >}} <br/>
-
 inserting 14 <br/>
 
-{{< figure src="/ox-hugo/rMY59VD.svg" >}} <br/>
 
-
-#### <span class="section-num">6.8.5</span> algorithms {#algorithms}
-
-
-### <span class="section-num">6.9</span> hash table {#hash-table}
+### <span class="section-num">2.9</span> hash table {#hash-table}
 
 <div class="definition">
 
@@ -3578,7 +3109,7 @@ it contains the following functions: <br/>
 </div>
 
 
-### <span class="section-num">6.10</span> theorems {#theorems}
+### <span class="section-num">2.10</span> theorems {#theorems}
 
 <div class="lemma">
 
@@ -3684,7 +3215,7 @@ for every almost complete tree with \\(n\\) nodes and height \\(h\\), \\(2^{h-2}
 </div>
 
 
-### <span class="section-num">6.11</span> data structures average time complexity table {#data-structures-average-time-complexity-table}
+### <span class="section-num">2.11</span> data structures average time complexity table {#data-structures-average-time-complexity-table}
 
 <div class="note">
 
@@ -3706,255 +3237,3 @@ see <https://stackoverflow.com/questions/12258114/big-oh-vs-big-ologn-in-trees> 
 | [AVL tree](#avl-tree)                     | \\(O(\log n)\\) | \\(O(\log n)\\) |
 | [2-3 tree](#2-3-tree)                     | \\(O(\log n)\\) | \\(O(\log n)\\) |
 
-
-## <span class="section-num">7</span> sorting algorithms {#sorting-algorithms}
-
-
-### <span class="section-num">7.1</span> selection sort {#selection-sort}
-
-**selection sort** maintains two subarrays in a given array, one subarray that is sorted and the other unsorted, it sorts a given array by repeatedly finding the minimum element (considering ascending order) from the unsorted part and putting it at the beginning <br/>
-in every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray. <br/>
-[time complexity](#time-complexity) is \\(\Theta(n^2)\\) <br/>
-
-<a id="code-snippet--SelectionSort"></a>
-```C++
-template <typename T>
-void selection_sort(T arr[], int len) {
-  for (int i = 0; i < len; ++i) {
-    // find index of minimum in unsorted subarray
-    int min_idx = i;
-    for (int j = i+1; j < len; ++j) {
-      if (arr[j] < arr[min_idx]) {
-        min_idx = j;
-      }
-    }
-
-    // add minimum to the sorted subarray
-    T tmp = arr[i];
-    arr[i] = arr[min_idx];
-    arr[min_idx] = tmp;
-  }
-}
-```
-
-example usage: <br/>
-
-```C++
-#include <iostream>
-
-int main() {
-  int arr[] = {8, 1, 2, 10, 50, 18};
-  selection_sort(arr, std::size(arr));
-  for (int i = 0; i < std::size(arr); ++i) {
-    std::cout << arr[i] << std::endl;
-  }
-}
-```
-
-| 1  |
-|----|
-| 2  |
-| 8  |
-| 10 |
-| 18 |
-| 50 |
-
-
-### <span class="section-num">7.2</span> insertion sort {#insertion-sort}
-
-1.  iterate from arr[1] to arr[n] <br/>
-2.  compare the current element to its predecessor <br/>
-3.  if the current element is smaller than its predecessor, drag it backwards until its bigger than its predecessor <br/>
-
-[time complexity](#time-complexity) is \\(O(n^2)\\) <br/>
-
-<a id="code-snippet--InsertionSort"></a>
-```C++
-template <typename T>
-void insertion_sort(T arr[], int len) {
-  for (int i = 1; i < len; ++i) {
-    int idx = i;
-    while (idx > 0 && arr[idx] < arr[idx-1]) {
-      T tmp = arr[idx];
-      arr[idx] = arr[idx-1];
-      arr[idx-1] = tmp;
-      idx--;
-    }
-  }
-}
-```
-
-
-### <span class="section-num">7.3</span> AVL sort {#avl-sort}
-
-AVL sort consists of inserting the given array into an [AVL tree](#avl-tree) element by element and then converting the tree into an array using [inorder traversal](#inorder-traversal) <br/>
-
-<div class="lemma">
-
-the [time complexity](#time-complexity) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) is \\(\Theta(n\log n)\\) <br/>
-
-</div>
-
-
-### <span class="section-num">7.4</span> heap sort {#heap-sort}
-
-**heap sort** consists of [transforming the given array into a heap array](#construction-of-binary-heap-from-array) `A`, initiating `heap-size` to `size(A)` then applying the following steps recursively: <br/>
-
-1.  replace the root of the heap `A[0]` with `A[heap-size - 1]` <br/>
-2.  [bubble down](#bubble-down) the newly replaced root (`A[0]`) <br/>
-3.  decrement `heap-size`, return to step 1 if `heap-size > 1` <br/>
-
-<div class="lemma">
-
-the [time complexity](#time-complexity) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) is \\(\Theta(n\log n)\\) <br/>
-
-</div>
-
-<div class="note">
-
-on the third step when decrementing `heap-size` we arent deleting the last element, we are simply decreasing the size of the part of the list that we're operating on because the part at the end contains elements that are sorted <br/>
-
-</div>
-
-
-### <span class="section-num">7.5</span> QuickSort {#quicksort}
-
-**QuickSort** is a [Divide-and-conquer algorithm]({{< relref "20220706211939-divide_and_conquer_algorithm.md" >}}), it picks an element as **pivot** and **partitions** the given array around the pivot, there are different versions of quicksort that pick pivots in different ways: <br/>
-
-1.  first element as pivot (implemented here) <br/>
-2.  last element as pivot <br/>
-3.  a random element as pivot <br/>
-4.  median as pivot <br/>
-
-the first subarray we use as a "partition" is the array itself, where given a pivot, put the pivot at its correct position in the sorted array by putting all the smaller elements before it, and all the greater elements after it. then divide the partition in 2 partitions, where the first partition is where all the smaller elements were put, and the second partition is where all the greater elements were put, and apply the same process for these partitions recursively until we reach partitions that contain 1 element only <br/>
-this algorithm runs in \\(O(n\log n)\\) time <br/>
-
-![](/ox-hugo/quicksort.png) <br/>
-image taken from <https://workat.tech/problem-solving/tutorial/sorting-algorithms-quick-sort-merge-sort-dsa-tutorials-6j3h98lk6j2w> <br/>
-
-<a id="code-snippet--QuickSort"></a>
-```C++
-template <typename T>
-void swap(T arr[], int i, int j) {
-  T tmp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = tmp;
-}
-
-template <typename T>
-int partition(T arr[], int low, int high) {
-  int pivot = low++;
-  while (low <= high) {
-    if (arr[low] <= arr[pivot]) low++;
-    else if (arr[high] >= arr[pivot]) high--;
-    else swap(arr, low, high);
-  }
-  swap(arr, high, pivot);
-  return high;
-}
-
-template <typename T>
-void quick_sort(T arr[], int low, int high) {
-  if (low <= high) {
-    int pivot = partition(arr, low, high);
-    quick_sort(arr, low, pivot-1);
-    quick_sort(arr, pivot+1, high);
-  }
-}
-```
-
-
-### <span class="section-num">7.6</span> merge sort {#merge-sort}
-
-yet another [divide-and-conquer algorithm]({{< relref "20220706211939-divide_and_conquer_algorithm.md" >}}) <br/>
-given an array, this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) keeps splitting it until it reaches a subarray that cant be divided which happens when a subarray contains only 1 or 0 elements, each of these subarrays are sorted individually and then combined, recursively, to eventually make a larger sorted array <br/>
-this algorithm runs in \\(\Theta(n\log n)\\) time <br/>
-
-![](/ox-hugo/merge_sort.webp) <br/>
-image taken from <https://www.programiz.com/dsa/merge-sort>, will keep this here until i make my own <br/>
-
-<a id="code-snippet--MergeSort"></a>
-```C++
-#include <iostream>
-template <typename T>
-void merge(T arr[], int l, int m, int r) {
-  int n1 = m - l + 1;
-  int n2 = r - m;
-  T L[n1];
-  T R[n2];
-
-  for (int i = 0; i < n1; ++i)
-    L[i] = arr[l + i];
-  for (int j = 0; j < n2; ++j)
-    R[j] = arr[m + 1 + j];
-
-  int i = 0, j = 0;
-  int k = l;
-  while (i < n1 && j < n2) {
-    if (L[i] <= R[j])
-      arr[k++] = L[i++];
-    else
-      arr[k++] = R[j++];
-  }
-
-  while (i < n1)
-    arr[k++] = L[i++];
-  while (j < n2)
-    arr[k++] = R[j++];
-}
-
-template <typename T>
-void sort(T arr[], int l, int r) {
-  if (l < r) {
-    int m = l+(r-l)/2;
-    sort(arr, l, m);
-    sort(arr, m + 1, r);
-    merge(arr, l, m, r);
-  }
-}
-```
-
-
-### <span class="section-num">7.7</span> bubble sort {#bubble-sort}
-
-this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) repeatedly steps through the input list element by element, comparing the current element with the one after it, swapping their values if needed. these passes through the list are repeated until no swaps had to be performed during a pass, meaning that the list has become fully sorted. the algorithm, which is a comparison sort, is named for the way the larger elements "bubble" up to the top of the list. <br/>
-
-
-## <span class="section-num">8</span> searching algorithms {#searching-algorithms}
-
-
-### <span class="section-num">8.1</span> binary search {#binary-search}
-
-goal: given a sorted array and a key, find index of the key in the array <br/>
-method: compare key against middle entry <br/>
-
--   too small, go left <br/>
--   too big, go right <br/>
--   equal, found <br/>
-
-time complexity is \\(O(\log n)\\) <br/>
-
-```java
-public static void main(String[] args) {
-  int[] a = {1,10,11,21,30};
-  System.out.println(binarySearch(a, 10));
-}
-
-static int binarySearch(int[] a, int key) {
-  int lo = 0, hi = a.length - 1;
-  while (lo <= hi) {
-    int mid = lo + (hi - lo) / 2;
-    if (key < a[mid]) hi = mid - 1;
-    else if (key > a[mid]) lo = mid + 1;
-    else return mid;
-  }
-  return -1;
-}
-```
-
-```text
-1
-```
-
-
-### <span class="section-num">8.2</span> ternary search {#ternary-search}
