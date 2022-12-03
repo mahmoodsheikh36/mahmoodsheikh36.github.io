@@ -2,7 +2,7 @@
 title = "recursion"
 author = ["mahmood"]
 description = "recursive functions"
-date = 2022-12-03T10:26:00+02:00
+date = 2022-12-03T11:36:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -63,6 +63,12 @@ window.onload = function() {
 <div class="definition">
 
 a **recursive** function is a function that calls itself <br/>
+
+<div class="note">
+
+there are a few mistakes here (in the recursion tree section)! this document needs some fixing <br/>
+
+</div>
 
 <div class="my_example">
 
@@ -198,8 +204,7 @@ consider the following [recurrence relation](#recurrence-relation) <br/>
 a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \\(T(n)\\) <br/>
 with that in mind, the first step would be: <br/>
 
-{{< figure src="/ox-hugo/AT4XkK.svg" >}} <br/>
-
+![](/ox-hugo/AT4XkK.svg) <br/>
 if we sum all the nodes we can see that indeed \\(T(n) = T\left(\frac{2n}{3}\right) + T\left(\frac{n}{3}\right) + n\\) <br/>
 for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\left(\frac{n}{3}\right)\\) in terms of time complexity for smaller values of \\(n\\) so we can know what the next row of nodes would be <br/>
 
@@ -249,7 +254,7 @@ the first step would be: <br/>
 
 \begin{align\*}
   T(n) &= \text{sum of all nodes}\\\\
-  &= \text{sum of all nodes in all full rows}\\\\
+  &= \text{sum of all nodes in full rows}\\\\
   &\leq n+n\left(\frac{2}{8}+\frac{3}{9}\right)+n\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+n\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\\\\
   &\leq n\left(\left(\frac{2}{8}+\frac{3}{9}\right)+\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\right)\\\\
   &= n\cdot \frac{1}{1-\left(\frac{2}{8}+\frac{3}{9}\right)}\\\\
@@ -323,6 +328,12 @@ we denote by \\(y\\) the last level with a full row, for this row to exist, \\(n
 \end{align\*}
 
 the division by 2 doesnt affect big omega so \\(T(n) = \Omega\left(2^{n/2}\right)\\) <br/>
+
+</div>
+
+<div class="my_example">
+
+<br/>
 
 </div>
 
