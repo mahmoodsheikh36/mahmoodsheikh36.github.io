@@ -2,7 +2,7 @@
 title = "probability homework 1"
 author = ["mahmood"]
 description = "probability homework 1"
-date = 2022-12-03T17:09:00+02:00
+date = 2022-12-03T22:03:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -62,11 +62,19 @@ window.onload = function() {
 
 <div class="question">
 
-let A,B,C be events, find the expressions for the following events: <br/>
+let A,B,C be events, find the [probability]({{< relref "probability.md" >}}) expressions for the following: <br/>
 
 <div class="subquestion">
 
 only A happens <br/>
+
+<div class="answer">
+
+\\[
+P(A) \cap P\left(\overline{B}\right) \cap P\left(\overline{C}\right)
+\\] <br/>
+
+</div>
 
 </div>
 
@@ -74,11 +82,27 @@ only A happens <br/>
 
 atleast one of them happens <br/>
 
+<div class="answer">
+
+\\[
+P(A) \cup P(B) \cup P( C)
+\\] <br/>
+
+</div>
+
 </div>
 
 <div class="subquestion">
 
 only one of them happens <br/>
+
+<div class="answer">
+
+\\[
+\left(P(A) \cap P(\overline{B}) \cap P(\overline{C})\right) \cup \left(P(\overline{A}) \cap P(B) \cap P(\overline{C})\right) \cup \left(P(\overline{A}) \cap P(\overline{B}) \cap P( C)\right)
+\\] <br/>
+
+</div>
 
 </div>
 
@@ -86,11 +110,28 @@ only one of them happens <br/>
 
 none of the events happen <br/>
 
+<div class="answer">
+
+\\[
+P(\overline{A})+P(\overline{B})+P(\overline{C})
+\\] <br/>
+
+</div>
+
 </div>
 
 <div class="subquestion">
 
 no more than 2 events happen <br/>
+
+<div class="answer">
+
+1 minus the probability of all 3 events happening: <br/>
+\\[
+1 - P(A) \cap P(B) \cap P( C)
+\\] <br/>
+
+</div>
 
 </div>
 
@@ -114,11 +155,19 @@ hint: use the sum of an infinite convergent series <br/>
 
 <div class="question">
 
-in a square matrix of the fourth degree we pick 4 different cells randomly, what is the probability that: <br/>
+in a [square matrix]({{< relref "linear_algebra2.md#square-matrix" >}}) of the fourth degree we pick 4 different cells randomly, what is the probability that: <br/>
 
 <div class="subquestion">
 
-all of them are in the same field <br/>
+all of them are in the same row <br/>
+
+<div class="answer">
+
+\\[
+\frac{3}{15} \cdot \frac{2}{14} \cdot \frac{1}{13}
+\\] <br/>
+
+</div>
 
 </div>
 
@@ -126,11 +175,27 @@ all of them are in the same field <br/>
 
 all of them are in the two upper rows <br/>
 
+<div class="answer">
+
+\\[
+\frac{7}{15} \cdot \frac{6}{14} \cdot \frac{5}{13}
+\\] <br/>
+
+</div>
+
 </div>
 
 <div class="subquestion">
 
 they form a permutation (exactly one from each row and column) <br/>
+
+<div class="answer">
+
+\\[
+\frac{9}{15} \cdot \frac{4}{14} \cdot \frac{1}{16}
+\\] <br/>
+
+</div>
 
 </div>
 
