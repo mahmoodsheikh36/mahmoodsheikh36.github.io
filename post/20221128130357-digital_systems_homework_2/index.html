@@ -1,0 +1,112 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>digital systems homework 2</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/org.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.107.0"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>digital systems homework 2</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/resume.pdf>Resume</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:mahmod.m2015@gmail.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/mahmoodsheikh36/><i class="fab fa-github"></i></a></li></ul></div></div></nav><main><div><h2>digital systems homework 2</h2><h5>December 3, 2022</h5></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
+\(\DeclareMathOperator{\dom}{domain}\)
+\(\DeclareMathOperator{\ran}{range}\)
+\(\DeclareMathOperator{\rng}{range}\)
+\(\DeclareMathOperator{\img}{Im}\)
+\(\DeclareMathOperator{\adj}{adj}\)
+\(\newcommand\dif[1]{\:\textrm{d}#1}\)
+\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+\(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+\(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+\(\newcommand{\khat}{\hat{\textbf{k}}}\)
+\(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+\(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><div class=question><p>a safe has 5 locks<br>person keys for locks X,V<br>person keys for locks Y,V<br>person keys for locks Y,W<br>person keys for locks Z,X<br>person E has keys for locks V,Z<br></p><div class=subquestion><p>whats the minimal number of persons needed to open the safe?<br></p><div class=answer><p>\begin{gather*}
+X=A+D\\
+Y=B+C\\
+Z=D+E\\
+W=C\\
+V=A+B+E\\
+F(A,B,C,D,E) = XYZWV = (A+D)(B+C)(D+E)( C)(A+B+E) = (A+D)(A+B+E)(D+E)(B+C) = (A+B+E)(A+D)(D+E)C = (A+B+E)(D+AE)C
+\end{gather*}</p><p>atleast 3 are needed<br></p></div></div><div class=subquestion><p>who is the main key holder (the obligatory one)?<br></p><div class=answer><p>C because he&rsquo;s the only one with a key for W<br></p></div></div></div><div class=question><p>show:<br></p><div class=subquestion><p>\[
+xy+\overline{x}\,\overline{y}+yz = xy+\overline{x}\,\overline{y}+\overline{x}z
+\]<br></p><div class=answer><p>simplifying the left side:<br></p><p>\begin{gather*}
+xy(z+\overline{z}) + \overline{x}\,\overline{y}+yz\\
+xyz + xy\overline{z} + \overline{x}\,\overline{y}+yz\\
+xyz + xy\overline{z} + \overline{x}\,\overline{y}\\
+xy + \overline{x}\,\overline{y}
+\end{gather*}</p><p>simplifying the right side:<br></p><p>\begin{gather*}
+xy + \overline{x} \ \overline{y} + \overline{x}z(y + \overline{y})\\
+xy + \overline{x} \ \overline{y} + \overline{x}zy + \overline{x}z\overline{y}\\
+xy + \overline{x}z\overline{y} + \overline{x}zy\\
+xy + \overline{x}z\\
+xy + \overline{x}z(y + \overline{y})\\
+xy + \overline{x}zy + \overline{x}z\overline{y}\\
+y(x + \overline{x}z) + \overline{x}z\overline{y}\\
+y(x + z) + \overline{x}z\overline{y}\\
+yx + yz + \overline{x}z\overline{y}\\
+yx + z(y + \overline{x} \ \overline{y})\\
+yx + z(y + \overline{x})\\
+yx + zy + z\overline{x}
+\end{gather*}</p><p>not sure what i did wrong because the resulting simplified expression for the left side has a truth table different from the original expression which makes it wrong but im confused because i dont think i took any wrong steps when simplifying :/<br></p></div></div><div class=subquestion><p>\[
+\overline{x}y+\overline{y}z+x\overline{z} = x\overline{y}+y\overline{z}+\overline{x}z
+\]<br></p><div class=answer><p>attempt at simplifying the left side:<br></p><p>\begin{gather*}
+\overline{x}y + \overline{y}z + x\overline{z}(\overline{y}+y)\\
+\overline{x}y + \overline{y}z + x\overline{z} \ \overline{y} + x\overline{z}y\\
+y(\overline{x} + x\overline{z}) + \overline{y}(z + x\overline{z})\\
+y(\overline{x} + \overline{z}) + \overline{y}(z + x)\\
+y\overline{x} + y\overline{z} + \overline{y}z + \overline{y}x
+\end{gather*}</p><p>attempt at simplifying the right side:<br></p><p>\begin{gather*}
+x\overline{y} + y\overline{z} + z\overline{x}(\overline{y}+y)\\
+x\overline{y} + y\overline{z} + z\overline{x} \ \overline{y} + z\overline{x}y\\
+\overline{y}(x + z\overline{x}) + y(\overline{z} + z\overline{x})\\
+\overline{y}(x + z) + y(\overline{z} + \overline{x})\\
+\overline{y}x + \overline{y}z + y\overline{z} + y\overline{x}
+\end{gather*}</p></div></div><div class=subquestion><p>\[
+\overline{y}+\overline{z}+yz\overline{w}=1
+\]<br></p><div class=answer><p>\begin{gather*}
+yzw + yz\overline{w} = yz \longrightarrow \overline{y} + \overline{z} + yz\\
+\overline{y} + \overline{z} = \overline{yz} \longrightarrow \overline{yz} + yz\\
+\overline{yz} + yz = 1
+\end{gather*}</p></div></div></div><div class=question><p>simplify the following expressions<br></p><div class=subquestion><p>\[
+\overline{\overline{\overline{xy}x}\,\overline{\overline{xy}y}}
+\]<br></p><div class=answer><p>\begin{gather*}
+[\overline{(xy)}x] + [\overline{(xy)}y]\\
+[(\overline{x} + \overline{y})x] + [(\overline{x} + \overline{y})y]\\
+[\overline{x}x + \overline{y}x] + [\overline{x}y + \overline{y}y]\\
+\overline{x}x + \overline{y}x + \overline{x}y + \overline{y}y\\
+1 + \overline{y}x + \overline{x}y + 1\\
+1
+\end{gather*}</p></div></div><div class=subquestion><p>\[
+\overline{\overline{\overline{x}y\overline{w}+xwz} + \overline{\overline{xwz}+\overline{y}\,\overline{w}\,\overline{z} + yw\overline{z}}}
+\]<br></p><div class=answer><p>\begin{gather*}
+[\overline{x}y\overline{w}+xwz] \ [\overline{(xwz)} + \overline{y} \ \overline{w} \ \overline{z} + yw\overline{z}] \\
+[\overline{x}y\overline{w}+xwz] \ [(\overline{x} + \overline{w} + \overline{z}) + \overline{y} \ \overline{w} \ \overline{z} + yw\overline{z}]\\
+[\overline{x}y\overline{w}+xwz] \ [\overline{x} + \overline{w} + \overline{z} + \overline{y} \ \overline{w} \ \overline{z} + yw\overline{z}]\\
+[\overline{x}y\overline{w}+xwz] \ [\overline{x} + \overline{y} \ \overline{w} \ \overline{z} + yw\overline{z}]\\
+\overline{x}y\overline{w} \ \overline{x} + \overline{x}y\overline{w} \ \overline{y} \ \overline{w} \ \overline{z} + \overline{x}y\overline{w}yw\overline{z} + xwz\overline{x} + xwz\overline{y} \ \overline{w} \ \overline{z} + xwzyw\overline{z}\\
+y\overline{w} \ \overline{x} + 0 + 0 + 0 + 0 + 0\\
+y\overline{w} \ \overline{x}
+\end{gather*}</p></div></div><div class=subquestion><p>\[
+\overline{x+y} \ \overline{\overline{x} + \overline{y}}
+\]<br></p><div class=answer><p>\begin{gather*}
+\overline{(x + y) + (\overline{x} + \overline{y})}\\
+\overline{x + y + \overline{x} + \overline{y}}\\
+1 + 1\\
+1
+\end{gather*}</p></div></div><div class=subquestion><p>\[
+y(w\overline{z}+wz)+xy
+\]<br></p><div class=answer><p>\begin{gather*}
+y(w(\overline{z} + z)) + xy\\
+y(w(1)) + xy\\
+y(w) + xy\\
+yw + xy = y(x + w)
+\end{gather*}</p></div></div><div class=subquestion><p>\[
+xyz + \overline{x}\,\overline{y}z + \overline{x}yz + xy\overline{z} + \overline{x}\,\overline{y}\,\overline{z}
+\]<br></p><div class=answer><p>\begin{gather*}
+xy + \overline{x} \ \overline{y}z + \overline{x}yz + \overline{x} \ \overline{y} \ \overline{z} \leftarrow xyz + xy\overline{z}=xy\\
+xy + \overline{x} \ \overline{y} + \overline{x}yz \leftarrow \overline{x} \ \overline{y}z + \overline{x} \ \overline{y} \ \overline{z} = \overline{x} \ \overline{y}\\
+xy + \overline{x} \ \overline{y} + \overline{x}yz
+\end{gather*}</p><p>not sure if this is the simplest form :/<br></p></div></div></div></div></main><footer></footer></body></html>
