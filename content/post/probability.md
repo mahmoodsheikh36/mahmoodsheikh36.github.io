@@ -2,7 +2,7 @@
 title = "probability"
 author = ["mahmood"]
 description = "probability theory"
-date = 2022-12-04T19:03:00+02:00
+date = 2022-12-04T20:32:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -92,9 +92,8 @@ P(\varnothing) = 0
 
 <div class="lemma">
 
-let \\(A\_1,A\_2,\dots,A\_n\\) be independent events, then <br/>
 \\[
-P\left(\bigcup\_{i=1}^{n}A\_i\right) = \sum\_{i=1}^{n} P(A\_i)
+P(\overline{A}) = 1 - P(A)
 \\] <br/>
 
 </div>
@@ -109,8 +108,9 @@ A \subset B \implies P(A) < P(B)
 
 <div class="lemma">
 
+let \\(A\_1,A\_2,\dots,A\_n\\) be independent events, then <br/>
 \\[
-P(\overline{A}) = 1 - P(A)
+P\left(\bigcup\_{i=1}^{n}A\_i\right) = \sum\_{i=1}^{n} P(A\_i)
 \\] <br/>
 
 </div>
@@ -223,6 +223,38 @@ could use some venn diagrams here.. <br/>
   B = (A \cap B) \cup (B - A) \implies P(B) = P(A \cap B) + P(B - A) \implies P(B - A) = P(B) - P(A \cap B)\\\\
   P(A \cup B) = P(A) + P(B) - P(A \cap B)
 \end{gather\*}
+
+</div>
+
+</div>
+
+<div class="question">
+
+prove: <br/>
+\\[
+A \subset B \implies P(B-A) = P(B)-P(A)
+\\] <br/>
+
+<div class="answer">
+
+\begin{gather\*}
+  B = (B \cap A) \cup (B - A) \implies P(B) = P(B \cap A) + P(B - A)\\\\
+  A \subset B \implies A \cap B = A \implies P(B) = P(A) + P(B - A) \implies P(B - A) - P(B) - P(A)
+\end{gather\*}
+
+</div>
+
+</div>
+
+<div class="question">
+
+let \\(\Omega = \\{1,2,3,4,5,6\\}\\) such that \\(n=1,2,3,4,5,6\\) and \\(P(\\{n\\}) = \alpha n\\), find \\(\alpha\\) <br/>
+
+<div class="answer">
+
+\\[
+P(\Omega) = 1 \implies \alpha + 2\alpha + \dots + 6\alpha = 1 \implies 21\alpha = 1 \implies \alpha = \frac{1}{21}
+\\] <br/>
 
 </div>
 
@@ -359,7 +391,7 @@ the [expected value](#expected-value) for a random variable, \\(x\\), for a Bern
 
 <div class="definition">
 
-the probability for a success on the $k$th attempt is <br/>
+the probability for a success on the \\(k\\)'th attempt is <br/>
 \\[
 P(k) = {(1-p)}^{k-1}p
 \\] <br/>
