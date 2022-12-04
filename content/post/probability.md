@@ -2,7 +2,7 @@
 title = "probability"
 author = ["mahmood"]
 description = "probability theory"
-date = 2022-12-04T11:55:00+02:00
+date = 2022-12-04T19:03:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -72,13 +72,46 @@ The probability of an impossible event is zero; the probability of a certain eve
 
 <div class="lemma">
 
-for \\(S\\) the sample space of all possibilities, \\(P(S) = 1\\). that is, the sum of all the probabilities for all possible events is equal to one. <br/>
+for \\(S\\) the sample space of all possibilities, \\(P(S)=1\\). that is, the sum of all the probabilities for all possible events is equal to one. <br/>
 
 <div class="entailment">
 
 the sum of the probabilities of both \\(A\\) and **not** \\(A\\) is equal to 1 <br/>
 
 </div>
+
+</div>
+
+<div class="lemma">
+
+\\[
+P(\varnothing) = 0
+\\] <br/>
+
+</div>
+
+<div class="lemma">
+
+let \\(A\_1,A\_2,\dots,A\_n\\) be independent events, then <br/>
+\\[
+P\left(\bigcup\_{i=1}^{n}A\_i\right) = \sum\_{i=1}^{n} P(A\_i)
+\\] <br/>
+
+</div>
+
+<div class="lemma">
+
+\\[
+A \subset B \implies P(A) < P(B)
+\\] <br/>
+
+</div>
+
+<div class="lemma">
+
+\\[
+P(\overline{A}) = 1 - P(A)
+\\] <br/>
 
 </div>
 
@@ -96,13 +129,145 @@ since there are 10 numbers, the odds of picking a number bigger than 5, which co
 
 </div>
 
+<div class="my_example">
+
+in a family there are 3 kids <br/>
+we define the following expressions: <br/>
+E - the oldest is a boy <br/>
+F - the younger kid (not youngest) is a boy <br/>
+G - the youngest is a boy <br/>
+find expressions for the following cases: <br/>
+
+<div class="subquestion">
+
+the three kids are boys <br/>
+
+<div class="answer">
+
+\\[
+E \cap F \cap G
+\\] <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+the three kids are girls <br/>
+
+<div class="answer">
+
+\\[
+\overline{E} \cap \overline{F} \cap \overline{G}
+\\] <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+atleast one of the kids is a boy <br/>
+
+<div class="answer">
+
+\\[
+E \cup F \cup G
+\\] <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+the two oldest kids are boys <br/>
+
+<div class="answer">
+
+\\[
+E \cap F
+\\] <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+exactly two kids are boys <br/>
+
+<div class="answer">
+
+\\[
+(E \cap F \cap \overline{G}) \cup (E \cap \overline{F} \cap G) \cup (\overline{E} \cap F \cap G)
+\\] <br/>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="question">
+
+given \\(A \cup B\\) is a union of 2 independent events, show that \\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\\) <br/>
+
+<div class="answer">
+
+could use some venn diagrams here.. <br/>
+
+\begin{gather\*}
+  A \cup B = A \cup (B - A) \implies P(A \cup B) = P(A \cup (B - A)) = P(A) + P(B - A)\\\\
+  B = (A \cap B) \cup (B - A) \implies P(B) = P(A \cap B) + P(B - A) \implies P(B - A) = P(B) - P(A \cap B)\\\\
+  P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\end{gather\*}
+
+</div>
+
+</div>
+
 </div>
 
 
-## <span class="section-num">1</span> conditional probability {#conditional-probability}
+## <span class="section-num">1</span> probability space {#probability-space}
+
+<https://en.wikipedia.org/wiki/Probability_space> <br/>
+
+<div class="definition">
+
+a **probability space** \\((\Omega ,{\mathcal {F}},P)\\) is a mathematical construct that provides a formal model of a random process or "experiment". <br/>
+a probability space consists of three elements: <br/>
+
+1.  a **sample space**, \\(\Omega\\), which is the [set]({{< relref "discrete_maths2.md#set" >}}) of all possible outcomes <br/>
+2.  an **event space**, which is a set of events \\(\mathcal{F}\\), an event being a set of outcomes in the sample space <br/>
+3.  a probability function, \\(P\\), which assigns each event in the event space a probability <br/>
+
+<div class="my_example">
+
+rolling 2 dice cubes: <br/>
+\\[
+\Omega = \\{(m,n) \mid m=1,2,\dots,6, n=1,2,\dots,6\\}
+\\] <br/>
+
+</div>
+
+<div class="lemma">
+
+\\[
+P(\Omega) = 1
+\\] <br/>
+
+</div>
+
+</div>
+
+
+## <span class="section-num">2</span> conditional probability {#conditional-probability}
 
 -   two events are mutually exclusive or [disjoint]({{< relref "discrete_maths2.md#disjoint-sets" >}}) if they cannot occur at the same time. <br/>
--   the [probability]({{< relref "probability.md" >}}) that event \\(A\\) occurs, given that event \\(B\\) has occurred, is called a **conditional probability**. the conditional probability of event \\(A\\), given event \\(B\\), is denoted by \\(P(A\mid B)\\), if \\(A\\) is independant from \\(B\\), this simplifies to \\(P(A\mid B) = P(A)\\), if \\(P(B)=0\\) the conditional probability is undefined. <br/>
+-   the [probability]({{< relref "probability.md" >}}) that event \\(A\\) occurs, given that event \\(B\\) has occurred, is called a **conditional probability**. the conditional probability of event \\(A\\), given event \\(B\\), is denoted by \\(P(A\mid B)\\), if \\(A\\) is independent from \\(B\\), this simplifies to \\(P(A\mid B) = P(A)\\), if \\(P(B)=0\\) the conditional probability is undefined. <br/>
 -   the complement of an event is the event not occurring. the probability that event \\(A\\) will not occur is denoted by \\(P(A')\\) or \\(P\left(\overline{A}\right)\\). <br/>
 -   the probability that events \\(A\\) and \\(B\\) both occur is the probability of the [intersection]({{< relref "discrete_maths2.md#intersection" >}}) of \\(A\\) and \\(B\\). the probability of the intersection of events \\(A\\) and \\(B\\) is denoted by \\(P(A\cap B)\\) which may be found using the [chain rule](#chain-rule). if events \\(A\\) and \\(B\\) are mutually exclusive, \\(P(A\cap B) = 0\\). <br/>
 -   the probability that events \\(A\\) or \\(B\\) occur is the probability of the [union]({{< relref "discrete_maths2.md#union" >}}) of \\(A\\) and \\(B\\). the probability of the union of events \\(A\\) and \\(B\\) is denoted by \\(P(A\cup B)\\) which may be found using the [sum rule](#sum-rule). <br/>
@@ -111,7 +276,7 @@ since there are 10 numbers, the odds of picking a number bigger than 5, which co
 [[<&stattrek_conditional_probability>] <br/>
 
 
-## <span class="section-num">2</span> chain rule {#chain-rule}
+## <span class="section-num">3</span> chain rule {#chain-rule}
 
 the **chain rule** for two random events \\(A\\) and \\(B\\) says: <br/>
 \\[
@@ -127,13 +292,13 @@ P\left(A\_{n} \cap \dots \cap A\_{1}\right)=\prod\_{k=1}^{n} P\left(A\_{k}\\,\Bi
 \\] <br/>
 
 
-## <span class="section-num">3</span> sum rule {#sum-rule}
+## <span class="section-num">4</span> sum rule {#sum-rule}
 
-the **sum rule** for two random events \\(A\\) and \\(B\\) says: <br/>
+the **sum rule** for two random events \\(A\\) and \\(B\\) states: <br/>
 \\[ P(A\cup B)=P(A)+P(B)-P(A\cap B) \\] <br/>
 
 
-## <span class="section-num">4</span> dependance {#dependance}
+## <span class="section-num">5</span> dependance {#dependance}
 
 we say two events are independent if knowing one event occurred doesn't change the probability of the other event. otherwise they are dependant <&khanacademy_probability_dependance> <br/>
 
@@ -150,19 +315,28 @@ two events, A and B, are independent if: <br/>
   P(A\mid B) = P(A) \land P(B\mid A) = P(B)
 \\] <br/>
 
+<div class="lemma">
 
-## <span class="section-num">5</span> expected value {#expected-value}
+given \\(A\_1,A\_2,\dots\\) are independent events such that \\(i \neq j \implies A\_i \cap A\_j = \varnothing\\) then: <br/>
+\\[
+P\left(\bigcup\_{i=1}^{\infty} A\_i\right) = \sum\_{i=1}^{\infty} P(A\_i)
+\\] <br/>
+
+</div>
+
+
+## <span class="section-num">6</span> expected value {#expected-value}
 
 expected value is exactly what you might think it means intuitively: the return you can expect for some kind of action, like how many questions you might get right if you guess on a multiple choice test. <br/>
 
 
-## <span class="section-num">6</span> probability table {#probability-table}
+## <span class="section-num">7</span> probability table {#probability-table}
 
 
-## <span class="section-num">7</span> binomial distribution {#binomial-distribution}
+## <span class="section-num">8</span> binomial distribution {#binomial-distribution}
 
 
-## <span class="section-num">8</span> Bernoulli distribution {#bernoulli-distribution}
+## <span class="section-num">9</span> Bernoulli distribution {#bernoulli-distribution}
 
 <div class="definition">
 
@@ -181,7 +355,7 @@ the [expected value](#expected-value) for a random variable, \\(x\\), for a Bern
 </div>
 
 
-## <span class="section-num">9</span> geometric distribution {#geometric-distribution}
+## <span class="section-num">10</span> geometric distribution {#geometric-distribution}
 
 <div class="definition">
 
