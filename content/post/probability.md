@@ -2,7 +2,7 @@
 title = "probability"
 author = ["mahmood"]
 description = "probability theory"
-date = 2022-12-04T20:32:00+02:00
+date = 2022-12-05T14:14:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -60,6 +60,12 @@ window.onload = function() {
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
+<div class="note">
+
+some things are incomplete and even wrong <br/>
+
+</div>
+
 <div class="definition">
 
 **probability** is a [function]({{< relref "discrete_maths2.md#function" >}}), denoted by \\(P\\) that describes the probability for a specific incident to occur <br/>
@@ -102,15 +108,6 @@ P(\overline{A}) = 1 - P(A)
 
 \\[
 A \subset B \implies P(A) < P(B)
-\\] <br/>
-
-</div>
-
-<div class="lemma">
-
-let \\(A\_1,A\_2,\dots,A\_n\\) be independent events, then <br/>
-\\[
-P\left(\bigcup\_{i=1}^{n}A\_i\right) = \sum\_{i=1}^{n} P(A\_i)
 \\] <br/>
 
 </div>
@@ -296,7 +293,119 @@ P(\Omega) = 1
 </div>
 
 
-## <span class="section-num">2</span> conditional probability {#conditional-probability}
+## <span class="section-num">2</span> dependance {#dependance}
+
+<div class="definition">
+
+we say two events are **independent** if knowing one event occurred doesn't change the probability of the other event. otherwise they are dependant <&khanacademy_probability_dependance> <br/>
+i.e. two events, A and B, are independent if: <br/>
+\\[
+  P(A\mid B) = P(A) \land P(B\mid A) = P(B)
+\\] <br/>
+
+<div class="my_example">
+
+for example, the probability that a fair coin shows "heads" after being flipped is 1/2. what if we knew the day was tuesday? does this change the probability of getting "heads?" of course not. the probability of getting "heads", given that it's a tuesday, is still 1/2. so the result of a coin flip and the day being tuesday are independent 127.0.0.1       youtube.com <br/>
+127.0.0.1       www.youtube.com <br/>
+events; knowing it was a tuesday didn't change the probability of getting "heads". <br/>
+not every situation is this obvious. what about gender and handedness (left handed vs. right handed)? it may seem like a person's gender and whether or not they are left-handed are totally independent events. when we look at probabilities though, we see that about 10% of all people are left-handed, but about 12% of males are left-handed. so these events are not independent, since knowing a random person is a male increases the probability that they are left-handed. <br/>
+The big idea is that we check for independence with probabilities. <br/>
+
+</div>
+
+<div class="lemma">
+
+given \\(A\_1,A\_2,\dots,A\_n\\) are independent events, then <br/>
+\\[
+P\left(\bigcup\_{i=1}^{n} A\_i\right) = \sum\_{i=1}^{n} P(A\_i)
+\\] <br/>
+
+</div>
+
+<div class="lemma">
+
+given \\(A\_1,A\_2,\dots\\) are independent events such that \\(i \neq j \implies A\_i \cap A\_j = \varnothing\\) then: <br/>
+\\[
+P\left(\bigcup\_{i=1}^{\infty} A\_i\right) = \sum\_{i=1}^{\infty} P(A\_i)
+\\] <br/>
+
+</div>
+
+<div class="lemma">
+
+given \\(A\_1,A\_2\\) are 2 random events <br/>
+\\[
+P(A\_1 \cup A\_2) = P(A\_1) - P(A\_2) - P(A\_1 \cap A\_2)
+\\] <br/>
+
+</div>
+
+<div class="lemma">
+
+given \\(A\_1,A\_2,A\_3\\) are 3 random events <br/>
+
+\begin{align\*}
+  P(A\_1 \cup A\_2 \cup A\_3) &= P((A\_1 \cup A\_2) \cup A\_3)\\\\
+  &= P(A\_1 \cup A\_2) - P(A\_3) - P((A\_1 \cup A\_2) \cap A\_3)\\\\
+  &= P(A\_1) + P(A\_2) - P(A\_1 \cap A\_2) + P(A\_3) - P((A\_1 \cap A\_2) \cup (A\_2 \cap A\_3))\\\\
+  &= P(A\_1) + P(A\_2) + P(A\_3) - P(A\_1 \cap A\_2) - [P(A\_1 \cap A\_3) + P(A\_2 \cap A\_3) - P(A\_1 \cap A\_2 \cap A\_3)]\\\\
+  &= P(A\_1) + P(A\_2) + P(A\_3) - P(A\_1 \cap A\_2) - P(A\_1 \cap A\_3) - P(A\_2 \cap A\_3) + P(A\_1 \cap A\_2 \cap A\_3)
+\end{align\*}
+
+</div>
+
+<div class="lemma">
+
+given \\(A\_1,A\_2,\dots,A\_n\\) are random events <br/>
+\\[
+P\left(\bigcup\_{i=1}^{n} A\_i\right) = S\_1 - S\_2 + S\_3 - \dots + {(-1)}^{n-1}S\_n
+\\] <br/>
+such that <br/>
+
+\begin{align\*}
+  S\_1 &= \sum\_{i=1}^{n} P(A\_i)\\\\
+  S\_2 &= \sum\_{\mathclap{1 \le i < j < n}} P(A\_i \cap A\_j) &\text{union of pairs}\\\\
+  S\_3 &= \sum\_{\mathclap{1 \le i < j < k < n}} P(A\_i \cap A\_j \cap A\_k) &\text{union of triples}\\\\
+  &\vdots\\\\
+  S\_k &= \sum\_{\mathclap{1 \le k < i\_1 < i\_2 < \dots < i\_k < n}} P(A\_{i\_1} \cap A\_{i\_2} \cap \dots \cap A\_{i\_k})\\\\
+  &\vdots\\\\
+  S\_n &= P(A\_1 \cap A\_2 \cap \dots \cap A\_n)
+\end{align\*}
+
+</div>
+
+<div class="my_example">
+
+a secretary has \\(n\\) mails destined for \\(n\\) different people, the secretary sent the letters out randomly to people <br/>
+
+<div class="subquestion">
+
+what is the probability that atleast one person received the correct mail <br/>
+
+<div class="answer">
+
+A = atleast one person received the correct mail <br/>
+\\(A = A\_1 \cup A\_2 \cup \dots \cup A\_n\\) <br/>
+\\(A\_i\\) the \\(i\\)'th mail arrived to the correct person <br/>
+\\(P(A\_i) = \frac{(n-1)!}{n!} = \frac{1}{n},\ S\_i = n \cdot \frac{1}{n} = 1\\) <br/>
+\\(P(A\_i \cap A\_j) = \frac{(n-2)!}{n!} = \frac{1}{n(n-1)}\\) <br/>
+\\(S\_2 = \frac{1}{n(n-1)} \cdot \binom{n}{2} = \frac{1}{n(n-1)} \cdot \frac{n(n-1)}{2!} = \frac{1}{2!}\\) <br/>
+\\(P(A\_{i\_1} \cap A\_{i\_2} \cap \dots \cap A\_{i\_n}) = \frac{(n-k)!}{n!}\\) <br/>
+\\(S\_k = \frac{(n-k)!}{n!} = \binom{n}{k} = \frac{1}{k!}\\) <br/>
+\\(P(A\_1 \cap A\_2 \cap \dots \cap A\_n) = \frac{1}{n!}\\) <br/>
+\\(P(A) = P(A\_1 \cup A\_2 \cup \dots \cup A\_n) = 1 - \frac{1}{2!} + \frac{1}{3!} - \dots + {(-1)}^{n-1} \cdot \frac{1}{n!}\\) <br/>
+\\(\lim\_{n \to \infty} P\_n = 1 - \sum\_{n=0}^{\infty} \frac{(-1)^n}{n!} = 1-e^{-1}\\) <br/>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+## <span class="section-num">3</span> conditional probability {#conditional-probability}
 
 -   two events are mutually exclusive or [disjoint]({{< relref "discrete_maths2.md#disjoint-sets" >}}) if they cannot occur at the same time. <br/>
 -   the [probability]({{< relref "probability.md" >}}) that event \\(A\\) occurs, given that event \\(B\\) has occurred, is called a **conditional probability**. the conditional probability of event \\(A\\), given event \\(B\\), is denoted by \\(P(A\mid B)\\), if \\(A\\) is independent from \\(B\\), this simplifies to \\(P(A\mid B) = P(A)\\), if \\(P(B)=0\\) the conditional probability is undefined. <br/>
@@ -308,7 +417,19 @@ P(\Omega) = 1
 [[<&stattrek_conditional_probability>] <br/>
 
 
-## <span class="section-num">3</span> chain rule {#chain-rule}
+## <span class="section-num">4</span> sum rule {#sum-rule}
+
+the **sum rule** for two random events \\(A\\) and \\(B\\) states: <br/>
+\\[
+P(A\cup B)=P(A)+P(B)-P(A\cap B)
+\\] <br/>
+if the events are disjoint, the formula would simplify to <br/>
+\\[
+P(A \cup B) = P(A) + P(B)
+\\] <br/>
+
+
+## <span class="section-num">5</span> chain rule {#chain-rule}
 
 the **chain rule** for two random events \\(A\\) and \\(B\\) says: <br/>
 \\[
@@ -322,39 +443,6 @@ which by induction may be turned into: <br/>
 \\[
 P\left(A\_{n} \cap \dots \cap A\_{1}\right)=\prod\_{k=1}^{n} P\left(A\_{k}\\,\Bigg|\\,\bigcap\_{j=1}^{k-1}A\_{j}\right)
 \\] <br/>
-
-
-## <span class="section-num">4</span> sum rule {#sum-rule}
-
-the **sum rule** for two random events \\(A\\) and \\(B\\) states: <br/>
-\\[ P(A\cup B)=P(A)+P(B)-P(A\cap B) \\] <br/>
-
-
-## <span class="section-num">5</span> dependance {#dependance}
-
-we say two events are independent if knowing one event occurred doesn't change the probability of the other event. otherwise they are dependant <&khanacademy_probability_dependance> <br/>
-
-<div class="my_example">
-
-for example, the probability that a fair coin shows "heads" after being flipped is 1/2. what if we knew the day was tuesday? does this change the probability of getting "heads?" of course not. the probability of getting "heads", given that it's a tuesday, is still 1/2. so the result of a coin flip and the day being tuesday are independent events; knowing it was a tuesday didn't change the probability of getting "heads". <br/>
-not every situation is this obvious. what about gender and handedness (left handed vs. right handed)? it may seem like a person's gender and whether or not they are left-handed are totally independent events. when we look at probabilities though, we see that about 10% of all people are left-handed, but about 12% of males are left-handed. so these events are not independent, since knowing a random person is a male increases the probability that they are left-handed. <br/>
-The big idea is that we check for independence with probabilities. <br/>
-
-</div>
-
-two events, A and B, are independent if: <br/>
-\\[
-  P(A\mid B) = P(A) \land P(B\mid A) = P(B)
-\\] <br/>
-
-<div class="lemma">
-
-given \\(A\_1,A\_2,\dots\\) are independent events such that \\(i \neq j \implies A\_i \cap A\_j = \varnothing\\) then: <br/>
-\\[
-P\left(\bigcup\_{i=1}^{\infty} A\_i\right) = \sum\_{i=1}^{\infty} P(A\_i)
-\\] <br/>
-
-</div>
 
 
 ## <span class="section-num">6</span> expected value {#expected-value}
