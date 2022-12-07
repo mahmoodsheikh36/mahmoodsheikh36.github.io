@@ -35,7 +35,14 @@ P(\overline{A})+P(\overline{B})+P(\overline{C})
 1 - P(A) \cap P(B) \cap P( C)
 \]<br></p></div></div></div><div class=question><p>prove:<br>\[
 P(A \cup B \cup C) = P(A)+P(B)+P( C)-P(A \cap B)-P(A \cap C)-P(B \cap C)+P(A \cap B \cap C)
-\]<br></p></div><div class=question><p>let \(\Omega=\{0,1,2,\dots\}\), given that \(P(\{n\})=\frac{c}{6^n}\) for every \(n \in \Omega\), find \(c\)<br>hint: use the sum of an infinite convergent geometric sequence<br></p><div class=answer><p>we know that \[\sum_{n\in\Omega} P(\{n\}) = 1\] and so \[\sum_{n \in \Omega} \frac{c}{6^n} = 1 \implies \sum_{n=1}^{\infty} \frac{c}{6^n} = 1\] and using the formula for the <a href=/post/20220711182517-sum_of_geometric_progression/#sum-of-infinite-geometric-progression>sum of infinite geometric progression</a> we get \[\frac{c}{1-\frac{1}{6}} = 1 \implies c = \frac{5}{6}\]<br></p></div></div><div class=question><p>in a <a href=/post/linear_algebra2/#square-matrix>square matrix</a> of the fourth degree we pick 4 different cells randomly, what is the probability that:<br></p><div class=subquestion><p>all of them are in the same row<br></p><div class=answer><p>refer to <a href=/post/probability/#hypergeometric-distribution>hypergeometric distribution</a><br>\[
+\]<br></p><div class=answer><p>\begin{align*}
+P(A \cup B \cup C) &= P(A \cup (B \cup C))\\
+&= P(A) + P(B \cup C) - P(A \cap (B \cup C))\\
+&= P(A) + P(B) + P( C) - P(B \cap C) - P(A \cap (B \cup C))\\
+&= P(A) + P(B) + P( C) - P(B \cap C) - P((A \cap B) \cup (B \cap C))\\
+&= P(A) + P(B) + P( C) - P(B \cap C) - P(A \cap B) - P(B \cap C) + P((A \cap B) \cap (B \cap C))\\
+&= P(A) + P(B) + P( C) - P(B \cap C) - P(A \cap B) - P(B \cap C) + P(A \cap B \cap C)
+\end{align*}</p></div></div><div class=question><p>let \(\Omega=\{0,1,2,\dots\}\), given that \(P(\{n\})=\frac{c}{6^n}\) for every \(n \in \Omega\), find \(c\)<br>hint: use the sum of an infinite convergent geometric sequence<br></p><div class=answer><p>we know that \[\sum_{n\in\Omega} P(\{n\}) = 1\] and so \[\sum_{n \in \Omega} \frac{c}{6^n} = 1 \implies \sum_{n=1}^{\infty} \frac{c}{6^n} = 1\] and using the formula for the <a href=/post/20220711182517-sum_of_geometric_progression/#sum-of-infinite-geometric-progression>sum of infinite geometric progression</a> we get \[\frac{c}{1-\frac{1}{6}} = 1 \implies c = \frac{5}{6}\]<br></p></div></div><div class=question><p>in a <a href=/post/linear_algebra2/#square-matrix>square matrix</a> of the fourth degree we pick 4 different cells randomly, what is the probability that:<br></p><div class=subquestion><p>all of them are in the same row<br></p><div class=answer><p>refer to <a href=/post/probability/#hypergeometric-distribution>hypergeometric distribution</a><br>\[
 4 \cdot \frac{\binom{4}{4} \binom{16-4}{4-4}}{\binom{16}{4}} = \frac{1}{455}
 \]<br></p></div></div><div class=subquestion><p>all of them are in the two upper rows<br></p><div class=answer><p>\[
 \frac{\binom{8}{4} \binom{16-8}{4-4}}{\binom{16}{4}}
@@ -49,8 +56,10 @@ P(A \cup B \cup C) = P(A)+P(B)+P( C)-P(A \cap B)-P(A \cap C)-P(B \cap C)+P(A \ca
 \frac{\binom{20}{3} \binom{50-20}{5-3}}{\binom{50}{5}}
 \]<br></p></div></div><div class=subquestion><p>an equal number of boys and girls are picked<br></p><div class=answer><p>impossible, 0<br></p></div></div></div><div class=question><p>in an urn 10 balls of which only one is black, how many balls have to be removed and returned so that the probability that black is removed is atleast 0.9<br></p><div class=answer><p>the probability of removing the black ball is 0.1<br>\[
 P(k) \ge {(1-p)}^{k-1}p \implies 0.9 \ge {(1-0.1)}^{k-1} \cdot 0.1
-\]<br>the number of trials is \(k\) rounded up (e.g. 9.1 would be rounded to 10)<br></p></div></div><div class=question><p>there are 2 traffic lights, the probability of an error in the first is 0.1, the probability of an error in the second is 0.15, the probability of an error in both is 0.02, what is the probability that none of them error out?<br></p><div class=answer><p>apparently the odds of both erroring out arent the odds of each erroring out multiplied 🤔 so im guessing the case of both erroring out is independant<br>\[
-1 - 0.1 - 0.15 - 0.02
+\]<br>the number of trials is \(k\) rounded up (e.g. 9.1 would be rounded to 10)<br></p></div></div><div class=question><p>there are 2 traffic lights, the probability of an error in the first is 0.1, the probability of an error in the second is 0.15, the probability of an error in both is 0.02, what is the probability that none of them error out?<br></p><div class=answer><p>assume \(A\) is the first one erroring out, \(B\) is the second one erroring out<br>\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B) \implies 0.02 = 0.15 + 0.1 - P(A \cap B) \implies 0.23 = P(A \cap B)
+\]<br>so the probability that none of them error out is:<br>\[
+1 - 0.1 - 0.15 - 0.23 = 0.52
 \]<br></p></div></div><div class=question><p>12 people are asked about their month of birth (all of them have equal probabilities to be born on any of the months)<br></p><div class=subquestion><p>what is the probabiblity that all 12 people were born in different months?<br></p><div class=answer><p>this is a <a href=/post/20221204105120-combinatorics/#combination>combination</a>, \(\frac{1}{12!}\)<br></p></div></div><div class=subquestion><p>what is the probability that all of them were born in the same month<br></p><div class=answer><p>refer to <a href=/post/20221204105120-combinatorics/#variation-with-repetition>variation with repetition</a><br>\[
 \frac{1}{12^{12}}
 \]<br></p></div></div><div class=subquestion><p>what is the probability that exactly 4 were born in june<br></p><div class=answer><p>this is a <a href=/post/probability/#bernoulli-distribution>Bernoulli distribution</a><br>\[
