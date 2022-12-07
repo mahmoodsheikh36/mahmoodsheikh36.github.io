@@ -2,7 +2,7 @@
 title = "probability homework 1"
 author = ["mahmood"]
 description = "probability homework 1"
-date = 2022-12-07T22:41:00+02:00
+date = 2022-12-07T23:17:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -143,6 +143,19 @@ prove: <br/>
 \\[
 P(A \cup B \cup C) = P(A)+P(B)+P( C)-P(A \cap B)-P(A \cap C)-P(B \cap C)+P(A \cap B \cap C)
 \\] <br/>
+
+<div class="answer">
+
+\begin{align\*}
+  P(A \cup B \cup C) &= P(A \cup (B \cup C))\\\\
+  &= P(A) + P(B \cup C) - P(A \cap (B \cup C))\\\\
+  &= P(A) + P(B) + P( C) - P(B \cap C) - P(A \cap (B \cup C))\\\\
+  &= P(A) + P(B) + P( C) - P(B \cap C) - P((A \cap B) \cup (B \cap C))\\\\
+  &= P(A) + P(B) + P( C) - P(B \cap C) - P(A \cap B) - P(B \cap C) + P((A \cap B) \cap (B \cap C))\\\\
+  &= P(A) + P(B) + P( C) - P(B \cap C) - P(A \cap B) - P(B \cap C) + P(A \cap B \cap C)
+\end{align\*}
+
+</div>
 
 </div>
 
@@ -290,9 +303,13 @@ there are 2 traffic lights, the probability of an error in the first is 0.1, the
 
 <div class="answer">
 
-apparently the odds of both erroring out arent the odds of each erroring out multiplied 🤔 so im guessing the case of both erroring out is independant <br/>
+assume \\(A\\) is the first one erroring out, \\(B\\) is the second one erroring out <br/>
 \\[
-1 - 0.1 - 0.15 - 0.02
+P(A \cup B) = P(A) + P(B) - P(A \cap B) \implies 0.02 = 0.15 + 0.1 - P(A \cap B) \implies 0.23 = P(A \cap B)
+\\] <br/>
+so the probability that none of them error out is: <br/>
+\\[
+1 - 0.1 - 0.15 - 0.23 = 0.52
 \\] <br/>
 
 </div>
