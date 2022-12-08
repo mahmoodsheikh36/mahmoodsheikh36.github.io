@@ -2,7 +2,7 @@
 title = "probability homework 1"
 author = ["mahmood"]
 description = "probability homework 1"
-date = 2022-12-07T23:17:00+02:00
+date = 2022-12-08T12:02:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -303,14 +303,7 @@ there are 2 traffic lights, the probability of an error in the first is 0.1, the
 
 <div class="answer">
 
-assume \\(A\\) is the first one erroring out, \\(B\\) is the second one erroring out <br/>
-\\[
-P(A \cup B) = P(A) + P(B) - P(A \cap B) \implies 0.02 = 0.15 + 0.1 - P(A \cap B) \implies 0.23 = P(A \cap B)
-\\] <br/>
-so the probability that none of them error out is: <br/>
-\\[
-1 - 0.1 - 0.15 - 0.23 = 0.52
-\\] <br/>
+i think its \\(1-0.1-0.15-0.02\\) but thats probably wrong, although i would like to know why please <br/>
 
 </div>
 
