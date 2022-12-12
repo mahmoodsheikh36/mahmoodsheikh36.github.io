@@ -1,7 +1,7 @@
 +++
 title = "algorithm correctness"
 author = ["mahmood"]
-date = 2022-12-12T23:59:00+02:00
+date = 2022-12-13T00:29:00+02:00
 tags = ["math", "computer-science"]
 draft = false
 +++
@@ -29,7 +29,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
