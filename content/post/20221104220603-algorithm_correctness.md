@@ -1,7 +1,7 @@
 +++
 title = "algorithm correctness"
 author = ["mahmood"]
-date = 2022-11-09T22:14:00+02:00
+date = 2022-12-12T19:03:00+02:00
 tags = ["math", "computer-science"]
 draft = false
 +++
@@ -21,7 +21,6 @@ draft = false
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
   \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
   \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
-  \(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\)
 </p>
 
 <!-- mathjax -->
@@ -74,7 +73,7 @@ here we'll be using [mathematical induction]({{< relref "20220707193301-mathemat
 
 <div class="my_example">
 
-{{< figure src="/ox-hugo/cueVWTf.svg" >}} <br/>
+{{< figure src="~/.emacs.d/latex/cueVWTf.svg" >}} <br/>
 
 we need to prove the correctness of this algorithm, and we do so using induction <br/>
 for each \\(i=1,2,\dots,k\\), when the algorithm arrives to the end of the loop for the `i`'th time, the following [loop invariant]({{< relref "20221104221055-loop_invariant.md" >}}) holds true: <br/>
@@ -97,13 +96,15 @@ which is what we needed to prove <br/>
 
 consider the following function <br/>
 
-{{< figure src="/ox-hugo/e8I9jOY.svg" >}} <br/>
-
+![](/ox-hugo/e8I9jOY.svg) <br/>
 <span class="underline">proof that the algorithm terminates</span>: <br/>
 assume that \\(\textsc{Recursive-Sum}\\) runs on an array `A`, on each recursive call, the size of the input array `A` is halved, its obvious that at the end of every sequence of calls the size of the input array would arrive to 1 which is the edge case that would cause the function to terminate <br/>
 <span class="underline">proof of correctness</span>: <br/>
 we prove this by induction on the number of elements in the array <br/>
-for \\(|A|=1\\) which is the edge case, the algorithm returns \\(A[1]\\), the only element in \\(A\\), its obvious that the output is correct <br/>
+
+1.  for \\(|A|=1\\) which is the edge case, the algorithm returns \\(A[1]\\), the only element in \\(A\\), its obvious that the output is correct <br/>
+2.  we use [perfect induction]({{< relref "20220707193301-mathematical_induction.md#perfect-induction" >}}) on the size of the input, we assume that the algorithm correctly computes the sum of the elements of any array whose size is smaller than `n` <br/>
+3.  let `A` be an arbitrary array of size `n`, the call to \\(\textsc{Recursive-Sum}(A)\\) executes the calls \\(\textsc{Recursive-Sum}(A\_l)\\) and \\(\textsc{Recursive-Sum}(A\_r)\\), the size of the arrays \\(A\_l\\) and \\(A\_r\\) is smaller than \\(n\\), so according to the previous step we know those two recursive calls do return the correct sum of the corresponding subarrays, and since we are returning the sum of those sums we know for sure we are returning the correct sum <br/>
 
 </div>
 
