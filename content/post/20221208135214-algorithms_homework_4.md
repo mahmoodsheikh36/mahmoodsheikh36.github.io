@@ -2,7 +2,7 @@
 title = "algorithms homework 4"
 author = ["mahmood"]
 description = "homework on [[id:c78d97d4-19d4-482d-84a1-49e69b823637][backtracking]]"
-date = 2022-12-14T14:00:00+02:00
+date = 2022-12-14T16:14:00+02:00
 tags = ["math"]
 draft = false
 +++
