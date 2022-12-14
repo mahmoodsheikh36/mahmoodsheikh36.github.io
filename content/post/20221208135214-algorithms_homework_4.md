@@ -2,7 +2,7 @@
 title = "algorithms homework 4"
 author = ["mahmood"]
 description = "homework on [[id:c78d97d4-19d4-482d-84a1-49e69b823637][backtracking]]"
-date = 2022-12-14T16:14:00+02:00
+date = 2022-12-14T17:01:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -143,6 +143,16 @@ we dont need to know the properties of numbers that are divisible by 4 to solve 
 <div class="subquestion">
 
 prove the correctness of the algorithm <br/>
+
+<div class="answer">
+
+we prove this by induction on the number of elements in the array <br/>
+
+1.  for \\(\textsc{Size}(A)=1\\), the algorithm returns the only element in the array modulo 4, which would be 0 only if it is divisible which is the correct result <br/>
+2.  the **induction hypothesis**, we use [perfect induction]({{< relref "20220707193301-mathematical_induction.md#perfect-induction" >}}), we assume that the algorithm correctly computes the result for any input size that is less than `n` <br/>
+3.  the **induction step**, let `A` be an arbitrary array of length `n`, the call to \\(\textsc{Is-Divisble-By-Four}\\) executes the calls \\(\textsc{Is-Divisble-By-Four}\left(A\left[0,\dots,\frac{\textsc{Size}(A)}{2}\right]\right)\\) and \\(\textsc{Is-Divisble-By-Four}\left(A\left[\frac{\textsc{Size}(A)}{2}+1,\dots,\textsc{Size}(A)\right]\right)\\) and both of those calls are passed an array of size \\(\frac{n}{2}\\) and since it is less than `n` we know the calls return the correct result, by summing the results of those 2 calls and applying modulo 4 we get the 0 only if the sum is divisible by 4 which is the correct output <br/>
+
+</div>
 
 </div>
 
