@@ -1,8 +1,8 @@
 +++
-title = "boolean algebra (old)"
+title = "boolean algebra"
 author = ["mahmood"]
 description = "boolean algebra course"
-date = 2022-11-14T17:34:00+02:00
+date = 2022-12-19T01:09:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -22,7 +22,6 @@ draft = false
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
   \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
   \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
-  \(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\)
 </p>
 
 <!-- mathjax -->
@@ -31,7 +30,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
@@ -61,18 +63,12 @@ window.onload = function() {
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
-
-## <span class="section-num">1</span> introduction {#introduction}
-
 a variable can only be \\(x \in \\{0, 1\\}\\) <br/>
 
 
-## <span class="section-num">2</span> basic operations {#basic-operations}
+## <span class="section-num">1</span> AND {#and}
 
-
-### <span class="section-num">2.1</span> AND {#and}
-
-AND is a binary operation <br/>
+AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}}) <br/>
 
 \begin{gather\*}
   \begin{cases}
@@ -84,9 +80,9 @@ AND is a binary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">2.2</span> OR {#or}
+## <span class="section-num">2</span> OR {#or}
 
-OR is a binary operation <br/>
+**OR** is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}}) <br/>
 
 \begin{gather\*}
   \begin{cases}
@@ -98,9 +94,9 @@ OR is a binary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">2.3</span> NOT {#not}
+## <span class="section-num">3</span> NOT {#not}
 
-NOT is a unary operation <br/>
+**NOT** is a [unary operation]({{< relref "20221219005258-unary_operation.md" >}}) <br/>
 
 \begin{gather\*}
   \begin{cases}
@@ -110,10 +106,10 @@ NOT is a unary operation <br/>
 \end{gather\*}
 
 
-## <span class="section-num">3</span> basic properties {#basic-properties}
+## <span class="section-num">4</span> basic properties of boolean algebra {#basic-properties-of-boolean-algebra}
 
 
-### <span class="section-num">3.1</span> Idempotency {#idempotency}
+### <span class="section-num">4.1</span> Idempotency {#idempotency}
 
 \begin{gather\*}
   \begin{cases}
@@ -123,7 +119,7 @@ NOT is a unary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">3.2</span> identity {#identity}
+### <span class="section-num">4.2</span> identity {#identity}
 
 \begin{gather\*}
   \begin{cases}
@@ -133,7 +129,7 @@ NOT is a unary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">3.3</span> annulment {#annulment}
+### <span class="section-num">4.3</span> annulment {#annulment}
 
 \begin{gather\*}
   \begin{cases}
@@ -143,7 +139,7 @@ NOT is a unary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">3.4</span> commutative {#commutative}
+### <span class="section-num">4.4</span> commutative {#commutative}
 
 \begin{gather\*}
   \begin{cases}
@@ -153,7 +149,7 @@ NOT is a unary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">3.5</span> associativity {#associativity}
+### <span class="section-num">4.5</span> associativity {#associativity}
 
 \begin{gather\*}
   \begin{cases}
@@ -163,7 +159,7 @@ NOT is a unary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">3.6</span> complement {#complement}
+### <span class="section-num">4.6</span> complement {#complement}
 
 \begin{gather\*}
   \begin{cases}
@@ -173,7 +169,7 @@ NOT is a unary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">3.7</span> distributivity {#distributivity}
+### <span class="section-num">4.7</span> distributivity {#distributivity}
 
 \begin{gather\*}
   \begin{cases}
@@ -183,7 +179,7 @@ NOT is a unary operation <br/>
 \end{gather\*}
 
 
-### <span class="section-num">3.8</span> absorption 1 {#absorption-1}
+### <span class="section-num">4.8</span> absorption 1 {#absorption-1}
 
 \begin{gather\*}
   \begin{cases}
@@ -209,7 +205,7 @@ proof: <br/>
 \end{align\*}
 
 
-### <span class="section-num">3.9</span> absorption 2 {#absorption-2}
+### <span class="section-num">4.9</span> absorption 2 {#absorption-2}
 
 \begin{gather\*}
   \begin{cases}
@@ -227,7 +223,7 @@ proof: <br/>
 \end{align\*}
 
 
-### <span class="section-num">3.10</span> consensus {#consensus}
+### <span class="section-num">4.10</span> consensus {#consensus}
 
 \begin{gather\*}
   \begin{cases}
@@ -247,7 +243,7 @@ proof: <br/>
 \end{align\*}
 
 
-### <span class="section-num">3.11</span> De Morgan {#de-morgan}
+### <span class="section-num">4.11</span> De Morgan {#de-morgan}
 
 \begin{gather\*}
   \begin{cases}
@@ -259,13 +255,19 @@ proof: <br/>
 \end{gather\*}
 
 
-## <span class="section-num">4</span> switching expression {#switching-expression}
+## <span class="section-num">5</span> switching expression {#switching-expression}
+
+<div class="definition">
 
 a switching expression is a finite combination of switching variables and the operations \\(-,\cdot,+\\) <br/>
 
+<div class="characteristic">
+
 a combination of switching expressions results in a switching expression, so if \\(T\_1\\) and \\(T\_2\\) are both switching expressions then \\(T\_1' + T\_2\\) is also a switching expression <br/>
 
-examples: <br/>
+</div>
+
+<div class="my_example">
 
 \begin{align\*}
   T(x, y, z) &= x'y'z + yz + xz\\\\
@@ -275,6 +277,10 @@ examples: <br/>
              &= z \cdot 1 & \text{annulment property}\\\\
              &= z & \text{identity property}
 \end{align\*}
+
+</div>
+
+<div class="my_example">
 
 \begin{align\*}
   T(x, y, z) &= (x + y)[x'(y' + z')]' + x'y' + x'z'\\\\
@@ -288,14 +294,17 @@ examples: <br/>
              &= 1\\\\
 \end{align\*}
 
+</div>
 
-## <span class="section-num">5</span> switching functions {#switching-functions}
+</div>
 
-\\(f(x\_1, x\_2, \cdots, x\_n)\\) outputs only \\(1\\) or \\(0\\) for any combination of variables it receives <br/>
 
+## <span class="section-num">6</span> switching function {#switching-function}
+
+a function \\(f(x\_1, x\_2, \cdots, x\_n)\\) that outputs only \\(1\\) or \\(0\\) for any combination of variables it receives <br/>
 \\(f\\) can only output \\(2^n\\) different values <br/>
 
-example: <br/>
+<div class="my_example">
 
 | \\(x\_1, \cdots, x\_n\\) | \\(f(x\_1, \cdots, x\_n)\\) | \\(f\_1\\) | \\(f\_2\\) |
 |--------------------------|-----------------------------|------------|------------|
@@ -305,15 +314,14 @@ example: <br/>
 | \\(1,1,1, \cdots, 10\\)  | \\(f(1,1,1, \cdots, 0)\\)   | \\(0\\)    | \\(1\\)    |
 | \\(1,1,1, \cdots, 1\\)   | \\(f(1,1,1, \cdots, 1)\\)   | \\(1\\)    | \\(1\\)    |
 
+</div>
+
 the number of possible functions for \\(n\\) variables is \\({2^2}^n\\) <br/>
-
 the complement of \\(f\\), written as \\(f'\\) is the function that outputs the value \\(1\\) where \\(f\\) outputs 0 <br/>
-
 \\(f + g\\) is the sum of both functions \\(g\\) and \\(f\\), \\(f + g = 1\\) if and only if atleast one of both functions gives \\(1\\) for a given combination <br/>
-
 \\(f \bullet g\\) is the multiplication of both functinos, for a given combination, it gives \\(1\\) if and only if both functions give \\(1\\) for that specific combination <br/>
 
-example: <br/>
+<div class="my_example">
 
 | \\(x\_1\\) | \\(x\_2\\) | \\(x\_3\\) | \\(f\\) | \\(f'\\) | \\(g\\) | \\(f + g\\) | \\(f \cdot g\\) |
 |------------|------------|------------|---------|----------|---------|-------------|-----------------|
@@ -326,19 +334,38 @@ example: <br/>
 | \\(1\\)    | \\(1\\)    | \\(0\\)    | \\(1\\) | \\(0\\)  | \\(0\\) | \\(1\\)     | \\(0\\)         |
 | \\(1\\)    | \\(1\\)    | \\(1\\)    | \\(0\\) | \\(1\\)  | \\(1\\) | \\(1\\)     | \\(0\\)         |
 
-
-### <span class="section-num">5.1</span> minterms, maxterms, DNF, GNF {#minterms-maxterms-dnf-gnf}
-
-an expression that is a series of multiplications that contain the variables \\(x\_1, \cdots, x\_n\\) is called a _minterm_ <br/>
-
-an expression that is a series of additions that that contain the variables \\(x\_1, \cdots, x\_n\\) is called a _maxterm_ <br/>
-
-when a function is written as a sum of products we get what is called as _Disjunctive Normal Form - DNF_ <br/>
-
-when a function is written as a product of sums we get what is called as _Conjunctive Normal Form - CNF_ <br/>
+</div>
 
 
-### <span class="section-num">5.2</span> finding the switching expressions of a function {#finding-the-switching-expressions-of-a-function}
+## <span class="section-num">7</span> minterm {#minterm}
+
+<div class="definition">
+
+an expression that is a series of multiplications that contain the variables \\(x\_1, \cdots, x\_n\\) is called a **minterm** <br/>
+
+</div>
+
+
+## <span class="section-num">8</span> maxterm {#maxterm}
+
+<div class="definition">
+
+an expression that is a series of additions that that contain the variables \\(x\_1, \cdots, x\_n\\) is called a **maxterm** <br/>
+
+</div>
+
+
+## <span class="section-num">9</span> DNF {#dnf}
+
+when a function is written as a sum of products we get what is called as **Disjunctive Normal Form** <br/>
+
+
+## <span class="section-num">10</span> GNF {#gnf}
+
+when a function is written as a product of sums we get what is called as **Conjunctive Normal Form** <br/>
+
+
+## <span class="section-num">11</span> finding the switching expressions of a function {#finding-the-switching-expressions-of-a-function}
 
 |   | x | y | z | f | minterms     | maxterms      |
 |---|---|---|---|---|--------------|---------------|
@@ -352,11 +379,10 @@ when a function is written as a product of sums we get what is called as _Conjun
 | 7 | 1 | 1 | 1 | 1 | \\(xyz\\)    |               |
 
 \\(f(x, y, z) = \sum(0,2,3,6,7) = x'y'z' + x'yz' + x'yz' + xyz' + xyz \longrightarrow\\) sum of products, _DNF_ <br/>
-
 \\(f(x, y, z) = \Pi(1,4,5) = (x+y+z')(x'+y+z)(x'+y+z') \longrightarrow\\) product of sums, _CNF_ <br/>
 
 
-## <span class="section-num">6</span> Shannon's law {#shannon-s-law}
+## <span class="section-num">12</span> Shannon's law {#shannon-s-law}
 
 for every switching function \\(f(x\_1, \cdots, x\_n)\\) we get: <br/>
 
@@ -367,7 +393,7 @@ for every switching function \\(f(x\_1, \cdots, x\_n)\\) we get: <br/>
 
 this law helps us move between _DNF_ or _CNF_ forms without looking at the truth table of a function <br/>
 
-example: <br/>
+<div class="my_example">
 
 \begin{align\*}
   f(x, y, z) &= y'xz + y'z'x' + xz\\\\
@@ -376,8 +402,10 @@ example: <br/>
              &= x(y'z + z) + x'(y'z')
 \end{align\*}
 
+</div>
 
-## <span class="section-num">7</span> functionally complete systems {#functionally-complete-systems}
+
+## <span class="section-num">13</span> functional completeness {#functional-completeness}
 
 a set of operations is functionally complete if every switching function can be described as a switching expression that only contains operations from the given set <br/>
 
@@ -386,7 +414,7 @@ for example \\(\\{\lnot, +\\}\\) is functionally complete because \\(x \bullet y
 \\(\\{\bullet, \lnot\\}\\) is also functionally complete because <br/>
 
 
-### <span class="section-num">7.1</span> list of systems known to be functionally complete {#list-of-systems-known-to-be-functionally-complete}
+### <span class="section-num">13.1</span> list of systems known to be functionally complete {#list-of-systems-known-to-be-functionally-complete}
 
 -   \\(\\{+, \bullet, \lnot\\}\\) <br/>
 -   \\(\\{+, \lnot\\}\\) <br/>
@@ -395,7 +423,6 @@ for example \\(\\{\lnot, +\\}\\) is functionally complete because \\(x \bullet y
 -   _NAND_: \\(x \uparrow y = \bar{x} + \bar{y} = \overline{(xy)}\\) <br/>
 
 one way to prove that a set of operations is completely functional is by describing all the operations of a set that is already known to be functional using the operations in the set we have <br/>
-
 proof of NOR's functional completeness using the already functionally complete set \\(\\{\lnot, +\\}\\): <br/>
 
 \begin{gather\*}
@@ -405,20 +432,17 @@ proof of NOR's functional completeness using the already functionally complete s
 \end{gather\*}
 
 <span class="underline">rule</span>: a functionally complete system consisting of only 1 function returns the complement of a variable if all its passed to all its inputs, and the complement is true, as in a system that doesnt abide by this rule isnt functionally complete <br/>
-
 example: given the completely functional system \\(\\{f(x,y,z,w)\\}\\), according to this rule, \\(f(x,x,x,x) = \bar{x}\\) <br/>
-
 a non-symbolic example: take the functionally complete operation _NOR_, we pass \\(x\\) to all its inputs and we get \\(\bar{x}\\): <br/>
-
 \\[ x \downarrow x = \bar{x} \bullet \bar{x} = \bar{x} \\] <br/>
 
 
-### <span class="section-num">7.2</span> partial functional completeness {#partial-functional-completeness}
+### <span class="section-num">13.2</span> partial functional completeness {#partial-functional-completeness}
 
 a system of operations is partially functionally complete when a set of operations is combined with \\(0\\) and \\(1\\) or both to provide funcitonal completeness <br/>
 
 
-## <span class="section-num">8</span> _Exclusive OR - XOR_ operation {#exclusive-or-xor-operation}
+## <span class="section-num">14</span> _Exclusive OR - XOR_ operation {#exclusive-or-xor-operation}
 
 | \\(x\\) | \\(y\\) | \\(x \oplus y\\) |
 |---------|---------|------------------|
@@ -428,7 +452,7 @@ a system of operations is partially functionally complete when a set of operatio
 | 1       | 1       | 0                |
 
 
-### <span class="section-num">8.1</span> properties {#properties}
+### <span class="section-num">14.1</span> properties {#properties}
 
 \begin{align}
   A \oplus B &= B \oplus A & \text{commutative}\\\\
@@ -447,7 +471,7 @@ another important property, if \\(A \oplus B = C\\) then: <br/>
 \end{align\*}
 
 
-## <span class="section-num">9</span> minimal functions {#minimal-functions}
+## <span class="section-num">15</span> minimal functions {#minimal-functions}
 
 given \\(f\\) and \\(g\\) are switching functions with \\(n\\) variables, we say \\(f\\) covers g and write \\(g \subseteq f\\) <br/>
 
@@ -458,7 +482,7 @@ given \\(f\\) and \\(g\\) are switching functions with \\(n\\) variables, we say
 if \\(g \subseteq f\\) and \\(g\\) is a multiplication of variables then \\(g\\) is called an _implicant_ of \\(f\\) and we write \\(g \rightarrow f\\) <br/>
 
 
-### <span class="section-num">9.1</span> \\(g \subseteq h + g\\) {#g-subseteq-h-plus-g}
+### <span class="section-num">15.1</span> \\(g \subseteq h + g\\) {#g-subseteq-h-plus-g}
 
 proof: <br/>
 
@@ -468,7 +492,7 @@ proof: <br/>
 \end{gather\*}
 
 
-### <span class="section-num">9.2</span> if \\(g \subseteq f\\) and \\(f \subseteq g\\) then \\(f = g\\) {#if-g-subseteq-f-and-f-subseteq-g-then-f-g}
+### <span class="section-num">15.2</span> if \\(g \subseteq f\\) and \\(f \subseteq g\\) then \\(f = g\\) {#if-g-subseteq-f-and-f-subseteq-g-then-f-g}
 
 proof: <br/>
 
@@ -477,7 +501,7 @@ proof: <br/>
 \\] <br/>
 
 
-### <span class="section-num">9.3</span> \\(g + h \subseteq\\) if and only if \\(g \subseteq f\\) and \\(h \subseteq f\\) {#g-plus-h-subseteq-if-and-only-if-g-subseteq-f-and-h-subseteq-f}
+### <span class="section-num">15.3</span> \\(g + h \subseteq\\) if and only if \\(g \subseteq f\\) and \\(h \subseteq f\\) {#g-plus-h-subseteq-if-and-only-if-g-subseteq-f-and-h-subseteq-f}
 
 proof: <br/>
 
@@ -492,7 +516,7 @@ if \\(g = 1\\) then \\(g + h = 1\\) and so \\(f = 1\\) and so \\(g \subseteq f\\
 if \\(h = 1\\) then \\(g + h = 1\\) and so \\(f = 1\\) and so \\(h \subseteq f\\) <br/>
 
 
-### <span class="section-num">9.4</span> prime implicant {#prime-implicant}
+### <span class="section-num">15.4</span> prime implicant {#prime-implicant}
 
 a multiplication expression \\(p\\) is called a _Prime implicant_ of a function \\(f\\) if: <br/>
 
@@ -509,7 +533,7 @@ the removal of \\(y \rightarrow x'z\\) implicant of \\(f\\) <br/>
 the removal of \\(x' \rightarrow yz\\) implicant of \\(f\\) <br/>
 
 
-### <span class="section-num">9.5</span> every sum of products that isnt minimizable that equals \\(f\\) is a sum of prime implicants of \\(f\\) {#every-sum-of-products-that-isnt-minimizable-that-equals-f-is-a-sum-of-prime-implicants-of-f}
+### <span class="section-num">15.5</span> every sum of products that isnt minimizable that equals \\(f\\) is a sum of prime implicants of \\(f\\) {#every-sum-of-products-that-isnt-minimizable-that-equals-f-is-a-sum-of-prime-implicants-of-f}
 
 proof: assume in contradiction that there is a sum of products that isnt minimizable that equals \\(f\\) and contains the product \\(\varphi\\) that isnt a prime implicant of \\(f\\) <br/>
 
@@ -520,7 +544,7 @@ also \\(\varphi \rightarrow \varphi\_0\\) in case \\(\varphi\\) is a product of 
 ..... <br/>
 
 
-### <span class="section-num">9.6</span> Essential Prime Implicant {#essential-prime-implicant}
+### <span class="section-num">15.6</span> Essential Prime Implicant {#essential-prime-implicant}
 
 from previous theorems, <br/>
 
@@ -539,7 +563,7 @@ from previous theorems, <br/>
 3.  <span class="underline">note</span>: a minimal switching expression has to contain all the possible _EPI's_ (_Essential Prime Implicants_) <br/>
 
 
-### <span class="section-num">9.7</span> the process of finding the minimal switching expression {#the-process-of-finding-the-minimal-switching-expression}
+### <span class="section-num">15.7</span> the process of finding the minimal switching expression {#the-process-of-finding-the-minimal-switching-expression}
 
 given the swtiching function \\(f\\) <br/>
 
@@ -576,7 +600,7 @@ this function has 2 minimal forms <br/>
 \\(f(x,y,z) = \bar{x}\bar{z} + yz + x\bar{y}\\) <br/>
 
 
-## <span class="section-num">10</span> _Don't care_ combinations {#don-t-care-combinations}
+## <span class="section-num">16</span> _Don't care_ combinations {#don-t-care-combinations}
 
 _Don't care_ is a value of a function we get for a combination of values for the variables that isnt defined, and therefore can be either \\(1\\) or \\(0\\) <br/>
 
@@ -593,17 +617,17 @@ the symbol of the value _Don't care_ is \\(\phi\\), its allowed to switch the va
 %the definition of the function <br/>
 
 
-## <span class="section-num">11</span> map expressions {#map-expressions}
+## <span class="section-num">17</span> map expressions {#map-expressions}
 
 the usage of map exxpressions allows us to describe a function with more than \\(n\\) variables using a karnaugh map with \\(n\\) variables <br/>
 
 <span class="underline">definition</span>: a map expression is a switching expression that appears in the map and that isnt \\(0\\), \\(1\\) or \\(\phi\\) <br/>
 
 
-## <span class="section-num">12</span> logic gates {#logic-gates}
+## <span class="section-num">18</span> logic gates {#logic-gates}
 
 
-### <span class="section-num">12.1</span> AND gate {#and-gate}
+### <span class="section-num">18.1</span> AND gate {#and-gate}
 
 \\[
   t = a \bullet b
@@ -612,7 +636,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/bKKN1Bx.svg" >}} <br/>
 
 
-### <span class="section-num">12.2</span> OR gate {#or-gate}
+### <span class="section-num">18.2</span> OR gate {#or-gate}
 
 \\[
   t = a + b + c
@@ -621,7 +645,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/JEh5DG2.svg" >}} <br/>
 
 
-### <span class="section-num">12.3</span> NAND gate {#nand-gate}
+### <span class="section-num">18.3</span> NAND gate {#nand-gate}
 
 \\[
   t = \overline{(a \bullet b \bullet c)}
@@ -630,7 +654,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/cINGfRg.svg" >}} <br/>
 
 
-### <span class="section-num">12.4</span> NOR gate {#nor-gate}
+### <span class="section-num">18.4</span> NOR gate {#nor-gate}
 
 \\[
   t = \overline{(a + b)}
@@ -639,7 +663,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/g8ASPWI.svg" >}} <br/>
 
 
-### <span class="section-num">12.5</span> XOR gate {#xor-gate}
+### <span class="section-num">18.5</span> XOR gate {#xor-gate}
 
 \\[
   t = a \oplus b
@@ -648,7 +672,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/FLVi83R.svg" >}} <br/>
 
 
-### <span class="section-num">12.6</span> NOT gate {#not-gate}
+### <span class="section-num">18.6</span> NOT gate {#not-gate}
 
 \\[
   b = \overline{a}
@@ -657,7 +681,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/f4X1VZI.svg" >}} <br/>
 
 
-## <span class="section-num">13</span> logic circuits {#logic-circuits}
+## <span class="section-num">19</span> logic circuits {#logic-circuits}
 
 a combination of logical gates to represent a more complex switching function is called a logical circuit or a switching circuit <br/>
 
@@ -672,7 +696,7 @@ the exit of a logical circuit depends only on the current combination of values 
 {{< figure src="/ox-hugo/PCw1P6a.svg" >}} <br/>
 
 
-## <span class="section-num">14</span> Digital abstraction {#digital-abstraction}
+## <span class="section-num">20</span> Digital abstraction {#digital-abstraction}
 
 how do we represent the values \\(0\\) and \\(1\\) using a digital logic circuits? <br/>
 
@@ -686,7 +710,7 @@ the <span class="underline">solution</span>: <br/>
 -   sometimes, it is agreed upon that the output of a circuit represents the value of the switching function, other times its agreed upon that it doesnt <br/>
 
 
-### <span class="section-num">14.1</span> Logical levels {#logical-levels}
+### <span class="section-num">20.1</span> Logical levels {#logical-levels}
 
 the two logical values \\(0\\) and \\(1\\) are represented in _Electronic circuits_ using logical levels. <br/>
 
@@ -700,201 +724,4 @@ as an example: <br/>
   Vplus - 0.2\Delta{v} &= 4volt \leq v \leq 5volt = Vplus & \text{represents logical $1$}\\\\
   Vminus &= 0volt \leq v \leq 1volt = Vminus + 0.2\Delta{v} & \text{represents logical $0$}
 \end{align\*}
-
-
-## <span class="section-num">15</span> Electronic circuits {#electronic-circuits}
-
-
-### <span class="section-num">15.1</span> Half Adder {#half-adder}
-
-inputs: \\(a,b\\) <br/>
-
-outputs: \\(S,C\_{out}\\) <br/>
-
-{{< figure src="/ox-hugo/LCW6aT6.svg" >}} <br/>
-
-this component adds the bits \\(a + b\\), gives the sum in the output \\(S\\) and the carry bit in \\(C\_{out}\\) <br/>
-
-<span class="underline">definition</span>: <br/>
-
-| \\(a\\) | \\(b\\) | \\(C\_{out}\\) | S |
-|---------|---------|----------------|---|
-| 0       | 0       | 0              | 0 |
-| 0       | 1       | 0              | 1 |
-| 1       | 0       | 0              | 1 |
-| 1       | 1       | 1              | 0 |
-
-\begin{gather\*}
-  S = a \oplus b\\\\
-  C\_{out} = ab
-\end{gather\*}
-
-<span class="underline">implementation</span>: <br/>
-
-{{< figure src="/ox-hugo/hQ8scH7.svg" >}} <br/>
-
-
-### <span class="section-num">15.2</span> Full adder {#full-adder}
-
-this component adds 3 input bits <br/>
-
-inputs: \\(a,b,C\_{in}\\) <br/>
-
-outputs: \\(S,C\_{out}\\) <br/>
-
-{{< figure src="/ox-hugo/TWyPIBB.svg" >}} <br/>
-
-it executes \\(a+b+C\_{in}\\), puts the result of the addition in output \\(S\\) and the carry bit in \\(C\_{out}\\) <br/>
-
-the truth table we aim to reproduce in the form of an electrical circuit: <br/>
-
-| \\(a\\) | \\(b\\) | \\(C\_{in}\\) | \\(C\_{out}\\) | \\(S\\) |
-|---------|---------|---------------|----------------|---------|
-| 0       | 0       | 0             | 0              | 0       |
-| 0       | 0       | 1             | 0              | 1       |
-| 0       | 1       | 0             | 0              | 1       |
-| 0       | 1       | 1             | 1              | 0       |
-| 1       | 0       | 0             | 0              | 1       |
-| 1       | 0       | 1             | 1              | 0       |
-| 1       | 1       | 0             | 1              | 0       |
-| 1       | 1       | 1             | 1              | 1       |
-
-\begin{gather\*}
-  S = a \oplus b \oplus C\_{in}\\\\
-  C\_{out} = ab + aC\_{in} + bC\_{in}
-\end{gather\*}
-
-<span class="underline">implementation</span>: <br/>
-
-we can implement this using a combination of /Half adder/s <br/>
-
-
-### <span class="section-num">15.3</span> Full subtractor {#full-subtractor}
-
-this component subtracts two bits <br/>
-
-inputs: \\(a,e,b\_{in}\\) (\\(b\_{in}\\) is borrow in input) <br/>
-
-outputs: \\(a-e-b\_{n}\\) - gives the result in \\(S\\) and borrow in \\(b\_{out}\\) <br/>
-
-| \\(a\\) | \\(e\\) | \\(b\_{in}\\) | Res | \\(b\_{out}\\) | \\(S\_{FS}\\) |
-|---------|---------|---------------|-----|----------------|---------------|
-| 0       | 0       | 0             | 0   | 0              | 0             |
-| 0       | 0       | 1             | -1  | 1              | 1             |
-| 0       | 1       | 0             | -1  | 1              | 1             |
-| 0       | 1       | 1             | -2  | 1              | 0             |
-| 1       | 0       | 0             | 1   | 0              | 1             |
-| 1       | 0       | 1             | 0   | 0              | 0             |
-| 1       | 1       | 0             | 0   | 0              | 0             |
-| 1       | 1       | 1             | -1  | 1              |               |
-
-karnaugh map of \\(b\_{out}\\): <br/>
-
-{{< figure src="/ox-hugo/YLUqZrh.svg" >}} <br/>
-
-karnaugh map of \\(S\_{FS}\\) <br/>
-
-{{< figure src="/ox-hugo/iBziQBH.svg" >}} <br/>
-
-\begin{align\*}
-  S\_{FS}(a,e,b\_{in}) &= S\_{FA}(a,e,b\_{in}) = \bar{S}\_{FA}(\bar{a},e,b\_{in})\\\\
-  b\_{out}(a,e,b\_{in}) &= C\_{out}(\bar{a},e,b\_{in})
-\end{align\*}
-
-implementation: <br/>
-
-implementation goes here... <br/>
-
-
-### <span class="section-num">15.4</span> Multiplier {#multiplier}
-
-to be able to implemenet an electrical circuit that does bit multiplication, we first need to understand how multiplication works, we look at the following examples: <br/>
-
-to be written... <br/>
-
-
-### <span class="section-num">15.5</span> Decoder {#decoder}
-
-Decoders convert the given binary input to a decimal output (so to speak), for \\(n\\) inputs, a decoder has \\(2^n\\) outputs <br/>
-
-{{< figure src="/ox-hugo/8qgEknj.svg" >}} <br/>
-
-the input is \\(100 = 4\\) gave us the output \\(00010000\\) (the index of the bit of value 1 is the decimal value) <br/>
-
-
-### <span class="section-num">15.6</span> Encoder {#encoder}
-
-also called _Selector_, an Encoder receives a decimal input and outputs the corresponding bit <br/>
-
-we implement the switching function \\(f(w,x,y,z) = \sum(3,4,9,12,13,14)\\) as an example <br/>
-
-{{< figure src="/ox-hugo/CvEk44N.svg" >}} <br/>
-
-
-### <span class="section-num">15.7</span> Modulo {#modulo}
-
-we want to implement a module that receives a 4-bit number as an input and outputs that number modulo 3, for example an input of \\(0101\\) would result in an output of \\(10\\) because \\(5 \mod 3 = 2\\) <br/>
-
-{{< figure src="/ox-hugo/JoBP21H.svg" >}} <br/>
-
-first we write the truth table that represents the results we want <br/>
-
-| \\(X\_0\\) | \\(X\_1\\) | \\(X\_2\\) | \\(X\_3\\) | \\(f\_1\\) | \\(f\_2\\) |
-|------------|------------|------------|------------|------------|------------|
-| 0          | 0          | 0          | 0          | 0          | 0          |
-| 0          | 0          | 0          | 1          | 0          | 1          |
-| 0          | 0          | 1          | 0          | 1          | 0          |
-| 0          | 0          | 1          | 1          | 0          | 0          |
-| 0          | 1          | 0          | 0          | 0          | 1          |
-| 0          | 1          | 0          | 1          | 1          | 0          |
-| 0          | 1          | 1          | 0          | 0          | 0          |
-| 0          | 1          | 1          | 1          | 0          | 1          |
-| 1          | 0          | 0          | 0          | 1          | 0          |
-| 1          | 0          | 0          | 1          | 0          | 0          |
-| 1          | 0          | 1          | 0          | 0          | 1          |
-| 1          | 0          | 1          | 1          | 1          | 0          |
-| 1          | 1          | 0          | 0          | 0          | 0          |
-| 1          | 1          | 0          | 1          | 0          | 1          |
-| 1          | 1          | 1          | 0          | 1          | 0          |
-| 1          | 1          | 1          | 1          | 0          | 0          |
-
-\begin{align\*}
-  f\_1(x\_0,x\_1,x\_2,x\_3) &= \sum(2,5,8,10,14)\\\\
-  f\_2(x\_0,x\_1,x\_2,x\_3) &= \sum(1,4,7,10,13)\\\\
-\end{align\*}
-
-we can implement this module using two _Decoder/s of the type \\(4 \rightarrow 16\\) and two /OR_ gates, but we're gonna do it with \\(8 \rightarrow 1\\) selectors <br/>
-
-{{< figure src="/ox-hugo/7R29PQD.svg" >}} <br/>
-
-
-## <span class="section-num">16</span> memory circuits {#memory-circuits}
-
-
-### <span class="section-num">16.1</span> SR Latch {#sr-latch}
-
-{{< figure src="/ox-hugo/gXdWqIj.svg" >}} <br/>
-
-
-## <span class="section-num">17</span> times/delays {#times-delays}
-
-in the following, _cd_ stands for _contamination delay_ and _pd_ stands for _propagation delay_ <br/>
-
-\\(T\_{pd}\\)(non-memory module)-- the time it takes for the module to generate the proper output after the inputs were changed, until that time has passed we cant know what the output is, after this time passes the output should be proper according to the truth table we write for the module, it can also be called the response/reaction time of the module <br/>
-
-\\(T\_{cd}\\)(non-memory module)-- the time during which the output stays the same after the inputs were changed <br/>
-
-obviously, \\(T\_{pd} > T\_{cd}\\), and there is a time between them where we cant know what happens in the circuit <br/>
-
-\\(T\_{pC-Q}\\)(memory module)-- the time that comes after the inputs were changed during which the output is correct according to the inputs and the truth table <br/>
-
-\\(T\_{cC-Q}\\)(memory module)-- the time after the clock turns 1 during which the output hasnt changed yet in response to the changed inputs <br/>
-
-\\(p\\) denotes change (correct output), \\(c\\) denotes similarity <br/>
-
-to find \\(T\_{pC-Q}\\)(system) or \\(T\_{pC-Q}\\)(system) we take the time from the last clock before the exit until the exit <br/>
-
-\\(T\_{setup}\\) or \\(T\_s\\) for short-- the time before the clock turns up to 1 during which the input cannot change, in other words its like the time during which the circuit welcomes the inputs (the inputs arrive before that time though) <br/>
-
-\\(T\_{hold}\\) or $T_h$-- the time after the turnup of the clock during which the inputs cannot change <br/>
 
