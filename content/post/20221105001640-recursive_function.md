@@ -2,7 +2,7 @@
 title = "recursion"
 author = ["mahmood"]
 description = "recursive functions"
-date = 2022-12-03T11:36:00+02:00
+date = 2022-12-19T19:14:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -30,7 +30,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
@@ -85,20 +88,29 @@ def fac(n):
 </div>
 
 
-## <span class="section-num">1</span> recurrence relation {#recurrence-relation}
+## <span class="section-num">1</span> base case {#base-case}
+
+<div class="definition">
+
+A recursive function definition has one or more base cases, meaning input(s) for which the function produces a result trivially (without recurring) <br/>
+
+</div>
+
+
+## <span class="section-num">2</span> recurrence relation {#recurrence-relation}
 
 to analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of [recursive function]({{< relref "20221105001640-recursive_function.md" >}})s we use a mathematical concept called **recurrence relation** <br/>
 a recurrence defines \\(T(n)\\) in terms of \\(T\\) for smaller values <br/>
 example: \\(T(n) = T(n-1) + 1\\), here \\(T(n)\\) is defined in terms of \\(T(n-1)\\) <br/>
 
 
-### <span class="section-num">1.1</span> initial condition {#initial-condition}
+### <span class="section-num">2.1</span> initial condition {#initial-condition}
 
 a [recurrence relation](#recurrence-relation) must have **initial conditions**, initial conditions are values of the recurrence for small values of \\(n\\) <br/>
 the values of \\(T(0),T(1)\\) are usually sufficient as initial conditions <br/>
 
 
-### <span class="section-num">1.2</span> closed form {#closed-form}
+### <span class="section-num">2.2</span> closed form {#closed-form}
 
 to solve a [recurrence](#recurrence-relation), we find a **closed form** for it, a closed form for \\(T(n)\\) is an equation that defines \\(T(n)\\) using an expression that does **not** involve \\(T\\) <br/>
 there is no single method that works for all, we check for patterns and use substitution <br/>
@@ -195,7 +207,7 @@ for `fib(n)`, how many times is `fib` called? <br/>
 </div>
 
 
-## <span class="section-num">2</span> recursion tree {#recursion-tree}
+## <span class="section-num">3</span> recursion tree {#recursion-tree}
 
 <div class="my_example">
 
@@ -204,9 +216,7 @@ consider the following [recurrence relation](#recurrence-relation) <br/>
 a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \\(T(n)\\) <br/>
 with that in mind, the first step would be: <br/>
 
-![](/ox-hugo/AT4XkK.svg) <br/>
-if we sum all the nodes we can see that indeed \\(T(n) = T\left(\frac{2n}{3}\right) + T\left(\frac{n}{3}\right) + n\\) <br/>
-for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\left(\frac{n}{3}\right)\\) in terms of time complexity for smaller values of \\(n\\) so we can know what the next row of nodes would be <br/>
+{{< figure src="/ox-hugo/AT4XkK.svg" >}} <br/>
 
 \begin{align\*}
   T\left(\frac{2n}{3}\right) &= T\left(\frac{2 \cdot \frac{2n}{3}}{3}\right) + T\left(\frac{\frac{2n}{3}}{3}\right) + \frac{2n}{3} = T\left(\frac{4n}{9}\right) + T\left(\frac{2n}{9}\right) + \frac{2n}{3}\\\\
@@ -215,22 +225,7 @@ for the next step we need to write \\(T\left(\frac{2n}{3}\right)\\) and \\(T\lef
 
 according to this, the tree with the new nodes would be: <br/>
 
-![](/ox-hugo/e66eVE.svg) <br/>
-we define a **full row** as a row that is full of nodes, in the previous tree the rows \\(1,2,3\\) are full, we might notice that the sum of all the nodes of a full row is \\(n\\) <br/>
-let \\(y\\) be the last full row <br/>
-because the leftmost node is always the smallest in its row, for a row to be full the leftmost node has to be greater or equal to 1 (\\(\frac{n}{3^y} \geq 1\\) in this case) <br/>
-if \\(\frac{n}{3^y} \geq 1\\) is true then the leftmost node in the row \\(y+1\\) whose value is \\(\frac{n}{3^y}\\) appears in the tree (because nodes with values greater or equal to 1 do appear in the tree), and so the row \\(y+1\\) is full, which results in a contradiction because \\(y\\) is the last full row <br/>
-therefore it must be that \\(\frac{n}{3^y} < 1 \implies n < 3^y \implies y > \log\_3{n}\\) <br/>
-therefore the tree contains atleast \\(\log\_3{n}\\) full rows, and because the sum of every full row is \\(n\\) we get: <br/>
-\\(T(n) =\\) sum of all nodes = sum of nodes in full rows + sum of nodes in unfull rows \\(\geq\\) sum of nodes in full rows \\(\geq\\) \\(n \cdot \log\_3{n} = \Theta(n\log{n})\\) <br/>
-and therefore \\(T(n) = \Omega(n\log{n})\\) <br/>
-let \\(x\\) be the last row in the tree, the value of the rightmost node in row \\(x\\) would be \\({\left(\frac23\right)}^{x-1} \cdot n\\) <br/>
-if this value is less than 1 then this node doesnt appear in the tree and all the other nodes in row \\(x\\) that have a smaller value also dont exist which gives us a contradiction because \\(x\\) is the last row in the tree <br/>
-therefore we get \\({\left(\frac23\right)}^{x-1}n \geq 1 \implies n \geq {\left(\frac32\right)}^{x-1} \implies \log\_{3/2}n \geq x - 1 \implies x \leq 1 + \log\_{3/2}n\\) <br/>
-and therefore in the tree there is at most \\(1 + \log\_{3/2}n\\) rows, and since the sum of every row in the tree is \\(n\\) we get: <br/>
-\\(T(n)\\) = sum of all nodes = sum of all nodes in all rows \\(\leq n \cdot\\) number of rows in the tree \\(\leq n \cdot (1+\log\_{3/2}n) = \Theta(n\log{n})\\) <br/>
-and therefore \\(T(n) = O(n\log{n})\\) <br/>
-in summery, we proved that \\(T(n) = \Theta(n\log{n})\\) <br/>
+{{< figure src="/ox-hugo/e66eVE.svg" >}} <br/>
 
 </div>
 
@@ -261,7 +256,7 @@ the first step would be: <br/>
   &= \Theta(n)
 \end{align\*}
 
-note the sum was found using  <br/>
+note the sum was found using [geometric progression formula]({{< relref "20220711182517-sum_of_geometric_progression.md" >}}) <br/>
 and so we have shown that \\(T(n) = O(n)\\) <br/>
 \\[
   T(n) = \text{sum of all nodes in the tree} \ge \text{root} = n = \Theta(n)
@@ -272,6 +267,12 @@ and so \\(T(n) = \Theta(n)\\) <br/>
 </div>
 
 <div class="my_example">
+
+<div class="note">
+
+this need some correction as the sum of the nodes in the tree isnt exactly \\(2^{x-1}\\) <br/>
+
+</div>
 
 ```C
 best_sum(A, i) {
@@ -331,17 +332,11 @@ the division by 2 doesnt affect big omega so \\(T(n) = \Omega\left(2^{n/2}\right
 
 </div>
 
-<div class="my_example">
 
-<br/>
-
-</div>
+## <span class="section-num">4</span> master theorem {#master-theorem}
 
 
-## <span class="section-num">3</span> master theorem {#master-theorem}
-
-
-### <span class="section-num">3.1</span> dividing functions {#dividing-functions}
+### <span class="section-num">4.1</span> dividing functions {#dividing-functions}
 
 to solve a [recurrence relation](#recurrence-relation) of the form: <br/>
 \\[ T(n) = aT\left(\frac{n}{b}\right) + f(n) \text{ where } a \geq 1, b > 1 \\] <br/>
@@ -350,7 +345,7 @@ we compare \\(f(n)\\) with \\(n^{\log\_b{a}}\\) and check which one dominates, t
 \begin{align}
   \exists \epsilon > 0 \mid f(n) = O\left(n^{\log\_b(a)-\epsilon}\right) &\implies T(n) = \Theta\left(n^{\log\_b{a}}\right)\\\\
   f(n) = \Theta\left(n^{\log\_b{a}}\right) &\implies T(n) = \Theta\left(n^{\log\_b{a}}\log{n}\right)\\\\
-  \exists \epsilon > 0 \mid f(n) = \Omega\left(n^{\log\_b(a)+\epsilon}\right) \text{ and } 0 < c < 1 \mid af\left(\frac{n}{b}\right) < cf(n) &\implies T(n) = \Theta(f(n))
+  \exists \epsilon > 0 \mid f(n) = \Omega\left(n^{\log\_b(a)+\epsilon}\right) \text{ and } 0 < c < 1 \ \Big|\ af\left(\frac{n}{b}\right) < cf(n) &\implies T(n) = \Theta(f(n))
 \end{align}
 
 <div class="my_example">
@@ -402,7 +397,7 @@ we get: <br/>
 </div>
 
 
-### <span class="section-num">3.2</span> decreasing functions {#decreasing-functions}
+### <span class="section-num">4.2</span> decreasing functions {#decreasing-functions}
 
 the **master theorem** can be used to solve recurrences of the form \\(T(n) = aT(n - b) + f(n)\\), where \\(a \geq 1\\) and \\(b > 0\\) and \\(f(n)\\) is **asymptotically positive**. (asymptotically positive means that the function is positive for all sufficiently large n.) this recurrence describes an algorithm that divides a problem of size \\(n\\) into sub problems, each of size \\(n-b\\), and solves them recursively. <br/>
 the theorem is as follows: <br/>
