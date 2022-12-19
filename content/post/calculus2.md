@@ -2,7 +2,7 @@
 title = "calculus"
 author = ["mahmood"]
 description = "calculus"
-date = 2022-10-23T22:00:00+03:00
+date = 2022-12-19T17:46:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -30,7 +30,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
@@ -282,8 +285,13 @@ when finding the limit of a rational function where both parts of the fraction d
 
 ### <span class="section-num">5.3</span> Squeeze theorem {#squeeze-theorem}
 
+the **squeeze theorem** states that if \\(f(x) \le g(x) \le h(x)\\) for all numbers, and at some point \\(x=k\\) we have \\(f(k)=h(k)\\), then \\(g(k)\\) must also be equal to them. <br/>
+we can use the theorem to find tricky limits like \\(\lim\_{x \to 0} \frac{\sin x}{x}\\), by "squeezing" \\(\frac{\sin x}{x}\\) between two nicer functions and using them to find the limit <br/>
+
 
 ### <span class="section-num">5.4</span> indeterminate form {#indeterminate-form}
+
+some forms of limits are called **indeterminate** if the limiting behaviour of individual parts of the given expression is not able to determine the overall limit. if the limits are applied for the given function, then it becomes 0/0, which is known as an indeterminate form <br/>
 
 
 ### <span class="section-num">5.5</span> chain rule {#chain-rule}
@@ -1438,9 +1446,6 @@ we split the shape into rectangles that are as narrow as possible as the more re
 the following image shows the area split into \\(n=8\\) rectangles <br/>
 
 {{< figure src="/ox-hugo/JAIRcvb.svg" >}} <br/>
-
-you can probably tell that the sum of the areas of these rectangles isnt really close to the area we want to find <br/>
-to be more accurate we increase the number of rectangles to \\(n=70\\) and we get a nicer result: <br/>
 
 {{< figure src="/ox-hugo/5SZ0x8R.svg" >}} <br/>
 
