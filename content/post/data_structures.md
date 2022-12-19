@@ -2,7 +2,7 @@
 title = "data structures"
 author = ["mahmood"]
 description = "college course in data structures and algorithms"
-date = 2022-12-03T22:03:00+02:00
+date = 2022-12-19T17:11:00+02:00
 tags = ["math", "code", "computer-science"]
 draft = false
 +++
@@ -30,7 +30,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
@@ -140,94 +143,6 @@ since abstract data types dont specify an implementation, this means its also in
 to further complicate matters, since certain abstract data types are almost always implemented with a particular data structure, some programmers will use the two terms interchangeably: for example, priority queue and heap, or associative array and hash table. the context in which the term is being used can usually provide distinction. <br/>
 
 </div>
-
-<div class="question">
-
-The Ministry of Education's computer system stores data on teachers, schools and subjects. For each teacher they keep: an ID number and details about the subjects they teach and the schools where they teach. For each school we keep: the name of the school (assuming that this name uniquely identifies the school) and details about the teachers who teach at the school and the subjects taught at the school. For each subject we keep: subject number and details about the teachers who teach this subject and the schools where the subject is taught. <br/>
-
--   Given a teacher's ID number, subject number and school name Adding/deleting the figure that the teacher teaches the subject at school takes \\(O(m\cdot\log r+\log p)\\) time on average, where m indicates the number of schools where the teacher teaches the subject, p indicates the number of subjects the teacher teaches, and r indicates the number of teachers who teach the subject. <br/>
--   Given a teacher's ID number, printing a list of all the subjects taught by the teacher, where for each subject, in addition to the subject number, a number is printed indicating the number of schools where the teacher teaches the profession. The list of subjects must be sorted by the number of schools where the teacher teaches the subject in ascending order. This action must be performed on time O(p) on average where p indicates the number of subjects taught by the teacher. For example if the teacher teaches subject A in 3 schools, subject B in 5 schools and subject C in 2 schools, then the output will be (in order from left to right (: 5 C 2, A 3, B <br/>
--   Given a subject number and a school number, printing all the teachers who teach this subject in this school, with the teachers sorted by the number of schools where they teach this subject in ascending order. This action must be performed on time O(q) on average where q indicates the number of teachers to be printed. For example, suppose teacher X teaches the given subject in the given school and 3 other schools, and teacher Y teaches the given subject in the given school and 6 other schools, and teacher Z teaches the given subject In the given school and 2 more schools, then the output will be (in order from left to right): Z,X,Y. <br/>
-
-Describe verbally how all the above actions are performed. <br/>
-
-</div>
-
-<div class="my_example">
-
-```java
-import java.util.*;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeMap;
-
-public class ADT {
-  public static boolean findK(Integer[] A, Integer k) {
-    Set<Integer> s = new HashSet<Integer>();
-    for (int i = 0; i < A.length; i++) {
-      if (s.contains(k-A[i]))
-        return true;
-      s.add(A[i]);
-    }
-    return false;
-  }
-
-  public static void main(String[] args) {
-    Integer[] arr = {1,7,9,3,7,4};
-    System.out.println(findK(arr, 17));
-    System.out.println(findK(arr, 16));
-
-    Set<Integer> s = new HashSet<Integer>();
-    s.add(5);
-    s.add(6);
-    for (int i : s)
-      System.out.println(i);
-
-    System.out.println(s.contains(6));
-
-    Map<String, Integer> mp = new TreeMap<String, Integer>();
-    Integer v = mp.get("USA");
-    if (v == null) mp.put("USA", 1);
-    else mp.put("USA", v++);
-    mp.put("USA", 1);
-    mp.put("USA", 2);
-    mp.put("israel", 12);
-    System.out.println(mp.get("USA"));
-
-    List<Integer> li = new ArrayList<Integer>();
-
-    Stack<Integer> st = new Stack<Integer>();
-    st.push(1);
-    st.pop();
-    st.push(2);
-    st.push(3);
-
-    Iterator<Integer> it = st.iterator();
-    while (it.hasNext())
-      System.out.println(it.next());
-
-    for (int i : st)
-      System.out.println(i);
-  }
-}
-```
-
-</div>
-
-```text
-false
-true
-5
-6
-true
-2
-2
-3
-2
-3
-```
 
 </div>
 
@@ -1351,9 +1266,9 @@ is this tree balanced?: 0 <br/>
 the height of this tree is: 6 <br/>
 the balance factor of the root is: -1 <br/>
 
-{{< figure src="/ox-hugo/v5wXfns.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_BT4xEYU.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/DimK7tW.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_OwSAlY9.svg" >}} <br/>
 
 
 #### <span class="section-num">1.7.17</span> AVL tree {#avl-tree}
@@ -1384,7 +1299,7 @@ a minimal form of an [AVL tree](#avl-tree) with a given height \\(h\\) is one wh
 
 <div class="lemma">
 
-the minimal number of nodes for a tree of height \\(h\\) is given by the following [recurrence relation]({{< relref "20221105001640-recursive_function.md#recurrence-relation" >}}) <br/>
+the minimal number of nodes for a tree of height \\(h\\) is given by the following  <br/>
 
 \begin{align\*}
   N(h)&=N(h-1) + N(h-2) + 1\\\\
@@ -1591,7 +1506,7 @@ int main() {
 }
 ```
 
-{{< figure src="/ox-hugo/WeIpZa6.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_sN2uzxn.svg" >}} <br/>
 
 
 #### <span class="section-num">1.7.18</span> 2-3 tree {#2-3-tree}
@@ -2122,7 +2037,7 @@ balance 100 110 \\(\varnothing\\) recursively <br/>
 root: 40 \\(\varnothing\\) \\(\varnothing\\) <br/>
 100 110 \\(\varnothing\\) is good. <br/>
 
-{{< figure src="/ox-hugo/ModNGVL.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_HLa5Fi7.svg" >}} <br/>
 
 
 #### <span class="section-num">1.7.19</span> algorithms {#algorithms}
@@ -2131,11 +2046,6 @@ root: 40 \\(\varnothing\\) \\(\varnothing\\) <br/>
 ##### <span class="section-num">1.7.19.1</span> backtracking {#backtracking}
 
 **Backtracking** is an algorithm that incrementally builds candidates to the solutions, and abandons a candidate as soon as it determines that the candidate cannot possibly be completed to a valid solution, see <https://en.wikipedia.org/wiki/Backtracking> <br/>
-
-
-##### <span class="section-num">1.7.19.2</span> pattern {#pattern}
-
-this includes the [backtracking](#backtracking) algorithm <br/>
 after solving a few problems i saw a pattern that makes it much easier to solve recursion problems related to binary trees <br/>
 when i want to solve a problem with recursion i ask myself 3 questions <br/>
 
@@ -2152,7 +2062,7 @@ note that its **important** that we gather info as we go on every node we visit 
 words arent the best way to put it so hopefully ill provide a better visual explanation in the future <br/>
 
 
-##### <span class="section-num">1.7.19.3</span> reverse inorder {#reverse-inorder}
+##### <span class="section-num">1.7.19.2</span> reverse inorder {#reverse-inorder}
 
 given a [binary tree](#binary-tree), write a function to reverse its [inorder traversal](#inorder-traversal) output <br/>
 this algorithm runs in `O(n)` time <br/>
@@ -2218,13 +2128,13 @@ int main() {
 }
 ```
 
-{{< figure src="/ox-hugo/TzGqehC.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_KL5D1mf.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/oZWWLS5.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_Uq5IcJ5.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/pot364K.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_FybxPrX.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/swUdtLQ.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_wSYos1D.svg" >}} <br/>
 
 </div>
 
@@ -2538,43 +2448,43 @@ int main() {
 
 inserting 0 <br/>
 
-{{< figure src="/ox-hugo/UG4wO7f.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_8ARGd70.svg" >}} <br/>
 
 inserting 1 <br/>
 
-{{< figure src="/ox-hugo/KwSoQco.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_Tq58m9o.svg" >}} <br/>
 
 inserting 2 <br/>
 
-{{< figure src="/ox-hugo/HkFDSNG.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_UZxlwy8.svg" >}} <br/>
 
 inserting 3 <br/>
 
-{{< figure src="/ox-hugo/N0o6fGT.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_AmdO1X5.svg" >}} <br/>
 
 inserting 4 <br/>
 
-{{< figure src="/ox-hugo/uMAUG2r.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_T1VEkFv.svg" >}} <br/>
 
 inserting 5 <br/>
 
-{{< figure src="/ox-hugo/UrrpZJW.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_qe69eCz.svg" >}} <br/>
 
 inserting 6 <br/>
 
-{{< figure src="/ox-hugo/MHMvZ3P.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_jfD5vyN.svg" >}} <br/>
 
 inserting 7 <br/>
 
-{{< figure src="/ox-hugo/WzGEce9.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_puriysd.svg" >}} <br/>
 
 inserting 8 <br/>
 
-{{< figure src="/ox-hugo/pDalJ34.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_RNepkbb.svg" >}} <br/>
 
 inserting 9 <br/>
 
-{{< figure src="/ox-hugo/c2Scgyl.svg" >}} <br/>
+{{< figure src="/ox-hugo/tmp_19bbXmQ.svg" >}} <br/>
 
 
 ##### <span class="section-num">1.8.3.7</span> binary heap algorithms {#binary-heap-algorithms}
@@ -2586,26 +2496,7 @@ initial inefficient solution: <br/>
 
 {{< figure src="/ox-hugo/tHkzZWu.svg" >}} <br/>
 
-we analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
-\\[
-  T(n) \leq C\_1 \cdot (\log n+\log(n-1) + \cdots + \log(n-(k-1))) \leq C\_1 \cdot (\log n + \log n + \cdots + \log n) = C\_1 \cdot k\log n
-\\] <br/>
-which means that the time complexity is \\(T(n) = O(k\log n)\\) <br/>
-we cant arrive at [Big Theta]({{< relref "20221203185351-asymptotic_notations.md#big-theta" >}}) for this algorithm <br/>
-we suggest another algorithm that is more efficient: <br/>
-
 {{< figure src="/ox-hugo/7kcwMR4.svg" >}} <br/>
-
-we analyze the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}): <br/>
-\\[
-  T(n) \leq C\_1 \cdot (3\log2 + 3\log3 + \cdots + 3\log(k+1)) \leq C\_1 \cdot 3k\log(k+1) = \Theta(k\log k)
-\\] <br/>
-which implies \\(T(n) = O(k\log g)\\) <br/>
-\\[
-  T(n) \geq \log2 + \log3 + \cdots + \log(k+1)) = \log2 + \log3 + \cdots + \log(k/2) + \log(k/2+1) + \cdots + \log(k+1)) \geq \log(k/2) + \log(k/2) + \cdots + \log(k/2) = k/2\log(k/2) = \Theta(k\log k)
-\\] <br/>
-which implies \\(T(n) = \Omega(k\log k)\\) <br/>
-and therefore \\(T(n) = \Theta(k\log k)\\) <br/>
 
 
 ###### <span class="section-num">1.8.3.7.2</span> check if array represents a binary heap {#check-if-array-represents-a-binary-heap}
@@ -2693,7 +2584,7 @@ this is an example binomial heap that consists of 13 nodes and 3 binomial trees 
 
 <div class="characteristic">
 
-a binomial tree of order \\(k\\) has \\(2^{k}\\) nodes and height \\(k\\). the name comes from the shape: a binomial tree of order k has \\(\binom{k}{d}\\) nodes at depth \\(d\\), a [binomial coefficient]({{< relref "discrete_maths2.md#binomial-coefficient" >}}). because of its structure, a binomial tree of order \\(k\\) can be constructed from two trees of order \\(k-1\\) by attaching one of them as the leftmost child of the root of the other tree. This feature is central to the [merge](#union) operation of a binomial heap, which is its major advantage over other conventional heaps. <br/>
+a binomial tree of order \\(k\\) has \\(2^{k}\\) nodes and height \\(k\\). the name comes from the shape: a binomial tree of order k has \\(\binom{k}{d}\\) nodes at depth \\(d\\), a [binomial coefficient]({{< relref "20221204105120-combinatorics.md#binomial-coefficient" >}}). because of its structure, a binomial tree of order \\(k\\) can be constructed from two trees of order \\(k-1\\) by attaching one of them as the leftmost child of the root of the other tree. This feature is central to the [merge](#union) operation of a binomial heap, which is its major advantage over other conventional heaps. <br/>
 
 </div>
 
@@ -3044,20 +2935,64 @@ int main() {
 ```
 
 inserting 0 <br/>
+
+{{< figure src="/ox-hugo/tmp_bg8TDWx.svg" >}} <br/>
+
 inserting 1 <br/>
+
+{{< figure src="/ox-hugo/tmp_AiseR0l.svg" >}} <br/>
+
 inserting 2 <br/>
+
+{{< figure src="/ox-hugo/tmp_pdRlT1g.svg" >}} <br/>
+
 inserting 3 <br/>
+
+{{< figure src="/ox-hugo/tmp_FxYpK8t.svg" >}} <br/>
+
 inserting 4 <br/>
+
+{{< figure src="/ox-hugo/tmp_yIMqZAJ.svg" >}} <br/>
+
 inserting 5 <br/>
+
+{{< figure src="/ox-hugo/tmp_YPj1bvG.svg" >}} <br/>
+
 inserting 6 <br/>
+
+{{< figure src="/ox-hugo/tmp_dXUsV8h.svg" >}} <br/>
+
 inserting 7 <br/>
+
+{{< figure src="/ox-hugo/tmp_VQSCx4j.svg" >}} <br/>
+
 inserting 8 <br/>
+
+{{< figure src="/ox-hugo/tmp_bPWHhV3.svg" >}} <br/>
+
 inserting 9 <br/>
+
+{{< figure src="/ox-hugo/tmp_ApTqukD.svg" >}} <br/>
+
 inserting 10 <br/>
+
+{{< figure src="/ox-hugo/tmp_UmxmjVx.svg" >}} <br/>
+
 inserting 11 <br/>
+
+{{< figure src="/ox-hugo/tmp_EEjJAzU.svg" >}} <br/>
+
 inserting 12 <br/>
+
+{{< figure src="/ox-hugo/tmp_f8PL47H.svg" >}} <br/>
+
 inserting 13 <br/>
+
+{{< figure src="/ox-hugo/tmp_UfMOIm8.svg" >}} <br/>
+
 inserting 14 <br/>
+
+{{< figure src="/ox-hugo/tmp_aITCAjb.svg" >}} <br/>
 
 
 ### <span class="section-num">1.9</span> hash table {#hash-table}
