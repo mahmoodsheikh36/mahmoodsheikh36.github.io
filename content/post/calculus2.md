@@ -2,7 +2,7 @@
 title = "calculus"
 author = ["mahmood"]
 description = "calculus"
-date = 2022-12-19T17:46:00+02:00
+date = 2022-12-19T20:47:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -1440,15 +1440,15 @@ a function \\(f\\) is an **integrable function** in the interval \\([a,b]\\) if 
 ### <span class="section-num">7.14</span> riemann sum {#riemann-sum}
 
 **Riemann sum** can be applied to [integrable function](#integrable-function)s to find area <br/>
-
 consider the area below the function \\(e^{-x}\\) in the interval \\([1,2]\\) <br/>
 we split the shape into rectangles that are as narrow as possible as the more rectangles we use the more accurate the result <br/>
 the following image shows the area split into \\(n=8\\) rectangles <br/>
 
 {{< figure src="/ox-hugo/JAIRcvb.svg" >}} <br/>
 
-{{< figure src="/ox-hugo/5SZ0x8R.svg" >}} <br/>
+you can probably tell that the sum of the areas of these rectangles isnt really close to the area we want to find to be more accurate we increase the number of rectangles to \\(n=70\\) and we get a nicer result: <br/>
 
+![](/ox-hugo/5SZ0x8R.svg) <br/>
 you can probably already tell that since this is a "narrower" coverage of the area, the sum of the rectangles would be closer to the value of the actual area <br/>
 and now that we know that the more rectangles we have the more accurate we get, we know we should be aiming at \\(\infty\\) rectangles <br/>
 the width of a rectangle would be \\(\frac{1}{n}\\) and the height would be \\(f\left(\frac{k}{n}\right)\\) where \\(k\\) is the index of the rectangle starting at 1, the sum of the area \\(S\\) of the rectangles would be: <br/>
