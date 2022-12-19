@@ -2,7 +2,7 @@
 title = "probability"
 author = ["mahmood"]
 description = "probability theory"
-date = 2022-12-05T14:14:00+02:00
+date = 2022-12-19T22:22:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -30,7 +30,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
@@ -60,19 +63,13 @@ window.onload = function() {
 <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
-<div class="note">
-
-some things are incomplete and even wrong <br/>
-
-</div>
-
 <div class="definition">
 
 **probability** is a [function]({{< relref "discrete_maths2.md#function" >}}), denoted by \\(P\\) that describes the probability for a specific incident to occur <br/>
 
 <div class="lemma">
 
-The probability of an impossible event is zero; the probability of a certain event is one. therefore, for any event \\(A\\), the range of possible probabilities is \\(0 \le P(A) \le 1\\) <br/>
+the probability of an impossible event is zero; the probability of a certain event is one. therefore, for any event \\(A\\), the range of possible probabilities is \\(0 \le P(A) \le 1\\) <br/>
 
 </div>
 
@@ -297,17 +294,19 @@ P(\Omega) = 1
 
 <div class="definition">
 
-we say two events are **independent** if knowing one event occurred doesn't change the probability of the other event. otherwise they are dependant <&khanacademy_probability_dependance> <br/>
+<&probability_conditional> <br/>
+\\[
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+\\] <br/>
+two events are **independent** if knowing one event occurred doesn't change the probability of the other event. otherwise they are dependant <&khanacademy_probability_dependance> <br/>
 i.e. two events, A and B, are independent if: <br/>
 \\[
-  P(A\mid B) = P(A) \land P(B\mid A) = P(B)
+  P(A\mid B) = P(A) \text{ and } P(B\mid A) = P(B)
 \\] <br/>
 
 <div class="my_example">
 
-for example, the probability that a fair coin shows "heads" after being flipped is 1/2. what if we knew the day was tuesday? does this change the probability of getting "heads?" of course not. the probability of getting "heads", given that it's a tuesday, is still 1/2. so the result of a coin flip and the day being tuesday are independent 127.0.0.1       youtube.com <br/>
-127.0.0.1       www.youtube.com <br/>
-events; knowing it was a tuesday didn't change the probability of getting "heads". <br/>
+for example, the probability that a fair coin shows "heads" after being flipped is 1/2. what if we knew the day was tuesday? does this change the probability of getting "heads?" of course not. the probability of getting "heads", given that it's a tuesday, is still 1/2. so the result of a coin flip and the day being tuesday are independent events; knowing it was a tuesday didn't change the probability of getting "heads". <br/>
 not every situation is this obvious. what about gender and handedness (left handed vs. right handed)? it may seem like a person's gender and whether or not they are left-handed are totally independent events. when we look at probabilities though, we see that about 10% of all people are left-handed, but about 12% of males are left-handed. so these events are not independent, since knowing a random person is a male increases the probability that they are left-handed. <br/>
 The big idea is that we check for independence with probabilities. <br/>
 
@@ -376,6 +375,28 @@ such that <br/>
 
 <div class="my_example">
 
+joseph rolls a dice cube, what is the probability that he got the number 4 if we know he got is even? <br/>
+
+<div class="answer">
+
+\begin{align\*}
+  P(\text{result of 4} \mid \text{even result}) &= \frac{P(\text{result of 4 and also even})}{P(\text{even result})}\\\\
+  &= \frac{P(\text{result of 4})}{P(\text{even result})}\\\\
+  &= \frac{\frac{1}{6}}{\frac{1}{2}} = \frac{1}{3}
+\end{align\*}
+
+</div>
+
+</div>
+
+<div class="my_example">
+
+in a class there are 6 boys and 7 girls, we randomly pick 4 students, if we know that 2 girls and 2 boys were picked, what is the probability that joseph wasnt picked? <br/>
+
+</div>
+
+<div class="my_example">
+
 a secretary has \\(n\\) mails destined for \\(n\\) different people, the secretary sent the letters out randomly to people <br/>
 
 <div class="subquestion">
@@ -405,19 +426,7 @@ A = atleast one person received the correct mail <br/>
 </div>
 
 
-## <span class="section-num">3</span> conditional probability {#conditional-probability}
-
--   two events are mutually exclusive or [disjoint]({{< relref "discrete_maths2.md#disjoint-sets" >}}) if they cannot occur at the same time. <br/>
--   the [probability]({{< relref "probability.md" >}}) that event \\(A\\) occurs, given that event \\(B\\) has occurred, is called a **conditional probability**. the conditional probability of event \\(A\\), given event \\(B\\), is denoted by \\(P(A\mid B)\\), if \\(A\\) is independent from \\(B\\), this simplifies to \\(P(A\mid B) = P(A)\\), if \\(P(B)=0\\) the conditional probability is undefined. <br/>
--   the complement of an event is the event not occurring. the probability that event \\(A\\) will not occur is denoted by \\(P(A')\\) or \\(P\left(\overline{A}\right)\\). <br/>
--   the probability that events \\(A\\) and \\(B\\) both occur is the probability of the [intersection]({{< relref "discrete_maths2.md#intersection" >}}) of \\(A\\) and \\(B\\). the probability of the intersection of events \\(A\\) and \\(B\\) is denoted by \\(P(A\cap B)\\) which may be found using the [chain rule](#chain-rule). if events \\(A\\) and \\(B\\) are mutually exclusive, \\(P(A\cap B) = 0\\). <br/>
--   the probability that events \\(A\\) or \\(B\\) occur is the probability of the [union]({{< relref "discrete_maths2.md#union" >}}) of \\(A\\) and \\(B\\). the probability of the union of events \\(A\\) and \\(B\\) is denoted by \\(P(A\cup B)\\) which may be found using the [sum rule](#sum-rule). <br/>
--   if the occurrence of event \\(A\\) changes the probability of event \\(B\\), then events \\(A\\) and \\(B\\) are dependent. on the other hand, if the occurrence of event \\(A\\) does not change the probability of event \\(B\\), then events \\(A\\) and \\(B\\) are independent. <br/>
-
-[[<&stattrek_conditional_probability>] <br/>
-
-
-## <span class="section-num">4</span> sum rule {#sum-rule}
+## <span class="section-num">3</span> sum rule {#sum-rule}
 
 the **sum rule** for two random events \\(A\\) and \\(B\\) states: <br/>
 \\[
@@ -429,7 +438,7 @@ P(A \cup B) = P(A) + P(B)
 \\] <br/>
 
 
-## <span class="section-num">5</span> chain rule {#chain-rule}
+## <span class="section-num">4</span> chain rule {#chain-rule}
 
 the **chain rule** for two random events \\(A\\) and \\(B\\) says: <br/>
 \\[
@@ -445,18 +454,15 @@ P\left(A\_{n} \cap \dots \cap A\_{1}\right)=\prod\_{k=1}^{n} P\left(A\_{k}\\,\Bi
 \\] <br/>
 
 
-## <span class="section-num">6</span> expected value {#expected-value}
+## <span class="section-num">5</span> expected value {#expected-value}
 
 expected value is exactly what you might think it means intuitively: the return you can expect for some kind of action, like how many questions you might get right if you guess on a multiple choice test. <br/>
 
 
-## <span class="section-num">7</span> probability table {#probability-table}
+## <span class="section-num">6</span> binomial distribution {#binomial-distribution}
 
 
-## <span class="section-num">8</span> binomial distribution {#binomial-distribution}
-
-
-## <span class="section-num">9</span> Bernoulli distribution {#bernoulli-distribution}
+## <span class="section-num">7</span> Bernoulli distribution {#bernoulli-distribution}
 
 <div class="definition">
 
@@ -475,11 +481,11 @@ the [expected value](#expected-value) for a random variable, \\(x\\), for a Bern
 </div>
 
 
-## <span class="section-num">10</span> geometric distribution {#geometric-distribution}
+## <span class="section-num">8</span> geometric distribution {#geometric-distribution}
 
 <div class="definition">
 
-the probability for a success on the \\(k\\)'th attempt is <br/>
+the probability for a success on the \\(k\\)'th attempt with success probability \\(p\\) is <br/>
 \\[
 P(k) = {(1-p)}^{k-1}p
 \\] <br/>
@@ -492,4 +498,12 @@ the [expected](#expected-value) number of trials for a success is \\(E[k] = \fra
 </div>
 
 </div>
+
+
+## <span class="section-num">9</span> hypergeometric distribution {#hypergeometric-distribution}
+
+out of \\(n\\) different items of which \\(m\\) are of a specific type and \\(n-m\\) are of another type, we pick \\(k\\) items without [repetition]({{< relref "20221204105120-combinatorics.md#repetition" >}}), the probability that from \\(k\\) items \\(r\\) are of the first type and \\(k-r\\) is of the second type is: <br/>
+\\[
+P\_n(k) = \frac{\binom{m}{r} \binom{n-m}{k-r}}{\binom{n}{k}}
+\\]
 
