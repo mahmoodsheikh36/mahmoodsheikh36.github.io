@@ -2,7 +2,7 @@
 title = "tikz"
 author = ["mahmood"]
 description = "tikz"
-date = 2022-10-19T10:26:00+03:00
+date = 2022-12-21T00:41:00+02:00
 tags = ["math", "code", "language"]
 draft = false
 +++
@@ -30,7 +30,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
