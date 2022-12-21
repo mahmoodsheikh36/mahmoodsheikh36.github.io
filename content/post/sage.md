@@ -2,8 +2,8 @@
 title = "sagemath"
 author = ["mahmood"]
 description = "sagemath"
-date = 2022-09-15T00:18:00+03:00
-tags = ["program"]
+date = 2022-12-21T16:31:00+02:00
+tags = ["math", "code", "program"]
 draft = false
 +++
 
@@ -17,6 +17,11 @@ draft = false
   \(\newcommand\dif[1]{\:\textrm{d}#1}\)
   \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
   \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 </p>
 
 <!-- mathjax -->
@@ -25,7 +30,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
@@ -119,7 +127,7 @@ open_left = False
 open_right = False
 ```
 
-{{< figure src="/ox-hugo/c4XFj9.png" >}} <br/>
+{{< figure src="/ox-hugo/c4XFj9.svg" >}} <br/>
 
 
 ### <span class="section-num">1.2</span> solid of revolution {#solid-of-revolution}
@@ -131,7 +139,7 @@ my_plot = revolution_plot3d(e^x, (x,0,1), show_curve=True, parallel_axis='z', fi
 
 ```
 
-<iframe style="width: 100%; height: 4in" src="/more/IKj0Gj.html"></iframe>
+<iframe style="width: 100%; height: 4in" src="/Users/mahmooz/brain/out/IKj0Gj.html"></iframe>
 
 
 ### <span class="section-num">1.3</span> parametric 3d plot {#parametric-3d-plot}
@@ -141,7 +149,7 @@ my_plot = parametric_plot3d([cos(x),sin(x),x/10], (x,0,4*pi), color='red', viewe
 
 ```
 
-<iframe style="width: 100%; height: 4in" src="/more/G5rZlG.html"></iframe>
+<iframe style="width: 100%; height: 4in" src="/Users/mahmooz/brain/out/G5rZlG.html"></iframe>
 
 
 ### <span class="section-num">1.4</span> more {#more}
@@ -155,7 +163,7 @@ for k in [1,2,3,4]:
 
 ```
 
-<iframe style="width: 100%; height: 4in" src="/more/ZZcUa4.html"></iframe>
+<iframe style="width: 100%; height: 4in" src="/Users/mahmooz/brain/out/ZZcUa4.html"></iframe>
 
 
 ### <span class="section-num">1.5</span> animation {#animation}
@@ -170,7 +178,7 @@ my_plot = animate(frames).interactive()
 
 ```
 
-<iframe style="width: 100%; height: 4in" src="/more/oB72QW.html"></iframe>
+<iframe style="width: 100%; height: 4in" src="/Users/mahmooz/brain/out/oB72QW.html"></iframe>
 
 ```sage
 sines = [plot(c*sin(x), (-2*pi,2*pi), color=Color(c,0,0), ymin=-1, ymax=1,transparent=False) for c in sxrange(0,1,.1)]
@@ -231,7 +239,7 @@ my_plot = plot([f,g,h],-2,3,fill={0:g,1:h,2:0})
 
 ```
 
-{{< figure src="/more/9s9RNl.png" >}} <br/>
+{{< figure src="/ox-hugo/9s9RNl.svg" >}} <br/>
 
 
 ### <span class="section-num">1.7</span> more filling {#more-filling}
@@ -241,7 +249,7 @@ my_plot = plot(1.13*log(x), 1, 100, fill = lambda a: nth_prime(a)/floor(a), fill
 
 ```
 
-{{< figure src="/more/efTJka.png" >}} <br/>
+{{< figure src="/ox-hugo/efTJka.svg" >}} <br/>
 
 ```sage
 #plot(x,(x,0,1),fill=x^2)
@@ -249,7 +257,7 @@ my_plot = plot([x,x^2],(x,-0.5,1),fill={0:[1]})
 
 ```
 
-{{< figure src="/more/gYDdhB.png" >}} <br/>
+{{< figure src="/ox-hugo/gYDdhB.svg" >}} <br/>
 
 
 ## <span class="section-num">2</span> examples {#examples}
@@ -613,8 +621,6 @@ v3 = matrix(SR, 4, 1, [var(f'x{i}') for i in range(4)])
 ld(v1.augment(v2).augment(v3), v1.augment(v2).augment(v3).echelon_form())
 ```
 
-\\[\left[\begin{array}{rrr} 1 & 0 & x\_{0} \\\ 2 & 1 & x\_{1} \\\ 0 & 0 & x\_{2} \\\ 0 & 0 & x\_{3} \end{array}\right] \left[\begin{array}{rrr} 1 & 0 & 0 \\\ 0 & 1 & 0 \\\ 0 & 0 & 1 \\\ 0 & 0 & 0 \end{array}\right]\\] <br/>
-
 this isnt really the result we're looking for, because the correct result will most certainly contain the symbolic variables \\(x\_{0\rightarrow 3}\\) <br/>
 to get proper results we use `PolynomialRing` <br/>
 
@@ -626,7 +632,16 @@ v3 = matrix(R, 4, 1, R.gens())
 ld(v1.augment(v2).augment(v3), v1.augment(v2).augment(v3).echelon_form())
 ```
 
-\\[\left[\begin{array}{rrr} 1 & 0 & x\_{0} \\\ 2 & 1 & x\_{1} \\\ 0 & 0 & x\_{2} \\\ 0 & 0 & x\_{3} \end{array}\right] \left[\begin{array}{rrr} 1 & 0 & x\_{0} \\\ 0 & 1 & -2 x\_{0} + x\_{1} \\\ 0 & 0 & x\_{2} \\\ 0 & 0 & x\_{3} \end{array}\right]\\] <br/>
+[ <br/>
+(1, 0, -2, 1), <br/>
+(0, 1, -1, 0) <br/>
+] <br/>
+2 <br/>
+[ <br/>
+(1, 0, -4, 3), <br/>
+(0, 1, -2, 1) <br/>
+] <br/>
+2 <br/>
 
 now this, this is a proper result, cheers! <br/>
 to get the same functionality but with other Rings/Fields we can use `MatrixSpace` <br/>
@@ -749,3 +764,9 @@ tex = r"\frac{d}{dx}(x^{2}+x)"
 print(latex2sympy(tex))
 print(latex2latex(tex))
 ```
+
+
+## <span class="section-num">8</span> more resources {#more-resources}
+
+[recurrence relation]({{< relref "20221105001640-recursive_function.md#recurrence-relation" >}}) in sage: <https://cocalc.com/share/public_paths/6575abaa81222f77110e4e1de268ff8b12145be8> <br/>
+
