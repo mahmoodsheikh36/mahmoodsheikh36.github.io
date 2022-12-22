@@ -2,7 +2,7 @@
 title = "probability"
 author = ["mahmood"]
 description = "probability theory"
-date = 2022-12-19T22:22:00+02:00
+date = 2022-12-22T19:02:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -290,19 +290,73 @@ P(\Omega) = 1
 </div>
 
 
-## <span class="section-num">2</span> dependance {#dependance}
+## <span class="section-num">2</span> sum rule {#sum-rule}
+
+the **sum rule** for two random events \\(A\\) and \\(B\\) states: <br/>
+\\[
+P(A\cup B)=P(A)+P(B)-P(A\cap B)
+\\] <br/>
+if the events are disjoint, the formula would simplify to <br/>
+\\[
+P(A \cup B) = P(A) + P(B)
+\\] <br/>
+
+
+## <span class="section-num">3</span> chain rule {#chain-rule}
+
+the **chain rule** for two random events \\(A\\) and \\(B\\) says: <br/>
+\\[
+P(A\cap B) = P(B\mid A) \cdot P(A)
+\\] <br/>
+for more than two events \\(A\_{1},\dots,A\_{n}\\) the chain rule extends to the [formula]({{< relref "20220711175314-formula.md" >}}): <br/>
+\\[
+P \left(A\_{n}\cap \dots \cap A\_{1}\right)= P\left(A\_{n} \mid A\_{n-1}\cap \dots \cap A\_{1}\right)\cdot P\left(A\_{n-1}\cap \dots \cap A\_{1}\right)
+\\] <br/>
+which by induction may be turned into: <br/>
+\\[
+P\left(A\_{n} \cap \dots \cap A\_{1}\right)=\prod\_{k=1}^{n} P\left(A\_{k}\\,\Bigg|\\,\bigcap\_{j=1}^{k-1}A\_{j}\right)
+\\] <br/>
+
+
+## <span class="section-num">4</span> disjoint events {#disjoint-events}
+
+<div class="definition">
+
+events A and B are **disjoint** if they cannot occur at the same time, i.e. \\(A \cap B = \varnothing \iff P(A \cap B) = 0\\) <br/>
+
+<div class="lemma">
+
+given A,B are disjoint events \\[ P(A \cup B) = P(A) + P(B) \\] <br/>
+
+</div>
+
+</div>
+
+
+## <span class="section-num">5</span> dependence {#dependence}
 
 <div class="definition">
 
 <&probability_conditional> <br/>
+the probability of A occuring, knowing that B has occured is <br/>
 \\[
-P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A) \cdot P(B)}{P(B)}
 \\] <br/>
-two events are **independent** if knowing one event occurred doesn't change the probability of the other event. otherwise they are dependant <&khanacademy_probability_dependance> <br/>
+two events are **independent** if knowing one event occurred doesn't change the probability of the other event. otherwise they are both dependant on one another <&khanacademy_probability_dependance> <br/>
 i.e. two events, A and B, are independent if: <br/>
+\\[
+  P(A \cap B) = P(A) \cdot P(B)
+\\] <br/>
+
+<div class="lemma">
+
+if A and B are independant then <br/>
 \\[
   P(A\mid B) = P(A) \text{ and } P(B\mid A) = P(B)
 \\] <br/>
+proving \\(P(A \cap B) = P(A)\\) or \\(P(A \cap B) \neq P(A)\\) is enough to prove both events' dependence/independence <br/>
+
+</div>
 
 <div class="my_example">
 
@@ -393,6 +447,88 @@ joseph rolls a dice cube, what is the probability that he got the number 4 if we
 
 in a class there are 6 boys and 7 girls, we randomly pick 4 students, if we know that 2 girls and 2 boys were picked, what is the probability that joseph wasnt picked? <br/>
 
+<div class="answer">
+
+\begin{align\*}
+  P (\text{joseph not picked} \mid \text{2 girls 2 boys picked}) &= \frac{P(\text{2 girls 2 boys picked and joseph wasnt})}{P(\text{2 girls 2 boys picked})}\\\\
+  &= \frac{P(\text{2 girls 2 boys picked and joseph wasnt})}{\frac{\binom{6}{2}\binom{7}{2}}{\binom{13}{4}}}\\\\
+  &= \frac{\frac{\binom{5}{2}\binom{7}{2}}{\binom{12}{4}}}{\frac{\binom{6}{2}\binom{7}{2}}{\binom{13}{4}}}\\\\
+\end{align\*}
+
+used [hypergeometric distribution](#hypergeometric-distribution) for both the numerator and the denominator <br/>
+
+</div>
+
+</div>
+
+<div class="my_example">
+
+in a country 2 cellular companies, Soft and Label, 30% of the residents are registered in Label and 60% in Soft, and 15% have no cellular phones at all <br/>
+
+<div class="subquestion">
+
+which percentage of adults are registered in the 2 companies <br/>
+
+<div class="answer">
+
+|     | not in Label | in Label |             |
+|-----|--------------|----------|-------------|
+| 0.6 |              |          | in Soft     |
+| 0.4 | 0.15         |          | not in Soft |
+| 1   | 0.7          | 0.3      |             |
+
+we fill the table: <br/>
+
+|     | not in Label | in Label |             |
+|-----|--------------|----------|-------------|
+| 0.6 | 0.55         | 0.05     | in Soft     |
+| 0.4 | 0.15         | 0.25     | not in Soft |
+| 1   | 0.7          | 0.3      |             |
+
+\\[P(\text{Label and Soft}) = 0.05\\] <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+we pick a person that is registered in Soft, what is the probability that they're registered also in Label <br/>
+
+<div class="answer">
+
+\\[P(\text{Label} \mid \text{Soft}) = \frac{P(\text{Soft and Label})}{P(\text{Soft})} = \frac{0.05}{0.6} = \frac{1}{12}\\] <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+if a person isnt registered in Label, what is the probability that they're registered in Soft? <br/>
+
+<div class="answer">
+
+\\[
+P(\text{Soft} \mid \text{Label}) = \frac{P(\text{Label and Soft})}{P(\text{Label})} = \frac{0.55}{0.7} = \frac{11}{14}
+\\] <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+if a person is registered in either, what is the probability that they're registered in Soft? <br/>
+
+\begin{gather\*}
+  P(\text{Soft} \mid \text{Soft or Label}) = \frac{P(\text{Soft and (Soft or Label)})}{P(\text{Soft or Label})} = \frac{P(\text{Soft})}{P(\text{Soft or Label})}\\\\
+  P(\text{Soft or Label} = 1 - P(\text{not in either}) = 1 - 0.15 = 0.85\\\\
+  \frac{P(\text{Soft})}{P(\text{Soft or Label})} = \frac{0.6}{0.85} = \frac{12}{17}
+\end{gather\*}
+
+</div>
+
 </div>
 
 <div class="my_example">
@@ -426,43 +562,111 @@ A = atleast one person received the correct mail <br/>
 </div>
 
 
-## <span class="section-num">3</span> sum rule {#sum-rule}
+### <span class="section-num">5.1</span> probability tree {#probability-tree}
 
-the **sum rule** for two random events \\(A\\) and \\(B\\) states: <br/>
+<div class="question">
+
+in a given city all residents work either as fishers or in business, 70% of the reidents are male and the rest are female, of the men 38% work as fishers along with 10% of women, we pick a person randomly <br/>
+
+<div class="subquestion">
+
+what is the probability that the person is a male that works in fishing <br/>
+
+<div class="answer">
+
+{{< figure src="/ox-hugo/G1S0eQf.svg" >}} <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+what is the probability that the person works in fishing <br/>
+
+<div class="answer">
+
+\\(P(\text{fisher}) = 0.7 \cdot 0.38 + 0.3 \cdot 0.1 = 0.296\\) <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+what is the probability that the person is a female who works in business <br/>
+
+<div class="answer">
+
+\\(P(\text{woman in business}) = 0.3 \cdot 0.9 = 0.27\\) <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+what is the probability that the person works in business <br/>
+
+<div class="answer">
+
+\\(P(\text{in business}) = 0.7 \cdot 0.62 + 0.3 \cdot 0.9 = 0.704\\) <br/>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="question">
+
+in a given population 40% are men and the rest are women, of the men 10% are unemployed, in total 13% of the population is unemployed <br/>
+
+<div class="subquestion">
+
+a person is chosen randomly, what is the probability that its a woman? <br/>
+
+<div class="answer">
+
+{{< figure src="/ox-hugo/rYPt0ig.svg" >}} <br/>
+
+{{< figure src="/ox-hugo/mFjsNnA.svg" >}} <br/>
+
 \\[
-P(A\cup B)=P(A)+P(B)-P(A\cap B)
-\\] <br/>
-if the events are disjoint, the formula would simplify to <br/>
-\\[
-P(A \cup B) = P(A) + P(B)
+P(\text{woman} \mid \text{unemployed}) = \frac{P(\text{unemployed woman})}{P(\text{unemployed})} = \frac{0.6 \cdot 0.15}{0.13} = 0.6923
 \\] <br/>
 
+</div>
 
-## <span class="section-num">4</span> chain rule {#chain-rule}
+</div>
 
-the **chain rule** for two random events \\(A\\) and \\(B\\) says: <br/>
-\\[
-P(A\cap B) = P(B\mid A) \cdot P(A)
-\\] <br/>
-for more than two events \\(A\_{1},\dots,A\_{n}\\) the chain rule extends to the [formula]({{< relref "20220711175314-formula.md" >}}): <br/>
-\\[
-P \left(A\_{n}\cap \dots \cap A\_{1}\right)= P\left(A\_{n} \mid A\_{n-1}\cap \dots \cap A\_{1}\right)\cdot P\left(A\_{n-1}\cap \dots \cap A\_{1}\right)
-\\] <br/>
-which by induction may be turned into: <br/>
-\\[
-P\left(A\_{n} \cap \dots \cap A\_{1}\right)=\prod\_{k=1}^{n} P\left(A\_{k}\\,\Bigg|\\,\bigcap\_{j=1}^{k-1}A\_{j}\right)
-\\] <br/>
+<div class="subquestion">
+
+we define the events A - an unemployed person is chosen, B - a man is chosen, are those events [independent](#dependence)? are they [disjoint](#disjoint-events)? <br/>
+
+<div class="answer">
+
+\\[P(A \cap B) = P(\text{unemployed and man}) = 0.04 \neq 0\\] <br/>
+A,B arent disjoint <br/>
+\\[P(A) \cdot P(B) = 0.4 \cdot 0.13 = 0.052 \neq 0.04\\] <br/>
+B,A are dependant <br/>
+
+</div>
+
+</div>
+
+</div>
 
 
-## <span class="section-num">5</span> expected value {#expected-value}
+## <span class="section-num">6</span> expected value {#expected-value}
 
 expected value is exactly what you might think it means intuitively: the return you can expect for some kind of action, like how many questions you might get right if you guess on a multiple choice test. <br/>
 
 
-## <span class="section-num">6</span> binomial distribution {#binomial-distribution}
+## <span class="section-num">7</span> binomial distribution {#binomial-distribution}
 
 
-## <span class="section-num">7</span> Bernoulli distribution {#bernoulli-distribution}
+## <span class="section-num">8</span> Bernoulli distribution {#bernoulli-distribution}
 
 <div class="definition">
 
@@ -481,7 +685,7 @@ the [expected value](#expected-value) for a random variable, \\(x\\), for a Bern
 </div>
 
 
-## <span class="section-num">8</span> geometric distribution {#geometric-distribution}
+## <span class="section-num">9</span> geometric distribution {#geometric-distribution}
 
 <div class="definition">
 
@@ -500,7 +704,7 @@ the [expected](#expected-value) number of trials for a success is \\(E[k] = \fra
 </div>
 
 
-## <span class="section-num">9</span> hypergeometric distribution {#hypergeometric-distribution}
+## <span class="section-num">10</span> hypergeometric distribution {#hypergeometric-distribution}
 
 out of \\(n\\) different items of which \\(m\\) are of a specific type and \\(n-m\\) are of another type, we pick \\(k\\) items without [repetition]({{< relref "20221204105120-combinatorics.md#repetition" >}}), the probability that from \\(k\\) items \\(r\\) are of the first type and \\(k-r\\) is of the second type is: <br/>
 \\[
