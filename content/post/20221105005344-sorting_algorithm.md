@@ -1,10 +1,15 @@
 +++
 title = "sorting algorithms"
-author = ["user"]
-date = 2022-11-30T04:15:00+02:00
+author = ["mahmooz"]
+date = 2022-12-23T17:24:00+02:00
 tags = ["math"]
 draft = false
 +++
+
+## comparison sort {#comparison-sort}
+
+a **comparison sort** is a type of **sorting algorithm** that only reads the list elements through a single abstract comparison operation (often a "less than or equal to" operator or a three-way comparison) that determines which of two elements should occur first in the final sorted list. <br/>
+
 
 ## selection sort {#selection-sort}
 
@@ -12,7 +17,7 @@ draft = false
 in every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray. <br/>
 [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) is \\(\Theta(n^2)\\) <br/>
 
-{{< figure src="~/.emacs.d/latex/8aX7xpu.svg" >}} <br/>
+{{< figure src="/ox-hugo/8aX7xpu.svg" >}} <br/>
 
 <a id="code-snippet--SelectionSort"></a>
 ```C++
@@ -89,7 +94,7 @@ AVL sort consists of inserting the given array into an [AVL tree]({{< relref "da
 
 <div class="lemma">
 
-the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this is \\(\Theta(n\log n)\\) <br/>
+the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) is \\(\Theta(n\log n)\\) <br/>
 
 </div>
 
@@ -104,7 +109,7 @@ the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of thi
 
 <div class="lemma">
 
-the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this is \\(\Theta(n\log n)\\) <br/>
+the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) is \\(\Theta(n\log n)\\) <br/>
 
 </div>
 
@@ -117,7 +122,7 @@ on the third step when decrementing `heap-size` we arent deleting the last eleme
 
 ## QuickSort {#quicksort}
 
-**QuickSort** is a , it picks an element as **pivot** and **partitions** the given array around the pivot, there are different versions of quicksort that pick pivots in different ways: <br/>
+**QuickSort** is a [Divide-and-conquer algorithm]({{< relref "20220706211939-divide_and_conquer_algorithm.md" >}}), it picks an element as **pivot** and **partitions** the given array around the pivot, there are different versions of quicksort that pick pivots in different ways: <br/>
 
 1.  first element as pivot (implemented here) <br/>
 2.  last element as pivot <br/>
@@ -127,7 +132,7 @@ on the third step when decrementing `heap-size` we arent deleting the last eleme
 the first subarray we use as a "partition" is the array itself, where given a pivot, put the pivot at its correct position in the sorted array by putting all the smaller elements before it, and all the greater elements after it. then divide the partition in 2 partitions, where the first partition is where all the smaller elements were put, and the second partition is where all the greater elements were put, and apply the same process for these partitions recursively until we reach partitions that contain 1 element only <br/>
 this algorithm runs in \\(O(n\log n)\\) time <br/>
 
-![](./quicksort.png) <br/>
+![](/ox-hugo/quicksort.png) <br/>
 image taken from <https://workat.tech/problem-solving/tutorial/sorting-algorithms-quick-sort-merge-sort-dsa-tutorials-6j3h98lk6j2w> <br/>
 
 <a id="code-snippet--QuickSort"></a>
@@ -164,11 +169,11 @@ void quick_sort(T arr[], int low, int high) {
 
 ## merge sort {#merge-sort}
 
-yet another  <br/>
-given an array, this keeps splitting it until it reaches a subarray that cant be divided which happens when a subarray contains only 1 or 0 elements, each of these subarrays are sorted individually and then combined, recursively, to eventually make a larger sorted array <br/>
+yet another [divide-and-conquer algorithm]({{< relref "20220706211939-divide_and_conquer_algorithm.md" >}}) <br/>
+given an array, this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) keeps splitting it until it reaches a subarray that cant be divided which happens when a subarray contains only 1 or 0 elements, each of these subarrays are sorted individually and then combined, recursively, to eventually make a larger sorted array <br/>
 this algorithm runs in \\(\Theta(n\log n)\\) time <br/>
 
-![](./merge_sort.webp) <br/>
+![](/ox-hugo/merge_sort.webp) <br/>
 image taken from <https://www.programiz.com/dsa/merge-sort>, will keep this here until i make my own <br/>
 
 <a id="code-snippet--MergeSort"></a>
@@ -213,18 +218,16 @@ void sort(T arr[], int l, int r) {
 ```
 
 
-### of merge {#of-merge}
+### [correctness]({{< relref "20221104220603-algorithm_correctness.md" >}}) of merge {#correctness--20221104220603-algorithm-correctness-dot-md--of-merge}
 
 consider the `merge` algorithm that merges two partitions, i.e. takes in two sorted arrays A,B, and returns a new sorted array C that contains all elements from A and B <br/>
 
-![](/ox-hugo/ONsc6RS.svg) <br/>
-we propose the following : for every \\(1 \le i \le m + n\\), after \\(i\\) iterations in the loop, the array \\(C[1,\dots,i]\\) contains a sorted permutation of the smallest \\(i\\) elements of A and B, the pointers \\(ap\\) and \\(bp\\) point to the first elements in A and B that havent yet been moved to C and the value of \\(cp\\) equals \\(i+1\\), this can be proved by tracing the lines <br/>
-the correctness of the algorithm follows directly from the loop invariant after \\(n+m\\) iterations <br/>
+{{< figure src="/ox-hugo/ONsc6RS.svg" >}} <br/>
 
 
 ## bubble sort {#bubble-sort}
 
-this repeatedly steps through the input list element by element, comparing the current element with the one after it, swapping their values if needed. these passes through the list are repeated until no swaps had to be performed during a pass, meaning that the list has become fully sorted. the algorithm, which is a comparison sort, is named for the way the larger elements "bubble" up to the top of the list. <br/>
+this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) repeatedly steps through the input list element by element, comparing the current element with the one after it, swapping their values if needed. these passes through the list are repeated until no swaps had to be performed during a pass, meaning that the list has become fully sorted. the algorithm, which is a comparison sort, is named for the way the larger elements "bubble" up to the top of the list. <br/>
 
-{{< figure src="~/.emacs.d/latex/Raz84EU.svg" >}}
+{{< figure src="/ox-hugo/Raz84EU.svg" >}} <br/>
 
