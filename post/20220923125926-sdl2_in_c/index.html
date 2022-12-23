@@ -1,0 +1,152 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>SDL2 in C++</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/org.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.108.0"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>SDL2 in C++</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/resume.pdf>Resume</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:mahmod.m2015@gmail.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/mahmoodsheikh36/><i class="fab fa-github"></i></a></li></ul></div></div></nav><main><div><h2>SDL2 in C++</h2><h5>October 15, 2022</h5><a href=https://mahmoodsheikh36.github.io/tags/programming><kbd class=item-tag>programming</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
+\(\DeclareMathOperator{\dom}{domain}\)
+\(\DeclareMathOperator{\ran}{range}\)
+\(\DeclareMathOperator{\rng}{range}\)
+\(\DeclareMathOperator{\img}{Im}\)
+\(\DeclareMathOperator{\adj}{adj}\)
+\(\newcommand\dif[1]{\:\textrm{d}#1}\)
+\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+\(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+\(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+\(\newcommand{\khat}{\hat{\textbf{k}}}\)
+\(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+\(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p>Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D<br>SDL officially supports Windows, Mac OS X, Linux, iOS, and Android. support for other platforms may be found in the source code<br>SDL is written in C, works natively with <a href=/post/cpp/>C++</a>, and there are bindings available for several other languages, including C# and <a href=/post/20220809215936-python/>python</a> &lt;&sdl><br></p><h2 id=installation><span class=section-num>1</span> installation</h2><p>on macos:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>brew install sdl2
+</span></span></code></pre></div><h2 id=create-window><span class=section-num>2</span> create window</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#ifdef _WIN32
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;SDL/SDL.h&gt; /* Windows-specific SDL2 library */</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#else
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;SDL2/SDL.h&gt; /* macOS and Linux-specific */</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#endif
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> argv[]) {
+</span></span><span style=display:flex><span>  SDL_Window <span style=color:#f92672>*</span>window;
+</span></span><span style=display:flex><span>  SDL_Init(SDL_INIT_VIDEO);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  window <span style=color:#f92672>=</span> SDL_CreateWindow(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;sdl2 demo&#34;</span>,                <span style=color:#75715e>// window title
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    SDL_WINDOWPOS_UNDEFINED,    <span style=color:#75715e>// initial x position
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    SDL_WINDOWPOS_UNDEFINED,    <span style=color:#75715e>// initial y position
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#ae81ff>640</span>,                        <span style=color:#75715e>// width, in pixels
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#ae81ff>480</span>,                        <span style=color:#75715e>// height, in pixels
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#ae81ff>0</span>                           <span style=color:#75715e>// flags
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  );
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (window <span style=color:#f92672>==</span> NULL) {
+</span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;Could not create window: %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, SDL_GetError());
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// the window is open, start handling events
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  SDL_Event e;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>bool</span> quit <span style=color:#f92672>=</span> false;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>quit) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (SDL_PollEvent(<span style=color:#f92672>&amp;</span>e)) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (e.type <span style=color:#f92672>==</span> SDL_QUIT) {
+</span></span><span style=display:flex><span>        quit <span style=color:#f92672>=</span> true;
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (e.type <span style=color:#f92672>==</span> SDL_KEYDOWN) {
+</span></span><span style=display:flex><span>        quit <span style=color:#f92672>=</span> true;
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (e.type <span style=color:#f92672>==</span> SDL_MOUSEBUTTONDOWN) {
+</span></span><span style=display:flex><span>        quit <span style=color:#f92672>=</span> true;
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// pause execution for 3000 milliseconds
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>// SDL_Delay(3000);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// close and destroy the window
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  SDL_DestroyWindow(window);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// clean up
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  SDL_Quit();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>this code can be compiled with <code>g++ -lsdl2 myfile.cpp</code><br></p><h2 id=basic-rendering><span class=section-num>3</span> basic rendering</h2><p><a href=https://wiki.libsdl.org/SDL_Renderer>https://wiki.libsdl.org/SDL_Renderer</a><br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#ifdef _WIN32
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;SDL/SDL.h&gt; /* Windows-specific SDL2 library */</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#else
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;SDL2/SDL.h&gt; /* macOS and Linux-specific */</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#endif
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> argv[]) {
+</span></span><span style=display:flex><span>  SDL_Window <span style=color:#f92672>*</span>window;
+</span></span><span style=display:flex><span>  SDL_Renderer <span style=color:#f92672>*</span>renderer;
+</span></span><span style=display:flex><span>  SDL_Init(SDL_INIT_VIDEO);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  window <span style=color:#f92672>=</span> SDL_CreateWindow(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;basic rendering&#34;</span>,          <span style=color:#75715e>// window title
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    SDL_WINDOWPOS_UNDEFINED,    <span style=color:#75715e>// initial x position
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    SDL_WINDOWPOS_UNDEFINED,    <span style=color:#75715e>// initial y position
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#ae81ff>640</span>,                        <span style=color:#75715e>// width, in pixels
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#ae81ff>480</span>,                        <span style=color:#75715e>// height, in pixels
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#ae81ff>0</span>                           <span style=color:#75715e>// flags
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  );
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (window <span style=color:#f92672>==</span> NULL) {
+</span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;Could not create window: %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, SDL_GetError());
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  renderer <span style=color:#f92672>=</span> SDL_CreateRenderer(window, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, SDL_RENDERER_ACCELERATED);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (renderer <span style=color:#f92672>==</span> NULL) {
+</span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;Could not create renderer: %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, SDL_GetError());
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// some basic rendering
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  SDL_Rect rect <span style=color:#f92672>=</span> {.x<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>,.y<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>,.w<span style=color:#f92672>=</span><span style=color:#ae81ff>50</span>,.h<span style=color:#f92672>=</span><span style=color:#ae81ff>50</span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  SDL_SetRenderDrawColor(renderer, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>255</span>);
+</span></span><span style=display:flex><span>  SDL_RenderFillRect(renderer, <span style=color:#f92672>&amp;</span>rect);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  SDL_SetRenderDrawColor(renderer, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>);
+</span></span><span style=display:flex><span>  SDL_RenderDrawRect(renderer, <span style=color:#f92672>&amp;</span>rect);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  SDL_RenderDrawLine(renderer, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>30</span>, <span style=color:#ae81ff>250</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  SDL_RenderPresent(renderer);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// start handling events
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  SDL_Event e;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>bool</span> quit <span style=color:#f92672>=</span> false;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>quit) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (SDL_PollEvent(<span style=color:#f92672>&amp;</span>e)) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (e.type <span style=color:#f92672>==</span> SDL_QUIT) {
+</span></span><span style=display:flex><span>        quit <span style=color:#f92672>=</span> true;
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (e.type <span style=color:#f92672>==</span> SDL_KEYDOWN) {
+</span></span><span style=display:flex><span>        quit <span style=color:#f92672>=</span> true;
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (e.type <span style=color:#f92672>==</span> SDL_MOUSEBUTTONDOWN) {
+</span></span><span style=display:flex><span>        quit <span style=color:#f92672>=</span> true;
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// pause execution for 3000 milliseconds
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>// SDL_Delay(3000);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// close and destroy the window
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  SDL_DestroyWindow(window);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// clean up
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  SDL_Quit();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>**<br></p></div></main><footer></footer></body></html>

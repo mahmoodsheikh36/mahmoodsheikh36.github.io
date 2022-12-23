@@ -1,0 +1,137 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>recursion</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/org.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.108.0"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>recursion</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/resume.pdf>Resume</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:mahmod.m2015@gmail.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/mahmoodsheikh36/><i class="fab fa-github"></i></a></li></ul></div></div></nav><main><div><h2>recursion</h2><h5>December 19, 2022</h5><a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
+\(\DeclareMathOperator{\dom}{domain}\)
+\(\DeclareMathOperator{\ran}{range}\)
+\(\DeclareMathOperator{\rng}{range}\)
+\(\DeclareMathOperator{\img}{Im}\)
+\(\DeclareMathOperator{\adj}{adj}\)
+\(\newcommand\dif[1]{\:\textrm{d}#1}\)
+\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+\(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+\(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+\(\newcommand{\khat}{\hat{\textbf{k}}}\)
+\(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+\(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><div class=definition><p>a <strong>recursive</strong> function is a function that calls itself<br></p><div class=note><p>there are a few mistakes here (in the recursion tree section)! this document needs some fixing<br></p></div><div class=my_example><p>consider factorial<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fac</span>(n):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> n <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>: <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>else</span>: <span style=color:#66d9ef>return</span> fac(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> n
+</span></span></code></pre></div></div></div><h2 id=base-case><span class=section-num>1</span> base case</h2><div class=definition><p>A recursive function definition has one or more base cases, meaning input(s) for which the function produces a result trivially (without recurring)<br></p></div><h2 id=recurrence-relation><span class=section-num>2</span> recurrence relation</h2><p>to analyze the <a href=/post/20221130014441-time_complexity/>time complexity</a> of <a href=/post/20221105001640-recursive_function/>recursive function</a>s we use a mathematical concept called <strong>recurrence relation</strong><br>a recurrence defines \(T(n)\) in terms of \(T\) for smaller values<br>example: \(T(n) = T(n-1) + 1\), here \(T(n)\) is defined in terms of \(T(n-1)\)<br></p><h3 id=initial-condition><span class=section-num>2.1</span> initial condition</h3><p>a <a href=#recurrence-relation>recurrence relation</a> must have <strong>initial conditions</strong>, initial conditions are values of the recurrence for small values of \(n\)<br>the values of \(T(0),T(1)\) are usually sufficient as initial conditions<br></p><h3 id=closed-form><span class=section-num>2.2</span> closed form</h3><p>to solve a <a href=#recurrence-relation>recurrence</a>, we find a <strong>closed form</strong> for it, a closed form for \(T(n)\) is an equation that defines \(T(n)\) using an expression that does <strong>not</strong> involve \(T\)<br>there is no single method that works for all, we check for patterns and use substitution<br>to get a better understanding, we look at examples<br></p><div class=my_example><p>consider the following function that returns the factorial of a given number<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fac</span>(n):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> n <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>: <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>else</span>: <span style=color:#66d9ef>return</span> n <span style=color:#f92672>*</span> fac(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>print([fac(i) <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>10</span>)])
+</span></span></code></pre></div><p>for <code>fac(n)</code>, how many times is <code>fac</code> called?<br>\[ T(n) = T(n-1) + C_1 \]<br>\(C_1\) represents the total time of all the operations that take constant time that the function does on every iteration<br>now this is obviously not what we wanna arrive at, we need to arrive at an expression that doesnt have \(T\) in it<br>we can substitute in \(n - 1\) because \(T\) is a function that takes any positive integer<br></p><p>\begin{align*}
+T(n) &= \underbrace{T(n-2) + C_1}_{T(n-1)} + C_1\\
+T(n) &= T(n-3) + 3C_1
+\end{align*}</p><p>now you probably already see the pattern here, on every iteration the function takes constant time \(C_1\) to run, until it reaches the last iteration \(k\) at which point it we would&rsquo;ve \(k\) times \(C_1\), e.g.:<br>\[ T(n) \leq T(n-k) + kC_1 \]<br></p><p>now we know that the total number of times the function calls itself depends on the initial value of \(n\), in this case that number would be \(n - 1\), as in, this function calls itself \(n - 1\) times<br>we substitute \(k = n - 1\) to get the total time this function takes to run<br></p><p>\begin{align*}
+T(n) &= T(n-(n-1)) + (n-1)C_1\\
+&= T(1) + (n-1)C_1\\
+&= C_1 + (n-1)C_1 &\text{because } C_1 \geq T(1)\\
+&= nC_1
+\end{align*}</p><p>so we conclude that<br>\[
+\Theta(n) = nC_1 \implies \Theta(n) = n
+\]<br></p></div><div class=my_example><p>consider the following function that returns the maximum value in a given array<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>mymax</span>(arr, l, r):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> l <span style=color:#f92672>==</span> r:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> arr[l]
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> max(arr[l], mymax(arr, l<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, r))
+</span></span><span style=display:flex><span>arr <span style=color:#f92672>=</span> [<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>81</span>, <span style=color:#ae81ff>30</span>, <span style=color:#ae81ff>58</span>, <span style=color:#ae81ff>0</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>10</span>]
+</span></span><span style=display:flex><span>print(mymax(arr, <span style=color:#ae81ff>0</span>, len(arr)<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
+</span></span></code></pre></div><p>we need to find a recurrence for this function so we can analyze its time complexity<br>first thing we notice is on every iteration we have a constant time (excluding the recursive call), we call it \(C\)<br>we can also notice that the variable &ldquo;\(r\)&rdquo; never changes, so our recurrence should only depends on \(l\)<br>now we can guess that the recurrence equation is:<br>\[ T(l) = T(l-1) + C \]<br>you might be confused (hopefully not) that we wrote \(l-1\) even though in the recursive call its \(l+1\), this is because we dont care about the value of the variable itself but rather about how many times the variable causes the function to call itself<br>now if we had written \(l+1\) this would suggest that given the value \(l\) the function runs \(l+1\) times which is not correct<br>and so this equals to \(\Theta(n)\) (using the same proof as the previous problem)<br></p></div><div class=my_example><p>consider the following function that returns the fibonacci number at the given index<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fib</span>(n):
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> n <span style=color:#f92672>in</span> [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>]: <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>else</span>: <span style=color:#66d9ef>return</span> fib(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> fib(n<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>print([fib(i) <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>10</span>)])
+</span></span></code></pre></div><p>for <code>fib(n)</code>, how many times is <code>fib</code> called?<br></p><p>\begin{align*}
+T(1) &= 1\\
+T(2) &= 1\\
+T(3) &= T(1) + T(2) + 1 = 1 + 1 + 1 = 3\\
+T(4) &= T(3) + T(2) + 1 = 3 + 1 + 1 = 5\\
+T(5) &= T(4) + T(3) + 1 = 5 + 3 + 1 = 9\\
+T(n) &= T(n-1) + T(n-2) + 1 = 2^n + 1
+\end{align*}</p></div><h2 id=recursion-tree><span class=section-num>3</span> recursion tree</h2><div class=my_example><p>consider the following <a href=#recurrence-relation>recurrence relation</a><br>\[ T(n) = T\left(\frac{n}{3}\right) + T\left(\frac{2n}{3}\right) + n \]<br>a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \(T(n)\)<br>with that in mind, the first step would be:<br></p><p><figure><img src=/ox-hugo/AT4XkK.svg></figure><br></p><p>\begin{align*}
+T\left(\frac{2n}{3}\right) &= T\left(\frac{2 \cdot \frac{2n}{3}}{3}\right) + T\left(\frac{\frac{2n}{3}}{3}\right) + \frac{2n}{3} = T\left(\frac{4n}{9}\right) + T\left(\frac{2n}{9}\right) + \frac{2n}{3}\\
+T\left(\frac{n}{3}\right) &= T\left(\frac{2 \cdot \frac{n}{3}}{3}\right) + T\left(\frac{\frac{n}{3}}{3}\right) + \frac{n}{3} = T\left(\frac{2n}{9}\right) + T\left(\frac{n}{9}\right) + \frac{n}{3}
+\end{align*}</p><p>according to this, the tree with the new nodes would be:<br></p><p><figure><img src=/ox-hugo/e66eVE.svg></figure><br></p></div><div class=my_example><p>consider the following <a href=#recurrence-relation>recurrence relation</a><br>\[
+T(n) = 2T\left(\frac{n}{8}\right) + 3T\left(\frac{n}{9}\right) + n
+\]<br>we cant determine \(\Theta\) using the <a href=#master-theorem>Master Theorem</a>, but we can using a recursion tree<br>the first step would be:<br></p><p><figure><img src=/ox-hugo/0IoNVgg.svg></figure><br></p><p>\begin{align*}
+T\left(\frac{n}{8}\right) &= 2T\left(\frac{n}{8^2}\right) + 3T\left(\frac{n}{8\cdot9}\right) + \frac{n}{8}\\
+T\left(\frac{n}{9}\right) &= 2T\left(\frac{n}{8\cdot9}\right) + 3T\left(\frac{n}{9^2}\right) + \frac{n}{9}
+\end{align*}</p><p><figure><img src=/ox-hugo/8OoGIIt.svg></figure><br></p><p>\begin{align*}
+T(n) &= \text{sum of all nodes}\\
+&= \text{sum of all nodes in full rows}\\
+&\leq n+n\left(\frac{2}{8}+\frac{3}{9}\right)+n\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+n\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\\
+&\leq n\left(\left(\frac{2}{8}+\frac{3}{9}\right)+\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\right)\\
+&= n\cdot \frac{1}{1-\left(\frac{2}{8}+\frac{3}{9}\right)}\\
+&= \Theta(n)
+\end{align*}</p><p>note the sum was found using <a href=/post/20220711182517-sum_of_geometric_progression/>geometric progression formula</a><br>and so we have shown that \(T(n) = O(n)\)<br>\[
+T(n) = \text{sum of all nodes in the tree} \ge \text{root} = n = \Theta(n)
+\]<br>and so we have shown that \(T(n) = \Omega(n)\)<br>and so \(T(n) = \Theta(n)\)<br></p></div><div class=my_example><div class=note><p>this need some correction as the sum of the nodes in the tree isnt exactly \(2^{x-1}\)<br></p></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C><span style=display:flex><span><span style=color:#a6e22e>best_sum</span>(A, i) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> i <span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>size</span>(A)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>max</span>(<span style=color:#a6e22e>best_sum</span>(A, i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>), A[i] <span style=color:#f92672>+</span> <span style=color:#a6e22e>best_sum</span>(A, i<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>))
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>\begin{align*}
+T(n) &= T(n-1) + T(n-2) + C\\
+&\le 2T(n-1) + C\\
+&\le 2(2T(n-2)+C) + C = 4T(n-2) + 3C\\
+&\le 4(2T(n-3) + C) + 3C = 8T(n-3) + 7C\\
+&\vdots\\
+&\le 2^{n-1}T(n-(n-1)) + \left(2^{n-1}-1\right)C\\
+&\le 2^{n-1}T(1) + \left(2^{n-1}-1\right)C\\
+&\leq 2^n = \Theta(2^n)
+\end{align*}</p><p>we proved \(T(n) = O(2^n)\), now we try showing \(T(n) = \Omega(2^n)\)<br></p><p>\begin{align*}
+T(n) &= T(n-1) + T(n-2) + C\\
+&\ge 2T(n-2) + C\\
+&\ge 2(2T(n-4) + C) + C = 4T(n-4) + 3C\\
+&\ge 4(2T(n-6) + C) + 3C = 8T(n-6) + 7C\\
+&\vdots\\
+&\ge 2^{n/2}T(n-(n-2)) + \left(2^{n/2}-1\right)C\\
+&\ge 2^{n/2}T(2) + \left(2^{n/2}-1\right)C\\
+&\ge 2^{n/2} = \Theta\left(2^{n/2}\right)
+\end{align*}</p><p>and so we showed that \(T(n) = \Omega\left(2^{n/2}\right)\), which means there isnt a tight bound on the <a href=/post/20221130014441-time_complexity/>time complexity</a> of this function<br>using a <a href=#recursion-tree>recursion tree</a>:<br></p><p><figure><img src=/ox-hugo/QIrzGtq.svg></figure><br></p><p>\begin{align*}
+T(n) &= \text{sum of all nodes}\\
+&= \text{sum of all nodes in all levels}\\
+&\le 2^{x-1}\\
+&\le 2^{x} = \Theta(2^x)
+\end{align*}</p><p>we denote by \(y\) the last level with a full row, for this row to exist, \(n-2(y-1) \ge 0 \implies n+2 \ge 2y \implies \frac{n+2}{2} \ge y\), so we have \(\frac{n+2}{2}\) full rows<br></p><p>\begin{align*}
+T(n) &= \text{sum of all nodes}\\
+&\ge \text{sum of full rows}\\
+&\ge \sum_{i=1}^{\frac{n+2}{2}} 2^{i-1}\\
+&\ge 2^{\frac12n+1}-1\\
+&\ge \frac{2^{n/2}}{2}-1
+\end{align*}</p><p>the division by 2 doesnt affect big omega so \(T(n) = \Omega\left(2^{n/2}\right)\)<br></p></div><h2 id=master-theorem><span class=section-num>4</span> master theorem</h2><h3 id=dividing-functions><span class=section-num>4.1</span> dividing functions</h3><p>to solve a <a href=#recurrence-relation>recurrence relation</a> of the form:<br>\[ T(n) = aT\left(\frac{n}{b}\right) + f(n) \text{ where } a \geq 1, b > 1 \]<br>we compare \(f(n)\) with \(n^{\log_b{a}}\) and check which one dominates, the possible outcomes are:<br></p><p>\begin{align}
+\exists \epsilon > 0 \mid f(n) = O\left(n^{\log_b(a)-\epsilon}\right) &\implies T(n) = \Theta\left(n^{\log_b{a}}\right)\\
+f(n) = \Theta\left(n^{\log_b{a}}\right) &\implies T(n) = \Theta\left(n^{\log_b{a}}\log{n}\right)\\
+\exists \epsilon > 0 \mid f(n) = \Omega\left(n^{\log_b(a)+\epsilon}\right) \text{ and } 0 &lt; c &lt; 1 \ \Big|\ af\left(\frac{n}{b}\right) &lt; cf(n) &\implies T(n) = \Theta(f(n))
+\end{align}</p><div class=my_example><p>example of the first possibility<br></p><p>\begin{gather*}
+T(n) = 8T\left(\frac{n}{2}\right) + 1000n^2\\
+a = 8,\ b = 2,\ f(n) = 1000n^2
+\end{gather*}</p><p>the conditions of the first possibility are met:<br>\[ n^{\log_b{a}} = n^{\log_2{8}} = n^3 = O\left(1000n^2\right) \]<br>therefore we get:<br>\[ T(n) = \Theta(n^3) \]<br></p></div><div class=my_example><p>example of the second possibility<br></p><p>\begin{gather*}
+T(n) = 2T\left(\frac{n}{2}\right) + 10n\\
+a = 2, b = 2, f(n) = 10n
+\end{gather*}</p><p>the conditions of the second possibility are met:<br>\[ n^{\log_b{a}} = n^{\log_2{2}} = n^1 = \Theta(10n) \]<br>we get:<br>\[ T(n) = \Theta(n\log{n}) \]<br></p></div><div class=my_example><p>example of the third possibility<br></p><p>\begin{gather*}
+T(n) = 2T\left(\frac{n}{2}\right) + n^2\\
+a=2,b=2,f(n)=n^2
+\end{gather*}</p><p>the conditions of the third possibility are met:<br>\[ n^{\log_b{a}} = n^{\log_2{2}} = n^1 = \Omega(n^2) \]<br>we get:<br>\[ T(n) = \Theta\left(n^2\right) \]<br></p></div><h3 id=decreasing-functions><span class=section-num>4.2</span> decreasing functions</h3><p>the <strong>master theorem</strong> can be used to solve recurrences of the form \(T(n) = aT(n - b) + f(n)\), where \(a \geq 1\) and \(b > 0\) and \(f(n)\) is <strong>asymptotically positive</strong>. (asymptotically positive means that the function is positive for all sufficiently large n.) this recurrence describes an algorithm that divides a problem of size \(n\) into sub problems, each of size \(n-b\), and solves them recursively.<br>the theorem is as follows:<br>if \(T(n) = aT(n-b) + f(n)\), where \(a \geq 1\), \(b > 0\), \(f(n) = O(n^k)\) and \(k \geq 0\)<br>we consider 3 cases:<br><strong>case 1</strong>, if \(a = 1\)<br>\[ T(n) = O(n \cdot f(n)) \text{ or } O\left(n^{k+1}\right) \]<br></p><div class=my_example><p>\begin{align}
+T(n) = T(n - 1) + 1 &\implies O(n)\\
+T(n) = T(n - 1) + n &\implies O(n^2)\\
+T(n) = T(n-1) + \log{n} &\implies O(n\log{n})
+\end{align}</p></div><p><strong>case 2</strong>, if \(a > 1\)<br>\[ T(n) = O\left(a^{\frac{n}{b}} \cdot f(n)\right) \text{ or } O\left(a^{\frac{n}{b}} \cdot n^k\right) \]<br></p><div class=my_example><p>\begin{align}
+T(n) = 2T(n-1)+1 &\implies O(2^n)\\
+T(n) = 3T(n-1)+1 &\implies O(3^n)\\
+T(n) = 2T(n-1)+n &\implies O(n \cdot 2^n)
+\end{align}</p></div><p><strong>case 3</strong>, if \(a &lt; 1\)<br></p><div class=my_example><p>\[ T(n) = O(f(n)) \text{ or } O\left(n^k\right) \]<br></p></div></div><h4 class=page-header>Related</h4><div class=item><h4><a href=/post/sage/>sagemath</a></h4><h5>sagemath</h5>December 23, 2022
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a>
+<a href=https://mahmoodsheikh36.github.io/tags/code><kbd class=item-tag>code</kbd></a>
+<a href=https://mahmoodsheikh36.github.io/tags/program><kbd class=item-tag>program</kbd></a></div><div class=item><h4><a href=/post/20221105005344-sorting_algorithm/>sorting algorithms</a></h4><h5></h5>December 23, 2022
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div><div class=item><h4><a href=/post/probability/>probability</a></h4><h5>probability theory</h5>December 22, 2022
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div></main><footer></footer></body></html>
