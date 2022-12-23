@@ -1,12 +1,70 @@
 +++
 title = "sorting algorithms"
-author = ["mahmooz"]
-date = 2022-12-23T21:28:00+02:00
+author = ["mahmood"]
+description = "sorting algorithms"
+date = 2022-12-23T22:04:00+02:00
 tags = ["math"]
 draft = false
 +++
 
-## comparison sort {#comparison-sort}
+<p style="height:0px; display: none;">
+  \(\DeclareMathOperator{\spn}{span}\)
+  \(\DeclareMathOperator{\dom}{domain}\)
+  \(\DeclareMathOperator{\ran}{range}\)
+  \(\DeclareMathOperator{\rng}{range}\)
+  \(\DeclareMathOperator{\img}{Im}\)
+  \(\DeclareMathOperator{\adj}{adj}\)
+  \(\newcommand\dif[1]{\:\textrm{d}#1}\)
+  \(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+  \(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+  \(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+  \(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+  \(\newcommand{\khat}{\hat{\textbf{k}}}\)
+  \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+  \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
+</p>
+
+<!-- mathjax -->
+<script>
+// auto load modules like cancel
+window.MathJax = {
+  loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
+  tex: {
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
+  },
+  tex2jax: {preview: "none"}
+};
+/* since i've configured org mode to insert a new line after every line i need to get rid of those that mess up my html */
+function removeNewlineAfterDisplayMath() {
+  elems = document.querySelectorAll('mjx-container')
+  for (i = 0; i < elems.length; ++i) {
+    elem = elems[i]
+    if (elem.getAttribute('display') !== 'true')
+      continue
+    nextElem = elem.nextElementSibling
+    if (nextElem !== null && nextElem.tagName === 'BR')
+      nextElem.remove()
+  }
+}
+window.onload = function() {
+  removeNewlineAfterDisplayMath()
+}
+</script>
+
+<!-- katex, a lackluster -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" -->
+<!--     onload="renderMathInElement(document.body);"></script> -->
+
+<script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+## <span class="section-num">1</span> comparison sort {#comparison-sort}
 
 <div class="definition">
 
@@ -40,7 +98,7 @@ we arrived at a contradiction and so it has to be true that this function is bou
 </div>
 
 
-## selection sort {#selection-sort}
+## <span class="section-num">2</span> selection sort {#selection-sort}
 
 **selection sort** maintains two subarrays in a given array, one subarray that is sorted and the other unsorted, it sorts a given array by repeatedly finding the minimum element (considering ascending order) from the unsorted part and putting it at the beginning <br/>
 in every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray. <br/>
@@ -92,7 +150,7 @@ int main() {
 | 50 |
 
 
-## insertion sort {#insertion-sort}
+## <span class="section-num">3</span> insertion sort {#insertion-sort}
 
 1.  iterate from arr[1] to arr[n] <br/>
 2.  compare the current element to its predecessor <br/>
@@ -117,7 +175,7 @@ void insertion_sort(T arr[], int len) {
 ```
 
 
-## AVL sort {#avl-sort}
+## <span class="section-num">4</span> AVL sort {#avl-sort}
 
 AVL sort consists of inserting the given array into an [AVL tree]({{< relref "data_structures.md#avl-tree" >}}) element by element and then converting the tree into an array using [inorder traversal]({{< relref "data_structures.md#inorder-traversal" >}}) <br/>
 
@@ -128,7 +186,7 @@ the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of thi
 </div>
 
 
-## heap sort {#heap-sort}
+## <span class="section-num">5</span> heap sort {#heap-sort}
 
 **heap sort** consists of [transforming the given array into a heap array]({{< relref "data_structures.md#construction-of-binary-heap-from-array" >}}) `A`, initiating `heap-size` to `size(A)` then applying the following steps recursively: <br/>
 
@@ -149,7 +207,7 @@ on the third step when decrementing `heap-size` we arent deleting the last eleme
 </div>
 
 
-## QuickSort {#quicksort}
+## <span class="section-num">6</span> QuickSort {#quicksort}
 
 **QuickSort** is a [Divide-and-conquer algorithm]({{< relref "20220706211939-divide_and_conquer_algorithm.md" >}}), it picks an element as **pivot** and **partitions** the given array around the pivot, there are different versions of quicksort that pick pivots in different ways: <br/>
 
@@ -196,7 +254,7 @@ void quick_sort(T arr[], int low, int high) {
 ```
 
 
-## merge sort {#merge-sort}
+## <span class="section-num">7</span> merge sort {#merge-sort}
 
 yet another [divide-and-conquer algorithm]({{< relref "20220706211939-divide_and_conquer_algorithm.md" >}}) <br/>
 given an array, this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) keeps splitting it until it reaches a subarray that cant be divided which happens when a subarray contains only 1 or 0 elements, each of these subarrays are sorted individually and then combined, recursively, to eventually make a larger sorted array <br/>
@@ -247,14 +305,14 @@ void sort(T arr[], int l, int r) {
 ```
 
 
-### [correctness]({{< relref "20221104220603-algorithm_correctness.md" >}}) of merge {#correctness--20221104220603-algorithm-correctness-dot-md--of-merge}
+### <span class="section-num">7.1</span> [correctness]({{< relref "20221104220603-algorithm_correctness.md" >}}) of merge {#correctness--20221104220603-algorithm-correctness-dot-md--of-merge}
 
 consider the `merge` algorithm that merges two partitions, i.e. takes in two sorted arrays A,B, and returns a new sorted array C that contains all elements from A and B <br/>
 
 {{< figure src="/ox-hugo/ONsc6RS.svg" >}} <br/>
 
 
-## bubble sort {#bubble-sort}
+## <span class="section-num">8</span> bubble sort {#bubble-sort}
 
 this [algorithm]({{< relref "20220706211958-algorithm.md" >}}) repeatedly steps through the input list element by element, comparing the current element with the one after it, swapping their values if needed. these passes through the list are repeated until no swaps had to be performed during a pass, meaning that the list has become fully sorted. the algorithm, which is a comparison sort, is named for the way the larger elements "bubble" up to the top of the list. <br/>
 
