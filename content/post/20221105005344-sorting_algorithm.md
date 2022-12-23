@@ -1,7 +1,7 @@
 +++
 title = "sorting algorithms"
 author = ["mahmooz"]
-date = 2022-12-23T20:34:00+02:00
+date = 2022-12-23T21:28:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -21,7 +21,7 @@ any comparison-sort based algorithm has a time is bound by \\(\Omega(n\log n)\\)
 <div class="my_example">
 
 a vector `A` of size `n` is **defined** to be a "hill" iff for every \\(i \le i < j \le m\\) we know \\(A[i] \le A[j]\\) and for every \\(m \le i < j \le n\\) we know \\(A[i] \geq A[j]\\) where \\(m\\) is a constant and \\(i,j\\) are variable indicies <br/>
-prove that any comparison-based algorithm that turns a vector into a hill is bound by \\(\Omega(n\log n)\\) <br/>
+prove that any comparison-based algorithm that turns a vector into a hill has to perform \\(\Omega(n\log n)\\) operations <br/>
 
 <div class="answer">
 
@@ -29,8 +29,8 @@ we assume in contradiction that there exists a comparison-based algorithm that t
 consider the following function: <br/>
 
 ![](/ox-hugo/30t764s.svg) <br/>
-each line from 2 to 6 runs in \\(\Theta(n)\\) time, and so the time complexity of this function would be \\(\Theta(n)\\) <br/>
-this is a comparison-based function that sorts a given array in \\(\Theta(n)\\) time, which contradicts with our theorem that no sorting function can have a lower time complexity than \\(\Theta(n\log n)\\) <br/>
+each line from 3 to 6 runs in \\(\Theta(n)\\) time, except the first which we know by the assumption runs in less than \\(\Theta(n\log n)\\), so the whole function runs in less than \\(\Theta(n\log n)\\) time <br/>
+this is a comparison-based function that sorts a given array in less than \\(\Theta(n\log n)\\) time, which contradicts with our theorem that no sorting function can have a lower time complexity than \\(\Theta(n\log n)\\) <br/>
 we arrived at a contradiction and so it has to be true that this function is bound from below by \\(\Theta(n\log n)\\), i.e. its time complexity is \\(\Omega(n\log n)\\) <br/>
 
 </div>
