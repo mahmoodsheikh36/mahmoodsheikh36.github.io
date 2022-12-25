@@ -2,7 +2,7 @@
 title = "probability"
 author = ["mahmood"]
 description = "probability theory"
-date = 2022-12-22T19:02:00+02:00
+date = 2022-12-24T23:31:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -354,7 +354,7 @@ if A and B are independant then <br/>
 \\[
   P(A\mid B) = P(A) \text{ and } P(B\mid A) = P(B)
 \\] <br/>
-proving \\(P(A \cap B) = P(A)\\) or \\(P(A \cap B) \neq P(A)\\) is enough to prove both events' dependence/independence <br/>
+proving \\(P(A \mid B) = P(A)\\) or \\(P(A \mid B) \neq P(A)\\) is enough to prove both events' independence/dependence <br/>
 
 </div>
 
@@ -388,7 +388,7 @@ P\left(\bigcup\_{i=1}^{\infty} A\_i\right) = \sum\_{i=1}^{\infty} P(A\_i)
 
 given \\(A\_1,A\_2\\) are 2 random events <br/>
 \\[
-P(A\_1 \cup A\_2) = P(A\_1) - P(A\_2) - P(A\_1 \cap A\_2)
+P(A\_1 \cup A\_2) = P(A\_1) + P(A\_2) - P(A\_1 \cap A\_2)
 \\] <br/>
 
 </div>
@@ -630,6 +630,8 @@ a person is chosen randomly, what is the probability that its a woman? <br/>
 
 {{< figure src="/ox-hugo/rYPt0ig.svg" >}} <br/>
 
+\\(0.13 = 0.4 \cdot 0.1 + 0.6p\\) so: <br/>
+
 {{< figure src="/ox-hugo/mFjsNnA.svg" >}} <br/>
 
 \\[
@@ -652,6 +654,35 @@ A,B arent disjoint <br/>
 B,A are dependant <br/>
 
 </div>
+
+</div>
+
+</div>
+
+<div class="question">
+
+an employee asked her employer for a letter of recommendation for her new job, she knows if she gets a good recommendation letter she'll have a probability of 80% to get the new job, 40% if the letter is average and 10% if the letter is bad, the probability that she gets a good letter is 0.7, an average letter 0.2 and a bad letter 0.1 <br/>
+
+<div class="subquestion">
+
+what is the probability that she'd get the job? <br/>
+
+<div class="answer">
+
+{{< figure src="/ox-hugo/JkUzci4.svg" >}} <br/>
+
+\begin{gather\*}
+  P(\text{accepted}) = 0.7 \cdot 0.8 + 0.2 \cdot 0.4 + 0.1 \cdot 0.1\\\\
+  P(\text{good} \mid \text{accepted}) = \frac{P(\text{good and accepted})}{P(\text{accepted})} = \frac{0.7 \cdot 0.8}{0.65} = \frac{0.56}{0.65} = \frac{56}{65}
+\end{gather\*}
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+had she been accepted for the new job, what is the probability that she had received a good letter of recommendation? <br/>
 
 </div>
 
@@ -709,5 +740,14 @@ the [expected](#expected-value) number of trials for a success is \\(E[k] = \fra
 out of \\(n\\) different items of which \\(m\\) are of a specific type and \\(n-m\\) are of another type, we pick \\(k\\) items without [repetition]({{< relref "20221204105120-combinatorics.md#repetition" >}}), the probability that from \\(k\\) items \\(r\\) are of the first type and \\(k-r\\) is of the second type is: <br/>
 \\[
 P\_n(k) = \frac{\binom{m}{r} \binom{n-m}{k-r}}{\binom{n}{k}}
-\\]
+\\] <br/>
+
+
+## <span class="section-num">11</span> probability of atleast {#probability-of-atleast}
+
+\begin{gather\*}
+  P(\text{at least 3 reds in 5 pulls}) = P(\text{3 reds}) + P(\text{4 reds}) + P(\text{5 reds})\\\\
+  P(\text{at least 1 success}) = 1 - P(\text{all failures})\\\\
+  P(\text{at least 1 failure}) = 1 - P(\text{all successes})
+\end{gather\*}
 
