@@ -2,7 +2,7 @@
 title = "boolean algebra"
 author = ["mahmood"]
 description = "boolean algebra course"
-date = 2022-12-26T03:00:00+02:00
+date = 2022-12-26T18:42:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -396,6 +396,57 @@ the complement of \\(f\\), written as \\(f'\\), is the function that outputs the
 
 </div>
 
+given \\(f\\) and \\(g\\) are switching functions with \\(n\\) variables, we say \\(f\\) covers g and write \\(g \subseteq f\\) if <br/>
+\\[
+  g(x\_1, \cdots, x\_n) = 1 \implies f(x\_1, \cdots, x\_n) = 1
+\\] <br/>
+if \\(g \subseteq f\\) and \\(g\\) is a multiplication of variables then \\(g\\) is called an _implicant_ of \\(f\\) and we write \\(g \rightarrow f\\) <br/>
+
+<div class="lemma">
+
+\\(g \subseteq h + g\\) <br/>
+
+<div class="proof">
+
+\begin{gather\*}
+  g = 1 \Rightarrow g + h = 1\\\\
+  g \cdot h = 1 \Rightarrow g = 1
+\end{gather\*}
+
+</div>
+
+</div>
+
+<div class="lemma">
+
+if \\(g \subseteq f\\) and \\(f \subseteq g\\) then \\(f = g\\) <br/>
+
+<div class="proof">
+
+\\[
+  g = 1 \Leftrightarrow f = 1
+\\] <br/>
+
+</div>
+
+</div>
+
+<div class="lemma">
+
+\\(g + h \subseteq\\) if and only if \\(g \subseteq f\\) and \\(h \subseteq f\\) <br/>
+
+<div class="proof">
+
+1st side, assume \\(g \subseteq f\\) and \\(h \subseteq f\\), we need to prove \\(g + h \subseteq f\\) <br/>
+assume that \\(g + h = 1\\), then \\(g = 1\\) is a consequence of \\(g \subseteq f\\) that \\(f = 1\\), and \\(h = 1\\) is a consequence of \\(h \subseteq f\\) so that \\(f = 1\\), and so \\(g + h \subseteq f\\) <br/>
+2nd side, assume that \\(g + h \subseteq f\\) <br/>
+if \\(g = 1\\) then \\(g + h = 1\\) and so \\(f = 1\\) and so \\(g \subseteq f\\) <br/>
+if \\(h = 1\\) then \\(g + h = 1\\) and so \\(f = 1\\) and so \\(h \subseteq f\\) <br/>
+
+</div>
+
+</div>
+
 
 ### <span class="section-num">6.1</span> minterm {#minterm}
 
@@ -452,38 +503,116 @@ we write a truth table for the function and for each row we write a minterm or a
 \\(f(x, y, z) = \Pi(1,4,5) = (x+y+z')(x'+y+z)(x'+y+z') \longrightarrow\\) product of sums, [GNF](#gnf) <br/>
 
 
-## <span class="section-num">7</span> Shannon's law {#shannon-s-law}
+### <span class="section-num">6.6</span> prime implicant {#prime-implicant}
 
-<div class="definition">
+a multiplication expression \\(p\\) is called a **Prime implicant** of a [switching function](#switching-function) \\(f\\) if: <br/>
 
-for every switching function \\(f(x\_1, \cdots, x\_n)\\) we get: <br/>
+1.  \\(p \rightarrow f\\) (\\(f\\) covers \\(p\\) or \\(p\\) is an implicant of \\(f\\)) <br/>
+2.  deletion of every literal in \\(p\\) results in product that isnt covered by \\(f\\) meaning \\(p\_1, NOT \rightarrow f\\) (there is atleast one combination where \\(p\_1 = 0\\) but \\(f = 0\\)) <br/>
 
-\begin{align\*}
-  f(x\_1, \cdots, x\_n) &= x\_1 \cdot f(1, x\_2, \cdots, x\_n) + x\_1' \cdots f(0, x\_2, \cdots, x\_n)\\\\
-  f(x\_1, \cdots, x\_n) &= [x\_1 + f(0, x\_2, \cdots, x\_n)] \cdot [x\_1' + f(1, x\_2, \cdots, x\_n)]
-\end{align\*}
+in the last example \\(h = x'y\\) is a prime implicant of \\(f\\) because \\(x'\\) and \\(y\\) are implicants of \\(f\\), \\(k\\) isnt a prime implicant of \\(f\\) <br/>
+the removal of \\(z\\), \\(x'yz\\) turns into \\(x'y\\) which is still an implicant of \\(f\\) <br/>
+the removal of \\(y \rightarrow x'z\\) implicant of \\(f\\) <br/>
+the removal of \\(x' \rightarrow yz\\) implicant of \\(f\\) <br/>
 
-<div class="characteristic">
+<div class="lemma">
 
-this law helps us move between [DNF](#dnf) and [GNF](#gnf) forms without looking at the truth table of a function <br/>
+every sum of products that isnt minimizable that equals \\(f\\) is a sum of prime implicants of \\(f\\) <br/>
+
+<div class="proof">
+
+assume in contradiction that there is a sum of products that isnt minimizable that equals \\(f\\) and contains the product \\(\varphi\\) that isnt a prime implicant of \\(f\\) <br/>
+assume \\(f = g + \varphi\\), in case of the sum where \\(\varphi = 1\\) and \\(f = 1\\) and so \\(\varphi \rightarrow f\\), in case that \\(\varphi\\) isnt a prime implicant then its possible to remove from \\(\varphi\\) atleast 1 literal so that we get \\(\varphi\_0\\) so that \\(\varphi\_0 \rightarrow f\\) <br/>
+also \\(\varphi \rightarrow \varphi\_0\\) in case \\(\varphi\\) is a product of literals that \\(\varphi\_0\\) is a part of <br/>
+..... <br/>
+
+</div>
+
+</div>
+
+
+### <span class="section-num">6.7</span> essential prime implicant {#essential-prime-implicant}
+
+from previous theorems <br/>
+
+1.  a minimal switching expression of a function is the sum of its _Prime Implicants_ <br/>
+2.  _Prime Implicants_ correspond to squares in the Karnaugh map that arent a part of bigger squares <br/>
+
+<span class="underline">question</span>: which _Prime Implicants_ exist in the minimal switching expression <br/>
+<span class="underline">definition</span>: a product of literals \\(P\\) is called an _Essential Prime Implicant_ of the function \\(f\\) if: <br/>
+
+1.  \\(P\\) is a _Prime Implicant_ of \\(f\\) <br/>
+2.  \\(P\\) covers atleast a minterm of \\(f\\) that cant be covered by another _Prime Implicant_ <br/>
+3.  <span class="underline">note</span>: a minimal switching expression has to contain all the possible _EPI's_ (_Essential Prime Implicants_) <br/>
+
+
+### <span class="section-num">6.8</span> the process of finding a minimal switching expression of a switching function {#the-process-of-finding-a-minimal-switching-expression-of-a-switching-function}
+
+given the [switching function](#switching-function) \\(f\\) <br/>
+
+-   find all the [prime implicant](#prime-implicant)s of \\(f\\) <br/>
+-   from the list of prime implicants, find the [essential prime implicant](#essential-prime-implicant)s and put them in an expression <br/>
+-   remove from the list of _PI_ all the _EPI_'s and all the _PI_'s that are covered by _EPI_'s <br/>
+-   if the set of _EPI_'s covers \\(f\\), then we're done, otherwise, choose more _PI_'s so that \\(f\\) is entirely covered by the resulting set of _PI_'s but make sure to pick a minimal number of _PI_'s to do the job, and make sure to pick the _PI_'s with the least number of literals <br/>
+
+<div class="note">
+
+this isnt a definite solution for the problem but its enough for functions with a small number of literals <br/>
 
 </div>
 
 <div class="my_example">
 
-\begin{align\*}
-  f(x, y, z) &= y'xz + y'z'x' + xz\\\\
-             &= x(y'1z + y'z'1' + 1z) + x'(y'0z + y'z'0' + 0z)\\\\
-             &= x(y'z + y'z'0 + z) + x'(0 + y'z' + 0)\\\\
-             &= x(y'z + z) + x'(y'z')
-\end{align\*}
+\begin{gather\*}
+  f(w,x,y,z) = \sum(4,5,8,12,13,14,15)\\\\
+  f = xy' + wx + wy'z'
+\end{gather\*}
+
+{{< figure src="/ox-hugo/dQOeJio.svg" caption="<span class=\"figure-number\">Figure 1: </span>_Prime implicants_: \\(x\bar{y}\bar{z}, wx, x\bar{y}\\), all of them are _EPI_" >}} <br/>
 
 </div>
 
+<div class="my_example">
+
+\begin{gather\*}
+  f(x,y,z) = \sum(0,2,3,4,5,7)
+\end{gather\*}
+
+{{< figure src="/ox-hugo/96j2WfN.svg" caption="<span class=\"figure-number\">Figure 2: </span>_Prime Implicants_: \\(\bar{x}\bar{z}, \bar{x}y, yz, xz, x\bar{y}, \bar{y}\bar{z}\\)" >}} <br/>
+
+none of these _PI_'s are _EPI_ and all of them are the same size <br/>
+this function has 2 minimal forms <br/>
+\\(f(x,y,z) = \bar{x}y + xz + \bar{y}\bar{z}\\) <br/>
+\\(f(x,y,z) = \bar{x}\bar{z} + yz + x\bar{y}\\) <br/>
+
 </div>
 
 
-## <span class="section-num">8</span> functional completeness {#functional-completeness}
+### <span class="section-num">6.9</span> _Don't care_ combinations {#don-t-care-combinations}
+
+_Don't care_ is a value of a function we get for a combination of values for the variables that isnt defined, and therefore can be either \\(1\\) or \\(0\\) <br/>
+
+the symbol of the value _Don't care_ is \\(\phi\\), its allowed to switch the value \\(\phi\\) with either \\(1\\) or \\(0\\) according to our needs, this is useful when finding the minimal form of a switching function <br/>
+
+%_example\_: <br/>
+% <br/>
+%a function \\(f\\) that receives the decimal digits \\(0-9\\) in \\(BCD\\) code and outputs \\(1\\) if the digit is divisible by \\(3\\) <br/>
+% <br/>
+%this function has 4 variables, we can also see that a combination of values for the variables that results in the output \\(10-15\\) isnt defined <br/>
+% <br/>
+%the output for the values \\(9, 6, 3, 0\\) is \\(1\\) <br/>
+% <br/>
+%the definition of the function <br/>
+
+
+### <span class="section-num">6.10</span> map expressions {#map-expressions}
+
+the usage of map exxpressions allows us to describe a function with more than \\(n\\) variables using a karnaugh map with \\(n\\) variables <br/>
+
+<span class="underline">definition</span>: a map expression is a switching expression that appears in the map and that isnt \\(0\\), \\(1\\) or \\(\phi\\) <br/>
+
+
+## <span class="section-num">7</span> functional completeness {#functional-completeness}
 
 <div class="definition">
 
@@ -541,7 +670,7 @@ proof of NOR's functional completeness using the already functionally complete s
 </div>
 
 
-### <span class="section-num">8.1</span> list of systems known to be functionally complete {#list-of-systems-known-to-be-functionally-complete}
+### <span class="section-num">7.1</span> list of systems known to be functionally complete {#list-of-systems-known-to-be-functionally-complete}
 
 -   \\(\\{+, \cdot, \lnot\\}\\) <br/>
 -   \\(\\{+, \lnot\\}\\) <br/>
@@ -550,9 +679,40 @@ proof of NOR's functional completeness using the already functionally complete s
 -   _NAND_: \\(x \uparrow y = \overline{x} + \overline{y} = \overline{(xy)}\\) <br/>
 
 
-### <span class="section-num">8.2</span> partial functional completeness {#partial-functional-completeness}
+### <span class="section-num">7.2</span> partial functional completeness {#partial-functional-completeness}
 
 a system of operations is partially functionally complete when a set of operations is combined with \\(0\\) and \\(1\\) or both to provide funcitonal completeness <br/>
+
+
+## <span class="section-num">8</span> Shannon's law {#shannon-s-law}
+
+<div class="definition">
+
+for every switching function \\(f(x\_1, \cdots, x\_n)\\) we get: <br/>
+
+\begin{align\*}
+  f(x\_1, \cdots, x\_n) &= x\_1 \cdot f(1, x\_2, \cdots, x\_n) + x\_1' \cdots f(0, x\_2, \cdots, x\_n)\\\\
+  f(x\_1, \cdots, x\_n) &= [x\_1 + f(0, x\_2, \cdots, x\_n)] \cdot [x\_1' + f(1, x\_2, \cdots, x\_n)]
+\end{align\*}
+
+<div class="characteristic">
+
+this law helps us move between [DNF](#dnf) and [GNF](#gnf) forms without looking at the truth table of a function <br/>
+
+</div>
+
+<div class="my_example">
+
+\begin{align\*}
+  f(x, y, z) &= y'xz + y'z'x' + xz\\\\
+             &= x(y'1z + y'z'1' + 1z) + x'(y'0z + y'z'0' + 0z)\\\\
+             &= x(y'z + y'z'0 + z) + x'(0 + y'z' + 0)\\\\
+             &= x(y'z + z) + x'(y'z')
+\end{align\*}
+
+</div>
+
+</div>
 
 
 ## <span class="section-num">9</span> XOR {#xor}
@@ -564,8 +724,7 @@ a system of operations is partially functionally complete when a set of operatio
 | 1       | 0       | 1                |
 | 1       | 1       | 0                |
 
-
-### <span class="section-num">9.1</span> properties {#properties}
+<div class="characteristic">
 
 \begin{align}
   A \oplus B &= B \oplus A & \text{commutative}\\\\
@@ -575,7 +734,11 @@ a system of operations is partially functionally complete when a set of operatio
   \overline{A \oplus B} &= 1 \text{ only if } A = B
 \end{align}
 
-another important property, if \\(A \oplus B = C\\) then: <br/>
+</div>
+
+<div class="characteristic">
+
+if \\(A \oplus B = C\\) then: <br/>
 
 \begin{align\*}
   A \oplus C &= A \oplus (A \oplus B) = (A \oplus A) \oplus B = B\\\\
@@ -583,164 +746,13 @@ another important property, if \\(A \oplus B = C\\) then: <br/>
   A \oplus B \oplus C &= A \oplus B \oplus (A \oplus B) = 0
 \end{align\*}
 
+</div>
 
-## <span class="section-num">10</span> minimal functions {#minimal-functions}
 
-given \\(f\\) and \\(g\\) are switching functions with \\(n\\) variables, we say \\(f\\) covers g and write \\(g \subseteq f\\) <br/>
+## <span class="section-num">10</span> logic gate {#logic-gate}
 
-\\[
-  g(x\_1, \cdots, x\_n) = 1 \Rightarrow f(x\_1, \cdots, x\_n) = 1
-\\] <br/>
 
-if \\(g \subseteq f\\) and \\(g\\) is a multiplication of variables then \\(g\\) is called an _implicant_ of \\(f\\) and we write \\(g \rightarrow f\\) <br/>
-
-
-### <span class="section-num">10.1</span> \\(g \subseteq h + g\\) {#g-subseteq-h-plus-g}
-
-proof: <br/>
-
-\begin{gather\*}
-  g = 1 \Rightarrow g + h = 1\\\\
-  g \bullet h = 1 \Rightarrow g = 1
-\end{gather\*}
-
-
-### <span class="section-num">10.2</span> if \\(g \subseteq f\\) and \\(f \subseteq g\\) then \\(f = g\\) {#if-g-subseteq-f-and-f-subseteq-g-then-f-g}
-
-proof: <br/>
-
-\\[
-  g = 1 \Leftrightarrow f = 1
-\\] <br/>
-
-
-### <span class="section-num">10.3</span> \\(g + h \subseteq\\) if and only if \\(g \subseteq f\\) and \\(h \subseteq f\\) {#g-plus-h-subseteq-if-and-only-if-g-subseteq-f-and-h-subseteq-f}
-
-proof: <br/>
-
-1st side, assume \\(g \subseteq f\\) and \\(h \subseteq f\\), we need to prove \\(g + h \subseteq f\\) <br/>
-
-assume that \\(g + h = 1\\), then \\(g = 1\\) is a consequence of \\(g \subseteq f\\) that \\(f = 1\\), and \\(h = 1\\) is a consequence of \\(h \subseteq f\\) so that \\(f = 1\\), and so \\(g + h \subseteq f\\) <br/>
-
-2nd side, assume that \\(g + h \subseteq f\\) <br/>
-
-if \\(g = 1\\) then \\(g + h = 1\\) and so \\(f = 1\\) and so \\(g \subseteq f\\) <br/>
-
-if \\(h = 1\\) then \\(g + h = 1\\) and so \\(f = 1\\) and so \\(h \subseteq f\\) <br/>
-
-
-### <span class="section-num">10.4</span> prime implicant {#prime-implicant}
-
-a multiplication expression \\(p\\) is called a _Prime implicant_ of a function \\(f\\) if: <br/>
-
-1.  \\(p \rightarrow f\\) (\\(f\\) covers \\(p\\) or \\(p\\) is an implicant of \\(f\\)) <br/>
-
-2.  deletion of every literal in \\(p\\) results in product that isnt covered by \\(f\\) meaning \\(p\_1, NOT \rightarrow f\\) (there is atleast one combination where \\(p\_1 = 0\\) but \\(f = 0\\)) <br/>
-
-in the last example \\(h = x'y\\) is a prime implicant of \\(f\\) because \\(x'\\) and \\(y\\) are implicants of \\(f\\), \\(k\\) isnt a prime implicant of \\(f\\) <br/>
-
-the removal of \\(z\\), \\(x'yz\\) turns into \\(x'y\\) which is still an implicant of \\(f\\) <br/>
-
-the removal of \\(y \rightarrow x'z\\) implicant of \\(f\\) <br/>
-
-the removal of \\(x' \rightarrow yz\\) implicant of \\(f\\) <br/>
-
-
-### <span class="section-num">10.5</span> every sum of products that isnt minimizable that equals \\(f\\) is a sum of prime implicants of \\(f\\) {#every-sum-of-products-that-isnt-minimizable-that-equals-f-is-a-sum-of-prime-implicants-of-f}
-
-proof: assume in contradiction that there is a sum of products that isnt minimizable that equals \\(f\\) and contains the product \\(\varphi\\) that isnt a prime implicant of \\(f\\) <br/>
-
-assume \\(f = g + \varphi\\), in case of the sum where \\(\varphi = 1\\) and \\(f = 1\\) and so \\(\varphi \rightarrow f\\), in case that \\(\varphi\\) isnt a prime implicant then its possible to remove from \\(\varphi\\) atleast 1 literal so that we get \\(\varphi\_0\\) so that \\(\varphi\_0 \rightarrow f\\) <br/>
-
-also \\(\varphi \rightarrow \varphi\_0\\) in case \\(\varphi\\) is a product of literals that \\(\varphi\_0\\) is a part of <br/>
-
-..... <br/>
-
-
-### <span class="section-num">10.6</span> Essential Prime Implicant {#essential-prime-implicant}
-
-from previous theorems, <br/>
-
-1.  a minimal switching expression of a function is the sum of its _Prime Implicants_ <br/>
-
-2.  _Prime Implicants_ correspond to squares in the Karnaugh map that arent a part of bigger squares <br/>
-
-<span class="underline">question</span>: which _Prime Implicants_ exist in the minimal switching expression <br/>
-
-<span class="underline">definition</span>: a product of literals \\(P\\) is called an _Essential Prime Implicant_ of the function \\(f\\) if: <br/>
-
-1.  \\(P\\) is a _Prime Implicant_ of \\(f\\) <br/>
-
-2.  \\(P\\) covers atleast a minterm of \\(f\\) that cant be covered by another _Prime Implicant_ <br/>
-
-3.  <span class="underline">note</span>: a minimal switching expression has to contain all the possible _EPI's_ (_Essential Prime Implicants_) <br/>
-
-
-### <span class="section-num">10.7</span> the process of finding the minimal switching expression {#the-process-of-finding-the-minimal-switching-expression}
-
-given the swtiching function \\(f\\) <br/>
-
--   find all the _Prime Implicant_ of \\(f\\) <br/>
--   from the list of _Prime Implicants_, find the _Essential Prime Implicants_ and put them in an expression <br/>
--   remove from the list of _PI_ all the _EPI_'s and all the _PI_'s that are covered by _EPI_'s <br/>
--   if the set of _EPI_'s covers \\(f\\), then we're done, otherwise, choose more _PI_'s so that \\(f\\) is entirely covered by the resulting set of _PI_'s but make sure to pick a minimal number of _PI_'s to do the job, and make sure to pick the _PI_'s with the least number of literals <br/>
-
-<span class="underline">note</span>: this isnt an absolute solution for the problem but its enough for functions with a small number of literals <br/>
-
-example: <br/>
-
-\begin{gather\*}
-  f(w,x,y,z) = \sum(4,5,8,12,13,14,15)\\\\
-  f = xy' + wx + wy'z'
-\end{gather\*}
-
-{{< figure src="/ox-hugo/dQOeJio.svg" caption="<span class=\"figure-number\">Figure 1: </span>_Prime implicants_: \\(x\bar{y}\bar{z}, wx, x\bar{y}\\), all of them are _EPI_" >}} <br/>
-
-another example: <br/>
-
-\begin{gather\*}
-  f(x,y,z) = \sum(0,2,3,4,5,7)
-\end{gather\*}
-
-{{< figure src="/ox-hugo/96j2WfN.svg" >}} <br/>
-
-none of these _PI_'s are _EPI_ and all of them are the same size <br/>
-
-this function has 2 minimal forms <br/>
-
-\\(f(x,y,z) = \bar{x}y + xz + \bar{y}\bar{z}\\) <br/>
-
-\\(f(x,y,z) = \bar{x}\bar{z} + yz + x\bar{y}\\) <br/>
-
-
-## <span class="section-num">11</span> _Don't care_ combinations {#don-t-care-combinations}
-
-_Don't care_ is a value of a function we get for a combination of values for the variables that isnt defined, and therefore can be either \\(1\\) or \\(0\\) <br/>
-
-the symbol of the value _Don't care_ is \\(\phi\\), its allowed to switch the value \\(\phi\\) with either \\(1\\) or \\(0\\) according to our needs, this is useful when finding the minimal form of a switching function <br/>
-
-%_example\_: <br/>
-% <br/>
-%a function \\(f\\) that receives the decimal digits \\(0-9\\) in \\(BCD\\) code and outputs \\(1\\) if the digit is divisible by \\(3\\) <br/>
-% <br/>
-%this function has 4 variables, we can also see that a combination of values for the variables that results in the output \\(10-15\\) isnt defined <br/>
-% <br/>
-%the output for the values \\(9, 6, 3, 0\\) is \\(1\\) <br/>
-% <br/>
-%the definition of the function <br/>
-
-
-## <span class="section-num">12</span> map expressions {#map-expressions}
-
-the usage of map exxpressions allows us to describe a function with more than \\(n\\) variables using a karnaugh map with \\(n\\) variables <br/>
-
-<span class="underline">definition</span>: a map expression is a switching expression that appears in the map and that isnt \\(0\\), \\(1\\) or \\(\phi\\) <br/>
-
-
-## <span class="section-num">13</span> logic gate {#logic-gate}
-
-
-### <span class="section-num">13.1</span> AND gate {#and-gate}
+### <span class="section-num">10.1</span> AND gate {#and-gate}
 
 \\[
   t = a \bullet b
@@ -749,7 +761,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/bKKN1Bx.svg" >}} <br/>
 
 
-### <span class="section-num">13.2</span> OR gate {#or-gate}
+### <span class="section-num">10.2</span> OR gate {#or-gate}
 
 \\[
   t = a + b + c
@@ -758,7 +770,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/JEh5DG2.svg" >}} <br/>
 
 
-### <span class="section-num">13.3</span> NAND gate {#nand-gate}
+### <span class="section-num">10.3</span> NAND gate {#nand-gate}
 
 \\[
   t = \overline{(a \bullet b \bullet c)}
@@ -767,7 +779,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/cINGfRg.svg" >}} <br/>
 
 
-### <span class="section-num">13.4</span> NOR gate {#nor-gate}
+### <span class="section-num">10.4</span> NOR gate {#nor-gate}
 
 \\[
   t = \overline{(a + b)}
@@ -776,7 +788,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/g8ASPWI.svg" >}} <br/>
 
 
-### <span class="section-num">13.5</span> XOR gate {#xor-gate}
+### <span class="section-num">10.5</span> XOR gate {#xor-gate}
 
 \\[
   t = a \oplus b
@@ -785,7 +797,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/FLVi83R.svg" >}} <br/>
 
 
-### <span class="section-num">13.6</span> NOT gate {#not-gate}
+### <span class="section-num">10.6</span> NOT gate {#not-gate}
 
 \\[
   b = \overline{a}
@@ -794,7 +806,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/f4X1VZI.svg" >}} <br/>
 
 
-## <span class="section-num">14</span> logic circuit {#logic-circuit}
+## <span class="section-num">11</span> logic circuit {#logic-circuit}
 
 a combination of logical gates to represent a more complex switching function is called a logical circuit or a switching circuit <br/>
 
@@ -809,7 +821,7 @@ the exit of a logical circuit depends only on the current combination of values 
 {{< figure src="/ox-hugo/PCw1P6a.svg" >}} <br/>
 
 
-### <span class="section-num">14.1</span> Digital abstraction {#digital-abstraction}
+### <span class="section-num">11.1</span> Digital abstraction {#digital-abstraction}
 
 how do we represent the values \\(0\\) and \\(1\\) using a digital logic circuits? <br/>
 
@@ -823,7 +835,7 @@ the <span class="underline">solution</span>: <br/>
 -   sometimes, it is agreed upon that the output of a circuit represents the value of the switching function, other times its agreed upon that it doesnt <br/>
 
 
-#### <span class="section-num">14.1.1</span> Logical levels {#logical-levels}
+#### <span class="section-num">11.1.1</span> Logical levels {#logical-levels}
 
 the two logical values \\(0\\) and \\(1\\) are represented in _Electronic circuits_ using logical levels. <br/>
 
