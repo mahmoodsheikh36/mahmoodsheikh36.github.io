@@ -2,7 +2,7 @@
 title = "boolean algebra"
 author = ["mahmood"]
 description = "boolean algebra course"
-date = 2022-12-19T01:09:00+02:00
+date = 2022-12-26T03:00:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -105,11 +105,15 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
+all of these expressions are equal: \\(\lnot x,\overline x,x'\\) <br/>
+
 
 ## <span class="section-num">4</span> basic properties of boolean algebra {#basic-properties-of-boolean-algebra}
 
 
 ### <span class="section-num">4.1</span> Idempotency {#idempotency}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -118,8 +122,12 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
+</div>
+
 
 ### <span class="section-num">4.2</span> identity {#identity}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -128,8 +136,12 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
+</div>
+
 
 ### <span class="section-num">4.3</span> annulment {#annulment}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -138,8 +150,12 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
+</div>
+
 
 ### <span class="section-num">4.4</span> commutative {#commutative}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -148,8 +164,12 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
+</div>
+
 
 ### <span class="section-num">4.5</span> associativity {#associativity}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -158,8 +178,12 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
+</div>
+
 
 ### <span class="section-num">4.6</span> complement {#complement}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -168,8 +192,12 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
+</div>
+
 
 ### <span class="section-num">4.7</span> distributivity {#distributivity}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -178,8 +206,12 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
+</div>
+
 
 ### <span class="section-num">4.8</span> absorption 1 {#absorption-1}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -188,7 +220,7 @@ AND is a [binary operation]({{< relref "20221219005229-binary_operation.md" >}})
   \end{cases}
 \end{gather\*}
 
-proof: <br/>
+<div class="proof">
 
 \begin{align\*}
   x + x \cdot y &= x \cdot 1 + x \cdot y\\\\
@@ -204,8 +236,14 @@ proof: <br/>
                   &= x
 \end{align\*}
 
+</div>
+
+</div>
+
 
 ### <span class="section-num">4.9</span> absorption 2 {#absorption-2}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -214,7 +252,7 @@ proof: <br/>
   \end{cases}
 \end{gather\*}
 
-proof: <br/>
+<div class="proof">
 
 \begin{align\*}
   x + x' \cdot y &= (x + x') \cdot (x + y)\\\\
@@ -222,8 +260,14 @@ proof: <br/>
                  &= x + y
 \end{align\*}
 
+</div>
+
+</div>
+
 
 ### <span class="section-num">4.10</span> consensus {#consensus}
+
+<div class="lemma">
 
 \begin{gather\*}
   \begin{cases}
@@ -232,7 +276,7 @@ proof: <br/>
   \end{cases}
 \end{gather\*}
 
-proof: <br/>
+<div class="proof">
 
 \begin{align\*}
   x \cdot y + x' \cdot z + y \cdot z &= x \cdot y + x' \cdot z + y \cdot z \cdot 1\\\\
@@ -242,24 +286,38 @@ proof: <br/>
                                      &= xy + x'z
 \end{align\*}
 
+</div>
+
+</div>
+
 
 ### <span class="section-num">4.11</span> De Morgan {#de-morgan}
 
+<div class="lemma">
+
+<div class="note">
+
+not sure yet what the 4th formula refers to <br/>
+
+</div>
+
 \begin{gather\*}
   \begin{cases}
-    (x')' = x\\\\
-    (x + y)' = x' \cdot y'\\\\
-    (xy)' = x' + y'\\\\
+    \overline{(\overline{x})} = x\\\\
+    \overline{(x + y)} = \overline{x} \cdot \overline{y}\\\\
+    \overline{(xy)} = \overline{x} + \overline{y}\\\\
     [T(x\_1, x\_2, \cdots, x\_n, 0, 1, +, \bullet)]' = T(x\_1', x\_2', \cdots, x\_n', 1, 0, \bullet, +)
   \end{cases}
 \end{gather\*}
+
+</div>
 
 
 ## <span class="section-num">5</span> switching expression {#switching-expression}
 
 <div class="definition">
 
-a switching expression is a finite combination of switching variables and the operations \\(-,\cdot,+\\) <br/>
+a **switching expression** is a finite combination of switching variables and the operations [AND](#and),[OR](#or),[NOT](#not) <br/>
 
 <div class="characteristic">
 
@@ -268,6 +326,8 @@ a combination of switching expressions results in a switching expression, so if 
 </div>
 
 <div class="my_example">
+
+an example of simplifying a switching expression <br/>
 
 \begin{align\*}
   T(x, y, z) &= x'y'z + yz + xz\\\\
@@ -317,9 +377,9 @@ a function \\(f(x\_1, x\_2, \cdots, x\_n)\\) that outputs only \\(1\\) or \\(0\\
 </div>
 
 the number of possible functions for \\(n\\) variables is \\({2^2}^n\\) <br/>
-the complement of \\(f\\), written as \\(f'\\) is the function that outputs the value \\(1\\) where \\(f\\) outputs 0 <br/>
-\\(f + g\\) is the sum of both functions \\(g\\) and \\(f\\), \\(f + g = 1\\) if and only if atleast one of both functions gives \\(1\\) for a given combination <br/>
-\\(f \bullet g\\) is the multiplication of both functinos, for a given combination, it gives \\(1\\) if and only if both functions give \\(1\\) for that specific combination <br/>
+the complement of \\(f\\), written as \\(f'\\), is the function that outputs the value 1 wherever \\(f\\) outputs 0 <br/>
+\\(f+g\\) is the sum of both functions \\(g\\) and \\(f\\), \\(f + g = 1\\) if and only if atleast one of both functions gives \\(1\\) for a given combination <br/>
+\\(f \cdot g\\) is the multiplication of both functinos, for a given combination, it gives 1 if and only if both functions give 1 for that specific combination <br/>
 
 <div class="my_example">
 
@@ -337,52 +397,64 @@ the complement of \\(f\\), written as \\(f'\\) is the function that outputs the 
 </div>
 
 
-## <span class="section-num">7</span> minterm {#minterm}
+### <span class="section-num">6.1</span> minterm {#minterm}
 
 <div class="definition">
 
-an expression that is a series of multiplications that contain the variables \\(x\_1, \cdots, x\_n\\) is called a **minterm** <br/>
+an expression that is a series of multiplications that contain the variables \\(x\_1, \cdots, x\_n\\) of a function \\(f(x\_1, x\_2, \cdots, x\_n)\\) is called a **minterm** <br/>
 
 </div>
 
 
-## <span class="section-num">8</span> maxterm {#maxterm}
+### <span class="section-num">6.2</span> maxterm {#maxterm}
 
 <div class="definition">
 
-an expression that is a series of additions that that contain the variables \\(x\_1, \cdots, x\_n\\) is called a **maxterm** <br/>
+an expression that is a series of additions that that contain the variables \\(x\_1, \cdots, x\_n\\) of a function \\(f(x\_1, x\_2, \cdots, x\_n)\\) is called a **maxterm** <br/>
 
 </div>
 
 
-## <span class="section-num">9</span> DNF {#dnf}
+### <span class="section-num">6.3</span> DNF {#dnf}
+
+<div class="definition">
 
 when a function is written as a sum of products we get what is called as **Disjunctive Normal Form** <br/>
 
+</div>
 
-## <span class="section-num">10</span> GNF {#gnf}
+
+### <span class="section-num">6.4</span> GNF {#gnf}
+
+<div class="definition">
 
 when a function is written as a product of sums we get what is called as **Conjunctive Normal Form** <br/>
 
-
-## <span class="section-num">11</span> finding the switching expressions of a function {#finding-the-switching-expressions-of-a-function}
-
-|   | x | y | z | f | minterms     | maxterms      |
-|---|---|---|---|---|--------------|---------------|
-| 0 | 0 | 0 | 0 | 1 | \\(x'y'z'\\) |               |
-| 1 | 0 | 0 | 1 | 0 |              | \\(x+y+z'\\)  |
-| 2 | 0 | 1 | 0 | 1 | \\(x'yz'\\)  |               |
-| 3 | 0 | 1 | 1 | 1 | \\(x'yz\\)   |               |
-| 4 | 1 | 0 | 0 | 0 |              | \\(x'+y+z\\)  |
-| 5 | 1 | 0 | 1 | 0 |              | \\(x'+y+z'\\) |
-| 6 | 1 | 1 | 0 | 1 | \\(xyz'\\)   |               |
-| 7 | 1 | 1 | 1 | 1 | \\(xyz\\)    |               |
-
-\\(f(x, y, z) = \sum(0,2,3,6,7) = x'y'z' + x'yz' + x'yz' + xyz' + xyz \longrightarrow\\) sum of products, _DNF_ <br/>
-\\(f(x, y, z) = \Pi(1,4,5) = (x+y+z')(x'+y+z)(x'+y+z') \longrightarrow\\) product of sums, _CNF_ <br/>
+</div>
 
 
-## <span class="section-num">12</span> Shannon's law {#shannon-s-law}
+### <span class="section-num">6.5</span> finding the switching expressions of a switching function {#finding-the-switching-expressions-of-a-switching-function}
+
+we write a truth table for the function and for each row we write a minterm or a maxterm depending on whether the function outputs 1 or 0, respectively <br/>
+
+|   | x | y | z | f | [minterm](#minterm)s | [maxterm](#maxterm)s |
+|---|---|---|---|---|----------------------|----------------------|
+| 0 | 0 | 0 | 0 | 1 | \\(x'y'z'\\)         |                      |
+| 1 | 0 | 0 | 1 | 0 |                      | \\(x+y+z'\\)         |
+| 2 | 0 | 1 | 0 | 1 | \\(x'yz'\\)          |                      |
+| 3 | 0 | 1 | 1 | 1 | \\(x'yz\\)           |                      |
+| 4 | 1 | 0 | 0 | 0 |                      | \\(x'+y+z\\)         |
+| 5 | 1 | 0 | 1 | 0 |                      | \\(x'+y+z'\\)        |
+| 6 | 1 | 1 | 0 | 1 | \\(xyz'\\)           |                      |
+| 7 | 1 | 1 | 1 | 1 | \\(xyz\\)            |                      |
+
+\\(f(x, y, z) = \sum(0,2,3,6,7) = x'y'z' + x'yz' + x'yz' + xyz' + xyz \longrightarrow\\) sum of products, [DNF](#dnf) <br/>
+\\(f(x, y, z) = \Pi(1,4,5) = (x+y+z')(x'+y+z)(x'+y+z') \longrightarrow\\) product of sums, [GNF](#gnf) <br/>
+
+
+## <span class="section-num">7</span> Shannon's law {#shannon-s-law}
+
+<div class="definition">
 
 for every switching function \\(f(x\_1, \cdots, x\_n)\\) we get: <br/>
 
@@ -391,7 +463,11 @@ for every switching function \\(f(x\_1, \cdots, x\_n)\\) we get: <br/>
   f(x\_1, \cdots, x\_n) &= [x\_1 + f(0, x\_2, \cdots, x\_n)] \cdot [x\_1' + f(1, x\_2, \cdots, x\_n)]
 \end{align\*}
 
-this law helps us move between _DNF_ or _CNF_ forms without looking at the truth table of a function <br/>
+<div class="characteristic">
+
+this law helps us move between [DNF](#dnf) and [GNF](#gnf) forms without looking at the truth table of a function <br/>
+
+</div>
 
 <div class="my_example">
 
@@ -404,45 +480,82 @@ this law helps us move between _DNF_ or _CNF_ forms without looking at the truth
 
 </div>
 
-
-## <span class="section-num">13</span> functional completeness {#functional-completeness}
-
-a set of operations is functionally complete if every switching function can be described as a switching expression that only contains operations from the given set <br/>
-
-for example \\(\\{\lnot, +\\}\\) is functionally complete because \\(x \bullet y = (x'+y')'\\) and in every switching expression where we have \\(x \bullet y\\) we can replace with \\(\lnot(\lnot x + \lnot y)\\) <br/>
-
-\\(\\{\bullet, \lnot\\}\\) is also functionally complete because <br/>
+</div>
 
 
-### <span class="section-num">13.1</span> list of systems known to be functionally complete {#list-of-systems-known-to-be-functionally-complete}
+## <span class="section-num">8</span> functional completeness {#functional-completeness}
 
--   \\(\\{+, \bullet, \lnot\\}\\) <br/>
--   \\(\\{+, \lnot\\}\\) <br/>
--   \\(\\{\bullet, \lnot\\}\\), because \\(x + y = \overline{(\bar{x} \cdot \bar{y})}\\) <br/>
--   _NOR_: \\(x \downarrow y = \bar{x} \bullet \bar{y} = \overline{(x + y)}\\) <br/>
--   _NAND_: \\(x \uparrow y = \bar{x} + \bar{y} = \overline{(xy)}\\) <br/>
+<div class="definition">
+
+a set of operations forms a **functionally complete** system if every switching function can be described as a switching expression that only contains operations from the given set <br/>
+
+<div class="my_example">
+
+for example \\(\\{\lnot, +\\}\\) is functionally complete because \\(x \cdot y = (x'+y')'\\) and in every switching expression where we have \\(x \cdot y\\) we can replace with \\(\lnot(\lnot x + \lnot y)\\) <br/>
+
+</div>
+
+<div class="my_example">
+
+\\(\\{\cdot, \lnot\\}\\) is also functionally complete <br/>
+
+</div>
+
+<div class="lemma">
+
+a functionally complete system consisting of only 1 function returns the complement of a variable if all its passed to all its inputs, and the complement is true, as in a system that doesnt abide by this rule isnt functionally complete <br/>
+
+<div class="my_example">
+
+given the completely functional system \\(\\{f(x,y,z,w)\\}\\), according to this rule, \\(f(x,x,x,x) = \overline{x}\\) <br/>
+
+</div>
+
+<div class="my_example">
+
+take the functionally complete operation _NOR_, we pass \\(x\\) to all its inputs and we get \\(\overline{x}\\): <br/>
+\\[ x \downarrow x = \overline{x} \cdot \overline{x} = \overline{x} \\] <br/>
+
+</div>
+
+</div>
+
+<div class="lemma">
 
 one way to prove that a set of operations is completely functional is by describing all the operations of a set that is already known to be functional using the operations in the set we have <br/>
+
+<div class="my_example">
+
 proof of NOR's functional completeness using the already functionally complete set \\(\\{\lnot, +\\}\\): <br/>
 
 \begin{gather\*}
   x \downarrow x = x' \cdot x' = x'\\\\
-  (x \downarrow y) \downarrow (x \downarrow y) = (x' \bullet y')' \bullet (x' \bullet y')' = (x + y)(x + y) = (x + y)\\\\
-  ((x + y)' + (x + y)')' = (x'y' + x'y')' = (x'y')' \bullet (x'y')' = (x+y)(x+y) = (x+y)
+  (x \downarrow y) \downarrow (x \downarrow y) = (x' \cdot y')' \cdot (x' \cdot y')' = (x + y)(x + y) = (x + y)\\\\
+  ((x + y)' + (x + y)')' = (x'y' + x'y')' = (x'y')' \cdot (x'y')' = (x+y)(x+y) = (x+y)
 \end{gather\*}
 
-<span class="underline">rule</span>: a functionally complete system consisting of only 1 function returns the complement of a variable if all its passed to all its inputs, and the complement is true, as in a system that doesnt abide by this rule isnt functionally complete <br/>
-example: given the completely functional system \\(\\{f(x,y,z,w)\\}\\), according to this rule, \\(f(x,x,x,x) = \bar{x}\\) <br/>
-a non-symbolic example: take the functionally complete operation _NOR_, we pass \\(x\\) to all its inputs and we get \\(\bar{x}\\): <br/>
-\\[ x \downarrow x = \bar{x} \bullet \bar{x} = \bar{x} \\] <br/>
+</div>
+
+</div>
+
+</div>
 
 
-### <span class="section-num">13.2</span> partial functional completeness {#partial-functional-completeness}
+### <span class="section-num">8.1</span> list of systems known to be functionally complete {#list-of-systems-known-to-be-functionally-complete}
+
+-   \\(\\{+, \cdot, \lnot\\}\\) <br/>
+-   \\(\\{+, \lnot\\}\\) <br/>
+-   \\(\\{\cdot, \lnot\\}\\), because \\(x + y = \overline{(\bar{x} \cdot \bar{y})}\\) <br/>
+-   _NOR_: \\(x \downarrow y = \overline{x} \cdot \overline{y} = \overline{(x + y)}\\) <br/>
+-   _NAND_: \\(x \uparrow y = \overline{x} + \overline{y} = \overline{(xy)}\\) <br/>
+
+
+### <span class="section-num">8.2</span> partial functional completeness {#partial-functional-completeness}
 
 a system of operations is partially functionally complete when a set of operations is combined with \\(0\\) and \\(1\\) or both to provide funcitonal completeness <br/>
 
 
-## <span class="section-num">14</span> _Exclusive OR - XOR_ operation {#exclusive-or-xor-operation}
+## <span class="section-num">9</span> XOR {#xor}
 
 | \\(x\\) | \\(y\\) | \\(x \oplus y\\) |
 |---------|---------|------------------|
@@ -452,7 +565,7 @@ a system of operations is partially functionally complete when a set of operatio
 | 1       | 1       | 0                |
 
 
-### <span class="section-num">14.1</span> properties {#properties}
+### <span class="section-num">9.1</span> properties {#properties}
 
 \begin{align}
   A \oplus B &= B \oplus A & \text{commutative}\\\\
@@ -471,7 +584,7 @@ another important property, if \\(A \oplus B = C\\) then: <br/>
 \end{align\*}
 
 
-## <span class="section-num">15</span> minimal functions {#minimal-functions}
+## <span class="section-num">10</span> minimal functions {#minimal-functions}
 
 given \\(f\\) and \\(g\\) are switching functions with \\(n\\) variables, we say \\(f\\) covers g and write \\(g \subseteq f\\) <br/>
 
@@ -482,7 +595,7 @@ given \\(f\\) and \\(g\\) are switching functions with \\(n\\) variables, we say
 if \\(g \subseteq f\\) and \\(g\\) is a multiplication of variables then \\(g\\) is called an _implicant_ of \\(f\\) and we write \\(g \rightarrow f\\) <br/>
 
 
-### <span class="section-num">15.1</span> \\(g \subseteq h + g\\) {#g-subseteq-h-plus-g}
+### <span class="section-num">10.1</span> \\(g \subseteq h + g\\) {#g-subseteq-h-plus-g}
 
 proof: <br/>
 
@@ -492,7 +605,7 @@ proof: <br/>
 \end{gather\*}
 
 
-### <span class="section-num">15.2</span> if \\(g \subseteq f\\) and \\(f \subseteq g\\) then \\(f = g\\) {#if-g-subseteq-f-and-f-subseteq-g-then-f-g}
+### <span class="section-num">10.2</span> if \\(g \subseteq f\\) and \\(f \subseteq g\\) then \\(f = g\\) {#if-g-subseteq-f-and-f-subseteq-g-then-f-g}
 
 proof: <br/>
 
@@ -501,7 +614,7 @@ proof: <br/>
 \\] <br/>
 
 
-### <span class="section-num">15.3</span> \\(g + h \subseteq\\) if and only if \\(g \subseteq f\\) and \\(h \subseteq f\\) {#g-plus-h-subseteq-if-and-only-if-g-subseteq-f-and-h-subseteq-f}
+### <span class="section-num">10.3</span> \\(g + h \subseteq\\) if and only if \\(g \subseteq f\\) and \\(h \subseteq f\\) {#g-plus-h-subseteq-if-and-only-if-g-subseteq-f-and-h-subseteq-f}
 
 proof: <br/>
 
@@ -516,7 +629,7 @@ if \\(g = 1\\) then \\(g + h = 1\\) and so \\(f = 1\\) and so \\(g \subseteq f\\
 if \\(h = 1\\) then \\(g + h = 1\\) and so \\(f = 1\\) and so \\(h \subseteq f\\) <br/>
 
 
-### <span class="section-num">15.4</span> prime implicant {#prime-implicant}
+### <span class="section-num">10.4</span> prime implicant {#prime-implicant}
 
 a multiplication expression \\(p\\) is called a _Prime implicant_ of a function \\(f\\) if: <br/>
 
@@ -533,7 +646,7 @@ the removal of \\(y \rightarrow x'z\\) implicant of \\(f\\) <br/>
 the removal of \\(x' \rightarrow yz\\) implicant of \\(f\\) <br/>
 
 
-### <span class="section-num">15.5</span> every sum of products that isnt minimizable that equals \\(f\\) is a sum of prime implicants of \\(f\\) {#every-sum-of-products-that-isnt-minimizable-that-equals-f-is-a-sum-of-prime-implicants-of-f}
+### <span class="section-num">10.5</span> every sum of products that isnt minimizable that equals \\(f\\) is a sum of prime implicants of \\(f\\) {#every-sum-of-products-that-isnt-minimizable-that-equals-f-is-a-sum-of-prime-implicants-of-f}
 
 proof: assume in contradiction that there is a sum of products that isnt minimizable that equals \\(f\\) and contains the product \\(\varphi\\) that isnt a prime implicant of \\(f\\) <br/>
 
@@ -544,7 +657,7 @@ also \\(\varphi \rightarrow \varphi\_0\\) in case \\(\varphi\\) is a product of 
 ..... <br/>
 
 
-### <span class="section-num">15.6</span> Essential Prime Implicant {#essential-prime-implicant}
+### <span class="section-num">10.6</span> Essential Prime Implicant {#essential-prime-implicant}
 
 from previous theorems, <br/>
 
@@ -563,7 +676,7 @@ from previous theorems, <br/>
 3.  <span class="underline">note</span>: a minimal switching expression has to contain all the possible _EPI's_ (_Essential Prime Implicants_) <br/>
 
 
-### <span class="section-num">15.7</span> the process of finding the minimal switching expression {#the-process-of-finding-the-minimal-switching-expression}
+### <span class="section-num">10.7</span> the process of finding the minimal switching expression {#the-process-of-finding-the-minimal-switching-expression}
 
 given the swtiching function \\(f\\) <br/>
 
@@ -600,7 +713,7 @@ this function has 2 minimal forms <br/>
 \\(f(x,y,z) = \bar{x}\bar{z} + yz + x\bar{y}\\) <br/>
 
 
-## <span class="section-num">16</span> _Don't care_ combinations {#don-t-care-combinations}
+## <span class="section-num">11</span> _Don't care_ combinations {#don-t-care-combinations}
 
 _Don't care_ is a value of a function we get for a combination of values for the variables that isnt defined, and therefore can be either \\(1\\) or \\(0\\) <br/>
 
@@ -617,17 +730,17 @@ the symbol of the value _Don't care_ is \\(\phi\\), its allowed to switch the va
 %the definition of the function <br/>
 
 
-## <span class="section-num">17</span> map expressions {#map-expressions}
+## <span class="section-num">12</span> map expressions {#map-expressions}
 
 the usage of map exxpressions allows us to describe a function with more than \\(n\\) variables using a karnaugh map with \\(n\\) variables <br/>
 
 <span class="underline">definition</span>: a map expression is a switching expression that appears in the map and that isnt \\(0\\), \\(1\\) or \\(\phi\\) <br/>
 
 
-## <span class="section-num">18</span> logic gates {#logic-gates}
+## <span class="section-num">13</span> logic gate {#logic-gate}
 
 
-### <span class="section-num">18.1</span> AND gate {#and-gate}
+### <span class="section-num">13.1</span> AND gate {#and-gate}
 
 \\[
   t = a \bullet b
@@ -636,7 +749,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/bKKN1Bx.svg" >}} <br/>
 
 
-### <span class="section-num">18.2</span> OR gate {#or-gate}
+### <span class="section-num">13.2</span> OR gate {#or-gate}
 
 \\[
   t = a + b + c
@@ -645,7 +758,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/JEh5DG2.svg" >}} <br/>
 
 
-### <span class="section-num">18.3</span> NAND gate {#nand-gate}
+### <span class="section-num">13.3</span> NAND gate {#nand-gate}
 
 \\[
   t = \overline{(a \bullet b \bullet c)}
@@ -654,7 +767,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/cINGfRg.svg" >}} <br/>
 
 
-### <span class="section-num">18.4</span> NOR gate {#nor-gate}
+### <span class="section-num">13.4</span> NOR gate {#nor-gate}
 
 \\[
   t = \overline{(a + b)}
@@ -663,7 +776,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/g8ASPWI.svg" >}} <br/>
 
 
-### <span class="section-num">18.5</span> XOR gate {#xor-gate}
+### <span class="section-num">13.5</span> XOR gate {#xor-gate}
 
 \\[
   t = a \oplus b
@@ -672,7 +785,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/FLVi83R.svg" >}} <br/>
 
 
-### <span class="section-num">18.6</span> NOT gate {#not-gate}
+### <span class="section-num">13.6</span> NOT gate {#not-gate}
 
 \\[
   b = \overline{a}
@@ -681,7 +794,7 @@ the usage of map exxpressions allows us to describe a function with more than \\
 {{< figure src="/ox-hugo/f4X1VZI.svg" >}} <br/>
 
 
-## <span class="section-num">19</span> logic circuits {#logic-circuits}
+## <span class="section-num">14</span> logic circuit {#logic-circuit}
 
 a combination of logical gates to represent a more complex switching function is called a logical circuit or a switching circuit <br/>
 
@@ -696,7 +809,7 @@ the exit of a logical circuit depends only on the current combination of values 
 {{< figure src="/ox-hugo/PCw1P6a.svg" >}} <br/>
 
 
-## <span class="section-num">20</span> Digital abstraction {#digital-abstraction}
+### <span class="section-num">14.1</span> Digital abstraction {#digital-abstraction}
 
 how do we represent the values \\(0\\) and \\(1\\) using a digital logic circuits? <br/>
 
@@ -710,7 +823,7 @@ the <span class="underline">solution</span>: <br/>
 -   sometimes, it is agreed upon that the output of a circuit represents the value of the switching function, other times its agreed upon that it doesnt <br/>
 
 
-### <span class="section-num">20.1</span> Logical levels {#logical-levels}
+#### <span class="section-num">14.1.1</span> Logical levels {#logical-levels}
 
 the two logical values \\(0\\) and \\(1\\) are represented in _Electronic circuits_ using logical levels. <br/>
 
