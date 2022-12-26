@@ -2,7 +2,7 @@
 title = "probability"
 author = ["mahmood"]
 description = "probability theory"
-date = 2022-12-24T23:31:00+02:00
+date = 2022-12-26T18:44:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -745,9 +745,13 @@ P\_n(k) = \frac{\binom{m}{r} \binom{n-m}{k-r}}{\binom{n}{k}}
 
 ## <span class="section-num">11</span> probability of atleast {#probability-of-atleast}
 
+<div class="my_example">
+
 \begin{gather\*}
   P(\text{at least 3 reds in 5 pulls}) = P(\text{3 reds}) + P(\text{4 reds}) + P(\text{5 reds})\\\\
   P(\text{at least 1 success}) = 1 - P(\text{all failures})\\\\
   P(\text{at least 1 failure}) = 1 - P(\text{all successes})
 \end{gather\*}
+
+</div>
 
