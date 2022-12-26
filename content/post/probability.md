@@ -2,7 +2,7 @@
 title = "probability"
 author = ["mahmood"]
 description = "probability theory"
-date = 2022-12-26T18:44:00+02:00
+date = 2022-12-27T00:03:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -304,15 +304,15 @@ P(A \cup B) = P(A) + P(B)
 
 ## <span class="section-num">3</span> chain rule {#chain-rule}
 
-the **chain rule** for two random events \\(A\\) and \\(B\\) says: <br/>
+for two random events \\(A\\) and \\(B\\): <br/>
 \\[
 P(A\cap B) = P(B\mid A) \cdot P(A)
 \\] <br/>
-for more than two events \\(A\_{1},\dots,A\_{n}\\) the chain rule extends to the [formula]({{< relref "20220711175314-formula.md" >}}): <br/>
+for more than two events \\(A\_{1},\dots,A\_{n}\\) the chain rule extends to <br/>
 \\[
 P \left(A\_{n}\cap \dots \cap A\_{1}\right)= P\left(A\_{n} \mid A\_{n-1}\cap \dots \cap A\_{1}\right)\cdot P\left(A\_{n-1}\cap \dots \cap A\_{1}\right)
 \\] <br/>
-which by induction may be turned into: <br/>
+which by induction may be turned into <br/>
 \\[
 P\left(A\_{n} \cap \dots \cap A\_{1}\right)=\prod\_{k=1}^{n} P\left(A\_{k}\\,\Bigg|\\,\bigcap\_{j=1}^{k-1}A\_{j}\right)
 \\] <br/>
@@ -322,11 +322,11 @@ P\left(A\_{n} \cap \dots \cap A\_{1}\right)=\prod\_{k=1}^{n} P\left(A\_{k}\\,\Bi
 
 <div class="definition">
 
-events A and B are **disjoint** if they cannot occur at the same time, i.e. \\(A \cap B = \varnothing \iff P(A \cap B) = 0\\) <br/>
+events A and B are **disjoint** if they cannot occur at the same time, \\(P(A \cap B) = 0\\) <br/>
 
 <div class="lemma">
 
-given A,B are disjoint events \\[ P(A \cup B) = P(A) + P(B) \\] <br/>
+given A,B are disjoint events, \\[ P(A \cup B) = P(A) + P(B) \\] <br/>
 
 </div>
 
