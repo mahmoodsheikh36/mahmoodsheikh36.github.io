@@ -2,7 +2,7 @@
 title = "boolean algebra"
 author = ["mahmood"]
 description = "boolean algebra course"
-date = 2022-12-26T18:42:00+02:00
+date = 2022-12-28T12:33:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -561,6 +561,14 @@ this isnt a definite solution for the problem but its enough for functions with 
 
 </div>
 
+using karnaugh maps we can apply this process <br/>
+
+{{< figure src="/ox-hugo/cqS6PbM.svg" >}} <br/>
+
+{{< figure src="/ox-hugo/nixxAs4.svg" >}} <br/>
+
+by finding rectangles whose area is a power of 2 in these tables we would be finding minterms and the least amount of rectangles we can find would give us the minimal form we're looking for <br/>
+
 <div class="my_example">
 
 \begin{gather\*}
@@ -590,19 +598,8 @@ this function has 2 minimal forms <br/>
 
 ### <span class="section-num">6.9</span> _Don't care_ combinations {#don-t-care-combinations}
 
-_Don't care_ is a value of a function we get for a combination of values for the variables that isnt defined, and therefore can be either \\(1\\) or \\(0\\) <br/>
-
+**Don't care** is a value of a function we get for a combination of values for the variables that isnt defined, and therefore can be either \\(1\\) or \\(0\\) <br/>
 the symbol of the value _Don't care_ is \\(\phi\\), its allowed to switch the value \\(\phi\\) with either \\(1\\) or \\(0\\) according to our needs, this is useful when finding the minimal form of a switching function <br/>
-
-%_example\_: <br/>
-% <br/>
-%a function \\(f\\) that receives the decimal digits \\(0-9\\) in \\(BCD\\) code and outputs \\(1\\) if the digit is divisible by \\(3\\) <br/>
-% <br/>
-%this function has 4 variables, we can also see that a combination of values for the variables that results in the output \\(10-15\\) isnt defined <br/>
-% <br/>
-%the output for the values \\(9, 6, 3, 0\\) is \\(1\\) <br/>
-% <br/>
-%the definition of the function <br/>
 
 
 ### <span class="section-num">6.10</span> map expressions {#map-expressions}
