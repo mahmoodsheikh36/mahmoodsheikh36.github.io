@@ -2,7 +2,7 @@
 title = "sorting algorithms"
 author = ["mahmood"]
 description = "sorting algorithms"
-date = 2022-12-23T22:04:00+02:00
+date = 2023-01-01T16:16:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -72,7 +72,7 @@ a **comparison sort** is a type of **sorting algorithm** that only reads the lis
 
 <div class="lemma">
 
-any comparison-sort based algorithm has a time is bound by \\(\Omega(n\log n)\\) <br/>
+any comparison-sort based algorithm has a [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) that is bound by \\(\Omega(n\log n)\\) <br/>
 
 </div>
 
@@ -86,7 +86,8 @@ prove that any comparison-based algorithm that turns a vector into a hill has to
 we assume in contradiction that there exists a comparison-based algorithm that turns a vector into a hill whose time complexity is less than \\(\Omega(n\log n)\\) <br/>
 consider the following function: <br/>
 
-![](/ox-hugo/30t764s.svg) <br/>
+{{< figure src="/ox-hugo/30t764s.svg" >}} <br/>
+
 each line from 3 to 6 runs in \\(\Theta(n)\\) time, except the first which we know by the assumption runs in less than \\(\Theta(n\log n)\\), so the whole function runs in less than \\(\Theta(n\log n)\\) time <br/>
 this is a comparison-based function that sorts a given array in less than \\(\Theta(n\log n)\\) time, which contradicts with our theorem that no sorting function can have a lower time complexity than \\(\Theta(n\log n)\\) <br/>
 we arrived at a contradiction and so it has to be true that this function is bound from below by \\(\Theta(n\log n)\\), i.e. its time complexity is \\(\Omega(n\log n)\\) <br/>
@@ -305,7 +306,7 @@ void sort(T arr[], int l, int r) {
 ```
 
 
-### <span class="section-num">7.1</span> [correctness]({{< relref "20221104220603-algorithm_correctness.md" >}}) of merge {#correctness--20221104220603-algorithm-correctness-dot-md--of-merge}
+### <span class="section-num">7.1</span> merge {#merge}
 
 consider the `merge` algorithm that merges two partitions, i.e. takes in two sorted arrays A,B, and returns a new sorted array C that contains all elements from A and B <br/>
 
