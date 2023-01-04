@@ -1,7 +1,7 @@
 +++
 title = "dynamic programming"
 author = ["mahmood"]
-date = 2023-01-04T19:51:00+02:00
+date = 2023-01-04T23:11:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -68,7 +68,7 @@ dynamic programming amounts to breaking down an optimization problem into simple
 
 </div>
 
-<div class="subquestion">
+<div class="question">
 
 given the vector of integers A of size n, for each pair of indicies i&lt;j we define \\(\text{diff}(i,j) = A[j]-A[i]\\), write an [algorithm]({{< relref "20220706211958-algorithm.md" >}}) that finds \\(\text{maxdiff} = \underset{i<j}{\max} \\{\text{diff}(i,j)\\}\\}\\) <br/>
 for example for the vector \\(\\{9,2,8,4,0,6,7\\}\\) the result should be is \\(\text{maxdiff} = 7 - 0 = 7\\) <br/>
