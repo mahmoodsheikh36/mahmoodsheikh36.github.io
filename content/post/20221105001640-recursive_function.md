@@ -2,7 +2,7 @@
 title = "recursion"
 author = ["mahmood"]
 description = "recursive functions"
-date = 2022-12-19T19:14:00+02:00
+date = 2023-01-06T01:23:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -66,12 +66,6 @@ window.onload = function() {
 <div class="definition">
 
 a **recursive** function is a function that calls itself <br/>
-
-<div class="note">
-
-there are a few mistakes here (in the recursion tree section)! this document needs some fixing <br/>
-
-</div>
 
 <div class="my_example">
 
@@ -401,7 +395,7 @@ we get: <br/>
 
 the **master theorem** can be used to solve recurrences of the form \\(T(n) = aT(n - b) + f(n)\\), where \\(a \geq 1\\) and \\(b > 0\\) and \\(f(n)\\) is **asymptotically positive**. (asymptotically positive means that the function is positive for all sufficiently large n.) this recurrence describes an algorithm that divides a problem of size \\(n\\) into sub problems, each of size \\(n-b\\), and solves them recursively. <br/>
 the theorem is as follows: <br/>
-if \\(T(n) = aT(n-b) + f(n)\\), where \\(a \geq 1\\), \\(b > 0\\), \\(f(n) = O(n^k)\\) and \\(k \geq 0\\) <br/>
+if \\(T(n) = aT(n-b) + f(n)\\), where \\(a \geq 1\\), \\(b > 0\\), \\(f(n) = O\left(n^k\right)\\) and \\(k \geq 0\\) <br/>
 we consider 3 cases: <br/>
 **case 1**, if \\(a = 1\\) <br/>
 \\[ T(n) = O(n \cdot f(n)) \text{ or } O\left(n^{k+1}\right) \\] <br/>
