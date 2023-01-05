@@ -1,8 +1,8 @@
 +++
-title = "algorithms"
+title = "algorithms course"
 author = ["mahmood"]
 description = "algorithms course from college"
-date = 2022-11-22T12:50:00+02:00
+date = 2023-01-06T01:08:00+02:00
 tags = ["todo"]
 draft = false
 +++
@@ -22,7 +22,6 @@ draft = false
   \(\newcommand{\khat}{\hat{\textbf{k}}}\)
   \(\newcommand{\rhat}{\hat{\textbf{r}}}\)
   \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
-  \(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\)
 </p>
 
 <!-- mathjax -->
@@ -31,7 +30,10 @@ draft = false
 window.MathJax = {
   loader: {load: ['[tex]/autoload', '[tex]/mathtools', '[tex]/physics']},
   tex: {
-    packages: {'[+]': ['autoload', 'mathtools', 'physics']}
+    packages: {'[+]': ['autoload', 'mathtools', 'physics']},
+    macros: {
+      textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+    }
   },
   tex2jax: {preview: "none"}
 };
@@ -67,8 +69,10 @@ window.onload = function() {
 in order: <br/>
 
 -   [algorithm correctness]({{< relref "20221104220603-algorithm_correctness.md" >}}), without the recursion part <br/>
--   [asymptotic notations]({{< relref "data_structures.md#asymptotic-notations" >}}) and [time complexity]({{< relref "data_structures.md#time-complexity" >}}) <br/>
--   [selection sort]({{< relref "data_structures.md#selection-sort" >}}), [bubble sort]({{< relref "data_structures.md#bubble-sort" >}}) <br/>
+-   [asymptotic notations]({{< relref "20221203185351-asymptotic_notations.md" >}}) and [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) <br/>
+-   [selection sort]({{< relref "20221105005344-sorting_algorithm.md#selection-sort" >}}), [bubble sort]({{< relref "20221105005344-sorting_algorithm.md#bubble-sort" >}}) <br/>
 -   [recursion]({{< relref "20221105001640-recursive_function.md" >}}) <br/>
 -   [correctness of recursive algorithms]({{< relref "20221104220603-algorithm_correctness.md#correctness-of-recursive-algorithms" >}}) <br/>
+-   [practice algorithm questions]({{< relref "20230101212037-practice_algorithm_questions.md" >}}) <br/>
+-   [dynamic programming]({{< relref "20230102173117-dynamic_programming.md" >}}) <br/>
 
