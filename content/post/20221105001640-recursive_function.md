@@ -2,7 +2,7 @@
 title = "recursion"
 author = ["mahmood"]
 description = "recursive functions"
-date = 2023-01-06T01:23:00+02:00
+date = 2023-01-07T12:03:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -424,10 +424,5 @@ we consider 3 cases: <br/>
 </div>
 
 **case 3**, if \\(a < 1\\) <br/>
-
-<div class="my_example">
-
-\\[ T(n) = O(f(n)) \text{ or } O\left(n^k\right) \\] <br/>
-
-</div>
+\\[ T(n) = O(f(n)) \text{ or } O\left(n^k\right) \\]
 
