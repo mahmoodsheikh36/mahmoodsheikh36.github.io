@@ -68,6 +68,86 @@ dynamic programming amounts to breaking down an optimization problem into simple
 
 </div>
 
+<div class="question" id="dynamic_programming_essential_problem">
+
+provide an algorithm that is as efficient as possible that solves the following problem: <br/>
+<span class="underline">input</span>: an array of [natural]({{< relref "calculus2.md#natural" >}}) numbers <br/>
+<span class="underline">output</span>: a list of k pairs (\\(k \le n/2\\)) of indicies of the form i,i+1 such that none of the indicies of the array appears more than once and the sum \\(\sum A[i]-A[i+1]\\) is maximal <br/>
+example: for the input 12,11,2,4,1,10,8,12 the output should be (11,2),(4,1),(10,8) <br/>
+
+<div class="subquestion">
+
+describe the algorithm in words <br/>
+
+<div class="answer">
+
+its all in the next subquestion <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+write pseudocode for the algorithm <br/>
+
+<div class="answer">
+
+first, we propose a solution, then optimize it using dynamic programming <br/>
+
+{{< figure src="/ox-hugo/2CcvjGm.svg" >}} <br/>
+
+to make this simpler for implementation and for further optimization we use an additional argument, \\(i\\), thats an index whose initial value should be \\(i=|A|-1\\), because thats how the algorithm i've written works <br/>
+
+{{< figure src="/ox-hugo/oPeEeuE.svg" >}} <br/>
+
+this algorithm has exponential time complexity, we could precompute the values that would be returned by \\(\textsc{Question1-Alg}\\) into an array B, such that \\(B[i] := \textsc{Question1-Alg-Recurse}(A, i-1)\\), we use another array C to keep track of the pairs we pick, because we are required to do so <br/>
+
+{{< figure src="/ox-hugo/N4Ymsmc.svg" >}} <br/>
+
+by running \\(\textsc{Question1-Alg-Efficient}\\), \\(C\\) would contain the pairs of indicies and \\(B[N-1]\\) the sum we're looking for, this algorithm runs in \\(\Theta(n)\\) <br/>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+show the [correctness]({{< relref "20221104220603-algorithm_correctness.md" >}}) of the algorithm you proposed <br/>
+
+<div class="answer">
+
+we prove the correctness of the algorithm using [induction]({{< relref "20220707193301-mathematical_induction.md" >}}) on the size of the input array <br/>
+
+1.  base step: for \\(|A|=2\\), the solution, \\(B[1]\\), would equal \\(A[1]-A[2]\\), and C to a singleton of \\((1,2)\\) which is the only pair in the array so it is the solution <br/>
+2.  the [induction hypothesis]({{< relref "20230108230724-induction_hypothesis.md" >}}): we assume truth for \\(|A|=n\\) <br/>
+3.  the [induction step]({{< relref "20230108230748-induction_step.md" >}}), we show truth for \\(|A|=n+1\\) <br/>
+    on the last iteration of the for loop \\(4,\dots,n+1-1\\), we would be checking which of the values \\(A[i-1]-A[i]+B[i-3]\\),\\(A[i]-A[i+1]+B[i-2]\\) is bigger, the first corresponding to a [combination]({{< relref "20221204105120-combinatorics.md#combination" >}}) of pairs whose sum would've been maximal up until \\(A[i-2]\\), and the second corresponding to a combination of pairs whose sum would've been maximal up until \\(A[i-1]\\), of those two, we pick one and add to it yet another pair only if the addition of that pair makes the sum stay or become bigger than the sum of the other combination with the other new pair added to it, so the last sum in B would still be maximal, and the pairs in C, likewise, would be corresponding to the newly found maximal sum <br/>
+
+<div class="note">
+
+im not sure of this proof, should reevaluate it <br/>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="subquestion">
+
+what is the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of the algorith? <br/>
+
+<div class="answer">
+
+its simply a single for loop with no added complexity whatsoever, so its just \\(\Theta(n)\\) <br/>
+
+</div>
+
+</div>
+
+</div>
+
 <div class="question">
 
 given the following problem: <br/>
