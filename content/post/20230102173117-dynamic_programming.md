@@ -1,7 +1,7 @@
 +++
 title = "dynamic programming"
 author = ["mahmood"]
-date = 2023-01-08T19:00:00+02:00
+date = 2023-01-08T22:10:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -148,7 +148,7 @@ given a vector A of positive integers, find the maximum sum of a subarray whose 
 
 <div class="answer">
 
-we use the array B such that \\(B[i]\\) is the solution to the problem in the indicies \\(1\dots i\\) such that we have to pick \\(A[i]\\) <br/>
+we use the array B such that \\(B[i]\\) is the solution to the problem in the indicies \\(1\dots i\\) under the constraint that we have to pick \\(A[i]\\) <br/>
 \\(B[i+1] = A[i+1] + \textsc{Max}\\{B[i-1],B[i-2]\\}\\) is the recursion step <br/>
 
 </div>
