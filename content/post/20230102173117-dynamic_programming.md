@@ -1,7 +1,7 @@
 +++
 title = "dynamic programming"
 author = ["mahmood"]
-date = 2023-01-08T15:14:00+02:00
+date = 2023-01-08T19:00:00+02:00
 tags = ["math"]
 draft = false
 +++
