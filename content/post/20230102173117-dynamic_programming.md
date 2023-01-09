@@ -1,7 +1,7 @@
 +++
 title = "dynamic programming"
 author = ["mahmood"]
-date = 2023-01-09T00:58:00+02:00
+date = 2023-01-09T13:29:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -93,15 +93,15 @@ write pseudocode for the algorithm <br/>
 
 <div class="answer">
 
-first, we propose a solution, then optimize it using dynamic programming <br/>
+first we propose a solution, then optimize it using dynamic programming <br/>
 
 {{< figure src="/ox-hugo/2CcvjGm.svg" >}} <br/>
 
-to make this simpler for implementation and for further optimization we use an additional argument, \\(i\\), thats an index whose initial value should be \\(i=|A|-1\\), because thats how the algorithm i've written works <br/>
+to make this simpler for implementation and for further optimization we rewrite the algorithm and use an additional argument, \\(i\\), thats an index whose initial value should be \\(i=|A|-1\\), because thats how the algorithm i've written works <br/>
 
 {{< figure src="/ox-hugo/oPeEeuE.svg" >}} <br/>
 
-this algorithm has exponential time complexity, we could precompute the values that would be returned by \\(\textsc{Question1-Alg}\\) into an array B, such that \\(B[i] := \textsc{Question1-Alg-Recurse}(A, i-1)\\), we use another array C to keep track of the pairs we pick, because we are required to do so <br/>
+this algorithm has exponential time complexity, we could precompute the values that would be returned by \\(\textsc{Question1-Alg}\\) into an array B, such that \\(B[i] := \textsc{Question1-Alg-Recurse}(A, i)\\), we use another array C to keep track of the pairs we pick, because we are required to do so <br/>
 
 {{< figure src="/ox-hugo/N4Ymsmc.svg" >}} <br/>
 
