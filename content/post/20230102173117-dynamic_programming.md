@@ -1,7 +1,7 @@
 +++
 title = "dynamic programming"
 author = ["mahmood"]
-date = 2023-01-09T13:29:00+02:00
+date = 2023-01-11T15:36:00+02:00
 tags = ["math"]
 draft = false
 +++
@@ -74,6 +74,7 @@ provide an algorithm that is as efficient as possible that solves the following 
 <span class="underline">input</span>: an array of [natural]({{< relref "calculus2.md#natural" >}}) numbers <br/>
 <span class="underline">output</span>: a list of k pairs (\\(k \le n/2\\)) of indicies of the form i,i+1 such that none of the indicies of the array appears more than once and the sum \\(\sum A[i]-A[i+1]\\) is maximal <br/>
 example: for the input 12,11,2,4,1,10,8,12 the output should be (11,2),(4,1),(10,8) <br/>
+write an algorithm to find the pairs of indicies as well as the sum <br/>
 
 <div class="subquestion">
 
@@ -101,11 +102,18 @@ to make this simpler for implementation and for further optimization we rewrite 
 
 {{< figure src="/ox-hugo/oPeEeuE.svg" >}} <br/>
 
-this algorithm has exponential time complexity, we could precompute the values that would be returned by \\(\textsc{Question1-Alg}\\) into an array B, such that \\(B[i] := \textsc{Question1-Alg-Recurse}(A, i)\\), we use another array C to keep track of the pairs we pick, because we are required to do so <br/>
+this algorithm has exponential time complexity, we could precompute the values that would be returned by \\(\textsc{Question1-Alg}\\) into an array B, such that \\(B[i] := \textsc{Question1-Alg-Recurse}(A, i)\\), we use another array C to keep track of the pairs we pick, only because we are required to do so <br/>
 
 {{< figure src="/ox-hugo/N4Ymsmc.svg" >}} <br/>
 
-by running \\(\textsc{Question1-Alg-Efficient}\\), \\(C\\) would contain the pairs of indicies and \\(B[N-1]\\) the sum we're looking for, this algorithm runs in \\(\Theta(n)\\) <br/>
+by running \\(\textsc{Question1-Alg-Efficient}\\), \\(C\\) would contain the pairs of indicies and \\(B[|A|-1]\\) the sum we're looking for, this algorithm runs in \\(\Theta(n)\\) <br/>
+
+<div class="note">
+
+there is something i couldnt get quite right with \\(C\\) <br/>
+i think this is wrong, there is something wrong with the way im keeping record of the pairs in \\(C\\) but im too lazy/exhausted to figure it out <br/>
+
+</div>
 
 </div>
 
@@ -136,7 +144,7 @@ im not sure of this proof, should reevaluate it <br/>
 
 <div class="subquestion">
 
-what is the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of the algorith? <br/>
+what is the [time complexity]({{< relref "20221130014441-time_complexity.md" >}}) of the algorithm? <br/>
 
 <div class="answer">
 
@@ -151,7 +159,7 @@ its simply a single for loop with no added complexity whatsoever, so its just \\
 <div class="question">
 
 given the following problem: <br/>
-<span class="underline">input</span>: an array of integers <br/>
+<span class="underline">input</span>: an array of positive numbers of size \\(n\\) <br/>
 <span class="underline">output</span>: a subarray (non-consecutive) whose sum is maximal that doesnt contain two consecutive elements <br/>
 example: input \\(3,{\bf 12},6\\) output 12 <br/>
 example: input \\({\bf 5},4,{\bf 9}\\) output 14 <br/>
@@ -174,9 +182,9 @@ we assume in contradiction that for the index i, such that \\(1 \le i \le n-2\\)
 
 </div>
 
-<div class="lemma">
+<div class="lemma" id="dynamic_programming_lemma_1">
 
-the optimal solution always contains one of A[n],A[n-1], but not both <br/>
+the optimal solution always contains one of A[n],A[n-1], but obviously not both <br/>
 
 <div class="proof">
 
