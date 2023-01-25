@@ -1,0 +1,28 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><title>variance &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><h2 class=nav-title>mahmood</h2></a><ul><li><a href=/><span>Home</span></a></li><li><a href=/post/><span>Posts</span></a></li><li><a href=/resume.pdf><span>Resume</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible><nav id=TableOfContents></nav></div></div></aside><div class=post><div class=post-info><span>Written by</span>
+[mahmood]<br><span>on&nbsp;</span><time datetime="2023-01-26 00:14:00 +0200 +0200">January 26, 2023</time></div><h1 class=post-title>variance</h1><div class=post-line></div><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
+\(\DeclareMathOperator{\dom}{domain}\)
+\(\DeclareMathOperator{\ran}{range}\)
+\(\DeclareMathOperator{\rng}{range}\)
+\(\DeclareMathOperator{\img}{Im}\)
+\(\DeclareMathOperator{\adj}{adj}\)
+\(\newcommand\dif[1]{\:\textrm{d}#1}\)
+\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+\(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+\(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+\(\newcommand{\khat}{\hat{\textbf{k}}}\)
+\(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+\(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><div class=definition><p>let \(X\) be a <a href=/post/20230104221353-random_variable/>random variable</a> whose <a href=/post/20230121184721-expected_value/>expected value</a> is finite \(\mu=\mathrm{E}(X)\), the <strong>variance</strong> of \(X\), denoted by \(\mathrm{Var}(x)\), is defined as<br>\[
+\mathrm{Var}(x) = \mathrm{E}\left(\left(X-\mu\right)^2\right)
+\]<br></p><div class=my_example><p>let \(X\) be a random variable whose distribution law is<br>\[
+x = \begin{cases}
+-1 & 1/4\\
+0 & 1/4\\
+1 & 1/2
+\end{cases}
+\]<br>we find the variance:<br></p><p>\begin{gather*}
+\mu = \mathrm{E}(X) = -1 \cdot \frac{1}{4} + 0 \cdot \frac{1}{4} + 1 \cdot \frac{1}{2} = \frac{1}{4}\\
+\mathrm{Var}(X) = \mathrm{E}\left(\left(X-\frac{1}{4}\right)^2\right) = \left(-1-\frac{1}{4}\right)^2 \cdot \frac{1}{4} + \left(0-\frac{1}{4}\right)^2 \cdot \frac{1}{4} + \left(1-\frac{1}{4}\right) \cdot \frac{1}{2} = \frac{11}{16}
+\end{gather*}</p></div><div class=characteristic><p>\(\mathrm{Var}(X) \geq 0\)<br></p></div><div class=characteristic><p>\(\mathrm{Var}(x)\) iff \(X\) is constant<br></p></div><div class=characteristic><p>\(\mathrm{Var}(aX+b)=a^2 \cdot \mathrm{Var}(X)\)<br></p></div></div></div><div class=pagination><a href=/post/20230123011904-marginal_distribution/ class="left arrow">&#8592;</a>
+<a href=/post/20230120140031-joint_probability_distribution/ class="right arrow">&#8594;</a>
+<a href=# class=top>Top</a></div></main><footer><span>&copy; <time datetime="2023-01-25 23:16:35.174015385 +0000 UTC m=+0.217101720">2023</time> . Made with <a href=https://gohugo.io>Hugo</a> using the <a href=https://github.com/EmielH/tale-hugo/>Tale</a> theme.</span></footer></body></html>
