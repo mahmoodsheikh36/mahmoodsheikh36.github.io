@@ -1,0 +1,38 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>polar coordinate system</title><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/main.css><link rel=stylesheet href=https://mahmoodsheikh36.github.io/css/org.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.110.0"></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>polar coordinate system</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/resume.pdf>Resume</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:mahmod.m2015@gmail.com><i class="fas fa-envelope"></i></a></li><li class=navbar-icon><a href=https://github.com/mahmoodsheikh36/><i class="fab fa-github"></i></a></li></ul></div></div></nav><main><div><h2>polar coordinate system</h2><h5>October 1, 2022</h5><a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div><div align=start class=content><p style=height:0;display:none>\(\DeclareMathOperator{\spn}{span}\)
+\(\DeclareMathOperator{\dom}{domain}\)
+\(\DeclareMathOperator{\ran}{range}\)
+\(\DeclareMathOperator{\rng}{range}\)
+\(\DeclareMathOperator{\img}{Im}\)
+\(\DeclareMathOperator{\adj}{adj}\)
+\(\newcommand\dif[1]{\:\textrm{d}#1}\)
+\(\DeclarePairedDelimiter\ceil{\lceil}{\rceil}\)
+\(\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}\)
+\(\newcommand{\ihat}{\hat{\textbf{i}}}\)
+\(\newcommand{\jhat}{\hat{\textbf{j}}}\)
+\(\newcommand{\khat}{\hat{\textbf{k}}}\)
+\(\newcommand{\rhat}{\hat{\textbf{r}}}\)
+\(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p>a 2d <a href=/post/20220929000626-coordinate_system/>coordinate system</a><br>points in the \(x,y\) plane are described not by \((x,y)\) coordinates but by \((r,\theta)\) coordinates, where \(r\) is the <a href=/post/linear_algebra2/#magnitude>magnitude</a> and \(\theta\) is the angle between the <a href=/post/linear_algebra2/#vector>vector</a> and the \(x\) axis<br></p><p>\begin{align*}
+r &= \sqrt{x^2+y^2}\\
+\theta &= \arctan\left(\frac{y}{x}\right)
+\end{align*}</p><p>the <a href=/post/linear_algebra2/#basis>base vector</a>s of this coordinate system are usually denoted by \(\rhat\) and \(\thetahat\)<br></p><p>\begin{align*}
+\rhat(\theta) &= \cos\theta\ihat + \sin\theta\jhat\\
+\thetahat(\theta) &= -\sin\theta\ihat + \cos\theta\jhat
+\end{align*}</p><p><figure><img src=/ox-hugo/mOFGQtH.gif alt="Figure 1: two-dimensional polar coordinate system"><figcaption><p><span class=figure-number>Figure 1: </span>two-dimensional polar coordinate system</p></figcaption></figure><br></p><p><figure><img src=/ox-hugo/n9Brin6.gif></figure><br></p><h2 id=from-polar-to-cartesian-coordinates--20220929001304-cartesian-coordinate-system-dot-md><span class=section-num>1</span> from polar to <a href=/post/20220929001304-cartesian_coordinate_system/>cartesian coordinates</a></h2><p>\begin{align*}
+x &= r\cos(\theta)\\
+y &= r\sin(\theta)
+\end{align*}</p></div><h4 class=page-header>Related</h4><div class=item><h4><a href=/post/20230121192455-discrete_random_variable/>discrete random variable</a></h4><h5></h5>January 26, 2023
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div><div class=item><h4><a href=/post/20230113164748-variance/>variance</a></h4><h5></h5>January 26, 2023
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div><div class=item><h4><a href=/post/20230120140031-joint_probability_distribution/>joint probability distribution</a></h4><h5></h5>January 26, 2023
+<a href=https://mahmoodsheikh36.github.io/tags/math><kbd class=item-tag>math</kbd></a></div></main><footer></footer></body></html>
