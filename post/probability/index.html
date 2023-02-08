@@ -46,62 +46,15 @@ P(\Omega) = 1 \implies \alpha + 2\alpha + \dots + 6\alpha = 1 \implies 21\alpha 
 P(\Omega) = 1
 \]<br></p></div></div><h2 id=sum-rule><span class=section-num>2</span> sum rule</h2><p>the <strong>sum rule</strong> for two random events \(A\) and \(B\) states:<br>\[
 P(A\cup B)=P(A)+P(B)-P(A\cap B)
-\]<br>if the events are disjoint, the formula would simplify to<br>\[
+\]<br>if the events are <a href=/post/20230127023223-disjoint_events/>disjoint</a>, the formula would simplify to<br>\[
 P(A \cup B) = P(A) + P(B)
 \]<br></p><h2 id=chain-rule><span class=section-num>3</span> chain rule</h2><p>for two random events \(A\) and \(B\):<br>\[
-P(A\cap B) = P(B\mid A) \cdot P(A)
+P(A\cap B) = P(B\mid A) \cdot P(A) = P(A\mid B) \cdot P(B)
 \]<br>for more than two events \(A_{1},\dots,A_{n}\) the chain rule extends to<br>\[
 P \left(A_{n}\cap \dots \cap A_{1}\right)= P\left(A_{n} \mid A_{n-1}\cap \dots \cap A_{1}\right)\cdot P\left(A_{n-1}\cap \dots \cap A_{1}\right)
 \]<br>which by induction may be turned into<br>\[
 P\left(A_{n} \cap \dots \cap A_{1}\right)=\prod_{k=1}^{n} P\left(A_{k}\,\Bigg|\,\bigcap_{j=1}^{k-1}A_{j}\right)
-\]<br></p><h2 id=disjoint-events><span class=section-num>4</span> disjoint events</h2><div class=definition><p>events A and B are <strong>disjoint</strong> if they cannot occur at the same time, \(P(A \cap B) = 0\)<br></p><div class=lemma><p>given A,B are disjoint events, \[ P(A \cup B) = P(A) + P(B) \]<br></p></div></div><h2 id=dependence><span class=section-num>5</span> dependence</h2><div class=definition><p>&lt;&probability_conditional><br>the probability of A occuring, knowing that B has occured is<br>\[
-P(A \mid B) = \frac{P(A \cap B)}{P(B)}
-\]<br>two events are <strong>independent</strong> if knowing one event occurred doesn&rsquo;t change the probability of the other event. otherwise they are both dependant on one another &lt;&khanacademy_probability_dependance><br>i.e. two events, A and B, are independent if:<br>\[
-P(A \cap B) = P(A) \cdot P(B)
-\]<br></p><div class=lemma><p>if A and B are independant then<br>\[
-P(A\mid B) = P(A) \text{ and } P(B\mid A) = P(B)
-\]<br>proving \(P(A \mid B) = P(A)\) or \(P(A \mid B) \neq P(A)\) is enough to prove both events&rsquo; independence/dependence<br></p></div><div class=my_example><p>for example, the probability that a fair coin shows &ldquo;heads&rdquo; after being flipped is 1/2. what if we knew the day was tuesday? does this change the probability of getting &ldquo;heads?&rdquo; of course not. the probability of getting &ldquo;heads&rdquo;, given that it&rsquo;s a tuesday, is still 1/2. so the result of a coin flip and the day being tuesday are independent events; knowing it was a tuesday didn&rsquo;t change the probability of getting &ldquo;heads&rdquo;.<br>not every situation is this obvious. what about gender and handedness (left handed vs. right handed)? it may seem like a person&rsquo;s gender and whether or not they are left-handed are totally independent events. when we look at probabilities though, we see that about 10% of all people are left-handed, but about 12% of males are left-handed. so these events are not independent, since knowing a random person is a male increases the probability that they are left-handed.<br>The big idea is that we check for independence with probabilities.<br></p></div><div class=lemma><p>given \(A_1,A_2,\dots,A_n\) are independent events, then<br>\[
-P\left(\bigcup_{i=1}^{n} A_i\right) = \sum_{i=1}^{n} P(A_i)
-\]<br></p></div><div class=lemma><p>given \(A_1,A_2,\dots\) are independent events such that \(i \neq j \implies A_i \cap A_j = \varnothing\) then:<br>\[
-P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)
-\]<br></p></div><div class=lemma><p>given \(A_1,A_2\) are 2 random events<br>\[
-P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cap A_2)
-\]<br></p></div><div class=lemma><p>given \(A_1,A_2,A_3\) are 3 random events<br></p><p>\begin{align*}
-P(A_1 \cup A_2 \cup A_3) &= P((A_1 \cup A_2) \cup A_3)\\
-&= P(A_1 \cup A_2) - P(A_3) - P((A_1 \cup A_2) \cap A_3)\\
-&= P(A_1) + P(A_2) - P(A_1 \cap A_2) + P(A_3) - P((A_1 \cap A_2) \cup (A_2 \cap A_3))\\
-&= P(A_1) + P(A_2) + P(A_3) - P(A_1 \cap A_2) - [P(A_1 \cap A_3) + P(A_2 \cap A_3) - P(A_1 \cap A_2 \cap A_3)]\\
-&= P(A_1) + P(A_2) + P(A_3) - P(A_1 \cap A_2) - P(A_1 \cap A_3) - P(A_2 \cap A_3) + P(A_1 \cap A_2 \cap A_3)
-\end{align*}</p></div><div class=lemma><p>given \(A_1,A_2,\dots,A_n\) are random events<br>\[
-P\left(\bigcup_{i=1}^{n} A_i\right) = S_1 - S_2 + S_3 - \dots + {(-1)}^{n-1}S_n
-\]<br>such that<br></p><p>\begin{align*}
-S_1 &= \sum_{i=1}^{n} P(A_i)\\
-S_2 &= \sum_{\mathclap{1 \le i &lt; j &lt; n}} P(A_i \cap A_j) &\text{union of pairs}\\
-S_3 &= \sum_{\mathclap{1 \le i &lt; j &lt; k &lt; n}} P(A_i \cap A_j \cap A_k) &\text{union of triples}\\
-&\vdots\\
-S_k &= \sum_{\mathclap{1 \le k &lt; i_1 &lt; i_2 &lt; \dots &lt; i_k &lt; n}} P(A_{i_1} \cap A_{i_2} \cap \dots \cap A_{i_k})\\
-&\vdots\\
-S_n &= P(A_1 \cap A_2 \cap \dots \cap A_n)
-\end{align*}</p></div><div class=my_example><p>joseph rolls a dice cube, what is the probability that he got the number 4 if we know he got is even?<br></p><div class=answer><p>\begin{align*}
-P(\text{result of 4} \mid \text{even result}) &= \frac{P(\text{result of 4 and also even})}{P(\text{even result})}\\
-&= \frac{P(\text{result of 4})}{P(\text{even result})}\\
-&= \frac{\frac{1}{6}}{\frac{1}{2}} = \frac{1}{3}
-\end{align*}</p></div></div><div class=my_example><p>in a class there are 6 boys and 7 girls, we randomly pick 4 students, if we know that 2 girls and 2 boys were picked, what is the probability that joseph wasnt picked?<br></p><div class=answer><p>\begin{align*}
-P (\text{joseph not picked} \mid \text{2 girls 2 boys picked}) &= \frac{P(\text{2 girls 2 boys picked and joseph wasnt})}{P(\text{2 girls 2 boys picked})}\\
-&= \frac{P(\text{2 girls 2 boys picked and joseph wasnt})}{\frac{\binom{6}{2}\binom{7}{2}}{\binom{13}{4}}}\\
-&= \frac{\frac{\binom{5}{2}\binom{7}{2}}{\binom{12}{4}}}{\frac{\binom{6}{2}\binom{7}{2}}{\binom{13}{4}}}\\
-\end{align*}</p><p>used <a href=/post/20230113165622-hypergeometric_distribution/>hypergeometric distribution</a> for both the numerator and the denominator<br></p></div></div><div class=my_example><p>in a country 2 cellular companies, Soft and Label, 30% of the residents are registered in Label and 60% in Soft, and 15% have no cellular phones at all<br></p><div class=subquestion><p>which percentage of adults are registered in the 2 companies<br></p><div class=answer><table><thead><tr><th></th><th>not in Label</th><th>in Label</th><th></th></tr></thead><tbody><tr><td>0.6</td><td></td><td></td><td>in Soft</td></tr><tr><td>0.4</td><td>0.15</td><td></td><td>not in Soft</td></tr><tr><td>1</td><td>0.7</td><td>0.3</td><td></td></tr></tbody></table><p>we fill the table:<br></p><table><thead><tr><th></th><th>not in Label</th><th>in Label</th><th></th></tr></thead><tbody><tr><td>0.6</td><td>0.55</td><td>0.05</td><td>in Soft</td></tr><tr><td>0.4</td><td>0.15</td><td>0.25</td><td>not in Soft</td></tr><tr><td>1</td><td>0.7</td><td>0.3</td><td></td></tr></tbody></table><p>\[P(\text{Label and Soft}) = 0.05\]<br></p></div></div><div class=subquestion><p>we pick a person that is registered in Soft, what is the probability that they&rsquo;re registered also in Label<br></p><div class=answer><p>\[P(\text{Label} \mid \text{Soft}) = \frac{P(\text{Soft and Label})}{P(\text{Soft})} = \frac{0.05}{0.6} = \frac{1}{12}\]<br></p></div></div><div class=subquestion><p>if a person isnt registered in Label, what is the probability that they&rsquo;re registered in Soft?<br></p><div class=answer><p>\[
-P(\text{Soft} \mid \text{Label}) = \frac{P(\text{Label and Soft})}{P(\text{Label})} = \frac{0.55}{0.7} = \frac{11}{14}
-\]<br></p></div></div><div class=subquestion><p>if a person is registered in either, what is the probability that they&rsquo;re registered in Soft?<br></p><p>\begin{gather*}
-P(\text{Soft} \mid \text{Soft or Label}) = \frac{P(\text{Soft and (Soft or Label)})}{P(\text{Soft or Label})} = \frac{P(\text{Soft})}{P(\text{Soft or Label})}\\
-P(\text{Soft or Label} = 1 - P(\text{not in either}) = 1 - 0.15 = 0.85\\
-\frac{P(\text{Soft})}{P(\text{Soft or Label})} = \frac{0.6}{0.85} = \frac{12}{17}
-\end{gather*}</p></div></div><div class=my_example><p>a secretary has \(n\) mails destined for \(n\) different people, the secretary sent the letters out randomly to people<br></p><div class=subquestion><p>what is the probability that atleast one person received the correct mail<br></p><div class=answer><p>A = atleast one person received the correct mail<br>\(A = A_1 \cup A_2 \cup \dots \cup A_n\)<br>\(A_i\) the \(i\)&rsquo;th mail arrived to the correct person<br>\(P(A_i) = \frac{(n-1)!}{n!} = \frac{1}{n},\ S_i = n \cdot \frac{1}{n} = 1\)<br>\(P(A_i \cap A_j) = \frac{(n-2)!}{n!} = \frac{1}{n(n-1)}\)<br>\(S_2 = \frac{1}{n(n-1)} \cdot \binom{n}{2} = \frac{1}{n(n-1)} \cdot \frac{n(n-1)}{2!} = \frac{1}{2!}\)<br>\(P(A_{i_1} \cap A_{i_2} \cap \dots \cap A_{i_n}) = \frac{(n-k)!}{n!}\)<br>\(S_k = \frac{(n-k)!}{n!} = \binom{n}{k} = \frac{1}{k!}\)<br>\(P(A_1 \cap A_2 \cap \dots \cap A_n) = \frac{1}{n!}\)<br>\(P(A) = P(A_1 \cup A_2 \cup \dots \cup A_n) = 1 - \frac{1}{2!} + \frac{1}{3!} - \dots + {(-1)}^{n-1} \cdot \frac{1}{n!}\)<br>\(\lim_{n \to \infty} P_n = 1 - \sum_{n=0}^{\infty} \frac{(-1)^n}{n!} = 1-e^{-1}\)<br></p></div></div></div></div><h3 id=probability-tree><span class=section-num>5.1</span> probability tree</h3><div class=question><p>in a given city all residents work either as fishers or in business, 70% of the reidents are male and the rest are female, of the men 38% work as fishers along with 10% of women, we pick a person randomly<br></p><div class=subquestion><p>what is the probability that the person is a male that works in fishing<br></p><div class=answer><p><figure><img src=/ox-hugo/G1S0eQf.svg></figure><br></p></div></div><div class=subquestion><p>what is the probability that the person works in fishing<br></p><div class=answer><p>\(P(\text{fisher}) = 0.7 \cdot 0.38 + 0.3 \cdot 0.1 = 0.296\)<br></p></div></div><div class=subquestion><p>what is the probability that the person is a female who works in business<br></p><div class=answer><p>\(P(\text{woman in business}) = 0.3 \cdot 0.9 = 0.27\)<br></p></div></div><div class=subquestion><p>what is the probability that the person works in business<br></p><div class=answer><p>\(P(\text{in business}) = 0.7 \cdot 0.62 + 0.3 \cdot 0.9 = 0.704\)<br></p></div></div></div><div class=question><p>in a given population 40% are men and the rest are women, of the men 10% are unemployed, in total 13% of the population is unemployed<br></p><div class=subquestion><p>a person is chosen randomly, what is the probability that its a woman?<br></p><div class=answer><p><figure><img src=/ox-hugo/rYPt0ig.svg></figure><br></p><p><figure><img src=/ox-hugo/mFjsNnA.svg></figure><br></p><p>\(0.13 = 0.4 \cdot 0.1 + 0.6p\) so:<br></p><p><figure><img src=/ox-hugo/mFjsNnA.svg></figure><br></p><p>\[
-P(\text{woman} \mid \text{unemployed}) = \frac{P(\text{unemployed woman})}{P(\text{unemployed})} = \frac{0.6 \cdot 0.15}{0.13} = 0.6923
-\]<br></p></div></div><div class=subquestion><p>we define the events A - an unemployed person is chosen, B - a man is chosen, are those events <a href=#dependence>independent</a>? are they <a href=#disjoint-events>disjoint</a>?<br></p><div class=answer><p>\[P(A \cap B) = P(\text{unemployed and man}) = 0.04 \neq 0\]<br>A,B arent disjoint<br>\[P(A) \cdot P(B) = 0.4 \cdot 0.13 = 0.052 \neq 0.04\]<br>B,A are dependant<br></p></div></div></div><div class=question><p>an employee asked her employer for a letter of recommendation for her new job, she knows if she gets a good recommendation letter she&rsquo;ll have a probability of 80% to get the new job, 40% if the letter is average and 10% if the letter is bad, the probability that she gets a good letter is 0.7, an average letter 0.2 and a bad letter 0.1<br></p><div class=subquestion><p>what is the probability that she&rsquo;d get the job?<br></p><div class=answer><p><figure><img src=/ox-hugo/JkUzci4.svg></figure><br></p><p>\begin{gather*}
-P(\text{accepted}) = 0.7 \cdot 0.8 + 0.2 \cdot 0.4 + 0.1 \cdot 0.1\\
-P(\text{good} \mid \text{accepted}) = \frac{P(\text{good and accepted})}{P(\text{accepted})} = \frac{0.7 \cdot 0.8}{0.65} = \frac{0.56}{0.65} = \frac{56}{65}
-\end{gather*}</p></div></div><div class=subquestion><p>had she been accepted for the new job, what is the probability that she had received a good letter of recommendation?<br></p></div></div><h2 id=probability-of-atleast><span class=section-num>6</span> probability of atleast</h2><div class=my_example><p>\begin{gather*}
+\]<br></p><h2 id=probability-of-atleast><span class=section-num>4</span> probability of atleast</h2><div class=my_example><p>\begin{gather*}
 P(\text{at least 3 reds in 5 pulls}) = P(\text{3 reds}) + P(\text{4 reds}) + P(\text{5 reds})\\
 P(\text{at least 1 success}) = 1 - P(\text{all failures})\\
 P(\text{at least 1 failure}) = 1 - P(\text{all successes})
