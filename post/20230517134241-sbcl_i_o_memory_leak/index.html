@@ -21,7 +21,7 @@
 </span></span><span style=display:flex><span>    (loop for line <span style=color:#a6e22e>=</span> (<span style=color:#a6e22e>read-line</span> <span style=color:#a6e22e>stream</span> <span style=color:#66d9ef>nil</span>)
 </span></span><span style=display:flex><span>          while line
 </span></span><span style=display:flex><span>          collect line)))
-</span></span><span style=display:flex><span>(loop for j from <span style=color:#ae81ff>0</span> below <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>(loop for j from <span style=color:#ae81ff>0</span> below <span style=color:#ae81ff>20</span>
 </span></span><span style=display:flex><span>      do (defparameter a (get-file (<span style=color:#a6e22e>pathname</span> <span style=color:#e6db74>&#34;/home/mahmooz/brain/notes/data/2c/cba5d6-f153-454d-9e49-004b56167fbb/mnist_train.csv&#34;</span>))))
 </span></span></code></pre></div><p>i ran sbcl with 1gb heap size using <code>sbcl --dynamic-space-size 1GB</code><br>sbcl would crash with the following error:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>  <span style=color:#a6e22e>*</span> Heap exhausted during garbage collection: <span style=color:#ae81ff>3696</span> bytes available, <span style=color:#ae81ff>7312</span> requested.
 </span></span><span style=display:flex><span>        Immobile Object Counts
@@ -41,6 +41,6 @@
 </span></span><span style=display:flex><span>SBCL 2.3.3
 </span></span><span style=display:flex><span>~ λ uname -a
 </span></span><span style=display:flex><span>Linux mahmooz 6.1.28-1-lts <span style=color:#75715e>#1 SMP PREEMPT_DYNAMIC Thu, 11 May 2023 15:52:41 +0000 x86_64 GNU/Linux</span>
-</span></span></code></pre></div><p>although i did try running the same code in <code>clisp</code> and it worked flawlessly, and memory usage wasnt even noticable!</p></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
+</span></span></code></pre></div><p>also tried on sbcl versions 2.3.4 and 2.3.1, same error<br>although i did try running the same code in <code>clisp</code> and it worked flawlessly, and memory usage wasnt even noticable!<br>apparently im the only one experiencing this <a href=https://bugs.launchpad.net/sbcl/+bug/2020119>https://bugs.launchpad.net/sbcl/+bug/2020119</a></p></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
 <script src=https://mahmoodsheikh36.github.io/js/page.js type=text/javascript></script>
 <script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
