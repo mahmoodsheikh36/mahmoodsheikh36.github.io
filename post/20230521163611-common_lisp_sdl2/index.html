@@ -22,8 +22,9 @@
 </span></span></code></pre></div><p>here im implementing an abstraction layer over opengl/sdl2 to be able to render things like math functions easily<br>we need a generic way to represent objects that are renderable onto a window so we use the generic function <code>render</code> and implement it in the various classes<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defgeneric render (obj)
 </span></span><span style=display:flex><span>  (<span style=color:#e6db74>:documentation</span> <span style=color:#e6db74>&#34;a function to render the object in an opengl context&#34;</span>))
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>(defstruct rgb ()
-</span></span><span style=display:flex><span>           (r <span style=color:#ae81ff>0</span>) (g <span style=color:#ae81ff>0</span>) (b <span style=color:#ae81ff>0</span>))
+</span></span><span style=display:flex><span>(defstruct rgb
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;rgb color&#34;</span>
+</span></span><span style=display:flex><span>  (r <span style=color:#ae81ff>0</span>) (g <span style=color:#ae81ff>0</span>) (b <span style=color:#ae81ff>0</span>))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>(defstruct point-2d ()
 </span></span><span style=display:flex><span>  x y (color (make-rgb <span style=color:#e6db74>:r</span> <span style=color:#ae81ff>0</span> <span style=color:#e6db74>:b</span> <span style=color:#ae81ff>0</span> <span style=color:#e6db74>:g</span> <span style=color:#ae81ff>0</span>)))
@@ -113,7 +114,9 @@
 </span></span><span style=display:flex><span>  (push renderable (window-renderables win)))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>(defstruct plot
-</span></span><span style=display:flex><span>  lam (color (make-rgb <span style=color:#e6db74>:r</span> <span style=color:#ae81ff>0</span> <span style=color:#e6db74>:b</span> <span style=color:#ae81ff>0</span> <span style=color:#e6db74>:g</span> <span style=color:#ae81ff>0</span>)))
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;lam is the lambda function to call with x (should return y)&#34;</span>
+</span></span><span style=display:flex><span>  lam
+</span></span><span style=display:flex><span>  (color (make-rgb <span style=color:#e6db74>:r</span> <span style=color:#ae81ff>0</span> <span style=color:#e6db74>:b</span> <span style=color:#ae81ff>0</span> <span style=color:#e6db74>:g</span> <span style=color:#ae81ff>0</span>)))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>(defmethod render ((p plot))
 </span></span><span style=display:flex><span>  (<span style=color:#66d9ef>let</span> ((prev-point <span style=color:#66d9ef>nil</span>)
@@ -130,6 +133,7 @@
 </span></span><span style=display:flex><span>               (setf prev-point new-point)))))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>(defstruct discrete-plot
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;a discrete plot, one that connects a finite amount of points&#34;</span>
 </span></span><span style=display:flex><span>  points (color (make-rgb <span style=color:#e6db74>:r</span> <span style=color:#ae81ff>0</span> <span style=color:#e6db74>:b</span> <span style=color:#ae81ff>0</span> <span style=color:#e6db74>:g</span> <span style=color:#ae81ff>0</span>)))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>(defmethod render ((p discrete-plot))
