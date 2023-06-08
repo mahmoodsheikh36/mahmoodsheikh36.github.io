@@ -16,35 +16,31 @@
 \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 \(\newcommand\brm[1]{\textbf{#1}}\)
 \(\DeclareMathOperator*{\argmax}{arg\,max}\
-\(\DeclareMathOperator*{\argmin}{arg\,min}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p>basically the idea is that, given a range <img src=/ltximg/4cef1f-2e5b-4010-967c-932df726fa6f-f24cac49227c73a30b10e8ebde7886fc.svg alt=\([a,b]\) style=height:.9805em;vertical-align:-.2455em;display:inline-block class="org-latex org-latex-fragment"> and the number <img src=/ltximg/77d3fc-1a2d-46bd-9a20-2b6b9b815825-cb13356a0e9bdb77512a86d4e9fb5220.svg alt=\(x\) style=height:.4224em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"> such that <img src=/ltximg/0b64d7-6f5b-4acc-812c-fc874c9d0363-2ccc3686282bcf0c24110077707d2d72.svg alt="\(a \le x \le b\)" style=height:.9122em;vertical-align:-.1824em;display:inline-block class="org-latex org-latex-fragment"> and another range <img src=/ltximg/e093c9-acd2-4e48-a8dc-b34707be4537-cb339d663e0ab1d683e9c64c224d18be.svg alt=\([c,d]\) style=height:.9805em;vertical-align:-.2455em;display:inline-block class="org-latex org-latex-fragment">, we wanna find the number <img src=/ltximg/8c870a-100e-4857-a162-65901c039825-3f1954db6338d32c3fa139406c8673bf.svg alt="\(x'\)" style=height:.7372em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"> such that <img src=/ltximg/28c145-eae4-413f-ae4b-93117fb85590-d83aa151b991c83d1263110b81064447.svg alt="\(\frac{x'-c}{d-c}=\frac{x-a}{b-a}\)" style=height:1.3739em;vertical-align:-.4201em;display:inline-block class="org-latex org-latex-fragment"><br>we need to isolate <img src=/ltximg/8c870a-100e-4857-a162-65901c039825-3f1954db6338d32c3fa139406c8673bf.svg alt="\(x'\)" style=height:.7372em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment">:<br></p><div class=equation-container><span class=equation><img src=/ltximg/443a21-38f6-4194-8220-db33e2b6b758-69b50122f991a780f2a50c8f871b8640.svg alt="\begin{gather*}
-  x'b-x'a-cb+ca=xd-xc-ad+ac\\
-  x'b-x'a-cb+\cancel{ca}=xd-xc-ad+\cancel{ac}\\
-  x'b-x'a-cb=xd-xc-ad\\
-  x'b-x'a=xd-xc-ad+cb\\
-  x'(b-a)=xd-xc-ad+cb\\
-  \boxed{x'=\frac{xd-xc-ad+cb}{b-a}}
-\end{gather*}
-" style=height:10.5651em class="org-latex org-latex-environment"></span></div><h2 id=extending-to-higher-dimensions><span class=section-num>1</span> extending to higher dimensions</h2><p>assume a <a href=/post/linear_algebra2/#vector-space>vector space</a> <img src=/ltximg/ecc5d0-fbd8-495a-ba5f-7e25dacd660a-9b2ac2d07360ee1789625c8e9473eacf.svg alt=\(V\) style=height:.6702em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"> with a <a href=/post/linear_algebra2/#dimension>dimension</a> of <img src=/ltximg/40ec92-a8e4-4f9c-adea-a6901151ba11-bace42be71fb9c8635473c59c7fa535e.svg alt=\(n\) style=height:.4224em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment">, given the 2 set of discrete ranges<br></p><div class=equation-container><span class=equation><img src=/ltximg/2c03fe-eb5b-40b4-852c-5cdc644ddf06-113dcabdfc28cc2655fc427101ef95b9.svg alt="\begin{align*}
-  S&amp;amp;=\{[s_{1a},s_{1b}],[s_{2a,2b}],\dots,[s_{na},s_{nb}]\} &amp;amp;\text{source ranges}\\
-  D&amp;amp;=\{[d_{1a},d_{1b}],[d_{2a,2b}],\dots,[d_{na},d_{nb}]\} &amp;amp;\text{destination ranges}
-\end{align*}
-" style=height:2.9993em class="org-latex org-latex-environment"></span></div><p>and a <a href=/post/linear_algebra2/#vector>vector</a> <img src=/ltximg/b0fc33-66d4-4985-854e-5c299eaf5128-26d424684c15ca02c1a2beb2ea721954.svg alt="\(\vec{x} \in V\)" style=height:.739em;vertical-align:-.0388em;display:inline-block class="org-latex org-latex-fragment">:<br><img src=/ltximg/810c85-244d-48e6-8143-fd73a86883d6-7098286e673ac35cd5856099e656380b.svg alt="\[ \vec{x} = \bmqty{x_1\\ x_2\\ \vdots\\ x_n} \]" style=height:5.4547em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"><br>where <img src=/ltximg/459e23-e301-4e08-b8da-35bb0761f59b-720114fb4baa326359da11d68019d1f1.svg alt=\(x_j\) style=height:.7028em;vertical-align:-.2809em;display:inline-block class="org-latex org-latex-fragment"> for all <img src=/ltximg/b4ffed-d76d-4463-b343-e2fbd095cede-92be4d56f24baf5cfda2aa63cb22fc85.svg alt="\(1 \le j \le n\)" style=height:.8374em;vertical-align:-.191em;display:inline-block class="org-latex org-latex-fragment"> is bound in the discrete range <img src=/ltximg/8aeb37-f8ec-448f-a502-a83b2e2e2ccd-e0510c3c36ae5918ca54894eccbbdce4.svg alt=\([d_{ja},d_{jb}]\) style=height:1.0159em;vertical-align:-.2809em;display:inline-block class="org-latex org-latex-fragment">, i.e.<br></p><div class=equation-container><span class=equation><img src=/ltximg/5235ae-746a-48b4-aa5e-37a39a61b924-62945df6b0f7c89b60cc931d58d1756a.svg alt="\begin{gather*}
-  s_{1a} \le x_1 \le s_{1b}\\
-  s_{2a} \le x_2 \le s_{2b}\\
-  \vdots\\
-  s_{na} \le x_n \le s_{2b}\\
-\end{gather*}
-" style=height:8.1595em class="org-latex org-latex-environment"></span></div><p>we wanna find the vector <img src=/ltximg/d10fde-42fe-4172-87e9-0211a484d853-ca82e58883af68e13e3bc2c803a27a21.svg alt=\(\vec{v}\) style=height:.7006em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment">:<br><img src=/ltximg/f9b2ef-5ac8-47bc-86b6-e1f814bd4853-386da6eaeb7f5b1b1fe5d644b5bc8092.svg alt="\[ \vec{v} = \bmqty{v_1\\ v_2\\ \vdots\\ v_n} \]" style=height:5.4547em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"><br>such that<br></p><div class=equation-container><span class=equation><img src=/ltximg/81a853-54c3-4d87-92c3-84cba41f4fcf-089e393aea6e048404a45864e8c294d4.svg alt="\begin{align*}
-  v_1 &amp;amp;= \frac{x_1d_{1b}-x_1d_{1a}-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
-  v_2 &amp;amp;= \frac{x_2d_{2b}-x_2d_{2a}-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
-  &amp;amp;\hspace{1.5 mm} \vdots\\
-  v_n &amp;amp;= \frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}
-\end{align*}
-" style=height:9.591em class="org-latex org-latex-environment"></span></div><p>so we write the <a href=/post/linear_algebra2/#linear-map>linear transformation</a> (might not be necessarily linear but <a href=/post/20221229184844-affine_transformation/>affine</a>)<br><img src=/ltximg/b5c5c4-bee4-4d0e-8e96-878f03231fe0-4b94daad9dc03d827585748f49cfad6a.svg alt="\[ L\left(\bmqty{x_1\\ x_2\\ \vdots\\ x_n}\right) = \bmqty{
+\(\DeclareMathOperator*{\argmin}{arg\,min}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p>basically the idea is that, given a range \([a,b]\) and the number \(x\) such that \(a \le x \le b\) and another range \([c,d]\), we wanna find the number \(x&rsquo;\) such that \(\frac{x&rsquo;-c}{d-c}=\frac{x-a}{b-a}\)<br>we need to isolate \(x&rsquo;\):<br></p><p>\begin{gather*}
+x&rsquo;b-x&rsquo;a-cb+ca=xd-xc-ad+ac\\
+x&rsquo;b-x&rsquo;a-cb+\cancel{ca}=xd-xc-ad+\cancel{ac}\\
+x&rsquo;b-x&rsquo;a-cb=xd-xc-ad\\
+x&rsquo;b-x&rsquo;a=xd-xc-ad+cb\\
+x&rsquo;(b-a)=xd-xc-ad+cb\\
+\boxed{x&rsquo;=\frac{xd-xc-ad+cb}{b-a}}
+\end{gather*}</p><h2 id=extending-to-higher-dimensions><span class=section-num>1</span> extending to higher dimensions</h2><p>assume a <a href=/post/linear_algebra2/#vector-space>vector space</a> \(V\) with a <a href=/post/linear_algebra2/#dimension>dimension</a> of \(n\), given the 2 set of discrete ranges<br></p><p>\begin{align*}
+S&=\{[s_{1a},s_{1b}],[s_{2a,2b}],\dots,[s_{na},s_{nb}]\} &\text{source ranges}\\
+D&=\{[d_{1a},d_{1b}],[d_{2a,2b}],\dots,[d_{na},d_{nb}]\} &\text{destination ranges}
+\end{align*}</p><p>and a <a href=/post/linear_algebra2/#vector>vector</a> \(\vec{x} \in V\):<br>\[ \vec{x} = \bmqty{x_1\\ x_2\\ \vdots\\ x_n} \]<br>where \(x_j\) for all \(1 \le j \le n\) is bound in the discrete range \([d_{ja},d_{jb}]\), i.e.<br></p><p>\begin{gather*}
+s_{1a} \le x_1 \le s_{1b}\\
+s_{2a} \le x_2 \le s_{2b}\\
+\vdots\\
+s_{na} \le x_n \le s_{2b}\\
+\end{gather*}</p><p>we wanna find the vector \(\vec{v}\):<br>\[ \vec{v} = \bmqty{v_1\\ v_2\\ \vdots\\ v_n} \]<br>such that<br></p><p>\begin{align*}
+v_1 &= \frac{x_1d_{1b}-x_1d_{1a}-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
+v_2 &= \frac{x_2d_{2b}-x_2d_{2a}-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
+&\hspace{1.5 mm} \vdots\\
+v_n &= \frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}
+\end{align*}</p><p>so we write the <a href=/post/linear_algebra2/#linear-map>linear transformation</a> (might not be necessarily linear but <a href=/post/20221229184844-affine_transformation/>affine</a>)<br>\[ L\left(\bmqty{x_1\\ x_2\\ \vdots\\ x_n}\right) = \bmqty{
 \frac{x_1d_{1b}-x_1d_{1a}-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
 \frac{x_2d_{2b}-x_2d_{2a}-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
 \hspace{1.5 mm} \vdots\\
-\frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]" style=height:5.9785em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"><br>obviously this function doesnt preserve the origin as <img src=/ltximg/9c4534-a5c5-4443-808f-d92d9bed0bb0-72030f25362f1deafd21c076953e5033.svg alt="\(L(\vec{0}\neq \vec{0})\)" style=height:1.1408em;vertical-align:-.2455em;display:inline-block class="org-latex org-latex-fragment">, so its an affine transformation, we find the intercept so we can drop it and add it later:<br><img src=/ltximg/ad1a6e-137a-4094-83eb-abce05753cbc-012ab0ba5fdad94297094bda4c74f1ea.svg alt="\[ L\left(\bmqty{x_1\\ x_2\\ \vdots\\ x_n}\right) = \bmqty{
+\frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]<br>obviously this function doesnt preserve the origin as \(L(\vec{0}\neq \vec{0})\), so its an affine transformation, we find the intercept so we can drop it and add it later:<br>\[ L\left(\bmqty{x_1\\ x_2\\ \vdots\\ x_n}\right) = \bmqty{
 \frac{x_1d_{1b}-x_1d_{1a}}{s_{1b}-s_{1a}}\\
 \frac{x_2d_{2b}-x_2d_{2a}}{s_{2b}-s_{2a}}\\
 \hspace{1.5 mm} \vdots\\
@@ -52,23 +48,23 @@
 \bmqty{\frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
 \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
 \hspace{1.5 mm} \vdots\\
-\frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]" style=height:5.9785em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"><br>we drop the <a href=/post/20230608210313-intercept/>intercept</a> and find the <a href=/post/20230604202340-linear_map_parametric_form_to_function_form/>affine transformation matrix</a>, which is a <a href=/post/linear_algebra2/#square-matrix>square matrix</a> of size <img src=/ltximg/0758e2-3811-4aa0-9660-963c4add86b8-96bca7ed8d44726e01bf4387275804d1.svg alt="\(n \times n\)" style=height:.6538em;vertical-align:-.0822em;display:inline-block class="org-latex org-latex-fragment"><br><img src=/ltximg/89d03d-8aa8-4295-8e33-744ecbfcc759-25478829730235e302c76182396de5d9.svg alt="\[ \bmqty{
-\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\
-0 &amp;amp; \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} &amp;amp; \cdots &amp;amp; 0\\
-\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; 0\\
-0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}}\\
-} \]" style=height:5.9785em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"><br>then we add the intercept with <a href=/post/20221229010338-homogeneous_coordinates/>homogeneous coordinates</a> to get the final matrix, which is a square matrix of size <img src=/ltximg/fddf6f-b825-427d-be20-7a64087d87a7-21614577cdd8b9819bd7930512ae1fe3.svg alt="\((n+1) \times (n+1)\)" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br><img src=/ltximg/5b34f2-1cba-4ab1-828c-b4e9245e85e2-0ed43aa70b90dd3a75fce90b746b210e.svg alt="\[ \bmqty{
-\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
-0 &amp;amp; \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
-\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; 0 &amp;amp; \vdots\\
-0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}} &amp;amp; \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}\\
-0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1\\
-} \]" style=height:7.1546em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"><br>so to conclude, the formula<br><img src=/ltximg/4fd605-b8ea-4698-974e-d3299bb88919-e0bb35d6541e384473322650512b898c.svg alt="\[ \bmqty{v_1\\ v_2\\ \vdots\\ v_n\\ 1} = \bmqty{
-\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
-0 &amp;amp; \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
-\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; 0 &amp;amp; \vdots\\
-0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}} &amp;amp; \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}\\
-0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1\\
-} \cdot \bmqty{x_1\\ x_2\\ \vdots\\ x_n\\ 1} \]" style=height:7.1546em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"><br>transforms the vector <img src=/ltximg/470db3-e9a8-4102-b028-3babddc035ea-0d764971da25682b4ae6bed615df1486.svg alt=\(\vec{x}\) style=height:.7006em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"> from a given set of ranges into another, resulting in <img src=/ltximg/d10fde-42fe-4172-87e9-0211a484d853-ca82e58883af68e13e3bc2c803a27a21.svg alt=\(\vec{v}\) style=height:.7006em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-fragment"></p></div><div class=bl-section><h4>Links to this note</h4><div class=backlinks><ul><li><a href=/post/20230602050340-2d_transformations/>2d transformations</a></li></ul></div></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
+\frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]<br>we drop the <a href=/post/20230608210313-intercept/>intercept</a> and find the <a href=/post/20230604202340-linear_map_parametric_form_to_function_form/>affine transformation matrix</a>, which is a <a href=/post/linear_algebra2/#square-matrix>square matrix</a> of size \(n \times n\)<br>\[ \bmqty{
+\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} & 0 & \cdots & 0\\
+0 & \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} & \cdots & 0\\
+\vdots & \vdots & \ddots & 0\\
+0 & 0 & \cdots & \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}}\\
+} \]<br>then we add the intercept with <a href=/post/20221229010338-homogeneous_coordinates/>homogeneous coordinates</a> to get the final matrix, which is a square matrix of size \((n+1) \times (n+1)\)<br>\[ \bmqty{
+\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} & 0 & \cdots & 0 & \frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
+0 & \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} & \cdots & 0 & \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
+\vdots & \vdots & \ddots & 0 & \vdots\\
+0 & 0 & \cdots & \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}} & \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}\\
+0 & 0 & \cdots & 0 & 1\\
+} \]<br>so to conclude, the formula<br>\[ \bmqty{v_1\\ v_2\\ \vdots\\ v_n\\ 1} = \bmqty{
+\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} & 0 & \cdots & 0 & \frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
+0 & \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} & \cdots & 0 & \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
+\vdots & \vdots & \ddots & 0 & \vdots\\
+0 & 0 & \cdots & \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}} & \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}\\
+0 & 0 & \cdots & 0 & 1\\
+} \cdot \bmqty{x_1\\ x_2\\ \vdots\\ x_n\\ 1} \]<br>transforms the vector \(\vec{x}\) from a given set of ranges into another, resulting in \(\vec{v}\)</p></div><div class=bl-section><h4>Links to this note</h4><div class=backlinks><ul><li><a href=/post/20230602050340-2d_transformations/>2d transformations</a></li></ul></div></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
 <script src=https://mahmoodsheikh36.github.io/js/page.js type=text/javascript></script>
 <script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
