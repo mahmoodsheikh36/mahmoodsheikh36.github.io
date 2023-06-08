@@ -23,14 +23,14 @@ x&rsquo;b-x&rsquo;a-cb=xd-xc-ad\\
 x&rsquo;b-x&rsquo;a=xd-xc-ad+cb\\
 x&rsquo;(b-a)=xd-xc-ad+cb\\
 \boxed{x&rsquo;=\frac{xd-xc-ad+cb}{b-a}}
-\end{gather*}</p><h2 id=extending-to-higher-dimensions><span class=section-num>1</span> extending to higher dimensions</h2><p>assume a <a href=/post/linear_algebra2/#vector-space>vector space</a> \(V\) with a <a href=/post/linear_algebra2/#dimension>dimension</a> of \(n\), given the 2 set of discrete ranges<br></p><p>\begin{align*}
+\end{gather*}</p><h2 id=extending-to-higher-dimensions><span class=section-num>1</span> extending to higher dimensions</h2><p>assume a <a href=/post/linear_algebra2/#vector-space>vector space</a> \(V\) with a <a href=/post/linear_algebra2/#dimension>dimension</a> of \(n\), given the 2 sets of discrete ranges<br></p><p>\begin{align*}
 S&=\{[s_{1a},s_{1b}],[s_{2a,2b}],\dots,[s_{na},s_{nb}]\} &\text{source ranges}\\
 D&=\{[d_{1a},d_{1b}],[d_{2a,2b}],\dots,[d_{na},d_{nb}]\} &\text{destination ranges}
-\end{align*}</p><p>and a <a href=/post/linear_algebra2/#vector>vector</a> \(\vec{x} \in V\):<br>\[ \vec{x} = \bmqty{x_1\\ x_2\\ \vdots\\ x_n} \]<br>where \(x_j\) for all \(1 \le j \le n\) is bound in the discrete range \([d_{ja},d_{jb}]\), i.e.<br></p><p>\begin{gather*}
+\end{align*}</p><p>and a <a href=/post/linear_algebra2/#vector>vector</a> \(\vec{x} \in V\):<br>\[ \vec{x} = \bmqty{x_1\\ x_2\\ \vdots\\ x_n} \]<br>where \(x_j\) for all \(1 \le j \le n\) is bound in the discrete range \([s_{ja},s_{jb}]\), i.e.<br></p><p>\begin{gather*}
 s_{1a} \le x_1 \le s_{1b}\\
 s_{2a} \le x_2 \le s_{2b}\\
 \vdots\\
-s_{na} \le x_n \le s_{2b}\\
+s_{na} \le x_n \le s_{2b}
 \end{gather*}</p><p>we wanna find the vector \(\vec{v}\):<br>\[ \vec{v} = \bmqty{v_1\\ v_2\\ \vdots\\ v_n} \]<br>such that<br></p><p>\begin{align*}
 v_1 &= \frac{x_1d_{1b}-x_1d_{1a}-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
 v_2 &= \frac{x_2d_{2b}-x_2d_{2a}-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
@@ -48,7 +48,7 @@ v_n &= \frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}
 \bmqty{\frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
 \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
 \hspace{1.5 mm} \vdots\\
-\frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]<br>we drop the <a href=/post/20230608210313-intercept/>intercept</a> and find the <a href=/post/20230604202340-linear_map_parametric_form_to_function_form/>affine transformation matrix</a>, which is a <a href=/post/linear_algebra2/#square-matrix>square matrix</a> of size \(n \times n\)<br>\[ \bmqty{
+\frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]<br>we drop the <a href=/post/20230608210313-intercept/>intercept</a> and find the <a href=/post/20230604202340-linear_map_parametric_form_to_function_form/>transformation matrix</a> of the function without it, which is a <a href=/post/linear_algebra2/#square-matrix>square matrix</a> of size \(n \times n\)<br>\[ \bmqty{
 \frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} & 0 & \cdots & 0\\
 0 & \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} & \cdots & 0\\
 \vdots & \vdots & \ddots & 0\\
