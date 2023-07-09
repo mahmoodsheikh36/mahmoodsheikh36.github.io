@@ -16,86 +16,96 @@
 \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 \(\newcommand\brm[1]{\textbf{#1}}\)
 \(\DeclareMathOperator*{\argmax}{arg\,max}\
-\(\DeclareMathOperator*{\argmin}{arg\,min}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><div class=definition><p>a <strong>graph</strong> is an <a href=/post/discrete_maths2/#ordered-pair>ordered pair</a> \(G = (V, E)\), where \(V\) is a set whose elements are called <a href=/post/20230314001051-graph/>vertices</a>, and \(E\) is a set of paired vertices, whose elements are called <a href=/post/20230314001632-edge/>edge</a>s<br></p></div><div class=my_example><p>consider the graph \(G_1=(V_1,E_1),V_1=\{a,b,c\},E_1=\{(a,b),(a,c),(a,a),e_1=(b,c),e_2=(b,c)\)<br></p><p>\begin{tikzpicture}[node distance=4cm]
-\tikzset{every loop/.style={}}%removes arrow head from all loops.
-\begin{scope}[every node/.style={circle,thick,draw}]
-\node (a) {a};
-\node (b) [right of=a] {b};
-\node ( c) [below right of=a] {c};
-\end{scope}</p><p>\begin{scope}[
+\(\DeclareMathOperator*{\argmin}{arg\,min}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><div class=definition><p>a <strong>graph</strong> is an <a href=/post/discrete_maths2/#ordered-pair>ordered pair</a> <img src=/ltximg/01395f-401f-4042-8edb-c958df4b62d8-2decdf235f64e91da3c4d9bbdc7512f5.svg alt="$G = (V, E)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">, where <img src=/ltximg/26fb71-c438-4e07-b81c-325503fd2680-6e24bd619ffef696976aafb9b40c1772.svg alt=$V$ style=height:.768em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> is a set whose elements are called <a href=/post/20230314001051-graph/>vertices</a>, and <img src=/ltximg/5c66aa-e088-4070-9ea7-21ab4fdc6ddd-371539ff3c54a351f2b95dff916ad49d.svg alt=$E$ style=height:.768em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> is a set of paired vertices, whose elements are called <a href=/post/20230314001632-edge/>edge</a>s<br></p></div><div class=my_example><p>consider the graph <img src=/ltximg/15e8bc-f747-4821-a745-4023ac1067a4-034c97a7eafbca8f68e40ecf0ad569f4.svg alt="$G_1=(V_1,E_1),V_1=\{a,b,c\},E_1=\{(a,b),(a,c),(a,a),e_1=(b,c),e_2=(b,c)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br></p><div class=equation-container><span class=equation><img src=/ltximg/e16b81-4e16-42db-9937-493e235d6684-1a1adf497144e951d33da1a68540ce83.svg alt='\begin{tikzpicture}[node distance=4cm]
+  \tikzset{every loop/.style={}}%removes arrow head from all loops.
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (a) {a};
+    \node (b) [right of=a] {b};
+    \node (c) [below right of=a] {c};
+  \end{scope}
+<p>\begin{scope}[
 every node/.style={above}
 ]
 \path [-] (a) edge node {$(a,b)$} (b);
-\path [-] (b) edge[bend right] node {$e_2$} ( c);
-\path [-] (b) edge[bend left] node {$e_1$} ( c);
-\path [-] (a) edge node {$(a,c)$} ( c);
+\path [-] (b) edge[bend right] node {$e_2$} (c);
+\path [-] (b) edge[bend left] node {$e_1$} (c);
+\path [-] (a) edge node {$(a,c)$} (c);
 \path (a) edge [loop] node {$(a,a)$} (a);
 \end{scope}
-\end{tikzpicture}</p></div><div class=characteristic><p>usually a graph is stored in computer memory using an <a href=/post/20230314193059-adjacency_list/>adjacency list</a>, this is the assumption here<br></p></div><div class=my_example><p>consider the following <a href=/post/20220706211958-algorithm/>algorithm</a> which receives an undirected graph and returns a list of its edges<br></p><p>\begin{alg}
-\SetKwFunction{func}{\textsc{Examp}}
-\fn{\func{G}} {
-\For{$i \gets 1$ \KwTo $|V|$} {
-$out(V[i])$\;
-}
-\For{$i \gets 1$ \KwTo $|V|$} {
-\For{$j \in adj[V[i]]$} {
-\If {$i \le j$} {
-$out((i,j))$\;
-}
-}
-}
-}
-\end{alg}</p><p>the <a href=/post/20221130014441-time_complexity/>time complexity</a> of this algorithm is \(O(|E|+|V|)\)<br></p></div><div class=lemma><p>\[
+\end{tikzpicture}
+" style=&ldquo;height: 12.9466em&rdquo; class=&ldquo;org-latex org-latex-environment&rdquo; />
+</span></p>
+</div>
+</div>
+<div class=' characteristic"><p>usually a graph is stored in computer memory using an <a href=/post/20230314193059-adjacency_list/>adjacency list</a>, this is the assumption here<br></p></div><div class=my_example><p>consider the following <a href=/post/20220706211958-algorithm/>algorithm</a> which receives an undirected graph and returns a list of its edges<br></p><div class=equation-container><span class=equation><img src=/ltximg/52df00-d246-4dc6-a335-03174691ced6-7c8f55ecf280e814d59de2bf5789e015.svg alt="\begin{alg}
+  \SetKwFunction{func}{\textsc{Examp}}
+  \fn{\func{G}} {
+    \For{$i \gets 1$ \KwTo $|V|$} {
+      $out(V[i])$\;
+    }
+    \For{$i \gets 1$ \KwTo $|V|$} {
+      \For{$j \in adj[V[i]]$} {
+        \If {$i \le j$} {
+          $out((i,j))$\;
+        }
+      }
+    }
+  }
+\end{alg}
+" style=height:10.8017em class="org-latex org-latex-environment"></span></div><p>the <a href=/post/20221130014441-time_complexity/>time complexity</a> of this algorithm is <img src=/ltximg/786e51-bce7-4d9f-95cd-42cf42bacab2-3bbfc7f4ef2b3edfe46b3be259b51238.svg alt=$O(|E|+|V|)$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br></p></div><div class=lemma><p><img src=/ltximg/afb275-e04c-40e6-8ab5-c3879e7d0e56-673db7b43dbef607b14f1add472b4807.svg alt="\[
 \sum_{v \in V} \deg(v) = 2|E|
-\]<br></p></div><div class=lemma><p>the maximum number of edges in a simple undirected graph is<br>\[
+\]" style=height:2.5954em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br></p></div><div class=lemma><p>the maximum number of edges in a simple undirected graph is<br><img src=/ltximg/d54b1e-0444-4453-a2a0-bcee62502cab-ded27270707fd40d5e0c4d1479b9a416.svg alt="\[
 \frac{|V| \cdot (|V|-1)}{2}
-\]<br></p><div class=proof><p>in a complete graph, the rank of each vertex is \(|V|-1\), and it follows trivially that the sum of ranks is \(|V|(|V|-1)\), and since each vertex touches 2 edges, the number of edges is \(|E|=\frac{|V| \cdot (|V|-1)}{2}\)<br></p></div></div><div class=definition><p>let \(\alpha=(v_0,v_1,\dots,v_l)\) be a <a href=/post/20230418001340-path/>path</a> in a graph \(G\)<br></p><ol><li>if \(v_0=v_l\), then \(a\) is a <strong>cycle</strong><br></li><li>a path \(\alpha\) is <strong>simple</strong> if no vertex appears in \(\alpha\) more than once<br></li><li>a cycle \(\sigma\) is simple if no vertex except for the first one appears in \(sigma\) more than once<br></li><li>let \(\alpha=(v_1,v_2,\dots,v_l),\beta=(v_l,v_{l+1},\dots,v_{l+m})\) be two paths in the graph \(G=(V,E)\), the concatenation of \(\alpha,\beta\) is \(\alpha \circ \beta = (v_0,v_1,\dots,v_l,v_{l+1},\dots,v_{l+m})\)<br></li></ol></div><div class=definition><ol><li>the graph \(G=(V,E)\) is <strong>connected</strong> if between every two vertices \(u,v \in V\) there&rsquo;s a path<br></li><li>a graph \(G=(V,E)\) is <strong>acyclic</strong> if in \(G\) there&rsquo;s no cycles<br></li><li>a graph \(T=(V,E)\) is a tree if it is connected and acyclic<br></li></ol></div><div class=definition><p>let \(G=(V,E)\) be a connected non-weighted graph and let \(\alpha=v_0,v_1,\dots,v_l\) be a path in \(G\)<br></p><ol><li>the length of \(\alpha\) is defined as the number of edges in the path, \(l\), we write \(|\alpha|=l\)<br></li><li>the distance between the vertices \(u\) and \(v\) is defined as the length of the minimal path between \(u\) and \(v\), we denote by \(\delta_G(u,v)\) the distance in graph G between \(u\) and \(v\) and get:<br></li></ol><p>\[
+\]" style=height:2.2666em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br></p><div class=proof><p>in a complete graph, the rank of each vertex is <img src=/ltximg/fdeb5a-7ad1-435e-9b54-8d357647fb18-05cd80243fd39da757f73165ca337d1e.svg alt=$|V|-1$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">, and it follows trivially that the sum of ranks is <img src=/ltximg/d4a7a9-ce41-4b22-bb74-1e014828c0f4-f13aea5c255ae73915414cf31a878a57.svg alt=$|V|(|V|-1)$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">, and since each vertex touches 2 edges, the number of edges is <img src=/ltximg/d99540-fdca-4d39-b6cb-a2a5e8e1617e-260854ef92338472bddc1d833738e6c1.svg alt="$|E|=\frac{|V| \cdot (|V|-1)}{2}$" style=height:1.4261em;vertical-align:-.3871em;display:inline-block class="org-latex org-latex-fragment"><br></p></div></div><div class=definition><p>let <img src=/ltximg/f55a5c-30ea-403a-bd1e-b4999a0eec7f-44dad487f6dc58cfdc9138b3fffe3e0a.svg alt="$\alpha=(v_0,v_1,\dots,v_l)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> be a <a href=/post/20230418001340-path/>path</a> in a graph <img src=/ltximg/fc0303-2787-49d5-a4a5-b35e89e15220-25d33033cf49a0cec5ff75fa67123d5f.svg alt=$G$ style=height:.768em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br></p><ol><li>if <img src=/ltximg/d6a4b2-8009-46ed-86aa-90bc1119076e-d7e204a3137e3bb4d344753f212010fa.svg alt="$v_0=v_l$" style=height:.6673em;vertical-align:-.1962em;display:inline-block class="org-latex org-latex-fragment">, then <img src=/ltximg/bd05e5-e832-41c0-a374-1ef449c7674a-60ee514333e4bd3f6b663072b2769d4b.svg alt=$a$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> is a <strong>cycle</strong><br></li><li>a path <img src=/ltximg/6e8582-ad43-407d-8080-fcbe6d8a2a77-0b7bb94b4b2bcd076390daf81f854066.svg alt=$\alpha$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> is <strong>simple</strong> if no vertex appears in <img src=/ltximg/6e8582-ad43-407d-8080-fcbe6d8a2a77-0b7bb94b4b2bcd076390daf81f854066.svg alt=$\alpha$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> more than once<br></li><li>a cycle <img src=/ltximg/7dc786-209c-40db-a1f9-53dad64b91bf-89018d3d1b2c282b13b273bc5dfe549e.svg alt=$\sigma$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> is simple if no vertex except for the first one appears in <img src=/ltximg/394720-3d3c-48fa-8066-31abca4fab00-273cc8fe13e9c117c9f58a407c89decc.svg alt=$sigma$ style=height:.9353em;vertical-align:-.2397em;display:inline-block class="org-latex org-latex-fragment"> more than once<br></li><li>let <img src=/ltximg/df96c2-cd3d-4791-9a6c-ba83102ede97-f395e7a0d4786eaafc79a3fc32130fc4.svg alt="$\alpha=(v_1,v_2,\dots,v_l),\beta=(v_l,v_{l+1},\dots,v_{l+m})$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> be two paths in the graph <img src=/ltximg/363cd6-b4c2-4307-b54e-01b9e3cb1774-84f7855a7f5e317bede8c85f352c30ed.svg alt="$G=(V,E)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">, the concatenation of <img src=/ltximg/cbae1a-2720-4f5c-89b7-1db3a43ac8e9-b81f4fa49ebcf2985bbd5aca8cab975f.svg alt=$\alpha,\beta$ style=height:.9695em;vertical-align:-.2397em;display:inline-block class="org-latex org-latex-fragment"> is <img src=/ltximg/5f4fe4-defa-45bc-b243-234e7b09a9a9-b1b57c5b366984961cd6be3f089ad65b.svg alt="$\alpha \circ \beta = (v_0,v_1,\dots,v_l,v_{l+1},\dots,v_{l+m})$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br></li></ol></div><div class=definition><ol><li>the graph <img src=/ltximg/363cd6-b4c2-4307-b54e-01b9e3cb1774-84f7855a7f5e317bede8c85f352c30ed.svg alt="$G=(V,E)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> is <strong>connected</strong> if between every two vertices <img src=/ltximg/065b1d-3e7d-462b-8e3d-cbe8a6b9ec38-f30eca61bdc0bcffca518f671001b2af.svg alt="$u,v \in V$" style=height:.9586em;vertical-align:-.2397em;display:inline-block class="org-latex org-latex-fragment"> there&rsquo;s a path<br></li><li>a graph <img src=/ltximg/363cd6-b4c2-4307-b54e-01b9e3cb1774-84f7855a7f5e317bede8c85f352c30ed.svg alt="$G=(V,E)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> is <strong>acyclic</strong> if in <img src=/ltximg/fc0303-2787-49d5-a4a5-b35e89e15220-25d33033cf49a0cec5ff75fa67123d5f.svg alt=$G$ style=height:.768em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> there&rsquo;s no cycles<br></li><li>a graph <img src=/ltximg/e743c8-d2fc-4a8b-92b7-507d23de6bd2-d92a3fe8890f0ac1cc8da32095708e5d.svg alt="$T=(V,E)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> is a tree if it is connected and acyclic<br></li></ol></div><div class=definition><p>let <img src=/ltximg/363cd6-b4c2-4307-b54e-01b9e3cb1774-84f7855a7f5e317bede8c85f352c30ed.svg alt="$G=(V,E)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> be a connected non-weighted graph and let <img src=/ltximg/c2beea-d104-48ce-8721-ae6a4c8b9835-3074ca5e3b493d607f94d4c8fca832d4.svg alt="$\alpha=v_0,v_1,\dots,v_l$" style=height:.7109em;vertical-align:-.2397em;display:inline-block class="org-latex org-latex-fragment"> be a path in <img src=/ltximg/fc0303-2787-49d5-a4a5-b35e89e15220-25d33033cf49a0cec5ff75fa67123d5f.svg alt=$G$ style=height:.768em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br></p><ol><li>the length of <img src=/ltximg/6e8582-ad43-407d-8080-fcbe6d8a2a77-0b7bb94b4b2bcd076390daf81f854066.svg alt=$\alpha$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> is defined as the number of edges in the path, <img src=/ltximg/5bcb4d-1b73-4289-aecf-6a538ae21011-435168253634404123cebff2e27e4df1.svg alt=$l$ style=height:.7789em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment">, we write <img src=/ltximg/131215-3177-48c5-a003-61f411b3d17c-a5abcfde488ad73d1a820dc04e8a7b9a.svg alt="$|\alpha|=l$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br></li><li>the distance between the vertices <img src=/ltximg/77fa09-b4de-48f2-8bd3-58cfab633f50-73a111d0e11c097bd4f0c68aa687ca88.svg alt=$u$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> and <img src=/ltximg/a47b56-6153-4b69-a6fc-92a76b732a9c-406e957895e0d19cde7acbc96a8809a4.svg alt=$v$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> is defined as the length of the minimal path between <img src=/ltximg/77fa09-b4de-48f2-8bd3-58cfab633f50-73a111d0e11c097bd4f0c68aa687ca88.svg alt=$u$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> and <img src=/ltximg/a47b56-6153-4b69-a6fc-92a76b732a9c-406e957895e0d19cde7acbc96a8809a4.svg alt=$v$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment">, we denote by <img src=/ltximg/3ae2d2-585d-48d1-83e7-b32c5e0ddc48-3fc515cf449113f3496dd3c41f7abd89.svg alt=$\delta_G(u,v)$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> the distance in graph G between <img src=/ltximg/77fa09-b4de-48f2-8bd3-58cfab633f50-73a111d0e11c097bd4f0c68aa687ca88.svg alt=$u$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> and <img src=/ltximg/a47b56-6153-4b69-a6fc-92a76b732a9c-406e957895e0d19cde7acbc96a8809a4.svg alt=$v$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> and get:<br></li></ol><p><img src=/ltximg/6166b0-5139-4ebd-a7bd-289960ab553f-3ab536f4f2bea69535aed529830653d5.svg alt="\[
 \delta(u,v) = \min_a |a|
-\]<br>if there is no path between \(u\) and \(v\) then \(\delta(u,v)=\infty\)<br></p></div><div class=my_example><p>here we demonstrate an algorithm that finds the distances from a given vertex to all the other vertices in a non-weighted graph<br>we use the <a href=/post/20230530012215-breadth_first_search/>breadth-first search</a> technique along with a <a href=/post/data_structures/#queue>queue</a><br></p><p>\begin{alg}
-\KwIn{a graph $G=(V,E)$ and a vertex $s \in V$}
-\KwOut{an array of distances, such that for $v \in V$ we have $d[v] = \delta(s,v)$ and an array of vertices, such that for $v \in V$, $p[v]$ is the second-to-last vertex in a minimal path from $s$ to $v$}
-\SetKwFunction{bfs}{\textsc{BFS}}
-\SetKwFunction{bfsinit}{\textsc{BFS-Init}}
-\fn{\bfs{G,s}} {
-\bfsinit{G,s}\;
-\While{$Q \neq \varnothing$} {
-$u \gets deque(Q)$\;
-\For{$v \in adj[u]$} {
-\If {$d[v] = \infty$} {
-$d[v] \gets d[u] + 1$\;
-$p[v] \gets u$\;
-$enque(v)$\;
-}
-}
-}
-}
-\fn{\bfsinit{V,E,s}} {
-$d[s] \gets 0$\;
-$p[s] \gets null$\;
-\For{$v \in V - \{s\}$} {
-$d[v] \gets \infty$\;
-$p[v] \gets null$\;
-}
-$enque(s)$\;
-}
-\end{alg}</p><p>the time complexity of this algorithm is \(\Theta(|E|+|V|)\)<br></p></div><div class=my_example><p>given the undirected graph \(G=(V,E)\), let \(U,W \in V\), we define \(d(U,W)=\min\{d(u,w) \mid u \in U, w \in W\}\), write an algorithm that finds \(d(U,W)\)<br></p><div class=answer><p>\begin{alg}
-$G&rsquo;=(V&rsquo;,E&rsquo;)$\;
-$V&rsquo;=V \cup \{s,t\}$\;
-$E&rsquo;=E \cup \{(s,u) \mid u \in U\} \cup \{(t,v) \mid v \in V\}$\;
-$d \in \textsc{BFS}(G&rsquo;,s)$\;
-\Return $d(t)-2$\;
-\end{alg}</p></div></div><div class=my_example><p>let \(G(V,E,w)\) be a directed non-negatively weighted graph. a vertex is called <strong>origin</strong> iff \(\deg_{in}(v)=0\) and <strong>pit</strong> iff \(\deg_{out}(v)=0\). for every vertex we define the length of the shortest path that starts from some origin, goes through \(v\) and ends in some pit as \(l(v)\)<br>propose an algorithm that finds \(l(v)\) for each vertex in the graph<br></p><div class=answer><p>\begin{alg}
-$V_1=\{s\} \cup V$\;
-$E_1=E \cup \{(s,x) \mid x \in V \text{ is an origin}\}$\;
-$w_1((x,y))=w(x,y) \quad (x,y) \in E$\;
-$w_1((s,x)=0 \quad (s,x) \in E_1$\;
-$d_1 \gets \textsc{Dijkstra}(G_1,s)$\;
-$V_2=\{t\} \cup V$\;
-$E_2=\{(x,y) \mid (y,x) \in E\} \cup \{(t,x) \mid x \in V \text{ is a pit}\}$\;
-$w_2((x,y))=w((y,x)) \quad (y,x) \in E$\;
-$w_2((t,x)=0 \quad (t,x) \in E_2$\;
-$d_2 \gets \textsc{Dijkstra}(G_2,t)$\;
-\Return $d_1(v)+d_2(v)$ for each $v \in V$\;
-\end{alg}</p></div></div></div><div class=bl-section><h4>Links to this note</h4><div class=backlinks><ul><li><a href=/post/20230520175032-convolutional_neural_network/>convolutional neural network</a></li><li><a href=/post/20230417083545-induced_subgraph/>induced subgraph</a></li><li><a href=/post/20230612175914-residual_network/>residual network</a></li><li><a href=/post/20230612174622-flow_augmenting_path/>flow augmenting path</a></li><li><a href=/post/20230415232312-shortest_path_tree/>shortest-path tree</a></li><li><a href=/post/20230602023249-separation_vertex/>separation vertex</a></li><li><a href=/post/20230530012137-dfs/>depth-first search</a></li><li><a href=/post/20230612183735-bipartite_graph/>bipartite graph</a></li><li><a href=/post/20230515173032-kruksal_s_algorithm/>kruskal's algorithm</a></li><li><a href=/post/20230426175407-dense_graph/>dense graph</a></li><li><a href=/post/20230127010904-index/>index</a></li><li><a href=/>index</a></li><li><a href=/post/20230511062718-negative_cycle/>negative cycle</a></li><li><a href=/post/20230602025130-biconnected_graph/>biconnected graph</a></li><li><a href=/post/20230314193059-adjacency_list/>adjacency list</a></li><li><a href=/post/20230513210458-cut_set/>cut set</a></li><li><a href=/post/20230610054759-flow_network/>flow network</a></li><li><a href=/post/20230612185404-maximum_bipartite_matching/>maximum bipartite matching</a></li><li><a href=/post/20230418001340-path/>path</a></li><li><a href=/post/20230313233050-algorithms2_course/>algorithms 2 course</a></li><li><a href=/post/20230508095930-algorithms_2_homework_4/>algorithms 2 homework 4</a></li><li><a href=/post/20230508180506-minimum_weight_spanning_tree/>minimum spanning tree</a></li><li><a href=/post/20230508181651-cut/>cut</a></li><li><a href=/post/20230511063703-simple_cycle/>simple cycle</a></li><li><a href=/post/20230415231645-spanning_tree/>spanning tree</a></li><li><a href=/post/20230415231031-subgraph/>subgraph</a></li><li><a href=/post/20230323170647-tree/>tree</a></li><li><a href=/post/20230314001626-vertex/>vertex</a></li><li><a href=/post/20230314151206-simple_graph/>simple graph</a></li><li><a href=/post/20230412150436-weighted_graph/>weighted graph</a></li><li><a href=/post/20230314002402-directed_graph/>directed graph</a></li><li><a href=/post/20230314001632-edge/>edge</a></li></ul></div></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
+\]" style=height:1.9604em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br>if there is no path between <img src=/ltximg/77fa09-b4de-48f2-8bd3-58cfab633f50-73a111d0e11c097bd4f0c68aa687ca88.svg alt=$u$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> and <img src=/ltximg/a47b56-6153-4b69-a6fc-92a76b732a9c-406e957895e0d19cde7acbc96a8809a4.svg alt=$v$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> then <img src=/ltximg/a9f22b-9d8f-4793-bfbf-6ec16a9f29df-ecddca1a7088cf0853f4ad84def92dcf.svg alt="$\delta(u,v)=\infty$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br></p></div><div class=my_example><p>here we demonstrate an algorithm that finds the distances from a given vertex to all the other vertices in a non-weighted graph<br>we use the <a href=/post/20230530012215-breadth_first_search/>breadth-first search</a> technique along with a <a href=/post/data_structures/#queue>queue</a><br></p><div class=equation-container><span class=equation><img src=/ltximg/6f7bff-74ab-43b5-a959-8822a35af157-2fc4df73c3e45f48603c655e0628eddc.svg alt="\begin{alg}
+  \KwIn{a graph $G=(V,E)$ and a vertex $s \in V$}
+  \KwOut{an array of distances, such that for $v \in V$ we have $d[v] = \delta(s,v)$ and an array of vertices, such that for $v \in V$, $p[v]$ is the second-to-last vertex in a minimal path from $s$ to $v$}
+  \SetKwFunction{bfs}{\textsc{BFS}}
+  \SetKwFunction{bfsinit}{\textsc{BFS-Init}}
+  \fn{\bfs{G,s}} {
+    \bfsinit{G,s}\;
+    \While{$Q \neq \varnothing$} {
+      $u \gets deque(Q)$\;
+      \For{$v \in adj[u]$} {
+        \If {$d[v] = \infty$} {
+          $d[v] \gets d[u] + 1$\;
+          $p[v] \gets u$\;
+          $enque(v)$\;
+        }
+      }
+    }
+  }
+  \fn{\bfsinit{V,E,s}} {
+    $d[s] \gets 0$\;
+    $p[s] \gets null$\;
+    \For{$v \in V - \{s\}$} {
+      $d[v] \gets \infty$\;
+      $p[v] \gets null$\;
+    }
+    $enque(s)$\;
+  }
+\end{alg}
+" style=height:26.3782em class="org-latex org-latex-environment"></span></div><p>the time complexity of this algorithm is <img src=/ltximg/31685f-80c6-4489-9edb-e6e4756e3bb6-f26232e5513c35bad973c5eba5dfa9c0.svg alt=$\Theta(|E|+|V|)$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br></p></div><div class=my_example><p>given the undirected graph <img src=/ltximg/363cd6-b4c2-4307-b54e-01b9e3cb1774-84f7855a7f5e317bede8c85f352c30ed.svg alt="$G=(V,E)$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">, let <img src=/ltximg/27e1ef-60b8-4779-8e44-0869e87ef1ba-8da490dadac720aefa6357733c7ba77c.svg alt="$U,W \in V$" style=height:.9586em;vertical-align:-.2397em;display:inline-block class="org-latex org-latex-fragment">, we define <img src=/ltximg/c0ce4f-3c54-4403-b432-c6d6aaca3498-7677368af7cc3b3008e69e14effb7c54.svg alt="$d(U,W)=\min\{d(u,w) \mid u \in U, w \in W\}$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">, write an algorithm that finds <img src=/ltximg/7188ec-963d-42df-a634-3bc4d13cf271-7d30a84411d82b3a26b1afb4d10b1979.svg alt=$d(U,W)$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br></p><div class=answer><div class=equation-container><span class=equation><img src=/ltximg/1cf714-f149-4f64-aa0a-f06e5f0982f1-55ce70eb469cdbbc8be73142ef17a860.svg alt="\begin{alg}
+  $G'=(V',E')$\;
+  $V'=V \cup \{s,t\}$\;
+  $E'=E \cup \{(s,u) \mid u \in U\} \cup \{(t,v) \mid v \in V\}$\;
+  $d \in \textsc{BFS}(G',s)$\;
+  \Return $d(t)-2$\;
+\end{alg}
+" style=height:6.5664em class="org-latex org-latex-environment"></span></div></div></div><div class=my_example><p>let <img src=/ltximg/42d446-02d5-4e36-98e0-95a91351c5be-29253a5f39da8b9b9271330770461865.svg alt=$G(V,E,w)$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> be a directed non-negatively weighted graph. a vertex is called <strong>origin</strong> iff <img src=/ltximg/e4e02d-ed02-4d8f-8224-e76b525b16fc-dc8808453ab8c4de254065d929aa50f5.svg alt="$\deg_{in}(v)=0$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> and <strong>pit</strong> iff <img src=/ltximg/66f1bb-ac27-410b-bbd4-21cf827d8ec0-58c383352d20a1a1dbb395649827e3a9.svg alt="$\deg_{out}(v)=0$" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">. for every vertex we define the length of the shortest path that starts from some origin, goes through <img src=/ltximg/a47b56-6153-4b69-a6fc-92a76b732a9c-406e957895e0d19cde7acbc96a8809a4.svg alt=$v$ style=height:.5203em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"> and ends in some pit as <img src=/ltximg/335a82-fb60-4079-85b7-67dd250e871f-e8e00540736a0c9f0b8b2c9ac0c6e656.svg alt=$l(v)$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"><br>propose an algorithm that finds <img src=/ltximg/335a82-fb60-4079-85b7-67dd250e871f-e8e00540736a0c9f0b8b2c9ac0c6e656.svg alt=$l(v)$ style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> for each vertex in the graph<br></p><div class=answer><div class=equation-container><span class=equation><img src=/ltximg/844354-e104-4ecc-8243-31bff904842a-3c4cf6892bb9db91c18ddda26b597241.svg alt="\begin{alg}
+  $V_1=\{s\} \cup V$\;
+  $E_1=E \cup \{(s,x) \mid x \in V \text{ is an origin}\}$\;
+  $w_1((x,y))=w(x,y) \quad (x,y) \in E$\;
+  $w_1((s,x)=0 \quad (s,x) \in E_1$\;
+  $d_1 \gets \textsc{Dijkstra}(G_1,s)$\;
+  $V_2=\{t\} \cup V$\;
+  $E_2=\{(x,y) \mid (y,x) \in E\} \cup \{(t,x) \mid x \in V \text{ is a pit}\}$\;
+  $w_2((x,y))=w((y,x)) \quad (y,x) \in E$\;
+  $w_2((t,x)=0 \quad (t,x) \in E_2$\;
+  $d_2 \gets \textsc{Dijkstra}(G_2,t)$\;
+  \Return $d_1(v)+d_2(v)$ for each $v \in V$\;
+\end{alg}
+" style=height:13.6224em class="org-latex org-latex-environment"></span></div></div></div></div><div class=bl-section><h4>Links to this note</h4><div class=backlinks><ul><li><a href=/post/20230520175032-convolutional_neural_network/>convolutional neural network</a></li><li><a href=/post/20230417083545-induced_subgraph/>induced subgraph</a></li><li><a href=/post/20230612175914-residual_network/>residual network</a></li><li><a href=/post/20230612174622-flow_augmenting_path/>flow augmenting path</a></li><li><a href=/post/20230415232312-shortest_path_tree/>shortest-path tree</a></li><li><a href=/post/20230602023249-separation_vertex/>separation vertex</a></li><li><a href=/post/20230530012137-dfs/>depth-first search</a></li><li><a href=/post/20230612183735-bipartite_graph/>bipartite graph</a></li><li><a href=/post/20230515173032-kruksal_s_algorithm/>kruskal's algorithm</a></li><li><a href=/post/20230426175407-dense_graph/>dense graph</a></li><li><a href=/post/20230127010904-index/>index</a></li><li><a href=/>index</a></li><li><a href=/post/20230511062718-negative_cycle/>negative cycle</a></li><li><a href=/post/20230602025130-biconnected_graph/>biconnected graph</a></li><li><a href=/post/20230314193059-adjacency_list/>adjacency list</a></li><li><a href=/post/20230513210458-cut_set/>cut set</a></li><li><a href=/post/20230610054759-flow_network/>flow network</a></li><li><a href=/post/20230612185404-maximum_bipartite_matching/>maximum bipartite matching</a></li><li><a href=/post/20230418001340-path/>path</a></li><li><a href=/post/20230313233050-algorithms2_course/>algorithms 2 course</a></li><li><a href=/post/20230508095930-algorithms_2_homework_4/>algorithms 2 homework 4</a></li><li><a href=/post/20230508180506-minimum_weight_spanning_tree/>minimum spanning tree</a></li><li><a href=/post/20230508181651-cut/>cut</a></li><li><a href=/post/20230511063703-simple_cycle/>simple cycle</a></li><li><a href=/post/20230415231645-spanning_tree/>spanning tree</a></li><li><a href=/post/20230415231031-subgraph/>subgraph</a></li><li><a href=/post/20230323170647-tree/>tree</a></li><li><a href=/post/20230314001626-vertex/>vertex</a></li><li><a href=/post/20230314151206-simple_graph/>simple graph</a></li><li><a href=/post/20230412150436-weighted_graph/>weighted graph</a></li><li><a href=/post/20230314002402-directed_graph/>directed graph</a></li><li><a href=/post/20230314001632-edge/>edge</a></li></ul></div></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
 <script src=https://mahmoodsheikh36.github.io/js/page.js type=text/javascript></script>
 <script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
