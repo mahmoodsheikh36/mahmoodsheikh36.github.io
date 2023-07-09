@@ -55,7 +55,7 @@
 </span></span><span style=display:flex><span>(setf color (make-rgb <span style=color:#e6db74>:r</span> <span style=color:#ae81ff>2</span>)) <span style=color:#75715e>;; =&gt; #S(RGB :NIL NIL :R 2 :G 0 :B 0)</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>(<span style=color:#a6e22e>list</span> (rgb-r color) (rgb-b color)) <span style=color:#75715e>;; =&gt; (2 0)</span>
-</span></span></code></pre></div><h2 id=arrays><span class=section-num>9</span> arrays</h2><p>to create an array:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(<span style=color:#a6e22e>make-array</span> <span style=color:#ae81ff>10</span> <span style=color:#e6db74>:initial-element</span> <span style=color:#ae81ff>10</span>)
+</span></span></code></pre></div><h2 id=arrays-matrices><span class=section-num>9</span> arrays/matrices</h2><p>to create an array:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(<span style=color:#a6e22e>make-array</span> <span style=color:#ae81ff>10</span> <span style=color:#e6db74>:initial-element</span> <span style=color:#ae81ff>10</span>)
 </span></span></code></pre></div><table><thead><tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td></tr></tbody></table><p>multidimensional arrays:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(<span style=color:#a6e22e>make-array</span> <span style=color:#f92672>&#39;</span>(<span style=color:#ae81ff>4</span> <span style=color:#ae81ff>3</span>) <span style=color:#e6db74>:initial-element</span> <span style=color:#ae81ff>15</span>)
 </span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>#2A((15 15 15) (15 15 15) (15 15 15) (15 15 15))
 </span></span></code></pre></div><p>access slot in array<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(<span style=color:#a6e22e>aref</span> (<span style=color:#a6e22e>make-array</span> <span style=color:#f92672>&#39;</span>(<span style=color:#ae81ff>4</span> <span style=color:#ae81ff>3</span> <span style=color:#ae81ff>1</span>) <span style=color:#e6db74>:initial-element</span> <span style=color:#ae81ff>15</span>) <span style=color:#ae81ff>2</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span>)
@@ -78,12 +78,27 @@
 </span></span><span style=display:flex><span>15 
 </span></span><span style=display:flex><span>15 
 </span></span><span style=display:flex><span>15 
-</span></span></code></pre></div><p>turn multidimensional list into array:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun list-dimensions (<span style=color:#a6e22e>list</span> depth)
-</span></span><span style=display:flex><span>  (loop repeat depth
-</span></span><span style=display:flex><span>        collect (<span style=color:#a6e22e>length</span> <span style=color:#a6e22e>list</span>)
-</span></span><span style=display:flex><span>        do (setf <span style=color:#a6e22e>list</span> (<span style=color:#a6e22e>car</span> <span style=color:#a6e22e>list</span>))))
-</span></span><span style=display:flex><span>(defun list-to-array (<span style=color:#a6e22e>list</span> depth)
-</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>make-array</span> (list-dimensions <span style=color:#a6e22e>list</span> depth)
+</span></span></code></pre></div><p>some simple utility functions:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span><span style=color:#75715e>;; (defun array-width (2d-array)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>;;   (car (cdr (array-dimensions 2d-array))))</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>;; (defun array-height (2d-array)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>;;   (car (array-dimensions 2d-array)))</span>
+</span></span><span style=display:flex><span>(defun array-rows (arr)
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;number of rows in array&#34;</span>
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>elt</span> (<span style=color:#a6e22e>array-dimensions</span> arr) (<span style=color:#a6e22e>-</span> (<span style=color:#a6e22e>length</span> (<span style=color:#a6e22e>array-dimensions</span> arr)) <span style=color:#ae81ff>2</span>)))
+</span></span><span style=display:flex><span>(defun array-cols (arr)
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;number of columns in array&#34;</span>
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>elt</span> (<span style=color:#a6e22e>array-dimensions</span> arr) (<span style=color:#a6e22e>-</span> (<span style=color:#a6e22e>length</span> (<span style=color:#a6e22e>array-dimensions</span> arr)) <span style=color:#ae81ff>1</span>)))
+</span></span><span style=display:flex><span>(defun array-depth (arr)
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;depth of a tensor of the third order&#34;</span>
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>elt</span> (<span style=color:#a6e22e>array-dimensions</span> arr) (<span style=color:#a6e22e>-</span> (<span style=color:#a6e22e>length</span> (<span style=color:#a6e22e>array-dimensions</span> arr)) <span style=color:#ae81ff>3</span>)))
+</span></span><span style=display:flex><span>(defun array-size (arr)
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>array-total-size</span> arr))
+</span></span></code></pre></div><p>turn multidimensional list into array:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun list-dimensions (<span style=color:#a6e22e>list</span>)
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>if</span> (and (<span style=color:#a6e22e>eq</span> (<span style=color:#a6e22e>type-of</span> <span style=color:#a6e22e>list</span>) <span style=color:#e6db74>&#39;cons</span>) (<span style=color:#a6e22e>eq</span> (<span style=color:#a6e22e>type-of</span> (<span style=color:#a6e22e>car</span> <span style=color:#a6e22e>list</span>)) <span style=color:#e6db74>&#39;cons</span>))
+</span></span><span style=display:flex><span>      (<span style=color:#a6e22e>append</span> (<span style=color:#a6e22e>list</span> (<span style=color:#a6e22e>length</span> <span style=color:#a6e22e>list</span>)) (list-dimensions (<span style=color:#a6e22e>car</span> <span style=color:#a6e22e>list</span>)))
+</span></span><span style=display:flex><span>      (<span style=color:#a6e22e>list</span> (<span style=color:#a6e22e>length</span> <span style=color:#a6e22e>list</span>))))
+</span></span><span style=display:flex><span>(defun list-&gt;array (<span style=color:#a6e22e>list</span>)
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>make-array</span> (list-dimensions <span style=color:#a6e22e>list</span>)
 </span></span><span style=display:flex><span>              <span style=color:#e6db74>:initial-contents</span> <span style=color:#a6e22e>list</span>))
 </span></span></code></pre></div><p>use displacement arrays to get the first element of every row in a 2d array:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(loop for i from <span style=color:#ae81ff>0</span> below (<span style=color:#a6e22e>array-dimension</span> arr <span style=color:#ae81ff>0</span>)
 </span></span><span style=display:flex><span>      collect (<span style=color:#66d9ef>let</span> ((row (<span style=color:#a6e22e>make-array</span>
@@ -95,7 +110,118 @@
 </span></span><span style=display:flex><span>(<span style=color:#a6e22e>vector-push-extend</span> <span style=color:#e6db74>&#39;a</span> *x*)
 </span></span><span style=display:flex><span>(<span style=color:#a6e22e>vector-push-extend</span> <span style=color:#e6db74>&#39;b</span> *x*)
 </span></span><span style=display:flex><span>*x*
-</span></span></code></pre></div><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>A</td><td>B</td></tr></tbody></table><h2 id=vector><span class=section-num>10</span> vector</h2><p>create vector<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(<span style=color:#a6e22e>vector</span> <span style=color:#ae81ff>3</span> <span style=color:#ae81ff>5</span> <span style=color:#ae81ff>1</span>)
+</span></span></code></pre></div><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>A</td><td>B</td></tr></tbody></table><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun array-&gt;list (<span style=color:#a6e22e>array</span>)
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>let*</span> ((dimensions (<span style=color:#a6e22e>array-dimensions</span> <span style=color:#a6e22e>array</span>))
+</span></span><span style=display:flex><span>         (depth      (<span style=color:#a6e22e>1-</span> (<span style=color:#a6e22e>length</span> dimensions)))
+</span></span><span style=display:flex><span>         (indices    (<span style=color:#a6e22e>make-list</span> (<span style=color:#a6e22e>1+</span> depth) <span style=color:#e6db74>:initial-element</span> <span style=color:#ae81ff>0</span>)))
+</span></span><span style=display:flex><span>    (<span style=color:#66d9ef>labels</span> ((recurse (n)
+</span></span><span style=display:flex><span>               (loop for j below (<span style=color:#a6e22e>nth</span> n dimensions)
+</span></span><span style=display:flex><span>                     do (setf (<span style=color:#a6e22e>nth</span> n indices) j)
+</span></span><span style=display:flex><span>                     collect (<span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>=</span> n depth)
+</span></span><span style=display:flex><span>                                 (<span style=color:#a6e22e>apply</span> <span style=color:#a6e22e>#&#39;aref</span> <span style=color:#a6e22e>array</span> indices)
+</span></span><span style=display:flex><span>                                 (recurse (<span style=color:#a6e22e>1+</span> n))))))
+</span></span><span style=display:flex><span>      (recurse <span style=color:#ae81ff>0</span>))))
+</span></span></code></pre></div><p>fill array manually:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(<span style=color:#a6e22e>make-array</span> <span style=color:#f92672>&#39;</span>(<span style=color:#ae81ff>3</span> <span style=color:#ae81ff>3</span>) <span style=color:#e6db74>:initial-contents</span> <span style=color:#f92672>&#39;</span>((<span style=color:#ae81ff>1</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span>) (<span style=color:#ae81ff>0</span> <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>0</span>) (<span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>1</span>)))
+</span></span></code></pre></div><p>to generate an array with random elements of arbitrary dimensions:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun random-list (dims)
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>let*</span> ((dim (<span style=color:#a6e22e>car</span> dims)))
+</span></span><span style=display:flex><span>    (<span style=color:#66d9ef>let</span> ((<span style=color:#a6e22e>list</span> (<span style=color:#a6e22e>make-list</span> dim)))
+</span></span><span style=display:flex><span>      (<span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>&gt;</span> (<span style=color:#a6e22e>length</span> dims) <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>          (loop for i from <span style=color:#ae81ff>0</span> below dim
+</span></span><span style=display:flex><span>                do (setf (<span style=color:#a6e22e>elt</span> <span style=color:#a6e22e>list</span> i) (random-list (<span style=color:#a6e22e>cdr</span> dims))))
+</span></span><span style=display:flex><span>          (loop for i from <span style=color:#ae81ff>0</span> below dim
+</span></span><span style=display:flex><span>                do (setf (<span style=color:#a6e22e>elt</span> <span style=color:#a6e22e>list</span> i) (<span style=color:#a6e22e>random</span> <span style=color:#ae81ff>1.0</span>))))
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>list</span>)))
+</span></span><span style=display:flex><span>(defun random-tensor (dims)
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;an inefficient way, but ill take it for now.&#34;</span>
+</span></span><span style=display:flex><span>  (list-&gt;array (random-list dims)))
+</span></span></code></pre></div><p>the following utility function is similar to <code>map</code> but for arrays:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun array-map (<span style=color:#a6e22e>function</span> <span style=color:#a6e22e>array</span>
+</span></span><span style=display:flex><span>                  <span style=color:#66d9ef>&amp;optional</span> (retval (<span style=color:#a6e22e>make-array</span> (<span style=color:#a6e22e>array-dimensions</span> <span style=color:#a6e22e>array</span>))))
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;Apply FUNCTION to each element of ARRAY.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>Return a new array, or write into the optional 3rd argument.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>example usage: (array-map #&#39;1+ #(3 1 2) #(1 1 1)) ==&gt; #(4 2 3)&#34;</span>
+</span></span><span style=display:flex><span>  (dotimes (i (<span style=color:#a6e22e>array-total-size</span> <span style=color:#a6e22e>array</span>) retval)
+</span></span><span style=display:flex><span>    (setf (<span style=color:#a6e22e>row-major-aref</span> retval i)
+</span></span><span style=display:flex><span>          (<span style=color:#a6e22e>funcall</span> <span style=color:#a6e22e>function</span> (<span style=color:#a6e22e>row-major-aref</span> <span style=color:#a6e22e>array</span> i)))))
+</span></span></code></pre></div><p>a utility function to copy a subarray of an array<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun subarray (a offsets dims)
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;copy a subarray of a given array
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>example usage:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>(subarray #2A((0.70462835 0.7893367 0.3833828)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              (0.8126608 0.6136594 0.37239313)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              (0.44657052 0.4761132 0.9504193)) &#39;(1 0) &#39;(2 2))&#34;</span>
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>let*</span> ((b (<span style=color:#a6e22e>make-array</span> dims)))
+</span></span><span style=display:flex><span>    (subarray-util a b <span style=color:#66d9ef>nil</span> <span style=color:#66d9ef>nil</span> offsets (<span style=color:#a6e22e>array-dimensions</span> a) dims)
+</span></span><span style=display:flex><span>    b))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>(defun subarray-util (a b a-indicies b-indicies offsets a-dims b-dims)
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>if</span> b-dims
+</span></span><span style=display:flex><span>      (<span style=color:#66d9ef>let</span> ((use-b-dims (<span style=color:#a6e22e>eq</span> (<span style=color:#a6e22e>length</span> a-dims) (<span style=color:#a6e22e>length</span> b-dims)))
+</span></span><span style=display:flex><span>            (offset (<span style=color:#a6e22e>car</span> offsets)))
+</span></span><span style=display:flex><span>        (<span style=color:#66d9ef>if</span> use-b-dims
+</span></span><span style=display:flex><span>            (loop for i from offset below (<span style=color:#a6e22e>+</span> offset (<span style=color:#a6e22e>car</span> b-dims))
+</span></span><span style=display:flex><span>                  do (subarray-util
+</span></span><span style=display:flex><span>                      a
+</span></span><span style=display:flex><span>                      b
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>append</span> a-indicies (<span style=color:#a6e22e>list</span> i))
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>append</span> b-indicies (<span style=color:#a6e22e>list</span> (<span style=color:#a6e22e>-</span> i offset)))
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>cdr</span> offsets)
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>cdr</span> a-dims)
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>cdr</span> b-dims)))
+</span></span><span style=display:flex><span>            (subarray-util
+</span></span><span style=display:flex><span>             a
+</span></span><span style=display:flex><span>             b
+</span></span><span style=display:flex><span>             (<span style=color:#a6e22e>append</span> a-indicies (<span style=color:#a6e22e>list</span> offset))
+</span></span><span style=display:flex><span>             <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>             (<span style=color:#a6e22e>cdr</span> offsets)
+</span></span><span style=display:flex><span>             (<span style=color:#a6e22e>cdr</span> a-dims)
+</span></span><span style=display:flex><span>             b-dims)))
+</span></span><span style=display:flex><span>      (setf (<span style=color:#a6e22e>apply</span> <span style=color:#a6e22e>#&#39;aref</span> (<span style=color:#a6e22e>cons</span> b b-indicies))
+</span></span><span style=display:flex><span>            (<span style=color:#a6e22e>apply</span> <span style=color:#a6e22e>#&#39;aref</span> (<span style=color:#a6e22e>cons</span> a a-indicies)))))
+</span></span></code></pre></div><p>another utility that copies the n-th element of an array, which is an array itself:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun array-nth (arr idx)
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>let*</span> ((new-dims (<span style=color:#a6e22e>cdr</span> (<span style=color:#a6e22e>array-dimensions</span> arr)))
+</span></span><span style=display:flex><span>         (offsets (<span style=color:#a6e22e>append</span> (<span style=color:#a6e22e>list</span> idx) (<span style=color:#a6e22e>make-list</span> (<span style=color:#a6e22e>length</span> new-dims) <span style=color:#e6db74>:initial-element</span> <span style=color:#ae81ff>0</span>))))
+</span></span><span style=display:flex><span>    (subarray
+</span></span><span style=display:flex><span>     arr
+</span></span><span style=display:flex><span>     offsets
+</span></span><span style=display:flex><span>     new-dims)))
+</span></span></code></pre></div><p>a utility function to copy a subarray into an array<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun copy-into-array (a b <span style=color:#66d9ef>&amp;optional</span> (offsets (<span style=color:#a6e22e>make-list</span> (<span style=color:#a6e22e>length</span> (<span style=color:#a6e22e>array-dimensions</span> a)) <span style=color:#e6db74>:initial-element</span> <span style=color:#ae81ff>0</span>)))
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;copy an (possibly smaller) array into another array&#34;</span>
+</span></span><span style=display:flex><span>  (copy-into-array-util a b <span style=color:#66d9ef>nil</span> <span style=color:#66d9ef>nil</span> offsets (<span style=color:#a6e22e>array-dimensions</span> a) (<span style=color:#a6e22e>array-dimensions</span> b))
+</span></span><span style=display:flex><span>  a)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>(defun copy-into-array-util (a b a-indicies b-indicies offsets a-dims b-dims)
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>if</span> b-dims
+</span></span><span style=display:flex><span>      (<span style=color:#66d9ef>let</span> ((use-b-dims (<span style=color:#a6e22e>eq</span> (<span style=color:#a6e22e>length</span> a-dims) (<span style=color:#a6e22e>length</span> b-dims)))
+</span></span><span style=display:flex><span>            (offset (<span style=color:#a6e22e>car</span> offsets)))
+</span></span><span style=display:flex><span>        (<span style=color:#66d9ef>if</span> use-b-dims
+</span></span><span style=display:flex><span>            (loop for i from offset below (<span style=color:#a6e22e>+</span> offset (<span style=color:#a6e22e>car</span> b-dims))
+</span></span><span style=display:flex><span>                  do (copy-into-array-util
+</span></span><span style=display:flex><span>                      a
+</span></span><span style=display:flex><span>                      b
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>append</span> a-indicies (<span style=color:#a6e22e>list</span> i))
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>append</span> b-indicies (<span style=color:#a6e22e>list</span> (<span style=color:#a6e22e>-</span> i offset)))
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>cdr</span> offsets)
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>cdr</span> a-dims)
+</span></span><span style=display:flex><span>                      (<span style=color:#a6e22e>cdr</span> b-dims)))
+</span></span><span style=display:flex><span>            (copy-into-array-util
+</span></span><span style=display:flex><span>             a
+</span></span><span style=display:flex><span>             b
+</span></span><span style=display:flex><span>             (<span style=color:#a6e22e>append</span> a-indicies (<span style=color:#a6e22e>list</span> offset))
+</span></span><span style=display:flex><span>             <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>             (<span style=color:#a6e22e>cdr</span> offsets)
+</span></span><span style=display:flex><span>             (<span style=color:#a6e22e>cdr</span> a-dims)
+</span></span><span style=display:flex><span>             b-dims)))
+</span></span><span style=display:flex><span>      (setf (<span style=color:#a6e22e>apply</span> <span style=color:#a6e22e>#&#39;aref</span> (<span style=color:#a6e22e>cons</span> a a-indicies))
+</span></span><span style=display:flex><span>            (<span style=color:#a6e22e>apply</span> <span style=color:#a6e22e>#&#39;aref</span> (<span style=color:#a6e22e>cons</span> b b-indicies)))))
+</span></span></code></pre></div><p>a utility function to copy into an array into anothers highest dimension<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun set-array-nth (arr other-arr idx)
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;example usage: (set-array-nth (make-array &#39;(4 4 4)) (random-tensor &#39;(4 4)) 1)&#34;</span>
+</span></span><span style=display:flex><span>  (copy-into-array
+</span></span><span style=display:flex><span>   arr
+</span></span><span style=display:flex><span>   other-arr
+</span></span><span style=display:flex><span>   (<span style=color:#a6e22e>append</span> (<span style=color:#a6e22e>list</span> idx) (<span style=color:#a6e22e>make-list</span> (<span style=color:#a6e22e>length</span> (<span style=color:#a6e22e>array-dimensions</span> other-arr)) <span style=color:#e6db74>:initial-element</span> <span style=color:#ae81ff>0</span>))))
+</span></span></code></pre></div><p>vectorizing an array (turning it into a 1d vector) is pretty simple:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun vectorize-array (arr)
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;turn an array into a 1d vector&#34;</span>
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>make-array</span> (<span style=color:#a6e22e>array-total-size</span> arr) <span style=color:#e6db74>:displaced-to</span> arr))
+</span></span></code></pre></div><h2 id=vectors><span class=section-num>10</span> vectors</h2><p>create vector<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(<span style=color:#a6e22e>vector</span> <span style=color:#ae81ff>3</span> <span style=color:#ae81ff>5</span> <span style=color:#ae81ff>1</span>)
 </span></span></code></pre></div><p>we can use <code>length</code> on vectors<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(<span style=color:#a6e22e>length</span> (<span style=color:#a6e22e>vector</span> <span style=color:#ae81ff>3</span> <span style=color:#ae81ff>5</span> <span style=color:#ae81ff>1</span>)) ==&gt; <span style=color:#ae81ff>3</span>
 </span></span></code></pre></div><p>get nth element:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defparameter *x* (<span style=color:#a6e22e>vector</span> <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span> <span style=color:#ae81ff>3</span>))
 </span></span><span style=display:flex><span>(<span style=color:#a6e22e>length</span> *x*) ==&gt; <span style=color:#ae81ff>3</span>
@@ -120,13 +246,39 @@
 </span></span></code></pre></div><p>someone on discord gave me this shorter one though:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun list-&gt;vector (<span style=color:#a6e22e>list</span>)
 </span></span><span style=display:flex><span>  (<span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>atom</span> <span style=color:#a6e22e>list</span>) <span style=color:#a6e22e>list</span>
 </span></span><span style=display:flex><span>      (<span style=color:#a6e22e>map</span> <span style=color:#e6db74>&#39;vector</span> <span style=color:#a6e22e>#&#39;</span>list-&gt;vector <span style=color:#a6e22e>list</span>)))
-</span></span></code></pre></div><h2 id=multithreading><span class=section-num>11</span> multithreading</h2><p><code>sb-thread:make-thread</code> takes a function to call in a newly created thread.<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(sb-thread:make-thread
+</span></span></code></pre></div><h2 id=multithreading><span class=section-num>11</span> multithreading</h2><p>in <a href=/post/20230429181052-sbcl/>sbcl</a> <code>sb-thread:make-thread</code> takes a function to call in a newly created thread.<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(sb-thread:make-thread
 </span></span><span style=display:flex><span> (lambda ()
 </span></span><span style=display:flex><span>   (<span style=color:#66d9ef>progn</span>
 </span></span><span style=display:flex><span>     (<span style=color:#a6e22e>sleep</span> <span style=color:#ae81ff>0</span>) <span style=color:#75715e>;; give other threads a chance to run, then return here</span>
 </span></span><span style=display:flex><span>     (setf c (<span style=color:#a6e22e>+</span> a b))
 </span></span><span style=display:flex><span>     (<span style=color:#a6e22e>print</span> <span style=color:#e6db74>&#34;ADDITION:&#34;</span>)
 </span></span><span style=display:flex><span>     (<span style=color:#a6e22e>print</span> c))))
-</span></span></code></pre></div><h2 id=resources><span class=section-num>12</span> resources</h2><p><a href=https://lisp-journey.gitlab.io/blog/common-lisp-macros-by-example-tutorial>https://lisp-journey.gitlab.io/blog/common-lisp-macros-by-example-tutorial</a><br><a href=https://taeric.github.io/CodeAsData.html>https://taeric.github.io/CodeAsData.html</a><br><a href=https://github.com/ghollisjr/cl-ana>https://github.com/ghollisjr/cl-ana</a><br><a href=https://github.com/marcoheisig/Petalisp>https://github.com/marcoheisig/Petalisp</a></p></div><div class=bl-section><h4>Links to this note</h4><div class=backlinks><ul><li><a href=/>index</a></li><li><a href=/post/20230521163611-common_lisp_sdl2/>common lisp graphics</a></li><li><a href=/post/20230502235623-feedforward_neural_network/>feedforward neural network</a></li><li><a href=/post/20230420204808-multivariate_linear_regression/>multivariate linear regression</a></li></ul></div></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
+</span></span></code></pre></div><p>although notice that this is sbcl-specific, the <a href=https://github.com/lmj/lparallel>lparallel</a>, works great on multiple CL implementations though!, more on lparallel at <a href=https://lparallel.org/page/2/>https://lparallel.org/page/2/</a><br></p><h2 id=macros><span class=section-num>12</span> macros</h2><p>simple macro from <a href=https://lispcookbook.github.io/cl-cookbook/macros.html>https://lispcookbook.github.io/cl-cookbook/macros.html</a>:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defmacro setq2 (v1 v2 e)
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>list</span> <span style=color:#e6db74>&#39;progn</span> (<span style=color:#a6e22e>list</span> <span style=color:#e6db74>&#39;setq</span> v1 e) (<span style=color:#a6e22e>list</span> <span style=color:#e6db74>&#39;setq</span> v2 e)))
+</span></span><span style=display:flex><span><span style=color:#75715e>;; (setq2 v1 v2 3) =&gt; v1=3,v2=3</span>
+</span></span></code></pre></div><p>this macro is very close to the following function definition:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun setq2-function (v1 v2 e)
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>list</span> <span style=color:#e6db74>&#39;progn</span> (<span style=color:#a6e22e>list</span> <span style=color:#e6db74>&#39;setq</span> v1 e) (<span style=color:#a6e22e>list</span> <span style=color:#e6db74>&#39;setq</span> v2 e)))
+</span></span></code></pre></div><p>consider the following macro <code>when2</code> which behaves like the builtin <code>when</code><br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defmacro when2 (<span style=color:#66d9ef>condition</span> <span style=color:#66d9ef>&amp;rest</span> body)
+</span></span><span style=display:flex><span>  <span style=color:#f92672>`</span>(<span style=color:#66d9ef>if</span> <span style=color:#f92672>,</span><span style=color:#66d9ef>condition</span> (<span style=color:#66d9ef>progn</span> <span style=color:#f92672>,@</span>body)))
+</span></span><span style=display:flex><span><span style=color:#75715e>;; (when2 t (print &#34;hey&#34;)) =&gt; &#34;hey&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>;; (when2 nil (print &#34;hey&#34;)) =&gt; nothing</span>
+</span></span></code></pre></div><div class=note><p>from <a href=http://www.lispworks.com/documentation/HyperSpec/Body/02_df.htm>http://www.lispworks.com/documentation/HyperSpec/Body/02_df.htm</a><br>if a comma is immediately followed by an at-sign, then the form following the at-sign is evaluated to produce a list of objects. these objects are then “spliced” into place in the template. for example, if x has the value (a b c), then<br>`(x ,x ,@x foo ,(cadr x) bar ,(cdr x) baz ,@(cdr x))<br>=> (x (a b c) a b c foo b bar (b c) baz b c)<br></p></div><p><code>body</code> is just a list and can be used/modified<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defmacro test-macro (<span style=color:#66d9ef>&amp;rest</span> body)
+</span></span><span style=display:flex><span>  <span style=color:#f92672>`</span>(<span style=color:#66d9ef>quote</span> <span style=color:#f92672>,</span>body))
+</span></span></code></pre></div><p>this is called an <strong>anaphoric macro</strong> where you wrap the body with a lexical function definition that shadows the global one<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>CL-USER&gt; (defun foo () <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>FOO
+</span></span><span style=display:flex><span>CL-USER&gt; (defmacro with-different-foo (<span style=color:#66d9ef>&amp;body</span> body)
+</span></span><span style=display:flex><span>           <span style=color:#f92672>`</span>(<span style=color:#66d9ef>flet</span> ((foo () <span style=color:#ae81ff>2</span>))
+</span></span><span style=display:flex><span>              <span style=color:#f92672>,@</span>body))
+</span></span><span style=display:flex><span>WITH-DIFFERENT-FOO
+</span></span><span style=display:flex><span>CL-USER&gt; (<span style=color:#66d9ef>progn</span>
+</span></span><span style=display:flex><span>           (foo))
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>CL-USER&gt; (with-different-foo
+</span></span><span style=display:flex><span>           (foo))
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span>
+</span></span></code></pre></div><h2 id=reader-macros><span class=section-num>13</span> reader macros</h2><p>the <code>#+</code> and <code>#-</code> <strong>reader macros</strong> are pretty nice for commenting out sexps. they allow ignoring the following sexp, if the given symbol isn&rsquo;t/is found in <code>*FEATURES*</code>. Just pick a symbol not in <code>*FEATURES*</code>, and use it with <code>#+</code> like this:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span><span style=color:#f92672>#+</span><span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>(defun foo ()
+</span></span><span style=display:flex><span>  <span style=color:#f92672>...</span>)
+</span></span></code></pre></div><p>Now, the function definition will be ignored (unless NIL is in <code>*FEATURES*</code>, which is not very likely).<br></p><h2 id=resources><span class=section-num>14</span> resources</h2><p><a href=https://lisp-journey.gitlab.io/blog/common-lisp-macros-by-example-tutorial>https://lisp-journey.gitlab.io/blog/common-lisp-macros-by-example-tutorial</a><br><a href=https://taeric.github.io/CodeAsData.html>https://taeric.github.io/CodeAsData.html</a><br><a href=https://github.com/ghollisjr/cl-ana>https://github.com/ghollisjr/cl-ana</a><br><a href=https://github.com/marcoheisig/Petalisp>https://github.com/marcoheisig/Petalisp</a></p></div><div class=bl-section><h4>Links to this note</h4><div class=backlinks><ul><li><a href=/>index</a></li><li><a href=/post/20230521163611-common_lisp_sdl2/>common lisp graphics</a></li><li><a href=/post/20230614172149-connect_to_remote_common_lisp_repl_with_sly_slime/>connect to remote common lisp repl with sly/slime</a></li><li><a href=/post/20230614171231-cuda_common_lisp/>cuda common lisp</a></li><li><a href=/post/20230502235623-feedforward_neural_network/>feedforward neural network</a></li><li><a href=/post/20230420204808-multivariate_linear_regression/>multivariate linear regression</a></li></ul></div></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
 <script src=https://mahmoodsheikh36.github.io/js/page.js type=text/javascript></script>
 <script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
