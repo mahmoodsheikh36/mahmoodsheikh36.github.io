@@ -1,0 +1,165 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage[boxed,linesnumbered,vlined]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\cov}{cov}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\cmark}{\text{\ding{51}}}
+\newcommand{\xmark}{\text{\ding{55}}}
+\author{mahmood}
+\date{\today}
+\title{geometric distribution}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={geometric distribution},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+a \href{20230120140123-probability_distribution.org}{probability distribution}\\[0pt]
+the probability for a success on the \(k\)'th attempt with success probability \(p\) is\\[0pt]
+\[
+P(k) = {(1-p)}^{k-1}p
+\]\\[0pt]
+because we have \(k-1\) failures which gives us \({(1-p)}^{k-1}\), and a single success on the last attempt so we multiply by \(p\)\\[0pt]
+\begin{definition}
+a \href{20230104221353-random_variable.org}{random variable} has \textbf{geometric distributivity} if it receives the values \(1,2,\dots\) with probabilities \hyperref[org37cb532]{\(P(X=k)\)}\\[0pt]
+\end{definition}
+\begin{characteristic}
+\begin{itemize}
+\item the symbol of the geometric distribution is \(X \sim G(p)\)\\[0pt]
+\item the \href{20230121184721-expected_value.org}{expected} number of trials for a success is \(E[k] = \frac{1}{p}\)\\[0pt]
+\item \href{20230113164748-variance.org}{variance} is \(\mathrm{Var}=\frac{1-p}{p^2}\)\\[0pt]
+\item formula of "at most" in a geometric distribution is \(P(x \le k)=1-(1-p)^k\)\\[0pt]
+\item formula of "at least" \(P(x \geq k)=(1-p)^{k-1}\)\\[0pt]
+\end{itemize}
+\end{characteristic}
+\end{document}

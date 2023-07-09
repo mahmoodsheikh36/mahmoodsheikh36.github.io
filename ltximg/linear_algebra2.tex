@@ -1,0 +1,2196 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage{algpseudocode}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\author{mahmood}
+\date{\textit{<2022-08-12 Fri 17:58:00>}}
+\title{linear algebra}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={linear algebra},
+ pdfkeywords={},
+ pdfsubject={linear algebra},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+\begin{note}
+this document needs some refactoring, some of the proofs may be incomplete\\
+\end{note}
+
+\section{field}
+\label{sec:orgd95c18e}
+\section{matrix}
+\label{sec:org2833a15}
+\begin{definition}
+a \textbf{matrix} is a rectangular array or table of numbers, symbols, or expressions, arranged in rows and columns, which is used to represent a mathematical object or a property of such an object\\
+\begin{characteristic}
+a matrix can be constructed over a specific finite/infinite set of numbers for example \(\mathbb{Z}\) which is the set of integers, when we say a matrix is over a specific field of numbers we mean that the numbers in the matrix are limited to that field of numbers\\
+\end{characteristic}
+\begin{my_example}
+consider this matrix over the field \(\mathbb{Z}\), where all the numbers are integers\\
+\[\left[\begin{array}{rrrr} -1 & 1 & -5 & 1 \\ -2 & -3 & 1 & 2 \\ -4 & 0 & 2 & 2 \\ 0 & -1 & -1 & 0 \\ -1 & -5 & 1 & 1 \end{array}\right]\]\\
+\end{my_example}
+\end{definition}
+\subsection{matrix multiplication}
+\label{sec:org599cf8b}
+\begin{definition}
+let \(A,\ B\) be matrices\\
+\textbf{matrix multiplication} is possible if and only if the matrices have the dimensions \(A_{m \times n},\ B_{n \times m}\)\\
+\url{./matrix-multiplication.gif}\\
+\end{definition}
+\begin{definition}
+matrices can be \textbf{multiplied by constants}, let \(A\) be a matrix and \(c\) be a constant, the definition of such multiplication is:\\
+\[
+  A \cdot c = B \iff A_{i,j} \cdot c = B_{i,j}
+\]\\
+\end{definition}
+\subsection{matrix addition}
+\label{sec:org4162d81}
+\begin{definition}
+\textbf{matrix addition} is defined as the addition of 2 matrices with the same dimensions \(A_{m \times n},\ B_{m \times n}\)\\
+\[
+  A + B = C \iff A_{i,j} + B_{i,j} = C_{i,j}
+\]\\
+\begin{my_example}
+\begin{gather*}
+  \begin{bmatrix} A_1 & A_2\\ A_3 & A_4 \end{bmatrix} + \begin{bmatrix} B_1 & B_2\\ B_3 & B_4 \end{bmatrix} = \begin{bmatrix} A_1+B_1 & A_2+B_2\\ A_3+B_3 & A_4+B_4 \end{bmatrix}
+\end{gather*}
+\end{my_example}
+\end{definition}
+\subsection{elementary row operation}
+\label{sec:orgdd80885}
+\subsection{augmented matrix}
+\label{sec:org83db26e}
+\begin{definition}
+for a given system of equation, an \textbf{augmented matrix} is the system of equations represented using a matrix\\
+\begin{my_example}
+\[
+  \begin{aligned} 2x+5y=10\\ 3x+4y=24 \end{aligned} \,\iff\, \left[\begin{array}{cc|c} 2 & 5 & 10\\ 3 & 4 & 24 \end{array}\right]
+\]\\
+\end{my_example}
+\end{definition}
+\subsection{square matrix}
+\label{sec:orgf670bc9}
+\begin{definition}
+a \textbf{square matrix} is a \hyperref[sec:org2833a15]{matrix} whose width is the same as its height, i.e. \(A_{n\times n}\)\\
+\end{definition}
+\subsection{identity matrix}
+\label{sec:org15aa549}
+\subsection{triangular matrix}
+\label{sec:orgbc7aa60}
+\subsection{row echelon form}
+\label{sec:orgc9a3364}
+\begin{characteristic}
+once we convert a \hyperref[sec:org2833a15]{matrix} to its \textbf{echelon form}, we would be able to clearly see how many solutions said matrix has\\
+a matrix with no solution has the following echelon shape:\\
+\begin{gather*}
+  \left[
+    \begin{array}{ccc|c}
+      1 & 0 & 3 & 0 \\
+      0 & 1 & 1 & 0 \\
+      0 & 0 & 0 & 5 \\
+    \end{array}
+  \right]
+\end{gather*}
+its not possible that \(0 \cdot x_1 + 0 \cdot x_2 + 0 \cdot x_3 = 5\) so such a matrix has no solution\\
+\end{characteristic}
+
+\begin{characteristic}
+a matrix with a single solution has the following echelon shape:\\
+\begin{gather*}
+  \left[
+    \begin{array}{ccc|c}
+      1 & 0 & 0 & 2 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 5 \\
+    \end{array}
+  \right]
+\end{gather*}
+this is the kind of shape we would hope for when reducing a matrix to its echelon form, because the solution is very easy to read which is:\\
+\begin{align*}
+  x_1 = 2\\
+  x_2 = 0\\
+  x_3 = 5
+\end{align*}
+\end{characteristic}
+
+\begin{characteristic}
+a matrix with an \(\infty\) number of solutions has the following echelon shape:\\
+\begin{gather*}
+  \left[
+    \begin{array}{ccc|c}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 1 & 0 \\
+      0 & 0 & 0 & 0 \\
+    \end{array}
+  \right]
+\end{gather*}
+where one of the rows zeros out which makes the third variable in the corresponding system of equations a \emph{free variable} that can take any value, the other 2 variables depend on the value of the free variable\\
+\end{characteristic}
+\subsection{invertible matrix}
+\label{sec:orgb6a6a45}
+\subsection{transpose}
+\label{sec:org668c066}
+\subsection{matrix similarity}
+\label{sec:org5ddd44c}
+\subsection{determinant}
+\label{sec:orgff9607b}
+see \url{https://en.wikipedia.org/wiki/Determinant}\\
+\begin{definition}
+the \textbf{determinant} is a \href{20220727110413-scalar.org}{scalar} value that is a function of the entries of a \hyperref[sec:orgf670bc9]{square matrix}, it is nonzero if and only if the \hyperref[sec:org2833a15]{matrix} is \hyperref[sec:orgb6a6a45]{invertible} and the \hyperref[sec:orgdf3d063]{linear map} represented by the matrix is an \hyperref[sec:orgb9fe876]{isomorphism}. the determinant of a matrix A is denoted \(\det(A)\), \(\det A\), or \(|A|\).\\
+in the case of a \(2\times2\) matrix the determinant can be defined as\\
+\begin{gather*}
+  |A| = \begin{vmatrix} a & b\\ c & d \end{vmatrix} = ad - bc
+\end{gather*}
+similarly, for a \(3\times3\) matrix \(A\), its determinant is\\
+\begin{align*}
+  |A| = \begin{vmatrix} a & b & c\\ d & e & f\\ g & h & i \end{vmatrix} &= a\begin{vmatrix} e & f\\ h & i \end{vmatrix} - b\begin{vmatrix} d & f\\ g & i \end{vmatrix} + c\begin{vmatrix} d & e\\ g & h \end{vmatrix}\\
+  &= aei + bfg + cdh - ceg - bdi - afh
+\end{align*}
+each determinant of a \(2\times2\) matrix in this equation is called a \hyperref[sec:org75038da]{minor} of the matrix \(A\). this procedure can be extended to give a recursive definition for the determinant of an \(n\times n\) matrix, known as \hyperref[sec:orgfd4b3c6]{laplace expansion}\\
+
+\begin{characteristic}
+\(\det I = 1\) where \(I\) is an \hyperref[sec:org15aa549]{identity matrix}\\
+\end{characteristic}
+
+\begin{characteristic}
+the determinant is \href{20220801201511-multilinear.org}{multilinear}\\
+\label{org7b090e0}
+\end{characteristic}
+
+\begin{characteristic}
+the determinant is \href{20220801201711-alternating.org}{alternating}\\
+\label{orgce6cc22}
+\end{characteristic}
+
+\begin{lemma}
+the determinant is a \href{20220801201746-homogeneous_function.org}{homogeneous function}, i.e.\\
+\[
+  \det(cA) = c^n\det(A)
+\]\\
+assuming \(A\) is an \(n\times n\) matrix\\
+\end{lemma}
+
+\begin{lemma}
+interchanging any pair of columns of a matrix multiplies its determinant by \(-1\). This follows from the determinant being \hyperref[org7b090e0]{multilinear} and \hyperref[orgce6cc22]{alternating}\\
+\end{lemma}
+
+\begin{lemma}
+if the columns of the matrix form a \hyperref[sec:org174d95a]{linearly dependant set}, the determinant is 0\\
+\end{lemma}
+
+\begin{lemma}
+adding a scalar multiple of one column to another column does not change the value of the determinant. this is a consequence of \hyperref[org7b090e0]{multilinearity} and being \hyperref[orgce6cc22]{alternative}\\
+\end{lemma}
+
+\begin{lemma}
+if \(A\) is a \hyperref[sec:orgbc7aa60]{triangular matrix} then its determinant equals the product of the diagonal entries:\\
+\[
+  \det A = a_{11}a_{22}\cdots a_{nn} = \prod_{i=1}^n a_{ii}
+\]\\
+\end{lemma}
+
+\begin{lemma}
+the determinant of the \hyperref[sec:org668c066]{transpose} of a matrix equals the determinant of the matrix:\\
+\[
+  \det A^T = \det(A)
+\]\\
+\end{lemma}
+
+\begin{lemma}
+\[
+  \det(AB) = \det A \det B
+\]\\
+\end{lemma}
+
+\begin{lemma}
+\[
+  \det\left(A^{-1}\right) = \frac{1}{\det A} = \det(A)^{-1}
+\]\\
+\end{lemma}
+\end{definition}
+\subsubsection{Leibniz formula}
+\label{sec:org410955f}
+see \url{https://en.wikipedia.org/wiki/Determinant}\\
+the \textbf{Leibniz \href{20220711175314-formula.org}{formula}} for the \hyperref[sec:orgff9607b]{determinant} of a \(3\times3\) \hyperref[sec:org2833a15]{matrix} is the following:\\
+\[
+  \begin{vmatrix} a & b & c\\ d & e & f\\ g & h & i \end{vmatrix} = a(ei - fh) - b(di - fg) + c(dh - eg)
+\]\\
+\subsubsection{rule of Sarrus}
+\label{sec:org4df1b86}
+see \url{https://en.wikipedia.org/wiki/Rule\_of\_Sarrus}\\
+the \textbf{rule of Sarrus} is a mnemonic of \hyperref[sec:org410955f]{Leibniz formula}\\
+\begin{center}
+\includegraphics[width=.9\linewidth]{./Schema_sarrus-regel.png}
+\end{center}
+\[
+  \det \begin{pmatrix} a_{11} & a_{12} & a_{13}\\ a_{21} & a_{22} & a_{23}\\ a_{31} & a_{32} & a_{33} \end{pmatrix} = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{31}a_{22}a_{13} - a_{32}a_{23}a_{11} - a_{33}a_{21}a_{12}
+\]\\
+\subsection{diagonal matrix}
+\label{sec:orgaf43c3e}
+\begin{definition}
+a \textbf{diagonal matrix} is a \hyperref[sec:org2833a15]{matrix} in which the entries outside the main diagonal are all zero; the term usually refers to \hyperref[sec:orgf670bc9]{square matrices}. elements of the main diagonal can either be zero or nonzero\\
+\end{definition}
+\subsection{diagonalizable matrix}
+\label{sec:org136aa39}
+see \url{https://textbooks.math.gatech.edu/ila/diagonalization.html}\\
+\begin{definition}
+a \hyperref[sec:orgf670bc9]{square matrix} \(A\) is called \textbf{diagonalizable} if it is \hyperref[sec:org5ddd44c]{similar} to a \hyperref[sec:orgaf43c3e]{diagonal matrix}, i.e., if there exists an \hyperref[sec:orgb6a6a45]{invertible matrix} \(P\) which we may call the \textbf{eigenbasis matrix} or \textbf{eigenmatrix} and a diagonal matrix \(D\) such that \(P^{-1}AP=D\), or equivalently \(A=PDP^{-1}\)\\
+\begin{characteristic}
+diagonalizable matrices are especially easy for computations, once their \hyperref[sec:org929d22f]{eigenvalue}s and \hyperref[sec:org929d22f]{eigenvector}s are known, one can raise a diagonal matrix \(D\) to a power by simply raising the diagonal entries to that power, and the \hyperref[sec:orgff9607b]{determinant} of a diagonal matrix is simply the product of all diagonal entries, and multiplying diagonal matrices together just multiplies their diagonal entries; such computations generalize easily to \(A = PDP^{-1}\):\\
+\[
+  A^k = T \pmqty{\lambda_1^k & 0 & 0 & \cdots & 0\\ 0 & \lambda_2^k & 0 & \cdots & 0\\ 0 & 0 & \lambda_3^k & \cdots & 0\\ \vdots & \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & 0 & \cdots & \lambda_n^k}T^{-1}
+\]\\
+
+\begin{my_example}
+\[
+  \pmqty{x_1 & 0 & 0\\ 0 & x_2 & 0\\ 0 & 0 & x_3}\pmqty{y_1 & 0 & 0\\ 0 & y_2 & 0\\ 0 & 0 & y_3} = \pmqty{x_1y_1 & 0 & 0\\ 0 & x_2y_2 & 0\\ 0 & 0 & x_3y_3}
+\]\\
+\end{my_example}
+
+\begin{my_example}
+\[
+  \pmqty{x & 0 & 0\\ 0 & y & 0\\ 0 & 0 & z}^n = \pmqty{x^n & 0 & 0\\ 0 & y^n & 0\\ 0 & 0 & z^n}
+\]\\
+\end{my_example}
+
+\begin{my_example}
+\begin{gather*}
+  T^{-1}AT = \pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 1}\\
+  TT^{-1}ATT^{-1} = T\pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 1}T^{-1}\\
+  A = T\pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 1}T^{-1}\\
+  A^2 = T\pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 1}T^{-1}T\pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 1}T^{-1}\\
+  A^2 = T\pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 1}^2T^{-1}\\
+  A^2 = T\pmqty{2^2 & 0 & 0\\ 0 & 2^2 & 0\\ 0 & 0 & 1^2}T^{-1}\\
+  A^k = T\pmqty{\lambda_1^k & 0 & 0\\ 0 & \lambda_2^k & 0\\ 0 & 0 & \lambda_3^k}T^{-1}\\
+\end{gather*}
+\end{my_example}
+\end{characteristic}
+
+\begin{my_example}
+any \hyperref[sec:orgaf43c3e]{diagonal matrix} is \hyperref[sec:org136aa39]{diagonalizable} because it is \textbf{similar} to itself\\
+\[
+  \pmqty{1 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 3} = I_3\pmqty{1 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 3}I_3^{-1}
+\]\\
+\end{my_example}
+\end{definition}
+\subsubsection{diagonalization theorem}
+\label{sec:org072d977}
+a fundamental question about a matrix is whether or not it is \hyperref[sec:org136aa39]{diagonalizable}. the following is the primary criterion for diagonalizability. it shows that diagonalizability is an \hyperref[sec:org929d22f]{eigenvalue} problem.\\
+\begin{definition}
+an \(n\times n\) \hyperref[sec:org2833a15]{matrix} \(A_{n\times n}\) is \textbf{diagonalizable} if and only if \(A\) has \(n\) \hyperref[sec:org174d95a]{linearly independant} \hyperref[sec:org929d22f]{eigenvector}s\\
+in this case, \(A = CDC^{-1}\) for\\
+\[
+  C = \pmqty{\vert & \vert & & \vert\\ v_1 & v_2 & \cdots & v_n\\ \vert & \vert & & \vert} \quad D = \pmqty{\lambda_1 & 0 & \cdots & 0\\ 0 & \lambda_2 & \cdots & 0\\ \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \cdots & \lambda_n}
+\]\\
+where \(v_1,v_2,\ldots,v_n\) are linearly independant eigenvectors, and \(\lambda_1,\lambda_2,\ldots,\lambda_n\) are the corresponding eigenvalues, in the same order.\\
+\begin{note}
+the eigenvectors \(\lambda_1,\lambda_2,\ldots,\lambda_n\) dont have to be unique, in case they arent, we call that \href{20220731205450-algebraic_multiplicity.org}{Algebraic multiplicity}\\
+\end{note}
+\end{definition}
+\subsection{minor}
+\label{sec:org75038da}
+\begin{definition}
+a \textbf{minor} of a \hyperref[sec:org2833a15]{matrix} \(A\) is the determinant of some smaller \hyperref[sec:orgf670bc9]{square matrix}, cut down from \(A\) by removing one or more of its rows and columns.\\
+\end{definition}
+\subsubsection{first minor}
+\label{sec:org4a814ef}
+\begin{definition}
+if \(A\) is a \hyperref[sec:orgf670bc9]{square matrix}, then the minor of the entry in the \$i\$th row and \$j\$th column (also called the \((i,j)\) minor) is the determinant of the submatrix formed by deleting the \$i\$th row and \$j\$th column. this number is often denoted \(M_{i,j}\).\\
+\end{definition}
+\subsection{laplace expansion}
+\label{sec:orgfd4b3c6}
+\subsection{conjugate transpose}
+\label{sec:orgc578b7e}
+see \url{https://en.wikipedia.org/wiki/Conjugate\_transpose}\\
+\begin{definition}
+the \textbf{conjugate transpose} of an \(m\times n\) \hyperref[sec:org2833a15]{matrix} \(A_{m\times n}\) with \href{calculus2.org}{complex} entries is the \(n\times m\) matrix obtained from \(A\) by taking the transpose and then taking the complex conjugate of each entry (the complex conjugate of \(a+ib\) being \(a-ib\), for \href{calculus2.org}{real} numbers \(a\) and \(b\)). it is often denoted as \(A^H\) or \(A^*\).\\
+For real matrices, the conjugate transpose is just the \hyperref[sec:org668c066]{transpose}, \(A^H = A^T\)\\
+\end{definition}
+\subsection{cofactor matrix}
+\label{sec:org47e0d92}
+\begin{definition}
+a \textbf{cofactor matrix} of a \hyperref[sec:orgf670bc9]{square matrix} \(A\), denoted \(C\) is the matrix formed by the \hyperref[sec:org4ffc1b2]{cofactor}s of \(A\)\\
+\begin{characteristic}
+the cofator matrix is useful to find the \hyperref[sec:org517aaf6]{adjugate} and the \hyperref[sec:orgb6a6a45]{inverse} of the given matrix.\\
+\end{characteristic}
+\end{definition}
+\subsubsection{cofactor}
+\label{sec:org4ffc1b2}
+\begin{definition}
+the \((i,j)\) \textbf{cofactor} of a \hyperref[sec:org2833a15]{matrix}, often denoted \(C_{i,j}\) is obtained by multiplying the \hyperref[sec:org4a814ef]{first minor} \(M_{i,j}\) by \((-1)^{i+j}\).\\
+\end{definition}
+\subsection{adjugate matrix}
+\label{sec:org517aaf6}
+\begin{definition}
+the \textbf{adjugate} of a \hyperref[sec:orgf670bc9]{square matrix} is the \hyperref[sec:org668c066]{transpose} of its \hyperref[sec:org47e0d92]{cofactor matrix}.\\
+
+\begin{characteristic}
+the product of a \hyperref[sec:org2833a15]{matrix} with its adjugate gives a \hyperref[sec:orgaf43c3e]{diagonal matrix} whose diagonal entries are the \hyperref[sec:orgff9607b]{determinant} of the original matrix. consequently, dividing this product matrix by the determinant produces the identity matrix of that size, which is just a diagonal matrix with all the diagonal entries equal to one. The multiplicative inverse of a square matrix can therefore be found by dividing its adjugate by its determinant, since multiplying this by the original matrix gives the identity.\\
+\end{characteristic}
+
+\begin{characteristic}
+for any \(n\times n\) matrix \(A\), \hyperref[sec:orgdd80885]{elementary row operation} show that adjugates have the following properties:\\
+
+\begin{lemma}
+\[\adj 0 = 0\]\\
+\end{lemma}
+
+\begin{lemma}
+\[\adj I = I\]\\
+\end{lemma}
+
+\begin{lemma}
+\[
+  \adj\left(A^T\right) = \adj(A)^T
+\]\\
+\end{lemma}
+
+\begin{lemma}
+if \(A\) is \href{discrete_maths2.org}{invertible}, or equivalently, if \(|A| \neq 0\)\\
+\[
+  A^{-1} = \frac{\adj A}{|A|}
+\]\\
+\begin{entailment}
+\(\adj A\) is \href{discrete_maths2.org}{invertible} and its inverse is \({(\det A)}^{-1}A\)\\
+\end{entailment}
+
+\begin{entailment}
+\[
+  \adj A^{-1} = \adj(A)^{-1}
+\]\\
+\end{entailment}
+\end{lemma}
+
+\begin{lemma}
+\[
+  \adj AB_{n\times n} = \adj B_{n\times n}\adj A
+\]\\
+\begin{entailment}
+\[
+\adj A^k = \adj(A)^k
+\]\\
+\end{entailment}
+\end{lemma}
+\end{characteristic}
+\end{definition}
+\subsection{matrix from the perspective of vector}
+\label{sec:org665c542}
+\subsubsection{row space}
+\label{sec:orged0dce5}
+\begin{definition}
+the \textbf{row space} of a \hyperref[sec:org2833a15]{matrix} \(A\), denoted by \(R(A)\), is the \hyperref[sec:org1ee137f]{span} of its rows\\
+
+\begin{note}
+here we are basically looking at the matrix as a column of rows where each row represents a vector\\
+\end{note}
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/8C0g6w}
+\end{center}
+\end{definition}
+\subsubsection{column space}
+\label{sec:org05b7955}
+\begin{definition}
+the \hyperref[sec:org1ee137f]{span} of the columns of a \hyperref[sec:org2833a15]{matrix} \(A\), denoted by \(C(A)\), is called the \textbf{range} or the \textbf{column space} of the matrix. the \hyperref[sec:orged0dce5]{row space} and the \textbf{column space} of a matrix always have the same \hyperref[sec:orgdef24d1]{dimension}\\
+generally when referring to a span of a matrix we refer to the \textbf{column space}\\
+here we are basically looking at the matrix as a row of columns where each column represents a vector\\
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/3cVWJn}
+\end{center}
+
+\begin{note}
+please note that elementary row operations change the column space (unlike the row space which doesnt change) so after reducing a matrix you would have to go back to the original matrix and pick the corresponding columns from there not from the matrix you applied row operations to\\
+\end{note}
+\begin{my_example}
+say \(A_{m \times n} \in M_{m \times n}(\mathbb{R})\) then \(C(A) \leq \mathbb{R}^m\) and \(R(A) \leq \mathbb{R}^n\)\\
+\end{my_example}
+\begin{characteristic}
+consider the transposition of \(A\), \((A^t)_{n \times m}\), we know \(C(A^t) = R(A)\) and \(R(A^t) = C(A)\)\\
+\end{characteristic}
+\begin{characteristic}
+we can describe matrix multiplication using vectors and the concept of linear combinations\\
+if \(A \cdot B = C\) then the column \(C^j\) (column \(j\) of C) is a linear combination of the columns of \(A\) using \(B^j\) as the set of coefficients\\
+\begin{my_example}
+\[\left[\begin{array}{rr} 3 & 1 \\ 2 & 0 \\ 1 & 2 \end{array}\right] \cdot \left[\begin{array}{rrr} 1 & 0 & 1 \\ 3 & 2 & 1 \end{array}\right] = \left[\begin{array}{rrr} 6 & 2 & 4 \\ 2 & 0 & 2 \\ 7 & 4 & 3 \end{array}\right]\]\\
+
+you might notice that:\\
+\[1 \cdot \left[\begin{array}{r} 3 \\ 2 \\ 1 \end{array}\right] + 3 \cdot \left[\begin{array}{r} 1 \\ 0 \\ 2 \end{array}\right] = \left[\begin{array}{r} 6 \\ 2 \\ 7 \end{array}\right]\]\\
+here the output vector is a linear combination of the 2 vectors and \(1,3\) are the coefficients\\
+\end{my_example}
+\end{characteristic}
+
+\begin{entailment}
+the columns of \(A\) span the columns of \(AB\)\\
+\[
+  C(AB) \leq C(A)
+\]\\
+the rows of \(B\) span the rows of \(AB\)\\
+\[
+  R(AB) \leq R(B)
+\]\\
+\end{entailment}
+
+\begin{entailment}
+\begin{align*}
+  \dim C(AB) \leq \dim C(A)\\
+  \dim R(AB) \leq \dim R(B)
+\end{align*}
+\end{entailment}
+
+\begin{entailment}
+given \(A_{m \times n}\)\\
+\begin{gather*}
+  C(A) \leq \mathbb{R}^m\\
+  R(A) \leq \mathbb{R}^n\\
+  \dim C(A) \leq m\\
+  \dim R(A) \leq n\\
+  \dim C(A) \leq n\\
+  \dim R(A) \leq m\\
+  \dim C(A) \leq \min\{n,m\}\\
+  \dim R(A) \leq \min\{n,m\}
+\end{gather*}
+\end{entailment}
+
+\begin{lemma}
+if \(L\) is an invertible matrix then:\\
+\[
+  \dim R(LB) \leq \dim R(B)
+\]\\
+\begin{proof}
+\begin{gather*}
+  B = L^{-1}LB\\
+  R(B) = R(L^{-1}(LB)) \leq R(LB) \leq R(B)
+\end{gather*}
+\end{proof}
+
+\begin{entailment}
+\[
+  R(LB) = R(B)
+\]\\
+\end{entailment}
+\end{lemma}
+
+\begin{lemma}
+if \(L\) is an invertible matrix then\\
+\[
+  C(BL) \leq C(B)
+\]\\
+\begin{proof}
+\begin{gather*}
+  B = BLL^{-1}\\
+  C(B) = C((BL)L^{-1}) \leq C(BL)
+\end{gather*}
+\end{proof}
+
+\begin{entailment}
+\(R(A) = R(A')\) where \(A\) is the matrix in its reduced echelon form\\
+\end{entailment}
+\end{lemma}
+
+\begin{lemma}
+given the matrix \(A_{m \times n}\)\\
+\[
+  \dim C(A) \leq \dim R(A)
+\]\\
+\begin{proof}
+let \(\dim R(A) = k\) and let \(b_1,b_2\ldots b_k\) be a basis of \(R(A)\)\\
+we construct a matrix \(B\)\\
+\[
+  B = \begin{bmatrix} \cdots b_1 \cdots\\ \cdots b_2 \cdots\\ \vdots\\ \cdots b_n \cdots \end{bmatrix}_{k \times n}
+\]\\
+we know \(k \leq m\)\\
+there exists \(\Delta\) such that \(\Delta \cdot B = A\) because the rows of \(A\) are spanned by the rows of \(B\)\\
+\[
+  C(\Delta B) \leq C(\Delta)
+\]\\
+therefore\\
+\[
+  \dim C(A) = \dim C(\Delta B) \leq \dim(C(\Delta)) \leq k = \dim R(A)
+\]\\
+we substitute \(A\) inplace of \(A^t\) in the lemma and we get:\\
+\begin{align*}
+  \dim C(A^t) \leq \dim R(A^t)\\
+  \dim R(A) \leq \dim C(A)
+\end{align*}
+therefore\\
+\[
+  \dim C(A) = \dim R(A)
+\]\\
+\end{proof}
+\end{lemma}
+\end{definition}
+\subsubsection{rank}
+\label{sec:org33aa784}
+\begin{definition}
+the \textbf{rank} of a given matrix \(A\) is the \hyperref[sec:orgdef24d1]{dimension} of its \hyperref[sec:orged0dce5]{row space} which is also equal to the dimension of its \hyperref[sec:org05b7955]{column space}\\
+\[
+  \rank (A) = \dim C(A) = \dim R(A)
+\]\\
+\begin{note}
+if the matrix is given, the \textbf{rank} can be simply found by checking how many linearly independant rows (or columns) the matrix has\\
+\end{note}
+
+\begin{characteristic}
+given the matrix \(A_{m \times n}\), \(\ker A = \{v \mid A\vec v = \vec0\}\), \(\ker A \leq \mathbb{R}^n\), given \(A'\) is \(A\) in its reduced echelon form then \(\dim{\ker{A}} =\) number of free variables in \(A'\) and \(\rank A = \dim R(A) = \dim R(A')\)\\
+\end{characteristic}
+
+\begin{lemma}
+for every matrix \(A_{m \times n}\):\\
+
+\[
+  \overbrace{\dim \ker A}^{\clap{number of free variables}} + \underbrace{\rank A}_{\clap{number of basic variables}} = n
+\]\\
+\end{lemma}
+
+\begin{question}
+given the matrices \(A,B\) such that \(A_{n \times k} \cdot B_{k \times m} = 0_{n \times m}\), prove that \(\ker A \leq C(B)\)\\
+\end{question}
+
+\begin{characteristic}
+To find a basis for the span of a set of vectors, write the vectors as rows of a matrix and then row reduce the matrix. The span of the rows of a matrix is called the row space of the matrix. The dimension of the row space is the rank of the matrix.\\
+\end{characteristic}
+\end{definition}
+\subsubsection{kernel}
+\label{sec:org975ee65}
+\begin{definition}
+the \textbf{kernel} of a \hyperref[sec:org2833a15]{matrix} or \hyperref[sec:orgdf3d063]{linear transformation} \(A\) is a \href{discrete_maths2.org}{set} of all \hyperref[sec:org103a65e]{vector}s \(V\) such that for every \(v \in V\) the expression \(Av = 0\) holds true in the case of matrix and \(A(v)=0\) in the case of linear transformation\\
+\begin{characteristic}
+the kernel of a matrix doesnt change when an \hyperref[sec:orgdd80885]{elementary row operation} is applied to the matrix\\
+\end{characteristic}
+\end{definition}
+\subsubsection{image}
+\label{sec:org149cad8}
+\begin{definition}
+The \textbf{image} of a \hyperref[sec:orgdf3d063]{linear transformation} or \hyperref[sec:org2833a15]{matrix} is the \hyperref[sec:org1ee137f]{span} of the column \hyperref[sec:org103a65e]{vector}s of the linear transformation. (think of it as what you can get from applying the linear transformation or multiplying the matrix by a vector.) it can be written as \(\img(A)\)\\
+\end{definition}
+\section{vector}
+\label{sec:org103a65e}
+anything can be a vector, so long as we define sensible addition and scalar multiplication operations that abide by the axioms of a \hyperref[sec:orgea93933]{vector space}\\
+a \textbf{vector} can be represented using its components or using length and direction\\
+\subsection{magnitude}
+\label{sec:orgd47f5ea}
+\begin{definition}
+the \textbf{magnitude} of a \hyperref[sec:org103a65e]{vector} \(A\) is its length, denoted by \(|A|\) or \(\left\Vert A \right\Vert\), it can be calculated from the square root of the total of the squares of of the individual vector components\\
+\end{definition}
+\subsection{unit vector}
+\label{sec:orgc00677a}
+\begin{definition}
+a \hyperref[sec:org103a65e]{vector} whose \hyperref[sec:orgd47f5ea]{magnitude} is equal to 1, laballed by a caret, e.g. \(\ihat\)\\
+\begin{lemma}
+\(\ihat = \frac{i}{|i|}\)\\
+where \(i\) is some vector and \(\ihat\) is the corresponding unit vector\\
+\end{lemma}
+\end{definition}
+\subsection{vector scalar multiplication}
+\label{sec:org099902f}
+\begin{lemma}
+if we multiply a \hyperref[sec:org103a65e]{vector} \(A\) by a positive \href{20220727110413-scalar.org}{scalar} \(b\), the result is a new vector \(C = bA\). The vector C is parallel to A, and its length is \(b\) times greater, thus \(\hat C = \hat A\) (\hyperref[sec:orgc00677a]{unit vector}s) and \(|C| = b|A|\)\\
+\end{lemma}
+\begin{lemma}
+the result of multiplying a vector by \(-1\) is a new vector opposite in direction to the original vector\\
+multiplication of a vector by a negative scalar evidently can change both the \hyperref[sec:orgd47f5ea]{magnitude} and the direction sense\\
+\end{lemma}
+\subsection{vector addition and subtraction}
+\label{sec:org8a7b075}
+the addition of 2 vectors is simply described in the following drawing:\\
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/BlOGLgM}
+\end{center}
+
+the rule is: to add B to A, place the tail of B at the head of A. the sum is a vector from the tail of A to the head of B\\
+since \(A-B=A+(-B)\), in order to subtract B from A we can simply multiply it by -1 and then add, so in a sense, we're "rotating" B and adding it to A to get \(A-B\):\\
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/WnuzbR0}
+\end{center}
+
+vector addition is \textbf{commutative}, \href{20220923212917-associative.org}{associative} and \href{20220923212922-distributive.org}{distributive}\\
+\subsection{dot product}
+\label{sec:org7fafbe9}
+\begin{definition}
+the scalar product of 2 vectors A and B is defined as \(A \cdot B = |A||B|\cos\theta\) where \(\theta\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \(\theta\) is always taken as the angle smaller than \(\pi\)):\\
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/dVIhILj}
+\end{center}
+
+when the vectors are in the form of a list of components, e.g. \((x,y,z)\) then the dot product is the sum of the products of corresponding components, i.e. given two vectors \(A=(A_1,\dots,A_n),B=(B_1,\dots,B_n)\), their dot product is \(A\cdot B=A_1B_1+\dots+A_nB_n\)\\
+
+\begin{question}
+find a unit vector in the \(xy\) plane which is perpendicular to \(A=(3,5,1)\)\\
+\begin{answer}
+we denote the perpendicular vector by \(B=(B_x,B_y,B_z)\), since \(B\) is in the \(xy\) plane, \(B_z=0\), for B to be perpendicular to A, we have \(A\cdot B=0\) because \(\cos90=0\), so:\\
+\begin{align*}
+  A \cdot B &= 3B_x + 5B_y\\
+  &= 0
+\end{align*}
+hence \(B_y=-\frac{3}{5}B_x\), however, B is a \hyperref[sec:orgc00677a]{unit vector}, which means that \(\sqrt{B_x^2+B_y^2}=1\)\\
+combining these gives \(B_x^2+\frac{9}{25}B_x^2=1\), or \(B_x=\sqrt{\frac{25}{34}}=\pm0.857\) and \(B_y=-\frac{3}{5}B_x=\pm0.514\)\\
+the ambiguity in sign of \(B_x\) and \(B_y\) indicates that B can point along a line perpendicular to A in either of two directions\\
+\end{answer}
+\end{question}
+\end{definition}
+\subsection{cross product}
+\label{sec:orge4c1a00}
+unlike the \hyperref[sec:org7fafbe9]{dot product} which gives us a scalar as a result, the \textbf{cross product} results in a \hyperref[sec:org103a65e]{vector}, so we get a \hyperref[sec:orgd47f5ea]{magnitude} and a direction that represent the vector\\
+the cross product is defined by the formula:\\
+\(A \times B = \left\Vert A \right\Vert \left\Vert B \right\Vert\sin(\theta)n\)\\
+where \(\theta\) is the angle between A and B when they are drawn tail to tail (to eliminate ambiguity, \(\theta\) is always taken as the angle smaller than \(\pi\))\\
+when we draw A and B tail to tail, they determine a plane, we define \(n\) to be a \hyperref[sec:orgc00677a]{unit vector} that is perpendicular to that plane, which means \(A\times B\) is in that same direction as the unit vector\\
+imagine a right hand coordinate system with \(A\) and \(B\) in the \(xy\) plane, A lies on the \(x\) axis and \(B\) lies toward the \(y\) axis, \(A\), \(B\) and \(n\) should form what is called a right hand triple such that \(n\) would be represented by the thumb\\
+a result of our definition of the cross product is that:\\
+\(B\times A=-A\times B\)\\
+and so obviously cross product isnt \href{20220923212910-commutative.org}{commutative} but rather anticommutative\\
+\subsection{vector space}
+\label{sec:orgea93933}
+\begin{definition}
+let \(V\) be a non-empty \href{discrete_maths2.org}{set} of \hyperref[sec:org103a65e]{vector}s containing numbers from the \hyperref[sec:orgd95c18e]{field} \(\mathbb{F}\), consider the 2 operations addition and scalar multiplication, \(V_\mathbb{F}\) is a \textbf{vector space} only if it abides by the following axioms:\\
+\textbf{addition axioms}:\\
+\begin{itemize}
+\item addition closure: for every \(\vec{v}_1, \vec{v}_2 \in V\) we have \(\vec{v}_1 + \vec{v}_2 \in V\)\\
+\item associative addition: for every \(\vec{v}_1, \vec{v}_2, \vec{v}_3 \in V\) we have \((\vec{v}_1 + \vec{v}_2) + \vec{v}_3 = \vec{v}_1 + (\vec{v}_2 + \vec{v}_3)\)\\
+\item commutative addition: \(\vec{v}_1 + \vec{v}_2 = \vec{v}_2 + \vec{v}_1\)\\
+\item zero vector: \(\vec{0} \in V\) so that \(\vec{0} + \vec{v} = \vec{v}\)\\
+\item negative vector: for every \(\vec{v} \in V\) there exists \(-\vec{v}\) so that \(\vec{v} + (-\vec{v}) = \vec{0}\)\\
+\end{itemize}
+\textbf{multiplication axioms}:\\
+\begin{itemize}
+\item multiplication closure: for every \(\vec{v} \in V\) and \(a \in \mathbb{F}\) we have \(a \cdot \vec{v} \in V\)\\
+\item associative multiplication: for every \(\vec{v} \in V\) and \(a,b \in \mathbb{F}\) we have \((a \cdot b) \cdot \vec{v} = a \cdot (b \cdot \vec{v})\)\\
+\item identity vector: for every \(\vec{v} \in V\) we have \(\vec{1} \cdot \vec{v} = \vec{v}\)\\
+\item identity law: for every \(\vec{v} \in V\) we have \(1 \cdot \vec{v} = \vec{v}\)\\
+\item first distributive law: for every \(a,b \in \mathbb{F}\) and \(\vec{v} \in V\) we can have \((a + b) \cdot v = a \cdot v + b \cdot v\)\\
+\item second distributive law: for every \(a \in \mathbb{F}\) and \(\vec{v}_1, \vec{v}_2 \in V\) we can have \(a \cdot (\vec{v}_1 + \vec{v}_2) = a \cdot \vec{v}_1 + a \cdot \vec{v}_2\)\\
+\end{itemize}
+\begin{my_example}
+\(v = \{\overline{0}\}\) over some field \(\mathbb{F}\)\\
+\end{my_example}
+\begin{my_example}
+over some \(n \in \mathbb{N}\) and some field \(\mathbb{F}\):\\
+\[
+v = \{(x_1, x_2, x_3, \ldots x_n) \ | \ x_i \in \mathbb{F}, i = 1, \ldots, n\}
+\]\\
+the definition of summation would be:\\
+\begin{gather*}
+  v = (v_1, v_2, \dots, v_n) \in V\\
+  u = (u_1, u_2, \dots, u_n) \in V\\
+  u \oplus v = (u_1 + v_1, u_2 + v_2, \dots, u_n + v_n)
+\end{gather*}
+and for some \(a \in \mathbb{F}\) the definition of multiplication would be:\\
+\[
+a \odot v = (a \cdot v_1, a \cdot v_2, \dots, a \cdot v_n)
+\]\\
+\end{my_example}
+\begin{my_example}
+this is an example of the 1st addition axiom\\
+let \(\mathbb{F}\) be a field\\
+this describes all the polynomials of \(x\) over the field \(\mathbb{F}\)\\
+\[
+  \mathbb{F}[x] = \sum_{i=0}^{n}a_i \cdot x^i \text{ where $a_i \in \mathbb{F}$}
+\]\\
+let \(\mathbb{F} = \mathbb{R}\) as an example\\
+the addition of 2 polynomials is as follows:\\
+\begin{align*}
+(3x^5 + 2x^3 + x + 1) + (7x^4 + 2x + 3)&=\\
+(3x^5 + 0x^4 + 2x^3 + 0x^2 + x + 1) + (0x^5 + 7x^4 + 0x^3 + 0x^2 + 2x + 3)&=\\
+3x^5 + 7x^4 + 2x^3 + 0x^2 + 3x + 4&=\\
+3x^5 + 7x^4 + 2x^3 + 3x + 4&
+\end{align*}
+the symbolic process of addition can be described as follows:\\
+let \(f, g \in \mathbb{F}[x]\) so there exist the polynomial degrees \(m \leq n\)\\
+\begin{align*}
+  f(x) &= \sum_{i=0}^{m} a_i \cdot x^i,\ a_i \in \mathbb{F}\\
+  g(x) &= \sum_{i=0}^{n} b_i \cdot x^i,\ b_i \in \mathbb{F}\\
+  f(x) \oplus g(x) &= \sum_{i=0}^{m} (a_i + b_i) \cdot x^i + \sum_{i=m+1}^{n} b_i \cdot x^i
+\end{align*}
+and the symbolic process of constant multiplication is defined as:\\
+\[ a \cdot f(x) = \sum_{i=0}^{m} a \cdot a_i \cdot x^i \]\\
+as for the degrees of the resulting polynomials after multiplication/addition:\\
+if \(n > m\):\\
+\begin{align*}
+  \deg(f) &= n\\
+  \deg(g) &= m\\
+  \deg(f+g) &= n
+\end{align*}
+if \(n = m\):\\
+\[ \deg(f+g) = \text{cant be predetermined, depends on the polynomials} \]\\
+\end{my_example}
+\begin{my_example}
+a vector space could look something like this:\\
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/BdNZek}
+\end{center}
+
+all the vectors that lie on the blue line represent a vector space, because the multiplication of a line would just make it longer (or shorter) it wouldnt make it move out of the blue line, and addition of any 2 vectors that lie on the blue line would also result in a longer (or shorter) vector that lies on the same line which expands across the entire 2d space\\
+\end{my_example}
+\begin{my_example}
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/xt5Zoo}
+\end{center}
+
+this line doesnt represent a vector space because it doesnt contain the vector \(\begin{bmatrix} 0\\ 0 \end{bmatrix}\)\\
+\end{my_example}
+\begin{lemma}
+\textbf{reduction law}\\
+for every \(y,v,w \in V\)\\
+\[ u + w = v + w \implies u = v \]\\
+
+\begin{proof}
+\begin{align*}
+  (u + w) + (-w) &= (v + w) + (-w) & \text{5th addition axiom (negative vector)}\\
+  u + (w + (-w)) &= v + (w + (-w)) & \text{2nd addition axiom (associative property)}\\
+  u + 0 &= v + 0\\
+  u &= v
+\end{align*}
+\end{proof}
+\end{lemma}
+\begin{lemma}
+for \(v \in V\):\\
+\[ 0 \cdot v = \vec{0} \]\\
+\end{lemma}
+\begin{lemma}
+for \(a \in \mathbb{F}\)\\
+\[ a \cdot \vec0 = \vec0 \]\\
+
+\begin{proof}
+\begin{align*}
+  a \cdot \vec0 &= a \cdot (\vec0 + \vec0)\\
+  a \cdot \vec0 &= a \cdot \vec0 + a \cdot \vec0\\
+  \vec0 + a \cdot \vec0 &= a \cdot \vec0 + a \cdot \vec0\\\
+  \vec0 &= a \cdot \vec0
+\end{align*}
+\end{proof}
+\end{lemma}
+\begin{lemma}
+\(v \in V \implies (-1) \cdot v = -v\)\\
+\end{lemma}
+\begin{lemma}
+\(v_1 = -v \land v_2 = -v \implies v_1 = v_2\)\\
+\end{lemma}
+\begin{lemma}
+for \(a \in \mathbb{F}\) and \(v \in V\)\\
+\[ a \cdot v = \vec0 \iff (a = 0 \text{ or } v = \vec0) \]\\
+\end{lemma}
+\end{definition}
+\subsubsection{vector subspace}
+\label{sec:org3f77751}
+\begin{definition}
+let \(V_\mathbb{F}\) be a \hyperref[sec:orgea93933]{vector space}\\
+if \(U \subseteq V_\mathbb{F}\) we say \(U\) is a \textbf{subspace} of \(V\) and we write \(U \leq V\) only if the following is true:\\
+\begin{itemize}
+\item \(\vec0 \in U\)\\
+\item for \(u_1,u_2 \in U\) its also true that \(u_1 + u_2 \in U\) (addition closure)\\
+\item for \(u \in U,\ a \in F \implies a \cdot u \in U\) (scalar multiplication closure)\\
+\end{itemize}
+\begin{lemma}
+if \(U \leq V\) then \(U_\mathbb{F}\) is a vector space\\
+\begin{proof}
+let \(u_1,u_2 \in U\) then \(u_1 + u_2 \in U\), let \(u_1,u_2,u_3 \in U\) then \((u_1+u_2)+u_3 = u_1+(u_2+u_3)\)\\
+to be continued..\\
+\end{proof}
+\end{lemma}
+\begin{characteristic}
+strictly speaking, a \textbf{subspace} is a vector space included in another larger vector space. therefore, all properties of a vector space, such as being closed under addition and scalar multiplication still hold true when applied to the subspace.\\
+\end{characteristic}
+\begin{my_example}
+let the set of vectors \(V_\mathbb{R} = \mathbb{R}^2\), consider the following set:\\
+\[ V = \{(x,y) \mid x + y = 0\} \]\\
+by the definition of this set, a vector \(\vec{v} = (x,y)\) is in the set \(V\) only if \(x + y = 0\)\\
+for \(V_\mathbb{R}\) to be a subspace of \(\mathbb{R}^2\), it has to meet 3 conditions:\\
+condition 1: \(\vec0 \in V\), in this case \(\vec0 = (0,0)\)\\
+\[ 0 + 0 = 0 \ \checkmark \]\\
+condition 2: addition closure, meaning if \(\vec{v}_1, \vec{v}_2 \in V\) then \(\vec{v}_1 + \vec{v}_2 \in V\)\\
+\begin{align*}
+  \vec{v}_1 &= (x_1, y_1)\\
+  \vec{v}_2 &= (x_2, y_2)\\
+  \vec{v}_3 &= (x_1+x_2, y_1+y_2)\\
+  (x_1 + x_2) + (y_1 + y_2) &= (x_1 + y_1) + (x_2 + y_2) = 0 \ \checkmark
+\end{align*}
+condition 3: multiplication closure, meaning if \(\vec{v} \in V, k \in \mathbb{R}\) then \(k \cdot v \in V\)\\
+\begin{align*}
+  v &= (x, y)\\
+  k \cdot v &= (kx, ky)\\
+  kx + ky &= k(x + y) = 0 \ \checkmark
+\end{align*}
+\end{my_example}
+\end{definition}
+\subsubsection{linear combination}
+\label{sec:org0d4cbb4}
+\begin{definition}
+let \(V_\mathbb{F}\) be a \hyperref[sec:orgea93933]{vector space}, let \(A = \{\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n\} \subseteq V_\mathbb{F}\) and \(x_1, x_2, \ldots, x_n \in \mathbb{F}\), then \(x_1\vec{v}_1 + x_2\vec{v}_2 + \cdots + x_n\vec{v}_n\) is a \textbf{linear combination} of elements of \(A\)\\
+although the term \textbf{linear combination} is somewhat ambiguous as it can refer to either the combination of vectors and coefficients itself or (in most cases) to its value, i.e. \(v = x_1\vec{v}_1 + x_2\vec{v}_2 + \cdots + x_n\vec{v}_n\) means the \hyperref[sec:org103a65e]{vector} \(v\) is a linear combination of the vectors in the \href{discrete_maths2.org}{set} \(A\)\\
+\end{definition}
+\subsubsection{span}
+\label{sec:org1ee137f}
+\begin{definition}
+the \textbf{span} of a given \href{discrete_maths2.org}{set} of \hyperref[sec:org103a65e]{vector}s is the collection of all the possible \hyperref[sec:org0d4cbb4]{linear combination}s of the vectors of the set, i.e.:\\
+let \(V_\mathbb{F}\) be a \hyperref[sec:orgea93933]{vector space}, let \(A = \{\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n\} \subseteq V_\mathbb{F}\) and \(x_1, x_2, \ldots, x_n \in \mathbb{F}\), then \(\spn(\{\vec{v}_1, \ldots, \vec{v}_n\}) = \{x_1\vec{v}_1, x_2\vec{v}_2, \ldots, x_n\vec{v}_n \}\)\\
+
+\begin{lemma}
+let \(A = \{\vec{v_1},\ldots,\vec{v_n}\} \subseteq V_\mathbb{F}\), then \(\spn(A) = \spn\{\vec{v}_1,\ldots,\vec{v}_n\} \leq V_\mathbb{F}\)\\
+
+\begin{proof}
+let \(\vec{v} \in \spn(A),\ \vec{x} \in \mathbb{F}\)\\
+\begin{align*}
+  x_iv_i &\in V &\text{ multiplication closure of } V\\
+  \vec{v} = \sum_{i=1}^{n} x_iv_i &\in V &\text{addition closure of } V\\
+  \spn(A) &\subseteq V &\text{ because every } \vec{v} \in \spn(A) \text{ is also } \vec{v} \in V
+\end{align*}
+we have proven that \(\spn(A)\) is a subset of \(V\), now with that out of the way we need to check the 3 conditions that need to be satisfied for a subset to be a subspace\\
+condition 1: \(\vec0 \in \spn(A)\)\\
+\[ \vec{x} = \vec0 \implies \sum_{i=1}^{n} 0 \cdot v_i = \vec0 \in \spn(A) \]\\
+condition 2: addition closure\\
+let \(\vec{v}, \vec{w} \in \spn(A)\) so there exist \(\vec{x}, \vec{y} \in \mathbb{F}\) so that:\\
+\begin{align*}
+  \vec{v} &= x_1\vec{v}_1 + x_2\vec{v}_2 + \ldots + x_n\vec{v}_n\\
+  \vec{w} &= y_1\vec{v}_1 + y_2\vec{v}_2 + \ldots + y_n\vec{v}_n\\
+  \vec{v} + \vec{w} &= (x_1\vec{v}_1 + \ldots + x_n\vec{v}_n) + (y_1\vec{v}_1 + \ldots + y_n\vec{v}_n)\\
+    &= \underbrace{(x_1+y_1)\vec{v}_1}_{(x_1+y_1)\vec{v}_1 \in V} + \ldots + (\underbrace{x_n+y_n}_{x_n+y_n \in \mathbb{F}})\vec{v}_n \in \spn(A)
+\end{align*}
+condition 3: multiplication closure\\
+let \(\vec{v} \in \spn\{\vec{v}_1 \ldots \vec{v}_n\}, a \in \mathbb{F}\) so there exist \(x_1 \ldots x_n \in \mathbb{F}\), such that \(\vec{v} = \sum_{k=1}^{n} x_k\vec{v}_k\)\\
+\[ a\vec{v} = a \sum_{k=1}^{n} x_k\vec{v}_k = \underbrace{(ax_1)}_{ax_1 \in \mathbb{F}}\vec{v}_1 + (ax_2)\vec{v}_2 + \ldots + (ax_n)\vec{v}_n \in \spn\{\vec{v}_1,\ldots,\vec{v}_n\} \]\\
+\end{proof}
+\end{lemma}
+
+\begin{my_example}
+by definition of \textbf{span}, a span of a set of vectors is the collection of all the possible linear combinations using said vectors\\
+the span of a single vector would just be its own line expanded across the entire 3d region, because we cant reach other dimensions by constant multiplication or by addition of the vector to itself\\
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/DuGLXT}
+\end{center}
+
+the span of 2 \textbf{linearly independant} vectors is however more interesting because it would be visualized as a grid across the 3d space\\
+for simplicity, we take the relatively simple vectors \(\begin{bmatrix} 0\\1.3\\1.8 \end{bmatrix}, \begin{bmatrix} 0\\ -0.9\\ 0.9 \end{bmatrix}\) that lie on the \(x=0\) grid which covers the \(y\) and \(z\) axes\\
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/BkRBEU}
+\end{center}
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/mW0Cqb}
+\end{center}
+\end{my_example}
+\end{definition}
+\paragraph{spanning set}
+\label{sec:org780ffb0}
+\begin{definition}
+consider the \hyperref[sec:orgea93933]{vector space} \(V\), let \(w \subseteq V_\mathbb{F},\ |w| \in \mathbb{N},\ \spn(w)=V\), then \(w\) is a \textbf{spanning set} of \(V\) and \(V\) is a \textbf{finitely spanned set}\\
+\begin{my_example}
+\begin{itemize}
+\item \(\spn\{(1,0,0),(0,1,0),(0,0,1)\} = \mathbb{R}^3\)\\
+\item \(\spn\{(1,0,0),(0,1,0),(1,1,0)\} \neq \mathbb{R}^3\) because the third vector is the sum of the first two which makes it a linear combination of them\\
+\end{itemize}
+which means the first set is a spanning set but the second isnt\\
+\end{my_example}
+\begin{my_example}
+consider the vector space \(\mathbb{R}^4\), given the vectors \(v_1= \left[\begin{array}{r} 1 \\ 2 \\ -1 \\ -2 \end{array}\right] ,v_2= \left[\begin{array}{r} 1 \\ 2 \\ 3 \\ -6 \end{array}\right] ,v_3= \left[\begin{array}{r} 0 \\ 0 \\ 1 \\ -1 \end{array}\right] ,v= \left[\begin{array}{r} 1 \\ 2 \\ 1 \\ -4 \end{array}\right]\), check if \(v \in \spn\{v_1,v_2,v_3\}\)\\
+this means there exist \(x,y,z \in \mathbb{R}\) such that \(x\cdot \left[\begin{array}{r} 1 \\ 2 \\ -1 \\ -2 \end{array}\right] +y\cdot \left[\begin{array}{r} 1 \\ 2 \\ 3 \\ -6 \end{array}\right] +z\cdot \left[\begin{array}{r} 0 \\ 0 \\ 1 \\ -1 \end{array}\right] = \left[\begin{array}{r} 1 \\ 2 \\ 1 \\ -4 \end{array}\right]\)\\
+to solve this we build an augmented matrix:\\
+\[\left[\begin{array}{rrr} 1 & 1 & 0 \\ 2 & 2 & 0 \\ -1 & 3 & 1 \\ -2 & -6 & -1 \end{array}\right] \cdot \left[\begin{array}{r} x \\ y \\ z \end{array}\right] = \left[\begin{array}{r} 1 \\ 2 \\ 1 \\ -4 \end{array}\right] \implies \left[\begin{array}{rrrr} 1 & 1 & 0 & 1 \\ 2 & 2 & 0 & 2 \\ -1 & 3 & 1 & 1 \\ -2 & -6 & -1 & -4 \end{array}\right]\]\\
+we reduce to echelon form:\\
+\[\left[\begin{array}{rrrr} 1 & 1 & 0 & 1 \\ 0 & 4 & 1 & 2 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{array}\right]\]\\
+this matrix tells us that we have infinite \(x,y,z\) that give us what we want, therefore \(v \in \spn\{v_1,v_2,v_3\}\)\\
+\end{my_example}
+\begin{my_example}
+\(\mathbb{R} ^n\) is spanned by the set \(x_1,x_2\ldots x_n\):\\
+\[
+  \spn(\mathbb{R}^n) = \sum_{i=1}^{n} x_iu_i
+\]\\
+\(\mathbb{R}^n\) is spanned by the following \(n\) vectors:\\
+\begin{align*}
+  u_1 &= (1,0,0\ldots 0)\\
+  u_2 &= (0,1,0\ldots 0)\\
+  u_2 &= (0,0,1\ldots 0)\\
+  &\vdots\\
+  u_n &= (0,0,0\ldots 1)
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\(\mathbb{R}[x]\) is the space of polynomials over the field \(\mathbb{R}\) with a single polynomial \(x\)\\
+\(\mathbb{R}[x]\) isnt finitely spanned, to prove this, we assume in contradiction that the set \(p_1(x),p_2(x)\ldots p_n(x)\) spans \(\mathbb{R}[x]\)\\
+a linear combination of polynomials cant give us a degree that is higher than the degree of the polynomial with the highest degree in said linear combination, we write:\\
+\[
+  \sum_{i=1}^n x_ip_i(x) \leq max\{deg(p_{1 \rightarrow n}(x))\}
+\]\\
+let \(m\) be the polynomial with the highest degree, \(m = max\{deg(p_{1 \rightarrow n}(x))\}\), we know \(x^{m+1} \in \mathbb{R}[x]\) by necessity because \(\mathbb{R}[x]\) contains all the polynomials over the field \(\mathbb{R}\)\\
+\[
+  \sum_{i=1}^n x_ip_i(x) \leq m \implies \sum_{i=1}^{n} x_ip_i(x) \neq x^{m+1} \implies x^{m+1} \not \in \mathbb{R}[x] \implies \spn\{p_1\ldots p_n\} \neq \mathbb{R}[x]
+\]\\
+\end{my_example}
+\begin{lemma}
+let \(V\) be a vector space over the field \(\mathbb{F}\), and let \(T \subseteq V, S \subseteq V\) be sets of vectors, then \(\spn(S) \subseteq \spn(T) \iff S \subseteq \spn(T)\)\\
+\end{lemma}
+\begin{lemma}
+if \(V_\mathbb{F}\) is finitely spanned, if \(W \leq V\) then \(W\) is finitely spanned too\\
+\end{lemma}
+\end{definition}
+\paragraph{linear dependance}
+\label{sec:org174d95a}
+\begin{definition}
+a \href{discrete_maths2.org}{set} of vectors \(v_1, v_2, \ldots, v_k\) from a \hyperref[sec:orgea93933]{vector space} is said to be \textbf{linearly dependant} if there exists a non-trivial (not all zeros) set of \href{20220727110413-scalar.org}{scalar}s \(a_1,a_2,\ldots,a_k\), such that:\\
+\[
+  a_1v_1 + a_2v_2 + \cdots + a_kv_k = \vec0
+\]\\
+thus, a set of vectors is linearly dependent if and only if one of them is zero or a linear combination of the others.\\
+each of the vectors in a linearly dependant set is linearly dependant on the set\\
+
+\begin{note}
+a \textbf{set of vectors} is just a subset of a vector space \(V\) while a \textbf{sequence of vectors} is a map \(\mathbb{N} \rightarrow V\) (can also be written as a infinite tuple). A set does not care about ordering or enumerating elements multiple times in contrast to a sequence.\\
+\end{note}
+\begin{my_example}
+given \(v_1= \left[\begin{array}{r} 1 \\ 0 \\ 1 \end{array}\right] ,v_2= \left[\begin{array}{r} 1 \\ 1 \\ 0 \end{array}\right] ,v_3= \left[\begin{array}{r} 2 \\ 1 \\ 1 \end{array}\right]\) check whether these vectors are linearly dependant\\
+
+we need to find \(x,y,z\) such that \(xv_1 + xv_2 + xv_3 = \vec0\), and the first combination that comes to mind is \(v_1 + v_2 - v_3 = \vec0\), so these vectors are linearly dependant\\
+\end{my_example}
+\begin{lemma}
+\(\{\vec v\}\) is a linearly dependant set if and only if \(\vec v = \vec0\)\\
+\begin{proof}
+\textbf{first} we prove\\
+\[ \{\vec v\} \text{ being linearly dependant} \implies \vec v = \vec0 \]\\
+\(\{\vec v\}\) being linearly dependant means there exists \(a \neq 0 \in \mathbb{F}\) such that:\\
+\[ a\vec v = \vec0 \]\\
+we multiply both sides of this equation by \(a^{-1} \in \mathbb{F}\)\\
+\begin{align*}
+  a^{-1}a\vec v &= a^{-1}\vec0\\
+  \vec v &= \vec0
+\end{align*} 
+\textbf{second} we prove\\
+\[ \vec v = \vec0 \implies \{\vec v\} \text{ is linearly dependant} \]\\
+we need to find \(a \neq 0 \in \mathbb{F}\) such that\\
+\[
+  a\vec v = \vec0
+\]\\
+and that \(a\) can just be \(a = 1\) which would give us \(1 \cdot \vec v = \vec0\), therefore \(\{\vec v\}\) is linearly dependant\\
+\end{proof}
+\end{lemma}
+\end{definition}
+\subparagraph{proportionality}
+\label{sec:org381ea32}
+\begin{definition}
+\(v_1, v_2\) are called \textbf{proportional} if there exists \(a \in \mathbb{F}\) such that \(v_1 = a \cdot v_2\)\\
+
+\begin{lemma}
+\(\{v_1, v_2\}\) is a linearly dependant set if and only if the vectors \(v_1,v_2\) are proportional\\
+\begin{proof}
+\textbf{first} we need to prove\\
+\[
+  \{v_1, v_2\} \text{ is linearly dependant} \implies \{v_1, v_2\} \text{ are proportional}
+\]\\
+\(\{v_1, v_2\}\) being linearly dependant means there exist \(a,b \in \mathbb{F}\) not both 0 such that \(av_1 + bv_2 = \vec0\)\\
+we assume \textbf{Without loss of generality} that \(a \neq 0\)\\
+so we can manipulate the equation to be:\\
+\[
+  v_1 = -\dfrac{b}{a}v_2
+\]\\
+and therefore \(v_1,v_2\) are proportional\\
+\textbf{second} we need to prove\\
+\[
+  v_1, v_2 \text{ are proportional} \implies \{v_1, v_2\} \text{ are linearly dependant}
+\]\\
+\(v_1, v_2\) being proportional means there exists \(a \in \mathbb{F}\) such that:\\
+\[
+  v_1 = av_2
+\]\\
+now we can manipulate this expression to be:\\
+\[
+  v_1 - av_2 = \vec0
+\]\\
+which obviously tells us that \(\{v_1,v_2\}\) are linearly dependant because there exists a set of coefficients not all 0 that gives us the vector \(\vec0\)\\
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+if \(S \subset T\) and both are finite sets, if \(S\) is linearly dependant then \(T\) is linearly dependant aswell\\
+\begin{proof}
+let \(S = \{s_1, s_2, \ldots, s_n\}\), \(T=\{s_1,s_2,\ldots, s_n, t_{n+1}, \ldots, t_{k+1}\}\)\\
+since \(S\) is linearly dependant then we have the scalars \(x_1,x_2,\ldots,x_n \in \mathbb{F}\) not all zero that give us:\\
+\[
+  x_1s_1 + x_2s_2 + \cdots + x_ns_n = \vec0
+\]\\
+consider the following sum:\\
+\[
+  x_1s_1 + \cdots + x_ns_n + 0 \cdot t_{n+1} + \cdots + 0 \cdot t_{n+k} = \vec0
+\]\\
+this sum shows just why \(T\) would be linearly dependant, because it is a linear combination whose scalars arent all 0 that gives us \(\vec0\)\\
+\end{proof}
+\begin{entailment}
+if a sequence of vectors \(A = \{v_1, \ldots, v_n\}\) contains a zero vector \(\vec0\) or 2 vectors that are proportional then \(A\) is linearly dependant\\
+\end{entailment}
+\end{lemma}
+
+\begin{lemma}
+let \(A = \{v_1,\ldots,v_n\}\) be a sequence of vectors such that \(v_1 \neq \vec0\), therefore the following statements are equal\\
+\begin{enumerate}
+\item \(A\) is a linearly dependant set of vectors\\
+\item the sequence \(A\) contains a vector \(v_i,\ i \geq 2\) which is a linear combination of its preceding vectors\\
+\item the sequence \(A\) contains a vector \(v_i,\ i \geq 2\) that is a linear combination of other vectors which means \(v_i \in \spn\{v_1,\ldots,v_{i-1},v_{i+1},\ldots,v_n\}\)\\
+\end{enumerate}
+\begin{proof}
+we start with proving \(\text{statement } 1 \implies \text{statement } 2\)\\
+according to statement 1, \(A\) is a linearly dependant set of vectors, therefore there exists a non-trivial linear combination that gives us \(\vec0\)\\
+\[
+  x_1v_1 + x_2v_2 + \cdots + x_nv_n = \vec0
+\]\\
+we pick the last coefficient that isnt 0, let \(x_k \neq 0\) be that coefficient, so we know \(x_{k+1} \cdots x_n = 0\) because \(x_k\) is the last non-zero scalar\\
+and we can also conclude that the following is a non-trivial sequence that gives us \(\vec0\) because all scalars that come after \(x_k\) are \(0\)\\
+\[
+  x_1v_1 + x_2v_2 + \cdots + x_kv_k = \vec0
+\]\\
+we manipulate this expression:\\
+\begin{align*}
+  x_1v_1 + x_2v_2 + \cdots + x_kv_k &= \vec0\\
+  x_1v_1 + x_2v_2 + \cdots + x_{k-1}v_{k-1} &= -x_kv_k\\
+  \dfrac{x_1}{-x_k}v_1 + \dfrac{x_2}{-x_k}v_2 + \cdots \dfrac{x_{k-1}}{-x_k}v_{k-1} &= v_k\\
+\end{align*}
+and so we have proved that \(v_k\) is a linear combination of its preceding vectors\\
+not that \(k \geq 2\) because if \(k = 1\) and \(k\) is the rightmost non-zero scalar then all the scalars are zero\\
+\end{proof}
+
+\begin{proof}
+now we prove \(\text{statement } 2 \implies \text{statement } 3\)\\
+statement 2 tells us there exists \(i \geq 2\) such that \(v_i \in \spn\{v_1 \cdots v_{i-1}\}\) which means:\\
+\[
+  v_i = b_1v_1 + \cdots + b_{i-1}v_{i-1}
+\]\\
+we can add the rest of the vectors with 0 as the coefficients and not affect the equation\\
+\[
+  v_i = b_1v_1 + \cdots + b_{i-1}v_{i-1} + 0 \cdot v_{i+1} + \cdots 0 \cdot v_n
+\]\\
+\end{proof}
+
+\begin{proof}
+now we prove \(\text{statement } 3 \implies \text{statement } 1\)\\
+there exist \(x_1, x_2, x_{i-1}, x_{i+1}, x_n \in \mathbb{F}\) such that \(v_i = x_1v_1 + x_{i-1}v_{i-1} + x_{i+1}v_{i+1} + x_nv_n\)\\
+we move \(v_i\) to the other side of the equation to get:\\
+\[
+  \vec0 = x_1v_1 + x_{i-1}v_{i-1} + (-1)v_i + x_{i+1}v_{i+1} + x_nv_n
+\]\\
+since \(x_i=-1\), this shows that we have a non-trivial linear combination that gives us \(\vec0\) which means that the set is linearly dependant\\
+\end{proof}
+
+\begin{entailment}
+if \(S \subseteq V\) is linearly dependant then there exists \(\vec s \in S\) such that \(\vec s \in \spn(S - \{s\})\)\\
+in other words, if a given sequence of vectors is linearly dependant then it has atleast one vector that is a linear combination of the other vectors\\
+\label{org7800c26}
+\end{entailment}
+\end{lemma}
+
+\begin{lemma}
+let \(S = \{s_1,s_2,\ldots,s_n\}\), if \(S \subseteq V\) is a dependant set then there exists \(\vec s \in S\) such that \(\spn(s) = \spn(S - \{s\})\)\\
+in other words, given a dependant set of vectors, there exists a vector in this set that is possible to drop without changing the span of the set\\
+
+\begin{proof}
+according to \hyperref[org7800c26]{this entailment}, there exists \(s \in S\) such that \(s \in \spn(S - \{s\})\)\\
+to prove \(\spn(s) = \spn(S - \{s\})\) we show that \(\spn(s) \subseteq \spn(S - \{s\})\) and \(\spn(S - \{s\}) \subseteq \spn(s)\)\\
+we know that \(\spn(S - \{s\}) \subseteq \spn(s)\) because we can take every linear combination from the former, add \(0 \cdot s\) to it, and it would be a linear combination of the latter\\
+without loss of generality, assume \(s = s_1\)\\
+since \(s_1 \in \spn(S - \{s_1\})\) then:\\
+\[
+  s_1 = y_2s_2 + y_3s_3 + \cdots + y_ns_n
+\]\\
+where \(y_2\ldots y_n \in \mathbb{F}\)\\
+let \(v \in \spn(S)\) then:\\
+\[
+  v = x_1s_1 + x_2s_2 + \cdots + x_ns_n
+\]\\
+where \(x_2\ldots x_n \in \mathbb{F}\)\\
+we substitute \(s_1\) in this equation to get:\\
+\begin{align*}
+  v &= x_1(y_2s_2 + y_3s_3 + \cdots + y_ns_n) + x_2s_2 + \cdots + x_ns_n\\
+  v &= (x_1y_2 + x_2)s_2 + \cdots + (x_1y_n + x_n)s_n\\
+\end{align*}
+we have showed that \(v \in \spn(S - \{s_1\})\)\\
+and since \(v \in \spn(S)\) and \(v \in \spn(S - \{s\})\) then \(\spn(S) \subseteq \spn(S - \{s\})\)\\
+and since \(\spn(s) \subseteq \spn(S - \{s\})\) and \(\spn(S - \{s\}) \subseteq \spn(s)\) then \(\spn(s) = \spn(S - \{s\})\)\\
+\end{proof}
+\label{orgd3163b2}
+\end{lemma}
+
+\begin{lemma}
+for every finite set \(S \in V_\mathbb{F}\), there exists \(B \subseteq S\) such that:\\
+\begin{enumerate}
+\item \(B\) is linearly indepenedant\\
+\item \(\spn(B) = \spn(S)\)\\
+\end{enumerate}
+
+\begin{proof}
+in case \(S\) is linearly independant we pick \(B = S\) and so \(B\) is linearly dependant and \(\spn(B) = \spn(S)\)\\
+in case \(S\) is linearly dependant we got more work to do:\\
+according to \hyperref[orgd3163b2]{this lemma}, \(\spn(S) = \spn(S - \{s_1\})\)\\
+in case \(S - \{s_1\}\) is linearly independant then let \(B = S - \{s_1\}\) which means \(B \subseteq S\) and \(\spn(B) = \spn(S)\)\\
+in case \(S - \{s_1\}\) is linearly dependant, according to \hyperref[orgd3163b2]{this lemma}, \(\spn(S - \{s_1,s_2\}) = \spn(S - \{s_1\}) = \spn(S)\)\\
+in case \(\spn(S - \{s_1,s_2\})\) is linearly independant then the proof is over\\
+in case it isnt, we repeat the same step of removing a vector\\
+you might already see the pattern here, we keep dropping vectors from \(S\) without changing the span, eventually we would arrive at \(S - \{s_1,s_2,s_k\}\) that is linearly independant and \(B \subseteq S\) and \(\spn(B) = \spn(S)\)\\
+\end{proof}
+\end{lemma}
+\end{definition}
+\subsubsection{basis}
+\label{sec:orgfcbaa89}
+\begin{definition}
+assuming a \hyperref[sec:orgea93933]{vector space} \(V\), let \(B \subseteq V\) be a finite, \hyperref[sec:org174d95a]{linearly independant} and \hyperref[sec:org780ffb0]{spanning set} of \(V\) which we call a \textbf{basis}, each vector in a basis is called a \textbf{basis vector}\\
+let \(B = \{u_1,\ldots,u_i,\ldots,u_n\}\) be a basis of \(\mathbb{R}^n\):\\
+\begin{align*}
+  u_1 &= (1,0,\ldots,0)\\
+  u_2 &= (0,1,\ldots,0)\\
+  &\vdots\\
+  u_i &= (0,0,\ldots,1\ldots,0)\\
+  &\vdots\\
+  u_n &= (0,0,\ldots,1)
+\end{align*}
+since \(B\) is linearly independant then:\\
+\[
+  \sum_{i=1}^{n} x_iu_i = \vec0 \iff x_1 = x_2 = \cdots = x_n = 0
+\]\\
+this is necessarily true because \(x_i\) has to be 0 for \(u_i\) to zero out and if it wasnt zero then the output vector would have a non-zero in it and it wouldnt be \(\vec0\) anymore\\
+\begin{note}
+a basis doesnt have to be of this simplified form, we can take the basis \(B\), apply \hyperref[sec:orgdd80885]{elementary row operation}s to its vectors and we would get another basis for the given vector space\\
+\end{note}
+
+\begin{lemma}
+every \textbf{finitely generated vector space} \(V_\mathbb{F}\) has atleast one basis\\
+\begin{proof}
+since \(V_\mathbb{F}\) is finitely generated there exists a finite set \(S \subseteq V\) such that \(\spn(S) = V\)\\
+according to \hyperref[orgd3163b2]{this lemma}, there exists \(B \subseteq S\) where \(B\) is linearly independant and \(\spn(B) = V\), therefore \(B\) is a basis\\
+\end{proof}
+\end{lemma}
+\begin{my_example}
+\(V = \{\vec0\}\)\\
+\(\spn(\varnothing) = \{\vec0\}\)\\
+\(\varnothing\) is linearly independant\\
+\(\varnothing\) is a basis of \(V\)\\
+\end{my_example}
+\begin{my_example}
+given the vector space \(W = \{(x,y,z)\in\mathbb{R}^3 \mid x=y\}\), we find a basis of it:\\
+\[
+(x,y,z) = (x,x,z) = x(1,1,0) + z(0,0,1) \implies B = \{(1,1,0),(0,0,1)\}
+\]\\
+so \(B\) is a basis of \(W\) and \(\dim W = 2\), see \hyperref[sec:orgdef24d1]{dimension}\\
+\end{my_example}
+\begin{my_example}
+consider the vector space \(M_{n \times m}(\mathbb{F})\) which represents all the matrices with dimensions \(n \times m\) over the field \(\mathbb{F}\)\\
+what we are basically looking for is a set of matrices that is linearly independant so that no matrix is a linear combination of the others, which is accomplished with:\\
+\[
+  u_{i,j} = i\stackrel{j}{\begin{pmatrix} 0 & \vdots & 0\\ \cdots & 1 & &\\ 0 & & 0 \end{pmatrix}}
+\]\\
+and:\\
+\[
+  \underbrace{\spn\{u_{i,j}\}}_{n \cdot m \text{ elements}} = M_{n \times m}(\mathbb{F})
+\]\\
+we prove that \(\{u_{i,j}\}\) is linearly independant:\\
+\[
+  \sum_{i=1}^{n} \sum_{j=1}^{m} \alpha_{i,j} \cdot u_{i,j} = \vec0
+\]\\
+it must be that \(a_{i,j} = 0\) and so \(\{u_{i,j}\}\) is linearly independant because the only linear combination that gives us \(\vec0\) is where the coefficients all are 0\\
+\end{my_example}
+
+\begin{lemma}
+given \(S\) is a finite set and \(T \subseteq \spn(S)\) and \(|T| > |S|\), then \(T\) is linearly dependant\\
+in other words, if we have a finitely generated vector space, if \(T\) is a subset of that space such that the number of elements in \(T\) is bigger than the number of elements in \(S\), then \(T\) is linearly dependant\\
+\begin{proof}
+let \(S = \{s_1,s_2 \ldots s_n\}\) and \(T = \{t_1,t_2 \ldots t_n\}\) such that \(n > m\)\\
+let \(A\) denote the coefficients, for every \(1 \leq i \leq n\) where \(t_i \in \spn(S)\) there exist the coefficients:\\
+\[
+  t_i = \sum_{j=1}^{m} A_{j,i} S_j
+\]\\
+\end{proof}
+\begin{entailment}
+let \(S\) be a finite set, if \(T \subseteq \spn(S)\) and \(T\) is linearly independant then \(|T| \leq |S|\)\\
+\end{entailment}
+\begin{entailment}
+let \(A,B\) be bases of \(V\) then \(|A| = |B|\)\\
+\begin{proof}
+\(B\) is a spanning set and \(A \subseteq \spn(B)\) and \(A\) is linearly independant then \(|A| \leq |B|\)\\
+\(A\) is a spanning set and \(B \subseteq \spn(A)\) and \(B\) is linearly independant then \(|B| \leq |A|\)\\
+therefore \(|B| = |A|\)\\
+\end{proof}
+\end{entailment}
+\end{lemma}
+\end{definition}
+\paragraph{standard basis}
+\label{sec:orgf759dd0}
+\begin{definition}
+the \textbf{standard basis} of a \hyperref[sec:orgea93933]{vector space} is the set of vectors whose components are all zero, except one that equals 1.\\
+
+\begin{my_example}
+consider the set \(\{(1,0),(0,1)\}\) which is a standard basis of the vector space \(\mathbb{R}^2\)\\
+also the dimension of this set is 2\\
+\end{my_example}
+
+\begin{lemma}
+when put in a matrix, a standard basis forms an identity matrix\\
+
+\begin{my_example}
+consider the set \(A = \{(1,0,0),(0,1,0),(0,0,1)\}\) which is a standard basis of the vector space \(\mathbb{R}^3\)\\
+we put the vectors in a matrix:\\
+\[
+\bmqty{1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1}
+\]\\
+which is an identity matrix of the 3rd degree\\
+\(\dim A = 3\)\\
+\end{my_example}
+\end{lemma}
+\end{definition}
+\paragraph{basis of the cartesian coordinate system}
+\label{sec:org6f7d0d9}
+the \hyperref[sec:orgf759dd0]{standard basis} of the \href{20220929001304-cartesian_coordinate_system.org}{cartesian coordinate system} consists of the \hyperref[sec:orgc00677a]{unit vector}s that lie along the x, y, and z axes\\
+the x unit vector is denoted by \(\ihat\), the y unit vector by \(\jhat\), and the z unit vector by \(\khat\)\\
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/YzTbRCF}
+\end{center}
+
+\begin{characteristic}
+\begin{align*}
+  \ihat \cdot \ihat &= \jhat \cdot \jhat = \khat \cdot \khat = 1\\
+  \ihat \cdot \jhat &= \jhat \cdot \khat = \khat \cdot \ihat = 0\\
+  \ihat \times \jhat &= \khat\\
+  \jhat \times \khat &= \ihat\\
+  \khat \times \ihat &= \jhat
+\end{align*}
+we can write any vector in terms of the base vectors\\
+\(A = A_x\ihat + A_y\jhat + A_z\khat\)\\
+\end{characteristic}
+\subsubsection{dimension}
+\label{sec:orgdef24d1}
+\begin{definition}
+the \textbf{dimension} of a \hyperref[sec:orgea93933]{vector space} \(V_\mathbb{F}\) is the number of elements in one of its \hyperref[sec:orgfcbaa89]{bases}\\
+we write \(\dim V_\mathbb{F} = |B|\) where \(B\) is a basis of \(V\)\\
+
+\begin{my_example}
+\(\dim(\mathbb{F}^n) = n\)\\
+\end{my_example}
+
+\begin{my_example}
+\(\dim(M_{n \times m}(\mathbb{F})) = n \times m\)\\
+\end{my_example}
+
+\begin{my_example}
+\(\dim(P_n[x]) = n + 1\)\\
+\end{my_example}
+
+\begin{my_example}
+\(\dim(\ker(A)) =\) number of free variables\\
+\end{my_example}
+
+\begin{lemma}
+let \(V_\mathbb{F}\) be a vector space of dimension \(n\), for every subset \(S \subseteq V\) that has \(n\) elements the following statements are equal\\
+\begin{enumerate}
+\item \(S\) is linearly independant\\
+\item \(\spn(S) = V\)\\
+\end{enumerate}
+
+\begin{proof}
+\begin{step}
+we prove \(\text{statement } 1 \Longrightarrow \text{statement } 2\)\\
+given \(S = \{s_1,s_2\ldots s_n\} \subseteq V^n\) is linearly independant, we need to prove \(\spn(S) = V\)\\
+let \(v \in V\), \(B\) a basis of \(V\), \(|B| = n\)\\
+let \(T = \{s_1,s_2\ldots s_n, v\}\)\\
+we know according to previous lemmas that \(|T| > n\) therefore \(T\) is linearly dependant\\
+since \(T\) is linearly dependant then we have the following non-trivial linear combination that gives us \(\vec0\):\\
+\[
+  \sum_{i=1}^n x_is_i + s_{n+1}v = \vec0
+\]\\
+we know \(x_{n+1} \neq 0\) because otherwise another \(s_i\) would be equal to 0 and \(S\) wouldnt be linearly independant\\
+by manipulating the expression we get:\\
+\[
+  \sum_{i=1}^n \frac{x_i}{x_{n+1}} \cdot s_i = v
+\]\\
+therefore \(v \in \spn(S)\) therefore \(\spn(S) = V\)\\
+\end{step}
+
+\begin{step}
+we prove \(\text{statement } 2 \Longrightarrow \text{statement } 1\)\\
+given \(\spn(S) = V^n\)\\
+assume in contradiction that \(S\) is linearly dependant\\
+according to a previous lemma we there exists \(B \subset S\) that is linearly independant such that \(\spn(B) = \spn(S)\) therefore \(B\) is a basis therefore \(|B| = n\)\\
+we arrived at a contradiction becacuse \(|B| < |S| = n\)\\
+\end{step}
+\end{proof}
+
+\begin{entailment}
+if \(\dim V = m\) and \(B = \{u_1,u_2 \ldots u_m\}\), if \(\spn(B) = V\) or \(B\) is linearly independant then \(B\) is a basis of \(V_\mathbb{F}\)\\
+\label{orgee4ccd8}
+\end{entailment}
+\end{lemma}
+
+\begin{lemma}
+given \(V_\mathbb{F}\) is finitely spanned, if \(W \leq V\) then \(\dim W \leq \dim V\)\\
+\begin{note}
+according to the previous lemma, since \(V\) is finitely spanned then \(W\) is finitely spanned too which means \(W\) has a basis and a dimension\\
+\end{note}
+we assume in contradiction that \(\dim W > \dim V\)\\
+assume \(\{v_1\ldots v_n\}\) is a basis of \(V\), then we know \(\spn\{v_1\ldots v_n\} = V\)\\
+assume \(\{w_1\ldots w_m\}\) where \(m > n\) is a basis of \(W\), then we know \(\spn\{w_1\ldots w_m\} = W\) which means \(\{w_1\ldots w_m\}\) is linearly independant but it cant be because we have a set where \(m \leq n\) with less elements that is linearly independant so a set with \(m > n\) cant be linearly independant\\
+\end{lemma}
+
+\begin{lemma}
+given \({V_\mathbb{F}}^n\) is finitely spanned, \(W^n \leq V^n\) and \(\dim W = \dim V\) then \(W = V\)\\
+\begin{proof}
+let \(w_1\ldots w_n\) be a basis of \(W\) and so \(n = |V|\) and \(w_1\ldots w_n\) is linearly independant therefore according to \hyperref[orgee4ccd8]{this lemma} \(\spn\{w_1\ldots w_n\} = V = W\) and since it spans \(V\) and is of size \(n = |V|\) then it is a basis of \(V\)\\
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+if \(V_\mathbb{F}\) is finitely spanned and \(W \leq V\) then for every basis \(B\) of \(W\) there exists a basis \(A\) of \(V\) such that \(B \subseteq A\)\\
+we call this operation as complementing the basis \(B\) to the basis \(A\)\\
+\begin{proof}
+we prove using induction of \(\dim V - \dim W\)\\
+\begin{step}
+the first step of an induction proof is a check\\
+we check if \(\dim V - \dim W = 0\) meaning \(\dim V = \dim W\)\\
+we pick \(A = B\)\\
+\end{step}
+to be continued\ldots{}\\
+\end{proof}
+\end{lemma}
+\begin{lemma}
+let \(V\) be a finitely spanned vector space, let \(U,W \leq V\) then:\\
+\[
+  \dim(U + W) = \dim U + \dim W - \dim(U \cap W)
+\]\\
+
+\begin{proof}
+with previous lemmas in mind, we know \(U + W,\ U \cap W \leq V\)\\
+let \(a_1\ldots a_n\) be a basis of \(U + W\)\\
+since \(U \cap W \leq V\) then we can complement \(a_1\ldots a_n\) to a basis of \(U\) such that \(a_1\ldots a_n + a_{n+1} \ldots a_m\) is a basis of \(U\)\\
+and since \(U \cap W \leq W\) then we can complement \(a_1\ldots a_n\) to a basis of \(W\) such that \(a_1\ldots a_n + b_{n+1} \ldots b_{k}\) is a basis of \(W\)\\
+so far we know \(\dim W = k,\ \dim U = m,\ \dim(W \cap U) = n\)\\
+to be continued\ldots{}\\
+\end{proof}
+\end{lemma}
+\end{definition}
+\subsubsection{coordinate vector}
+\label{sec:org33bca1f}
+\begin{definition}
+let \(V_F\) be a vector space such that \(\dim V = m\), and \(B=\{v_1,v_2\ldots v_m\}\) be a basis of \(V\) and \(u \in V\)\\
+the \textbf{coordinate vector} of \(u\) relative to the basis \(B\) is defined as \([u]_B=(k_1,k_2\ldots k_m)\) such that \(k_1v_1+k_2v_2+\cdots+k_mv_m=u\)\\
+\begin{question}
+given the vector \((18,21,20)\) and the basis \((1,2,3),(4,5,6),(7,8,8)\) of \(\mathbb{R}^3\), find the coordinates of the given vector relative to the given basis\\
+\begin{answer}
+we place these vectors in a matrix and reduce it:\\
+\begin{align*}
+  \left(
+    \begin{array}{ccc|c}
+      1 & 4 & 7 & 18\\
+      2 & 5 & 8 & 21\\
+      3 & 6 & 8 & 20
+    \end{array}
+  \right)
+  \xrightarrow[r_3 - 3r_1 \to r_3]{r_2 - 2r_1 \to r_2}&
+  \left(
+    \begin{array}{ccc|c}
+      1 & 4 & 7 & 18\\
+      0 & -3 & -6 & -15\\
+      0 & -6 & -13 & -34
+    \end{array}
+  \right)\\
+  \xrightarrow{\frac{r_2}{-3} \to r_2}&
+  \left(
+    \begin{array}{ccc|c}
+      1 & 4 & 7 & 18\\
+      0 & 1 & 2 & 5\\
+      0 & -6 & -13 & -34
+    \end{array}
+  \right)\\
+  \xrightarrow[r_3 + 6r_2 \to r_3]{r_1 - 4r_2 \to r_1}&
+  \left(
+    \begin{array}{ccc|c}
+      1 & 0 & -1 & -2\\
+      0 & 1 & 2 & 5\\
+      0 & 0 & -1 & -4
+    \end{array}
+  \right)\\
+  \xrightarrow{\frac{r_3}{-1} \to r_3}&
+  \left(
+    \begin{array}{ccc|c}
+      1 & 0 & -1 & -2\\
+      0 & 1 & 2 & 5\\
+      0 & 0 & 1 & 4
+    \end{array}
+  \right)\\
+  \xrightarrow[r_2 - 2r_3 \to r_2]{r_1 + r_3 \to r_1}&
+  \left(
+    \begin{array}{ccc|c}
+      1 & 0 & 0 & 2\\
+      0 & 1 & 0 & -3\\
+      0 & 0 & 1 & 4
+    \end{array}
+  \right)
+\end{align*}
+which means \([(18,21,20)]_B = (2,-3,4)\)\\
+\end{answer}
+\end{question}
+\end{definition}
+\paragraph{transformation matrix}
+\label{sec:orgda83b79}
+\begin{definition}
+let \(V_F\) be a vector space such that \(\dim v = m\) and let \(A=\{u_1,u_2\ldots u_m\},B=\{v_1,v_2\ldots v_m\}\) be bases of V, the \textbf{transformation matrix} from \(B\) to \(A\) is defined as \(_BT_A=([u_1]_B^T,[u_2]_B^T,\ldots,[u_m]_B^T)\)\\
+\begin{question}
+consider the following bases of \(\mathbb{R}^3\):\\
+\begin{gather*}
+  u = \{(1,0,0),(1,1,0),(1,1,1)\}\\
+  v = \{(1,1,1),(0,1,1),(0,0,1)\}
+\end{gather*}
+find the following:\\
+\begin{enumerate}
+\item \([u_1]_v\)\\
+\item \([u_2]_v\)\\
+\item \([u_3]_v\)\\
+\item \(_vT_u\)\\
+\end{enumerate}
+instead of putting each of the first 3 in its own matrix and reducing we use 1 matrix for them all\\
+\begin{align*}
+  \left(
+    \begin{array}{ccc|ccc}
+      v_1 & v_2 & v_3 & u_1 & u_2 & u_3\\
+      \hline
+      1 & 0 & 0 & 1 & 1 & 1\\
+      1 & 1 & 0 & 0 & 1 & 1\\
+      1 & 1 & 1 & 0 & 0 & 1
+    \end{array}
+  \right)
+  \xrightarrow[r_3 - r_1 \to r_3]{r_2 - r_1 \to r_2}&
+  \left(
+    \begin{array}{ccc|ccc}
+      1 & 0 & 0 & 1 & 1 & 1\\
+      0 & 1 & 0 & -1 & 0 & 0\\
+      0 & 1 & 1 & -1 & -1 & 0
+    \end{array}
+  \right)\\
+  \xrightarrow{r_3 - r_2 \to r_3}&
+  \left(
+    \begin{array}{ccc|ccc}
+      1 & 0 & 0 & 1 & 1 & 1\\
+      0 & 1 & 0 & -1 & 0 & 0\\
+      0 & 0 & 1 & 0 & -1 & 0
+    \end{array}
+  \right)
+\end{align*}
+which gives us:\\
+\begin{enumerate}
+\item \([u_1]_v = [(1,0,0)]_v = (1,-1,0)\)\\
+\item \([u_2]_v = [(1,1,0)]_v = (1,0,-1)\)\\
+\item \([u_3]_v = [(1,1,1)]_v = (1,0,0)\)\\
+\item \(_vT_u = \begin{pmatrix} 1 & 1 & 1\\ -1 & 0 & 0\\ 0 & -1 & 0 \end{pmatrix}\)\\
+\end{enumerate}
+\end{question}
+\begin{lemma}
+let \(V_F\) be a vector space such that \(\dim V = m\) and let \(A=\{u_1,u_2\ldots u_m\},B=\{v_1,v_2\ldots v_m\}\) be bases of \(V\) then:\\
+\begin{enumerate}
+\item \(A \cdot _AT_B = B\)\\
+\item \(_BT_A = {(_AT_B)}^{-1}\)\\
+\end{enumerate}
+\end{lemma}
+\end{definition}
+\subsubsection{vector space addition}
+\label{sec:orga69c64e}
+\begin{definition}
+given the \hyperref[sec:orgea93933]{vector space}s \(U,W\) that are \hyperref[sec:org3f77751]{subspace}s of the vector space \(V_\mathbb{F}\) (meaning \(U,W \leq V\)), then the addition of \(U\) and \(W\) is defined as:\\
+\[
+  U + W = \{u+w \mid u \in U \land w \in W\}
+\]\\
+
+\begin{lemma}
+\[
+  U + W = \{u+w \mid u \in U \land w \in W\} = \spn(\text{basis of }U \cup \text{basis of } W)
+\]\\
+\end{lemma}
+\begin{lemma}
+\(U + W \leq V\)\\
+\begin{proof}
+\begin{align*}
+  U + W \subseteq V \implies &u \in U \subseteq V\\
+                             &w \in W \subseteq V\\
+                             &u + w \in V &\text{addition closure under } V\\
+\end{align*}
+\begin{step}
+step 1: prove \(\vec0 \in U + W\)\\
+\begin{align*}
+  \vec0 &\in U &\text{because $U$ is a subspace}\\
+  \vec0 &\in W &\text{because $W$ is a subspace}\\
+  \vec0 + \vec0 = \vec0 &\in W + U
+\end{align*}
+\end{step}
+\begin{step}
+step 2: prove addition closure\\
+let \(x_1, x_2 \in \mathbb{U} + W\)\\
+\begin{gather*}
+  u_1 + w_1 = x_1\\
+  u_2 + w_2 = x_2\\
+  x_1 + x_2 = (u_1 + w_1) + (u_2 + w_2) = (u_1 + u_2) + (w_1 + w_2) \in W + U
+\end{gather*}
+\end{step}
+\begin{step}
+step 3: prove multiplication closure\\
+let \(x \in U + W,\ a \in \mathbb{F},\ u_1 + w_1 = x\)\\
+\[
+ax = a(u_1 + w_1) = au_1 + aw_1 \in U + W
+\]\\
+\end{step}
+\end{proof}
+\end{lemma}
+\begin{my_example}
+given \(U=\spn(\{(1,2,1,2,1),(2,1,2,1,2)\}),V=\spn(\{(0,1,2,3,0),(3,2,1,0,3)\})\), we find the basis and dimension of \(U+V\):\\
+\(U+V = \spn(\{(1,2,1,2,1),(2,1,2,1,2),(0,1,2,3,0),(3,2,1,0,3)\})\)\\
+we put these vectors in a matrix and reduce it to find out how many linearly independant vectors we have\\
+\[
+\bmqty{1 & 2 & 0 & 3\\ 2 & 1 & 1 & 2\\ 1 & 2 & 2 & 1\\ 2 & 1 & 3 & 0\\ 1 & 2 & 0 & 3} \xrightarrow{\text{row reduction}} \begin{bmatrix} 1 & 0 & 0 & 1\\0 & 1 & 0 & 1\\0 & 0 & 1 & -1\\0 & 0 & 0 & 0\\0 & 0 & 0 & 0 \end{bmatrix}
+\]\\
+which means that only the first 3 vectors are linearly independant so \(U+V = \spn(\{(1,2,1,2,1),(2,1,2,1,2),(0,1,2,3,0)\})\) and \(\dim(U+V)=3\)\\
+\end{my_example}
+\end{definition}
+\subsubsection{vector space intersection}
+\label{sec:org0ca5ccf}
+\begin{definition}
+given the \hyperref[sec:orgea93933]{vector space}s \(U,W\) that are \hyperref[sec:org3f77751]{subspace}s of the vector space \(V_\mathbb{F}\) (meaning \(U,W \leq V\)), then the intersection of \(U\) and \(W\) is defined as:\\
+\[
+  U \cap W = \{v \mid v \in U \land v \in W\}
+\]\\
+
+\begin{lemma}
+\(U \cap W \leq V\)\\
+\begin{proof}
+\begin{align*}
+  U \cap W &\subseteq V &\text{because they are subspaces so they must be subsets}\\
+  \vec0 &\in U &\text{because } U \leq V\\
+  \vec0 &\in W &\text{because } W \leq V\\
+  \implies \vec0 &\in U \cap W\\
+  x_1,\ x_2 &\in U \cap W & \text{assumption}\\
+  \implies x_1 + x_2 &\in U \cap W &\text{because both are subspaces of } V\\
+  a \in \mathbb{F},\ x &\in U \cap W &\text{assumption}\\
+  \implies a \cdot x &\in U \cap W &\text{because both are subspaces of } V
+\end{align*}
+\end{proof}
+\end{lemma}
+\begin{my_example}
+given \(U=\spn(\{(1,2,1,2,1),(2,1,2,1,2),(3,3,3,3,3)\}),V=\spn(\{(0,1,2,3,0),(3,2,1,0,3)\})\), we find the basis and dimension of \(U\cap V\):\\
+to find \(U\cap V\) we need to write \(U\) and \(V\) as a system of equations\\
+\begin{step}
+to find the corresponding equations of \(U\) we reduce the following matrix:\\
+\[
+\left[\begin{array}{ccc|c} 1 & 2 & 3 & x_1\\ 2 & 1 & 3 & x_2\\ 1 & 2 & 3 & x_3\\ 2 & 1 & 3 & x_4\\ 1 & 2 & 3 & x_5 \end{array}\right] \xrightarrow{\text{row reduction}} \left[\begin{array}{ccc|c} 1 & 2 & 3 & x_1\\ 0 & -3 & -6 & x_2-2x_1\\ 0 & 0 & 0 & x_3-x_1\\ 0 & 0 & 0 & x_4-x_2\\ 0 & 0 & 0 & x_5-x_1 \end{array}\right]
+\]\\
+and so \(U=\spn(\{(1,2,1,2,1),(2,1,2,1,2)\}),\ \dim U = 2\), and:\\
+\[
+U = \left\{\bmqty{x_1\\x_2\\x_3\\x_4\\x_5} \ \middle|\ \begin{aligned} x_3-x_1=0\\ x_4-x_2=0\\ x_5-x_1=0 \end{aligned}\right\}
+\]\\
+\end{step}
+\begin{step}
+now to find the corresponding equations of \(V\) we reduce the following matrix:\\
+\[
+\left[\begin{array}{cc|c} 3 & 0 & x_1\\ 2 & 1 & x_2\\ 1 & 2 & x_3\\ 0 & 3 & x_4\\ 3 & 0 & x_5 \end{array}\right] \xrightarrow{\text{row reduction}} \left[\begin{array}{cc|c} 1 & 2 & x_3\\ 0 & -3 & x_2-2x_3\\ 0 & 0 & x_1-2x_2+x_3\\ 0 & 0 & x_2-2x_3+x_4\\ 0 & 0 & -2x_2+x_3+x_5 \end{array}\right]
+\]\\
+and so \(V=\spn(\{(3,2,1,0,3),(0,1,2,3,0)\}),\ \dim V = 2\), and:\\
+\[
+  V = \left\{\bmqty{x_1\\x_2\\x_3\\x_4\\x_5} \ \middle|\ \begin{aligned} x_1-2x_2+x_3=0\\ x_2-2x_3+x_4=0\\ -2x_2+x_3+x_5=0 \end{aligned}\right\}
+\]\\
+\end{step}
+\begin{step}
+\[
+  U \cap V = \left\{\bmqty{x_1\\x_2\\x_3\\x_4\\x_5} \ \middle|\ \begin{aligned} x_3-x_1=0\\ x_4-x_2=0\\ x_5-x_1=0\\ x_1-2x_2+x_3=0\\ x_2-2x_3+x_4=0\\ -2x_2+x_3+x_5=0 \end{aligned}\right\}
+\]\\
+we put these equations in a matrix and reduce it:\\
+\[
+  \left(\begin{array}{ccccc|c} -1 & 0 & 1 & 0 & 0 & 0\\ 0 & -1 & 0 & 1 & 0 & 0\\ -1 & 0 & 0 & 0 & 1 & 0\\ 0 & -2 & 1 & 0 & 1 & 0\\ 0 & 1 & -2 & 1 & 0 & 0\\ 1 & -2 & 1 & 0 & 0 & 0 \end{array}\right) \xrightarrow{\text{row reduction}} \left(\begin{array}{ccccc|c} 1 & 0 & 0 & 0 & -1 & 0\\0 & 1 & 0 & 0 & -1 & 0\\0 & 0 & 1 & 0 & -1 & 0\\0 & 0 & 0 & 1 & -1 & 0\\0 & 0 & 0 & 0 & 0 & 0\\0 & 0 & 0 & 0 & 0 & 0\end{array}\right)
+\]\\
+which gives us:\\
+\begin{gather*}
+  x_1=x_5\\
+  x_2=x_5\\
+  x_3=x_5\\
+  x_4=x_5\\
+  (x_1,x_2,x_3,x_4,x_5)=(x_5,x_5,x_5,x_5,x_5) = x_5(1,1,1,1,1)
+\end{gather*}
+and so \(U \cap V = \spn(\{(1,1,1,1,1)\})\) and \(\dim(U \cap V) = 1\)\\
+\end{step}
+\end{my_example}
+\end{definition}
+\subsubsection{vector space union}
+\label{sec:orgc2dbc6b}
+\section{linear map}
+\label{sec:orgdf3d063}
+\begin{definition}
+let \(U,V\) be \hyperref[sec:orgea93933]{vector spaces} over the \hyperref[sec:orgd95c18e]{field} \(\mathbb{F}\), and let \(L: U \to V\) be a \href{discrete_maths2.org}{function} which would be called a \textbf{linear map} if:\\
+\begin{enumerate}
+\item for every \(u_1,u_2 \in U\), \(L(u_1+u_2) = L(u_1) + L(u_2)\)\\
+\item for every \(u \in U\) and \(k \in \mathbb{F}\), \(L(ku) = kL(u)\)\\
+\end{enumerate}
+
+\begin{question}
+\begin{gather*}
+  L: \mathbb{R}^3 \to \mathbb{R}^3\\
+  L(x,y,z) = \begin{pmatrix}
+                x-y-z\\
+                2x-y+2z\\
+                3x-2y+z
+              \end{pmatrix}
+\end{gather*}
+is \(L\) a \hyperref[sec:orgdf3d063]{linear map}?\\
+\begin{answer}
+\begin{step}
+we need to prove \(L((x_1,y_1,z_1)+(x_2,y_2,z_2)) = L(x_1,y_1,z_1) + L(x_2,y_2,z_2)\)\\
+\begin{note}
+i should be writing \(L((x,y,z))\) not \(L(x,y,z)\)\\
+\end{note}
+\begin{align*}
+  L((x_1,y_1,z_1)+(x_2,y_2,z_2)) & = L(x_1+x_2,y_1+y_2,z_1+z_2)\\
+  &= \begin{pmatrix}
+       x_1+x_2-(y_1+y_2)-(z_1+z_2)\\
+       2(x_1+x_2)-(y_1+y_2)+2(z_1+z_2)\\
+       3(x_1+x_2)-2(y_1+y_2)+(z_1+z_2)
+     \end{pmatrix}\\
+  &= \begin{pmatrix}
+       (x_1-y_1-z_1)+(x_2-y_2-z_2)\\
+       (2x_1-y_1+2z_1)+(2x_2-y_2+2z_2)\\
+       (3x_1-2y_1+z_1)+(3x_2-2y_2+z_2)
+     \end{pmatrix}\\
+  &= \begin{pmatrix}
+       x_1-y_1-z_1\\
+       2x_1-y_1+2z_1\\
+       3x_1-2y_1+z_1
+     \end{pmatrix} +
+     \begin{pmatrix}
+       x_2-y_2-z_2\\
+       2x_2-y_2+2z_2\\
+       3x_2-2y_2+z_2
+     \end{pmatrix}\\
+  &= L(x_1,y_1,z_1) + L(x_2,y_2,z_2)
+\end{align*}
+\end{step}
+\begin{step}
+we need to prove \(L(k(x,y,z)) = kL(x,y,z)\)\\
+\begin{align*}
+  L(k(x,y,z)) &= L(kx,ky,kz)\\
+  &= \begin{pmatrix}
+       kx-ky-kz\\
+       2kx-ky+2kz\\
+       3kx-2ky+kz
+     \end{pmatrix}\\
+  &= k\begin{pmatrix}
+        x-y-z\\
+        2x-y+2z\\
+        3x-2y+z
+      \end{pmatrix}\\
+  &= kL(x,y,z)
+\end{align*}
+\end{step}
+\end{answer}
+\end{question}
+
+\begin{question}
+check whether this represents a linear map:\\
+\[
+  T: \mathbb{R}^3 \to \mathbb{R}^3 \coloneqq T(x,y,z) = (x^2,x+y,y+z)
+\]\\
+\begin{answer}
+it isnt, a counter example:\\
+\begin{gather*}
+  T(1,0,0) = (1,1,0)\\
+  T(2,0,0) = (4,2,0)\\
+  T(1,0,0) + T(2,0,0) = (1,1,0) + (4,2,0) = (5, 3, 0)\\
+  T((1,0,0) + (2,0,0)) = T(3,0,0) = (9,3,0) \neq (5,3,0)
+\end{gather*}
+\end{answer}
+\end{question}
+
+\begin{lemma}
+if \(L: U \to V\) is a \hyperref[sec:orgdf3d063]{linear map} then \(L(\vec0)=\vec0\)\\
+\begin{entailment}
+if \(f: U \to V\) is a function such that \(f(\vec0)\neq\vec0\) then \(f\) isnt a linear map\\
+\end{entailment}
+\end{lemma}
+
+\begin{lemma}
+if \(L: U \to V\) is a \hyperref[sec:orgdf3d063]{linear map} then:\\
+\begin{enumerate}
+\item the \hyperref[sec:org975ee65]{kernel} of \(L\) is \(\ker L = \left\{u \in U \mid L(u) = \vec0\right\}\)\\
+\item the \textbf{image} of \(L\) is \(\img L = \left\{L(u) \mid u \in U\right\} \le V\), which means all the values that can be returned by \(L\), which is also the \hyperref[sec:org05b7955]{column space} of its corresponding \hyperref[sec:orgda83b79]{transformation matrix} (if it has one)\\
+\end{enumerate}
+\end{lemma}
+
+\begin{question}
+given the \hyperref[sec:orgdf3d063]{linear operator} \(L: \mathbb{R}^4 \to \mathbb{R}^4\) defined by \(L((x,y,z,w)) = (x+y, y+z, z+w, w+x)\)\\
+
+\begin{subquestion}
+find the matrix of \(L\) in the basis \(b_1=(1,1,1,1),b_2=(1,-1,0,0),b_3=(0,1,-1,0),b_4=(0,0,1,-1)\)\\
+\begin{answer}
+\begin{gather*}
+  L(\stackrel{x}{1},\stackrel{y}{1},\stackrel{z}{1},\stackrel{w}{1}) = (1+1,\ 1+1,\ 1+1,\ 1+1) = (2,2,2,2,2)\\
+  L(\stackrel{x}{1},\stackrel{y}{-1},\stackrel{z}{0},\stackrel{w}{0}) = (1-1,\ -1+0,\ 0+0,\ 0+1) = (0,-1,0,1)\\
+  L(0,1,-1,0) = (1,0,-1,0)\\
+  L(0,0,1,-1) = (0,1,0,-1)
+\end{gather*}
+on the left columns of the matrix lies the basis and on the right 4 columns lies the image\\
+\[\left[\begin{array}{rrrrrrrr} 1 & 1 & 0 & 0 & 2 & 0 & 1 & 0 \\ 1 & -1 & 1 & 0 & 2 & -1 & 0 & 1 \\ 1 & 0 & -1 & 1 & 2 & 0 & -1 & 0 \\ 1 & 0 & 0 & -1 & 2 & 1 & 0 & -1 \end{array}\right] \implies \left[\begin{array}{rrrrrrrr} 1 & 0 & 0 & 0 & 2 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\ 0 & 0 & 1 & 0 & 0 & -1 & 1 & 1 \\ 0 & 0 & 0 & 1 & 0 & -1 & 0 & 1 \end{array}\right]\]\\
+and so the matrix is:\\
+\[[L]_A^B = \left[\begin{array}{rrrr} 2 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & -1 & 1 & 1 \\ 0 & -1 & 0 & 1 \end{array}\right]\]\\
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+find the bases of \(\ker L, \img L\)\\
+\begin{answer}
+\begin{step}
+finding the basis of \(\ker L\)\\
+\begin{gather*}\\
+  L(x,y,z,w) = (0,0,0,0)\\
+  (x+y,\ y+z,\ z+w,\ w+x) = (0,0,0,0)\\
+  x+y=0\\
+  y+z=0\\
+  z+w=0\\
+  x+w=0\\
+  \left(
+    \begin{array}{cccc|c}
+      1 & 1 & 0 & 0 & 0\\
+      0 & 1 & 1 & 0 & 0\\
+      0 & 0 & 1 & 1 & 0\\
+      1 & 0 & 0 & 1 & 0
+    \end{array}
+  \right) \implies
+  \left(
+    \begin{array}{cccc|c}
+      1 & 0 & 0 & 1 & 0\\
+      0 & 1 & 0 & -1 & 0\\
+      0 & 0 & 1 & 1 & 0\\
+      0 & 0 & 0 & 0 & 0
+    \end{array}
+  \right)\\
+  w\text{ free variable}\\
+  x=-w\\
+  y=w\\
+  z=-w\\
+  (x,y,z,w) = (-w,w,-w,w) = w(-1,1,-1,1)\\
+  \text{basis of } \ker L = \{(-1,1,-1,1)\}\\
+  \dim\ker L = 1
+\end{gather*}
+\end{step}
+
+\begin{step}
+to find the basis of \(\img L\) we reduce the matrix:\\
+\begin{gather*}
+  \begin{pmatrix} 2 & 0 & 1 & 0\\ 2 & -1 & 0 & 1\\ 2 & 0 & -1 & 0\\ 2 & 1 & 0 & 1 \end{pmatrix} \implies \begin{pmatrix} 2 & 0 & 1 & 0\\ 0 & -1 & 1 & 0\\ 0 & 0 & -1 & 0 \end{pmatrix}
+\end{gather*}
+and so the basis of \(\img L\) is \(B = \{(2,2,2,2),(0,-1,0,1),(1,0,-1,0)\}\) and \(\dim\img L = 3\)\\
+we apply a simple check: \(\dim\mathbb{R}^4 = \dim\ker L + \dim\img L = 1 + 3 = 4 \,\checkmark\)\\
+\end{step}
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+given the \hyperref[sec:orgdf3d063]{linear operator} \(L: M_2(\mathbb{R}) \to M_2(\mathbb{R})\) defined by \(L(X) = XA + AX\) such that \(A = \begin{pmatrix} 1 & 1\\ 1 & 1 \end{pmatrix}\)\\
+\begin{subquestion}
+find the matrix of \(L\) in the basis \(E_1=\begin{pmatrix} 1 & 0\\ 0 & 1 \end{pmatrix}, E_2=\begin{pmatrix} 0 & 1\\ 1 & 0 \end{pmatrix},E_3 = \begin{pmatrix} 1 & 0\\ 0 & -1 \end{pmatrix}, E_4 = \begin{pmatrix} 0 & 1\\ -1 & 0 \end{pmatrix}\)\\
+\begin{answer}
+\begin{gather*}
+  L\begin{pmatrix} x_1 & x_2\\ x_3 & x_4 \end{pmatrix} = \begin{pmatrix} x_1 & x_2\\ x_3 & x_4 \end{pmatrix} \begin{pmatrix} 1 & 1\\ 1 & 1 \end{pmatrix} + \begin{pmatrix} 1 & 1\\ 1 & 1 \end{pmatrix} \begin{pmatrix} x_1 & x_2\\ x_3 & x_4 \end{pmatrix}\\
+  = \begin{pmatrix} x_1+x_2 & x_1+x_2\\ x_3+x_4 & x_3+x_4 \end{pmatrix} + \begin{pmatrix} x_1+x_3 & x_2+x_4\\ x_1+x_3 & x_2+x_4 \end{pmatrix}\\
+  = \begin{pmatrix} 2x_1+x_2+x_3 & x_1+2x_2+x_4\\ x_1+2x_3+x_4 & x_2+x_3+2x_4 \end{pmatrix}\\
+  L\begin{pmatrix} 1 & 0\\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 2\\ 2 & 2 \end{pmatrix}\\
+  L\begin{pmatrix} 0 & 1\\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 2 & 2\\ 2 & 2 \end{pmatrix}\\
+  L\begin{pmatrix} 1 & 0\\ 0 & -1 \end{pmatrix} = \begin{pmatrix} 2 & 0\\ 0 & -2 \end{pmatrix}\\
+  L\begin{pmatrix} 0 & 1\\ -1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 2\\ -2 & 0 \end{pmatrix}\\
+  \begin{pmatrix} x_1 & x_2\\ x_3 & x_4 \end{pmatrix} \sim \begin{pmatrix} x_1\\ x_2\\ x_3\\ x_4 \end{pmatrix} \implies \begin{pmatrix} 1 & 0\\ 0 & 1 \end{pmatrix} \sim \begin{pmatrix} 1\\ 0\\ 0\\ 1 \end{pmatrix}\\
+  \left(
+    \begin{array}{cccc|cccc}
+      1 & 0 & 1 & 0 & 2 & 2 & 2 & 0\\
+      0 & 1 & 0 & 1 & 2 & 2 & 0 & 2\\
+      0 & 1 & 0 & -1 & 2 & 2 & 0 & -2\\
+      1 & 0 & -1 & 0 & 2 & 2 & -2 & 0
+    \end{array}
+  \right) \implies
+  \left(
+    \begin{array}{cccc|cccc}
+      1 & 0 & 0 & 0 & 2 & 2 & -2 & 0\\
+      0 & 1 & 0 & 0 & 2 & 2 & 0 & -2\\
+      0 & 0 & 1 & 0 & 0 & 0 & 2 & 0\\
+      0 & 0 & 0 & 1 & 0 & 0 & 0 & 2
+    \end{array}
+  \right)\\
+  [L] = \begin{pmatrix}
+          2 & 2 & -2 & 0\\
+          2 & 2 & 0 & -2\\
+          0 & 0 & 2 & 0\\
+          0 & 0 & 0 & 2
+        \end{pmatrix}
+\end{gather*}
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+find the bases of \(\ker L, \img L\)\\
+\end{subquestion}
+\end{question}
+
+\begin{question}
+given the \href{discrete_maths2.org}{function} \(L: \mathbb{R}_2[x] \to M_2(\mathbb{R})\) defined by \(L(p(x)) = \begin{pmatrix} p(1) & p(0)\\ p(0) & -p(1) \end{pmatrix}\)\\
+
+\begin{subquestion}
+prove \(L\) is a \hyperref[sec:orgdf3d063]{linear transformation}\\
+\begin{answer}
+\(L\)'s \href{discrete_maths2.org}{domain} is a \hyperref[sec:orgea93933]{vector space} of \href{calculus2.org}{polynomial}s of the second degree at most, \(\mathbb{R}_2[x] = \{a_2x^2+a_1x+a_0 \mid a_2,a_1,a_0 \in \mathbb{R}\}\)\\
+\begin{step}
+assume \(p_1(x),p_2(x) \in \mathbb{R}_2[x]\), need to prove \(L((p_1+p_2)(x)) = L(p_1(x)) + L(p_2(x))\)\\
+\begin{align*}
+  L((p_1+p_2)(x)) &= \begin{pmatrix} (p_1+p_2)(1) & (p_1+p_2)(0)\\ (p_1+p_2)(0) & -((p_1+p_2)(1)) \end{pmatrix}\\
+  &= \begin{pmatrix} p_1(1)+p_2(1) & p_1(0)+p_2(0)\\ p_1(0)+p_2(0) & -p_1(1)-p_2(1) \end{pmatrix}\\
+  &= \begin{pmatrix} p_1(1) & p_1(0)\\ p_1(0) & -p_1(1) \end{pmatrix} + \begin{pmatrix} p_2(1) & p_2(0)\\ p_2(0) & -p_2(1) \end{pmatrix}\\
+  &= L(p_1(x)) + L(p_2(x))
+\end{align*}
+\end{step}
+
+\begin{step}
+let \(p(x) \in \mathbb{R}_2[x],\ k \in \mathbb{R}\), need to prove \(L(kp(x) = kL(p(x))\)\\
+\begin{align*}
+  L((kp)(x)) &= \begin{pmatrix} (kp)(1) & (kp)(0)\\ (kp(0)) & (-kp)(1) \end{pmatrix}\\
+  &= \begin{pmatrix} kp(1) & kp(0)\\ kp(0) & -kp(1) \end{pmatrix}\\
+  &= k\begin{pmatrix} p(1) & p(0)\\ p(0) & -p(1) \end{pmatrix}\\
+  &= kL(p(x))
+\end{align*}
+\end{step}
+therefore, \(L\) indeed is a linear transformation\\
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+find the \hyperref[sec:org2833a15]{matrix} of \(L\) in \hyperref[sec:orgf759dd0]{standard basis} form\\
+\end{subquestion}
+
+\begin{subquestion}
+find the bases of \(\img L, \ker L\)\\
+\end{subquestion}
+\end{question}
+\end{definition}
+\subsection{eigenvalues and eigenvectors}
+\label{sec:org929d22f}
+\begin{definition}
+an \textbf{eigenvector} of a \hyperref[sec:orgdf3d063]{linear transformation} is a nonzero \hyperref[sec:org103a65e]{vector} that changes at most by a scalar factor when that linear transformation is applied to it. The corresponding \textbf{eigenvalue}, often denoted by \(\lambda\), is the factor by which the eigenvector is scaled.\\
+\[
+  Av = \lambda v, v \neq 0 \in \mathbb{R}^n
+\]\\
+here \(A\) is a \hyperref[sec:orgda83b79]{transformation matrix}, \(v\) is an eigenvector, and \(\lambda\) is the eigenvalue corresponding to \(v\)\\
+\end{definition}
+\subsubsection{characteristic polynomial}
+\label{sec:orgb773cc6}
+\begin{definition}
+considering the \href{20220711175314-formula.org}{formula} \(Av = \lambda v, v \neq 0 \in \mathbb{R}^n\) from the definition of \hyperref[sec:org929d22f]{eigenvalues and eigenvectors}:\\
+\[
+  Av = \lambda v \implies Av - \lambda v = \vec0 \implies Av - \lambda I v = \vec0 \implies (A-\lambda I)v = \vec0 \land v \neq \vec0 \implies \infty \text{ solutions} \implies |A - \lambda I| = 0
+\]\\
+we call \(p(\lambda) = |A - \lambda I|\) the \textbf{characteristic \href{calculus2.org}{polynomial}} of \(A\)\\
+\end{definition}
+\subsubsection{eigenspace}
+\label{sec:org9b2c79c}
+\begin{definition}
+an \textbf{eigenspace} is the set of \hyperref[sec:org929d22f]{eigenvector}s corresponding to the same \hyperref[sec:org929d22f]{eigenvalue}, plus the zero vector. the \hyperref[sec:orgfcbaa89]{basis} of an eigenspace is called an \textbf{eigenbasis}\\
+
+\begin{question}
+given the matrix\\
+\[
+  A = \begin{pmatrix} 1 & 1 & -1\\ -1 & 3 & -1\\ -1 & 1 & 1 \end{pmatrix}
+\]\\
+\begin{subquestion}
+find the \hyperref[sec:orgb773cc6]{characteristic polynomial} and the \hyperref[sec:org929d22f]{eigenvalue}s,\hyperref[sec:org929d22f]{eigenvector}s, and \hyperref[sec:org9b2c79c]{eigenspace}s of \(A\)\\
+\begin{answer}
+\begin{step}
+\begin{gather*}
+  0 = |A - \lambda I| = \left|\begin{pmatrix} 1 & 1 & -1\\ -1 & 3 & -1\\ -1 & 1 & 1 \end{pmatrix} - \begin{pmatrix} \lambda & 0 & 0\\ 0 & \lambda & 0\\ 0 & 0 & \lambda \end{pmatrix}\right| = \left|\begin{pmatrix} 1-\lambda & 1 & -1\\ -1 & 3-\lambda & -1\\ -1 & 1 & 1-\lambda \end{pmatrix}\right|\\
+  {(1-\lambda)}^2(3-\lambda) + 1 + 1 - \left(-1(1-\lambda)-1(1-\lambda)+(3-\lambda)\right) = 0\\
+  p(\lambda) = -\lambda^3 + 5\lambda^2 - 8\lambda + 4
+\end{gather*}
+\end{step}
+\begin{step}
+to find the \hyperref[sec:org929d22f]{eigenvalue}s first we need to find the roots of the characteristic polynomial\\
+
+\begin{gather*}
+  -\lambda^3 + 5\lambda^2 - 8\lambda + 4 = 0\\
+  \lambda = 1,2\\
+  A - I\lambda = \begin{pmatrix} 1-\lambda & 1 & -1\\ -1 & 3-\lambda & -1\\ -1 & 1 & 1-\lambda \end{pmatrix}
+\end{gather*}
+we substitute the eigenvalue \(\lambda = 2\)\\
+\begin{align*}
+  \lambda = 2 &\implies \begin{pmatrix} 1-2 & 1 & -1\\ -1 & 3-2 & -1\\ -1 & 1 & 1-2 \end{pmatrix}\\
+  &\implies \begin{pmatrix} 1 & -1 & 1\\ 0 & 0 & 0\\ 0 & 0 & 0 \end{pmatrix}\\
+  &\implies x_1 = x_2 - x_3\\
+  &\implies (x_1,x_2,x_3) = (x_2-x_3,x_2,x_3) = x_2(1,1,0) + x_3(-1,0,1)
+\end{align*}
+the eigenvectors for the eigenvalue \(\lambda = 2\) are \((-1,0,1),(1,1,0)\), the eigenspace for \(\lambda = 2\) is \(\spn\{(1,1,0),(-1,0,1)\}\) of \hyperref[sec:orgdef24d1]{dimension} 2\\
+therefore \(A\) is a \hyperref[sec:org136aa39]{diagonal matrix}\\
+we substitute the eigenvalue \(\lambda = 1\):\\
+\begin{gather*}
+  \lambda = 1 \implies \left(\begin{array}{ccc|c} 0 & 1 & -1 & 0\\ -1 & 2 & -1 & 0\\ -1 & 1 & 0 & 0 \end{array}\right) \implies \left(\begin{array}{ccc|c} 1 & 0 & -1 & 0\\ 0 & 1 & -1 & 0\\ 0 & 0 & 0 & 0 \end{array}\right)\\
+  x_1-x_3=0 \implies x_1=x_3\\
+  x_2-x_3=0 \implies x_2=x_3\\
+  (x_1,x_2,x_3) = (x_3,x_3,x_3) = x_3(1,1,1)
+\end{gather*}
+for the eigenvalue \(\lambda = 1\), the eigenvector is \((1,1,1)\) and the eigenspace is \(\spn\{(1,1,1)\}\) of dimension 1\\
+\end{step}
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+find the \hyperref[sec:org136aa39]{diagonal matrix} \(T\) of \(A\)\\
+\begin{answer}
+\[
+  T = \begin{pmatrix} 1 & 1 & 1\\ 1 & 0 & 1\\ 0 & -1 & 1 \end{pmatrix},\ T^{-1}AT = \begin{pmatrix} 2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 1 \end{pmatrix}
+\]\\
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+find \(A^{2020}\)\\
+\begin{answer}
+\[
+  A^{2020} = T\begin{pmatrix} 2^{2020} & 0 & 0\\ 0 & 2^{2020} & 0\\ 0 & 0 & 1^{2020} \end{pmatrix}T^{-1}
+\]\\
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+given the matrix\\
+\[
+  A = \pmqty{-2 & 8 & 6\\ -4 & 10 & 6\\ 4 & -8 & -4}
+\]\\
+\begin{subquestion}
+find the \hyperref[sec:orgb773cc6]{Characteristic polynomial}, the \hyperref[sec:org929d22f]{eigenvalue}s and the \hyperref[sec:org929d22f]{eigenvector}s of \(A\)\\
+\begin{answer}
+\begin{gather*}
+  0 = |A - \lambda I| = \left|\begin{pmatrix} -2 & 8 & 6\\ -4 & 10 & 6\\ 4 & -8 & -4 \end{pmatrix} - \begin{pmatrix} \lambda & 0 & 0\\ 0 & \lambda & 0\\ 0 & 0 & \lambda \end{pmatrix}\right| = \left|\begin{pmatrix} -2-\lambda & 8 & 6\\ -4 & 10-\lambda & 6\\ 4 & -8 & -4-\lambda \end{pmatrix}\right|\\
+  0 = (-2-\lambda)(10-\lambda)(-4-\lambda)+192+192-(-32(-4\lambda)-48(-2\lambda)+24(10-\lambda))\\
+  p(\lambda) = \lambda{(\lambda-2)}^2
+\end{gather*}
+the \hyperref[sec:org929d22f]{eigenvalue}s are \(\lambda = 2,2,0\)\\
+we substitute the eigenvalue \(\lambda = 2\):\\
+\begin{gather*}
+  \lambda = 2 \implies \left(\begin{array}{ccc|c} -4 & 8 & 6 & 0\\ -4 & 8 & 6 & 0\\ 4 & -8 & -6 & 0 \end{array}\right) \implies \left(\begin{array}{ccc|c} 2 & -4 & -3 & 0\\ 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0 \end{array}\right)\\
+  x_2,x_3 \text{ free variables}\\
+  x_1 = \frac{4x_2+3x_3}{2}\\
+  (x_1,x_2,x_3) = \left(\frac{4x_2+3x_3}{2},x_2,x_3\right) = x_2(2,1,0) + x_3\left(\frac{3}{2},0,1\right)
+\end{gather*}
+the eigenvalue \(\lambda = 2\) has the corresponding eigenvectors \((2,1,0),\left(\frac{3}{2},0,1\right)\) and an eigenspace \(\spn\{(2,1,0),\left(\frac{3}{2},0,1\right)\}\)\\
+we substitute the eigenvalue \(\lambda = 0\):\\
+\begin{gather*}
+  \lambda = 0 \implies \begin{pmatrix} -2 & 8 & 6\\ -4 & 10 & 6\\ 4 & -8 & -4 \end{pmatrix} \implies \left(\begin{array}{ccc|c} 1 & 0 & 1 & 0\\ 0 & 1 & 1 & 0\\ 0 & 0 & 0 & 0 \end{array}\right)\\
+  x_3 \text{ free variable}\\
+  x_1 = -x_3\\
+  x_2 = -x_3\\
+  (x_1,x_2,x_3) = (-x_3,-x_3,x_3) = x_3(-1,-1,1)
+\end{gather*}
+the eigenvalue \(\lambda = 2\) has the corresponding eigenvector \((-1,-1,1)\) and an eigenspace \(\spn\{(-1,-1,1)\}\)\\
+and so \(A\) is \hyperref[sec:org136aa39]{diagonalizable} because it has 3 \hyperref[sec:org174d95a]{linearly independant} eigenvectors and 3 eigenvalues\\
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+find the \hyperref[sec:org136aa39]{eigenbasis matrix} of \(A\)\\
+\begin{answer}
+\begin{gather*}
+  T = \pmqty{2 & \frac32 & -1\\ 1 & 0 & -1\\ 0 & 1 & 1}\\
+  T^{-1}AT = \pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 0}
+\end{gather*}
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+find \(A^{2020}\)\\
+\begin{answer}
+\begin{gather*}
+  T^{-1}AT = \pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 0}\\
+  A = T\pmqty{2 & 0 & 0\\ 0 & 2 & 0\\ 0 & 0 & 0}T^{-1}\\
+  A^{2020} = T\pmqty{2^{2020} & 0 & 0\\ 0 & 2^{2020} & 0\\ 0 & 0 & 0}T^{-1}
+\end{gather*}
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+given the matrix\\
+\[
+A = \pmqty{1 & 2 & 1\\ 0 & 1 & 3\\ 2 & 7 & 11}
+\]\\
+
+\begin{subquestion}
+find the \hyperref[sec:orgb773cc6]{characteristic polynomial}, the \hyperref[sec:org929d22f]{eigenvalue}s and the \hyperref[sec:org929d22f]{eigenvector}s of \(A\)\\
+\begin{answer}
+\begin{step}
+find the characteristic polynomial\\
+\begin{gather*}
+  p(\lambda) = \left|\pmqty{1 & 2 & 1\\ 0 & 1 & 3\\ 2 & 7 & 11} - \pmqty{\lambda & 0 & 0\\ 0 & \lambda & 0\\ 0 & 0 & \lambda}\right| = \left|\pmqty{1-\lambda & 2 & 1\\ 0 & 1-\lambda & 3\\ 2 & 7 & 11-\lambda}\right|\\
+  p(\lambda) = -\lambda^3 + 13\lambda^2
+\end{gather*}
+\end{step}
+
+\begin{step}
+find the eigenvalues\\
+\begin{gather*}
+  0 = -\lambda^3 + 13\lambda^2\\
+  0 = \lambda^2(13 - \lambda)\\
+  \lambda = 13,0,0
+\end{gather*}
+\end{step}
+
+\begin{step}
+find the eigenvectors/eigenspaces\\
+for \(\lambda = 13\)\\
+\begin{gather*}
+  A - I\lambda = 0\\
+  \left(\begin{array}{ccc|c} 1-13 & 2 & 1 & 0\\ 0 & -12 & 3 & 0\\ 2 & 7 & -2 & 0 \end{array}\right) \implies \left(\begin{array}{ccc|c} 1 & 0 & -\frac18 & 0\\ 0 & 1 & -\frac14 & 0\\ 0 & 0 & 0 & 0 \end{array}\right)\\
+  x = \frac18z\\
+  y = \frac14z\\
+  \bmqty{\frac{z}{8} \\ \frac{z}{4} \\ z} \implies z\bmqty{\frac{1}{8}\\ \frac{1}{4}\\ 1}
+\end{gather*}
+so the eigenvalue \(\lambda = 13\) has the corresponding eigenvector \(\bmqty{\frac{1}{8}\\ \frac{1}{4}\\ 1}\) and an eigenspace \(\spn\left(\left\{\bmqty{\frac{1}{8}\\ \frac{1}{4}\\ 1}\right\}\right)\)\\
+for \(\lambda = 0\)\\
+\begin{gather*}
+  A - I\lambda = 0\\
+  \bmqty{1 & 2 & 1\\ 0 & 1 & 3\\ 2 & 7 & 11} \implies \bmqty{1 & 0 & -5\\ 0 & 1 & 3\\ 0 & 0 & 0}\\
+  x = 5z\\
+  y = -3z\\
+  \bmqty{5z\\ -3z\\ z} \implies z\bmqty{5\\ -3\\ 1}
+\end{gather*}
+so the eigenvalue \(\lambda = 0\) has the corresponding eigenvector \(\bmqty{5\\ -3\\ 1}\) and an eigenspace \(\spn\left(\left\{\bmqty{5\\ -3\\ 1}\right\}\right)\)\\
+\end{step}
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+find the \hyperref[sec:org136aa39]{eigenbasis matrix} of \(A\)\\
+\begin{answer}
+\(A\) isnt \hyperref[sec:org136aa39]{diagonalizable} so there isnt an eigenbasis matrix\\
+\end{answer}
+\end{subquestion}
+\end{question}
+\end{definition}
+\subsection{linear map composition}
+\label{sec:org4ce1639}
+remember that \hyperref[sec:orgdf3d063]{linear map}s are just \href{discrete_maths2.org}{function}s, so they can be \href{discrete_maths2.org}{composed}\\
+\begin{characteristic}
+let \(S,T,U\) be \hyperref[sec:orgea93933]{linear space}s, let \(f:S\to T, g:T\to U\) be functions, if \(f\) and \(g\) are linear maps, then also the composite transformation \(g\circ f:S\to U\) is a linear map and its \hyperref[sec:orgda83b79]{transformation matrix} is equal to the matrix of \(f\) multiplied by the matrix of \(g\) correspondingly \cite{statlect_linear_map_composition}\\
+\end{characteristic}
+\subsection{linear isomorphism}
+\label{sec:orgb9fe876}
+\end{document}

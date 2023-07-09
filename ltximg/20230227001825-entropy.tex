@@ -1,0 +1,39 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{entropy}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={entropy},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\cite{aima2010}\\
+\href{20230227001825-entropy.org}{entropy} is a measure of uncertainty of a \href{20230104221353-random_variable.org}{random variable}\\
+\begin{my_example}
+a random variable with only one value--a coin that always comes up heads--has no uncertainty and thus its entropy is defined as zero; thus, we gain no information by observing its value. a flip of a fair coin is equally likely to come up heads or tails, 0 or 1, this counts as “1 bit” of entropy. the roll of a fair four-sided die has 2 bits of entropy, because it takes two bits to describe one of four equally probable choices. now consider an unfair coin that comes up heads 99\% of the time. intuitively, this coin has less uncertainty than the fair coin--if we guess heads we’ll be wrong only 1\% of the time--so we would like it to have an entropy measure that is close to zero, but positive.\\
+\end{my_example}
+\begin{lemma}
+the entropy of a random variable \(V\) with values \(v_k\), each with \href{probability.org}{probability} \(P(v_k)\), is defined as\\
+\[
+\text{Entropy}: \quad H(V) = \sum_{k} P(v_k)\log_2\frac{1}{P(v_k)} = -\sum_{k} P(v_k)\log_2P(v_k)
+\]\\
+\end{lemma}
+\end{document}

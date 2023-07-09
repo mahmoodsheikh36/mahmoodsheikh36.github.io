@@ -1,0 +1,2002 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage[boxed,linesnumbered,vlined]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\cov}{cov}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\cmark}{\text{\ding{51}}}
+\newcommand{\xmark}{\text{\ding{55}}}
+\author{mahmood}
+\date{\textit{<2022-06-20 Mon 00:45:00>}}
+\title{calculus}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={calculus},
+ pdfkeywords={},
+ pdfsubject={calculus},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+\begin{note}
+its important to read the exercises provided on every subject because i explain important things with exercises\\[0pt]
+\end{note}
+\begin{note}
+headlines without content act as placeholders for now.\\[0pt]
+\end{note}
+\section{factoring formulas}
+\label{sec:org2393718}
+\begin{align}
+  a^2-b^2 &= (a-b)(a+b)\\
+  (a+b)^2 &= a^2+2ab+b^2\\
+  (a-b)^2 &= a^2-2ab+b^2\\
+  ax^2+bx+c &= a(x-x_1)(x-x_2)\\
+  a^3-b^3 &= (a-b)(a^2+b^2+ab)\\
+  a^3+b^3 &= (a+b)(a^2-ab+b^2)\\
+  (a-b)^3 &= a^3-b^3-3ab(a-b)\\
+  (a+b)^3 &= a^3+b^3+3ab(a+b)\\
+  (a+b+c)^3 &= a^3+b^3+c^3+3(a+b)(b+c)(c+a)\\
+  \frac{1}{k(k+1)} &= \frac1k - \frac{1}{k+1}
+\end{align}
+\section{trigonometric formulas}
+\label{sec:org8f6e426}
+\begin{align}
+  \sin^2{x} + \cos^2{x} &= 1\\
+  \cos 2x &= 2\cos^2 x - 1\\
+  \cos 2x &= 1 - 2\sin^2 x\\
+  \cos 2x &= \cos^2 x - \sin^2 x\\
+  \sin 2x &= 2\sin x \cos x\\
+  1 + \tan^2 x &= \frac{1}{\cos^2 x}\\
+  1 + \cot^2 x &= \frac{1}{\sin^2 x}\\
+  \cos(\alpha+\beta) &= \cos\alpha\cos\beta-\sin\alpha\sin\beta\\
+  \cos(\alpha-\beta) &= \cos\alpha\cos\beta+\sin\alpha\sin\beta
+\end{align}
+\section{numbers}
+\label{sec:org6fbc91e}
+\subsection{natural}
+\label{sec:orgd839596}
+\begin{definition}
+denoted by \(\mathbb{N}\), represents numbers used for counting, might contain 0 according to some definitions, \(\mathbb{N} = \{1,2,3,\dots\}\)\\[0pt]
+\end{definition}
+\subsection{integer}
+\label{sec:orgfd7aca8}
+\begin{definition}
+denoted by \(\mathbb{Z}\), represents whole numbers (numbers without fractions), \(\mathbb{Z} = \{\ldots,-2,-1,0,1,2,\ldots\}\)\\[0pt]
+\end{definition}
+\subsection{normal}
+\label{sec:org89e30d2}
+\begin{definition}
+denoted by \(\mathbb{N}\), represents all \hyperref[sec:orgfd7aca8]{integer}s greater than 0, \(\mathbb{N} = \{1,2,3,\ldots\}\)\\[0pt]
+\end{definition}
+\subsection{rational}
+\label{sec:org3d83069}
+\begin{definition}
+denoted by \(\mathbb{Q}\), represents all numbers that can be written as a fraction of 2 integers\\[0pt]
+\end{definition}
+\subsection{real}
+\label{sec:org6805ed1}
+\begin{definition}
+denoted by \(\mathbb{R}\), represents all numbers\\[0pt]
+\end{definition}
+\subsection{complex}
+\label{sec:org8392c77}
+\section{\href{discrete_maths2.org}{function}s}
+\label{sec:org19a339d}
+\subsection{linear}
+\label{sec:org9ff23ea}
+\subsection{rational}
+\label{sec:org1945d51}
+\subsection{irrational}
+\label{sec:org665262b}
+\subsection{exponential}
+\label{sec:org151780b}
+\begin{definition}
+\(f(x)=a^x\) is an \textbf{exponential function} if \(a > 0 \neq 1\)\\[0pt]
+\end{definition}
+\subsection{log}
+\label{sec:org56e717b}
+\begin{definition}
+the \textbf{logarithmic function} \(g(x) = log_a(x)\) is the inverse of the \hyperref[sec:org151780b]{exponential function} \(f(x) = a^x\), meaning \(a^b = x \equiv \log_ax=b\), defined for \(x > 0\)\\[0pt]
+\begin{characteristic}
+\textbf{important} logarithm formulas:\\[0pt]
+\begin{gather}
+  \log_ax + \log_ay = \log_a(xy)\\
+  \log_ax - \log_ay = \log_a\left(\frac{x}{y}\right)\\
+  \log_a(x^n) = n\log_ax\\
+  a^{\log_ax} = x\\
+  \log_a b = \frac{1}{\log_b a}\\
+  \log_a b = \frac{\log_c b}{\log_c a}
+\end{gather}
+\end{characteristic}
+\end{definition}
+\subsubsection{natural log}
+\label{sec:org69682cf}
+\subsection{polynomial}
+\label{sec:orgbab33ca}
+\subsection{trigonometric}
+\label{sec:org4d52575}
+\subsubsection{cosine}
+\label{sec:org65fe77c}
+\includesvg{/Users/mahmooz/brain/out/IRCODD}\\[0pt]
+
+\subsubsection{sine}
+\label{sec:org53499b5}
+\includesvg{/Users/mahmooz/brain/out/nhJjBHv}\\[0pt]
+
+\subsubsection{tangent}
+\label{sec:org42368ee}
+\includesvg{/Users/mahmooz/brain/out/n4JY5wF}\\[0pt]
+
+\subsection{even function}
+\label{sec:org252ecea}
+\begin{definition}
+let \(f\) be a real-valued \href{discrete_maths2.org}{function} of a \hyperref[sec:org6805ed1]{real} variable. then \(f\) is \textbf{even} if the following equation holds for all x such that x and -x are in the domain of \(f\)\\[0pt]
+\[
+  f(x) = f(-x)
+\]\\[0pt]
+\end{definition}
+\subsection{odd function}
+\label{sec:org19ea39b}
+\begin{definition}
+let \(f\) be a real-valued \href{discrete_maths2.org}{function} of a \hyperref[sec:org6805ed1]{real} variable. then \(f\) is \textbf{odd} if the following equation holds for all x such that x and -x are in the domain of \(f\)\\[0pt]
+\[
+  -f(x) = f(-x)
+\]\\[0pt]
+\end{definition}
+\section{limit}
+\label{sec:org8cc3125}
+\begin{definition}
+the \textbf{limit} of a sequence is denoted as\\[0pt]
+\[
+  \lim_{n\to\infty} \frac1n = L
+\]\\[0pt]
+if for every \(\epsilon > 0\) there exists \(0 < N,\ N(\epsilon)\) such that for every \(n > N\) we know \(|a_n-L| < \epsilon\)\\[0pt]
+
+\begin{my_example}
+\[
+  \lim_{n\to\infty} \frac{2n+4}{7n+5}
+\]\\[0pt]
+to find this limit we start with \(|a_n-L|\) which we need to show is smaller than \(\epsilon\):\\[0pt]
+\[ |a_n - L| = \left|\frac{2n+4}{7n+5} - \frac27\right| = \left|\frac{7(2n+4)-2(7n+5)}{7(7n+5)}\right| = \frac{18}{49n+35} < \frac{18}{49n} < \epsilon \implies \frac{18}{49\epsilon} < n \implies N(\epsilon) = \left[\frac{18}{49\epsilon}\right]+1 \]\\[0pt]
+\end{my_example}
+\end{definition}
+\subsection{limit table}
+\label{sec:orgf881106}
+\begin{gather}
+  \lim_{n \to \infty} n = \infty\\
+  \lim_{n \to \infty} \frac1n = 0\\
+  \lim_{n \to \infty} \left(\frac{x}{x+k}\right)^x = e^{-k}\\
+  \lim_{n \to \infty} \left(1+\frac{1}{n}\right)^n = e\\
+  \lim_{x\to 0} \frac{\sin{x}}{x} = 1
+\end{gather}
+\subsection{limits of rational functions}
+\label{sec:orgbd4eec8}
+\begin{characteristic}
+when finding the limit of a rational function where both parts of the fraction diverge we take the coefficient of the variable with the highest degree in the numerator divided by the coefficient of the variable with the heighest degree in the denominator\\[0pt]
+\end{characteristic}
+\subsection{Squeeze theorem}
+\label{sec:org6d719ce}
+the \textbf{squeeze theorem} states that if \(f(x) \le g(x) \le h(x)\) for all numbers, and at some point \(x=k\) we have \(f(k)=h(k)\), then \(g(k)\) must also be equal to them.\\[0pt]
+we can use the theorem to find tricky limits like \(\lim_{x \to 0} \frac{\sin x}{x}\), by "squeezing" \(\frac{\sin x}{x}\) between two nicer functions and using them to find the limit\\[0pt]
+\subsection{indeterminate form}
+\label{sec:orgd592a44}
+some forms of limits are called \textbf{indeterminate} if the limiting behaviour of individual parts of the given expression is not able to determine the overall limit. if the limits are applied for the given function, then it becomes 0/0, which is known as an indeterminate form\\[0pt]
+\subsection{chain rule}
+\label{sec:org7e51f11}
+\[
+  \lim_{x\to a} f(g(x)) = f\left(\lim_{x\to a}g(x)\right)
+\]\\[0pt]
+\subsection{divergence}
+\label{sec:orga069cab}
+\begin{definition}
+a limit diverges if it doesnt converge, that is, it might diverge to infinity, or it might get stuck like \(\sin(x)\) sliding back and forth between -1 and 1 (oscillating)\\[0pt]
+\begin{note}
+sometimes we also say a \hyperref[sec:org8cc3125]{limit} doesnt exist if it diverges\\[0pt]
+\end{note}
+\end{definition}
+\subsection{convergence}
+\label{sec:org0440354}
+\begin{definition}
+a limit converges if it converges to (is bounded by) a constant, which is the opposite of \hyperref[sec:orga069cab]{divergence}\\[0pt]
+\begin{note}
+we sometimes refer to a \hyperref[sec:org8cc3125]{limit} that converges by the word \textbf{exists}, as in we say \textbf{this limit exists}\\[0pt]
+\end{note}
+\end{definition}
+\subsection{limits using euler}
+\label{sec:org5af9ed3}
+\begin{note}
+need to add citation to \url{https://marcocetica.com/posts/euler\_number\_calculus/} (took lots of stuff from here!)\\[0pt]
+\end{note}
+a consequence of the definition of \href{20220704213259-euler_s_number.org}{Euler's Number} is:\\[0pt]
+\[
+  \lim_{x\to \pm\infty} \left(1+\frac{1}{f(x)}\right)^{f(x)} = e \iff f(x) \to \pm\infty
+\]\\[0pt]
+thus, if we have an \hyperref[sec:orgd592a44]{indeterminate form} that can be rewritten in this form, it would be easy to calculate it\\[0pt]
+
+\begin{my_example}
+\[
+  \lim_{x\to \infty} \left(1+\frac{3}{x}\right)^x
+\]\\[0pt]
+substitution of \(x=\infty\) give us \(1^\infty\) which is indeterminate, but since \(f(x)=\frac{x}{3}\to\infty\) we can use \href{20220704213259-euler_s_number.org}{Euler's Number} to get its value\\[0pt]
+we rewrite the limit as:\\[0pt]
+\[
+  \lim_{x\to\infty} \left(1+\frac{1}{\frac{x}{3}}\right)^x
+\]\\[0pt]
+now we need to move the 3 to the exponent, to do that we can multiply and divide the exponent by 3\\[0pt]
+\[
+  \lim_{x\to\infty} \left(1+\frac{1}{\frac{x}{3}}\right)^{x\cdot\frac{3}{3}} = \lim_{x\to\infty} \left(\underbrace{\left(1+\frac{1}{\frac{x}{3}}\right)^{\frac{x}{3}}}_{e}\right)^3 = e^3
+\]\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \lim_{x \to \infty} \left(  \frac{3x+1}{3x-5} \right)^{x-2}
+\]\\[0pt]
+again, this is an indeterminate form \(1^\infty\). the first thing we can do to obtain the standard form is to add and subtract a quantity to the numerator of the fraction. in this case this quantity is 5\\[0pt]
+\[
+  \lim_{x\to\infty} \left(\frac{3x-5+5+1}{3x-5}\right)^{x-2}
+\]\\[0pt]
+we can now split the fraction:\\[0pt]
+\[
+  \lim_{x\to\infty} \left(\frac{3x-5}{3x-5} + \frac{6}{3x-5}\right)^{x-2} = \lim_{x\to\infty} \left(1+\frac{6}{3x-5}\right)^{x-2}
+\]\\[0pt]
+at this point we need to "adjust" our fraction in order to have the standard form\\[0pt]
+\[
+  \lim_{x\to\infty} \left(1+\frac{1}{\frac{3x+5}{6}}\right)^{x-2}
+\]\\[0pt]
+finally, we multiply and divide the exponent by \(f(x)\)\\[0pt]
+\[
+  \lim_{x\to\infty} \left(1+\frac{1}{\frac{3x+5}{6}}\right)^{(x-2) \cdot \frac{3x+5}{6} \cdot \frac{6}{3x+5}}
+\]\\[0pt]
+which led us to:\\[0pt]
+\[
+  \lim_{x\to\infty} \left(\left(1+\frac{1}{\frac{3x+5}{6}}\right)^{\frac{3x+5}{6}}\right)^{\frac{6x-12}{3x+5}} = e^\frac{6}{3} = e^2
+\]\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \lim_{n\to\infty} \left(\frac{n^2-5n+6}{n^2-9n+20}\right)^{2n-1}
+\]\\[0pt]
+in this case, we first need to divide the numerator by the denominator (i.e., \hyperref[sec:org4103a69]{polynomial long division}). This leaves us with two new polynomials:\\[0pt]
+\[
+  P(x)=1 \qquad R(x)=4n-14
+\]\\[0pt]
+we can rewrite the limit like this:\\[0pt]
+\[
+  \lim_{n\to\infty} \left(1+\frac{4n-14}{n^2-9n+20}\right)^{2n-1}
+\]\\[0pt]
+the rest is similar to the previous example\\[0pt]
+\[
+  = \lim_{n\to\infty} \left(1+\frac{1}{\frac{n^2-9n+20}{4n-14}}\right)^{2n-1 \cdot \frac{n^2-9n+20}{4n-14} \cdot \frac{4n-14}{n^2-9n+20}} = \lim_{n\to\infty} \left( \underbrace{\left(1+\frac{1}{\frac{n^2-9n+20}{4n-14}}\right)^{\frac{n^2-9n+20}{4n-14}}}_{e}\right)^{\frac{(4n-14)(2n-1)}{n^2-9n+20}} = e^8
+\]\\[0pt]
+\end{my_example}
+\subsection{L'Hôpital's rule}
+\label{sec:org3873de8}
+see \url{https://en.wikipedia.org/wiki/L\%27H\%C3\%B4pital\%27s\_rule}\\[0pt]
+\textbf{L'Hôpital's rule} states that for functions \(f\) and \(g\) which are differentiable on an open interval \(I\), except possibly at a point \(c\) contained in \(I\), if \(\lim_{x\to c} f(x) = \lim_{x\to c} g(x) = 0\) or \(\lim_{x\to c} f(x) = \lim_{x\to c} g(x) = \pm\infty\), and \(g'(x) \neq 0\) for all \(x\) in \(I\) with \(x \neq c\) and \(\lim_{x\to c} \frac{f'(x)}{g'(x)}\) exists then\\[0pt]
+\[
+  \lim_{x\to c} \frac{f(x)}{g(x)} = \lim_{x\to c} \frac{f'(x)}{g'(x)}
+\]\\[0pt]
+the differentiation of the numerator and denominator often simplifies the quotient or converts it to a limit that can be evaluated directly.\\[0pt]
+
+\begin{my_example}
+\[
+  \lim_{x\to \infty} x\sin\frac1x
+\]\\[0pt]
+if we were to substitute \(x=\infty\) we would get:\\[0pt]
+\[
+   \infty \cdot \sin\frac1\infty = \infty \cdot \sin0 = \infty \cdot 0
+\]\\[0pt]
+which is an \hyperref[sec:orgd592a44]{indeterminate form}\\[0pt]
+we can rewrite the given expression as a fraction of 2 functions:\\[0pt]
+\[
+  x\sin\frac1x =\frac{\sin\frac1x}{\frac1x}
+\]\\[0pt]
+now we can substitute \(t=\frac{1}{x}\) to make our lives easier, so we get:\\[0pt]
+\[
+  \lim_{x\to \infty} \frac{\sin\frac1x}{\frac1x} = \lim_{t\to 0} \frac{\sin{t}}{t}
+\]\\[0pt]
+notice how the limit changed from \(\lim_{x\to \infty}\) to \(\lim_{t\to 0}\), this is because we substituted \(t=\frac{1}{x}\), and \(\lim_{x\to \infty} \frac{1}{x} = 0\)\\[0pt]
+now since \(\lim_{t\to 0} \sin{t} = \lim_{t\to 0} t = 0\) we can make use of \hyperref[sec:org3873de8]{L'Hôpital's rule}\\[0pt]
+\[
+  \lim_{t\to 0} \frac{\sin{t}}{t} = \lim_{t\to 0} \frac{\cos{t}}{1} = 1
+\]\\[0pt]
+and since this limit is equal to the original limit, we finally get:\\[0pt]
+\[
+  \lim_{x\to \infty} x\sin\frac1x = 1
+\]\\[0pt]
+\end{my_example}
+\section{derivative}
+\label{sec:org5154d31}
+\begin{definition}
+let \(f(x)\) be a \href{discrete_maths2.org}{function}, the \textbf{derivative} of \(f(x)\), denoted by \(f'(x)=\frac{df(x)}{dx}\) is the function that describes the slope of \(f(x)\)\\[0pt]
+\begin{note}
+to denote an nth derivative of a function we write \(\frac{d^nf(x)}{dx^n}\), this reads "the nth derivative of \(f(x)\) with respect to \(x\)"\\[0pt]
+\end{note}
+\end{definition}
+\subsection{derivative table}
+\label{sec:orgcd100f2}
+\begin{tabular}{lll}
+function & derivative & rule name\\[0pt]
+\hline
+c & 0 & \\[0pt]
+\(cx^n\) & \(ncx^{n-1}\) & power rule\\[0pt]
+\(f(x)+g(x)\) & \(f'(x)+g'(x)\) & sum rule\\[0pt]
+\(f(x)-g(x)\) & \(f'(x)-g'(x)\) & difference rule\\[0pt]
+\(f(x)\cdot g(x)\) & \(f(x)g'(x)+f'(x)g(x)\) & product rule\\[0pt]
+\(f(x)/g(x)\) & \(\frac{f'(x)g(x)-g'(x)f(x)}{g^2(x)}\) & quotient rule\\[0pt]
+\(f(g(x))\) & \(f'(g(x))g'(x)\) & chain rule\\[0pt]
+\(e^{cx}\) & \(ce^{cx}\) & \\[0pt]
+\(a^x\) & \(a^x\ln a\) & \\[0pt]
+\(\ln x\) & \(\frac{1}{x}\) & \\[0pt]
+\(\log_a x\) & \(\frac{1}{x\ln{a}}\) & \\[0pt]
+\(\sin x\) & \(\cos x\) & \\[0pt]
+\(\cos x\) & \(-\sin x\) & \\[0pt]
+\(\tan x\) & \(\sec^2 x\) & \\[0pt]
+\(\sin^{-1} x\) & \(\frac{1}{\sqrt{1-x^2}}\) & \\[0pt]
+\(\cos^{-1} x\) & \(\frac{-1}{\sqrt{1-x^2}}\) & \\[0pt]
+\(\tan^{-1} x\) & \(\frac{1}{1+x^2}\) & \\[0pt]
+\(\frac{1}{f(x)}\) & \(\frac{-f'(x)}{f(x)^2}\) & reciprocal Rule\\[0pt]
+\end{tabular}
+\subsection{chain rule}
+\label{sec:org9cdf5b8}
+see \hyperref[sec:orgcd100f2]{derivative table}\\[0pt]
+\section{integral}
+\label{sec:orgdba2ffa}
+\begin{definition}
+integral is the inverse of the derivative\\[0pt]
+we write the integral of \(f(x)\) as:\\[0pt]
+\[ \text{integral of $f(x)$ with respect to $x$ is denoted by } \int f(x) \text{ dx} \]\\[0pt]
+\end{definition}
+\subsection{integral table}
+\label{sec:orgb3a8bdb}
+\begin{tabular}{ll}
+\(f(x)\) & \(\int{f(x) \ \mathrm{dx}}\)\\[0pt]
+\hline
+\(x^n,\ n \neq -1\) & \(\frac{x^{n+1}}{n+1}\)\\[0pt]
+\(\frac{1}{\sqrt{x}}\) & \(2\sqrt{x}\)\\[0pt]
+\(e^x\) & \(e^x\)\\[0pt]
+\(a^x\) & \(\frac{a^x}{\ln{a}}\)\\[0pt]
+\(\frac{1}{x}\) & \(\ln{x}\)\\[0pt]
+\(\sin{x}\) & \(-\cos{x}\)\\[0pt]
+\(\cos{x}\) & \(\sin{x}\)\\[0pt]
+\(\frac{1}{\cos^2{x}}\) & \(\tan{x}\)\\[0pt]
+\(\frac{1}{\sin^2{x}}\) & \(\cot{x}\)\\[0pt]
+\(\frac{1}{1+x^2}\) & \(\arctan{x}\)\\[0pt]
+\(\frac{1}{\sqrt{1-x^2}}\) & \(\arcsin{x}\)\\[0pt]
+\(\frac{1}{x^2+a^2}\) & \(\frac1a \arctan{\frac{x}{a}}\)\\[0pt]
+\(\frac{1}{\sqrt{a^2-x^2}}\) & \(\arcsin{\frac{x}{a}}\)\\[0pt]
+\(\ln x\) & \(x\ln x - x\)\\[0pt]
+\end{tabular}
+\subsection{sum/difference rule}
+\label{sec:org89948e1}
+\[
+  \int f(x) \pm g(x) \dif{x} = \int f(x) \dif{x} \pm \int g(x) \dif{x}
+\]\\[0pt]
+\subsection{constant multiple rule}
+\label{sec:org13700bd}
+\[
+  \int cf(x) \dif{x} = c\int f(x) \dif{x}
+\]\\[0pt]
+\subsection{integration by parts}
+\label{sec:org97eb449}
+this method is the counterpart to the product rule for \hyperref[sec:org5154d31]{differentiation}\\[0pt]
+\begin{align*}
+  (u \cdot v)' &= u' \cdot v + v' \cdot u & \text{derivative rule}\\
+  u' \cdot v &= (u \cdot v)' - v' \cdot u\\
+  \int u' \cdot v &= \int((u \cdot v)' - v' \cdot u)\\
+  \int u' \cdot v &= \int{(u \cdot v)'} - \int{v' \cdot u} & \text{integral difference rule}\\
+  \int u' \cdot v &= u \cdot v - \int v' \cdot u
+\end{align*}
+\[
+  \boxed{\int u' \cdot v = u \cdot v - \int v' \cdot u}
+\]\\[0pt]
+\subsection{integral of ln}
+\label{sec:orgbc0d0a8}
+\begin{align*}
+  \int \ln x \ \mathrm{dx} &= \int 1 \cdot \ln x \ \mathrm{dx}\\
+                           &= x \cdot \ln x - \int \frac1x \cdot x\\
+                           &= x \cdot \ln x - \int 1\\
+                           &= x \cdot \ln x - x
+\end{align*}
+\[
+  \boxed{\int \ln x \ \mathrm{dx} = x \cdot \ln x - x + c}
+\]\\[0pt]
+\subsection{integrating rational functions}
+\label{sec:orgab53d10}
+a \hyperref[sec:org1945d51]{rational function} \(\frac{1}{f(x)}\) can be integrated quickly into \(\frac{\ln(f(x))}{f'(x)}\) if \(f(x)\) is \hyperref[sec:org9ff23ea]{linear}\\[0pt]
+\begin{my_example}
+\[
+  \int \frac{1}{5-2x} \ \mathrm{dx} = \frac{\ln(5-2x)}{-2} + c
+\]\\[0pt]
+\end{my_example}
+\subsubsection{partial fraction decomposition}
+\label{sec:org01f21e2}
+\begin{my_example}
+\begin{gather*}
+  \int \frac{1}{(x-3)(x-7)} \ \mathrm{dx}\\
+  \frac{1}{(x-3)(x-7)} = \frac{A}{x-3} + \frac{B}{x-7}\\
+  1 = A(x-7) + B(x-3)\\
+  1 = x(A+B)+(-7A-3B)\\
+  \begin{cases}
+    A+B = 0\\
+    -7A-3B=1
+  \end{cases}
+  \Rightarrow
+  \ A = \frac{-1}{4},\ B = \frac14\\
+  \frac{1}{(x-3)(x-7)} = \frac{-1}{4} \cdot \frac{1}{x-3} + \frac14 \cdot \frac{1}{x-7}\\
+  \int \frac{1}{(x-3)(x-7)} \ \mathrm{dx} = \int \frac{-1}{4} \cdot \frac{1}{x-3} \ \mathrm{dx} + \int \frac14 \cdot \frac{1}{x-7} \ \mathrm{dx}
+\end{gather*}
+\end{my_example}
+
+\begin{my_example}
+\\[0pt]
+
+
+\begin{gather*}
+  \int \frac{7}{x(x+3)} \ \mathrm{dx}\\
+  \frac{7}{x(x+3)} = \frac{A}{x} + \frac{B}{x+3}\\
+  7 = A(x+3) + Bx\\
+  7 = (A+B)x + 3A\\
+  \begin{cases}
+    A+B = 0\\
+    3A = 7
+  \end{cases}
+  \Rightarrow A = \frac73,\ B=-\frac73\\
+  \frac{7}{x(x+3)} = \frac{A}{x} + \frac{B}{x+3}\\
+  \int \frac{7}{x(x+3)} \ \mathrm{dx} = \int \frac73 \cdot \frac{1}{x} \ \mathrm{dx} + \int -\frac73 \cdot \frac{1}{x+3} \ \mathrm{dx}\\
+\end{gather*}
+\end{my_example}
+
+\begin{my_example}
+\begin{gather*}
+  \int \frac{2x^2-5x+9}{x^3-9x} \ \mathrm{dx}\\
+  \frac{2x^2-5x+9}{x^3-9x} = \frac{2x^2-5x+9}{x(x^2-9)} = \frac{2x^2-5x+9}{x(x-3)(x+3)}\\
+  \frac{2x^2-5x+9}{x(x-3)(x+3)} = \frac{A}{x} + \frac{B}{x-3} + \frac{C}{x+3}\\
+  2x^2-5x+9=A(x-3)(x+3) + Bx(x+3) + Cx(x-3)\\
+  \text{substitute } x = 0 \Rightarrow 9 = A \cdot -3 \cdot 3 \Rightarrow A = -1\\
+  \text{substitute } x = 3 \Rightarrow 2 \cdot 9 - 5 \cdot 3 + 9 = 6 \cdot 3 \cdot B \Rightarrow 12 = 9B \Rightarrow B = \frac{12}{9}\\
+  \text{substitute } x = -3 \Rightarrow 2 \cdot 9 + 5 \cdot 3 + 9 = C \cdot -3 \cdot -6 \Rightarrow C = \frac{42}{18}\\
+  \frac{2x^2-5x+9}{x(x-3)(x+3)} = \frac{-1}{x} + \frac{12}{9} \cdot \frac{1}{x-3} + \frac{42}{18} \cdot \frac{1}{x+3}\\
+  \int \frac{2x^2-5x+9}{x^3-9x} \ \mathrm{dx} = \int \frac{-1}{x} \ \mathrm{dx} + \int \frac{12}{9} \cdot \frac{1}{x-3} \ \mathrm{dx} + \int \frac{42}{18} \cdot \frac{1}{x+3} \ \mathrm{dx}
+\end{gather*}
+\end{my_example}
+
+\begin{my_example}
+\[
+  \int \frac{2x + 4}{{(x+2)}^2+4} \text{ dx} = \ln\left((x+2)^2+4\right)
+\]\\[0pt]
+\end{my_example}
+\paragraph{polynomial long division}
+\label{sec:org4103a69}
+\includegraphics{./polynomdiv.png}\\[0pt]
+\subsection{integration by substitution}
+\label{sec:orgf2294be}
+\begin{definition}
+this method is the counterpart to the \hyperref[sec:org9cdf5b8]{chain rule} for \hyperref[sec:org5154d31]{differentiation}\\[0pt]
+consider the following equation:\\[0pt]
+\[ t = x^2 + 5 \]\\[0pt]
+we derivate \(t\) with respect to \(x\):\\[0pt]
+\[
+  t = x^2 + 5 \implies \text{dt} = 2x \text{ dx} \implies \frac{\text{dt}}{\text{dx}} = 2x \implies \text{dt} = 2x \text{ dx}
+\]\\[0pt]
+the expression \(\frac{\mathrm{dt}}{\mathrm{dx}}\) means the derivative of \(t\) with respect to \(x\)\\[0pt]
+consider another equation:\\[0pt]
+\[ t^3 = e^{3x} + 7x^2 \]\\[0pt]
+we can derivate the left side with respect to \(t\) and the right side with respect to \(x\)\\[0pt]
+\[ 3t^2 \text{ dt} = \left(e^{3x} \cdot 3 + 14x\right) \text{ dx} \]\\[0pt]
+
+\begin{my_example}
+consider the integral:\\[0pt]
+\[ \int 2x\left(x^2+5\right)^{13} \text{ dx} \]\\[0pt]
+to integrate such \hyperref[sec:orgbab33ca]{polynomial}s, we use the substitution method:\\[0pt]
+
+let \(t = x^2 + 5\), the derivative of this with respect to \(t\) is \(1 \cdot \text{dt}\), the derivative with respect to \(x\) is \(2xdx\)\\[0pt]
+
+\begin{align*}
+  t &= x^2 + 5\\
+  \text{dt} &= 2x \text{ dx}\\
+  \text{dx} &= \frac{\text{dt}}{2x}\\
+  \int 2x\left(x^2+5\right)^{13} \text{ dx} &= \int 2xt^{13} \frac{\text{dt}}{2x} = \int t^{13} \text{ dt} = \frac{t^{14}}{14} = \frac{{(x^2+5)}^{14}}{14} + c
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+consider the integral\\[0pt]
+\[
+  \int x^2{(2x^3 + 7)}^{10} \text{ dx}
+\]\\[0pt]
+we use subtitution:\\[0pt]
+\begin{align*}
+  t = 2x^3 + 7\\
+  dt = 6x^2 dx\\
+  dx = \frac{dt}{6x^2}\\
+  \int x^2{(2x^3 + 7)}^{10} \text{ dx} &= \int x^2t^{10} \frac{dt}{6x^2}\\
+  &= \frac16 \int t^{10} dt\\
+  &= \frac{1}{66} \cdot t^{11} + c\\
+  &= \frac{1}{66} \cdot {(2x^3 + 7)}^{11} + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+consider\\[0pt]
+\[ \int x^5(2x^3 + 1)^7 \text{ dx} \]\\[0pt]
+we use \hyperref[sec:orgf2294be]{integration by substitution}\\[0pt]
+\begin{align*}
+  t = 2x^3 + 1\\
+  dt = 6x^2 dx\\
+  dx = \frac{dt}{6x^2}\\
+  \int x^5(2x^3 + 1)^7 \text{ dx} &= \int x^5t^7 \frac{dt}{6x^2}\\
+  &= \frac16 \int x^3t^7 dt
+\end{align*}
+we cant directly integrate \(\int x^3t^7 dt\) because we have \(x^3\) in the expression\\[0pt]
+but if we look at the equations above we see \(t = 2x^3 + 1\) which gives us \(x^3 = \frac{t-1}{2}\), so we substitute this and integrate\\[0pt]
+\begin{align*}
+  \frac16 \int x^3t^7 dt &= \frac{1}{12} \int (t-1)t^7 dt\\
+  &= \frac{1}{12} \int t^8-t^7 dt\\
+  &= \frac{1}{12} \int t^8 dt - \int t^7 dt\\
+  &= \frac{1}{12} \left(\frac{t^9}{9} - \frac{t^8}{9}\right)\\
+  &= \frac{1}{12} \left(\frac{{(2x^3 + 1)}^9}{9} - \frac{{(2x^3 + 1)}^8}{8}\right) + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\[
+  \int \frac{1}{x\ln{x}} \text{ dx}
+\]\\[0pt]
+we choose \(t = \ln{x}\)\\[0pt]
+\begin{align*}
+  t = \ln{x}\\
+  \text{dt} = \frac1x \text{ dx}\\
+  \text{dx} = x \text{ dt}\\
+  \int \frac{1}{x\ln{x}} \text{ dx} &= \int \frac{1}{x\ln{x}} x \text{ dt}\\
+  &= \int \frac{1}{t} \text{ dt}\\
+  &= \ln(t) + c\\
+  &= \ln(\ln(x)) + c
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\[
+  \int \frac{1}{x \cdot \ln{x} \cdot \ln(\ln{x})} \text{ dx}
+\]\\[0pt]
+we pick \(t = \ln(\ln{x})\)\\[0pt]
+\begin{align*}
+  t = \ln(\ln{x})\\
+  \text{dt} = \frac{1}{\ln{x}} \cdot \frac1x \text{ dx} = \frac{1}{x\ln{x}} \text{ dx}\\
+  dx = x\ln{x} \text{ dt}\\
+  \int \frac{1}{x \cdot \ln{x} \cdot \ln(\ln{x})} \text{ dx} &= \int \frac{x\ln{x}}{x \cdot \ln{x} \cdot \ln(\ln{x})} \text{ dt}\\
+  &= \int \frac{1}{\ln(\ln{x})} \text{ dt}\\
+  &= \int \frac{1}{t} \text{ dt}\\
+  &= \ln(t) + c\\
+  &= \ln(\ln(\ln{x})) + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\begin{note}
+when we integrate a function that is a product of 2 trigonometric functions (cos and sin), if both have odd exponents it doesnt matter which one we choose for \(t\)\\[0pt]
+\end{note}
+\[
+  \int \sin^7{x} \cos^5{x} \text{ dx}
+\]\\[0pt]
+we pick \(t = \sin x\)\\[0pt]
+\begin{align*}
+  t = \sin{x}\\
+  \text{dt} = \cos{x} \text{ dx}\\
+  \text{dx} = \frac{\text{dt}}{\cos x}\\
+  \int \sin^7{x} \cos^5{x} \text{ dx} &= \int t^7 \cos^5{x} \frac{\text{dt}}{\cos x}\\
+  &= \int t^7 \cos^4{x} \text{ dt}\\
+\end{align*}
+we need to get rid of \(\cos^4 x\) so we use the formula \(\cos^2 x + \sin^2 x = 1\), which gives us:\\[0pt]
+\[
+  \cos^2 x + t^2 = 1 \Rightarrow \cos^2 x = 1 - t^2 \Rightarrow \cos^4 x = {(1 - t^2)}^2
+\]\\[0pt]
+now that we have \(\cos^4 x\) in terms of \(t\) we can continue\\[0pt]
+\begin{align*}
+  \int t^7 {(1-t^2)}^2 \text{ dt} &= \int t^7(1 - 2t^2 + t^4) \text{ dt}\\
+  &= \int t^7 - 2t^9 + t^{11} \text{ dt}\\
+  &= \frac{t^8}{8} - \frac{2t^{10}}{10} + \frac{t^{12}}{12} + c\\
+  &= \frac{\sin^8{x}}{8} - \frac{\sin^{10} x}{5} + \frac{\sin^{12} x}{12} + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\[ \int \sin^2(2x) \cos^{11}(2x) \text{ dx} \]\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\begin{note}
+if we have an odd and an even exponent, we take \(t\) of the function with the even exponent, check the following exercise\\[0pt]
+\end{note}
+\begin{align*}
+  \int \sin^5{x} \cos^4{x} \text{ dx}\\
+  t = \cos x\\
+  \text{dt} = -\sin x \text{ dx}\\
+  \text{dx} = \frac{\text{dt}}{-\sin x}\\
+  \int \sin^5{x} \cos^4{x} \text{ dx} &= \int \sin^5(x) t^4 \frac{\text{dt}}{-\sin x}\\
+  &= -\int {(1-t^2)}^2 t^4 \text{ dt} &\sin^2{x} + \cos^2{x} = 1\\
+  &= -\int (1-2t^2+t^4) t^4 \text{ dt}\\
+  &= \int -t^4 + 2t^6 - t^8 \text{ dt}\\
+  &= \frac{-t^5}{5} + \frac{2t^7}{7} - \frac{t^9}{9} + c\\
+  &= \frac{-\cos^5{x}}{5} + \frac{2\cos^7 x}{7} - \frac{\cos^9 x}{9} + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\begin{align*}
+  \int \sin^2 x \text{ dx} &= \int \frac{1 - \cos(2x)}{2} \text{ dx} &\text{usage of the rule } \cos 2x = 1 - 2\sin^2 x\\
+  &= \frac12 \int 1 - \cos(2x) \text{ dx}\\
+  &= \frac12 \left(x - \frac12 \sin(2x)\right) + c
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\begin{note}
+this exercise demonstrates how to solve an integral with of product of 2 trigonometric functions (cos and sin) that both have an even exponent, we dont choose either for \(t\), we use one of the formulas for \(\cos 2x\)\\[0pt]
+\end{note}
+\begin{align*}
+  \int \sin^4 x \cos^2x \text{ dx} &= \int {(\sin x\cos x)}^2 \sin^2 x \text{ dx}\\
+  &= \int \frac14 \sin^2 2x \sin^2 x \text{ dx} &\text{using the formula } 2\sin x \cos x = \sin 2x\\
+  &= \int \frac14 \sin^2 2x \frac{1 - \cos 2x}{2} \text{ dx} &\text{using the formula } \cos 2x = 1 - 2\sin^2 x\\
+  &= \frac18 \int \sin^2 2x (1 - \cos 2x) \text{ dx}\\
+  &= \frac18 \int \sin^2 2x - \sin^2 2x \cos 2x \text{ dx}\\
+  &= \frac18 \int \sin^2 2x \text{ dx} - \frac18 \int \sin^2 2x \cos 2x \text{ dx}\\
+  &= \frac18 \int \frac{1 - \cos 4x}{2} \text{ dx} - \frac18 \int \sin^2 2x \cos 2x \text{ dx} &\text{using the formula } \cos 2x = 1 - 2\sin^2 x\\
+  &= \frac{1}{16} x - \frac{\sin{4x}}{64} - \frac18 \int \sin^2 2x \cos 2x \text{ dx}
+\end{align*}
+to solve the second integral we use substitution, we pick \(t = \sin 2x\)\\[0pt]
+
+\begin{align*}
+  t = \sin 2x\\
+  \text{dt} = 2\cos{2x} \text{ dx}\\
+  \text{dx} = \frac{\text{dt}}{2\cos 2x}\\
+  \frac{x}{16} - \frac{\sin{4x}}{64} - \frac18 \int \sin^2 2x \cos 2x \text{ dx} &= \frac{x}{16} - \frac{\sin{4x}}{64} - \frac18 \int t^2 \cos 2x \frac{\text{dt}}{2\cos 2x}\\
+  &= \frac{x}{16} - \frac{\sin{4x}}{64} - \frac18 \int \frac{t^2}{2} \text{dt}\\
+  &= \frac{x}{16} - \frac{\sin{4x}}{64} - \frac18 \cdot \frac{t^3}{6} + c\\
+  &= \frac{x}{16} - \frac{\sin{4x}}{64} - \frac{\sin^3 2x}{48} + c
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\[
+  \int \sqrt{1 - x^2} \text{ dx}
+\]\\[0pt]
+\begin{note}
+the \hyperref[sec:org53499b5]{sin} function is \href{discrete_maths2.org}{invertible} in the interval \([-\frac{\pi}{2}, \frac{\pi}{2}]\) and the \href{discrete_maths2.org}{inverse} of it is \(\arcsin\), so if we have \(x = \sin t\) (in that interval) we can write \(\arcsin x = t\)\\[0pt]
+\end{note}
+we do \(x = \sin t\)\\[0pt]
+\begin{align*}
+  x = \sin t\\
+  \text{dx} = \cos t \text{ dt}\\
+  \int \sqrt{1 - \sin^2 x} \cos t \text{ dt} &= \int \sqrt{\cos^2 t} \cos t \text{ dt} &\text{using } \sin^2{x} + \cos^2{x} = 1\\
+  &= \int \cos^2 t \text{ dt}\\
+  &= \int \frac{1 + \cos 2t}{2} \text{ dt} &\text{using } \cos 2x = 2\cos^2 x - 1\\
+  &= \frac12 \int 1 + \cos 2t \text{ dt}\\
+  &= \frac12 \left(t + \frac{\sin 2t}{2}\right) + c\\
+  &= \frac12 \left(\arcsin x + \frac{\sin(2\arcsin x)}{2}\right) + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\begin{align*}
+  \int \frac{x - 1}{\sqrt{1 - x^2}} \text{ dx} &= \int \frac{x}{\sqrt{1-x^2}} \text{ dx} - \int \frac{1}{\sqrt{1-x^2}} \text{ dx}\\
+  t = \sqrt{1 - x^2} \Rightarrow \text{dt} = \frac{-\cancel{2}x}{\cancel{2}\sqrt{1-x^2}} \text{ dx} &\Rightarrow \text{dx} = \frac{-\sqrt{1-x^2}}{x} \text{ dt}\\
+  \int \frac{x}{\sqrt{1-x^2}} \text{ dx} - \int \frac{1}{\sqrt{1-x^2}} \text{ dx} &= \int \frac{x}{\sqrt{1-x^2}} \cdot \frac{-\sqrt{1-x^2}}{x} \text{ dt} - \int \frac{1}{\sqrt{1-x^2}} \text{ dx}\\
+  &= \int (-1 \text{ dt}) - \arcsin x\\
+  &= -t - \arcsin x + c\\
+  &= -\sqrt{1 - x^2} - \arcsin x + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\[
+  \sin^4 x \text{ dx}
+\]\\[0pt]
+this function has both even exponents, as the exponent of cos is 0, because \(\sin^4 x = \cos^0 x \cdot \sin^4 x\), so we try to manipulate the function using the formulas of \(\cos 2x\)\\[0pt]
+\begin{align*}
+  \sin^4 x = {(\sin^2 x)}^2 &= {\left(\frac{1 - \cos 2x}{2}\right)}^2\\
+  &= \frac14(1 - 2\cos 2x + \cos^2 2x)\\
+  &= \frac14\left(1 - 2\cos 2x + \frac{1 + \cos 4x}{2}\right)\\
+  \int \sin^4 x \text{ dx} &= \frac14 \int 1 - 2\cos 2x + \frac12 + \frac{\cos 4x}{2} \text{ dx}\\
+  &= \frac14\left(1.5x - \sin 2x + \frac{\sin 4x}{8} \right) + c\\
+\end{align*}
+\end{my_example}
+\end{definition}
+\subsection{integration of sums of trigonometric functions}
+\label{sec:org50d9a5a}
+\begin{definition}
+\begin{note}
+when dealing with addition of \hyperref[sec:org53499b5]{sin} and \hyperref[sec:org65fe77c]{cos} functions we write\\[0pt]
+\[
+  \int \mathbb{R}(\sin x, \cos x)
+\]\\[0pt]
+and we pick \(\boxed{t = \tan \frac{x}{2}}\)\\[0pt]
+\end{note}
+consider the \hyperref[sec:org53499b5]{sin} function\\[0pt]
+\begin{align*}
+  \sin x = 2\sin\frac{x}{2} \cos\frac{x}{2} &= \frac{2\sin\frac{x}{2}}{\cos\frac{x}{2}} \cos^2\frac{x}{2}\\
+  &= 2\tan\frac{x}{2} \cos^2\frac{x}{2}\\
+  &= 2t\cos^2\frac{x}{2}\\
+  &= \frac{2t}{1 + t^2} &\text{using } 1 + \tan^2 x = \frac{1}{\cos^2 x}
+\end{align*}
+therefore we write\\[0pt]
+\[
+  \boxed{\sin x = \frac{2t}{1 + t^2}}
+\]\\[0pt]
+consider the \hyperref[sec:org65fe77c]{cos} function\\[0pt]
+\begin{align*}
+  \cos x = 2\cos^2 \frac{x}{2} - 1 &= 2\left(\frac{1}{1 + t^2}\right) - 1\\
+  &= \frac{2 - 1 - t^2}{1 + t^2}\\
+  &= \frac{1 - t^2}{1 + t^2}\\
+\end{align*}
+therefore we write\\[0pt]
+\[
+  \boxed{\cos x = \frac{1 - t^2}{1 + t^2}}
+\]\\[0pt]
+this is generally the pattern of substitution of \(t = \tan \frac{x}{2}\):\\[0pt]
+\begin{align*}
+  t = \tan \frac{x}{2} \Rightarrow \text{dt} &= \frac12 \cdot \frac{1}{\cos^2 \frac{x}{2}} \text{ dx}\\
+  &= \frac12\left(1 + \tan^2 \frac{x}{2}\right) \text{ dx} &\text{using } 1 + \tan^2 x = \frac{1}{\cos^2 x}\\
+  &= \frac{1 + t^2}{2} \text{ dx}\\
+  &\implies \text{dx} = \frac{2 \text{ dt}}{1 + t^2}
+\end{align*}
+therefore we write\\[0pt]
+\[
+  \boxed{\text{dx} = \frac{2 \text{ dt}}{1 + t^2}}
+\]\\[0pt]
+
+\begin{my_example}
+\begin{align*}
+  \int \frac{\text{dx}}{2\sin x + \cos x + 2} &= \int \frac{\frac{2\text{ dt}}{1+t^2}}{2 \cdot \frac{2t}{1+t^2} + \frac{1-t^2}{1+t^2} + 2}\\
+  &= \int \frac{\frac{2}{\cancel{1+t^2}}}{\frac{4t+1-t^2+2+2t^2}{\cancel{1+t^2}}} \text{ dt}\\
+  &= \int \frac{2}{3+t^2+4t} \text{ dt}\\
+  &= \int \frac{A}{t+3} + \frac{B}{t+1} \text{ dt}\\
+  &= \int \frac{-1}{t+3} + \frac{1}{t+1} \text{ dt}\\
+  &= -\ln(t+3) + \ln(t+1) + c\\
+  &= -\ln\left(\tan\left(\frac{x}{2}\right)+3\right) + \ln\left(\tan\left(\frac{x}{2}\right)+1\right) + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\begin{align*}
+  \int \frac{1}{\sin x} \text{ dx} &= \int \frac{\frac{2}{1+t^2} \text{ dt}}{\frac{2t}{1+t^2}}\\
+  &= \int \frac{1}{t} \text{ dt}\\
+  &= \ln{t} + c\\
+  &= \ln{\tan \frac{x}{2}} + c
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\begin{align*}
+  \int \frac{1}{\cos x} \text{ dx} &= \int \frac{\frac{2 \text{ dt}}{1+t^2}}{\frac{1-t^2}{1+t^2}}\\
+  &= \int \frac{2}{1-t^2} \text{ dt}\\
+  &= \int \frac{A}{1-t} + \frac{B}{1+t} \text{ dt}\\
+  &= \int \frac{1}{1-t} + \frac{1}{1+t} \text{ dt}\\
+  &= \frac{\ln(1-t)}{-1} + \ln(1+t) + c\\
+  &= -\ln(1-t) + \ln(1+t) + c\\
+  &= -\ln\left(1-\tan\frac{x}{2}\right) + \ln\left(1+\tan\frac{x}{2}\right) + c\\
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+\begin{align*}
+  \int \frac{7}{8\cos x + 10 - 10\sin x} \text{ dx} &= \int \frac{7}{8 \cdot \frac{1 - t^2}{1 + t^2} + 10 - 10 \cdot \frac{2t}{1 + t^2}} \cdot \frac{2\text{ dt}}{1+t^2}\\
+  &= \int \frac{\frac{14\text{ dt}}{1+t^2}}{\frac{8-8t^2+10+10t^2-20t}{1+t^2}}\\
+  &= \int \frac{14\text{ dt}}{18+2t^2-20t}\\
+  &= \int \frac{7\text{ dt}}{t^2-10t+9}\\
+  &= \int \frac{7}{t^2-10t+9} \text{ dt}\\
+  &= \int \frac{A}{t-9} + \frac{B}{t-1} \text{ dt}\\
+  &= \int \frac{\frac78}{t-9} + \frac{-\frac78}{t-1} \text{ dt}\\
+  &= \frac78 \int \frac{1}{t-9} + \frac{-1}{t-1} \text{ dt}\\
+  &= \frac78\left(\ln\left(\tan\frac{x}{2}-9\right) -\ln\left(\tan\frac{x}{2}-1\right)\right)\\
+\end{align*}
+\end{my_example}
+\end{definition}
+\subsection{definite integral}
+\label{sec:orgb402e53}
+\begin{definition}
+given a function \(f(x)\) that is continuous on the interval \([a,b]\), we divide the interval into \(n\) subintervals of equal width, \(\Delta x\), and from each interval choose a point, \(x_i^*\). then the \textbf{definite integral} of \(f(x)\) from \(a\) to \(b\) is:\\[0pt]
+\[
+  \int_a^b f(x) \text{ dx} = \lim_{n\rightarrow\infty} \sum_{i=1}^{n} f(x_i^*) \Delta x
+\]\\[0pt]
+in practicality:\\[0pt]
+\[ \int f(x) \text{ dx} = F(x) + c \Rightarrow \int_a^b = F(b) - F(a) \]\\[0pt]
+
+\begin{my_example}
+\[
+  \int_1^3 x^2 \text{ dx} = \frac{x^3}{3} \Big|_1^3 = \frac{3^3}{3} - \frac{1^3}{3} = 8\frac23
+\]\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \int_1^3 x^2 - 4x + 3 \text{ dx} = \frac{x^3}{3} - \frac{4x^2}{2} + 3x \Big|_1^3 = \frac{3^3}{3} - \frac{4 \cdot 3^2}{2} + 3 \cdot 3 - \left(\frac{1^3}{3} - \frac{4 \cdot 1^2}{2} + 3 \cdot 1\right) = -\frac43
+\]\\[0pt]
+\end{my_example}
+
+\begin{note}
+the \texttt{casio} calculator with a model name containing \texttt{991} can calculate definite integrals\\[0pt]
+\includegraphics{./casio-991.png}\\[0pt]
+but ofcourse if you're doing homework or you're just doing math in a non-restricting environment you can use \href{sage.org}{sagemath}\\[0pt]
+\begin{lstlisting}[language=sage,label= ,caption= ,captionpos=b,numbers=none]
+integral(sin(x)^3 + sin(x), x, 0, pi)
+\end{lstlisting}
+
+10/3\\[0pt]
+\end{note}
+
+\begin{my_example}
+\[
+  \int e^{-3x}(5x^2+7x-2) \text{ dx}
+\]\\[0pt]
+this is our first exercise dealing with integration of a function containing \(e\), we use \hyperref[sec:org97eb449]{integration by parts}\\[0pt]
+\begin{align*}
+  u' = e^{-3x} \Rightarrow u = \frac{e^{-3x}}{-3}\\
+  v = 5x^2+7x-2 \Rightarrow v' = 10x + 7\\
+  \int e^{-3x}(5x^2+7x-2) \text{ dx} &= \frac{e^{-3x}}{-3} \cdot (5x^2+7x-2) - \int (10x + 7) \cdot \frac{e^{-3x}}{-3} \text{ dx}\\
+  &= \frac{e^{-3x}}{-3} \cdot (5x^2+7x-2) + \frac13 \int (10x + 7) \cdot e^{-3x} \text{ dx}\\
+\end{align*}
+we use the same method to find the integral on the right\\[0pt]
+\begin{align*}
+  \int (10x + 7) \cdot e^{-3x} \text{ dx}\\
+  u' = e^{-3x} \Rightarrow u = \frac{e^{-3x}}{-3}\\
+  v = 10x + 7 \Rightarrow v' = 10\\
+  \int (10x + 7) \cdot e^{-3x} \text{ dx} &= \frac{e^{-3x}}{-3} \cdot (10x + 7) - \int 10 \cdot \frac{e^{-3x}}{-3} \text{ dx}\\
+  \int (10x + 7) \cdot e^{-3x} \text{ dx} &= \frac{e^{-3x}}{-3} \cdot (10x + 7) - \frac{10e^{-3x}}{9} + c
+\end{align*}
+then we substitute the result of the integral in the original equation\\[0pt]
+\[
+  \frac{e^{-3x}}{-3} \cdot (5x^2+7x-2) + \frac13 \int (10x + 7) \cdot e^{-3x} \text{ dx} = \frac{e^{-3x}}{-3} \cdot (5x^2+7x-2) + \frac13\left(\frac{e^{-3x}}{-3} \cdot (10x + 7) - \frac{10e^{-3x}}{9}\right) + c
+\]\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\begin{align*}
+  \int e^{5x} \sin 7x \text{ dx}\\
+  u' = e^{5x} \Rightarrow u = \frac{e^{5x}}{5}\\
+  v = \sin 7x \Rightarrow v' = 7\cos 7x\\
+  \int e^{5x} \sin 7x \text{ dx} &= \frac{e^{5x}}{5} \cdot \sin 7x - \int 7\cos 7x \cdot \frac{e^{5x}}{5} \text{ dx}\\
+  \int e^{5x} \sin 7x \text{ dx} &= \frac{e^{5x}}{5} \cdot \sin 7x - \frac{7}{5} \int \cos 7x \cdot e^{5x} \text{ dx}\\
+  u_2' = e^{5x} \Rightarrow u_2 = \frac{e^{5x}}{5}\\
+  v_2 = \cos 7x \Rightarrow v_2' = -7\sin 7x\\
+  \int \cos 7x \cdot e^{5x} \text{ dx} &= \frac{e^{5x}}{5} \cdot \cos 7x - \int -7\sin 7x \cdot \frac{e^{5x}}{5}\\
+  &= \frac{e^{5x}}{5} \cdot \cos 7x - \int -7\sin 7x \cdot \frac{e^{5x}}{5}\\
+  \int e^{5x} \sin 7x \text{ dx} &= \frac{e^{5x}}{5} \cdot \sin 7x - \frac{7}{5}\left(\frac{e^{5x}}{5} \cdot \cos 7x - \int -7\sin 7x \cdot \frac{e^{5x}}{5}\right)\\
+  &= \frac{e^{5x}}{5} \cdot \sin 7x - \frac{7}{5}\left(\frac{e^{5x}}{5} \cdot \cos 7x + \frac75 \int \sin 7x \cdot e^{5x}\right)\\
+  \int \cos 7x \cdot e^{5x} \text{ dx} &= \frac{e^{5x}}{5} \cdot \sin 7x - \frac{7e^{5x}}{25} \cdot \cos 7x - \frac{49}{25} \int \sin 7x \cdot e^{5x}\\
+  \frac{74}{25} \int \cos 7x \cdot e^{5x} \text{ dx} &= \frac{e^{5x}}{5} \cdot \sin 7x - \frac{7e^{5x}}{25} \cdot \cos 7x\\
+  \int \cos 7x \cdot e^{5x} \text{ dx} &= \frac{25}{74}\left(\frac{e^{5x}}{5} \cdot \sin 7x - \frac{7e^{5x}}{25} \cdot \cos 7x\right) + c\\
+\end{align*}
+\end{my_example}
+\end{definition}
+\subsection{finding area using definite integral}
+\label{sec:org433c754}
+\begin{definition}
+the area between 2 functions \(f,g\) in an interval \([a,b]\) in which \(f \geq g\) or \(g \geq f\) is defined as:\\[0pt]
+\[
+  S = \left| \int_a^b (f(x) - g(x)) \text{ dx} \right|
+\]\\[0pt]
+
+\begin{note}
+notice that the definition says \([a,b]\) in which \(f \geq g\) or \(g \geq f\) which means that if the functions cross each other in that interval and the lower function becomes the upper and the upper function becomes the lower then the area cant be calculated using this single formula but we split the interval into multiple and add the results\\[0pt]
+\end{note}
+
+\begin{my_example}
+consider the area \(S\) in the interval \([0,3]\) between \(f(x)=x^2\) and the \(x\) axis (\(g(x)=0\))\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/p44azc}\\[0pt]
+
+we calculate using the formula, i didnt mind the fact that the result should be turned to its absolute value because i know the \(f(x) \geq g(x)\)\\[0pt]
+
+\[
+  S = \int_0^3 (f(x) - g(x)) \text{ dx} = \int_0^3 x^2 \text{ dx} = \frac{x^3}{3} \Big|_0^3 = \frac{3^3}{3} - \frac{0^3}{3} = 9
+\]\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+consider the area \(S_1 + S_2\) in red between the polynomials\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/PzjSrV}\\[0pt]
+
+we split the area into 2 because if we tried to find the area without splitting we would be adding a negative value to a positive value whereas the areas should be positive, we wouldnt mind this when working with functions that dont cross because we can always take the absolute value of the result\\[0pt]
+
+so we find \(S_1\) and \(S_2\) and the total area would be \(|S_1| + |S_2|\), assume \(a=-2,\ b=2\), \(S_1\) would be the area from \([0,2]\) and \(S_2\) the area from \([0,2]\)\\[0pt]
+
+for \(S_1\) we take \(f(x) - g(x)\) because \(f(x) \geq g(x)\)\\[0pt]
+
+\begin{align*}
+  S_1 = \int_{-2}^0 (f(x) - g(x)) \text{ dx} &= \int_{-2}^0 3x^3-x^2-10x-(-x^2+2x) \text{ dx}\\
+  &= \int_{-2}^0 3x^3-12x \text{ dx}\\
+  &= \frac{3x^4}{4}-\frac{12x^2}{2} \Big|_{-2}^0\\
+  &= 0 - \left(\frac{3(-2)^4}{4}-\frac{12(-2)^2}{2}\right)\\  
+  &= 12
+\end{align*}
+
+for \(S_2\) we take \(f(x) - g(x)\) because \(f(x) \geq g(x)\)\\[0pt]
+
+\begin{align*}
+  \int_0^2 (g(x)-f(x)) \text{ dx} &= \int_0^2 -x^2+2x-(3x^3-x^2-10x) \text{ dx}\\
+  &= \int_0^2 -x^2+2x-3x^3+x^2+10x \text{ dx}\\
+  &= \int_0^2 -3x^3+12x \text{ dx}\\
+  &= \left(\frac{-3x^4}{4} + \frac{12x^2}{2}\right) \Big|_0^2\\
+  &= \frac{-3 \cdot 2^4}{4} + \frac{12 \cdot 2^2}{2}\\
+  &= 12
+\end{align*}
+
+therefore \(S = S_1 + S_2 = 24\)\\[0pt]
+\end{my_example}
+
+\begin{note}
+notice that these examples provide you with a plot of the functions so its easier to find the area, in general you wouldnt have the plot and you have to find the intersection points yourself so that you can integrate and find the area, see the following exercise for example\\[0pt]
+\end{note}
+
+\begin{my_example}
+find the area between \(f(x)=x^3-4x^2+13x-7,\ g(x)=6x^2-x^3+25x-7\)\\[0pt]
+first we find the intersection points so that we know how to split the integration\\[0pt]
+
+\begin{gather*}
+  x^3-4x^2+13x-7=6x^2-x^3+25x-7\\
+  2x^3-10x^2-12x=0\\
+  x(2x^2-10x-12)=0\\
+  2x(x-6)(x+1)=0\\
+  \Rightarrow x=0,6,-1
+\end{gather*}
+
+we found that we have intersections at \(x=0,6,-1\), so we find the integrals in the intervals \([-1,0],[0,6]\)\\[0pt]
+
+\begin{align*}
+  \int_{-1}^0 (f(x)-g(x)) \text{ dx} &= \int_{-1}^0 x^3-4x^2+13x-7-(6x^2-x^3+25x-7) \text{ dx}\\
+  &= \int_{-1}^0 2x^3 - 10x^2 - 12x \text{ dx}\\
+  &= \left(\frac{2x^4}{4} - \frac{10x^3}{3} - \frac{12x^2}{2}\right) \Big|_{-1}^0\\
+  &= 0-\left(\frac{2(-1)^4}{4} - \frac{10(-1)^3}{3} - \frac{12(-1)^2}{2}\right)\\
+  &= 0-\left(0.5 + \frac{10}{3} - 6\right)\\
+  &= \frac{13}{6}
+\end{align*}
+
+\begin{align*}
+  \int_0^6 (f(x)-g(x)) \text{ dx} &= \int_0^6 2x^3 - 10x^2 - 12x \text{ dx}\\
+  &= \left(\frac{2x^4}{4} - \frac{10x^3}{3} - \frac{12x^2}{2}\right) \Big|_0^6\\
+  &= \frac{2 \cdot 6^4}{4} - \frac{10 \cdot 6^3}{3} - \frac{12 \cdot 6^2}{2}\\
+  &= -288
+\end{align*}
+
+area is \(288\frac{13}{6}\)\\[0pt]
+\end{my_example}
+\end{definition}
+\subsection{solid of revolution}
+\label{sec:org54164d2}
+\begin{definition}
+\textbf{disc integration} is a method for calculating the volume of a \textbf{solid of revolution} of a solid-state material when integrating along an axis "parallel" to the axis of revolution\\[0pt]
+if the functions rotate around the \(x\) axis, the formula is\\[0pt]
+\[
+  V = \pi \int_a^b f^2(x) - g^2(x) \text{ dx}
+\]\\[0pt]
+if the functions rotate around the \(y\) axis, the formula is\\[0pt]
+\[
+  V = 2\pi \int_a^b x\left(f^2(x) - g^2(x)\right) \text{ dx}
+\]\\[0pt]
+\begin{my_example}
+we start with a simple example, consider the function \(y = x\)\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/dbBobk}\\[0pt]
+
+if we were to rotate this function around the \(x\) axis we would get a \textbf{Right Circular Cone}:\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/AeXpjL}\\[0pt]
+
+to find the volume of this cone we use the disc integration formula, in this case \(g(x)=0\)\\[0pt]
+assume the function stopped at \(x=a\) and started at \(x=0\) so we find the volume in the interval \([0,a]\)\\[0pt]
+\begin{align*}
+  V &= \pi \int_0^a f^2(x) - g^2(x) \text{ dx}\\
+  &= \pi \int_0^a x^2 - 0^2 \text{ dx}\\
+  &= \pi\left(\frac{x^3}{3}\Big|_0^a\right)\\
+  &= \pi\left(\frac{a^3}{3}\right)\\
+  &= \frac{a^3}{3} \cdot \pi
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+a circle is defined as \({(x-a)}^2+{(y-b)}^2=r^2\), consider the circle \({(x-1)}^2+{(y-1)}^2=1^2\)\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/4C0eoS}\\[0pt]
+
+if we were to rotate the circle \(360^{\circ}\) around the \(x\) axis we would get a \textbf{ball}\\[0pt]
+
+the upright quarter of a circle is defined as \(y=\sqrt{r^2-x^2}\)\\[0pt]
+
+consider the quarter of that circle whose formula is \(y=\sqrt{1^2-x^2}\)\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/Ni02n3}\\[0pt]
+
+if we were to rotate this around the \(x\) axis we would get half a ball and since this is easier to find the volume of we just find the volume using this quarter and multiply by 2 because it generates half a ball\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/krbfz1}\\[0pt]
+
+in this case \(g(x)=0\), we find the volume using the formula:\\[0pt]
+
+\begin{align*}
+  V &= \pi \int_0^r {\left(\sqrt{r^2-x^2}\right)}^2 \text{ dx}\\
+  &= \pi \int_0^r r^2-x^2 \text{ dx}\\
+  &= \pi \left(r^2x-\frac{x^3}{3} \Big|_0^r\right)\\
+  &= \pi \left(r^3-\frac{r^3}{3}\right)\\
+  &= \pi \left(\frac{2r^3}{3}\right)\\
+  &= \frac{2\pi r^3}{3}\\
+\end{align*}
+
+so the volume of the ball is \(\frac{4\pi r^3}{3}\)\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+find the volume of produced by rotating the function \(f(x)=e^x\) around the \(y\) axis in the interval \([0,1]\)\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/iryXEl}\\[0pt]
+
+\begin{align*}
+  V &= 2\pi \int_0^1 xe^x \text{ dx}\\  
+  &= 2\pi (xe^x-e^x) \Big|_0^1\\
+  &= 2\pi (e-e-(0-1))\\
+  &= 2\pi
+\end{align*}
+\end{my_example}
+\end{definition}
+\subsection{arc length}
+\label{sec:org8075c71}
+\begin{definition}
+the length of the curve of a continuous function \(f(x)\) in the interval \([a,b]\) is defined as:\\[0pt]
+\[
+  L = \int_a^b \sqrt{1+(f'(x))^2} \text{ dx}
+\]\\[0pt]
+\begin{my_example}
+find the length of the following curve in the interval \([0,3]\)\\[0pt]
+\[
+  f(x) = \frac13{(x^2+2)}^{\frac32}
+\]\\[0pt]
+first we find the derivative\\[0pt]
+\[
+  f'(x) = \frac13 \cdot \frac32{(x^2+2)}^{\frac12} \cdot 2x = x{(x^2+2)}^{\frac12}
+\]\\[0pt]
+we use the formula:\\[0pt]
+\begin{align*}
+  L &= \int_0^3 \sqrt{1+x^2(x^2+2)} \text{ dx}\\
+  &= \int_0^3 \sqrt{1+x^4+2x^2} \text{ dx}\\
+  &= \int_0^3 \sqrt{{(x^2+1)}^{2}} \text{ dx}\\
+  &= \int_0^3 x^2+1 \text{ dx}\\
+  &= \frac{x^3}{3}+x \Big|_0^3\\
+  &= \frac{3^3}{3}+3\\
+  &= 12
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+find the length of the curve of the function \(f(x) = \frac{x^4}{8} + \frac{1}{4x^2}\) in the interval \([1,3]\)\\[0pt]
+\begin{align*}
+  f(x) &= \frac{x^4}{8} + \frac{1}{4x^2}\\
+  f(x) &= \frac{x^4}{8} + \frac{x^{-2}}{4}\\
+  f'(x) &= \frac{4x^3}{8} + \frac{-2x^{-3}}{4}\\
+  f'(x) &= \frac{x^3}{2} - \frac{x^{-3}}{2}\\
+  {(f'(x))}^2 &= \left(\frac{x^3}{2} - \frac{x^{-3}}{2}\right)^2\\
+  {(f'(x))}^2 &= \left(\frac{x^3}{2}\right)^2 - \frac{x^3 \cdot x^{-3}}{2} + \left(\frac{x^{-3}}{2}\right)^2\\
+  {(f'(x))}^2 &= \left(\frac{x^3}{2}\right)^2 - \frac12 + \left(\frac{x^{-3}}{2}\right)^2\\
+  L &= \int_a^b \sqrt{1+(f'(x))^2} \text{ dx}\\
+  &= \int_a^b \sqrt{1+\left(\frac{x^3}{2}\right)^2 - \frac12 + \left(\frac{x^{-3}}{2}\right)^2} \text{ dx}\\
+  &= \int_a^b \sqrt{\left(\frac{x^3}{2}\right)^2 + \frac12 + \left(\frac{x^{-3}}{2}\right)^2} \text{ dx}\\
+  &= \int_a^b \sqrt{\left(\frac{x^3}{2}+\frac{x^{-3}}{2}\right)^2} \text{ dx}\\
+  &= \int_a^b \frac{x^3}{2}+\frac{x^{-3}}{2} \text{ dx}\\
+  &= \frac{x^4}{8}+\frac{x^{-2}}{-4} \Big|_a^b\\
+  &= \frac{x^4}{8}+\frac{x^{-2}}{-4} \Big|_1^3\\
+  &= \frac{3^4}{8}+\frac{3^{-2}}{-4} - \left(\frac{1^4}{8}+\frac{1^{-2}}{-4}\right)\\
+  &= \frac{92}{9}
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+find the length of the curve of the function \(f(x) = \ln(\sin x)\) in the interval \(\left[\frac{\pi}{6},\frac{\pi}{2}\right]\)\\[0pt]
+\begin{align*}
+  f(x) &= \ln(\sin x)\\
+  f'(x) &= \frac{1}{\sin x} \cdot \cos x = \cot x\\
+  L &= \int_{\frac{\pi}{6}}^{\frac{\pi}{2}} \sqrt{1+(f'(x))^2} \text{ dx}\\
+  &= \int_{\frac{\pi}{6}}^{\frac{\pi}{2}} \sqrt{1+\cot^2 x} \text{ dx}\\
+  &= \int_{\frac{\pi}{6}}^{\frac{\pi}{2}} \sqrt{\frac{1}{\sin^2 x}} \text{ dx}\\
+  &= \int_{\frac{\pi}{6}}^{\frac{\pi}{2}} \frac{1}{\sin x} \text{ dx}\\
+  &= \int_{\frac{\pi}{6}}^{\frac{\pi}{2}} \frac{1}{\sin x} \text{ dx}\\
+  &= \ln\tan\frac{x}{2} \Big|_{\frac{\pi}{6}}^{\frac{\pi}{2}}\\
+  &= \ln\tan\frac{\pi}{4} - \ln\tan\frac{\pi}{12}\\
+  &= 0 - \ln(2-\sqrt3)\\
+  &= -1.31695789692482
+\end{align*}
+\end{my_example}
+\end{definition}
+\subsection{integrable function}
+\label{sec:org53be8a4}
+\begin{definition}
+a function \(f\) is an \textbf{integrable function} in the interval \([a,b]\) if it has an integral in said interval and that integral is finite, the function has to be defined in that interval\\[0pt]
+\end{definition}
+\subsection{riemann sum}
+\label{sec:org54fe05e}
+\textbf{Riemann sum} can be applied to \hyperref[sec:org53be8a4]{integrable function}s to find area\\[0pt]
+consider the area below the function \(e^{-x}\) in the interval \([1,2]\)\\[0pt]
+we split the shape into rectangles that are as narrow as possible as the more rectangles we use the more accurate the result\\[0pt]
+the following image shows the area split into \(n=8\) rectangles\\[0pt]
+\includesvg{/Users/mahmooz/brain/out/JAIRcvb}\\[0pt]
+
+you can probably tell that the sum of the areas of these rectangles isnt really close to the area we want to find to be more accurate we increase the number of rectangles to \(n=70\) and we get a nicer result:\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/5SZ0x8R}\\[0pt]
+
+you can probably already tell that since this is a "narrower" coverage of the area, the sum of the rectangles would be closer to the value of the actual area\\[0pt]
+and now that we know that the more rectangles we have the more accurate we get, we know we should be aiming at \(\infty\) rectangles\\[0pt]
+the width of a rectangle would be \(\frac{1}{n}\) and the height would be \(f\left(\frac{k}{n}\right)\) where \(k\) is the index of the rectangle starting at 1, the sum of the area \(S\) of the rectangles would be:\\[0pt]
+\[
+  S = f\left(\frac{1}{n}\right) \cdot \frac{1}{n} + f\left(\frac{2}{n}\right) \cdot \frac{1}{n} + \cdots + f\left(\frac{n}{n}\right) \cdot \frac{1}{n}
+\]\\[0pt]
+we factor \(\frac{1}{n}\) out\\[0pt]
+\[
+  S = \frac{1}{n} \left(f\left(\frac{1}{n}\right) + f\left(\frac{2}{n}\right) + \cdots + f\left(\frac{n}{n}\right)\right)
+\]\\[0pt]
+and since we want \(n\) to be as big as possible, we take \(n \to \infty\)\\[0pt]
+\[
+  S = \lim_{n\to\infty} \frac{1}{n} \left(f\left(\frac{1}{n}\right) + f\left(\frac{2}{n}\right) + \cdots + f\left(\frac{n}{n}\right)\right)
+\]\\[0pt]
+and since we know that the area in the interval is equal to the \hyperref[sec:orgb402e53]{definite integral} in said interval then:\\[0pt]
+\[
+  S = \lim_{n\to\infty} \frac{1}{n} \left(f\left(\frac{1}{n}\right) + f\left(\frac{2}{n}\right) + \cdots + f\left(\frac{n}{n}\right)\right) = \int_{0}^{1} f(x) \text{ dx}
+\]\\[0pt]
+which is the common pattern for riemann sums\\[0pt]
+
+\begin{my_example}
+we find the area of \(f(x)=x\) in the interval \([0,1]\)\\[0pt]
+using the definite integral method we do:\\[0pt]
+\[
+ \int_{0}^{1} x \text{ dx} = \left. \frac{x^2}{2} \right\vert_0^1 = \frac12
+\]\\[0pt]
+using riemann sum:\\[0pt]
+\[
+ \lim_{n\to\infty} \frac{1}{n} \left(\frac{1}{n} + \frac{2}{n} + \cdots + \frac{n}{n}\right) = \lim_{n\to\infty} \frac1n \cdot \frac{n(n+1)}{2n} = \lim_{n\to\infty} \frac{n^2+n}{2n^2} = \frac12
+\]\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+consider the following limit\\[0pt]
+\begin{align*}
+  \lim_{n\to\infty} \frac{3n}{(n+1)^2} + \frac{3n}{(n+2)^2} + \cdots + \frac{3n}{(n+n)^2} &= \lim_{n\to\infty} \frac1n \left(\frac{3n^2}{(n+1)^2} + \frac{3n^2}{(n+2)^2} + \cdots + \frac{3n^2}{(n+n)^2}\right)\\
+  &= 3\lim_{n\to\infty} \frac1n \left(\frac{n^2}{(n+1)^2} + \frac{n^2}{(n+2)^2} + \cdots + \frac{n^2}{(n+n)^2}\right)\\
+  &= 3\lim_{n\to\infty} \frac1n \left(\left(\frac{n}{n+1}\right)^2 + \left(\frac{n}{n+2}\right)^2 + \cdots + \left(\frac{n}{n+n}\right)^2\right)\\
+  &= 3\lim_{n\to\infty} \frac1n \left(\left(\frac{1}{1+\frac1n}\right)^2 + \left(\frac{1}{1+\frac2n}\right)^2 + \cdots + \left(\frac{1}{1+1}\right)^2\right)\\
+  &= 3\lim_{n\to\infty} \frac1n \left(\frac{1}{\left(1+\frac1n\right)^2} + \frac{1}{\left(1+\frac2n\right)^2} + \cdots + \frac{1}{{(1+1)}^2}\right)\\
+  &= 3\int_{0}^{1} \frac{1}{{(1+x)}^2} \text{ dx}\\
+  &= 3\int_{0}^{1} {(1+x)}^{-2} \text{ dx}\\
+  &= 3 \cdot \frac{{(1+x)}^{-1}}{-1} \Bigg|_{0}^{1}\\
+  &= 3\left(\frac{{(1+1)}^{-1}}{-1} - \frac{{(1+0)}^{-1}}{-1}\right)\\
+  &= \frac{3}{2}\\
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\begin{align*}
+  \lim_{n\to\infty} \frac{n}{n^2+1^2} + \frac{n}{n^2+2^2} + \cdots + \frac{n}{n^2+n^2} &= \lim_{n\to\infty} \frac1n\left(\frac{n^2}{n^2+1^2} + \frac{n^2}{n^2+2^2} + \cdots + \frac{n^2}{n^2+n^2}\right)\\
+  &= \lim_{n\to\infty} \frac1n\left(\frac{1}{1+\frac{1^2}{n^2}} + \frac{1}{1+\frac{2^2}{n^2}} + \cdots + \frac{1}{1 + \left(\frac{n}{n}\right)^2}\right)\\
+  &= \lim_{n\to\infty} \frac1n\left(\frac{1}{1+\left(\frac{1}{n}\right)^2} + \frac{1}{1+\left(\frac{2}{n}\right)^2} + \cdots + \frac{1}{1 + \left(\frac{n}{n}\right)^2}\right)\\
+  &= \int_{0}^{1} \frac{1}{1+x^2} \text{ dx}\\
+  &= \arctan x \Big|_{0}^{1}\\
+  &= \frac{\pi}{4}
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\begin{align*}
+  \lim_{n\to\infty} \frac1n\left(\sin\frac{\pi}{n} + \sin\frac{2\pi}{n} + \cdots + \sin\frac{n\pi}{n}\right) &= \int_{0}^{1} \sin(\pi x) \text{ dx}\\
+  &= \frac{-\cos(\pi x)}{\pi} \Bigg|_{0}^{1}\\
+  &= \frac{-\cos(\pi)}{\pi} - \frac{-\cos(0)}{\pi}\\
+  &= \frac2\pi
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\begin{align*}
+  \lim_{n\to\infty} \frac{1^7 + 2^7 + \cdots + n^7}{n^8} &= \lim_{n\to\infty} \frac1n \left(\frac{1^7 + 2^7 + \cdots + n^7}{n^7}\right)\\
+  &= \lim_{n\to\infty} \frac1n \left(\left(\frac{1}{n}\right)^7 + \left(\frac{2}{n}\right)^7 + \cdots + \left(\frac{n}{n}\right)^7\right)\\
+  &= \int_0^1 x^7 \text{ dx}\\
+  &= \frac{x^8}{8} \Big|_0^1\\
+  &= \frac18
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\begin{align*}
+  \lim_{n\to\infty} \frac{\pi}{2n} \left(1+\cos{\frac{\pi}{2n}} + \cos{\frac{2\pi}{2n}} + \cdots + \cos{\frac{(n-1)\pi}{2n}}\right) &= \frac{\pi}{2} \lim_{n\to\infty} \frac{1}{n} \left(1+\cos{\frac{\pi}{2n}} + \cos{\frac{2\pi}{2n}} + \cdots + \cos{\frac{(n-1)\pi}{2n}}\right)\\
+  &= \frac{\pi}{2} \int_0^1 \cos{\frac{\pi x}{2}} \text{ dx}\\
+  &= \frac{\pi}{2} \left(\frac{\sin{\frac{\pi x}{2}}}{\frac{\pi}{2}} \Big|_0^1\right)\\
+  &= \frac{2}{\pi} \cdot \frac{\pi}{2}\\
+  &= 1
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\begin{align*}
+  \lim_{n\to\infty} \frac{1}{\sqrt{9n^2-1^2}} + \frac{1}{\sqrt{9n^2-2^2}} + \cdots + \frac{1}{\sqrt{9n^2-n^2}} &= \lim_{n\to\infty} \frac{1}{3n\sqrt{1-\frac{1^2}{9n^2}}} + \frac{1}{3n\sqrt{1-\frac{2^2}{9n^2}}} + \cdots + \frac{1}{3n\sqrt{1-\frac{n^2}{9n^2}}}\\
+  &= \lim_{n\to\infty} \frac{1}{3n\sqrt{1-\left(\frac{1}{3n}\right)^2}} + \frac{1}{3n\sqrt{1-\left(\frac{2}{3n}\right)^2}} + \cdots + \frac{1}{3n\sqrt{1-\left(\frac{n}{3n}\right)^2}}\\
+  &= \lim_{n\to\infty} \frac1n\left(\frac{1}{3\sqrt{1-\left(\frac{1}{3n}\right)^2}} + \frac{1}{3\sqrt{1-\left(\frac{2}{3n}\right)^2}} + \cdots + \frac{1}{3\sqrt{1-\left(\frac{n}{3n}\right)^2}}\right)\\
+  &= \int_0^1 \frac{1}{3\sqrt{1-\left(\frac{x}{3}\right)^2}} \text{ dx}\\
+  &= \frac13 \int_0^1 \frac{1}{\sqrt{1-\left(\frac{x}{3}\right)^2}} \text{ dx}\\
+  &= \frac13 \cdot \frac{\arcsin{\frac{x}{3}}}{\frac13} \Bigg|_0^1\\
+  &= \arcsin{\frac13}
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\begin{align*}
+  \lim_{n\to\infty} 7n\left(\frac{1}{25n^2 + 1^2} + \frac{1}{25n^2 + 2^2} + \cdots + \frac{1}{25n^2 + n^2}\right) &= 7\lim_{n\to\infty} n\left(\frac{1}{25n^2 + 1^2} + \frac{1}{25n^2 + 2^2} + \cdots + \frac{1}{25n^2 + n^2}\right)\\
+  &= 7\lim_{n\to\infty} \frac1n\left(\frac{1}{25 + \frac{1}{n^2}} + \frac{1}{25 + \frac{2^2}{n^2}} + \cdots + \frac{1}{25 + \frac{n^2}{n^2}}\right)\\
+  &= 7\lim_{n\to\infty} \frac1n\left(\frac{1}{25 + \left(\frac{1}{n}\right)^2} + \frac{1}{25 + \left(\frac{2}{n}\right)^2} + \cdots + \frac{1}{25 + \left(\frac{n}{n}\right)^2}\right)\\
+  &= 7\int_0^1 \frac{1}{25+x^2} \text{ dx}\\
+  &= \frac75 \arctan{\frac{x}{5}} \Big|_0^1\\
+  &= \frac{7 \cdot \arctan{\frac15}}{5}
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\begin{align*}
+  \int_2^\infty \frac{1}{x\ln x} \text{ dx} &= \int_2^\infty \frac{\frac1x}{\ln x} \text{ dx}\\
+  &= \ln{\ln x} \Big|_2^\infty\\
+  &= \infty
+\end{align*}
+\end{my_example}
+\subsection{improper integral}
+\label{sec:org5ea3649}
+\begin{definition}
+there are 2 types of \textbf{Improper integrals}\\[0pt]
+definition of an improper integral of type 1 – when the limits of integration are infinite\\[0pt]
+definition of an improper integral of type 2 – when the integrand becomes infinite within the interval of integration (like division by 0 for example)\\[0pt]
+\begin{note}
+so far we have dealt with integrals that gave us finite results for finite areas, here we deal with finite aswell as infinite integrals\\[0pt]
+\end{note}
+\end{definition}
+\subsubsection{type 1}
+\label{sec:orgf14a419}
+\begin{definition}
+improper integral of type 1 – when the limits of integration are infinite\\[0pt]
+
+\begin{my_example}
+consider the area below the function \(f(x)=\frac1x\) in the interval \([1,\infty]\):\\[0pt]
+
+\includesvg{/Users/mahmooz/brain/out/yg17D3}\\[0pt]
+
+to calculate the area we use the integration method:\\[0pt]
+\begin{align*}
+  \int_1^\infty \frac1x \text{ dx} &= \lim_{t\to\infty} \int_1^t \frac1x \text{ dx}\\
+  &= \lim_{t\to\infty} \ln{x} \Big|_1^t\\
+  &= \lim_{t\to\infty}\left(\ln{t} - \ln{1}\right)\\
+  &= \infty - 0\\
+  &= \infty\\
+\end{align*}
+\end{my_example}
+\end{definition}
+\subsubsection{type 2}
+\label{sec:org05b4b67}
+\begin{definition}
+improper integral of type 2 – when the integrand becomes infinite within the interval of integration (like division by 0 for example\\[0pt]
+
+\begin{my_example}
+\[
+  \int_0^1 \frac{1}{\sqrt{x}} \text{ dx}
+\]\\[0pt]
+this function isnt defined at \(x=0\) yet we integrate it which is why its called an improper integral\\[0pt]
+\[
+  \int_0^1 \frac{1}{\sqrt{x}} \text{ dx} = 2\sqrt{x} \Big|_0^1 = 2 - 0 = 2
+\]\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \int_0^1 \frac{1}{x} \text{ dx}
+\]\\[0pt]
+again this function isnt defined at \(x=0\) but we integrate it anyway:\\[0pt]
+\[
+  \int_0^1 \frac{1}{x} \text{ dx} = \ln{x} \Big|_0^1 = \ln{1} - \ln{0} = \infty
+\]\\[0pt]
+\end{my_example}
+
+\begin{lemma}
+\begin{align*}
+  \int_1^\infty \frac{1}{x^\alpha} \text{ dx} &= \int_1^\infty x^{-\alpha} \text{ dx}\\
+  &= \frac{x^{-\alpha+1}}{-\alpha+1} \bigg|_1^\infty\\
+  &= \begin{cases}
+       \frac{x^{-\alpha+1}}{-\alpha+1} \Big|_1^\infty &\alpha \neq 1\\
+       \ln x \Big|_1^\infty &\alpha = 1\\
+     \end{cases}\\
+  &= \begin{cases}
+       \frac{x^{-\alpha+1}}{-\alpha+1} \Big|_1^\infty &\alpha > 1 \rightarrow \text{converges}\\
+       \ln x \Big|_1^\infty &\alpha = 1 \rightarrow \text{diverges}\\
+       \frac{x^{-\alpha+1}}{-\alpha+1} \Big|_1^\infty &\alpha < 1 \rightarrow \text{diverges}
+     \end{cases}
+\end{align*}
+\end{lemma}
+\end{definition}
+\subsection{convergence tests}
+\label{sec:orgf6a3860}
+\subsubsection{direct comparison test}
+\label{sec:orgbfc2763}
+\begin{definition}
+given \(f(x) \geq g(x) \geq 0\) and it follows that \(\int_1^\infty g(x) \text{ dx} \leq \int_1^\infty f(x) \text{ dx}\), if \(\int_1^\infty f(x) \text{ dx}\) converges then \(\int_1^\infty g(x) \text{ dx}\) converges too and if \(\int_1^\infty g(x) \text{ dx}\) diverges then \(\int_1^\infty f(x) \text{ dx}\) diverges too\\[0pt]
+
+\begin{my_example}
+if we wanted to know if the integral \(\int_1^\infty \frac{1}{x^3+7} \text{ dx}\) diverges or converges we look at the expression we arrived at in the last lemma\\[0pt]
+we take the function \(\frac{1}{x^3}\) which corresponds to the first case in that lemma where \(a > 1\) which means this function converges\\[0pt]
+and since we know \(\frac{1}{x^3+7} < \frac{1}{x^3}\) and \(\int_1^\infty \frac{1}{x^3} \text{ dx}\) converges then we know \(\int_1^\infty \frac{1}{x^3+7} \text{ dx}\) converges too\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+check if the following integral diverges/converges\\[0pt]
+\[
+  \int_2^\infty \frac{1}{\ln{x}} \text{ dx}
+\]\\[0pt]
+we consider the function \(\frac1x\), we know \(\ln{x} \leq x\) is always true, if we were to turn them into fractions we would get \(\frac{1}{\ln{x}} \geq \frac{1}{x}\)\\[0pt]
+and if we look at the same lemma from before we know \(\int_2^\infty \frac{1}{x} \text{ dx}\) diverges because it corresponds to the case where \(a=1\)\\[0pt]
+and since \(\int_2^\infty \frac{1}{x} \text{ dx}\) diverges and \(\int_2^\infty \frac{1}{x} \text{ dx} \leq \int_2^\infty \frac{1}{\ln{x}} \text{ dx}\) then we know \(\int_2^\infty \frac{1}{\ln{x}} \text{ dx}\) diverges\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+consider the integral:\\[0pt]
+\[
+  \int_5^\infty \frac{1}{x\ln^2 x} \text{ dx}
+\]\\[0pt]
+we use \hyperref[sec:orgf2294be]{integration by substitution} where \(t = \ln x\)\\[0pt]
+\(\text{ dt} = \frac1x \text{ dx} \Longrightarrow \text{ dx} = x\text{ dt}\)\\[0pt]
+\begin{align*}
+  \int \frac{1}{x\ln^2 x} \text{ dx} &= \int \frac{1}{xt^2} \cdot x \text{ dt}\\
+  &= \int \frac{1}{t^2} \text{ dt}\\
+  &= \int t^{-2} \text{ dt}\\
+  &= -t^{-1}\\
+  &= \frac{-1}{t}\\
+  &= \frac{-1}{\ln x}\\
+\end{align*}
+we substitute the interval:\\[0pt]
+\begin{align*}
+  \int_5^\infty \frac{1}{x\ln^2 x} \text{ dx} &= \frac{-1}{\ln x} \Big|_5^\infty\\
+  &= \underbrace{\frac{-1}{\ln \infty}}_{\clap{diverges to 0}} - \frac{-1}{\ln 5}\\
+  &= \frac{1}{\ln 5}
+\end{align*}
+we found that the given integral converges to \(\frac{1}{\ln 5}\) (meaning the area between the given function and the \(x\) axis is equal to \(\frac{1}{\ln 5}\)).\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+this example shows another way to go about it\\[0pt]
+consider the integral\\[0pt]
+\[
+  \int_2^7 2x{(x^2 + 3)}^{10} \text{ dx}
+\]\\[0pt]
+we use substitution where \(t = x^2 + 3\)\\[0pt]
+\(t = x^2 + 3 \Longrightarrow \text{dt} = 2x \text{ dx}\)\\[0pt]
+\begin{align*}
+  \int 2x{(x^2 + 3)}^{10} \text{ dx} &= \int 2xt^{10} \frac{\text{dt}}{2x}\\
+  &= \int t^{10} \text{ dt}\\
+\end{align*}
+since \(t = x^2 + 3\), we know \(x = 2 \Longrightarrow t = 7,\ x = 7 \Longrightarrow 52\), therefore we use the interval \([7,52]\) and integrate with respect to \(t\)\\[0pt]
+\begin{align*}
+  \int_2^7 2x{(x^2 + 3)}^{10} \text{ dx} &= \int_7^{52} t^{10} \text{ dt}\\
+  &= \frac{t^{11}}{11} \Bigg|_7^{52}\\
+\end{align*}
+\end{my_example}
+\end{definition}
+\subsubsection{limit comparison test}
+\label{sec:org572bf4d}
+\begin{definition}
+given \(f(x),g(x) \geq 0\), if:\\[0pt]
+\[
+  \lim_{x\to\infty} \frac{f(x)}{g(x)} = L,\ 0 < L < \infty
+\]\\[0pt]
+then the integrals of \(\int_1^\infty f(x) \text{ dx}\) and \(\int_1^\infty g(x) \text{ dx}\) either both diverge or both converge\\[0pt]
+
+\begin{my_example}
+consider the following integral\\[0pt]
+\[
+  \int_1^\infty \frac{2x^2 + 3}{5x^4 + x^2 - 9} \text{ dx}
+\]\\[0pt]
+to tell whether this integral is divergent/convergent we devide it by \(\frac{1}{x^2}\) because \(\frac{x^2}{x^4} = \frac{1}{x^2}\) is the biggest power in \(\frac{2x^2 + 3}{5x^4 + x^2 - 9}\)\\[0pt]
+\[
+  \lim_{x\to\infty} \frac{\frac{2x^2 + 3}{5x^4 + x^2 - 9}}{\frac{1}{x^2}} = \lim_{x\to\infty} \frac{2x^4+3x^2}{5x^4+x^2-9} = \frac25
+\]\\[0pt]
+and since we know \(\int_1^\infty \frac{1}{x^2} \text{ dx}\) is convergent we know \(\int_1^\infty \frac{2x^2 + 3}{5x^4 + x^2 - 9} \text{ dx}\) is convergent too\\[0pt]
+\end{my_example}
+\end{definition}
+\subsubsection{Dirichlet's test}
+\label{sec:org6f3d3ae}
+\begin{definition}
+given an \hyperref[sec:org53be8a4]{integrable function} \(f(x)\) for all \(x\) such that:\\[0pt]
+\[
+  \left|\int_a^b f(x) \text{ dx}\right| \leq M
+\]\\[0pt]
+where \(M\) is some constant, and given some monotonically decreasing function \(g(x)\) such that \(\lim_{x\to\infty} g(x) = 0\) then the integral \(\int_a^\infty f(x) \cdot g(x) \text{ dx}\) converges\\[0pt]
+\begin{my_example}
+consider the integral:\\[0pt]
+\[
+  \int_1^\infty \frac{\sin x}{x} \text{ dx}
+\]\\[0pt]
+we use this test to determine whether this integral diverges or converges\\[0pt]
+\begin{gather*}
+  \int_1^\infty \frac{\sin x}{x} \text{ dx} = \int_1^\infty \sin x \cdot \frac1x \text{ dx}\\
+  \left|\int_a^b \sin x \text{ dx}\right| = \left|-\cos x\big|_a^b\right| = |-\cos b + \cos a| \leq 2
+\end{gather*}
+we take \(g(x) = \frac1x\), we know \(\lim_{x\to\infty} g(x) = 0\) and \(g'(x)=-\frac1{x^2} \leq 0\) therefore \(g(x)\) is a monotonically decreasing function therefore we can use it in our Dirichlet test and therefore \(\int_a^\infty f(x) \cdot g(x) \text{ dx}\) converges therefore the original integral \(\int_1^\infty \frac{\sin x}{x} \text{ dx}\) converges\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\begin{align*}
+  \int_1^\infty \frac{\cos^2 x}{x} \text{ dx} &= \int_1^\infty \frac{1+\cos 2x}{2x} \text{ dx}\\
+  &= \frac12\int_1^\infty \frac{1}{x} \text{ dx} + \frac12\int_1^\infty \frac{\cos 2x}{x} \text{ dx}\\
+\end{align*}
+we take the second integral \(\int_1^\infty \frac{\cos 2x}{x} \text{ dx}\), this integral is of 2 functions:\\[0pt]
+\begin{gather*}
+  \left|\int_a^b \cos 2x \text{ dx}\right| = \left|\frac{\sin 2x}{2}\Bigg|_a^b\right| = \left|\frac{\sin 2b}{2} - \frac{\sin 2a}{2}\right| \leq 1\\
+  g(x) = \frac1x,\ g'(x) = \frac{-1}{x^2} < 0,\ \lim_{x\to\infty} g(x) = 0
+\end{gather*}
+therefore the integral of the second function converges\\[0pt]
+and the integral of the first function \(\frac1x\) diverges\\[0pt]
+therefore the sum of those integrals converges\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+check whether the following integral converges\\[0pt]
+\[
+  \int_1^\infty x^4e^{-x} \cos x \text{ dx}
+\]\\[0pt]
+we take \(f(x) = \cos x\):\\[0pt]
+\[
+  \int_a^b \cos x \text{ dx} = \left|\sin x\big|_a^b\right| = \left|\sin b - \sin a\right| \leq 2
+\]\\[0pt]
+and we take \(g(x) = \frac{x^4}{e^x}\) and we know \(\lim_{x\to\infty} g(x) = 0\) since \(e^x\) outgrows any polynomial\\[0pt]
+\[
+  g'(x) = \frac{4x^3e^x-e^xx^4}{{(e^x)}^2} = \frac{x^3e^x(4-x)}{e^{2x}}
+\]\\[0pt]
+\(g'(x)\) is equal to 0 only in \(x=0,4\), we can substitute variables in both intervals \((0,4),(4,\infty]\) to find that in the interval \((0,4)\) the function is increasingly monotonic while in \((0,\infty]\) its decreasingly monotonic which is what we're looking for here\\[0pt]
+therefore we split this integral in 2:\\[0pt]
+\[
+  \int_1^\infty x^4e^{-x} \cos x \text{ dx} = \underbrace{\int_1^4 x^4e^{-x}\cos x \text{ dx}}_{\text{finite}} + \underbrace{\int_4^\infty x^4e^{-x}\cos x \text{ dx}}_{\text{converges}}\\
+\]\\[0pt]
+the second part of the integral converges because it abides by Dirichlet's and the first part is just a finite definite integral that evaluates to some constant\\[0pt]
+therefore this integral converges because the sum of 2 finite constants is a constant\\[0pt]
+\[
+ \int_1^\infty \frac{\sin^2 x}{x^3} \text{ dx} \leq \underbrace{\int_1^\infty \frac{1}{x^3} \text{ dx}}_{\text{converges}}
+\]\\[0pt]
+therefore the first integral also converges because its smaller\\[0pt]
+\end{my_example}
+
+\begin{question}
+\[
+  \int_1^\infty \sin(x^2) \text{ dx}
+\]\\[0pt]
+\begin{answer}
+we use \hyperref[sec:orgf2294be]{integration by substitution}, let \(t = x^2 \Longrightarrow \text{dt} = 2x\text{ dx} \Longrightarrow \text{dx} = \frac{\text{dt}}{2x}\), and the interval in this case is the same for \(t\) and \(x\)\\[0pt]
+\begin{align*}
+  \int_1^\infty \sin(x^2) \text{ dx} &= \int_1^\infty \sin t \frac{\text{dt}}{2x}\\
+  &= \frac12\int_1^\infty \frac{\sin t}{\sqrt{t}} \text{ dt}\\
+\end{align*}
+we can notice that the integral we arrived at can be solved using \hyperref[sec:org6f3d3ae]{Dirichlet's test}\\[0pt]
+we pick \(f(t) = \sin t\):\\[0pt]
+\[
+  \left|\int_a^b \sin t \text{ dt}\right| = \left|-\cos t\big|_a^b\right| = |-\cos b + \cos a| \leq 2
+\]\\[0pt]
+we pick \(g(t) = \frac{1}{\sqrt{t}} = t^{-\frac12}\)\\[0pt]
+\[
+  g'(t) = -\frac12 t^{-\frac32} < 0
+\]\\[0pt]
+\(g(t)\) is a monotonically decreasing function and \(\lim_{t\to\infty} \frac{1}{\sqrt t} = 0\) therefore according to \hyperref[sec:org6f3d3ae]{Dirichlet's test} \(\frac12\int_1^\infty \frac{\sin t}{\sqrt{t}} \text{ dt}\) converges therefore \(\int_1^\infty \sin(x^2) \text{ dx}\) converges too\\[0pt]
+\end{answer}
+\end{question}
+
+\begin{question}
+\[
+  \int_8^\infty \frac{\ln^3 x \cdot \cos\frac{x}{3}}{x} \text{ dx}
+\]\\[0pt]
+\begin{answer}
+again, we use \hyperref[sec:org6f3d3ae]{Dirichlet's test}\\[0pt]
+we take \(f(x) = \cos \frac{x}{3}\)\\[0pt]
+\[
+  \left|\int_a^b \cos \frac{x}{3} \text{ dx}\right| = \left|\frac{\sin \frac{x}{3}}{\frac13} \Bigg|_a^b\right| = \left|\frac{\sin \frac{b}{3}}{\frac13} - \frac{\sin \frac{a}{3}}{\frac13}\right| \leq 6
+\]\\[0pt]
+we take \(g(x) = \frac{\ln^3 x}{x}\), we use lhopital to find the limit\\[0pt]
+\[
+  \lim_{x\to\infty} \frac{\ln^3 x}{x} \Rightarrow \lim_{x\to\infty} \frac{3\ln^2 x \cdot \frac1x}{1} = \lim_{x\to\infty} \frac{3\ln^2 x}{x} \Rightarrow \lim_{x\to\infty} \frac{6\ln x \cdot \frac1x}{1} = \lim_{x\to\infty} \frac{6\ln x}{x} = \lim_{x\to\infty} \frac6x = 0
+\]\\[0pt]
+or we can say that \(x\) outgrows \(\ln^3 x\) therefore the function converges to 0, we find \(g'(x)\):\\[0pt]
+\[
+  g'(x) = \frac{3\ln^2 x \cdot \frac1x \cdot x - \ln^3 x}{x^2} = \frac{\ln^2 x(3-\ln x)}{x^2}
+\]\\[0pt]
+\(\frac{\ln^2 x(3-\ln x)}{x^2} = 0\) gives us the 2 solutions \(x=1,x=e^3\), and if we were to substitute \(x > e^3\) we would find that the function \(g(x)\) is monotonically decreasing in the interval \((e^3, \infty]\) and monotonically increasing in \((1,e^3)\), therefore these functions abide by \hyperref[sec:org6f3d3ae]{Dirichlet's test}'s requirements therefore we write:\\[0pt]
+\[
+  \int_8^\infty \frac{\ln^3 x \cdot \cos\frac{x}{3}}{x} \text{ dx} = \underbrace{\int_8^{e^3} \frac{\ln^3 x \cdot \cos\frac{x}{3}}{x} \text{ dx}}_{\text{finite}} + \underbrace{\int_{e^3}^{\infty} \frac{\ln^3 x \cdot \cos\frac{x}{3}}{x} \text{ dx}}_{\text{converges}}
+\]\\[0pt]
+finite + convergent = convergent therefore \(\int_8^\infty \frac{\ln^3 x \cdot \cos\frac{x}{3}}{x} \text{ dx}\) is convergent\\[0pt]
+\end{answer}
+\end{question}
+
+\begin{question}
+\[
+  \int_8^{\infty} \frac{1}{x\ln x\ln\ln x} \text{ dx}
+\]\\[0pt]
+\begin{answer}
+we use \hyperref[sec:orgf2294be]{substitution} where \(t = \ln\ln x \Rightarrow \text{dt} = \frac{1}{\ln x} \cdot \frac1x \Rightarrow \text{dx} = x\ln x \text{ dt}\)\\[0pt]
+\(x = 8 \Rightarrow t = \ln\ln8 = 0.73,\ x = \infty \Rightarrow t = \ln\ln\infty = \infty\)\\[0pt]
+\begin{align*}
+  \int_8^{\infty} \frac{1}{x\ln x\ln\ln x} \text{ dx} &= \int_{0.73}^\infty \frac1{\cancel{x\ln x}t} \cancel{x\ln x} \text{ dt}\\
+  &= \int_{0.73}^\infty \frac1t \text{ dt} &\text{diverges}
+\end{align*}
+therefore the original integral \(\int_8^{\infty} \frac{1}{x\ln x\ln\ln x} \text{ dx}\) diverges\\[0pt]
+\end{answer}
+\end{question}
+\end{definition}
+\section{series}
+\label{sec:org0245adf}
+\begin{note}
+here we're talking about positive series\\[0pt]
+\end{note}
+\begin{definition}
+consider the following series\\[0pt]
+\begin{align}
+  \sum_{n=1}^\infty a_n &= a_1 + a_2 + \cdots + a_n &\text{diverges, behaves like } f(x) = x\\
+  \sum_{n=1}^\infty \frac1n &= \frac11 + \frac12 + \cdots + \frac1n &\text{diverges,  behaves like } f(x)=\frac1x\\
+  \sum_{n=1}^\infty \frac1{n^2} &= \frac1{1^2} + \frac1{2^2} + \cdots + \frac1{n^2} &\text{converges,  behaves like } f(x)=\frac1{x^2}\\
+  \sum_{n=1}^\infty \frac1{3^n} &= \frac1{3^1} + \frac1{3^2} + \cdots + \frac1{3^n} &\text{diverges, this is an infinite decreasing series}\\
+  \sum_{n=1}^\infty 2n + 3 &= 5 + 7 + \cdots + 2n+3 &\text{diverges}\\
+  \sum_{n=1}^\infty {(-1)}^n &= -1 + 1 + -1 + 1 + \cdots + {(-1)}^n &\text{diverges, it doesnt converge to a constant}
+\end{align}
+\begin{my_example}
+consider the series:\\[0pt]
+\[
+  \sum_{n=1}^\infty \frac1{n(n+1)} = \sum_{n=1}^\infty \frac1n - \frac1{n+1} = \frac11 - \frac12 + \frac12 - \frac13 + \frac13 - \frac14 + \cdots + \frac1n - \frac1{n+1} = 1 - \frac{1}{n+1}
+\]\\[0pt]
+this series converges to 1 as it ends with \(1 - \frac{1}{n+1}\)\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \sum_{n=1}^\infty \ln\left(1 + \frac1n\right) = \sum_{n=1}^\infty \ln\left(\frac{1+n}{n}\right) =\sum_{n= 1}^\infty \ln(1+n) - \ln n = \ln2 - \ln1 + \ln3 - \ln2 + \ln4 - \ln3 + \cdots + \ln(1+n) - \ln n = \ln(n+1)
+\]\\[0pt]
+this series diverges\\[0pt]
+\end{my_example}
+
+\begin{lemma}
+a necessary condition for the convergence of a series is \(\lim_{n\to\infty} a_n=0\)\\[0pt]
+
+\begin{my_example}
+consider \(\sum \frac1n,\ \sum\frac{1}{n^2}\), the first diverges but the second converges therefore \(\lim_{n\to\infty} \frac{1}{n^2} = 0\)\\[0pt]
+\end{my_example}
+\end{lemma}
+
+\begin{lemma}
+the sum \(\sum_{n=1}^\infty \frac{1}{n^\alpha}\) converges when \(\alpha > 1\) and diverges when \(a \leq 1\)\\[0pt]
+\end{lemma}
+\end{definition}
+\subsection{telescoping series}
+\label{sec:org7b184f6}
+\subsection{convergence tests}
+\label{sec:org1c50f71}
+\begin{note}
+need to add citation for this image\\[0pt]
+\end{note}
+\includegraphics{tests.jpg}\\[0pt]
+\subsubsection{direct comparison test}
+\label{sec:orgdc02fd7}
+\begin{definition}
+given the infinite series \(\sum^\infty b_n, \sum^\infty a_n\) such that \(|a_n| \leq |b_n|\) for sufficiently large \(n\) then:\\[0pt]
+\begin{enumerate}
+\item if the series \(b_n\) converges then the series \(a_n\) also converges\\[0pt]
+\item if the series \(a_n\) diverges then the series \(b_n\) also diverges\\[0pt]
+\end{enumerate}
+
+\begin{my_example}
+\begin{align*}
+  \sum^\infty \frac{1}{n^5+17} \leq& \sum^\infty \frac{1}{n^5}\\
+  \text{converges} \impliedby& \text{converges}
+\end{align*}
+\end{my_example}
+
+\begin{my_example}
+does this series converge or diverge?\\[0pt]
+\[
+  \sum_{n=2}^\infty \frac{1}{\ln n}
+\]\\[0pt]
+it diverges because \(\frac{1}{\ln x} > \frac{1}{n}\) and \(\sum \frac{1}{n}\) diverges\\[0pt]
+\end{my_example}
+\end{definition}
+\subsubsection{limit comparison test}
+\label{sec:org793987b}
+\begin{definition}
+if \(\{a_n\},\{b_n\} > 0\) (all elements of the two sequences are positive) and the limit \(\lim_{n\to\infty} \frac{a_n}{b_n}\) \hyperref[sec:org0440354]{exists} and is non-zero, then \(\sum_{n=1}^\infty a_n\) diverges if and only if \(\sum_{n=1}^\infty b_n\) diverges\\[0pt]
+\begin{my_example}
+\[
+  \sum \frac{3n^3+7n^2-2}{7n^5+4n^2-3}
+\]\\[0pt]
+we divide by \(\frac{1}{n^2}\)\\[0pt]
+\[
+  \lim_{n\to\infty} \frac{\frac{3n^3+7n^2-2}{7n^5+4n^2-3}}{\frac{1}{n^2}} = \lim_{n\to\infty} \frac{3n^5+7n^4-2n^2}{7n^5+4n^2-3} = \frac37
+\]\\[0pt]
+we know \(\sum \frac{1}{n^2}\) converges therefore \(\sum \frac{3n^3+7n^2-2}{7n^5+4n^2-3}\) converges too\\[0pt]
+\end{my_example}
+\end{definition}
+\subsubsection{Ratio test}
+\label{sec:orgcc05a6d}
+\begin{definition}
+suppose there exists \(r\) such that\\[0pt]
+\[
+  \lim_{n\to\infty} \left|\frac{a_{n+1}}{a_n}\right| = r
+\]\\[0pt]
+If \(r < 1\), then the series \(\sum a_n\) is convergent. If \(r > 1\), then the series is divergent. If \(r = 1\), the \textbf{ratio test} is inconclusive, and the series may converge or diverge, and we may use the \hyperref[sec:org88b6001]{root test} which might succeed where the \hyperref[sec:orgcc05a6d]{ratio test} fails\\[0pt]
+
+\begin{my_example}
+consider \(\sum \frac1n\) which we already know is divergent, \(\lim_{n\to\infty} \frac{\frac{1}{n+1}}{\frac{1}{n}} = \lim_{n\to\infty} \frac{n}{n+1} = 1\) which means the test is inconclusive (fails)\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+consider \(\sum \frac{1}{3^n}\)\\[0pt]
+\[
+  \frac{a_{n+1}}{a_n} = \frac{3^n}{3^{n+1}} = \frac{3^n}{3 \cdot 3^n} = \frac13 < 1
+\]\\[0pt]
+which means \(\sum \frac{1}{3^n}\) converges\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+consider the series:\\[0pt]
+\[
+  \sum \frac{(n!)^2}{(2n)!}
+\]\\[0pt]
+we use the \hyperref[sec:orgcc05a6d]{ratio test}\\[0pt]
+\begin{align*}
+  \frac{a_{n+1}}{a_n} &= \frac{((n+1)!)^2}{(2(n+1))!} \cdot \frac{(2n)!}{(n!)^2}\\
+  &= \frac{(n+1)^2 \cdot (n!)^2}{(2n+2)!} \cdot \frac{(2n)!}{(n!)^2}\\
+  &= \frac{(n+1)^2 \cdot \cancel{(n!)^2}}{(2n+2)(2n+1)\cancel{((2n)!)}} \cdot \frac{\cancel{(2n)!}}{\cancel{(n!)^2}}\\
+  &= \frac{n^2+2n+1}{4n^2+6n+2}\\
+  &\implies \frac14
+\end{align*}
+which means this series is convergent\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+consider the series\\[0pt]
+\[
+  \sum \frac{2^n \cdot n!}{n^n}
+\]\\[0pt]
+we make use of the \hyperref[sec:orgcc05a6d]{ratio test}\\[0pt]
+\begin{align*}
+  \frac{a_{n+1}}{a_n} &= \frac{2^{n+1} \cdot (n+1)!}{(n+1)^{n+1}} \cdot \frac{n^n}{2^n \cdot n!}\\
+  &= \frac{2 \cdot \cancel{2^n \cdot (n+1)n!} \cdot n^n}{\cancel{(n+1)}(n+1)^n \cdot \cancel{2^n \cdot n!}}\\
+  &= \frac{2n^n}{(n+1)^n}\\
+  &= 2\left(\frac{n}{n+1}\right)^n
+\end{align*}
+we find the limit of \(\left(\frac{n}{n+1}\right)^n\) using euler\\[0pt]
+\begin{gather*}
+  \lim_{n\to\infty} \left(\frac{n}{n+1}\right)^n = e^L\\
+  L = \lim_{n\to\infty} \left(\frac{n}{n+1} - 1\right)n = \lim_{n\to\infty} \left(\frac{-1}{n+1}\right)n = \lim_{n\to\infty} \frac{-n}{n+1} = -1
+\end{gather*}
+we continue where we left off:\\[0pt]
+\[
+ \lim_{n\to\infty} 2\left(\frac{n}{n+1}\right)^n = 2e^{-1} = \frac{2}{e} < 1
+\]\\[0pt]
+which means this series is convergent\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \sum_{n=1}^\infty \sin\frac1n
+\]\\[0pt]
+we know \(\sin x\) behaves like \(x\) so we divide by \(\frac1n\) and use the \hyperref[sec:org793987b]{limit comparison test}\\[0pt]
+\[
+  \lim_{n\to\infty} \frac{\sin\frac1n}{\frac1n} = 1
+\]\\[0pt]
+which means the series is divergent because \(\sum \frac1n\) diverges\\[0pt]
+note that \(\sum_{n=1}^\infty \sin^2\frac1n\) is convergent because we would divide by \(\frac1{n^2}\) whose series converges\\[0pt]
+\end{my_example}
+\end{definition}
+\subsubsection{Root test}
+\label{sec:org88b6001}
+\begin{definition}
+let\\[0pt]
+\[
+  r = \lim_{n\to\infty} \sqrt[n]{|a_n|}
+\]\\[0pt]
+if \(r < 1\), the series converges, if \(r > 1\), then the series diverges, if \(r = 1\), the root test is inconclusive, and the series may converge or diverge.\\[0pt]
+
+\begin{note}
+this is a consequence of the following equality:\\[0pt]
+\[
+  \lim \frac{a_{n+1}}{a_n} = \lim \sqrt[n]{a_n}
+\]\\[0pt]
+\end{note}
+
+\begin{my_example}
+consider\\[0pt]
+\[
+  \sum \frac{1}{3^n}
+\]\\[0pt]
+we use the \hyperref[sec:org88b6001]{root test}\\[0pt]
+\[
+\sqrt[n]{a_n} = \sqrt[n]{\frac{1}{3^n}} = \frac13 < 1
+\]\\[0pt]
+which means that the series converges\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+consider\\[0pt]
+\[
+\sum \frac{1}{\left(\frac{n+1}{n+3}\right)^{n(n+1)}}
+\]\\[0pt]
+we apply the \hyperref[sec:org88b6001]{root test}\\[0pt]
+\[
+  \sqrt[n]{a_n} = \sqrt[n]{\frac{1}{\left(\frac{n+1}{n+3}\right)^{n(n+1)}}} = \frac{1}{\left(\frac{n+1}{n+3}\right)^{n+1}}
+\]\\[0pt]
+we find the limit of the fraction:\\[0pt]
+\begin{gather*}
+  \lim_{n\to\infty} \left(\frac{n+1}{n+3}\right)^{n+1} = e^L\\
+  L = \lim_{n\to\infty} \left(\frac{n+1}{n+3}-1\right)(n+1) = \lim_{n\to\infty} \left(\frac{-2}{n+3}\right)(n+1) = \lim_{n\to\infty} \frac{-2n-2}{n+3} = -2
+\end{gather*}
+we go back to the original limit:\\[0pt]
+\begin{gather*}
+  \lim_{n\to\infty} \frac{1}{\left(\frac{n+1}{n+3}\right)^{n+1}} = \lim_{n\to\infty} \frac{1}{e^{-2}} = e^2 > 1
+\end{gather*}
+which means that the series diverges\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \sum \left(\frac{n}{n+1}\right)^{2n}
+\]\\[0pt]
+we apply the \hyperref[sec:org88b6001]{root test}\\[0pt]
+\begin{gather*}
+  \lim_{n\to\infty} \left(\frac{n}{n+1}\right)^{2n} = \frac{1}{e^L}\\
+  a_n = \left(\frac{n}{n+1}\right)^{2n} \implies \frac{1}{e^L} \neq 0\\
+  L \implies \left(\frac{n}{n+1}-1\right)2n = \left(\frac{-1}{n+1}\right)2n = \frac{-2n}{n+1} \implies -2\\
+  \lim_{n\to\infty} \left(\frac{n}{n+1}\right)^{2n} = \frac{1}{e^{-2}} = e^2 > 1
+\end{gather*}
+which means that the series diverges\\[0pt]
+\end{my_example}
+\end{definition}
+\subsubsection{Integral test}
+\label{sec:org8492316}
+\begin{definition}
+let \(f(x) > 0\) then the integral \(\int_1^\infty f(x) \text{ dx}\) and the series \(\sum_{n=1}^\infty f(n)\) converge or diverge together\\[0pt]
+
+\begin{my_example}
+\[
+  \sum_{n=5}^\infty \frac{1}{n\ln n}
+\]\\[0pt]
+we use the \hyperref[sec:org8492316]{integral test} and compare the series to the integral \(\int_5^\infty \frac{1}{x\ln x} \text{ dx}\)\\[0pt]
+\begin{gather*}
+  t = \ln x\\
+  \text{dt} = \frac1x \text{ dx}\\
+  \text{dx} = x \text{ dt}\\
+  x=5 \implies t = \ln5\\
+  x=\infty \implies t=\ln\infty=\infty\\
+  \int_{\ln5}^\infty \frac{1}{xt}x \text{ dt} = \underbrace{\int_{\ln5}^\infty \frac{1}{t} \text{ dt}}_{\text{diverges}}
+\end{gather*}
+which means that the series \(\sum_{n=5}^\infty \frac{1}{n\ln n}\) diverges too\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+using both \hyperref[sec:orgcc05a6d]{ratio test} and \hyperref[sec:orgdc02fd7]{direct comparison test}\\[0pt]
+\begin{gather*}
+  \sum \frac{1!+2!+3!+\cdots+n!}{(2n)!} \leq \sum \frac{n!+n!+n!+\cdots+n!}{(2n)!} = \sum \frac{n\cdot n!}{(2n)!}\\
+  \frac{a_{n+1}}{a_n} = \frac{(n+1)(n+1)!}{(2(n+1))!} \cdot \frac{(2n)!}{n\cdot n!} = \frac{(n+1)\cancel{(n+1)n! \cdot (2n)!}}{\cancelto{2}{(2n+2)}(2n+1)\cancel{(2n)!} \cdot n \cdot \cancel{n!}} = \frac{n+1}{2(2n+1)n} = \frac{n+1}{4n^2+2n} \implies 0 < 1
+\end{gather*}
+which means the series converges\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\begin{gather*}
+  \sum_{n=1}^\infty 1-\cos\frac1n = \sum_{n=1}^\infty 2\sin^2\frac{1}{2n}\\
+  \lim \frac{2\sin^2\frac{1}{2n}}{\frac{1}{n^2}} \implies 8
+\end{gather*}
+unfinished\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \sum_{n=7}^\infty = \frac{\ln^{-3} n}{n}
+\]\\[0pt]
+we apply the \hyperref[sec:org8492316]{integral test}\\[0pt]
+\begin{gather*}
+  t = \ln x\\
+  \text{dt} = \frac1x \text{ dx}\\
+  \text{dx} = x\text{ dt}\\
+  x=7 \implies t=\ln7\\
+  x=\infty \implies t=\ln\infty=\infty\\
+  \int_{\ln7}^\infty \frac{1}{x\ln^3 x} \text{ dx} = \int_{\ln7}^\infty \frac{1}{xt^3} x \text{ dt} = \underbrace{\int_{\ln7}^\infty \frac{1}{t^3} \text{ dt}}_{\text{converges}}
+\end{gather*}
+which means the series converges too\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \sum \frac{(n+1)! + (n+2)! + \cdots + (2n)!}{(2n+3)!} \leq \sum \frac{n(2n)!}{(2n+3)(2n+2)(2n+1)(2n)!} \leq \sum \frac{n}{n \cdot n \cdot n} = \sum \frac{1}{n^2}
+\]\\[0pt]
+and since \(\sum \frac{1}{n^2}\) converges we know the original series converges because its smaller\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+\[
+  \sum \frac{2^n}{\left(\frac{3n+2}{3n+1}\right)^{n(2n-3)}}
+\]\\[0pt]
+we use the \hyperref[sec:org88b6001]{Root test}:\\[0pt]
+\[
+  \sqrt[n]{\frac{2^n}{\left(\frac{3n+2}{3n+1}\right)^{n(2n-3)}}} = \frac{2}{\left(\frac{3n+2}{3n+1}\right)^{2n-3}} \implies \frac{2}{e^{\frac23}} > 1
+\]\\[0pt]
+which means the series diverges\\[0pt]
+\end{my_example}
+\end{definition}
+\subsubsection{Raabe–Duhamel's test}
+\label{sec:orgd8424da}
+\begin{definition}
+given \(\lim_{n\to\infty} \left(\frac{a_n}{a_{n+1}}-1\right)n = L\)\\[0pt]
+\begin{enumerate}
+\item if \(L < 1\) then \(\sum a_n\) diverges\\[0pt]
+\item if \(L > 1\) then \(\sum a_n\) converges\\[0pt]
+\item the test is inconclusive\\[0pt]
+\end{enumerate}
+we use this test when the \hyperref[sec:orgcc05a6d]{Ratio test} fails\\[0pt]
+
+\begin{my_example}
+\[
+  \sum \frac{n!}{(5+1)(5+2)(5+3) \cdots (5+n)}
+\]\\[0pt]
+we try \hyperref[sec:orgcc05a6d]{Ratio test}:\\[0pt]
+\begin{align*}
+  \frac{a_{n+1}}{a_n} &= \frac{(n+1)!}{(5+1)(5+2) \cdots (5+n+1)} \cdot \frac{(5+1)(5+2) \cdots (5+n)}{n!}\\
+  &= \frac{(n+1)n!}{(5+1)(5+2) \cdots (5+n+1)} \cdot \frac{(5+1)(5+2) \cdots (5+n)}{n!}\\
+  &= \frac{n+1}{n+6}\\
+  &\implies 1
+\end{align*}
+\hyperref[sec:orgcc05a6d]{Ratio test} failed because we got 1 so we apply \textbf{Raabe's test}:\\[0pt]
+\begin{align*}
+  \lim_{n\to\infty} \left(\frac{a_n}{a_{n+1}}-1\right)n &= \lim_{n\to\infty} \left(\frac{n+6}{n+1}-1\right)n\\
+  &= \lim_{n\to\infty} \left(\frac{5}{n+1}\right)n\\
+  &= \lim_{n\to\infty} \frac{5n}{n+1}\\
+  &= 5 > 1
+\end{align*}
+we got \(5 > 1\) which means the series converges\\[0pt]
+\end{my_example}
+\end{definition}
+\subsubsection{Alternating series test}
+\label{sec:orgcbff953}
+suppose the following statements are true:\\[0pt]
+
+\begin{enumerate}
+\item \(a_{n}\) are all positive,\\[0pt]
+\item \(\lim_{n\to\infty} a_n = 0\)\\[0pt]
+\item for every \(n\), \(a_{n+1} \leq a_n\)\\[0pt]
+\end{enumerate}
+
+then \(\sum_{n=k}^{\infty} (-1)^n a_n\) and \(\sum_{n=k}^{\infty} (-1)^{n+1} a_n\) are convergent series\\[0pt]
+
+\begin{my_example}
+\[
+  \sum_{n=1}^{\infty} \frac{(-1)^n}{n} = \sum_{n=1}^{\infty} (-1)^n\frac{1}{n}
+\]\\[0pt]
+we check the conditions of the \hyperref[sec:orgcbff953]{Alternating series test}\\[0pt]
+\begin{enumerate}
+\item \(\frac{1}{n} \geq 0\)\\[0pt]
+\item \(\lim_{n\to \infty} \frac{1}{n} = 0\)\\[0pt]
+\item \(\frac{1}{n+1} < \frac{1}{n}\)\\[0pt]
+\end{enumerate}
+and since \(\frac{1}{n}\) meets all the conditions, we can apply the test to \(\sum_{n=1}^{\infty} (-1)^n\frac{1}{n}\) and find that it converges\\[0pt]
+\end{my_example}
+\end{document}

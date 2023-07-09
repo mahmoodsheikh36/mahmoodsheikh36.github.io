@@ -1,0 +1,215 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{probability homework 1}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={probability homework 1},
+ pdfkeywords={},
+ pdfsubject={probability homework 1},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{question}
+let A,B,C be events, find the \href{probability.org}{probability} expressions for the following:\\
+\begin{subquestion}
+only A happens\\
+\begin{answer}
+\[
+P(A) \cap P\left(\overline{B}\right) \cap P\left(\overline{C}\right)
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+atleast one of them happens\\
+\begin{answer}
+\[
+P(A) \cup P(B) \cup P(C)
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+only one of them happens\\
+\begin{answer}
+\[
+\left(P(A) \cap P(\overline{B}) \cap P(\overline{C})\right) \cup \left(P(\overline{A}) \cap P(B) \cap P(\overline{C})\right) \cup \left(P(\overline{A}) \cap P(\overline{B}) \cap P(C)\right)
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+none of the events happen\\
+\begin{answer}
+\[
+P(\overline{A})+P(\overline{B})+P(\overline{C})
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+no more than 2 events happen\\
+\begin{answer}
+1 minus the probability of all 3 events happening:\\
+\[
+1 - P(A) \cap P(B) \cap P(C)
+\]\\
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+prove:\\
+\[
+P(A \cup B \cup C) = P(A)+P(B)+P(C)-P(A \cap B)-P(A \cap C)-P(B \cap C)+P(A \cap B \cap C)
+\]\\
+\begin{answer}
+\begin{align*}
+  P(A \cup B \cup C) &= P(A \cup (B \cup C))\\
+  &= P(A) + P(B \cup C) - P(A \cap (B \cup C))\\
+  &= P(A) + P(B) + P(C) - P(B \cap C) - P(A \cap (B \cup C))\\
+  &= P(A) + P(B) + P(C) - P(B \cap C) - P((A \cap B) \cup (B \cap C))\\
+  &= P(A) + P(B) + P(C) - P(B \cap C) - P(A \cap B) - P(B \cap C) + P((A \cap B) \cap (B \cap C))\\
+  &= P(A) + P(B) + P(C) - P(B \cap C) - P(A \cap B) - P(B \cap C) + P(A \cap B \cap C)
+\end{align*}
+\end{answer}
+\end{question}
+
+\begin{question}
+let \(\Omega=\{0,1,2,\dots\}\), given that \(P(\{n\})=\frac{c}{6^n}\) for every \(n \in \Omega\), find \(c\)\\
+hint: use the sum of an infinite convergent geometric sequence\\
+\begin{answer}
+we know that \[\sum_{n\in\Omega} P(\{n\}) = 1\] and so \[\sum_{n \in \Omega} \frac{c}{6^n} = 1 \implies \sum_{n=1}^{\infty} \frac{c}{6^n} = 1\] and using the formula for the \href{20220711182517-sum_of_geometric_progression.org}{sum of infinite geometric progression} we get \[\frac{c}{1-\frac{1}{6}} = 1 \implies c = \frac{5}{6}\]\\
+\end{answer}
+\end{question}
+
+\begin{question}
+in a \href{linear_algebra2.org}{square matrix} of the fourth degree we pick 4 different cells randomly, what is the probability that:\\
+\begin{subquestion}
+all of them are in the same row\\
+\begin{answer}
+refer to \href{20230113165622-hypergeometric_distribution.org}{hypergeometric distribution}\\
+\[
+4 \cdot \frac{\binom{4}{4} \binom{16-4}{4-4}}{\binom{16}{4}} = \frac{1}{455}
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+all of them are in the two upper rows\\
+\begin{answer}
+\[
+\frac{\binom{8}{4} \binom{16-8}{4-4}}{\binom{16}{4}}
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+they form a permutation (exactly one from each row and column)\\
+\begin{answer}
+\[
+8 \cdot \frac{\binom{4}{4} \binom{16-4}{4-4}}{\binom{16}{4}} = \frac{2}{455}
+\]\\
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+in a class there are 20 girls and 30 boys, we randomly pick 5 students, what is the probability that:\\
+\begin{subquestion}
+only boys are picked\\
+\begin{answer}
+\[
+\frac{\binom{30}{5} \binom{50-30}{5-5}}{\binom{50}{5}}
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+all of the chosen are of the same gender\\
+\begin{answer}
+\[
+\frac{\binom{30}{5} \binom{50-30}{5-5}}{\binom{50}{5}} + \frac{\binom{20}{5} \binom{50-20}{5-5}}{\binom{50}{5}}
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+more girls are picked than boys\\
+\begin{answer}
+\[
+\frac{\binom{20}{3} \binom{50-20}{5-3}}{\binom{50}{5}}
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+an equal number of boys and girls are picked\\
+\begin{answer}
+impossible, 0\\
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+in an urn 10 balls of which only one is black, how many balls have to be removed and returned so that the probability that black is removed is atleast 0.9\\
+\begin{answer}
+the probability of removing the black ball is 0.1\\
+\[
+P(k) \ge {(1-p)}^{k-1}p \implies 0.9 \ge {(1-0.1)}^{k-1} \cdot 0.1
+\]\\
+the number of trials is \(k\) rounded up (e.g. 9.1 would be rounded to 10)\\
+\end{answer}
+\end{question}
+
+\begin{question}
+there are 2 traffic lights, the probability of an error in the first is 0.1, the probability of an error in the second is 0.15, the probability of an error in both is 0.02, what is the probability that none of them error out?\\
+\begin{answer}
+i think its \(1-0.1-0.15-0.02\) but thats probably wrong, although i would like to know why please\\
+\end{answer}
+\end{question}
+
+\begin{question}
+12 people are asked about their month of birth (all of them have equal probabilities to be born on any of the months)\\
+\begin{subquestion}
+what is the probabiblity that all 12 people were born in different months?\\
+\begin{answer}
+this is a \href{20221204105120-combinatorics.org}{combination}, \(\frac{1}{12!}\)\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+what is the probability that all of them were born in the same month\\
+\begin{answer}
+refer to \href{20221204105120-combinatorics.org}{variation with repetition}\\
+\[
+\frac{1}{12^{12}}
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+what is the probability that exactly 4 were born in june\\
+\begin{answer}
+this is a \href{20230113174354-binomial_distribution.org}{Bernoulli distribution}\\
+\[
+\binom{12}{4} \frac{1}{12}^4\left(1-\frac{1}{12}\right)^{12-4}
+\]\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+what is the probability that 6 people were born in the first 6 months of the year and the rest were born in the later 6 months of the year?\\
+\begin{answer}
+yet another Bernoulli distribution\\
+\[
+\binom{12}{6}0.5^6{(1-0.5)}^{12-6}
+\]\\
+\end{answer}
+\end{subquestion}
+\end{question}
+\end{document}

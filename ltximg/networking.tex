@@ -1,0 +1,697 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage{algpseudocode}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\author{mahmood}
+\date{\today}
+\title{networking}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={networking},
+ pdfkeywords={},
+ pdfsubject={college course in computer networking},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+\begin{note}
+this document is still being constructed, it should not be used for reference yet.\\
+\end{note}
+
+\begin{note}
+i have yet to add citations from the syllabus of the course from \texttt{syllabus.docx}\\
+\end{note}
+
+\section{storage units}
+\label{sec:org2981573}
+basic units table:\\
+\begin{center}
+\begin{tabular}{ll}
+unit & description\\
+\hline
+bit & 1 or 0\\
+byte & 8 bits\\
+kilobyte & 1024 bytes\\
+megabyte & 1024 kilobytes\\
+gigabyte & 1024 megabytes\\
+terabyte & 1024 gigabytes\\
+petabyte & 1024 terabytes\\
+\end{tabular}
+\end{center}
+\section{unit prefix table}
+\label{sec:org48badb5}
+\begin{center}
+\begin{tabular}{ll}
+prefix & exponent\\
+\hline
+yocto & \(10^{-24}\)\\
+zepto & \(10^{-21}\)\\
+atto & \(10^{-18}\)\\
+femto & \(10^{-15}\)\\
+pico & \(10^{-12}\)\\
+nano & \(10^{-9}\)\\
+micro & \(10^{-6}\)\\
+milli & \(10^{-3}\)\\
+kilo & \(10^3\)\\
+mega & \(10^6\)\\
+giga & \(10^9\)\\
+tera & \(10^{12}\)\\
+peta & \(10^{15}\)\\
+exa & \(10^{18}\)\\
+zetta & \(10^{21}\)\\
+yotta & \(10^{24}\)\\
+\end{tabular}
+\end{center}
+\section{internet}
+\label{sec:orga773caf}
+\begin{question}
+at home there are 4 computers and a router (therefore, 5 "stations") connected to the same channel.\\
+as long as only a single station is streaming it will succeed in streaming, if at any given moment more than 1 station try to stream at the same time the streaming for all stations will fail.\\
+given that a station is trying to stream with a \href{20220813151352-probability.org}{probability} \(p\), what is the probability that it is gonna succeed in streaming?\\
+\begin{answer}
+for that station to succeed in streaming the other 4 stations have to not try to stream\\
+for a station to try to stream at any given moment the probability is \(p\)\\
+so according to \href{20220813151352-probability.org}{Bernoulli distribution} the answer is \(\binom{5}{1}p^1(1-p)^4\)\\
+\end{answer}
+\begin{subquestion}
+for the same situation, 2 stations can stream at the same time, what is the odds that a station would succeed in streaming at any given time?\\
+\begin{answer}
+\(\binom{5}{1}p(1-p)^4 + \binom{5}{2}p^2(1-p)^3\)\\
+\end{answer}
+\end{subquestion}
+\end{question}
+\section{packet}
+\label{sec:orgd4c2e7b}
+\section{protocol}
+\label{sec:org040283e}
+\begin{definition}
+a communication \textbf{protocol} is a system of rules that allows two or more entities of a communications system to transmit information via any kind of variation of a physical quantity. the protocol defines the rules, syntax, semantics and synchronization of communication and possible error recovery methods. protocols may be implemented by hardware, software, or a combination of both.\\
+\end{definition}
+\section{bandwidth}
+\label{sec:org1cd0eee}
+\begin{definition}
+\textbf{bandwidth} indicates the maximum capacity of a link to transmit data in a given amount of time. typically, bandwidth is represented in the number of bits, kilobits, megabits or gigabits that can be transmitted in 1 second.\\
+\begin{note}
+here we use the unit bps (bits per second) and denote bandwidth by \(C\) or \(R\)\\
+\end{note}
+\end{definition}
+\section{transmission delay}
+\label{sec:org840ebaa}
+\begin{definition}
+\textbf{transmission delay} is the amount of time required to push all the \hyperref[sec:orgd4c2e7b]{packet}'s bits into the wire.\\
+it is denoted by \(T_i\) and its unit is bps (bit per second)\\
+\begin{lemma}
+\(T_i = \frac{L}{R}\) or \(T_i = \frac{L}{C}\) because \(C\) and \(R\) both denote \hyperref[sec:org1cd0eee]{bandwidth} (consequence of my college class 🤷‍♂️) and \(L\) denotes the size/length of a packet\\
+\end{lemma}
+\end{definition}
+\section{propagation speed}
+\label{sec:org019b862}
+the speed of a bit in a transmission link, denoted by \(s\), and its unit is \(m/s\) (meters per second)\\
+\section{propagation delay}
+\label{sec:org1724811}
+\begin{definition}
+\textbf{propagation delay}, denoted by \(T_p\), is the time duration in seconds taken for a packet to reach its destination.\\
+\begin{lemma}
+we denote the distance between the sender and receiver by \(d\) (in meters)\\
+and the \hyperref[sec:org019b862]{propagation speed} by \(s\)\\
+\(T_p = \frac{d}{s}\)\\
+the unit of \(T_p\) is the second\\
+\end{lemma}
+\end{definition}
+\section{window size}
+\label{sec:org4920bcf}
+when the receiver sends an acknowledgment, it will tell the sender how much data it can transmit before the receiver will send an acknowledgment. we call this the window size. basically, the window size indicates the size of the receive buffer.\\
+\section{client-server architecture}
+\label{sec:org489f272}
+\subsection{server}
+\label{sec:org3528d03}
+\subsection{client}
+\label{sec:org11c64de}
+\section{network}
+\label{sec:org9be7dda}
+\begin{definition}
+a computer \textbf{network} is a set of computers sharing resources located on or provided by network nodes. the computers use common communication \hyperref[sec:org040283e]{protocol}s over digital interconnections to communicate with each other.\\
+\end{definition}
+\subsection{local area network}
+\label{sec:org455686e}
+\subsection{network edge}
+\label{sec:orgaf3ce0c}
+\begin{definition}
+the \textbf{network edge} refers to endpoints. it is the first step between endpoints and the \hyperref[sec:org1270f5f]{core} of the network. these endpoints include personal computers (PCs), adapters, modems, and the devices that connect to them.\\
+\end{definition}
+\subsection{network core}
+\label{sec:org1270f5f}
+\begin{definition}
+the \textbf{network core} refers to the components that provide services to those at the \hyperref[sec:orgaf3ce0c]{edge}.\\
+it is a mesh of interconnected routers\\
+
+\begin{characteristic}
+the network core has 2 key functions:\\
+\begin{itemize}
+\item \textbf{routing}: determines source-destination route taken by packets\\
+\item \textbf{forwarding}: move packets from router's input to appropriate router output\\
+\end{itemize}
+\end{characteristic}
+\end{definition}
+\subsubsection{packet switching}
+\label{sec:org61ffd09}
+hosts break application-layer messages into packets\\
+\begin{itemize}
+\item forward packets from one router to the next, across links on path from source to destination\\
+\item each packet transmitted at full link capacity\\
+\item takes L/R seconds to transmit (push out) L-bit packet into link at R bps\\
+\item \textbf{store and forward}: entire packet must  arrive at router before it can be transmitted on next link\\
+\item end-end delay = 2L/R (assuming zero propagation delay)\\
+\item If arrival rate (in bits) to link exceeds transmission rate of link for a period of time:\\
+\begin{itemize}
+\item packets will queue, wait to be transmitted on link\\
+\item packets can be dropped (lost) if memory (buffer) fills up\\
+\end{itemize}
+\end{itemize}
+\subsubsection{circuit switching}
+\label{sec:org64acb9c}
+\textbf{circuit switching} is a method of implementing a telecommunications network in which two network nodes establish a dedicated communications channel (circuit) through the network before the nodes may communicate. The circuit guarantees the full bandwidth of the channel and remains connected for the duration of the communication session. The circuit functions as if the nodes were physically connected as with an electrical circuit. Circuit switching originated in analog telephone networks where the network created a dedicated circuit between two telephones for the duration of a telephone call. It contrasts with message switching and packet switching used in modern digital networks in which the trunklines between switching centers carry data between many different nodes in the form of data packets without dedicated circuits.\\
+\subsection{access network}
+\label{sec:org3ca6bc7}
+\subsubsection{digital subscriber line}
+\label{sec:org3056271}
+\subsubsection{cable network}
+\label{sec:org761776a}
+\subsubsection{home network}
+\label{sec:org8c7ea26}
+\subsubsection{enterprise access network}
+\label{sec:org769fe45}
+\subsubsection{wireless access network}
+\label{sec:orgac18c1d}
+\subsection{frequency division multiplexing}
+\label{sec:orgb619a4e}
+different channels transmitted in different frequency bands in a cable\\
+\begin{definition}
+an \textbf{access network} is a type of telecommunications network which connects subscribers to their immediate service provider. It is contrasted with the core network, which connects local providers to one another.\\
+\end{definition}
+\section{osi model}
+\label{sec:org5b0a109}
+\begin{center}
+\begin{tabular}{ll}
+name & protocols\\
+\hline
+application & http,ftp,SMTP/POP3/IMAP,DNS\\
+presentation & \\
+session & \\
+transport & \\
+network & \\
+data link & \\
+physical & \\
+\end{tabular}
+\end{center}
+\subsection{application layer}
+\label{sec:org63b7a34}
+\subsubsection{http}
+\label{sec:orgca25566}
+the HTTP \hyperref[sec:org040283e]{protocol} is based on \hyperref[sec:org287582b]{tcp}\\
+\paragraph{http methods}
+\label{sec:org77dcdbb}
+http/1.0 has the methods GET,POST,HEAD\\
+http/1.1 has the methods GET,POST,HEAD,PUT,DELETE\\
+\paragraph{webserver}
+\label{sec:org0e817af}
+\paragraph{persistent http}
+\label{sec:org3a28113}
+HTTP persistent connection, also called HTTP keep-alive, or HTTP connection reuse, is the idea of using a single \hyperref[sec:org287582b]{TCP} connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair\\
+A persistent connection takes 1 RTT for the connection and then transfers as many objects as wanted over this single connection.\\
+RTT stands for the round-trip time taken for an object request and then its retrieval. In other words, it is the time taken to request the object from the client to the server and then retrieve it from the server back to the client.\\
+\paragraph{non-persistent http}
+\label{sec:org0bab3c2}
+The non-persistent connection has connection type 1.0\\
+such connection takes a total time of 2RTT + file \hyperref[sec:org840ebaa]{transmission delay}. It takes the first RTT (round-trip time) to establish the connection between the server and the client. The second RTT is taken to request and return the object. This case stands for a single object transmission.\\
+After the client receives the object in non-persistent, the connection is immediately closed. This is the basic difference between persistent and non-persistent. The persistent connection ensures the transfer of multiple objects over a single connection.\\
+\paragraph{cache proxy server}
+\label{sec:org044a2f7}
+a \hyperref[sec:org00e635d]{proxy} that is used as a cache, where the user makes all the requests to it and if it doesnt have a specific object it requests it from the origin server and returns it (and often stores it for future requests)\\
+\paragraph{pipelining}
+\label{sec:org27d755b}
+HTTP pipelining is a feature of HTTP/1.1 which allows multiple HTTP requests to be sent over a single TCP connection without waiting for the corresponding responses.\\
+\paragraph{form input}
+\label{sec:org2c9d01a}
+using \textbf{POST method}:\\
+web page often includes form input\\
+input is uploaded to server in entity body\\
+using \textbf{URL method}:\\
+uses GET method\\
+input is uploaded in URL field of request line, e.g. www.somesite.com/animalsearch?monkeys\&banana\\
+\paragraph{status code}
+\label{sec:org60d1de4}
+\textbf{status code} appears in 1st line in server-to-client response message.\\
+some status codes:\\
+\begin{center}
+\begin{tabular}{rll}
+code & name & description\\
+\hline
+200 & OK & request succeeded, requested object later in this msg\\
+301 & Moved Permanently & requested object moved, new location specified later in this msg (Location:)\\
+400 & Bad Request & request msg not understood by server\\
+404 & Not Found & requested document not found on this server\\
+505 & HTTP Version Not Supported & \\
+\end{tabular}
+\end{center}
+\subsubsection{dns}
+\label{sec:org15194d9}
+\textbf{domain name system} is a protocol that allows identifying machines with \hyperref[sec:orga14cc92]{domain name} by converting them into \hyperref[sec:org07a120e]{IP} addresses\\
+\paragraph{domain name}
+\label{sec:orga14cc92}
+\paragraph{name server}
+\label{sec:orgc121ad0}
+a \textbf{\hyperref[sec:org15194d9]{DNS} \hyperref[sec:org3528d03]{server}} keeps records of DNS entries that map domain names to their corresponding IP addresses which can be served to other machines\\
+when a client wants to to communicate with a machine using its domain name, it makes a request to a dns server, if the server has a record of said domain name, it returns sends it back to the client, if it doesnt, it either sends back an IP to another dns server that has that record or it makes a request to that dns server itself and sends back the response to the client\\
+\begin{center}
+\includesvg[width=.9\linewidth]{/home/mahmooz/.emacs.d/latex/1btUy2d}
+\end{center}
+
+\begin{my_example}
+a client wants the IP for www.amazon.com; 1st approximation would be:\\
+\begin{itemize}
+\item client queries root server to find com DNS server\\
+\item client queries .com DNS server to get amazon.com DNS server\\
+\item client queries amazon.com DNS server to get IP address for www.amazon.com\\
+\end{itemize}
+\end{my_example}
+\paragraph{root name server}
+\label{sec:org9dcee91}
+contacted by local name server that can not resolve name\\
+a root server contacts authoritative name server if name mapping not known and returns the mapping to the local name server\\
+there are 13 root name "servers" worldwide\\
+\paragraph{resource record}
+\label{sec:orgc8f2b3d}
+the format for an RR is \texttt{(name, value, type, ttl)}\\
+when \texttt{type=A}:\\
+\begin{itemize}
+\item \textbf{name} is \textbf{hostname}\\
+\item \textbf{value} is \hyperref[sec:org07a120e]{IP} address\\
+\end{itemize}
+when \texttt{type=NS}:\\
+\begin{itemize}
+\item \textbf{name} is \hyperref[sec:orga14cc92]{domain name}\\
+\item \textbf{value} is hostname of \hyperref[sec:orgdf2cbbe]{authoritative name server} for this domain\\
+\end{itemize}
+when \texttt{type=CNAME}:\\
+\begin{itemize}
+\item name is alias name for some “canonical” (the real) name\\
+\item www.ibm.com is really servereast.backup2.ibm.com\\
+\item value is canonical name\\
+\end{itemize}
+when \texttt{type=MX}:\\
+\begin{itemize}
+\item \textbf{value} is canonical name\\
+\end{itemize}
+\paragraph{top level domain}
+\label{sec:org68a2005}
+a top-level \href{discrete_maths2.org}{domain} is one of the domains at the highest level in the hierarchical \hyperref[sec:org15194d9]{DNS} of the \hyperref[sec:orga773caf]{internet} after the root domain, a TLD server is responsible for these domains, examples include com,org,net,edu,aero.\\
+\paragraph{authoritative name server}
+\label{sec:orgdf2cbbe}
+an organization’s own DNS servers, providing authoritative hostname to IP mappings for the organization’s named hosts\\
+can be maintained by an organization or a service provider\\
+\paragraph{local name server}
+\label{sec:orgd652bbc}
+does not strictly belong to hierarchy\\
+each ISP (residential ISP, company, university) has one\\
+also called “default name server”\\
+when host makes DNS query, query is sent to its local DNS server\\
+has local cache of recent name-to-address translation pairs (but may be out of date!)\\
+acts as proxy, forwards query into hierarchy\\
+\paragraph{dns caching}
+\label{sec:org9916bc8}
+a server/client can store a record of a domain name and its corresponding IP address for a specific amount of time so that it wont have to make the same request to a dns server over and over again\\
+\paragraph{dns practice problems}
+\label{sec:org71c94f0}
+\begin{question}
+how can we make sure that in the \hyperref[sec:org15194d9]{DNS} system that for a canonical name and its aliases are identical and consistent? such that all the names that refer to the same host would have the same corresponding \hyperref[sec:org07a120e]{IP}\\
+\begin{answer}
+by making it so that for any given \hyperref[sec:orga14cc92]{domain name} that has a corresponding \texttt{CNAME} we cant save any additional information\\
+\end{answer}
+\end{question}
+\begin{question}
+assume that a \hyperref[sec:orgc121ad0]{dns server} receives a query for an IP of a specific host but it cant find an \texttt{RR} entry for it, how should the dns server behave in this situation?\\
+\begin{answer}
+it should check whether it has a \texttt{CNAME} entry for it, and if it does it renew the search for a domain name that is the canonical name for the original requested domain name\\
+\end{answer}
+\end{question}
+\begin{question}
+what problem can be a result of the solution to the previous question that stems from a configuration fault in the dns system\\
+\begin{answer}
+the search through the \texttt{CNAME} entries could enter a loop\\
+\end{answer}
+\end{question}
+\begin{question}
+a dns server for a given \texttt{zone} holds the names of the dns servers of \texttt{subzones} and their IPs, one of the reasons that IPs are saved is efficiency, a domain name of a dns server should be passed along with its IP, but there is another reason for this which is related to the accuracy of the functioning of the dns system for which we have to save those IPs, what is it?\\
+\begin{answer}
+if the dns server of a subzone belongs to another subzone itself, to find its IP we have to make a request using the address we're searching for\\
+\end{answer}
+\end{question}
+\begin{question}
+in DNS, the process of receiving a response can be either iterative or recursive\\
+there exists a caching process in the system that saves in its memory the responses that it received for previous queries and therefore speeds up the future responses for similar queries\\
+which of the 2 methods, iterative or recursive, is preferred as far as the efficiency of the caching process goes?\\
+\begin{answer}
+the recursive method because with this method throughout the whole process the name servers can save the response and serve similar queries in the future whereas with the iterative method only a single name server that serves a small portion of clients can save the response\\
+\end{answer}
+\end{question}
+\begin{question}
+consider a zone named \texttt{U} with a subzone named \texttt{W.U}\\
+the name of the server that holds information for \texttt{U} is \texttt{SERVER.U} and it contains the name of \texttt{SERVER.W.U} which holds information for \texttt{W.U}\\
+is \texttt{SERVER.U} an \hyperref[sec:orgdf2cbbe]{authoritative name server} for the record \texttt{(W.U, NS, SERVER.W.U)}?\\
+\begin{answer}
+no, the system admin of \texttt{U.W} decides which name server \texttt{U.W} uses\\
+\end{answer}
+\end{question}
+\paragraph{dns resolver}
+\label{sec:org5302061}
+a DNS resolver, also called a recursive resolver, is a server designed to receive DNS queries from web browsers and other applications. The resolver receives a hostname - for example, www.example.com - and is responsible for tracking down the IP address for that hostname.\\
+\paragraph{iterative query}
+\label{sec:org52d8a96}
+contacted server replies with name of server to contact "I don’t know this name, but ask this server"\\
+\paragraph{recursive query}
+\label{sec:org9bbf83d}
+puts burden of name resolution on contacted name server\\
+heavy load at upper levels of hierarchy?\\
+\subsubsection{dhcp}
+\label{sec:org6cea669}
+\subsection{transport layer}
+\label{sec:orgb52cc4c}
+\subsubsection{multiplexing}
+\label{sec:orgb5b3039}
+the sender handles data from multiple \hyperref[sec:orgc3ed321]{socket}s, and adds transport header (later used for \hyperref[sec:org12c1e9e]{demultiplexing})\\
+\subsubsection{demultiplexing}
+\label{sec:org12c1e9e}
+the receiver uses header info to deliver received segments to correct socket\\
+\subsection{network layer}
+\label{sec:orga665e5f}
+\subsubsection{ip}
+\label{sec:org07a120e}
+\paragraph{ip fragmentation}
+\label{sec:org989a53c}
+IP fragmentation is an \hyperref[sec:org07a120e]{ip} process that breaks packets into smaller pieces (fragments), so that the resulting pieces can pass through a link with a smaller maximum transmission unit (MTU) than the original packet size. The fragments are reassembled by the receiving host.\\
+\paragraph{ip routing}
+\label{sec:org037b655}
+\url{https://www.ibm.com/docs/en/zos/2.4.0?topic=internetworking-ip-routing}\\
+IP routing is based on routing tables held within a router or internet host. These tables contain routes which can either be static or dynamic. Typically, static routes are predefined within a configuration file, and dynamic routes are learned from the network, using a routing protocol.\\
+\subparagraph{direct routing}
+\label{sec:org81ec060}
+direct routing can take place when two hosts are directly connected to the same physical network. This can be a bridged token-ring network, a bridged Ethernet, or a bridged token-ring network and Ethernet. The distinction between direct routing and indirect routing is that, with direct routing, an IP datagram can be delivered to the remote host without subsequent interpretation of the IP address, by an intermediate host or router.\\
+\subparagraph{indirect routing}
+\label{sec:org06ed3c0}
+indirect routing takes place when the destination is not on a directly attached IP network, forcing the sender to forward the datagram to a router for delivery.\\
+In Figure 1, a datagram from Machine A being delivered to Machine C would be using indirect routing, with Machine D acting as the router (or gateway).\\
+\subsubsection{arp}
+\label{sec:orgeef309a}
+\subsection{tcp}
+\label{sec:org287582b}
+\textbf{reliable transport} between sending and receiving process\\
+\textbf{flow control}: sender won’t overwhelm receiver\\
+\textbf{congestion control}: throttle sender when network overloaded\\
+\textbf{does not provide}: timing, minimum throughput guarantee, security\\
+\textbf{connection-oriented}: setup required between client and server processes\\
+\subsection{udp}
+\label{sec:org2a32546}
+\textbf{unreliable data transfer} between sending and receiving process\\
+\textbf{does not provide}: reliability, flow control, congestion control, timing, throughput guarantee, security, orconnection setup\\
+\subsubsection{udp checksum}
+\label{sec:org532a959}
+\subsection{acknowledgement}
+\label{sec:org152b6fe}
+\section{reliable connection}
+\label{sec:org80dc2f3}
+for a connection to be reliable:\\
+\begin{enumerate}
+\item all the data sent should be received\\
+\item data is received without duplication\\
+\item the data is received in the order it wasnt sent\\
+\end{enumerate}
+\subsection{stop and wait}
+\label{sec:orgfe37c48}
+a \hyperref[sec:org040283e]{protocol} designed for reliability such that it keeps resending a packet until it is delivered successfully, controlled by a \texttt{timeout}, denoted by \(T_\text{out}\)\\
+assuming a transmission failure \href{20220813151352-probability.org}{probability} of \(p\), the \href{20220813152209-average.org}{average} time for a successful transmission is found using \href{20220813151352-probability.org}{geometric distribution}\\
+\[
+T_v = \frac{1}{1-p}(T_i+T_\text{out})
+\]\\
+the efficiency is\\
+\[
+u = \frac{T_i}{T_v} = \frac{T_i}{\frac{1}{1-p}(T_i+T_\text{out})}
+\]\\
+we denote \(a\) as the number of times \(T_i\) is contained in \(T_v\)\\
+\[
+a = \frac{T_i+T_\text{out}}{T_i} = \frac{T_i}{T_i} + \frac{T_\text{out}}{T_i} = 1 + \frac{T_\text{out}}{T_i}
+\]\\
+which implies that \(a-1=\frac{T_\text{out}}{T_i}\) and\\
+\[
+u = \frac{T_i}{\frac{1}{1-p}(T_i+T_\text{out})} = \frac{(1-p)T_i}{T_i+T_\text{out}} = \frac{1-p}{\frac{T_i+T_\text{out}}{T_i}} = \frac{1-p}{a}
+\]\\
+\begin{lemma}
+\(T_\text{out} \geq 2T_p\)\\
+\end{lemma}
+\subsubsection{stop and wait efficiency}
+\label{sec:orge9120a8}
+the efficiency is the \hyperref[sec:org840ebaa]{transmission delay} over the time taken for a successful transmission on \href{20220813152209-average.org}{average}\\
+\[
+u = \frac{T_i}{T_v} = \frac{T_i}{\frac{1}{1-p}(T_i+T_\text{out})}
+\]\\
+\subsection{go-back-n}
+\label{sec:org72dc15c}
+in the \textbf{go-back-n} \hyperref[sec:org040283e]{protocol} the sender doesnt wait for an \texttt{ack} packet but keeps sending continuous packets each with its own \texttt{time-out}, if a \texttt{time-out} of a packet expires or if the sender receives a \texttt{nack} packet, it resends the packet and then all the packets that were sent after it\\
+the sender only drops a packet if it knows it has arrived successfully\\
+\subsubsection{go-back-n efficiency}
+\label{sec:orge3dca86}
+assuming a transmission failure \href{20220813151352-probability.org}{probability} of \(p\), and \(a\) as the number of times \(T_i\) is contained in \(T_v\) (\href{20220813152209-average.org}{average} time for a successful delivery), the efficiency of the \hyperref[sec:org72dc15c]{go-back-n} protocol is defined as\\
+\[
+u = \frac{T_i}{T_v} = \frac{1-p}{1-p+ap}
+\]\\
+we denote by \(x\) the number of \hyperref[sec:orgd4c2e7b]{packet}s that we can transmit in a timespan \(T_\text{total}\)\\
+a reminder that if we have transmissions all through \(T_\text{out}\) then \(x=a\)\\
+so we can conclude that in such a case the efficiency is:\\
+\[
+u = \frac{1-p}{1-p+xp} \cdot \frac{x}{a},\, x < a
+\]\\
+\begin{question}
+given two nodes A and B that communicate the using \hyperref[sec:org72dc15c]{go-back-n} protocol, given:\\
+\begin{itemize}
+\item \hyperref[sec:org1cd0eee]{bandwidth} is 2mbps\\
+\item \hyperref[sec:org1724811]{propagation delay} of a bit from A to B or vice versa is 9ms\\
+\item timeout is set to \(2T_p\)\\
+\item the probability of a successful transmission of a packet is \(1-p\), ack packets arrive successfully all the time\\
+\item the size of a packet is 1500 bits\\
+\item time it takes to send ack packets and the time it takes for the nodes to process packets are negligable\\
+\item the size of transmission window of A is 16\\
+\end{itemize}
+
+\begin{subquestion}
+what is the efficiency of the protocol as a function of \(p\)?\\
+\begin{answer}
+\begin{gather*}
+  T_i = \frac{L}{C} = \frac{1500}{2\cdot10^6} = .75\text{ms} = 0.00075\text{sec}\\
+  a = \frac{T_i+T_\text{out}}{T_i} = 25 > 16 = x\\
+  u = \frac{1-p}{1-p+16p} \cdot \frac{16}{25} = \frac{1-p}{1+15p} \cdot \frac{16}{25}
+\end{gather*}
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+what is the \href{20220813152209-average.org}{average} number of bits that go through the third layer of B every second?\\
+\begin{answer}
+\[
+u \cdot c = \frac{1-p}{1+15p} \cdot \frac{16}{25} = \frac{2\cdot10^6}{\text{bandwidth}}
+\]\\
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+assume that between A and B the connection used the \hyperref[sec:orgfe37c48]{stop and wait} protocol wait the same properties given above, what is the efficiency here and how many bits on average arrive at layer 3 of B?\\
+\begin{answer}
+the efficiency is\\
+\[
+u = \frac{1-p}{a} = \frac{1-p}{25}
+\]\\
+the average numbers of bits that arrive at layer 3 is\\
+\[
+u \cdot c = \frac{1-p}{25} \cdot 2 \cdot 10^6
+\]\\
+\end{answer}
+\end{subquestion}
+
+\begin{subquestion}
+assume that both protocols operated on this connection, where the stop and wait protocol sends its packets when the go-back-n protocol isnt making use of the connection, what is the efficiency of both protocols together?\\
+\begin{answer}
+\[
+u = \underbrace{\frac{1-p}{1+15p} \cdot \frac{16}{25}}_{\text{go-back-n}} + \underbrace{\frac{1-p}{25}}_{\text{\clap{stop and wait}}}
+\]\\
+\end{answer}
+\end{subquestion}
+
+\begin{answer}
+assume that instead of adding the stop and wait protocol to the connection we could increase the size of the communication window to 17, for which value of \(p\) is this method favorable over the previous method as far as the efficiency goes?\\
+\end{answer}
+\end{question}
+\subsubsection{selective repeat}
+\label{sec:orgd9f1eee}
+\section{protocols of some popular applications}
+\label{sec:org8077989}
+\begin{center}
+\begin{tabular}{lll}
+application & application layer protocol & underlying transport protocol\\
+\hline
+email & SMTP [RFC 2821] & TCP\\
+remote terminal access & Telnet [RFC 854] & TCP\\
+web & http [RFC 2616] & TCP\\
+file transfer & FTP [RFC 959] & TCP\\
+streaming multimedia & HTTP, RTP [RFC 1889] & TCP/UDP\\
+internet telephony & SIP,RTP,proprietary protocols & TCP/UDP\\
+\end{tabular}
+\end{center}
+\section{socket}
+\label{sec:orgc3ed321}
+\section{p2p}
+\label{sec:org87bd447}
+\section{proxy}
+\label{sec:org00e635d}
+\section{cyclic redundancy check}
+\label{sec:orgeda63d2}
+\section{network bridge}
+\label{sec:org305b0fc}
+A network bridge is a computer networking device that creates a single, aggregate network from multiple communication networks or network segments. This function is called \textbf{network bridging}. Bridging is distinct from \hyperref[sec:org037b655]{routing}. Routing allows multiple networks to communicate independently and yet remain separate, whereas bridging connects two separate networks as if they were a single network. In the OSI model, bridging is performed in the data link layer (layer 2). If one or more segments of the bridged network are wireless, the device is known as a wireless bridge.\\
+from the perspective of the \hyperref[sec:orga773caf]{internet}, this a network represents forms a single network with a single ip address\\
+\subsection{transparent bridge}
+\label{sec:org374a9f5}
+\section{piggybacking}
+\label{sec:org798967a}
+piggbacking refers to the technique of waiting after receiving a packet until the network layer moves to the next data packet and then responding with an \hyperref[sec:org152b6fe]{ack} packet\\
+basically it refers to the process of delaying an ack packet\\
+\section{FDMA}
+\label{sec:orgc914c96}
+\section{TDMA}
+\label{sec:org456a4d9}
+\section{citations}
+\label{sec:org8a7b0c3}
+credit where credit is due\\
+\url{https://en.wikipedia.org/wiki/Top-level\_domain}\\
+\url{https://ns1.com/resources/what-is-dns}\\
+\end{document}

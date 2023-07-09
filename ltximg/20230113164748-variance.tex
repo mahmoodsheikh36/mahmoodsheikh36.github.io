@@ -1,0 +1,177 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage[boxed,linesnumbered,vlined]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\cov}{cov}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\cmark}{\text{\ding{51}}}
+\newcommand{\xmark}{\text{\ding{55}}}
+\author{mahmood}
+\date{\today}
+\title{variance}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={variance},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+\begin{definition}
+let \(X\) be a \href{20230104221353-random_variable.org}{random variable} whose \href{20230121184721-expected_value.org}{expected value} is finite \(\mu=\mathrm{E}(X)\), the \textbf{variance} of \(X\), denoted by \(\mathrm{Var}(X)\), is defined as\\[0pt]
+\[
+\mathrm{Var}(X) = \mathrm{E}\left(\left(X-\mu\right)^2\right)
+\]\\[0pt]
+\begin{my_example}
+let \(X\) be a random variable whose distribution law is\\[0pt]
+\[
+x = \begin{cases}
+      -1 & 1/4\\
+      0 & 1/4\\
+      1 & 1/2
+    \end{cases}
+\]\\[0pt]
+we find the variance:\\[0pt]
+\begin{gather*}
+\mu = \mathrm{E}(X) = -1 \cdot \frac{1}{4} + 0 \cdot \frac{1}{4} + 1 \cdot \frac{1}{2} = \frac{1}{4}\\
+\mathrm{Var}(X) = \mathrm{E}\left(\left(X-\frac{1}{4}\right)^2\right) = \left(-1-\frac{1}{4}\right)^2 \cdot \frac{1}{4} + \left(0-\frac{1}{4}\right)^2 \cdot \frac{1}{4} + \left(1-\frac{1}{4}\right) \cdot \frac{1}{2} = \frac{11}{16}
+\end{gather*}
+\end{my_example}
+\begin{characteristic}
+\(\mathrm{Var}(X) \geq 0\)\\[0pt]
+\end{characteristic}
+\begin{characteristic}
+\(\mathrm{Var}(x)\) iff \(X\) is constant\\[0pt]
+\end{characteristic}
+\begin{characteristic}
+\(\mathrm{Var}(aX+b)=a^2 \cdot \mathrm{Var}(X)\)\\[0pt]
+\end{characteristic}
+\end{definition}
+\end{document}

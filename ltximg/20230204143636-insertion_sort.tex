@@ -1,0 +1,49 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{insertion sort}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={insertion sort},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+\item iterate from arr[1] to arr[n]\\
+\item compare the current element to its predecessor\\
+\item if the current element is smaller than its predecessor, drag it backwards until its bigger than its predecessor\\
+\end{enumerate}
+\href{20221130014441-time_complexity.org}{time complexity} is \(O(n^2)\)\\
+\lstset{language=C++,label=org0562fcc,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+template <typename T>
+void insertion_sort(T arr[], int len) {
+  for (int i = 1; i < len; ++i) {
+    int idx = i;
+    while (idx > 0 && arr[idx] < arr[idx-1]) {
+      T tmp = arr[idx];
+      arr[idx] = arr[idx-1];
+      arr[idx-1] = tmp;
+      idx--;
+    }
+  }
+}
+\end{lstlisting}
+\end{document}

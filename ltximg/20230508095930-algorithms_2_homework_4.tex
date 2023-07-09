@@ -1,0 +1,83 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{algorithms 2 homework 4}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={algorithms 2 homework 4},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{note}
+this document and others can be found on my website\\
+\url{https://mahmoodsheikh36.github.io/}
+\end{note}
+\begin{question}
+let \(G=(V,E,W)\) be an undirected connected and positively weighted \href{20230314001051-graph.org}{graph} and let \(T_1,T_2\) be two \href{20230508180506-minimum_weight_spanning_tree.org}{minimum spanning tree}s of \(G\). prove that the sum of squares of the weights of \(T_1\) is equal to that of \(T_2\)\\
+\begin{answer}
+at first i thought it was obviously correct, because \(x^2=x^2\) where \(x\) is the sum of weights in every mst of \(G\), but then realized that just because the sums of weights are doesnt mean the weights themselves are equal (e.g. \(3^2+4^2 \neq 5^2+2^2\), but according to the lemma we proved in class they are indeed equal, so their summed squares must also be equal\\
+\end{answer}
+\end{question}
+\begin{question}
+let \(G=(V,E,W)\) be an undirected connected and positively weighted graph, and given that the weights of the edges of \(G\) differ from one another. prove that for every \(G\) there is a single mst\\
+\begin{answer}
+
+for every two mst's \(T_1,T_2\) in \(G\) we know \(\#_a(T_1) = \#_a(T_2)\) for every weight \(a\), and since the weights of the edges in the graph are all distinct each weight corresponds to one edge, and so 2 equal sets of weights would refer to the same set of edges, and so \(T_1=T_2\)\\
+\end{answer}
+\end{question}
+\begin{question}
+given an undirected positively weighted graph \(G=(V,E,w)\), and given an edge \(e \in E\)\\
+propose an efficient algorithm that returns true if for \(G\) there is an mst that contains \(e\) and false otherwise. prove the correctness of the algorithm\\
+note: the correctness proof is the essense of the question\\
+\begin{answer}
+we modify \href{20230515173032-kruksal_s_algorithm.org}{kruskal's algorithm} so that it assumes that the mst already contains the edge and build from there, if we succeed in building a full mst with \(|V|-1\) edges then such an mst exists, otherwise it doesnt\\
+\includesvg{/home/mahmooz/brain/out/PEgYDE4}\\
+\end{answer}
+\end{question}
+\begin{question}
+given an undirected positively weighted graph \(G=(V,E,w)\)\\
+\textbf{definition}: a minimal edge of a vertex \(v\) is an edge with the smallest weight of ones that touch \(v\) (\(v\) is one of their endpoints)\\
+\textbf{note}: a vertex can have multiple minimal edges\\
+prove that every vertex in the graph that has a single minimal edge has to be in every mst of the graph\\
+\begin{proof}
+\includegraphics[width=1\textwidth]{/home/mahmooz/brain/pen/2023-05-13-Note-18-23-1.png}\\
+\includegraphics[width=1\textwidth]{/home/mahmooz/brain/pen/2023-05-13-Note-18-23-2.png}\\
+\end{proof}
+\end{question}
+\begin{question}
+given \(G=(V,E,w)\) is an undirected weighted graph, let \(e_1,e_2 \in E\) be two edges of the same minimal weight in \(G\) (only these 2 have this weight)\\
+\begin{subquestion}
+prove that for every mst of \(G\) must contain \(e_1,e_2\)\\
+\begin{answer}
+if the edges dont share a vertex then this trivially follows from the proof in the previous question\\
+if the edges did share a vertex \(v\) (\(v\) is one of their endpoints), we need to show that its not possible for one to be in an mst without the other, and thats its not possible for neither to be in the mst\\
+assume one of the edges in in the mst but the other isnt, let \(v_1\) be the other endpoint of the first edge which is in the mst and \(v_2\) be the other endpoint of the second edge which isnt (so we're considering 3 vertices in total, like in the proof of the previous question), there has to be a path from \(v\) to \(v_1\) but no path can be shorter than the single edge between them, so any spanning tree we build without that edge is not gonna be an mst because there is atleast one edge in it that can be replaced with another edge with the minimum weight to get a tree with smaller total height\\
+assume both edges arent in the mst, let \(v_1\) be the other endpoint of the first edge and \(v_2\) the other endpoint of the second, as we stated before, any tree that wont contain these 2 edges will contain paths to \(v_1\) and \(v_2\) that are longer, and wont have a minimum height, so its not possible that both edges arent in the mst\\
+so both edges have to be in every mst\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+is this claim also correct for 3 edges?\\
+\begin{answer}
+no, consider the case where the three edges form a simple cycle, we can throw out one of the edges to get a tree with a smaller height\\
+\end{answer}
+\end{subquestion}
+\end{question}
+\end{document}

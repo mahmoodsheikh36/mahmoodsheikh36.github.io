@@ -1,0 +1,246 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{maxima in lisp}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={maxima in lisp},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{note}
+this document and others can be found on my website\\
+\url{https://mahmoodsheikh36.github.io/}
+\end{note}
+\begin{note}
+i ended up giving up on using maxima as a visualization/symbolic math computation library for elisp, it wasnt made with this usecase in mind i guess, and so its an utter nightmare to lisp with it\\
+\end{note}
+\href{20230510181855-maxima.org}{maxima} is written in \href{20230215220838-lisp.org}{lisp} and so it can be used as a modified/extended lisp runtime\\
+\section{how to}
+\label{sec:org062e185}
+to start the lisp runtime use the command:\\
+\lstset{language=bash,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+rmaxima -r 'to_lisp();'
+\end{lstlisting}
+can also run this in \href{emacs.org}{emacs}' slime/sly with \texttt{(sly "rmaxima -r to\_lisp();")}\\
+alternatively, we can clone maxima's source code to the subdirectory \texttt{local-projects} of the quicklisp installation directory (usually \texttt{\textasciitilde{}/quicklisp} unless you've modified it), follow the instructions at \url{https://sourceforge.net/p/maxima/code/ci/master/tree/INSTALL.lisp\#l66} to compile maxima and you'll be able to load it as a library:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(ql:quickload "maxima")
+\end{lstlisting}
+but then you gotta prefix functions with \texttt{maxima::}, e.g.\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(maxima::displa (maxima::$integrate #$2/(3*x^5)$ 'x))
+\end{lstlisting}
+
+\begin{verbatim}
+2 x
+----
+   5
+3 x
+\end{verbatim}
+
+
+unless you enter the library itself then you dont need the prefix:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(in-package :maxima)
+\end{lstlisting}
+loading maxima as a library works most of the time, but it causes some problems, for example we cant use \texttt{draw} when maxima is loaded as a library, thats why using \texttt{rmaxima} is better\\
+\section{misc}
+\label{sec:orgac397ad}
+to write an expression in infix syntax we do:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(print #$10/13$)
+\end{lstlisting}
+
+\begin{verbatim}
+
+((MAXIMA::RAT MAXIMA::SIMP) 10 13) 
+\end{verbatim}
+
+
+to display math using ascii art we use the function \texttt{displa} (short for \textbf{display})\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(maxima::displa #$10/13$)
+\end{lstlisting}
+
+\begin{verbatim}
+10
+--
+13
+\end{verbatim}
+\section{maxima expression to lisp expression}
+\label{sec:orgcb5abc7}
+this function helps turn maxima expressions into their corresponding lisp expression\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(defun lisp-form (macsyma-string)
+  (maxima::macsyma-read-string (concatenate 'string macsyma-string "$")))
+\end{lstlisting}
+
+example:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(print (lisp-form "diff(sin(x),x)"))
+\end{lstlisting}
+
+\begin{verbatim}
+
+((MAXIMA::$DIFF) ((MAXIMA::%SIN) MAXIMA::$X) MAXIMA::$X) 
+\end{verbatim}
+
+
+some expressions will return symbols instead of functions so they cannot be run directly, e.g.\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(print (lisp-form "sin(10d0)"))
+\end{lstlisting}
+
+\begin{verbatim}
+
+((MAXIMA::%SIN) 10.0) 
+\end{verbatim}
+
+
+so to evaluate these expressions we can use \texttt{meval*}:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(print (lisp-form "sin(10d0)"))
+(print (maxima::meval* (lisp-form "sin(10d0)")))
+(print (maxima::meval* '((maxima::%sin) 10.0)))
+\end{lstlisting}
+
+\begin{verbatim}
+
+((MAXIMA::%SIN) 10.0) 
+-0.5440211108893698 
+-0.5440211108893698 
+\end{verbatim}
+
+
+although functions like \texttt{\$sin} do exist and can be used instead of symbols like \texttt{\%sin}\\
+taken from \url{https://github.com/livelisp/livewlisp/blob/main/maxima-tutorial.txt}\\
+\section{integration}
+\label{sec:org70cb455}
+the main function for integration is \texttt{\$integrate} (or \texttt{sinint})\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(maxima::displa (maxima::$integrate #$2/(3*x^2)$ 'x))
+\end{lstlisting}
+
+\begin{verbatim}
+2 x
+----
+   2
+3 x
+\end{verbatim}
+
+
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(maxima::displa (maxima::$integrate '((maxima::%cos) x) 'x))
+\end{lstlisting}
+
+\begin{verbatim}
+sin(x)
+\end{verbatim}
+
+\section{lists}
+\label{sec:orgadeb7e9}
+i havent a better approach yet\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(maxima::displa (maxima::meval* `((maxima::mlist) 2 3 5)))
+\end{lstlisting}
+
+lisp list to maxima list:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(defun list->mlist (list)
+  (let ((mlist (maxima::meval* `((maxima::mlist)))))
+    (loop for expr in (reverse list) ;; its reversed in maxima dunno why
+          do (setf
+              mlist
+              (maxima::meval* `((maxima::$append) ((maxima::mlist) ,expr) ,mlist))))
+    mlist))
+\end{lstlisting}
+example:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(print (list->mlist '(1 2 3)))
+(maxima::displa (list->mlist '(1 2 3)))
+\end{lstlisting}
+
+\section{plotting}
+\label{sec:org91fff8f}
+we need to initialize some variables (like \texttt{*maxima-tempdir*}) to be able to plot, this can be done automatically using \texttt{initialize-runtime-globals}\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(maxima::initialize-runtime-globals)
+\end{lstlisting}
+to plot a set of points (discrete plot) using \texttt{gnuplot}\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(maxima::$plot2d
+ '((maxima::mlist)
+   maxima::$discrete
+   ((maxima::mlist) 1 2 3) ((maxima::mlist) 1 2 3)))
+\end{lstlisting}
+this can be (somewhat) simplified using our function \texttt{list->mlist} (see above)\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(maxima::$plot2d
+ `((maxima::mlist)
+   ((maxima::mlist) maxima::$discrete
+                    ,(list->mlist '(1 2 3)) ,(list->mlist '(1 2 3)))
+   ((maxima::mlist) maxima::$discrete
+                    ,(list->mlist '(1 2 3)) ,(list->mlist '(1 5 3)))))
+\end{lstlisting}
+we can draw multiple plots (this only works when running lisp using \texttt{maxima}, see the \textbf{how to} section):\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(let ((scene1 '((MAXIMA::$GR2D)
+                ((MAXIMA::MEQUAL) MAXIMA::$TITLE "first plot")
+                ((MAXIMA::MEQUAL) MAXIMA::$NTICKS 300)
+                ((MAXIMA::$PARAMETRIC)
+                 ((MAXIMA::MTIMES) 2 ((MAXIMA::%COS) MAXIMA::$T))
+                 ((MAXIMA::MTIMES) 5 ((MAXIMA::%SIN) MAXIMA::$T)) MAXIMA::$T 0
+                 ((MAXIMA::MTIMES) 2 MAXIMA::$%PI))))
+      (scene2 `((MAXIMA::$GR2D)
+                ((MAXIMA::MEQUAL) MAXIMA::$TITLE "second plot")
+                ((MAXIMA::MEQUAL) MAXIMA::$NTICKS 300)
+                ((maxima::$points) ((mlist) 1 2 3) ((mlist) 1 2 3)))))
+  (maxima::meval* `((MAXIMA::$DRAW) ,scene1 ,scene2 ((MAXIMA::MEQUAL) MAXIMA::$COLUMNS 2))))
+\end{lstlisting}
+we implement some abstraction over this to make it less explicit:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(defun plot-points (x-values y-values)
+  (maxima::$plot2d
+   `((maxima::mlist)
+     maxima::$discrete
+     ,(list->mlist x-values) ,(list->mlist y-values))))
+\end{lstlisting}
+\end{document}

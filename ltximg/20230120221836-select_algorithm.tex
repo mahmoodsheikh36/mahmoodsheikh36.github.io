@@ -1,0 +1,67 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{select algorithm}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={select algorithm},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+an \href{20220706211958-algorithm.org}{algorithm} that would help us reduce the time complexity of many problems\\[0pt]
+\uline{input}: an array \(A\) of \(n\) numbers and a normal number \(k\) such that \(1 \le k \le n\)\\[0pt]
+\uline{output}: the element in \(A\) whose rank is \(k\), i.e. the \(k\)'th smallest number in \(A\)\\[0pt]
+\uline{example}: for the input \(k=3,A=\{13,15,16,14,12,18,17,11\}\), the output is 13\\[0pt]
+a naive approach:\\[0pt]
+\includesvg{/Users/mahmooz/brain/out/8L6UBQN}\\[0pt]
+
+the \href{20221104220603-algorithm_correctness.org}{correctness} of this algorithm trivially follows from the definition of the given problem\\[0pt]
+we propose a more afficient algorithm that we'll call \(\textsc{Select}\) which solves the problem in \href{calculus2.org}{linear} time:\\[0pt]
+\includesvg{/Users/mahmooz/brain/out/vk2JPDq}\\[0pt]
+
+\begin{lemma}
+given an array \(A\) of \(n\) different numbers, and a number \(k\), \(1 \le k \le n\), let \(e_k\) be a number such that \(\rank(e_k,A)=k\)\\[0pt]
+assume that the \href{20230202201612-partition_algorithm.org}{partition algorithm} was applied to \(A\) and we got the subarrays \(A_l,A_r\) of sizes \(m,n-m\)\\[0pt]
+\begin{enumerate}
+\item if \(k \le m\) then \(e_k\) is in \(A_l\) and \(\rank(e_k,A_l)=k\)\\[0pt]
+\item if \(k>m\) then \(e_k\) is in \(A_r\) and \(\rank(e_k,A_r)=k-m\)\\[0pt]
+\end{enumerate}
+for example, given the array \(A=\{3,8,-2,13,11,6,9,2,14,7\},pivot=8,k=6\)\\[0pt]
+we'd get \(A_l=\{3,-2,6,2,7\},A_r=\{8,13,11,9,14\}\)\\[0pt]
+in \(A_l\) there are the 5 smallest numbers from \(A\), the sixth smallest number in A, 8, is the minimal number in \(A_r\)\\[0pt]
+\label{orgec13148}
+\end{lemma}
+the \href{20221104220603-algorithm_correctness.org}{correctness} of the algorithm follows trivially from \hyperref[orgec13148]{the lemma}\\[0pt]
+\begin{note}
+we are sacrificing linear time finding a good pivot so that the partition algorithm's worst-case performance doesnt reach \(\Theta(n^2)\), which may happen when the size of one of the partitions happens to be 1 repeatedly\\[0pt]
+\end{note}
+\begin{my_example}
+\includesvg{/Users/mahmooz/brain/out/5bRXpHM}\\[0pt]
+
+this algorithm runs in \href{calculus2.org}{linear} time\\[0pt]
+\end{my_example}
+\begin{my_example}
+a company has \(n\) employees, their salaries differ and are given in an array \(A\), it wants to give its employees bonuses (it wants to spend as much as it can, given a limited budget), a bonus is the same amount as ones salary, given \(k\), the sum of bonuses is less or equal to a given number \(k\), solve the problem in \(\Theta(n)\)\\[0pt]
+\includesvg{/Users/mahmooz/brain/out/UqiZP5F}\\[0pt]
+
+the \href{20230207143351-recurrence_relation.org}{recurrence formula} for this algorithm is \(T(n)=Cn+T\left(\frac{n}{2}\right)\) which simplifies to \(T(n) \in \Theta(n)\)\\[0pt]
+\label{org3845f72}
+\end{my_example}
+\end{document}

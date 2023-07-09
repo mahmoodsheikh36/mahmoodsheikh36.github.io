@@ -1,0 +1,92 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{graph}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={graph},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{definition}
+a \textbf{graph} is an \href{discrete_maths2.org}{ordered pair} \(G = (V, E)\), where \(V\) is a set whose elements are called \href{20230314001051-graph.org}{vertices}, and \(E\) is a set of paired vertices, whose elements are called \href{20230314001632-edge.org}{edge}s\\
+\end{definition}
+\begin{my_example}
+consider the graph \(G_1=(V_1,E_1),V_1=\{a,b,c\},E_1=\{(a,b),(a,c),(a,a),e_1=(b,c),e_2=(b,c)\)\\
+\includesvg{/home/mahmooz/brain/out/Eqzl9lY}\\
+\end{my_example}
+\begin{my_example}
+consider the following \href{20220706211958-algorithm.org}{algorithm} which receives a non-directed graph and returns a list of its edges\\
+\includesvg{/home/mahmooz/brain/out/1IQAdwQ}\\
+
+the \href{20221130014441-time_complexity.org}{time complexity} of this algorithm is \(O(|E|+|V|)\)\\
+\end{my_example}
+\begin{lemma}
+the maximum number of edges in a simple non-directed graph is\\
+\[
+\frac{|V| \cdot (|V|-1)}{2}
+\]\\
+\begin{proof}
+in a complete graph, the rank of each vertex is \(|V|-1\), and it follows trivially that the sum of ranks is \(|V|(|V|-1)\), and since each vertex touches 2 edges, the number of edges is \(|E|=\frac{|V| \cdot (|V|-1)}{2}\)\\
+\end{proof}
+\end{lemma}
+\begin{definition}
+let \(G=(V,E)\) be a graph, a \textbf{path} from the a \(v_0\) to another \(v_1\) is a sequence of edges\\
+\[
+\alpha = (v_0,v_1),(v_1,v_2),\dots,(v_{l-1},v_l)
+\]\\
+such that the first edge is between \(v_0\) and \(v_1\), the second is between \(v_1\) and \(v_2\), and in general, for all \(i\), \(1 \le i \le l\)\\
+the \(i\)'th edge is between \(v_{i-1}\) and \(v_i\). we can also write \(a=(v_0,v_1,\dots,v_l)\)\\
+a path in a \href{20230314002402-directed_graph.org}{directed graph} is the same as a graph of a non-directed graph, with one additional constraint, all the edges should be directed in the same direction, from the first to the last one\\
+\end{definition}
+\begin{definition}
+let \(\alpha=(v_0,v_1,\dots,v_l)\) be a path in a graph \(G\)\\
+\begin{enumerate}
+\item if \(v_0=v_l\), then \(a\) is a \textbf{cycle}\\
+\item a path \(\alpha\) is \textbf{simple} if no vertex appears in \(\alpha\) more than once\\
+\item a cycle \(\sigma\) is simple if no vertex except for the first one appears in \(sigma\) more than once\\
+\item let \(\alpha=(v_1,v_2,\dots,v_l),\beta=(v_l,v_{l+1},\dots,v_{l+m})\) be two paths in the graph \(G=(V,E)\), the concatenation of \(\alpha,\beta\) is \(\alpha \circ \beta = (v_0,v_1,\dots,v_l,v_{l+1},\dots,v_{l+m})\)\\
+\end{enumerate}
+\end{definition}
+\begin{definition}
+\begin{enumerate}
+\item the graph \(G=(V,E)\) is \textbf{connected} if between every two vertices \(u,v \in V\) there's a path\\
+\item a graph \(G=(V,E)\) is \textbf{acyclic} if in \(G\) there's no cycles\\
+\item a graph \(T=(V,E)\) is a tree if it is connected and acyclic\\
+\end{enumerate}
+\end{definition}
+\begin{definition}
+let \(G=(V,E)\) be a connected non-weighted graph and let \(\alpha=v_0,v_1,\dots,v_l\) be a path in \(G\)\\
+\begin{enumerate}
+\item the length of \(\alpha\) is defined as the number of edges in the path, \(l\), we write \(|\alpha|=l\)\\
+\item the distance between the vertices \(u\) and \(v\) is defined as the length of the minimal path between \(u\) and \(v\), we denote by \(\delta_G(u,v)\) the distance in graph G between \(u\) and \(v\) and get:\\
+\end{enumerate}
+\[
+\delta(u,v) = \min_a |a|
+\]\\
+if there is no path between \(u\) and \(v\) then \(\delta(u,v)=\infty\)\\
+\end{definition}
+
+\begin{my_example}
+here we demonstrate an algorithm that finds the distances from a given vertex to all the other vertices in a non-weighted graph\\
+we use the \textbf{breadth first search} technique along with a \href{data_structures.org}{queue}\\
+\includesvg{/home/mahmooz/brain/out/Bbwoajo}\\
+\end{my_example}
+\end{document}

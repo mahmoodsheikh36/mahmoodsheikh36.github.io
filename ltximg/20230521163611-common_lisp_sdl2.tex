@@ -1,0 +1,278 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{common lisp graphics}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={common lisp graphics},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{note}
+this document and others can be found on my website\\
+\url{https://mahmoodsheikh36.github.io/}
+\end{note}
+we need the libraries \texttt{sdl2}, \texttt{livesupport} (to be able to continue if an error occurs in the main loop) and \texttt{opengl} for rendering\\
+using \href{20230224163920-common_lisp.org}{quicklisp}\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(ql:quickload :sdl2)
+(ql:quickload :livesupport)
+(ql:quickload :cl-opengl)
+\end{lstlisting}
+here im implementing an abstraction layer over opengl/sdl2 to be able to render things like math functions easily\\
+we need a generic way to represent objects that are renderable onto a window so we use the generic function \texttt{render} and implement it in the various classes\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(defgeneric render (obj)
+  (:documentation "a function to render the object in an opengl context"))
+
+(defstruct rgb
+  "rgb color"
+  (r 0) (g 0) (b 0))
+
+(defstruct point-2d ()
+  x y (color (make-rgb :r 0 :b 0 :g 0)))
+
+(defmethod render ((p point-2d))
+  (gl:with-primitives :points
+    (gl:vertex (point-2d-x p) (point-2d-y p))))
+
+(defstruct line-2d
+  point1 point2 (color (make-rgb :r 0 :b 0 :g 0)) (width 1))
+
+(defmethod render ((line line-2d))
+  (let ((point1 (line-2d-point1 line))
+        (point2 (line-2d-point2 line))
+        (width (line-2d-width line)))
+    (gl:line-width width)
+    (gl:with-primitives
+        :lines
+      (gl:vertex (point-2d-x point1) (point-2d-y point1))
+      (gl:vertex (point-2d-x point2) (point-2d-y point2)))))
+
+(defclass window ()
+  ((draw-axis :initarg :draw-axis :accessor window-draw-axis)
+   (renderables :initform '() :accessor window-renderables)
+   (width :initarg :width :initform 750 :accessor window-width)
+   (height :initarg :height :initform 750 :accessor window-height)))
+
+(defmethod window-run ((my-window window))
+  (sdl2:with-init (:everything)
+    (format t "Using SDL Library Version: ~D.~D.~D~%"
+            sdl2-ffi:+sdl-major-version+
+            sdl2-ffi:+sdl-minor-version+
+            sdl2-ffi:+sdl-patchlevel+)
+    (sdl2:with-window
+        (sdl-window
+         :title "basic graphics"
+         :flags '(:shown :opengl)
+         :w (window-width my-window)
+         :h (window-height my-window))
+      (sdl2:with-gl-context (gl-context sdl-window)
+        ;; init opengl
+        (sdl2:gl-make-current sdl-window gl-context)
+
+        ;; enter main loop
+        (sdl2:with-event-loop (:method :poll)
+          (:keyup (:keysym keysym)
+                  (when (sdl2:scancode= (sdl2:scancode-value keysym) :scancode-q)
+                    (sdl2:push-event :quit)))
+          (:idle
+           ()
+           (livesupport:update-repl-link) ;; accept requests from slime/sly, for live programming
+           (livesupport:continuable (window-render my-window))
+           (sdl2:gl-swap-window sdl-window))
+          (:quit () t))))))
+
+(defmethod window-render ((win window))
+  "render the renderables, using opengl"
+  (gl:clear-color 255 255 255 1.0)
+  (gl:clear :color-buffer)
+  (loop for renderable in (window-renderables win)
+        do (gl:matrix-mode :projection)
+           (gl:load-identity) ;; reset matrix to default state
+           ;; (gl:ortho -1 1 -1 1 -1 1) ;; normalize window space, not really needed, done by default
+           (gl:viewport 0 0 (window-width win) (window-height win))
+           (gl:matrix-mode :modelview)
+           (with-slots (color) renderable
+             (gl:color (/ (rgb-r color) 255) (/ (rgb-b color) 255) (/ (rgb-g color) 255)))
+           (render renderable))
+  (sdl2:delay 20))
+
+(defmethod window-add-renderable ((win window) renderable)
+  "add a renderable to renderables, a renderable is an object that has the generic function render"
+  (push renderable (window-renderables win)))
+
+(defstruct axis
+  "a renderable, can hold other renderables which would be drawn locally (transformed), pos is the (point-2d) position in the window"
+  (renderables '()) pos width height (color (make-rgb :r 0 :b 0 :g 0))
+  ;; bounds of the axes
+  (min-y -1) (max-y 1) (min-x -1) (max-x 1))
+
+(defmethod axis-add-renderable ((a axis) renderable)
+  "add a renderable to renderables, a renderable is an object that has the generic function render"
+  (push renderable (axis-renderables a)))
+
+(defmethod render ((a axis))
+  (with-slots (min-y min-x max-y max-x width height) a
+    ;; axes view matrix setup
+    (gl:matrix-mode :projection)
+    (gl:viewport (point-2d-x (axis-pos a))
+                 (point-2d-y (axis-pos a))
+                 width
+                 height)
+    ;; apply matirx to make the screenspace correct for original width/height
+    (gl:ortho 0 width 0 height -1 1)
+    ;; render ticks of both axes
+    (let ((origin (make-point-2d
+                   :x (map-num 0 0 width (map-num 0 min-x max-x 0 width) width)
+                   :y (map-num 0 0 height (map-num 0 min-y max-y 0 height) height))))
+      (loop for x from (point-2d-x origin) below width by 75
+            do (render
+                (make-line-2d
+                 :point1 (make-point-2d
+                          :x x :y (- (point-2d-y origin) 10))
+                 :point2 (make-point-2d
+                          :x x :y (- (point-2d-y origin) -10))
+                 :width 3)))
+      (loop for x from (point-2d-x origin) above 0 by 75
+            do (render
+                (make-line-2d
+                 :point1 (make-point-2d
+                          :x x :y (- (point-2d-y origin) 10))
+                 :point2 (make-point-2d
+                          :x x :y (- (point-2d-y origin) -10))
+                 :width 3)))
+      (loop for y from (point-2d-y origin) above 0 by 75
+              do (render
+                  (make-line-2d
+                   :point1 (make-point-2d
+                            :x (- (point-2d-x origin) 10) :y y)
+                   :point2 (make-point-2d
+                            :x (- (point-2d-x origin) -10) :y y)
+                   :width 3)))
+      (loop for y from (point-2d-y origin) below height by 75
+              do (render
+                  (make-line-2d
+                   :point1 (make-point-2d
+                            :x (- (point-2d-x origin) 10) :y y)
+                   :point2 (make-point-2d
+                            :x (- (point-2d-x origin) -10) :y y)
+                   :width 3))))
+    ;; reset matrix then apply another matrix so that the screenspace is correct for min/max-x/y
+    (gl:load-identity)
+    (gl:ortho min-x max-x min-y max-y -1 1)
+    (gl:matrix-mode :modelview)
+    ;; render axes
+    (render
+     (make-line-2d
+      :point1 (make-point-2d
+               :x min-x :y 0)
+      :point2 (make-point-2d
+               :x max-x :y 0)
+      :width 3))
+    (render
+     (make-line-2d
+      :point1 (make-point-2d
+               :x 0 :y max-y)
+      :point2 (make-point-2d
+               :x 0 :y min-y)
+      :width 3))
+    ;; render children (renderables)
+    (loop for renderable in (axis-renderables a)
+          do (render renderable))))
+
+(defstruct plot
+  "lam is the lambda function to call with x (should return y)"
+  lam
+  ;; bounds of the plot (drawing bound of the plots)
+  min-y max-y min-x max-x
+  (color (make-rgb :r 0 :b 0 :g 0)))
+
+(defun map-num (num src-min src-max dest-min dest-max)
+  "(map-num 0.5 -1 1 -50 50) => 25.0"
+  (/ (- (+ (* (- num src-min) (- dest-max dest-min)) (* dest-min src-max)) (* dest-min src-min)) (- src-max src-min)))
+
+(defmethod render ((p plot))
+  (let ((prev-point nil)
+        (lam (plot-lam p)))
+    (loop for x from -100 below 100
+          do (let* ((x (map-num x -100 100 (plot-min-x p) (plot-max-x p)))
+                    (new-y (funcall lam x))
+                    (new-point (make-point-2d :x x :y new-y)))
+               (if prev-point
+                   (render (make-line-2d
+                            :point1 prev-point
+                            :point2 new-point))
+                   (render new-point))
+               (setf prev-point new-point)))))
+
+(defstruct discrete-plot
+  "a discrete plot, one that connects a finite amount of points"
+  points (color (make-rgb :r 0 :b 0 :g 0)))
+
+(defmethod render ((p discrete-plot))
+  (let* ((points (discrete-plot-points p))
+         (prev-point (elt points 0)))
+    (loop for i from 1 below (length points)
+          do (let ((new-point (elt points i)))
+               (render (make-line-2d
+                        :point1 prev-point
+                        :point2 new-point))
+               (setf prev-point new-point)))))
+\end{lstlisting}
+example usage:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(defun sdl2-test ()
+  (defparameter *win* (make-instance 'window :draw-axis t :width 750 :height 750))
+  (defparameter *axis* (make-axis
+                        :min-x -1
+                        :max-x 3
+                        :max-y 3
+                        :min-y -1
+                        :pos (make-point-2d :x 100 :y 100)
+                        :width 750
+                        :height 750))
+  (window-add-renderable *win* *axis*)
+  (axis-add-renderable *axis* (make-plot :lam (lambda (x) (* x x)) :min-x -2 :max-x 1))
+  ;; (axis-add-renderable *axis* (make-plot :lam (lambda (x) (sin x))))
+  ;; (axis-add-renderable *axis* (make-plot :lam (lambda (x) (tan x))))
+  ;; (axis-add-renderable *axis* (make-plot :lam (lambda (x) (cos x))))
+  (axis-add-renderable
+   *axis*
+   (make-discrete-plot :points
+                       (list (make-point-2d :x -1 :y 1)
+                             (make-point-2d :x 0 :y 0)
+                             (make-point-2d :x 2 :y 1))))
+  (sb-thread:make-thread (lambda () (window-run *win*))))
+\end{lstlisting}
+we can create objects and add them dynamically to the window:\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(window-add-renderable
+ *win*
+ (make-discrete-plot :points
+                     (list (make-point-2d :x (/ (random 10) 10) :y (/ (random 10) 10))
+                           (make-point-2d :x (/ (random 10) 10) :y (/ (random 10) 10)))))
+"done"
+\end{lstlisting}
+\end{document}

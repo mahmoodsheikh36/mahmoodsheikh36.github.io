@@ -1,0 +1,58 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{logical implication}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={logical implication},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{note}
+this document and others can be found on my website\\
+\url{https://mahmoodsheikh36.github.io/}
+\end{note}
+\begin{definition}
+a \href{20230401175139-statement.org}{proposition} \(\alpha\) \textbf{logically implies} the proposition \(\beta\) if in every model in which \(a\) is true, \(\beta\) is also true.\\
+we write \(\alpha \implies \beta\)\\
+\begin{lemma}
+\((\alpha \implies \beta) \iff (\alpha \to \beta \text{ is a tautology})\)\\
+\end{lemma}
+\end{definition}
+\begin{definition}
+a set of propositions \(\Gamma\) logically implies the proposition \(\beta\) if in every model in which all propositions of \(\Gamma\) are correct \(\beta\) is also correct.\\
+we write \(\Gamma \implies \beta\)\\
+\begin{lemma}
+let \(\Gamma = \{a_1,\dots,a_n\}\)\\
+\(\Gamma \implies \beta \iff ((a_1 \land \dots \land a_n) \to \beta) \text{ is a tautology}\)\\
+\end{lemma}
+\begin{my_example}
+\(\{A,(A \to B)\} \implies B\)\\
+\begin{tabular}{llll}
+A & B & \(A \to B\) & \(A \land (A \to B)\)\\
+\hline
+F & F & T & F\\
+F & T & T & F\\
+T & F & F & F\\
+T & T & T & T\\
+\end{tabular}
+\end{my_example}
+\end{definition}
+\end{document}

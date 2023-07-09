@@ -1,0 +1,237 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage[boxed,linesnumbered,vlined]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\author{mahmood}
+\date{\today}
+\title{algorithms homework 5}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={algorithms homework 5},
+ pdfkeywords={},
+ pdfsubject={homework on proving time complexity},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+homework on proving \href{20221130014441-time_complexity.org}{time complexity}\\[0pt]
+
+\begin{question}
+a pair \((A,\alpha)\) of an array \texttt{A} of \href{calculus2.org}{integer}s and an integer \(~\alpha\) is called big-sorted if and only if all items in \texttt{A} that are bigger than \(~\alpha\) exist in the array in a sorted manner, with no importance to the order of items that are smaller or equal to \(\alpha\), for example \(([1,8,3,10,2,12,1,14,0,5],7)\) is big-sorted\\[0pt]
+prove that there isnt a function that receives an array \texttt{B} of integers and an integer \texttt{b} that performs only placement and comparison actions whose time complexity is less than \(\Theta(n\log n)\) and returns \texttt{C} that is a permutation of \texttt{B} such that \((C,b)\) is big-sorted\\[0pt]
+\begin{answer}
+we assume in contradiction that the algorithm \(\textsc{Sort-Big}\) which returns a big-sorted array runs in less than \(\Theta(n\log n)\) time\\[0pt]
+consider the function:\\[0pt]
+\begin{center}
+\includesvg{/Users/mahmooz/brain/out/jyBtMrE}
+\end{center}
+
+we know this function sorts a given array because \(\textsc{Sort-Big}\) would sort the entire array as \(-\infty\) is smaller than any number that would exist in the array and we know the function \(\textsc{Sort-Big}\) sorts all numbers than are less than what is passed to it as an argument\\[0pt]
+the function \(\textsc{My-Sort}\) is made up of one operation that calls the function \(\textsc{Sort-Big}\) which we've assumed runs in less than \(\Theta(n\log n)\) time, and so the function \(\textsc{My-Sort}\) as a whole runs in less than \(\Theta(n\log n)\) time which contradicts with the theorem that comparison-based sorting algorithms cannot run in less than \(\Theta(n\log n)\) time\\[0pt]
+and since we've arrived at a contradiction we know the time complexity of the function \(\textsc{Sort-Big}\) has to have the boundary \(\Omega(n\log n)\)\\[0pt]
+\end{answer}
+\end{question}
+
+\begin{question}
+an array is "average-sorted" iff the average of every pair of numbers that are next to each other makes for an ascending sequence\\[0pt]
+example: the array \(1,10,3,20,7,22,9\) is average-sorted\\[0pt]
+prove that there isnt a comparison-based algorithm that receives an array of integers and returns a permutation that is average-sorted in less than \(\Theta(n\log n)\) operations\\[0pt]
+\begin{answer}
+assume in contradiction that a function \texttt{Average-Sort} runs in less than \(\Theta(n\log n)\) time\\[0pt]
+from the definition of "average-sorted" we can derive the following:\\[0pt]
+\[
+\frac{A[i]+A[i+1]}{2} > \frac{A[i+1]+A[i+2]}{2} \implies A[i+2] > A[i]
+\]\\[0pt]
+which means that its possible to split the array into 2 sorted subarrays, one from the odd indicies and the other from the even indicies, and then we can merge those two subarrays to form a sorted permutation of the original array:\\[0pt]
+\begin{center}
+\includesvg{/Users/mahmooz/brain/out/41wRVE3}
+\end{center}
+
+we know that \(\textsc{My-Sort}\) sorts a given array because \(\textsc{Average-Sort}\) would sort the array in a way so that the items at odd/even indicies form a sorted subarray on their own, and then we merge those two subarrays into one and return the result which is a sorted permutation of the original array\\[0pt]
+the second line calls the function \(\textsc{Average-Sort}\) which we've assumed runs in less than \(\Theta(n\log n)\) time, the next 2 lines run in constant time, the for loop runs in \(\Theta(n)\) time, and the call to \(\textsc{Merge}\) runs in \(\Theta(n)\), so the time complexity of this sorting function is less than \(\Theta(n\log n)\) as a whole, which contradicts with the theorem that every comparison-based sorting algorithm must run in atleast \(\Theta(n\log n)\) time\\[0pt]
+since we've arrived at a contradiction we know the time complexity of the function \(\textsc{Average-Sort}\) must be bound from below by \(\Theta(n\log n)\), i.e. \(\Omega(n\log n)\)\\[0pt]
+\end{answer}
+\end{question}
+
+\begin{question}
+an array is called "pair-sorted" if every pair of elements that are next to each other where the first is at an odd index preserve the following properties:\\[0pt]
+\begin{enumerate}
+\item both elements differ\\[0pt]
+\item the bigger element of every pair form an ascending sequence\\[0pt]
+\end{enumerate}
+for example \(3,9,32,4,40,5,56,10,7,100\) is pair-sorted\\[0pt]
+prove/disprove that there is no algorithm that runs in less than \(\Theta(n\log n)\) that receives an array of integers and returns a pair-sorted permutation of it\\[0pt]
+\begin{answer}
+this is a proof by contradiction\\[0pt]
+assume in contradiction that the function \(\textsc{Pair-Sort}\) runs in less than \(\Theta(n\log n)\) time and returns a pair-sorted permutation of the array it receives\\[0pt]
+consider the following algorithm:\\[0pt]
+\begin{center}
+\includesvg{/Users/mahmooz/brain/out/AHa2QHz}
+\end{center}
+
+this algorithm iterates twice through the array it receives, each loop is \(\Theta(n)\)\\[0pt]
+before each iteration, the algorithm runs \(\textsc{Pair-Sort}\) on the vector\\[0pt]
+on the first iteration the algorithm replaces all elements of the ascending sequence of numbers (that were made so by \(\textsc{Pair-Sort}\)) that are in each pair with \(-\infty\) so that the second call to \(\textsc{Pair-Sort}\) would sort the elements that werent sorted in the first call because they were smaller than their partner\\[0pt]
+and by merging the two vectors we generated we'd get a sorted vector and we'd have accomplished that in less than \(\Theta(n\log n)\) time because no operation or loop runs longer than \(\Theta(n\log n)\), but this contradicts with the theorem that no comparison-based sorting function can sort in less than \(\Theta(n\log n)\)\\[0pt]
+and since we've arrived at a contradiction we know it cannot be possible that \(\textsc{Pair-Sort}\) runs in less than \(\Omega(n\log n)\) time, so it has to be bound by it\\[0pt]
+\end{answer}
+\end{question}
+
+\begin{question}
+give a permutation of size \texttt{n} for whom after each i'th call to \(\textsc{Partition}\) one of the destination arrays would contain only one element\\[0pt]
+\begin{answer}
+\begin{note}
+this answer assumes an implementation of \href{20221105005344-sorting_algorithm.org}{quick sort} that takes the first element as pivot\\[0pt]
+\end{note}
+on each call to partition, two arrays are generated for pivot \(A[i]\), for one of them to be of size 1 either all but one have to be bigger than \(A[i]\), or all but one have to be smaller than \(A[i]\), and since we'd be moving forward, im gonna pick the second option and see where that leads me\\[0pt]
+if \(A[j]\) for all \(j > i+1\) have to be smaller than \(A[i]\), then we know \(A[i+1]\), which would be the next pivot, has to be smaller than it\\[0pt]
+because we're partitioning an array to arrays of size 1 and \(n-1\) its as if we're moving to the two elements at a time since the second to first element would be in its own partition and requires no further operations\\[0pt]
+so the sequence should be like: \(\{x,>x,y,>y \land <x,z,>z \land <y,\dots\}\) such that \(x>y>z>\dots\)\\[0pt]
+so i came up with an appropriate example using these facts: \(\{20,22,17,18,10,15\}\)\\[0pt]
+\begin{note}
+after looking at this example im realizing that this kind of permutations is just built up of two descending sequences, the first in the odd indicies and the second in the even indicies\\[0pt]
+\end{note}
+\end{answer}
+\end{question}
+
+\begin{question}
+an array \texttt{A} of size \texttt{n} is called ascending-three iff a third of the array that contains the biggest elements in the array is sorted in ascending order and are placed in indicies that when divided by 3 gives a remainder of 1\\[0pt]
+i.e. \(A[1] \le A[4] \le A[7] \le A[10]\) and for each \(k\) such that \(k \bmod 3 \neq 1\) we know \(A[k] \le A[1]\)\\[0pt]
+prove/disprove that there is no algorithm that run in less than \(\Theta(n\log n)\) that receives an array of integers and returns an ascending-three permutation of it\\[0pt]
+\begin{answer}
+this is a proof by contradiction\\[0pt]
+assume in contradiction that the function \(\textsc{Ascending-Three-Sort}\) runs in less than \(\Theta(n\log n)\) time and returns an ascending-three permutation of the array it receives\\[0pt]
+consider the following algorithm:\\[0pt]
+\begin{center}
+\includesvg{/Users/mahmooz/brain/out/92mI2By}
+\end{center}
+
+we apply the algorithm \(\textsc{Ascending-Three-Sort}\) 3 times and on each time we extract the scattered subarray and fill its indicies with \(-\infty\) to give way for other elements to be sorted, and at the end we merge those subarrays to get a sorted array, this is done in less than \(\Theta(n\log n)\) time which contradicts with the theorem that any comparison-based algorithm cannot run in less than \(\Omega(n\log n)\)\\[0pt]
+and since we've arrived at a contradiction we know it cannot be possible that \(\textsc{Ascending-Three-Sort}\) runs in less than \(\Omega(n\log n)\) time, so it has to be bound by it\\[0pt]
+\end{answer}
+\end{question}
+\end{document}

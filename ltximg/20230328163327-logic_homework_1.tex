@@ -1,0 +1,62 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{logic homework 1}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={logic homework 1},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+homework on turning natural language to propositional logic statements\\
+\begin{question}
+D - doctors stop their strike\\
+H - hospital managements invervene\\
+P - court intervenes\\
+C - the health of patients doesnt get harmed\\
+M - the government increases the budget\\
+turn the following sentences into logical \href{20230401175139-statement.org}{statement}s\\
+\begin{enumerate}
+\item if the doctors dont stop their strike hospital managements invervene\\
+\item if the health of patients doesnt get harmed the government doesnt increase the budget\\
+\item if hospital managements invervene then the health of patients doesnt get harmed or the court intervenes\\
+\item the court doesnt intervene and the goverment doesnt increase the budget\\
+\end{enumerate}
+\begin{answer}
+\begin{enumerate}
+\item \(\lnot D \implies H\)\\
+\item \(C \implies \lnot M\)\\
+\item \(H \implies (C \lor P)\)\\
+\item \(\lnot P \land \lnot M\)\\
+\end{enumerate}
+\end{answer}
+\end{question}
+
+\begin{question}
+\begin{answer}
+\begin{enumerate}
+\item \(A \implies D\)\\
+\item \(C \implies D\)\\
+\item \(B \implies (C \lor A)\)\\
+\item \(B\)\\
+\end{enumerate}
+\end{answer}
+\end{question}
+\end{document}

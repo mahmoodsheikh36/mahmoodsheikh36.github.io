@@ -1,0 +1,317 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage[boxed,linesnumbered,vlined]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\author{mahmood}
+\date{\today}
+\title{digital systems homework 3}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={digital systems homework 3},
+ pdfkeywords={},
+ pdfsubject={homework on the subject of },
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+\begin{question}
+given the function \(f(x,y,z)\)\\[0pt]
+\begin{center}
+\begin{tabular}{rrrrll}
+x & y & z & \(f(x,y,z)\) & minterm & maxterm\\[0pt]
+\hline
+0 & 0 & 0 & 1 & \(x'y'z'\) & \\[0pt]
+0 & 0 & 1 & 1 & \(x'y'z\) & \\[0pt]
+0 & 1 & 0 & 0 &  & \(x+y'+z\)\\[0pt]
+0 & 1 & 1 & 1 & \(x'yz\) & \\[0pt]
+1 & 0 & 0 & 0 &  & \(x'+y+z\)\\[0pt]
+1 & 0 & 1 & 0 &  & \(x'+y+z'\)\\[0pt]
+1 & 1 & 0 & 1 & \(xyz'\) & \\[0pt]
+1 & 1 & 1 & 0 &  & \(x'+y'+z'\)\\[0pt]
+\end{tabular}
+\end{center}
+\begin{subquestion}
+find a boolean expression for the function\\[0pt]
+\begin{answer}
+\begin{gather*}
+  f(x,y,z) = x'y'z'+x'y'z+x'yz+xyz'\\
+  f(x,y,z) = (x+y'+z)(x'+y+z)(x'+y+z')(x'+y'+z')
+\end{gather*}
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+check whether \(f(x,y,z)\) is \href{boolean_algebra.org}{functionally complete}\\[0pt]
+\begin{answer}
+\begin{gather*}
+  f(x,y,z) = x'y'z'+x'y'z+x'yz+xyz'\\
+  f(x,x,x) = x'x'x' + x'x'x + x'xx + xxx' = x' + 0 + 0 + 0 = x'\\
+  f(x',0,z) = x''0z' + x''0'z' + x''0z + x'0z = 0 + xz + 0 + 0 = xz
+\end{gather*}
+negation is derived from the second equation and the operator \(AND\) is derived from the second\\[0pt]
+\(f(x,y,z)\) is functionally complete\\[0pt]
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+check whether the following systems are functionally complete\\[0pt]
+\begin{subquestion}
+\[
+f_1(x,y) = x \oplus y \qquad f_2(x,y) = x + y'
+\]\\[0pt]
+\begin{answer}
+\(f_1(x,y)=x'y+xy'\)\\[0pt]
+\(f_1(x,1)=x' \longrightarrow\) derived negation\\[0pt]
+\(f_2(x, f_2(0, y)) = x+y \longrightarrow\) derived OR operator\\[0pt]
+this system partially complete since i used 0/1 (using the set of operands \(\lnot\), \(\lor\))\\[0pt]
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+\[
+f_1(a,b,c) = a(b+c) \qquad f_2(a) = a'
+\]\\[0pt]
+\begin{answer}
+\(f_2(a) = a' \longrightarrow\) derived negation\\[0pt]
+\(f_1(a,b,a')=a(b+a')=ab+aa'=ab+0=ab \longrightarrow\) derived AND operator\\[0pt]
+since we derived both negation and the AND operator (\(\lnot, \land\)) using the system then its functionally complete\\[0pt]
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+\[
+f_1(a,b) = a \oplus b \qquad f_2(a,b) = a'b
+\]\\[0pt]
+\begin{answer}
+\(f_1(a,b)=a'b+ab'\)\\[0pt]
+\(f_2(a,b)=a'b\)\\[0pt]
+not a functionally complete system\\[0pt]
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+write the truth table of \(f(x_1,x_2,x_3)\) which receives the value 1 if \(x_1=x_2'+x_3\)\\[0pt]
+\begin{answer}
+\begin{center}
+\begin{tabular}{rrrrll}
+\(x_1\) & \(x_2\) & \(x_3\) & \(f(x, x_2, x_3)\) & minterm & maxterm\\[0pt]
+\hline
+0 & 0 & 0 & 0 &  & \(x+y+z\)\\[0pt]
+0 & 0 & 1 & 0 &  & \(x+y+z'\)\\[0pt]
+0 & 1 & 0 & 0 &  & \(x+y'+z\)\\[0pt]
+0 & 1 & 1 & 0 &  & \(x+y'+z'\)\\[0pt]
+1 & 0 & 0 & 0 &  & \(x'+y+z\)\\[0pt]
+1 & 0 & 1 & 1 & \(xy'z\) & \\[0pt]
+1 & 1 & 0 & 0 &  & \(x'+y'+z\)\\[0pt]
+1 & 1 & 1 & 0 &  & \(+y'+z'\)\\[0pt]
+ &  &  &  &  & \\[0pt]
+\end{tabular}
+\end{center}
+\end{answer}
+\begin{subquestion}
+find a boolean expression for the function \(f\)\\[0pt]
+\begin{answer}
+\[f(x,y,z) = xy'z\]\\[0pt]
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+prove that \(f\) is \href{boolean_algebra.org}{partially functionally complete}\\[0pt]
+\begin{answer}
+\(f(x,y,z) = xy'z\)\\[0pt]
+\(f(1,y,1) = 1y'1 = y' \longrightarrow\) derived negation\\[0pt]
+\(f(1,y',z) = 1yz = yz \longrightarrow\) derived the AND operator\\[0pt]
+the function is partially completely functional because it can derive the already known completely functional set of operators \(\lnot, \land\)\\[0pt]
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+if \(f\) functionally complete? explain without proof\\[0pt]
+\begin{answer}
+\(f(x,x,x)=xxx=x\neq x'\)\\[0pt]
+\(f\) isnt functionally complete\\[0pt]
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+given the function \(f(x,y,z)\) which outputs the value 1 only when most of the variables are equal to 1\\[0pt]
+\begin{subquestion}
+write a truth table for \(f\)\\[0pt]
+\begin{answer}
+\begin{center}
+\begin{tabular}{rrrrll}
+\(x_1\) & \(x_2\) & \(x_3\) & \(f(x,x_2,x_3)\) & minterm & maxterm\\[0pt]
+\hline
+0 & 0 & 0 & 0 &  & \(x+y+z\)\\[0pt]
+0 & 0 & 1 & 0 &  & \(x+y+z'\)\\[0pt]
+0 & 1 & 0 & 0 &  & \(x+y'+z\)\\[0pt]
+0 & 1 & 1 & 1 & \(x'yz\) & \\[0pt]
+1 & 0 & 0 & 0 &  & \(x'+y+z\)\\[0pt]
+1 & 0 & 1 & 1 & \(xy'z\) & \\[0pt]
+1 & 1 & 0 & 1 & \(xyz'\) & \\[0pt]
+1 & 1 & 1 & 1 & \(xyz\) & \\[0pt]
+\end{tabular}
+\end{center}
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+prove that \(f,\lnot\) is a partially complete system\\[0pt]
+\begin{answer}
+\(f(x,y,z)=x'yz+xy'z+xyz'+xyz\)\\[0pt]
+\(f(x,y,z)=x'yz+xy'z+xy\)\\[0pt]
+\(f(x,y,0)=0+0+xy\)\\[0pt]
+\(f(x,y,0)=xy \longrightarrow\) derived the AND operator\\[0pt]
+\(f\) can derive AND so we get the set \(\lnot, \land\) which is known to provide complete functionality\\[0pt]
+\end{answer}
+\end{subquestion}
+\end{question}
+
+\begin{question}
+prove that NOR is a completely functional system\\[0pt]
+\begin{answer}
+\begin{center}
+\begin{tabular}{rrrll}
+\(x\) & \(y\) & output & minterm & maxterm\\[0pt]
+\hline
+0 & 0 & 1 & \(x'y'\) & \\[0pt]
+0 & 1 & 0 &  & \(x+y'\)\\[0pt]
+1 & 0 & 0 &  & \(x'+y\)\\[0pt]
+1 & 1 & 0 &  & \(x'+y'\)\\[0pt]
+\end{tabular}
+\end{center}
+\(f(x,y)=x'y'\)\\[0pt]
+\(f(x,x)=x'x'=x' \longrightarrow\) derived negation (\(\lnot\))\\[0pt]
+\(f(y,y)=y'y'=y'\)\\[0pt]
+\(f(x',y')=xy \longrightarrow\) derived AND operator (\(\land\))\\[0pt]
+we derived the set of operators (\(\land\), \(\lnot\)) using this function so its completely functional\\[0pt]
+\end{answer}
+\begin{subquestion}
+build a boolean expression for \(t(x,y,z) = xy+z'\) using only NOR\\[0pt]
+\begin{answer}
+\[t(x,y,z)=NOR(x',y')+NOR(z,z)\]\\[0pt]
+\end{answer}
+\end{subquestion}
+\end{question}
+\end{document}

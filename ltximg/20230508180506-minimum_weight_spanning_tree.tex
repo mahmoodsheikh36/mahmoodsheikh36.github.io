@@ -1,0 +1,99 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{minimum spanning tree}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={minimum spanning tree},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{note}
+this document and others can be found on my website\\
+\url{https://mahmoodsheikh36.github.io/}
+\end{note}
+\begin{definition}
+given an undirected, connected and weighted \href{20230314001051-graph.org}{graph} \(G=(V,E,w)\). let \(T=(V,E')\) be a \href{20230415231645-spanning_tree.org}{spanning tree} of \(G\). the weight of \(T\) is the sum of weights of its \href{20230314001632-edge.org}{edge}s. i.e.\\
+\[
+W(T) = \sum_{e \in E'} w(e)
+\]\\
+the tree \(T\) is a \textbf{minimum spanning tree} if for every other spanning tree \(T_1\) of \(G\), the following is true:\\
+\[
+W(T_1) \geq W(T)
+\]\\
+\end{definition}
+\begin{note}
+a graph may have multiple \textbf{mst}'s\\
+\end{note}
+\begin{lemma}
+let \(T\) be an mst of \(G\) and let \(e \in T\). upon the removal of \(e\) from \(T\) we get a \href{20230508181651-cut.org}{cut} and upon the addition of any edge that causes a cut we get another mst\\
+\label{orgdb4b51f}
+\end{lemma}
+\begin{lemma}
+let \(T\) be an mst of \(G\) and let \(e \notin T\), upon the addition of \(e\) to \(T\) we get a single \href{20230418001405-cycle.org}{cycle} and upon the removal of any of this cycle's edges we get another mst\\
+\label{orge6bc84e}
+\end{lemma}
+\begin{lemma}
+let \(G\) be an undirected simple non-negatively weighted graph. let \(c\) be a \href{20230511063703-simple_cycle.org}{simple cycle} in \(G\). let \(e\) be the edge with the absolutely biggest weight in the cycle \(c\). then there isnt an mst in \(G\) that contains \(e\).\\
+\begin{proof}
+assume in contradiction that there exists an mst \(T\) that contains \(e=(x,y)\). according to \hyperref[orge6bc84e]{lemma 2}: upon the removal of \(e\) from \(T\) we get a cut. \(x\) and \(y\) are found on different sides of the cut. we go through \(c\) from \(x\) to \(y\), at some point we have to go through a \href{20230511074636-cut_edge.org}{cut edge} \(e' \in c\) (one partition on the side of \(x\) and the other on the side of \(y\)) so \(w(e)>w(e')\). upon the addition of \(e'\) we get another mst \(T'\) according to \hyperref[orgdb4b51f]{lemma 1}.\\
+\[
+w(T') = w(T)\underbrace{-w(e)+w(e')}_{<0} \implies w(T') < w(T)
+\]\\
+which results in a contradiction with the fact that \(T\) is an mst\\
+\end{proof}
+\label{org6d3b5d6}
+\end{lemma}
+\begin{lemma}
+let \(G\) be an undirected connected non-negatively weighted graph in which each edge has a different weight and let \(e_{\max}\) be the edge with the biggest weight, then:\\
+\(e_{\max}\) doesnt belong to any cycle \(\iff\) \(e_{\max}\) is in every mst\\
+\begin{proof}
+\begin{step}
+we prove the implication from right to left, i.e. \(e_{\max}\) is in every mst \(\implies\) \(e_{\max}\) doesnt belong to any cycle\\
+assume \(e_{\max}\) belongs to every mst, let \(T\) be an mst of \(G\). we know \(e_{\max} \in T\)\\
+assume in contradiction \(e_{\max} \in c\) where \(c\) is a cycle\\
+according to \nameref{minimum_spanning_tree_lemma_3} this is a contradiction\\
+\end{step}
+\begin{step}
+we prove the implication from left to right\\
+assume \(e_{\max}\) belongs to no cycles.\\
+assume in contradiction that there exists an mst \(T\) such that \(e_{\max} \notin T\). according to \nameref{minimum_spanning_tree_lemma_2} upon the addition of \(e_{\max}\) to \(T\) we get a cycle, so we've arrived at a contradiction\\
+\end{step}
+\end{proof}
+\end{lemma}
+\begin{lemma}
+given \(G(V,E,W)\) is an undirected non-negatively weighted graph. let \(T,T_1\) be 2 mst's of \(G\). then there exists a sequence of mst's \(T_1,T_2,\dots,T_k=T\) and between every 2 adjacent mst's its possible to go from one to the other by adding an edge and removing another of the same weight. there exists an mst \(T_2\) that is received from \(T_1\) by addition/removal of edges of the same weight and \(T_2\) is closer to \(T\) than \(T_1\) (by length not weight)\\
+\end{lemma}
+\begin{lemma}
+\begin{note}
+a lemma built on \\
+\end{note}
+if \(T_1,T\) are mst's of \(G\) then \(\mathrm{weights}(T_1)=\mathrm{weights}(T)\)\\
+\end{lemma}
+\begin{lemma}
+\begin{note}
+a lemma built on \\
+\end{note}
+let \(T,T_1\) be mst's of \(G\), let \(a \in \mathbb{R}\), then \(\#_a(T_1)=\#_a(T)\)\\
+\begin{entailment}
+the histogram of weight frequency is the same for all mst's of a given graph\\
+\end{entailment}
+\end{lemma}
+\end{document}

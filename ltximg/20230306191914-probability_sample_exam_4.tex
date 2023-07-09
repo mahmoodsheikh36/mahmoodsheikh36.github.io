@@ -1,0 +1,133 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{probability sample exam 4}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={probability sample exam 4},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{question}
+there are 2 traffic lights, the probability of an error in the first is 0.1, second 0.15, both 0.02, whats the probability of no errors in either\\
+\begin{answer}
+A - error in first\\
+B - error in second\\
+\(P(A \cap B)=0.02\)\\
+\(P(A \cup B)=P(A)+P(B)-P(A \cap B)\)\\
+\end{answer}
+\end{question}
+\begin{question}
+40\% of the exams are of multiple choice questions, the rest are normal, the probability for a student to pass a multiple choice questions exam is 3/4 and a normal exam 2/3\\
+\begin{subquestion}
+given that the student has passed an exam, whats the probability that its a multiple choice questions exam\\
+\begin{answer}
+A - multiple choice questions exam\\
+B - passed exam\\
+\(P(A|B)=\frac{P(A \cap B)}{P(B)}=\frac{P(A)P(B|A)}{P(B)}\)\\
+we need to be build a \href{20230126225225-probability_tree.org}{probability tree}\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+given that the student hasnt passed the exam, whats the probability that it was mcq?\\
+\begin{answer}
+\(P(A|B)=\frac{P(A \cap \overline{B})}{P(\overline{B})}\)\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+if the student fails in the first exam they retake it, whats the probability that he passes the course?\\
+\begin{answer}
+\href{20230113173836-geometric_distribution.org}{geometric distribution}\\
+\end{answer}
+\end{subquestion}
+\end{question}
+\begin{question}
+in an exam are 20 copies of type A and 30 of type B, what is the probability that a student received a copy different from the ones his 2 neighboring students got\\
+\begin{answer}
+P(AAB)+P(BBA)\\
+\end{answer}
+\end{question}
+\begin{question}
+in a pool are 200 fish, 40 of which are golden, two were removed without returning, let \(X\) be the number of the golden fish that were removed, find the \href{20230121184721-expected_value.org}{expected value} of \(X\)\\
+\begin{answer}
+\href{20230113174354-binomial_distribution.org}{Bernoulli distribution}\\
+\end{answer}
+\end{question}
+\begin{question}
+A=0.7, B=0.5, C=0.4, D=0.3\\
+\end{question}
+\begin{question}
+31 female teachers and 14 male teachers, the principal picks 8 teachers, whats the probability that at most 6 women were chosen?\\
+\begin{answer}
+X - women picked\\
+\href{20230113165622-hypergeometric_distribution.org}{hypergeometric distribution}\\
+\(X \sim H(8,31,14)\)\\
+the answer is \(1-P(X=7)-P(X=8)\)\\
+\end{answer}
+\end{question}
+\begin{question}
+a professor has 8 keys of which only one opens a given lock, he tries the keys at random, but doesnt mark a key after trying it, whats the probability that it takes him more than 8 attempts to find the correct key? define a \href{20230104221353-random_variable.org}{random variable} and find its distribution in the process\\
+\begin{answer}
+\href{20230113173836-geometric_distribution.org}{geometric distribution}\\
+\(X \sim G(1/8)\)\\
+the answer is \(1-\sum_{k=1}^{8} P(X=k)\)\\
+\end{answer}
+\end{question}
+\begin{question}
+3 students of a course are divided into 3 practice groups, let \(X\) be the number of students in the first group, Y in the second and Z in the third\\
+\begin{subquestion}
+find the \href{20230123141739-joint_probability_table.org}{joint distribution table} of \(X\) and \(Y\)\\
+\begin{answer}
+\begin{tabular}{rllrrl}
+X $\backslash$ Y & 0 & 1 & 2 & 3 & P(X=x)\\
+\hline
+0 & 1/10 & 1/10 & 1/10 & 1/10 & 4/10\\
+1 & 1/10 & 1/10 & 1/10 & 0 & 3/10\\
+2 & 1/10 & 1/10 & 0 & 0 & 2/10\\
+3 & 1/10 & 0 & 0 & 0 & 1/10\\
+P(Y=y) & 4/10 & 3/10 & 2/10 & 1/10 & 1\\
+\end{tabular}
+X=0,Y=0,Z=3\\
+X=0,Y=1,Z=2\\
+X=1,Y=0,Z=2\\
+X=1,Y=1,Z=1\\
+X=2,Y=0,Z=1\\
+X=0,Y=2,Z=1\\
+X=1,Y=2,Z=0\\
+X=2,Y=1,Z=0\\
+X=3,Y=0,Z=0\\
+X=0,Y=3,Z=0\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+find the expected value and \href{20230113164748-variance.org}{variance} of both \(X\) and \(Y\)\\
+\begin{answer}
+expected value of each of them is 1\\
+variance of X is \((0-1)^2 \cdot \frac{4}{10} + (1-1)^2 \cdot \frac{3}{10}\)\\
+\end{answer}
+\end{subquestion}
+\begin{subquestion}
+find the \href{20230122214906-covariance.org}{covariance} of X and Y\\
+\begin{answer}
+\((0-1)(0-1)\frac{1}{10} \dots\)\\
+\end{answer}
+\end{subquestion}
+\end{question}
+\end{document}

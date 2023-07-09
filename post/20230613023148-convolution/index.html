@@ -16,48 +16,57 @@
 \(\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}\)
 \(\newcommand\brm[1]{\textbf{#1}}\)
 \(\DeclareMathOperator*{\argmax}{arg\,max}\
-\(\DeclareMathOperator*{\argmin}{arg\,min}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p>&lt;&amp;hal_cnn><br></p><div class=definition><p><strong>convolution</strong>:<br>the convolution operations is defined as the <a href=/post/calculus2/#integral>integral</a> of the product of two <a href=/post/discrete_maths2/#function>function</a>s \((f,g)\) after one is reflected about the y-axis and shifted:<br>\[ (f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau) \dif{\tau} \]<br></p></div><p>in essence, the convolution operation shows how one function affects the other<br></p><div class=definition><p><strong>discrete convolution</strong>:<br>for two functions \(f:\mathbb{Z} \to \mathbb{C},g:\mathbb{Z} \to \mathbb{C}\), the discrete convolution of \(f\) and \(g\) is given by:<br>\[ (f*g)[n] = \sum_{m=-\infty}^{\infty} f[m]g[n-m] \]<br>extending to 2 dimensional functions we&rsquo;d get:<br>\[ (f*g)[i,j] = \sum_{m} \sum_{n} f[m,n]g[i-m,j-n] \]<br></p></div><div class=my_example><p>in <a href=/post/20230225233819-machine_learning/>machine learning</a>, specifically in <a href=/post/20230520175032-convolutional_neural_network/>convolutional neural network</a>, the convolution operation is used do detect features in an <strong>image</strong>, one of the operands is the image and the second is the <strong>kernel</strong>, see <a href=#org373c7be>1</a><br></p><p>\begin{tikzpicture}[mmat/.style={matrix of math nodes,column sep=-\pgflinewidth/2,
-row sep=-\pgflinewidth/2,cells={nodes={draw,inner sep=3pt,thin}},draw=#1,thick,inner sep=0pt},
-mmat/.default=black,
-node distance=0.3em]
-\matrix[mmat](mat1){
-0 & 1 & 1 & 1 & 0 & 0 & 0 \\
-0 & 0 & 1 & 1 & 1 & 0 & 0 \\
-0 & 0 & 0 & 1 & 1 & 1 & 0 \\
-0 & 0 & 0 & 1 & 1 & 0 & 0 \\
-0 & 0 & 1 & 1 & 0 & 0 & 0 \\
-0 & 1 & 1 & 0 & 0 & 0 & 0 \\
-0 & 1 & 0 & 0 & 0 & 0 & 0 \\
-};
-\def\myarray{{1,0,1},{0,1,0},{1,0,1}}<br>\foreach \X in {0,1,2}
-{\foreach \Y in {0,1,2}
-{\pgfmathsetmacro{\myentry}{{\myarray}[\Y][\X]}
-\path (mat1-\the\numexpr\Y+1\relax-\the\numexpr\X+4\relax.south east)
-node[anchor=south east,blue,scale=0.3,inner sep=1.2pt]{$\times\myentry$};
-}}<br>\node[fit=(mat1-1-4)(mat1-3-6),inner sep=0pt,draw,red,thick,name path=fit](f1){};<br>\node[right=of mat1] (mul) {$*$};<br>\matrix[mmat=blue,fill=blue!20,right=of mul,name path=mat2](mat2){<br>1 & 0 & 1 \\
-0 & 1 & 0 \\
-1 & 0 & 1 \\ };
-\node[right=of mat2] (eq) {$=$};<br>\matrix[mmat,right=of eq](mat3){<br>1 & 4 & 3 & |[draw=green,thick,fill=green!20,alias=4]|4 & 1 \\
-1 & 2 & 4 & 3 & 3 \\
-1 & 2 & 3 & 4 & 1 \\
-1 & 3 & 3 & 1 & 1 \\
-3 & 3 & 1 & 1 & 0 \\
-};
-\foreach \Anchor in {south west,north west,south east,north east}
-{\path[name path=test] (f1.\Anchor) &ndash; (mat2.\Anchor);
-\draw[blue,thick,dotted,name intersections={of=test and fit,total=\t}]
-\ifnum\t>0 (intersection-\t) &ndash; (mat2.\Anchor) \else
-(f1.\Anchor) &ndash; (mat2.\Anchor)\fi;
-\path[name path=test2] (4.\Anchor) &ndash; (mat2.\Anchor);<br>\draw[green,thick,dotted,name intersections={of=test2 and mat2,total=\tt}]
-\ifnum\tt>0 (intersection-1) &ndash; (4.\Anchor) \else
-(mat2.\Anchor) &ndash; (4.\Anchor)\fi;
-}
-\path (mat1.south) node[below] {$\mathbf{I}$}
-(mat2|-mat1.south) node[below] {$\mathbf{K}$}
-(mat3|-mat1.south) node[below] {$\mathbf{I}*\mathbf{K}$};
-\begin{scope}[on background layer]
-\fill[red!20] (f1.north west) rectangle (f1.south east);
-\end{scope}
-\end{tikzpicture}</p><p>although the kernel has to be rotated around every axis before we begin sliding it over the image, otherwise we&rsquo;d be doing cross-correlation instead of convolution<br>here is an example of a flipped kernel:<br>\[ \bmqty{a & b & c\\ d & e & f\\ g & h & i} \xrightarrow{\text{vertical+horizontal rotation}} \bmqty{i & h & g\\ f & e & d\\ c & b & a} \]<br></p></div><div class=characteristic><p><strong>padding</strong>:<br>if you look at <a href=#org373c7be>1</a>, notice the edges essentially get &ldquo;trimmed off&rdquo;, converting a 7x7 matrix into a 5×5 one. the pixels on the edge are never at the center of the kernel, because there is nothing for the kernel to extend to beyond the edge. but we often would like the size of the output to equal the input.<br>to solve this, a <strong>padding</strong> is introduced to the image, where &ldquo;fake&rdquo; pixels are placed around the image to extend its dimensions so that the result of the convolution would grow to equal the size we want<br></p></div><div class=characteristic><p><strong>stride</strong>:<br>often when applying a convolution, we want an output with a lower size than the input. one way of accomplishing this is by using a <strong>stride</strong>, which is the amount of pixels the kernel (matrix) slides over in a given dimension<br></p></div><div class=my_example><p>given an image \(I_{i_r \times i_c}\) and a kernel \(K_{k_r \times k_c}\), assuming a stride of 1 and no padding, the resulting matrix \(M_{m_r \times m_c}\) would be of dimensions \((i_r - (k_r - 1)) \times (i_c - (k_c - 1))\), so \(m_r=i_r-(k_r-1),m_c=(i_c - (k_c - 1))\) and the operation would be defined as:<br>\[ (\forall 1 \le r \le m_r)(\forall 1 \le c \le m_c)\left((I*K)[r,c] = \sum_{n=r}^{r+k_r-1}\sum_{j=c}^{c+k_c-1} I[n,j]K[n-r,j-c]\right) \]<br></p></div><div class=characteristic><p>convolution is <a href=/post/20220923212910-commutative/>commutative</a><br></p></div><h2 id=im2col><span class=section-num>1</span> im2col</h2><p>yet to be researched<br><a href=https://leonardoaraujosantos.gitbook.io/artificial-inteligence/machine_learning/deep_learning/convolution_layer/making_faster>https://leonardoaraujosantos.gitbook.io/artificial-inteligence/machine_learning/deep_learning/convolution_layer/making_faster</a><br><a href=https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/>https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/</a><br><a href=https://iq.opengenus.org/im2col/>https://iq.opengenus.org/im2col/</a></p></div><div class=bl-section><h4>Links to this note</h4><div class=backlinks><ul><li><a href=/post/20230503204107-common_lisp_math/>common lisp math</a></li><li><a href=/post/20230520175032-convolutional_neural_network/>convolutional neural network</a></li></ul></div></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
+\(\DeclareMathOperator*{\argmin}{arg\,min}\)</p><script>window.MathJax={loader:{load:["[tex]/autoload","[tex]/mathtools","[tex]/physics"]},tex:{packages:{"[+]":["autoload","mathtools","physics"]},macros:{textsc:["\\style{font-variant-caps: small-caps}{\\text{#1}}",1]}},tex2jax:{preview:"none"}};function removeNewlineAfterDisplayMath(){elems=document.querySelectorAll("mjx-container");for(i=0;i<elems.length;++i){if(elem=elems[i],elem.getAttribute("display")!=="true")continue;nextElem=elem.nextElementSibling,nextElem!==null&&nextElem.tagName==="BR"&&nextElem.remove()}}window.onload=function(){removeNewlineAfterDisplayMath()}</script><script type=text/javascript id=MathJax-script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script><p>&lt;&amp;hal_cnn><br></p><div class=definition><p><strong>convolution</strong>:<br>the convolution operations is defined as the <a href=/post/calculus2/#integral>integral</a> of the product of two <a href=/post/discrete_maths2/#function>function</a>s <img src=/ltximg/c35e88-b1fb-4616-9c8c-2426aecb43d5-20e9bebee1dc464499bdddd7c1e85b19.svg alt=\((f,g)\) style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> after one is reflected about the y-axis and shifted:<br><img src=/ltximg/e9c4b1-0b8a-4587-a69e-dc2f9f1e81be-ba927ae74558897c7afe194cab30ecfe.svg alt="\[ (f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau) \dif{\tau} \]" style=height:2.5579em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br></p></div><p>in essence, the convolution operation shows how one function affects the other<br></p><div class=definition><p><strong>discrete convolution</strong>:<br>for two functions <img src=/ltximg/18f9bb-b45d-44a4-89be-b1369843c8c0-f0fa5ca254c8c88ef6eae65fdca16221.svg alt="\(f:\mathbb{Z} \to \mathbb{C},g:\mathbb{Z} \to \mathbb{C}\)" style=height:.9695em;vertical-align:-.2397em;display:inline-block class="org-latex org-latex-fragment">, the discrete convolution of <img src=/ltximg/cfdffb-daed-44e8-b137-c77aae74ceca-67ba6a5907636182258b4b36a25558ad.svg alt=\(f\) style=height:.9695em;vertical-align:-.2397em;display:inline-block class="org-latex org-latex-fragment"> and <img src=/ltximg/c8dd5b-81be-4fcb-811f-6d76a0b50cad-94930d2f3d4350a95af5849a47b8cb4e.svg alt=\(g\) style=height:.7109em;vertical-align:-.2397em;display:inline-block class="org-latex org-latex-fragment"> is given by:<br><img src=/ltximg/7a0528-656d-4f32-83fe-f29b29d390ea-9417e67c87fc07fa9c0d8c0996051162.svg alt="\[ (f*g)[n] = \sum_{m=-\infty}^{\infty} f[m]g[n-m] \]" style=height:3.1214em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br>extending to 2 dimensional functions we&rsquo;d get:<br><img src=/ltximg/0775d1-5cc1-4e0b-b0d6-d6ef18374365-12f7f041bda0fc700150cdc0f6a2f0d2.svg alt="\[ (f*g)[i,j] = \sum_{m} \sum_{n} f[m,n]g[i-m,j-n] \]" style=height:2.4994em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br></p></div><div class=my_example><p>in <a href=/post/20230225233819-machine_learning/>machine learning</a>, specifically in <a href=/post/20230520175032-convolutional_neural_network/>convolutional neural network</a>, the convolution operation is used do detect features in an <strong>image</strong>, one of the operands is the image and the second is the <strong>kernel</strong>, see <a href=#org8306402>1</a><br></p><div id=org8306402 class=equation-container><span class=equation><img src=/ltximg/620cce-b110-4da6-9d31-0a9dff3e3e8c-7dc1599fc37ff6537930b1d608e06d7c.svg alt="\begin{tikzpicture}[mmat/.style={matrix of math nodes,column sep=-\pgflinewidth/2,
+    row sep=-\pgflinewidth/2,cells={nodes={draw,inner sep=3pt,thin}},draw=#1,thick,inner sep=0pt},
+  mmat/.default=black,
+  node distance=0.3em]
+  \matrix[mmat](mat1){
+    0 &amp;amp; 1 &amp;amp; 1 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 
+    0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 1 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 \\ 
+    0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 1 &amp;amp; 1 &amp;amp; 0 \\ 
+    0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 \\ 
+    0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 
+    0 &amp;amp; 1 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 
+    0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 
+  };
+  \def\myarray{{1,0,1},{0,1,0},{1,0,1}}       
+  \foreach \X in {0,1,2}
+  {\foreach \Y in {0,1,2}
+    {\pgfmathsetmacro{\myentry}{{\myarray}[\Y][\X]}
+      \path (mat1-\the\numexpr\Y+1\relax-\the\numexpr\X+4\relax.south east)
+      node[anchor=south east,blue,scale=0.3,inner sep=1.2pt]{$\times\myentry$};
+    }}         
+  \node[fit=(mat1-1-4)(mat1-3-6),inner sep=0pt,draw,red,thick,name path=fit](f1){};      
+  \node[right=of mat1] (mul) {$*$};      
+  \matrix[mmat=blue,fill=blue!20,right=of mul,name path=mat2](mat2){    
+    1 &amp;amp; 0 &amp;amp; 1 \\ 
+    0 &amp;amp; 1 &amp;amp; 0 \\ 
+    1 &amp;amp; 0 &amp;amp; 1 \\ };
+  \node[right=of mat2] (eq) {$=$};       
+  \matrix[mmat,right=of eq](mat3){    
+    1 &amp;amp; 4 &amp;amp; 3 &amp;amp; |[draw=green,thick,fill=green!20,alias=4]|4 &amp;amp; 1 \\ 
+    1 &amp;amp; 2 &amp;amp; 4 &amp;amp; 3 &amp;amp; 3 \\ 
+    1 &amp;amp; 2 &amp;amp; 3 &amp;amp; 4 &amp;amp; 1 \\ 
+    1 &amp;amp; 3 &amp;amp; 3 &amp;amp; 1 &amp;amp; 1 \\ 
+    3 &amp;amp; 3 &amp;amp; 1 &amp;amp; 1 &amp;amp; 0 \\ 
+  };
+  \foreach \Anchor in {south west,north west,south east,north east}
+  {\path[name path=test] (f1.\Anchor) -- (mat2.\Anchor);
+    \draw[blue,thick,dotted,name intersections={of=test and fit,total=\t}]
+    \ifnum\t&amp;gt;0 (intersection-\t) -- (mat2.\Anchor) \else
+      (f1.\Anchor) -- (mat2.\Anchor)\fi;
+    \path[name path=test2]  (4.\Anchor) -- (mat2.\Anchor);  
+    \draw[green,thick,dotted,name intersections={of=test2 and mat2,total=\tt}] 
+    \ifnum\tt&amp;gt;0 (intersection-1) -- (4.\Anchor) \else
+      (mat2.\Anchor) --  (4.\Anchor)\fi;
+  }
+  \path (mat1.south) node[below] {$\mathbf{I}$}
+  (mat2|-mat1.south) node[below] {$\mathbf{K}$}
+  (mat3|-mat1.south) node[below] {$\mathbf{I}*\mathbf{K}$};
+  \begin{scope}[on background layer]
+    \fill[red!20] (f1.north west) rectangle (f1.south east);
+  \end{scope}
+\end{tikzpicture}
+" style=height:10.0359em class="org-latex org-latex-environment"></span></div><p>although the kernel has to be rotated around every axis before we begin sliding it over the image, otherwise we&rsquo;d be doing cross-correlation instead of convolution<br>here is an example of a flipped kernel:<br><img src=/ltximg/b584bd-6377-40dd-887e-150048cc06dd-50ccb064d8a905f97458cd6f61045e63.svg alt="\[ \bmqty{a &amp;amp; b &amp;amp; c\\ d &amp;amp; e &amp;amp; f\\ g &amp;amp; h &amp;amp; i} \xrightarrow{\text{vertical+horizontal rotation}} \bmqty{i &amp;amp; h &amp;amp; g\\ f &amp;amp; e &amp;amp; d\\ c &amp;amp; b &amp;amp; a} \]" style=height:3.7244em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br></p></div><div class=characteristic><p><strong>padding</strong>:<br>if you look at <a href=#org8306402>1</a>, notice the edges essentially get &ldquo;trimmed off&rdquo;, converting a 7x7 matrix into a 5×5 one. the pixels on the edge are never at the center of the kernel, because there is nothing for the kernel to extend to beyond the edge. but we often would like the size of the output to equal the input.<br>to solve this, a <strong>padding</strong> is introduced to the image, where &ldquo;fake&rdquo; pixels are placed around the image to extend its dimensions so that the result of the convolution would grow to equal the size we want<br></p></div><div class=characteristic><p><strong>stride</strong>:<br>often when applying a convolution, we want an output with a lower size than the input. one way of accomplishing this is by using a <strong>stride</strong>, which is the amount of pixels the kernel (matrix) slides over in a given dimension<br></p></div><div class=my_example><p>given an image <img src=/ltximg/682503-7959-47f1-8602-6fd2961dbc4b-01fd7682528aee22bc20d2a15401e1c2.svg alt="\(I_{i_r \times i_c}\)" style=height:1.013em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> and a kernel <img src=/ltximg/b4c7b4-9ba1-4693-b95b-4e856dbe73c4-75d189a7238d1fb50af66d3d2dc457e1.svg alt="\(K_{k_r \times k_c}\)" style=height:1.013em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">, assuming a stride of 1 and no padding, the resulting matrix <img src=/ltximg/47962b-abd6-4bce-8942-803c6d2e508a-50e9f699c449a9e651616e53a31325d7.svg alt="\(M_{m_r \times m_c}\)" style=height:1.013em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> would be of dimensions <img src=/ltximg/b4a48d-99c2-47c2-a0e5-74510f056718-cecffbab01751a6a0a2f1680596569ef.svg alt="\((i_r - (k_r - 1)) \times (i_c - (k_c - 1))\)" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment">, so <img src=/ltximg/52e1fc-409a-4217-97ce-a2efe0f1d7b9-bedd8f573dcc44b53e5e17aeb80f9e52.svg alt="\(m_r=i_r-(k_r-1),m_c=(i_c - (k_c - 1))\)" style=height:1.0784em;vertical-align:-.2942em;display:inline-block class="org-latex org-latex-fragment"> and the operation would be defined as:<br><img src=/ltximg/4176d4-844d-44c8-b655-3c44fdf47d13-ed5e19b49402c89292ef2d03a968c12b.svg alt="\[ (\forall 1 \le r \le m_r)(\forall 1 \le c \le m_c)\left((I*K)[r,c] = \sum_{n=r}^{r+k_r-1}\sum_{j=c}^{c+k_c-1} I[n,j]K[n-r,j-c]\right) \]" style=height:3.7244em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-fragment"><br></p></div><div class=characteristic><p>convolution is <a href=/post/20220923212910-commutative/>commutative</a><br></p></div><h2 id=im2col><span class=section-num>1</span> im2col</h2><p>yet to be researched<br><a href=https://leonardoaraujosantos.gitbook.io/artificial-inteligence/machine_learning/deep_learning/convolution_layer/making_faster>https://leonardoaraujosantos.gitbook.io/artificial-inteligence/machine_learning/deep_learning/convolution_layer/making_faster</a><br><a href=https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/>https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/</a><br><a href=https://iq.opengenus.org/im2col/>https://iq.opengenus.org/im2col/</a></p></div><div class=bl-section><h4>Links to this note</h4><div class=backlinks><ul><li><a href=/post/20230520175032-convolutional_neural_network/>convolutional neural network</a></li><li><a href=/post/20230503204107-common_lisp_math/>common lisp math</a></li></ul></div></div></div></div></div><script src=https://mahmoodsheikh36.github.io/js/URI.js type=text/javascript></script>
 <script src=https://mahmoodsheikh36.github.io/js/page.js type=text/javascript></script>
 <script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

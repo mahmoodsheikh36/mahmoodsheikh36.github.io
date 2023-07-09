@@ -1,0 +1,77 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{selection sort}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={selection sort},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\textbf{selection sort} maintains two subarrays in a given array, one subarray that is sorted and the other unsorted, it sorts a given array by repeatedly finding the minimum element (considering ascending order) from the unsorted part and putting it at the beginning\\
+in every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray.\\
+\href{20221130014441-time_complexity.org}{time complexity} is \(\Theta(n^2)\)\\
+\includesvg{/home/mahmooz/brain/out/8aX7xpu}\\
+
+\lstset{language=C++,label=orgc91e64f,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+template <typename T>
+void selection_sort(T arr[], int len) {
+  for (int i = 0; i < len; ++i) {
+    // find index of minimum in unsorted subarray
+    int min_idx = i;
+    for (int j = i+1; j < len; ++j) {
+      if (arr[j] < arr[min_idx]) {
+        min_idx = j;
+      }
+    }
+
+    // add minimum to the sorted subarray
+    T tmp = arr[i];
+    arr[i] = arr[min_idx];
+    arr[min_idx] = tmp;
+  }
+}
+\end{lstlisting}
+
+example usage:\\
+
+\lstset{language=C++,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <iostream>
+
+int main() {
+  int arr[] = {8, 1, 2, 10, 50, 18};
+  selection_sort(arr, std::size(arr));
+  for (int i = 0; i < std::size(arr); ++i) {
+    std::cout << arr[i] << std::endl;
+  }
+}
+\end{lstlisting}
+
+\begin{tabular}{r}
+1\\
+2\\
+8\\
+10\\
+18\\
+50\\
+\end{tabular}
+\end{document}

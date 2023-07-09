@@ -1,0 +1,54 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{tree in common lisp}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={tree in common lisp},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+implementation of trees in common lisp\\
+see \href{20230226232630-trees_in_lisp.org}{trees in lisp}\\
+\lstset{language=Lisp,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+(defun tree-to-latex-forest-for-org (tree)
+  "turn a tree into a runnable org mode latex block"
+  (format t "#+begin_src latex :results file graphics :file (temp-file \"svg\") ~%\\begin{forest}")
+  (tree-to-latex-forest-recurse tree)
+  (format t "\\end{forest}~%#+end_src"))
+
+(defun tree-to-latex-forest-recurse (tree)
+  "helper function for tree-to-latex-forest-for-org"
+  (if (not (eq tree nil))
+      (progn
+        (format t "[~a,circle,draw" (car tree))
+        (loop for child in (cdr tree)
+              do (tree-to-latex-forest-recurse child))
+        (format t "]"))
+      (format t "[,phantom]"))
+  tree)
+
+(let ((my-tree '(23 (12) (12 (1 nil (4 nil (5 nil (9 nil (10 nil nil))))) nil) (28 nil (45 nil (89 nil nil))))))
+  (tree-to-latex-forest-for-org my-tree))
+\end{lstlisting}
+
+\includesvg{/home/mahmooz/brain/out/tmp_F3bkGhk}\\
+\end{document}

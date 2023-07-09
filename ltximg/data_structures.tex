@@ -1,0 +1,2881 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage[boxed,linesnumbered,vlined]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\author{mahmood}
+\date{\today}
+\title{data structures}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={data structures},
+ pdfkeywords={},
+ pdfsubject={college course in data structures and algorithms},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+\begin{note}
+for most data structures i havent implemented deletion yet..\\[0pt]
+also its good to note that most of the code isnt optimized to hell, but it doesnt really matter since its only for education purposes and you should probably be using the data structures provided by the programming language's standard library\\[0pt]
+\end{note}
+
+\section{data structure}
+\label{sec:org8f50ccd}
+\begin{definition}
+a \textbf{data structure} is a collection of data and operations on said data, the data is represented as objects, and each object \texttt{x} has:\\[0pt]
+\begin{itemize}
+\item \texttt{key(x)}: a key that is used to identify the object (usually a number that uniquely identifies the object)\\[0pt]
+\item \texttt{info(x)} or \texttt{value(x)}: contains the data needed to store for the object (usually without the key)\\[0pt]
+\end{itemize}
+\begin{my_example}
+for example, if \texttt{x} is a person, \texttt{key(x)} could be the person's ID, \texttt{value(x)} would be information on said person, like age, height, weight etc..\\[0pt]
+\end{my_example}
+\end{definition}
+\subsection{KeyValue}
+\label{sec:org957000b}
+\begin{lstlisting}[language=C++,label=lst:orgcd04e30,caption= ,captionpos=b,numbers=none]
+template <typename K, typename V>
+class KeyValue {
+private:
+  K key;
+  V value;
+
+public:
+  KeyValue(K key, V value) {
+    this->key = key;
+    this->value = value;
+  }
+  K get_key() {
+    return this->key;
+  }
+  V get_value() {
+    return this->value;
+  }
+  void set_value(V value) {
+    this->value = value;
+  }
+  void set_key(K key) {
+    this->key = key;
+  }
+  friend bool operator <(const KeyValue<K, V>& c1, const KeyValue<K, V>& c2) {
+    return c1.key < c2.key;
+  }
+  friend bool operator >(const KeyValue<K, V>& c1, const KeyValue<K, V>& c2) {
+    return c1.key > c2.key;
+  }
+};
+\end{lstlisting}
+\subsection{abstract data type}
+\label{sec:orga3b31cf}
+\begin{definition}
+\textbf{abstract data types}, commonly abbreviated *ADT*s, are a way of classifying \hyperref[sec:org8f50ccd]{data structure}s based on how they are used and the behaviors they provide. they do not specify how the data structure must be implemented or laid out in memory, but simply provide a minimal expected interface and set of behaviors. for example, a \hyperref[sec:org1fa0f82]{stack} is an abstract data type that specifies a linear data structure with \hyperref[sec:org131c393]{LIFO} behavior. stacks are commonly implemented using \href{20220728190531-array.org}{array}s or \hyperref[sec:org3b67cf5]{linked list}s, but a needlessly complicated implementation using a \hyperref[sec:orge1ff544]{binary search tree} is still a valid implementation. to be clear, it is incorrect to say that stacks are arrays or vice versa. an array can be used as a stack. likewise, a stack can be implemented using an array.\\[0pt]
+\begin{characteristic}
+since abstract data types dont specify an implementation, this means its also incorrect to talk about the \href{20221130014441-time_complexity.org}{time complexity} of a given abstract data type. an associative array may or may not have \(O(1)\) average search times. An associative array that is implemented by a \hyperref[sec:org4f64d21]{hash table} does have \(O(1)\) average search times.\\[0pt]
+\end{characteristic}
+
+\begin{characteristic}
+to further complicate matters, since certain abstract data types are almost always implemented with a particular data structure, some programmers will use the two terms interchangeably: for example, priority queue and heap, or associative array and hash table. the context in which the term is being used can usually provide distinction.\\[0pt]
+\end{characteristic}
+\end{definition}
+\subsection{concrete data type}
+\label{sec:org39a1299}
+\begin{definition}
+a \textbf{concrete data type} is the "concrete" and actual implementation of a given \hyperref[sec:orga3b31cf]{abstract data type}\\[0pt]
+i.e. it is the actual \hyperref[sec:org8f50ccd]{data structure} we use in programming\\[0pt]
+\end{definition}
+\subsection{list}
+\label{sec:org250337b}
+\begin{definition}
+a \textbf{list} is an \hyperref[sec:orga3b31cf]{abstract data type} that is dynamically sized (often automatically resized) \textbf{list of objects} that stores as many objects as necessary, each type of list has its own method of dynamic storage\\[0pt]
+\end{definition}
+\subsubsection{linked list}
+\label{sec:org3b67cf5}
+\begin{definition}
+a \textbf{linked list} is a \hyperref[sec:org39a1299]{concrete data type} that is an implementation of a \hyperref[sec:org250337b]{list}\\[0pt]
+\end{definition}
+\paragraph{characteristics}
+\label{sec:org55250f7}
+\begin{itemize}
+\item is the list \textbf{sorted}? the nodes are sorted by their \texttt{key} (usually in an ascending order)\\[0pt]
+\item is the list \textbf{doubly/singly linked}? in a doubly linked list each node points to the next and previous node whereas in a singly linked list a node only points to the next\\[0pt]
+\item does the list have a \textbf{tail}? a pointer \texttt{tail(x)} points to the last node in a linked list\\[0pt]
+\item is the list \textbf{circular}? in a circular linked list the last node points to the first whereas in a non-circular linked list it points to NULL (nothing)\\[0pt]
+\end{itemize}
+\paragraph{functions}
+\label{sec:org756421d}
+\begin{itemize}
+\item \texttt{insert(x)}: inserts \texttt{x}\\[0pt]
+\item \texttt{search(k)}: returns the node whose key is \texttt{k}\\[0pt]
+\item \texttt{isEmpty()}: returns whether list is empty\\[0pt]
+\item \texttt{delete(x)}: given the node \texttt{x}, removes it from the list\\[0pt]
+\end{itemize}
+\paragraph{implementation (c++)}
+\label{sec:org88530cb}
+\subparagraph{Node}
+\label{sec:orge94d02c}
+\begin{lstlisting}[language=C++,label=lst:orgde557e6,caption= ,captionpos=b,numbers=none]
+
+#include <cassert>
+
+template <typename T>
+class Node : public KeyValue<int, T> {
+private:
+  Node<T>* next;
+
+public:
+  Node(int key, T value) : KeyValue<int, T>(key, value) {}
+  Node(int key) : KeyValue<int, T>(key, key) {}
+  Node<T>* get_next() {
+    return this->next;
+  }
+  void set_next(Node<T>* next) {
+    assert(this != next);
+    this->next = next;
+  }
+  bool has_next() {
+    return this->next != nullptr;
+  }
+  Node<T>* get_tail() {
+    Node<T>* n;
+    for (n = this; n->get_next() != nullptr; n = n->get_next());
+    return n;
+  }
+};
+\end{lstlisting}
+
+\subparagraph{DoublyNode}
+\label{sec:org4008aa8}
+\begin{lstlisting}[language=C++,label=lst:orgfb24550,caption= ,captionpos=b,numbers=none]
+template <typename T>
+class DoublyNode {
+private:
+  DoublyNode<T>* left = nullptr;
+  DoublyNode<T>* right = nullptr;
+  T data;
+
+public:
+  DoublyNode(T data) {
+    this->data = data;
+  }
+  ~DoublyNode() {
+    delete left;
+    delete right;
+  }
+  T get_data() {
+    return this->data;
+  }
+  void set_left(DoublyNode<T> node) {
+    this->left = node;
+    if (this->left != nullptr) {
+      this->left->parent = this;
+    }
+  }
+  void set_right(DoublyNode<T> node) {
+    this->right = node;
+    if (this->right != nullptr) {
+      this->right->parent = this;
+    }
+  }
+  DoublyNode<T> get_right() {
+    return this->right;
+  }
+  DoublyNode<T> get_left() {
+    return this->left;
+  }
+  bool has_right() {
+    return this->right != nullptr;
+  }
+  bool has_left() {
+    return this->left != nullptr;
+  }
+};
+\end{lstlisting}
+\subparagraph{LinkedList}
+\label{sec:org49f779d}
+\begin{lstlisting}[language=C++,label=lst:org29d9a55,caption= ,captionpos=b,numbers=none]
+
+template <typename T>
+class LinkedList {
+private:
+  Node<T>* head;
+
+public:
+  LinkedList() : head(nullptr) {}
+  ~LinkedList() {
+    Node<T>* n = this->head;
+    while (n) {
+      Node<T>* next = n->get_next();
+      delete n;
+      n = next;
+    }
+  }
+  Node<T>* get_head() {
+    return this->head;
+  }
+  void set_head(Node<T>* n) {
+    this->head = n;
+  }
+  LinkedList* add(int key) {
+    return this->add(new Node<T>(key));
+  }
+  LinkedList* add(Node<T>* n) {
+    if (this->is_empty()) {
+      this->head = n;
+    } else {
+      this->get_tail()->set_next(n);
+    }
+    return this;
+  }
+  Node<T>* get_tail() {
+    if (this->is_empty())
+      return nullptr;
+    return this->head->get_tail();
+  }
+  bool is_empty() {
+    return this->head == nullptr;
+  }
+  Node<T>* get_node(int index) {
+    Node<T>* n = head;
+    for (int i = 0; i < index; ++i) {
+      n = n->get_next();
+    }
+    return n;
+  }
+  int size() {
+    Node<T>* n;
+    int i = 0;
+    for (n = this->head; n != nullptr; n = n->get_next()) {
+      ++i;
+    }
+    return i;
+  }
+};
+\end{lstlisting}
+
+\subparagraph{DoublyLinkedList}
+\label{sec:orgc5b9363}
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+to be implemented
+\end{lstlisting}
+\subparagraph{LinkedListWithTail}
+\label{sec:org5b82fa6}
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+to be implemented
+\end{lstlisting}
+\subparagraph{CircularLinkedList}
+\label{sec:orgd03dd19}
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+to be implemented
+\end{lstlisting}
+\subsubsection{array list}
+\label{sec:orgd284d9b}
+\begin{definition}
+a \textbf{linked list} is a \hyperref[sec:org39a1299]{concrete data type} that is an implementation of a \hyperref[sec:org250337b]{list} based on an \href{20220728190531-array.org}{array} that is dynamically continuously reconstructed on insertions to hold as many objects as necessary\\[0pt]
+
+\begin{note}
+some might suggest that a linked list should shrink automatically aswell on deletions, though that isnt a popular implementation\\[0pt]
+\end{note}
+
+\begin{characteristic}
+an array list contains a fixed-size array initialized to a constant length, when the array gets filled we create a new array whose size is \(n \times c\) where \(n\) is a constant (usually 2), and \(c\) is the previous size of the array, and we copy all the objects to the new array and then we have more space to store more objects\\[0pt]
+\end{characteristic}
+\end{definition}
+\paragraph{ArrayList}
+\label{sec:org705237c}
+\begin{lstlisting}[language=C++,label=lst:org6b073e6,caption= ,captionpos=b,numbers=none]
+#include <cassert>
+#include <memory>
+
+#define INITIAL_SIZE 3
+#define SCALING_FACTOR 2
+
+template <typename T> class ArrayList {
+private:
+  int actual_size;
+  int idx;
+  T* arr;
+  T* allocate_memory(int num_of_objects) {
+    this->actual_size = num_of_objects;
+    // return new T[num_of_objects];
+    // return alloc.allocate(num_of_objects);
+    return (T*)::operator new(num_of_objects * sizeof(T));
+  }
+  void resize() {
+    int prev_size = this->actual_size;
+    T* newArr = allocate_memory(this->actual_size * SCALING_FACTOR);
+    for (int i = 0; i < idx; ++i) {
+      newArr[i] = this->arr[i];
+    }
+    // delete[] this->arr;
+    // alloc.deallocate(this->arr, prev_size);
+    ::operator delete(this->arr);
+    this->arr = newArr;
+  }
+
+public:
+  ArrayList() {
+    this->idx = 0;
+    this->arr = this->allocate_memory(INITIAL_SIZE);
+  }
+  ~ArrayList() {
+    delete[] this->arr;
+  }
+  ArrayList<T>* add(T val) {
+    if (this->idx == this->actual_size)
+      this->resize();
+    this->arr[this->idx++] = val;
+    return this;
+  }
+  T& get(int i) {
+    return this->arr[i];
+  }
+  T& operator [](int i) {
+    return this->arr[i];
+  }
+  void set(int index, T obj) {
+    this->arr[index] = obj;
+  }
+  int size() {
+    return this->idx;
+  }
+  void remove(int index) {
+    assert(index < this->idx);
+    for (int i = index; i < this->idx-1; ++i) {
+      this->arr[i] = this->arr[i+1];
+    }
+    this->idx--;
+  }
+  void insert(int index, T value) {
+    assert(index < idx);
+    if (idx == this->actual_size-1)
+      this->resize();
+    for (int i = idx; i > index; --i)
+      this->arr[i] = this->arr[i-1];
+    this->arr[index] = value;
+    idx++;
+  }
+  static ArrayList<T>* from_array(T* other_arr, int length) {
+    ArrayList<T>* list = new ArrayList<T>();
+    for (int i = 0; i < length; ++i) {
+      list->add(other_arr[i]);
+    }
+    return list;
+  }
+};
+\end{lstlisting}
+
+\subsection{stack}
+\label{sec:org1fa0f82}
+\begin{definition}
+a \textbf{stack} is an \hyperref[sec:orga3b31cf]{abstract data type}\\[0pt]
+\end{definition}
+\subsubsection{LIFO}
+\label{sec:org131c393}
+\subsection{queue}
+\label{sec:orga0bf8b2}
+\begin{definition}
+a \textbf{queue} is a linear \hyperref[sec:orga3b31cf]{abstract data type} in which the operations are performed based on \hyperref[sec:orga6fb74b]{FIFO} principle\\[0pt]
+\end{definition}
+\subsubsection{FIFO}
+\label{sec:orga6fb74b}
+\begin{definition}
+\textbf{FIFO} stands for \textbf{first in first out}, which means the first entity that enters would be the first one to exit\\[0pt]
+\end{definition}
+\subsubsection{Circular Queue}
+\label{sec:org4f2af1c}
+\begin{definition}
+a \textbf{Circular Queue} is a \hyperref[sec:orga0bf8b2]{Queue} in which the last element is connected back to the first element to make a circle.\\[0pt]
+\end{definition}
+\subsubsection{priority queue}
+\label{sec:org6cf60c4}
+a \textbf{priority queue} is an \href{data_structures.org}{abstract data type} similar to a regular \hyperref[sec:orga0bf8b2]{queue} or \hyperref[sec:org1fa0f82]{stack} in which each element additionally has a priority associated with it. in a priority queue, an element with high priority is served before an element with low priority\\[0pt]
+\subsection{tree}
+\label{sec:org6b67a14}
+\begin{definition}
+a \textbf{tree} is an \hyperref[sec:orga3b31cf]{abstract data type} which stores data in the shape of a downwards-growing tree and every entry is called a \hyperref[sec:orgec4976f]{node}\\[0pt]
+\end{definition}
+\subsubsection{node}
+\label{sec:orgec4976f}
+trees store data as \textbf{nodes}, meaning each item in a tree is called a node\\[0pt]
+each node \texttt{x} has the following fields\\[0pt]
+
+\begin{itemize}
+\item \texttt{key(x)}: a key that's used to identify the node (like every data structure)\\[0pt]
+\item \texttt{info(x)}: contains the data we need to store (like every data structure)\\[0pt]
+\item \texttt{left(x)}: a pointer to the left child of \texttt{x}\\[0pt]
+\item \texttt{right(x)}: a pointer to the right child\\[0pt]
+\item \texttt{parent(x)} (optional): a pointer to the parent of \texttt{x}\\[0pt]
+\end{itemize}
+
+every node in a \hyperref[sec:org254f5f7]{binary tree} has from 0 to 2 children\\[0pt]
+\paragraph{height}
+\label{sec:orgb8014c2}
+\begin{definition}
+the \textbf{height} of a \hyperref[sec:orgec4976f]{node} \texttt{x} is defined as the \hyperref[sec:org2cfcbaa]{height of subtree} of said \hyperref[sec:orgec4976f]{node}, denoted by \(T_x\)\\[0pt]
+\end{definition}
+\paragraph{balance factor}
+\label{sec:org98c9b00}
+the \textbf{balance factor} of a \hyperref[sec:orgec4976f]{node} \texttt{x}, denoted by \texttt{balance(x)} or \texttt{BF(x)}, is defined as the height of the \hyperref[sec:orgaaf7b83]{subtree} of the left child of \texttt{x}, denoted by \(T_{\text{left}(x)}\) minus the height of the subtree of the right child of \texttt{x} denoted by \(T_{\text{right}(x)}\), in short:\\[0pt]
+\[
+  BF(X) = \text{height}(T_{\text{left}(x)}) - \text{height}(T_{\text{right}(x)})
+\]\\[0pt]
+see for example this tree, the balance factor of each node is written above it\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/gXx4ZR}
+\end{center}\\[0pt]
+
+\subsubsection{height}
+\label{sec:org2cfcbaa}
+\begin{definition}
+the \textbf{height} of a tree is the number of the \hyperref[sec:orgec4976f]{node}s in the longest path downwards (including the root node)\\[0pt]
+\end{definition}
+\subsubsection{level}
+\label{sec:org769a6b1}
+\begin{definition}
+the \textbf{level} of a row in the tree is its distance from the root whose level is 1\\[0pt]
+\end{definition}
+\subsubsection{root}
+\label{sec:org76387eb}
+\begin{definition}
+the tree itself \texttt{T} (not for every node) contains a pointer \texttt{root(T)} that points to the root node of the tree (the first and topmost node)\\[0pt]
+\end{definition}
+\subsubsection{leaf}
+\label{sec:orge114c93}
+\begin{definition}
+a \hyperref[sec:orgec4976f]{node} that doesnt have children is called a \textbf{leaf}\\[0pt]
+\end{definition}
+\subsubsection{internal node}
+\label{sec:org26c1a68}
+\begin{definition}
+a \hyperref[sec:orgec4976f]{node} that has atleast one child is called an \textbf{internal node}\\[0pt]
+\end{definition}
+\subsubsection{sibling}
+\label{sec:org74ef367}
+\begin{definition}
+2 nodes are considered siblings if they share the same parent node\\[0pt]
+\end{definition}
+\subsubsection{ancestor}
+\label{sec:org48e7ebc}
+\begin{definition}
+an \textbf{ancestor} of a given \hyperref[sec:orgec4976f]{node} is a node that is at an upper level of it\\[0pt]
+\end{definition}
+\subsubsection{descendant}
+\label{sec:org3e6c055}
+\begin{definition}
+a \textbf{descendant} of a given \hyperref[sec:orgec4976f]{node} is a node that is at a lower level of the given node\\[0pt]
+\end{definition}
+\subsubsection{subtree}
+\label{sec:orgaaf7b83}
+for some \hyperref[sec:org254f5f7]{binary tree} \texttt{T} and a node \texttt{x} of said tree we denote \(T_x\) as the \textbf{subtree} whose \hyperref[sec:org76387eb]{root} is \texttt{x}, and the left \textbf{subtree} of \texttt{x} is the tree whose root is the left child of \texttt{x} denoted by \(T_{\text{left}(x)}\) and the right subtree of \texttt{x} is the tree whose root is the right child of \texttt{x} denoted by \(T_{\text{right}(x)}\)\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/vD1CJC}
+\end{center}\\[0pt]
+
+the height of this tree is 4\\[0pt]
+\subsubsection{complete tree}
+\label{sec:org8d4eeb6}
+\begin{definition}
+a \textbf{complete} \hyperref[sec:org254f5f7]{binary tree} is a binary tree in which every \hyperref[sec:orgec4976f]{node} has 2 or 0 children, and the leaves are all on at the same level\\[0pt]
+\end{definition}
+\subsubsection{almost complete tree}
+\label{sec:orgcd32ba8}
+\begin{definition}
+an \textbf{almost complete} binary tree is a binary tree from which 0 or more nodes have been deleted continuously from the right part of the last level of nodes\\[0pt]
+\begin{characteristic}
+the nodes in the last level in an almost complete binary tree have to appear continuously from left to right\\[0pt]
+\end{characteristic}
+
+\begin{characteristic}
+every \hyperref[sec:org8d4eeb6]{complete tree} is an \hyperref[sec:orgcd32ba8]{almost complete tree} but not every almost complete tree is a complete tree\\[0pt]
+\end{characteristic}
+
+\begin{characteristic}
+every level contains 2 times as many nodes as the level before it, except perhaps for the last level\\[0pt]
+\end{characteristic}
+
+\begin{characteristic}
+the height of a tree is \(\floor*{\log_2 n}\)\\[0pt]
+\end{characteristic}
+
+\begin{characteristic}
+the number of nodes in a tree is \(\ceil*{\frac{n}{2}}\)\\[0pt]
+\end{characteristic}
+
+\begin{characteristic}
+the number of nodes at height \(i\) is \(\ceil*{\frac{n}{2i+1}}\)\\[0pt]
+\end{characteristic}
+\end{definition}
+\subsubsection{breadth-first search}
+\label{sec:org5127bc8}
+\textbf{breadth-first search} or \textbf{BFS} for short, explores each level before moving onto the next one\\[0pt]
+extra memory, usually a \hyperref[sec:orga0bf8b2]{queue}, is needed to keep track of the child nodes that were encountered but not yet explored.\\[0pt]
+\url{./Animated\_BFS.gif}\\[0pt]
+\subsubsection{depth-first search}
+\label{sec:org9c80d34}
+\textbf{depth-first search} or \textbf{DFS} for short, consists of exploring branches as far as possible before \hyperref[sec:orgee54fe7]{backtracking} and exploring branches of other nodes\\[0pt]
+this is the algorithm we'll be using because its simpler\\[0pt]
+\url{./bfs\_dfs.gif}\\[0pt]
+\paragraph{inorder traversal}
+\label{sec:org719f705}
+left, parent, right\\[0pt]
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
+Algorithm inorder(tree)
+  1. go to the left child, i.e., call inorder(left-child), print it
+  2. go back to the parent, print it
+  3. go to the right child, i.e., call inorder(right-child), print it
+\end{lstlisting}
+\begin{note}
+note that before printing a child will always call \texttt{inorder(left-child)}, so the first node to print would be the leftmost node in the deepest level\\[0pt]
+\end{note}
+\paragraph{preorder traversal}
+\label{sec:org8b23efe}
+parent, left, right\\[0pt]
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
+Algorithm preorder(tree)
+  1. visit the parent, print it
+  2. go to the left child, i.e., call preorder(left-child), print it
+  3. go to the right child, i.e., call preorder(right-child), print it
+\end{lstlisting}
+\paragraph{postorder traversal}
+\label{sec:orgdf98ea5}
+left, right, parent\\[0pt]
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
+Algorithm postorder(tree)
+  1. go to the left child, i.e., call postorder(left-child), print it
+  2. go to the right child, i.e., call postorder(right-child), print it
+  3. visit the parent, print it
+\end{lstlisting}
+\subsubsection{binary tree}
+\label{sec:org254f5f7}
+\begin{definition}
+a \textbf{binary tree} is a \hyperref[sec:org39a1299]{concrete data type} that is an implementation of a \hyperref[sec:org6b67a14]{tree}\\[0pt]
+\end{definition}
+\paragraph{BinaryTreeNode}
+\label{sec:org7736646}
+\begin{lstlisting}[language=C++,label=lst:orgac56678,caption= ,captionpos=b,numbers=none]
+#include <cstdlib>
+
+template <typename T> class BinaryTree; /* forward declare the class instead of including it */
+
+template <typename T> class BinaryTreeNode {
+private:
+  BinaryTreeNode<T>* parent;
+  BinaryTreeNode<T>* right;
+  BinaryTreeNode<T>* left;
+  T value;
+  int key;
+
+public:
+  BinaryTreeNode(int key, T value)  {
+    this->key = key;
+    this->value = value;
+    this->parent = nullptr;
+    this->right = nullptr;
+    this->left = nullptr;
+  }
+  BinaryTreeNode(int key) {
+    this->key = key;
+    this->value = key;
+    this->parent = nullptr;
+    this->right = nullptr;
+    this->left = nullptr;
+  }
+  ~BinaryTreeNode()  {
+    delete this->right;
+    delete this->left;
+  }
+  void set_parent(BinaryTreeNode<T>* node) {
+    this->parent = node;
+  }
+  void set_right(BinaryTreeNode<T>* node) {
+    this->right = node;
+    if (node != nullptr)
+      node->parent = this;
+  }
+  void set_left(BinaryTreeNode<T>* node) {
+    this->left = node;
+    if (node != nullptr)
+      node->parent = this;
+  }
+  BinaryTreeNode<T>* get_parent() {
+    return this->parent;
+  }
+  BinaryTreeNode<T>* get_right() {
+    return this->right;
+  }
+  BinaryTreeNode<T>* get_left() {
+    return this->left;
+  }
+  bool has_right() {
+    return this->right != nullptr;
+  }
+  bool has_left() {
+    return this->left != nullptr;
+  }
+  bool has_parent() {
+    return this->parent != nullptr;
+  }
+  T get_value() {
+    return this->value;
+  }
+  int get_key() {
+    return this->key;
+  }
+  bool is_leaf() {
+    return !(this->has_left() || this->has_right());
+  }
+  bool is_right_child() {
+    return this->parent != nullptr && this->parent->get_right() == this;
+  }
+  bool is_left_child() {
+    return this->parent != nullptr && this->parent->get_left() == this;
+  }
+  int height() {
+    int right_height = this->has_left() ? this->get_left()->height() : 0;
+    int left_height = this->has_right() ? this->get_right()->height() : 0;
+    if (left_height > right_height) {
+      return 1 + left_height;
+    }
+    return 1 + right_height;
+  }
+  BinaryTreeNode<T>* find(int key) {
+    if (this->key == key) {
+      return this;
+    }
+    BinaryTreeNode<T>* n_left = this->has_left() ? this->get_left()->find(key) : nullptr;
+    BinaryTreeNode<T>* n_right = this->has_right() ? this->get_right()->find(key) : nullptr;
+    return n_left != nullptr ? n_left : n_right;
+  }
+  int balance_factor() {
+    if (this->has_left()) {
+      if (this->has_right()) {
+        return this->get_left()->height() - this->get_right()->height();
+      } else {
+        return this->get_left()->height();
+      }
+    }
+    if (this->has_right()) {
+      return 0 - this->get_right()->height();
+    }
+    return 0;
+  }
+  bool is_balanced() {
+    bool is_left_balanced = this->has_left() ? this->get_left()->is_balanced() : true;
+    bool is_right_balanced = this->has_right() ? this->get_right()->is_balanced() : true;
+    return !this->is_problematic() && is_left_balanced && is_right_balanced;
+  }
+  bool is_problematic() {
+    return abs(this->balance_factor()) > 1;
+  }
+  BinaryTreeNode<T>* find_problematic_node() {
+    if (this->is_problematic())
+      return this;
+    BinaryTreeNode<T>* p_left = nullptr;
+    BinaryTreeNode<T>* p_right = nullptr;
+    if (this->has_left())
+      p_left = this->get_left()->find_problematic_node();
+    if (this->has_right())
+      p_right = this->get_right()->find_problematic_node();
+    return p_left == nullptr ? p_right : p_left;
+  }
+  bool is_complete(BinaryTreeNode<T>* root) {
+    if (this->is_leaf())
+      return this->distance_to(root) == root->height();
+    if (!this->has_right() || !this->has_left())
+      return false;
+    return this->right->is_complete(root) && this->left->is_complete(root);
+  }
+  int distance_to(BinaryTreeNode<T>* other) {
+    if (other->height() > this->height()) {
+      return other->find_path(this)->height();
+    }
+    return this->find_path(other)->height();
+  }
+  BinaryTreeNode<T>* find_path(BinaryTreeNode<T>* other) {
+    if (this == other) {
+      return new BinaryTreeNode<T>(other->key, other->value);
+    } else {
+      if (this->has_left()) {
+        BinaryTreeNode<T>* n_left = this->get_left()->find_path(other);
+        if (n_left != nullptr) {
+          BinaryTreeNode<T>* node = new BinaryTreeNode<T>(this->key, this->value);
+          node->set_left(n_left);
+          return node;
+        }
+      }
+      if (this->has_right()) {
+        BinaryTreeNode<T>* n_right = this->get_right()->find_path(other);
+        if (n_right != nullptr) {
+          BinaryTreeNode<T>* node = new BinaryTreeNode<T>(this->key, this->value);
+          node->set_right(n_right);
+          return node;
+        }
+      }
+    }
+    return nullptr;
+  }
+  BinaryTreeNode<T>* find_rightmost_leaf() {
+    if (this->is_leaf() && this->level() == this->find_root()->height()) {
+      return this;
+    }
+    BinaryTreeNode<T>* from_right = this->has_right() ? this->get_right()->find_rightmost_leaf() : nullptr;
+    if (from_right != nullptr)
+      return from_right;
+    return this->has_left() ? this->get_left()->find_rightmost_leaf() : nullptr;
+  }
+  BinaryTreeNode<T>* find_leftmost_leaf() {
+    if (this->is_leaf() && this->level() == this->find_root()->height() - 1) {
+      return this;
+    }
+    BinaryTreeNode<T>* from_left = this->has_left() ? this->get_left()->find_leftmost_leaf() : nullptr;
+    if (from_left != nullptr)
+      return from_left;
+    return this->has_right() ? this->get_right()->find_leftmost_leaf() : nullptr;
+  }
+  bool has_right_and_left() {
+    return this->has_left() && this->has_right();
+  }
+  bool is_right() {
+    return this->parent->get_right() == this;
+  }
+  bool is_left() {
+    return this->parent->get_left() == this;
+  }
+  BinaryTreeNode<T>* get_right_uncle() {
+    return this->parent->parent->right;
+  }
+  int level() {
+    int lvl = 1;
+    BinaryTreeNode<T>* n = this;
+    while (n->has_parent()) {
+      lvl++;
+      n = n->get_parent();
+    }
+    return lvl;
+  }
+  BinaryTreeNode<T>* find_root() {
+    BinaryTreeNode<T>* n = this;
+    while (n->has_parent()) {
+      n = n->get_parent();
+    }
+    return n;
+  }
+  void print() {
+    if (this->has_left())
+      this->left->print();
+    std::cout << this->key << " ";
+    if (this->has_right())
+      this->right->print();
+  }
+};
+\end{lstlisting}
+\paragraph{BinaryTree}
+\label{sec:orge246581}
+\begin{lstlisting}[language=C++,label=lst:org412379d,caption= ,captionpos=b,numbers=none]
+
+
+template <typename T> class BinaryTree {
+private:
+  BinaryTreeNode<T>* root;
+public:
+  BinaryTree() { root = nullptr; }
+  BinaryTree(BinaryTreeNode<T>* root) {
+    this->root = root;
+  }
+  ~BinaryTree() {
+    delete this->root;
+  }
+  BinaryTreeNode<T>* get_root() {
+    return this->root;
+  }
+  void set_root(BinaryTreeNode<T>* node) {
+    this->root = node;
+  }
+  bool is_empty() {
+    return this->root == nullptr;
+  }
+  int size() {
+    BinaryTreeNode<T>* n;
+    int i = 0;
+    for (n = this->get_root(); n != nullptr; n = n->get_right()) {
+      ++i;
+    }
+    return i;
+  }
+  int height() {
+    if (this->is_empty())
+      return 0;
+    return this->root->height();
+  }
+  bool is_balanced() {
+    if (this->is_empty()) {
+      return true;
+    }
+    return this->get_root()->is_balanced();
+  }
+  BinaryTreeNode<T>* find_problematic_node() {
+    return this->root->find_problematic_node();
+  }
+  BinaryTreeNode<T>* find(int key) {
+    return this->root->find(key);
+  }
+  /* inorder print */
+  void print() {
+    if (!this->is_empty()) this->get_root()->print();
+    std::cout << "\n";
+  }
+  void empty() {
+    delete this->root;
+    this->root = nullptr;
+  }
+  BinaryTree<T>* insert_right(BinaryTreeNode<T>* node) {
+    if (this->is_empty()) {
+      this->set_root(node);
+      return this;
+    }
+    BinaryTreeNode<T>* n = this->get_root();
+    while (n->has_right()) {
+      n = n->get_right();
+    }
+    n->set_right(node);
+    return this;
+  }
+  BinaryTree<T>* insert_left(BinaryTreeNode<T>* node) {
+    if (this->is_empty()) {
+      this->set_root(node);
+      return this;
+    }
+    BinaryTreeNode<T>* n = this->get_root();
+    while (n->has_left()) {
+      n = n->get_left();
+    }
+    n->set_left(node);
+    return this;
+  }
+  BinaryTree<T>* insert_right(int key) {
+    return this->insert_right(new BinaryTreeNode<int>(key));
+  }
+  BinaryTree<T>* insert_left(int key) {
+    return this->insert_left(new BinaryTreeNode<int>(key));
+  }
+  bool is_complete() {
+    return this->is_empty() || this->root->is_complete(this->root);
+  }
+  /* note that this function gets the rightmost leaf in the last level */
+  BinaryTreeNode<T>* find_rightmost_leaf() {
+    return this->root->find_rightmost_leaf();
+  }
+  /* note that this function gets the leftmost leaf in the second-to-last level */
+  BinaryTreeNode<T>* find_leftmost_leaf() {
+    return this->root->find_leftmost_leaf();
+  }
+};
+\end{lstlisting}
+
+\paragraph{algorithms}
+\label{sec:orgccbe747}
+\begin{question}
+add to the class of a \hyperref[sec:org254f5f7]{binary tree} a function that takes in an integer \(k\) and checks if there is a node in the tree that contains exactly \(k\) \hyperref[sec:org3e6c055]{descendant}s, it should run in \(O(n)\) time\\[0pt]
+\begin{answer}
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+
+bool node_descendants(BinaryTreeNode<int>* n, int k) {
+  if (n->is_leaf()) {
+    return k == 0;
+  }
+  int new_num = k;
+  if (n->has_right()) new_num--;
+  if (n->has_left()) new_num--;
+  if (n->has_right() && node_descendants(n->get_right(), new_num))
+    return true;
+  if (n->has_left() && node_descendants(n->get_left(), new_num))
+    return true;
+  if (n->has_right() && node_descendants(n->get_right(), k))
+    return true;
+  if (n->has_left() && node_descendants(n->get_left(), k))
+    return true;
+  return false;
+}
+
+int main() {
+
+  t.print();
+  print_latex_forest(t.get_root());
+  std::cout << node_descendants(t.get_root(), 9) << std::endl;
+}
+\end{lstlisting}
+
+this code runs in \(O(2n) \sim O(n)\) time\\[0pt]
+\end{answer}
+\end{question}
+\subsubsection{binary search tree}
+\label{sec:orge1ff544}
+a \textbf{binary search tree} is a \hyperref[sec:org254f5f7]{binary tree} that has the following restrictions:\\[0pt]
+\begin{itemize}
+\item the keys of all the nodes in the left \hyperref[sec:orgaaf7b83]{subtree} of any given \hyperref[sec:orgec4976f]{node} \texttt{x} is smaller than the key of \texttt{x}\\[0pt]
+\item the keys of all the nodes in the right side of the tree are bigger or equal to the key of \texttt{x}\\[0pt]
+\end{itemize}
+for example the following tree is a binary search tree:\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/a0JkT1}
+\end{center}\\[0pt]
+
+\paragraph{insertion}
+\label{sec:org8a19b6e}
+a new key is always inserted as a \hyperref[sec:orge114c93]{leaf}. we start from the \hyperref[sec:org76387eb]{root}, making our way downwards by comparing the new key to the key of the current node to decide which child to move to on each iteration, until we hit a leaf node, then we add the new node as its child\\[0pt]
+\paragraph{BinarySearchTree}
+\label{sec:org2906779}
+\begin{lstlisting}[language=C++,label=lst:org65d9ce1,caption= ,captionpos=b,numbers=none]
+
+
+template <typename T> class BinarySearchTree : public BinaryTree<T> {
+public:
+  BinarySearchTree() {}
+  BinarySearchTree(BinaryTreeNode<T>* node) : BinaryTree<T>(node) {}
+  virtual BinarySearchTree<T>* insert(BinaryTreeNode<T>* node) {
+    node->set_right(nullptr);
+    node->set_left(nullptr);
+    if (this->is_empty()) {
+      BinaryTree<T>::set_root(node);
+    } else {
+      BinaryTreeNode<T>* n = this->get_root();
+      while (true) {
+        if (node->get_key() < n->get_key()) {
+          if (!n->has_left()) {
+            n->set_left(node);
+            node->set_parent(n);
+            break;
+          }
+          n = n->get_left();
+        } else {
+          if (!n->has_right()) {
+            n->set_right(node);
+            node->set_parent(n);
+            break;
+          }
+          n = n->get_right();
+        }
+      }
+    }
+    return this;
+  }
+  BinarySearchTree<T>* insert(int key, T value) {
+    return this->insert(new BinaryTreeNode<T>(key, value));
+  }
+  BinarySearchTree<T>* insert(int value) {
+    return this->insert(new BinaryTreeNode<T>(value));
+  }
+  BinarySearchTree<T>* insert(int* values, unsigned int size) {
+    for (int i = 0; i < size; ++i)
+      this->insert(new BinaryTreeNode<T>(values[i]));
+    return this;
+  }
+  /* this needs to be implemented asap */
+  void remove(BinaryTreeNode<T>* node) {
+    /* in case that node is the only one in the tree */
+    if (this->get_root()->is_leaf() && this->get_root() == node) {
+      this->set_root(nullptr);
+      return;
+    }
+    /* in case the node has no children */
+    BinaryTreeNode<T>* parent = node->get_parent();
+    if (node->is_leaf()) {
+      if (node->is_right_child()) {
+        parent->set_right(nullptr);
+      } else {
+        parent->set_left(nullptr);
+      }
+    }
+  }
+  void rotate_right(BinaryTreeNode<T>* node) {
+    BinaryTreeNode<T>* previous_left = node->get_left();
+    if (node->is_left_child()) {
+      node->get_parent()->set_left(previous_left);
+    } else if (node->is_right_child()) {
+      node->get_parent()->set_right(previous_left);
+    } else if (node == this->get_root()) {
+      this->set_root(previous_left);
+      previous_left->set_parent(nullptr);
+    }
+    node->set_parent(previous_left);
+    node->set_left(previous_left->get_right());
+    previous_left->set_right(node);
+  }
+  void rotate_left(BinaryTreeNode<T>* node) {
+    BinaryTreeNode<T>* previous_right = node->get_right();
+    if (node->is_right_child()) {
+      node->get_parent()->set_right(previous_right);
+    } else if (node->is_left_child()) {
+      node->get_parent()->set_left(previous_right);
+    } else if (node == this->get_root()) {
+      this->set_root(previous_right);
+      previous_right->set_parent(nullptr);
+    }
+    node->set_parent(previous_right);
+    node->set_right(previous_right->get_left());
+    previous_right->set_left(node);
+  }
+};
+\end{lstlisting}
+
+example usage:\\[0pt]
+
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+int main() {
+  BinarySearchTree<int> t;
+  t.insert(11)->insert(5)->insert(3)->insert(4)->insert(2)->insert(1)->insert(7)->insert(6)->insert(20)->insert(15)->insert(24)->insert(16)->insert(12)->insert(14)->insert(13)->insert(17)->insert(26);
+  std::cout << "is this tree balanced?: " << t.is_balanced() << std::endl;
+  std::cout << "the height of this tree is: " << t.get_root()->height() << std::endl;
+  std::cout << "the balance factor of the root is: " << t.get_root()->balance_factor() << std::endl;
+  print_latex_forest(t.get_root());
+  BinaryTreeNode<int>* newroot = t.get_root()->find_path(t.find(13));
+  print_latex_forest(newroot);
+  delete newroot;
+}
+\end{lstlisting}
+
+is this tree balanced?: 0\\[0pt]
+the height of this tree is: 6\\[0pt]
+the balance factor of the root is: -1\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_BT4xEYU}
+\end{center}\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_OwSAlY9}
+\end{center}\\[0pt]
+\subsubsection{AVL tree}
+\label{sec:orge9da911}
+an \textbf{AVL tree} is a \hyperref[sec:orge1ff544]{binary search tree} in which every node \texttt{x} has a \hyperref[sec:org98c9b00]{balance factor} of \(0,1,-1\), meaning:\\[0pt]
+\[
+  \left|\text{height}\left(T_{\text{left}(x)}\right) - \text{height}\left(T_{\text{right}(x)}\right)\right| \leq 1
+\]\\[0pt]
+every node \texttt{x} of this tree holds an extra field called \texttt{balance} which holds the \hyperref[sec:org98c9b00]{balance factor} of said node\\[0pt]
+for example, the following tree is an AVL tree:\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/CRLd0L}
+\end{center}\\[0pt]
+
+if we were to remove the node with value 14 or with value 9 this wouldnt be an AVL tree\\[0pt]
+
+\begin{lemma}
+let \texttt{T} be an AVL tree with \texttt{n} nodes and height \(h\), then \(h = \Theta(\log n)\)\\[0pt]
+\end{lemma}
+\paragraph{minimal form}
+\label{sec:orgd4eefed}
+\begin{definition}
+a minimal form of an \hyperref[sec:orge9da911]{AVL tree} with a given height \(h\) is one which contains the least possible number of nodes\\[0pt]
+\begin{lemma}
+the minimal number of nodes for a tree of height \(h\) is given by the following \\[0pt]
+\begin{align*}
+  N(h)&=N(h-1) + N(h-2) + 1\\
+  N(1)&=1\\
+  N(2)&=2
+\end{align*}
+\begin{note}
+according to some sources, the base cases are \(N(0)=1,\ N(1)=2\), but the base cases given above make more sense because a tree with a single node should have a height of 1 not 0\\[0pt]
+\end{note}
+\end{lemma}
+
+\begin{lemma}
+a minimal form of an \hyperref[sec:orge9da911]{AVL tree} with a given number of nodes \(N\) is the one with the smallest height which is given by:\\[0pt]
+\[
+  h = \log_2 N
+\]\\[0pt]
+\end{lemma}
+here is a python snippet to find the minimal number of nodes needed for a given height:\\[0pt]
+
+\begin{lstlisting}[language=Python,label= ,caption= ,captionpos=b,numbers=none]
+def find(height):
+  if height == 1:
+    return 1
+  if height == 2:
+    return 2
+  return find(height-1) + find(height-2) + 1
+return [(i,find(i)) for i in range(1,15)]
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{rr}
+height & nodes\\[0pt]
+\hline
+1 & 1\\[0pt]
+2 & 2\\[0pt]
+3 & 4\\[0pt]
+4 & 7\\[0pt]
+5 & 12\\[0pt]
+6 & 20\\[0pt]
+7 & 33\\[0pt]
+8 & 54\\[0pt]
+9 & 88\\[0pt]
+10 & 143\\[0pt]
+11 & 232\\[0pt]
+12 & 376\\[0pt]
+13 & 609\\[0pt]
+14 & 986\\[0pt]
+\end{tabular}
+\end{center}
+\end{definition}
+\paragraph{problematic node}
+\label{sec:org634a573}
+\begin{definition}
+a \textbf{problematic node} is a \hyperref[sec:orgec4976f]{node} whose \hyperref[sec:org98c9b00]{balance factor} is \(\pm2\)\\[0pt]
+\end{definition}
+\paragraph{insertion}
+\label{sec:orgf7c2dfc}
+the process of inserting a node to an AVL tree starts with inserting it using the same insertion method we used for a \hyperref[sec:orge1ff544]{binary search tree}, after said insertion we start going up the tree starting at the new node we just inserted and updating the \hyperref[sec:org98c9b00]{balance factor} for every node we encounter as we go\\[0pt]
+if we arrive at \hyperref[sec:org634a573]{problematic node}, we apply the proper \hyperref[sec:orgcca3d84]{rotation} to \hyperref[sec:org224f44b]{rebalance} the tree\\[0pt]
+\paragraph{rebalancing}
+\label{sec:org224f44b}
+during a modifying operation of a \hyperref[sec:org254f5f7]{binary tree}, a node might become \hyperref[sec:org634a573]{problematic}, to restore balance to the tree so that it remains an \hyperref[sec:orge9da911]{AVL tree} we use \hyperref[sec:orgcca3d84]{rotation}s\\[0pt]
+\subparagraph{rotation}
+\label{sec:orgcca3d84}
+to determine which type of \textbf{rotation} we need to use to \textbf{rebalance} a given tree, we go 2 steps from the \hyperref[sec:org634a573]{problematic node} towards the newly inserted node which gives us the following 4 cases:\\[0pt]
+\begin{enumerate}
+\item if we go 2 times to the left, then the \textbf{rotation} is of type \hyperref[sec:orga4dd83f]{LL}\\[0pt]
+\item if we go 2 times to the right, then the \textbf{rotation} is of type \hyperref[sec:orgae1b93d]{RR}\\[0pt]
+\item if we go left and then right then the \textbf{rotation} is of type \hyperref[sec:org9aa5be8]{LR}\\[0pt]
+\item if we go right and then left then the \textbf{rotation} is of type \hyperref[sec:org56c5343]{RL}\\[0pt]
+\end{enumerate}
+\begin{enumerate}
+\item simple rotation
+\label{sec:orga681800}
+\begin{enumerate}
+\item left left rotation
+\label{sec:orga4dd83f}
+let \texttt{z} be the left child of the \hyperref[sec:org634a573]{problematic node} and \texttt{x} be the problematic node itself\\[0pt]
+in \textbf{Left Left} rotation we rotate \texttt{x} to the right, such that the left child of \texttt{x} replaces \texttt{x} and \texttt{x} gets "rotated" to the right becoming the right child of \texttt{z} and a parent of the previous right child of \texttt{z}\\[0pt]
+
+\url{./leftleftrotation.gif}\\[0pt]
+image taken from \url{https://www.codesdope.com/course/data-structures-red-black-trees-insertion/}\\[0pt]
+
+\begin{my_example}
+consider the following \hyperref[sec:orge9da911]{AVL tree}:\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/OCEhdh}
+\end{center}\\[0pt]
+
+after inserting a new \hyperref[sec:orgec4976f]{node} with the value 2 this is how the tree would look:\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/nMREes}
+\end{center}\\[0pt]
+
+the \hyperref[sec:orgec4976f]{node} with the value 7 whose \hyperref[sec:org98c9b00]{balance factor} is 2 is \hyperref[sec:org634a573]{problematic} because its causing imbalance in the \hyperref[sec:orge9da911]{tree}, so we apply the \hyperref[sec:orgcca3d84]{rotation} to its subtree to rebalance it\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/ZIzaCe}
+\end{center}\\[0pt]
+
+the \hyperref[sec:orgaaf7b83]{subtree} after the \hyperref[sec:orgcca3d84]{rotation}:\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/diNERQ}
+\end{center}\\[0pt]
+
+and so the original tree would become:\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/pBO906}
+\end{center}\\[0pt]
+\end{my_example}
+\item right right rotation
+\label{sec:orgae1b93d}
+this is very similar to \hyperref[sec:orga4dd83f]{Left Left}, we first add the node and then if we have a \hyperref[sec:org634a573]{problematic node} \texttt{x} and if we took 2 steps to the right, then we use this rotation method\\[0pt]
+this method consists of rotating the \hyperref[sec:orgaaf7b83]{subtree} \(T_x\) such that \texttt{x} becomes a left child of its original right child \texttt{z}, and \texttt{z} takes the place of \texttt{x} and the previous left child of \texttt{z} becomes a right child of \texttt{x} at its new position\\[0pt]
+
+\url{./rightrightrotation.gif}\\[0pt]
+image taken from \url{https://www.codesdope.com/course/data-structures-red-black-trees-insertion/}\\[0pt]
+\end{enumerate}
+\item double rotation
+\label{sec:org251b5b5}
+the difference between this and \hyperref[sec:orga681800]{simple rotation} is that this method consists of rotating twice as you might've already guessed from the title\\[0pt]
+\begin{enumerate}
+\item left right rotation
+\label{sec:org9aa5be8}
+this method consists of 2 steps, first is applying an \hyperref[sec:orgae1b93d]{RR} rotation over the left child of the \hyperref[sec:org634a573]{problematic node}, then applying an \hyperref[sec:orga4dd83f]{LL} rotation to the \hyperref[sec:org634a573]{problematic node}\\[0pt]
+\item right left rotation
+\label{sec:org56c5343}
+this method consists of 2 steps, first is applying an \hyperref[sec:orga4dd83f]{LL} rotation over the right child of the \hyperref[sec:org634a573]{problematic node}, then applying a \hyperref[sec:orgae1b93d]{RR} rotation to the \hyperref[sec:org634a573]{problematic node}\\[0pt]
+\end{enumerate}
+\end{enumerate}
+\paragraph{AVLTree}
+\label{sec:orgc55430c}
+\begin{lstlisting}[language=C++,label=lst:org7d992d1,caption= ,captionpos=b,numbers=none]
+
+template <typename T> class AVLTree : public BinarySearchTree<T> {
+public:
+  using BinarySearchTree<T>::insert;
+  AVLTree() {}
+  AVLTree(BinaryTreeNode<T>* node) : BinarySearchTree<T>(node) {}
+  AVLTree<T>* insert(BinaryTreeNode<T>* node) override {
+    BinarySearchTree<T>::insert(node);
+    BinaryTreeNode<T>* retracing_node = node;
+    while (retracing_node != nullptr) {
+      if (retracing_node->is_problematic()) {
+        BinaryTreeNode<T>* path_root = retracing_node->find_path(node);
+        if (path_root->has_left() && path_root->get_left()->has_left()) { /* LL rotation */
+          this->rotate_right(retracing_node);
+        }
+        if (path_root->has_right() && path_root->get_right()->has_right()) { /* RR rotation */
+          this->rotate_left(retracing_node);
+        }
+        if (path_root->has_right() && path_root->get_right()->has_left()) { /* RL rotation */
+          this->rotate_right(retracing_node->get_right()); /* LL rotation */
+          this->rotate_left(retracing_node); /* RR rotation */
+        }
+        if (path_root->has_left() && path_root->get_left()->has_right()) { /* LR rotation */
+          this->rotate_left(retracing_node->get_left()); /* RR rotation */
+          this->rotate_right(retracing_node); /* LL rotation */
+        }
+          delete path_root;
+          break;
+        }
+      retracing_node = retracing_node->get_parent();
+    }
+    return this;
+  }
+};
+\end{lstlisting}
+
+example:\\[0pt]
+
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+
+int main() {
+  AVLTree<int> t;
+  t.insert(11)->insert(5)->insert(3)->insert(4)->insert(2)->insert(1)->insert(7)->insert(6)->insert(20)->insert(15)->insert(24)->insert(16)->insert(12)->insert(14)->insert(13)->insert(17)->insert(26);
+  print_latex_forest(t.get_root());
+}
+\end{lstlisting}
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_sN2uzxn}
+\end{center}\\[0pt]
+\subsubsection{2-3 tree}
+\label{sec:org1df410f}
+a \textbf{2–3 tree} is a \hyperref[sec:org6b67a14]{tree} \hyperref[sec:org39a1299]{concrete data type} where every \hyperref[sec:org26c1a68]{internal node} is either a \hyperref[sec:orgcb7e48c]{2-node} or \hyperref[sec:org08b0689]{3-node}\\[0pt]
+an exceptional case is when the tree contains only one element in which case the only node in the tree (which is the \hyperref[sec:org76387eb]{root}) holds only one element\\[0pt]
+\begin{characteristic}
+every \hyperref[sec:org26c1a68]{internal node} is a \hyperref[sec:orgcb7e48c]{2-node} or a \hyperref[sec:org08b0689]{3-node} \\[0pt]
+\end{characteristic}
+\begin{characteristic}
+all \hyperref[sec:orge114c93]{leaves} are at the same level\\[0pt]
+\end{characteristic}
+\begin{characteristic}
+keys are always ordered from left to right in ascending order\\[0pt]
+\end{characteristic}
+\paragraph{2-node}
+\label{sec:orgcb7e48c}
+\begin{definition}
+we say that an \hyperref[sec:org26c1a68]{internal node} is a \textbf{2-node} if it holds one value and two children\\[0pt]
+\end{definition}
+\paragraph{3-node}
+\label{sec:org08b0689}
+\begin{definition}
+we say that an \hyperref[sec:org26c1a68]{internal node} is a \textbf{3-node} if it holds two values and three children\\[0pt]
+\end{definition}
+\paragraph{insertion}
+\label{sec:orgc48a523}
+an important property to keep in mind is that insertion \textbf{always} occurs in one of the \hyperref[sec:orge114c93]{leaves}\\[0pt]
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./2-3_insertion.jpg}
+\caption{2-3 insertion visual explanation}
+\end{figure}\\[0pt]
+\cite{opengenus_twothree_tree}\\[0pt]
+\paragraph{TwoThreeNode}
+\label{sec:orgb26a12f}
+\begin{lstlisting}[language=C++,label=lst:orga5f93cb,caption= ,captionpos=b,numbers=none]
+const int SIZE = 3;
+
+template <typename T> class TwoThreeNode {
+private:
+  TwoThreeNode<T>* parent;
+  TwoThreeNode<T>* children[SIZE+1];
+  int keys[SIZE];
+  T values[SIZE];
+public:
+  void set_child(int idx, TwoThreeNode<T>* node) {
+    this->children[idx] = node;
+    if (node)
+      node->parent = this;
+  }
+  TwoThreeNode<T>* get_child(int idx) {
+    return this->children[idx];
+  }
+  void remove_child(TwoThreeNode<T>* node) {
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->children[i] == node) {
+        this->children[i]->parent = nullptr;
+        this->children[i] = nullptr;
+        return;
+      }
+    }
+  }
+  int add_child(TwoThreeNode<T>* node) {
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->keys[i] > node->biggest_key() || this->keys[i] == 0) {
+        this->set_child(i, node);
+        return i;
+      }
+    }
+    this->set_child(SIZE, node);
+    return SIZE;
+  }
+  int add_key_value(int key, T value) {
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->keys[i] == 0) {
+        this->keys[i] = key;
+        this->values[i] = value;
+        return i;
+      }
+      if (this->keys[i] > key) {
+        this->children[SIZE] = this->children[SIZE-1];
+        for (int j = SIZE-1; j > i; --j) {
+          this->keys[j] = this->keys[j-1];
+          this->values[j] = this->values[j-1];
+          this->children[j] = this->children[j-1];
+        }
+        this->keys[i] = key;
+        this->values[i] = value;
+        return i;
+      }
+    }
+    return -1;
+  }
+  void set_key(int idx, int key) {
+    this->keys[idx] = key;
+  }
+  int get_key(int idx) {
+    return this->keys[idx];
+  }
+  bool has_key(int idx) {
+    return this->keys[idx] != 0;
+  }
+  bool has_child(int idx) {
+    return this->children[idx] != nullptr;
+  }
+  void set_value(int idx, T value) {
+    this->values[idx] = value;
+  }
+  T get_value(int idx) {
+    return this->values[idx];
+  }
+  void set_parent(TwoThreeNode<T>* node) {
+    this->parent = node;
+  }
+  TwoThreeNode<T>* get_parent() {
+    return this->parent;
+  }
+  bool has_parent() {
+    return this->parent != nullptr;
+  }
+  bool is_leaf() {
+    for (int i = 0; i < SIZE; ++i) {
+      if (children[i] != nullptr)
+        return false;
+    }
+    return true;
+  }
+  bool is_root() {
+    return !this->has_parent();
+  }
+  TwoThreeNode<T>* find_node_to_place_key(int key) {
+    if (this->is_leaf()) {
+      for (int i = 0; i < SIZE; ++i) {
+        if (this->keys[i] > key || this->keys[i] == 0) {
+          return this;
+        }
+      }
+      return nullptr;
+    }
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->keys[i] > key || this->keys[i] == 0) {
+        return this->children[i]->find_node_to_place_key(key);
+      }
+    }
+    return this->children[SIZE] == nullptr ? nullptr : this->children[SIZE]->find_node_to_place_key(key); 
+  }
+  TwoThreeNode<T>* find_node_with_biggest_key() {
+    if (this->is_leaf())
+      return this;
+    TwoThreeNode<T>* biggest = nullptr;
+    int biggest_key = 0;
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->children[i] != nullptr) {
+        TwoThreeNode<T>* tmp = this->children[i]->find_node_with_biggest_key();
+        if (tmp == nullptr)
+          continue;
+        for (int j = 0; j < tmp->count_keys(); ++j) {
+          if (tmp->keys[j] > biggest_key) {
+            biggest = tmp;
+            biggest_key = tmp->keys[j];
+          }
+        }
+      }
+    }
+    return biggest;
+  }
+  int find_biggest_key() {
+    if (this->is_leaf()) {
+      return this->biggest_key();
+    }
+    int biggest = this->biggest_key();
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->children[i] != nullptr) {
+        int other = this->children[i]->find_biggest_key();
+        if (other > biggest)
+          biggest = other;
+      }
+    }
+    return biggest;
+  }
+  int find_smallest_key() {
+    if (this->is_leaf()) {
+      return this->smallest_key();
+    }
+    int smallest = this->smallest_key();
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->children[i] != nullptr) {
+        int other = this->children[i]->find_smallest_key();
+        if (other != 0 && other < smallest && other != -1)
+          smallest = other;
+      }
+    }
+    return smallest;
+  }
+  int biggest_key() {
+    int biggest = 0;
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->keys[i] > biggest)
+        biggest = this->keys[i];
+    }
+    return biggest;
+  }
+  int smallest_key() {
+    int smallest = -1;
+    for (int i = 0; i < SIZE; ++i) {
+      if ((this->keys[i] < smallest && this->keys[i] != 0) || smallest == -1)
+        smallest = this->keys[i];
+    }
+    return smallest;
+  }
+  int count_keys() {
+    int cnt = 0;
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->keys[i] != 0) {
+        ++cnt;
+      }
+    }
+    return cnt;
+  }
+  int count_children() {
+    int cnt = 0;
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->children[i] != nullptr) {
+        ++cnt;
+      }
+    }
+    return cnt;
+  }
+  bool is_2_node() {
+    return this->count_keys() == 1;
+  }
+  bool is_3_node() {
+    return this->count_keys() == 2;
+  }
+  void print() {
+    for (int i = 0; i < SIZE; ++i) {
+      std::cout << this->keys[i] << " ";
+    }
+    std::cout << std::endl;
+  }
+  std::string to_string() {
+    std::string str = "";
+    for (int i = 0; i < SIZE; ++i) {
+      std::string num_str = this->keys[i] == 0 ? "$\\varnothing$" : std::to_string(this->keys[i]);
+      str += num_str + (i == SIZE - 1 ? "" : " ");
+    }
+    return str;
+  }
+  int height() {
+    if (this->is_leaf())
+      return 1;
+    for (int i = 0; i < SIZE; ++i) {
+      if (this->children[i] != nullptr) {
+        return 1+this->children[i]->height();
+      }
+    }
+    return 1;
+  }
+  int get_left_key() {
+    return this->keys[0];
+  }
+  int get_right_key() {
+    return this->keys[1];
+  }
+  bool has_left_key() {
+    return this->keys[0] != 0;
+  }
+  bool has_right_key() {
+    return this->keys[1] != 0;
+  }
+  TwoThreeNode<T>* get_left_child() {
+    return this->children[0];
+  }
+  TwoThreeNode<T>* get_right_child() {
+    return this->children[2];
+  }
+  TwoThreeNode<T>* get_mid_child() {
+    return this->children[1];
+  }
+  bool has_left_child() {
+    return this->children[0] != nullptr;
+  }
+  bool has_right_child() {
+    return this->children[2] != nullptr;
+  }
+  bool has_mid_child() {
+    return this->children[1] != nullptr;
+  }
+};
+\end{lstlisting}
+\paragraph{TwoThreeTree}
+\label{sec:org6f36a73}
+\begin{lstlisting}[language=C++,label=lst:org9d8dece,caption= ,captionpos=b,numbers=none]
+
+
+template <typename T> class TwoThreeTree {
+private:
+  TwoThreeNode<T>* root = nullptr;
+public:
+  TwoThreeNode<T>* get_root() {
+    return this->root;
+  }
+  void add_key_value(int key, T value) {
+    if (this->root == nullptr) {
+      this->root = new TwoThreeNode<T>();
+      this->root->set_key(0, key);
+      this->root->set_value(0, value);
+      return;
+    }
+    TwoThreeNode<T>* node = this->root->find_node_to_place_key(key);
+    if (node == nullptr) {
+      node = this->root->find_node_with_biggest_key();
+    }
+    std::cout << "adding key " << key << " to " << (node == nullptr ? "unknown" : node->to_string()) << std::endl;
+    int key_count = node->count_keys();
+    if (key_count < SIZE-1) {
+      std::cout << "added " << key << " to " << node->to_string() << " and got ";
+      node->add_key_value(key, value);
+      std::cout << node->to_string() << std::endl;
+      return;
+    }
+    if (key_count >= SIZE-1) {
+      node->add_key_value(key, value);
+      std::cout << "balance " << node->to_string() << std::endl;
+      balance(node);
+    }
+  }
+  /* helping function */
+  void balance(TwoThreeNode<T>* node) {
+    std::cout << "root: " << this->root->to_string() << std::endl;
+    if (node->is_2_node() || node->is_3_node()) {
+      std::cout << node->to_string() << " is good." << std::endl;
+      return;
+    }
+    if (node->is_root()) {
+      TwoThreeNode<T>* new_root = new TwoThreeNode<T>();
+      new_root->add_key_value(node->get_key(1), node->get_value(1));
+      TwoThreeNode<T>* new_left_node = new TwoThreeNode<T>();
+      TwoThreeNode<T>* new_right_node = new TwoThreeNode<T>();
+      new_left_node->set_key(0, node->get_key(0));
+      new_right_node->set_key(0, node->get_key(2));
+      new_left_node->set_child(0, node->get_child(0));
+      new_left_node->set_child(1, node->get_child(1));
+      new_right_node->set_child(0, node->get_child(2));
+      new_right_node->set_child(1, node->get_child(3));
+      new_root->set_child(0, new_left_node);
+      new_root->set_child(1, new_right_node);
+      std::cout << "created new root " << new_root->to_string() << " to replace " << this->root->to_string() << ", left child: " << new_left_node->to_string() << ", right child: " << new_right_node->to_string() << std::endl;
+      this->root = new_root;
+      return;
+    }
+    TwoThreeNode<T>* the_parent = node->get_parent();
+    std::cout << "adding " << node->get_key(1) << " to " << the_parent->to_string() << " to get ";
+    the_parent->add_key_value(node->get_key(1), node->get_value(1));
+    std::cout << the_parent->to_string() << std::endl;
+    node->set_key(1, 0);
+    split(node);
+    std::cout << "balance " << the_parent->to_string() << " recursively" << std::endl;
+    balance(the_parent);
+    delete node;
+  }
+  void split(TwoThreeNode<T>* node) {
+    std::cout << "split " << node->to_string() << std::endl;
+    TwoThreeNode<T>* the_parent = node->get_parent();
+    TwoThreeNode<T>* new_left_node = new TwoThreeNode<T>();
+    TwoThreeNode<T>* new_right_node = new TwoThreeNode<T>();
+    new_left_node->set_key(0, node->get_key(0));
+    new_right_node->set_key(0, node->get_key(2));
+    new_left_node->set_child(0, node->get_child(0));
+    new_left_node->set_child(1, node->get_child(1));
+    new_right_node->set_child(0, node->get_child(2));
+    new_right_node->set_child(1, node->get_child(3));
+    the_parent->remove_child(node);
+    std::cout << "inserting right " << new_right_node->to_string() << " as a " << the_parent->add_child(new_right_node) << "th child of " << the_parent->to_string() << std::endl;
+    //the_parent->add_child(new_right_node);
+    std::cout << "inserting left " << new_left_node->to_string() << " as a " << the_parent->add_child(new_left_node) << "th child of " << the_parent->to_string() << std::endl;
+    //the_parent->add_child(new_left_node);
+  }
+  bool is_empty() {
+    return this->root == nullptr;
+  }
+  int height() {
+    return this->is_empty() ? 0 : this->root->height();
+  }
+};
+\end{lstlisting}
+
+example usage:\\[0pt]
+
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+
+int main() {
+  TwoThreeTree<float> t;
+  const float seq[] = {3,2,7,9,5,4,3.5,4.5,3.2,4.7,1,10,11,10.5,2.5,3.7,12};
+  for (int i = 0; i < 17; ++i) {
+    t.add_key_value((int)(seq[i]*10), seq[i]);
+  }
+  print_latex_forest_twothree_tree(t.get_root());
+}
+\end{lstlisting}
+
+adding key 20 to 30 \(\varnothing\) \(\varnothing\)\\[0pt]
+added 20 to 30 \(\varnothing\) \(\varnothing\) and got 20 30 \(\varnothing\)\\[0pt]
+adding key 70 to 20 30 \(\varnothing\)\\[0pt]
+balance 20 30 70\\[0pt]
+root: 20 30 70\\[0pt]
+created new root 30 \(\varnothing\) \(\varnothing\) to replace 20 30 70, left child: 20 \(\varnothing\) \(\varnothing\), right child: 70 \(\varnothing\) \(\varnothing\)\\[0pt]
+adding key 90 to 70 \(\varnothing\) \(\varnothing\)\\[0pt]
+added 90 to 70 \(\varnothing\) \(\varnothing\) and got 70 90 \(\varnothing\)\\[0pt]
+adding key 50 to 70 90 \(\varnothing\)\\[0pt]
+balance 50 70 90\\[0pt]
+root: 30 \(\varnothing\) \(\varnothing\)\\[0pt]
+adding 70 to 30 \(\varnothing\) \(\varnothing\) to get 30 70 \(\varnothing\)\\[0pt]
+split 50 \(\varnothing\) 90\\[0pt]
+inserting right 90 \(\varnothing\) \(\varnothing\) as a 2th child of 30 70 \(\varnothing\)\\[0pt]
+inserting left 50 \(\varnothing\) \(\varnothing\) as a 1th child of 30 70 \(\varnothing\)\\[0pt]
+balance 30 70 \(\varnothing\) recursively\\[0pt]
+root: 30 70 \(\varnothing\)\\[0pt]
+30 70 \(\varnothing\) is good.\\[0pt]
+adding key 40 to 50 \(\varnothing\) \(\varnothing\)\\[0pt]
+added 40 to 50 \(\varnothing\) \(\varnothing\) and got 40 50 \(\varnothing\)\\[0pt]
+adding key 35 to 40 50 \(\varnothing\)\\[0pt]
+balance 35 40 50\\[0pt]
+root: 30 70 \(\varnothing\)\\[0pt]
+adding 40 to 30 70 \(\varnothing\) to get 30 40 70\\[0pt]
+split 35 \(\varnothing\) 50\\[0pt]
+inserting right 50 \(\varnothing\) \(\varnothing\) as a 2th child of 30 40 70\\[0pt]
+inserting left 35 \(\varnothing\) \(\varnothing\) as a 1th child of 30 40 70\\[0pt]
+balance 30 40 70 recursively\\[0pt]
+root: 30 40 70\\[0pt]
+created new root 40 \(\varnothing\) \(\varnothing\) to replace 30 40 70, left child: 30 \(\varnothing\) \(\varnothing\), right child: 70 \(\varnothing\) \(\varnothing\)\\[0pt]
+adding key 45 to 50 \(\varnothing\) \(\varnothing\)\\[0pt]
+added 45 to 50 \(\varnothing\) \(\varnothing\) and got 45 50 \(\varnothing\)\\[0pt]
+adding key 32 to 35 \(\varnothing\) \(\varnothing\)\\[0pt]
+added 32 to 35 \(\varnothing\) \(\varnothing\) and got 32 35 \(\varnothing\)\\[0pt]
+adding key 47 to 45 50 \(\varnothing\)\\[0pt]
+balance 45 47 50\\[0pt]
+root: 40 \(\varnothing\) \(\varnothing\)\\[0pt]
+adding 47 to 70 \(\varnothing\) \(\varnothing\) to get 47 70 \(\varnothing\)\\[0pt]
+split 45 \(\varnothing\) 50\\[0pt]
+inserting right 50 \(\varnothing\) \(\varnothing\) as a 1th child of 47 70 \(\varnothing\)\\[0pt]
+inserting left 45 \(\varnothing\) \(\varnothing\) as a 0th child of 47 70 \(\varnothing\)\\[0pt]
+balance 47 70 \(\varnothing\) recursively\\[0pt]
+root: 40 \(\varnothing\) \(\varnothing\)\\[0pt]
+47 70 \(\varnothing\) is good.\\[0pt]
+adding key 10 to 20 \(\varnothing\) \(\varnothing\)\\[0pt]
+added 10 to 20 \(\varnothing\) \(\varnothing\) and got 10 20 \(\varnothing\)\\[0pt]
+adding key 100 to 90 \(\varnothing\) \(\varnothing\)\\[0pt]
+added 100 to 90 \(\varnothing\) \(\varnothing\) and got 90 100 \(\varnothing\)\\[0pt]
+adding key 110 to 90 100 \(\varnothing\)\\[0pt]
+balance 90 100 110\\[0pt]
+root: 40 \(\varnothing\) \(\varnothing\)\\[0pt]
+adding 100 to 47 70 \(\varnothing\) to get 47 70 100\\[0pt]
+split 90 \(\varnothing\) 110\\[0pt]
+inserting right 110 \(\varnothing\) \(\varnothing\) as a 3th child of 47 70 100\\[0pt]
+inserting left 90 \(\varnothing\) \(\varnothing\) as a 2th child of 47 70 100\\[0pt]
+balance 47 70 100 recursively\\[0pt]
+root: 40 \(\varnothing\) \(\varnothing\)\\[0pt]
+adding 70 to 40 \(\varnothing\) \(\varnothing\) to get 40 70 \(\varnothing\)\\[0pt]
+split 47 \(\varnothing\) 100\\[0pt]
+inserting right 100 \(\varnothing\) \(\varnothing\) as a 2th child of 40 70 \(\varnothing\)\\[0pt]
+inserting left 47 \(\varnothing\) \(\varnothing\) as a 1th child of 40 70 \(\varnothing\)\\[0pt]
+balance 40 70 \(\varnothing\) recursively\\[0pt]
+root: 40 70 \(\varnothing\)\\[0pt]
+40 70 \(\varnothing\) is good.\\[0pt]
+adding key 105 to 110 \(\varnothing\) \(\varnothing\)\\[0pt]
+added 105 to 110 \(\varnothing\) \(\varnothing\) and got 105 110 \(\varnothing\)\\[0pt]
+adding key 25 to 10 20 \(\varnothing\)\\[0pt]
+balance 10 20 25\\[0pt]
+root: 40 70 \(\varnothing\)\\[0pt]
+adding 20 to 30 \(\varnothing\) \(\varnothing\) to get 20 30 \(\varnothing\)\\[0pt]
+split 10 \(\varnothing\) 25\\[0pt]
+inserting right 25 \(\varnothing\) \(\varnothing\) as a 1th child of 20 30 \(\varnothing\)\\[0pt]
+inserting left 10 \(\varnothing\) \(\varnothing\) as a 0th child of 20 30 \(\varnothing\)\\[0pt]
+balance 20 30 \(\varnothing\) recursively\\[0pt]
+root: 40 70 \(\varnothing\)\\[0pt]
+20 30 \(\varnothing\) is good.\\[0pt]
+adding key 37 to 32 35 \(\varnothing\)\\[0pt]
+balance 32 35 37\\[0pt]
+root: 40 70 \(\varnothing\)\\[0pt]
+adding 35 to 20 30 \(\varnothing\) to get 20 30 35\\[0pt]
+split 32 \(\varnothing\) 37\\[0pt]
+inserting right 37 \(\varnothing\) \(\varnothing\) as a 3th child of 20 30 35\\[0pt]
+inserting left 32 \(\varnothing\) \(\varnothing\) as a 2th child of 20 30 35\\[0pt]
+balance 20 30 35 recursively\\[0pt]
+root: 40 70 \(\varnothing\)\\[0pt]
+adding 30 to 40 70 \(\varnothing\) to get 30 40 70\\[0pt]
+split 20 \(\varnothing\) 35\\[0pt]
+inserting right 35 \(\varnothing\) \(\varnothing\) as a 1th child of 30 40 70\\[0pt]
+inserting left 20 \(\varnothing\) \(\varnothing\) as a 0th child of 30 40 70\\[0pt]
+balance 30 40 70 recursively\\[0pt]
+root: 30 40 70\\[0pt]
+created new root 40 \(\varnothing\) \(\varnothing\) to replace 30 40 70, left child: 30 \(\varnothing\) \(\varnothing\), right child: 70 \(\varnothing\) \(\varnothing\)\\[0pt]
+adding key 120 to 105 110 \(\varnothing\)\\[0pt]
+balance 105 110 120\\[0pt]
+root: 40 \(\varnothing\) \(\varnothing\)\\[0pt]
+adding 110 to 100 \(\varnothing\) \(\varnothing\) to get 100 110 \(\varnothing\)\\[0pt]
+split 105 \(\varnothing\) 120\\[0pt]
+inserting right 120 \(\varnothing\) \(\varnothing\) as a 2th child of 100 110 \(\varnothing\)\\[0pt]
+inserting left 105 \(\varnothing\) \(\varnothing\) as a 1th child of 100 110 \(\varnothing\)\\[0pt]
+balance 100 110 \(\varnothing\) recursively\\[0pt]
+root: 40 \(\varnothing\) \(\varnothing\)\\[0pt]
+100 110 \(\varnothing\) is good.\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_HLa5Fi7}
+\end{center}\\[0pt]
+\subsubsection{algorithms}
+\label{sec:orgf60ac12}
+\paragraph{backtracking}
+\label{sec:orgee54fe7}
+\textbf{Backtracking} is an algorithm that incrementally builds candidates to the solutions, and abandons a candidate as soon as it determines that the candidate cannot possibly be completed to a valid solution, see \url{https://en.wikipedia.org/wiki/Backtracking}\\[0pt]
+after solving a few problems i saw a pattern that makes it much easier to solve recursion problems related to binary trees\\[0pt]
+when i want to solve a problem with recursion i ask myself 3 questions\\[0pt]
+\begin{enumerate}
+\item what is a node's job?\\[0pt]
+\item what info does a node require to do its job?\\[0pt]
+\item how do we give the node what it requires to do its job? (one of 2 methods)\\[0pt]
+\end{enumerate}
+the 2 methods of passing data around binary tree nodes are:\\[0pt]
+\begin{itemize}
+\item if a node needs to know some info about its \hyperref[sec:org48e7ebc]{ancestor}s or nodes from other subtrees this info has to be passed through function arguments because once we reach a node in the tree we cant go back to previous nodes (its possible but would take \texttt{O(n)} time which is horrible)\\[0pt]
+\item if a node needs to know something about its \hyperref[sec:org3e6c055]{descendant}s, this information has to be backpropagated by returning it to the parent node that called the recursive function on its child, because once we're back to a node we cant go back down (we could but again, it takes \texttt{O(n)} time), if we need to backpropagate multiple values we can use a simple structure to hold the values (in \texttt{C++} the simplest way is to use \texttt{struct})\\[0pt]
+\end{itemize}
+note that its \textbf{important} that we gather info as we go on every node we visit so that once we leave a specific node we'd have all the info we would need from it so that we wouldnt have to go back to visit it which usually results in \texttt{O(n)} time\\[0pt]
+words arent the best way to put it so hopefully ill provide a better visual explanation in the future\\[0pt]
+\paragraph{reverse inorder}
+\label{sec:org45f4751}
+given a \hyperref[sec:org254f5f7]{binary tree}, write a function to reverse its \hyperref[sec:org719f705]{inorder traversal} output\\[0pt]
+this algorithm runs in \texttt{O(n)} time\\[0pt]
+\begin{lstlisting}[language=C++,label=lst:orge5cfdea,caption= ,captionpos=b,numbers=none]
+template <typename T>
+void reverse(BinaryTreeNode<T>* node) {
+  if (node == nullptr)
+    return;
+  reverse(node->get_left());
+  reverse(node->get_right());
+  BinaryTreeNode<T>* l = node->get_left();
+  node->set_left(node->get_right());
+  node->set_right(l);
+}
+\end{lstlisting}
+
+example usage:\\[0pt]
+
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+
+
+int main() {
+  BinarySearchTree<int> t;
+  t.insert(11)->insert(5)->insert(3)->insert(4)->insert(2)->insert(1)->insert(7)->insert(6)->insert(20)->insert(15);
+  t.print();
+  reverse(t.get_root());
+  t.print();
+}
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{rrrrrrrrrr}
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 11 & 15 & 20\\[0pt]
+20 & 15 & 11 & 7 & 6 & 5 & 4 & 3 & 2 & 1\\[0pt]
+\end{tabular}
+\end{center}
+\subsubsection{other practice questions}
+\label{sec:org3b4b641}
+\begin{question}
+an "equal" tree is a tree data structure in which every nodes height is equal to the number of its leaves\\[0pt]
+prove whether an equal tree is necessary balanced?\\[0pt]
+
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+
+int main() {
+  for (int x = 1; x < 5; ++x) {
+    BinaryHeap<int> h;
+    for (int i = 0; i < x; ++i) {
+      h.insert(i);
+    }
+    BinaryTree<int>* bt = h.to_binary_tree();
+    print_latex_forest(bt->get_root());
+    delete bt;
+  }
+}
+\end{lstlisting}
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_KL5D1mf}
+\end{center}\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_Uq5IcJ5}
+\end{center}\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_FybxPrX}
+\end{center}\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_wSYos1D}
+\end{center}\\[0pt]
+\end{question}
+
+\begin{question}
+given an array we need to check whether there exists an element who is atleast two times of another element\\[0pt]
+\begin{answer}
+the first solution one might think of probably has a time complexity of \(O(n^2)\)\\[0pt]
+but a better solution would be to go through the array once and find the minimum and maximum elements and compare them to see if the max element is atleast twice of the minimum element\\[0pt]
+\end{answer}
+\end{question}
+\subsection{heap}
+\label{sec:org9903735}
+\begin{definition}
+a \textbf{Heap} is an \hyperref[sec:orga3b31cf]{abstract data type}\\[0pt]
+\end{definition}
+\subsubsection{min heap}
+\label{sec:orgc87ebb0}
+\begin{definition}
+a \textbf{min heap} is a \hyperref[sec:org9903735]{heap} in which each \hyperref[sec:orgec4976f]{node} is less than or equal to both its children\\[0pt]
+\end{definition}
+\subsubsection{max heap}
+\label{sec:org75e2e7b}
+\begin{definition}
+a \textbf{max heap} is a \hyperref[sec:org9903735]{heap} in which each node is bigger than or equal to both its children\\[0pt]
+\end{definition}
+this is the implementation we'll be using\\[0pt]
+\subsubsection{binary heap}
+\label{sec:orgff15739}
+\begin{definition}
+A \textbf{binary heap} is defined as a \hyperref[sec:org254f5f7]{binary tree} with two additional constraints:\\[0pt]
+\begin{enumerate}
+\item shape property: a binary heap is an \hyperref[sec:orgcd32ba8]{almost complete tree}\\[0pt]
+\item heap property: the key stored in each node is either greater than or equal to, or less than or equal to the keys in the node's children\\[0pt]
+\end{enumerate}
+
+\begin{characteristic}
+a heap may keep a pointer to speed up insertion, this pointer points to the leftmost leaf if the tree is complete, otherwise if its almost complete, it points to the right uncle of the rightmost leaf\\[0pt]
+\end{characteristic}
+\begin{note}
+in a heap the keys arent necessarily sorted like in \hyperref[sec:orge1ff544]{binary search tree}s\\[0pt]
+\end{note}
+\end{definition}
+\paragraph{bubbling}
+\label{sec:org74642bd}
+\begin{definition}
+moving a \hyperref[sec:orgec4976f]{node} up/down a heap to get it to its correct position\\[0pt]
+\end{definition}
+\subparagraph{bubble up}
+\label{sec:org389e434}
+\hyperref[sec:org74642bd]{bubbling} a node \textbf{upwards} consists of recursively switching it with its parent until its parent is bigger/smaller than it (depending on whether we're using a \hyperref[sec:orgc87ebb0]{min heap} or a \hyperref[sec:org75e2e7b]{max heap})\\[0pt]
+\subparagraph{bubble down}
+\label{sec:org3bbfb76}
+\hyperref[sec:org74642bd]{bubbling} a node \textbf{downards} consists of recursively switching it with one of its children until it gets to its correct position\\[0pt]
+this is a pseudocode for the \href{20220706211958-algorithm.org}{algorithm}:\\[0pt]
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
+l = left(i) // index of left child
+r = right(i) // index of right child
+if l <= heap-size[A] and A[l] > A[i]
+  largest = l
+else
+  largest = i
+if r <= heap-size[A] and A[r] > A[largest]
+  largest = r
+if largest != i
+  exchange A[i] A[largest]
+  heapify(A, largest)
+\end{lstlisting}
+\href{20221130014441-time_complexity.org}{time complexity} is \(O(\log n)\)\\[0pt]
+\paragraph{insertion}
+\label{sec:org2f88fcf}
+inserting a new \hyperref[sec:orgec4976f]{node} to the heap consists of adding it as a \hyperref[sec:orge114c93]{leaf} such that the heap remains \hyperref[sec:orgcd32ba8]{almost complete} and \hyperref[sec:org389e434]{bubbling up} the newly added node so that the keys in the tree remain sorted\\[0pt]
+if the heap is in \hyperref[sec:org93e8c49]{array representation}, we insert the new node to the end of the array and heapify it upwards (bubble up)\\[0pt]
+\paragraph{deletion}
+\label{sec:org40f555e}
+deletion of a node consists of replacing the rightmost leaf with it and bubble it \hyperref[sec:org3bbfb76]{downwards} if its smaller than one of its children or \hyperref[sec:org389e434]{upwards} if its bigger than its parent\\[0pt]
+\paragraph{binary heap array representation}
+\label{sec:org93e8c49}
+\begin{note}
+some resources may use assume that arrays start at index 1, i see no point in that since most programming languages use 0 as the first index, so some of the following propositions might seem a little different like for example the proposition number 2 in the following list according to these sources would be that the left child of i\textsuperscript{th} node is \(Arr[2i]\) instead of \(Arr[2i+1]\) and the right child is \(Arr[2i+1]\)\\[0pt]
+\end{note}
+for an array to represent a \hyperref[sec:orgff15739]{binary heap}, the only condition is that \(A[i] < A\left[\floor*{\frac{i-1}{2}}\right]\) (in the case of \hyperref[sec:org75e2e7b]{max heap})\\[0pt]
+arrays that represent heap have the following characterstics:\\[0pt]
+\begin{enumerate}
+\item root is \(Arr[0]\)\\[0pt]
+\item the parent of the i\textsuperscript{th} node (in the array) is \(A\left[\floor*{\frac{i-1}{2}}\right]\)\\[0pt]
+\item left child of the i\textsuperscript{th} node is \(Arr[2i+1]\)\\[0pt]
+\item right child of the i\textsuperscript{th} node is \(Arr[2i+2]\)\\[0pt]
+\end{enumerate}
+in other words, the nodes are taken from the root to the last level from left to right and put in that order in an array\\[0pt]
+the array should hold 2 values, \texttt{array-size}, which is the size of the array, and \texttt{heap-size}, which is the number of elements of the heap in the array\\[0pt]
+\paragraph{construction of binary heap from array}
+\label{sec:org8e8c688}
+given some random \href{20220728190531-array.org}{array}, e.g. \texttt{A=[10,20,30,40,50,70,35,60,80]}, we need to reorganize its elements such that it \hyperref[sec:org93e8c49]{represents a binary heap}\\[0pt]
+to achieve this we apply \hyperref[sec:org3bbfb76]{bubble down} to the first half of the array \textbf{in reverse} (because the \hyperref[sec:orge114c93]{leaf} nodes need not be heapified as they already follow the heap property)\\[0pt]
+e.g. for the given array we apply \texttt{bubble(A, i)} such that \(i = 3 \to 0\)\\[0pt]
+this is the constructing \href{20220706211958-algorithm.org}{algorithm} in pseudocode:\\[0pt]
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
+Build-Heap(A)
+  n = length(A)
+  heap-size = n
+  for i = n/2 to 1
+    heapify(A, i)
+\end{lstlisting}
+\begin{lemma}
+this algorithm runs in \(\Theta(n)\) time\\[0pt]
+\begin{proof}
+for \(0 < k < 1\) we know:\\[0pt]
+\[
+  \sum_{x=1}^{\infty} x \cdot k^x = \frac{k}{(1-k)^2}
+\]\\[0pt]
+so for \(k=\frac12\):\\[0pt]
+\[
+  \sum_{x=1}^{\infty} x \cdot \left(\frac{1}{2}\right)^x = \frac{1}{2} + \frac{2}{2^2} + \frac{3}{2^3} + \frac{4}{2^4} + \cdots = \frac{\frac{1}{2}}{\left(1-\frac{1}{2}\right)^2} = \frac{\frac{1}{2}}{\frac{1}{4}} = 2
+\]\\[0pt]
+to be continued\\[0pt]
+\end{proof}
+\end{lemma}
+\paragraph{BinaryHeap}
+\label{sec:org2eac639}
+\begin{note}
+this is a \hyperref[sec:org75e2e7b]{max heap} implementation\\[0pt]
+\end{note}
+\begin{lstlisting}[language=C++,label=lst:org280ee3b,caption= ,captionpos=b,numbers=none]
+#include <cmath>
+
+
+
+
+#define PARENT_INDEX(node_idx)      floor((node_idx-1)/2)
+#define LEFT_CHILD_INDEX(node_idx)  2*node_idx+1
+#define RIGHT_CHILD_INDEX(node_idx) 2*node_idx+2
+
+template <typename T>
+class BinaryHeap {
+private:
+  ArrayList<KeyValue<int, T>>* list = new ArrayList<KeyValue<int, T>>();
+  // heapify downwards assuming max heap
+  void heapify_down(int idx) {
+    KeyValue<int, T>* current = &this->list->get(idx);
+    KeyValue<int, T>* left = LEFT_CHILD_INDEX(idx) >= list->size() ? nullptr : &this->list->get(LEFT_CHILD_INDEX(idx));
+    KeyValue<int, T>* right = RIGHT_CHILD_INDEX(idx) >= list->size() ? nullptr : &this->list->get(RIGHT_CHILD_INDEX(idx));
+    if (left == nullptr && right == nullptr)
+      return;
+    if (left == nullptr) {
+      if (right->get_key() > current->get_key()) {
+        KeyValue<int, T> temp = *current;
+        this->list->set(idx, *right);
+        this->list->set(RIGHT_CHILD_INDEX(idx), temp);
+        heapify_down(RIGHT_CHILD_INDEX(idx));
+      }
+    } else if (right == nullptr) {
+      if (left->get_key() > current->get_key()) {
+        KeyValue<int, T> temp = *current;
+        this->list->set(idx, *left);
+        this->list->set(LEFT_CHILD_INDEX(idx), temp);
+        heapify_down(LEFT_CHILD_INDEX(idx));
+      }
+    } else {
+      if (left->get_key() > current->get_key() && left->get_key() > right->get_key()) {
+        KeyValue<int, T> temp = *current;
+        this->list->set(idx, *left);
+        this->list->set(LEFT_CHILD_INDEX(idx), temp);
+        heapify_down(LEFT_CHILD_INDEX(idx));
+      }
+      if (right->get_key() > current->get_key() && right->get_key() > left->get_key()) {
+        KeyValue<int, T> temp = *current;
+        this->list->set(idx, *right);
+        this->list->set(RIGHT_CHILD_INDEX(idx), temp);
+        heapify_down(RIGHT_CHILD_INDEX(idx));
+      }
+    }
+  }
+  void heapify_up(int idx) {
+    if (idx == 0)
+      return;
+    KeyValue<int, T>* current = &this->list->get(idx);
+    KeyValue<int, T>* parent = &this->list->get(PARENT_INDEX(idx));
+    if (current->get_key() > parent->get_key()) {
+      KeyValue<int, T> temp = *current;
+      this->list->set(idx, *parent);
+      this->list->set(PARENT_INDEX(idx), temp);
+      heapify_up(PARENT_INDEX(idx));
+    }
+  }
+  BinaryTreeNode<T>* to_binary_tree(int idx) {
+    if (idx >= this->list->size())
+      return nullptr;
+    BinaryTreeNode<T>* node = new BinaryTreeNode<T>(this->list->get(idx).get_key(), this->list->get(idx).get_value());
+    BinaryTreeNode<T>* left = to_binary_tree(LEFT_CHILD_INDEX(idx));
+    BinaryTreeNode<T>* right = to_binary_tree(RIGHT_CHILD_INDEX(idx));
+    node->set_left(left);
+    node->set_right(right);
+    return node;
+  }
+
+public:
+  ~BinaryHeap() {
+    delete this->list;
+  }
+  BinaryHeap<T>* insert(KeyValue<int, T> kv) {
+    this->list->add(kv);
+    this->heapify_up(this->list->size()-1);
+    return this;
+  }
+  BinaryHeap<T>* insert(int key) {
+    return this->insert(KeyValue<int, int>(key, key));
+  }
+  KeyValue<int, T>& operator [](int i) {
+    return (*list)[i];
+  }
+  KeyValue<int, T>& get(int i) {
+    return (*list)[i];
+  }
+  static BinaryHeap<T>* from_array(KeyValue<int, T>* other_arr, int length) {
+    BinaryHeap<T>* heap = new BinaryHeap<T>();
+    heap->list = ArrayList<KeyValue<int, T>>::from_array(other_arr, length);
+    for (int i = length / 2; i >= 0; --i) {
+      heap->heapify_down(i);
+    }
+    return heap;
+  }
+  int size() {
+    return this->list->size();
+  }
+  BinaryTree<T>* to_binary_tree() {
+    return new BinaryTree<T>(to_binary_tree(0));
+  }
+};
+\end{lstlisting}
+
+example usage:\\[0pt]
+
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+
+int main() {
+  // KeyValue<int, int> arr[4] = {{11, 11}, {21, 21}, {31, 31}, {41, 41}};
+  // BinaryHeap<int>* h = BinaryHeap<int>::from_array(arr, 4);
+  BinaryHeap<int> h;
+  for (int i = 0; i < 10; ++i) {
+    std::cout << "inserting " << i << std::endl;
+    h.insert(i);
+    BinaryTree<int>* bt = h.to_binary_tree();
+    print_latex_forest(bt->get_root());
+    delete bt;
+  }
+}
+\end{lstlisting}
+
+inserting 0\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_8ARGd70}
+\end{center}\\[0pt]
+
+inserting 1\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_Tq58m9o}
+\end{center}\\[0pt]
+
+inserting 2\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_UZxlwy8}
+\end{center}\\[0pt]
+
+inserting 3\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_AmdO1X5}
+\end{center}\\[0pt]
+
+inserting 4\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_T1VEkFv}
+\end{center}\\[0pt]
+
+inserting 5\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_qe69eCz}
+\end{center}\\[0pt]
+
+inserting 6\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_jfD5vyN}
+\end{center}\\[0pt]
+
+inserting 7\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_puriysd}
+\end{center}\\[0pt]
+
+inserting 8\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_RNepkbb}
+\end{center}\\[0pt]
+
+inserting 9\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_19bbXmQ}
+\end{center}\\[0pt]
+\paragraph{binary heap algorithms}
+\label{sec:orgbedcfa3}
+\subparagraph{biggest k nodes}
+\label{sec:org360ed48}
+initial inefficient solution:\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tHkzZWu}
+\end{center}\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/7kcwMR4}
+\end{center}\\[0pt]
+
+\subparagraph{check if array represents a binary heap}
+\label{sec:orgfbce1e0}
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+template <typename HEAP>
+bool is_binary_heap(HEAP heap, int left, int right) {
+  if (left > right) return true;
+  if ((2*left <= right && heap[2*left+1] > heap[left]) || (2*left+2 <= right && heap[2*left+2] > heap[right])) return false;
+  return is_binary_heap(heap, 2*left+1, right) && is_binary_heap(heap, 2*left+2, right);
+}
+
+int main() {
+  BinaryHeap<int> h;
+  for (int i = 0; i < 5; ++i) {
+    h.insert(i);
+    std::cout << i << std::endl;
+  }
+  std::cout << is_binary_heap(h, 0, 4) << std::endl;
+  std::cout << is_binary_heap(new int[] {1,2,3,4,5}, 0, 4) << std::endl;
+}
+\end{lstlisting}
+\subsubsection{binomial heap}
+\label{sec:orgd6615d4}
+some info taken from \url{http://staff.ustc.edu.cn/\~csli/graduate/algorithms/book6/chap20.htm}\\[0pt]
+\begin{definition}
+a \textbf{binomial heap} is a \hyperref[sec:org39a1299]{concrete data type} that implements the \hyperref[sec:org9903735]{heap} using a set of \hyperref[sec:org6e9f2b7]{binomial tree}s\\[0pt]
+
+\begin{characteristic}
+\hyperref[sec:orgff15739]{binary heap}s, binomial heaps, and fibonacci heaps are all inefficient in their support of the operation \texttt{SEARCH}; it can take a while to find a node with a given key. for this reason, operations such as \texttt{DECREASE-KEY} and \texttt{DELETE} that refer to a given node require a pointer to that node as part of their input. this requirement poses no problem in many applications.\\[0pt]
+\end{characteristic}
+\end{definition}
+\paragraph{binomial tree}
+\label{sec:org6e9f2b7}
+\begin{definition}
+a \textbf{binomial tree} is defined recursively as follows:\\[0pt]
+\begin{itemize}
+\item a binomial tree of order 0 is a single node\\[0pt]
+\item a binomial tree of order \(k\) has a root node whose children are roots of binomial trees of orders, \(k-1,k-2,\ldots,2,1,0\) (in this order)\\[0pt]
+\end{itemize}
+
+\begin{characteristic}
+each binomial tree in a heap obeys the \hyperref[sec:orgc87ebb0]{min heap} property\\[0pt]
+this ensures that the root of each binomial tree contains the smallest key in the tree. it follows that the smallest key in the entire heap is one of the roots.\\[0pt]
+\end{characteristic}
+
+\begin{characteristic}
+there can be at most one binomial tree for each order, including order 0\\[0pt]
+this property implies that a binomial heap with \(n\) nodes consists of at most \(1+\log_2n\) binomial trees. the number and orders of these trees are uniquely determined by the number of nodes \(n\): there is one binomial tree for each nonzero bit in the binary representation of the number \(n\). for example, the decimal number 13 is 1101 in binary, \(2^3+2^2+2^0\), and thus a binomial heap with 13 nodes will consist of three binomial trees of orders 3, 2, and 0 (see the \hyperref[orgd409229]{figure below}).\\[0pt]
+\end{characteristic}
+
+\begin{my_example}
+a binomial heap of order 3:\\[0pt]
+
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/mmqMhmW}
+\end{center}\\[0pt]
+\end{my_example}
+
+\begin{my_example}
+this is an example binomial heap that consists of 13 nodes and 3 binomial trees\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/ejJXe51}
+\label{orgd409229}
+\end{center}\\[0pt]
+\end{my_example}
+
+\begin{characteristic}
+a binomial tree of order \(k\) has \(2^{k}\) nodes and height \(k\). the name comes from the shape: a binomial tree of order k has \(\binom{k}{d}\) nodes at depth \(d\), a \href{20221204105120-combinatorics.org}{binomial coefficient}. because of its structure, a binomial tree of order \(k\) can be constructed from two trees of order \(k-1\) by attaching one of them as the leftmost child of the root of the other tree. This feature is central to the \hyperref[sec:org6a4cc43]{merge} operation of a binomial heap, which is its major advantage over other conventional heaps.\\[0pt]
+\end{characteristic}
+\end{definition}
+\paragraph{implementation}
+\label{sec:orge873736}
+because no operation requires random access to the root nodes of the binomial trees, the roots of the binomial trees can be stored in a \hyperref[sec:org3b67cf5]{linked list}, ordered by increasing order of the tree. because the number of children for each node is variable, it does not work well for each node to have separate links to each of its children, as would be common in a \hyperref[sec:org254f5f7]{binary tree}; instead, it is possible to implement this tree using links from each node to its highest-order child in the tree, and to its sibling of the next smaller order than it. these sibling pointers can be interpreted as the next pointers in a linked list of the children of each node, but with the opposite order from the linked list of roots: from largest to smallest order, rather than vice versa. this representation allows two trees of the same order to be linked together, making a tree of the next larger order, in constant time.\\[0pt]
+each node \texttt{x} has a key field and contains pointers \texttt{parent(x)} to its parent, \texttt{child(x)} to its leftmost child, and \texttt{sibling(x)} to the sibling of x immediately to its right. if node x is a root, then \texttt{parent(x) = nil}. if node x has no children, then \texttt{child(x) = nil}, and if x is the rightmost child of its parent, then \texttt{sibling(x) = nil}. each node x also contains the field \texttt{degree(x)}, which is the number of children of x.\\[0pt]
+the roots of the binomial trees within a binomial heap are organized in a linked list, which we refer to as the \textbf{root list}. the degrees of the roots strictly increase as we traverse the root list. in an n-node binomial heap the degrees of the roots are a subset of \({0,1,\ldots,\lg n}\). the sibling field has a different meaning for roots than for nonroots. if x is a root, then \texttt{sibling(x)} points to the next root in the root list. (as usual, \texttt{sibling(x) = nil} if x is the last root in the root list.)\\[0pt]
+a given binomial heap \texttt{h} is accessed by the field \texttt{head(h)}, which is simply a pointer to the first root in the root list of h. if binomial heap H has no elements, then \texttt{head[h] = nil}.\\[0pt]
+\subparagraph{create}
+\label{sec:orgb19781c}
+to make an empty binomial heap, the \texttt{MAKE-BINOMIAL-HEAP} procedure simply allocates and returns an object \texttt{h}, where \texttt{head[h] = nil}. the running time is \(O(1)\).\\[0pt]
+\subparagraph{union}
+\label{sec:org6a4cc43}
+the operation of uniting two binomial heaps is used as a subroutine by most of the remaining operations. merging of binomial trees is done by comparing the keys at the roots of two trees, and the root node with the larger key will become the child of the root with the smaller key. the time complexity for finding a union is \(O(\log n)\).\\[0pt]
+to perform the union of two binomial heaps, first we \textbf{merge} the heaps into one, such that the trees in the resulting heap would be in monotonically ascending order, then we traverse through the roots of the binomial trees, we consider the following cases where \texttt{x} denotes the current root:\\[0pt]
+\begin{enumerate}
+\item if \texttt{degree(x)} is not equal to \texttt{degree(next(x))}, then move the pointer ahead\\[0pt]
+\item if \texttt{degree(x) = degree(next(x)) = degree(next(next(x)))} then move the pointer ahead\\[0pt]
+\item if \texttt{degree(x) = degree(next(x))} but not equal to \texttt{degree(next(next(x)))}, and \texttt{key(x) < key(next(x))} then remove \texttt{next(x)} from root and attach it to x\\[0pt]
+\item if \texttt{degree(x) = degree(next(x))} but not equal to \texttt{degree(next(next(x)))} and \texttt{key(x) > key(next(x))} then remove x from root and attach it to \texttt{next(x)}.\\[0pt]
+\end{enumerate}
+because each binomial tree in a binomial heap corresponds to a bit in the binary representation of its size, there is an analogy between the merging of two heaps and the binary addition of the sizes of the two heaps, from right-to-left. whenever a carry occurs during addition, this corresponds to a merging of two binomial trees during the merge.\\[0pt]
+each binomial tree's traversal during merge only involves roots, hence making the time taken at the biggest order \(\log_2n\) and therefore the running time is \(O(\log n)\).\\[0pt]
+\subparagraph{insert}
+\label{sec:org27eb891}
+inserting a new element to a heap can be done by creating a new heap containing only this element and then \hyperref[sec:org6a4cc43]{merging} it with the original heap. because of the merge, a single insertion takes time \(O(\log n)\). however, this can be sped up using a merge procedure that shortcuts the merge after it reaches a point where only one of the merged heaps has trees of larger order. with this speedup, across a series of \(k\) consecutive insertions, the total time for the insertions is \(O(k+\log n)\). another way of stating this is that (after logarithmic overhead for the first insertion in a sequence) each successive insert has an amortized time of \(O(1)\) (i.e. constant time) per insertion.\\[0pt]
+a variant of the binomial heap, the skew binomial heap, achieves constant worst case insertion time by using forests whose tree sizes are based on the skew binary number system rather than on the binary number system.\\[0pt]
+\subparagraph{delete}
+\label{sec:orge4c8c42}
+\paragraph{BinomialHeapNode}
+\label{sec:org0e43f69}
+\begin{lstlisting}[language=C++,label=lst:orgdb5817d,caption= ,captionpos=b,numbers=none]
+template <typename K, typename V>
+class KeyValue {
+private:
+  K key;
+  V value;
+
+public:
+  KeyValue(K key, V value) {
+    this->key = key;
+    this->value = value;
+  }
+  K get_key() {
+    return this->key;
+  }
+  V get_value() {
+    return this->value;
+  }
+  void set_value(V value) {
+    this->value = value;
+  }
+  void set_key(K key) {
+    this->key = key;
+  }
+  friend bool operator <(const KeyValue<K, V>& c1, const KeyValue<K, V>& c2) {
+    return c1.key < c2.key;
+  }
+  friend bool operator >(const KeyValue<K, V>& c1, const KeyValue<K, V>& c2) {
+    return c1.key > c2.key;
+  }
+};
+#include <cassert>
+
+template <typename T>
+class Node : public KeyValue<int, T> {
+private:
+  Node<T>* next;
+
+public:
+  Node(int key, T value) : KeyValue<int, T>(key, value) {}
+  Node(int key) : KeyValue<int, T>(key, key) {}
+  Node<T>* get_next() {
+    return this->next;
+  }
+  void set_next(Node<T>* next) {
+    assert(this != next);
+    this->next = next;
+  }
+  bool has_next() {
+    return this->next != nullptr;
+  }
+  Node<T>* get_tail() {
+    Node<T>* n;
+    for (n = this; n->get_next() != nullptr; n = n->get_next());
+    return n;
+  }
+};
+
+template <typename T>
+class BinomialHeapNode : public Node<T> {
+private:
+  BinomialHeapNode<T>* parent;
+  BinomialHeapNode<T>* child; /* leftmost child */
+  /* right sibling is the field "next" of the parent class */
+public:
+  BinomialHeapNode(int key, T value) : Node<T>(key, value) {}
+  BinomialHeapNode(int key) : Node<T>(key, key) {}
+  BinomialHeapNode<T>* get_parent() {
+    return this->parent;
+  }
+  BinomialHeapNode<T>* get_child() {
+    return this->child;
+  }
+  void set_child(BinomialHeapNode<T>* node) {
+    if (node != nullptr)
+      node->set_parent(this);
+    this->child = node;
+  }
+  void set_parent(BinomialHeapNode<T>* node) {
+    this->parent = node;
+  }
+  bool has_child() {
+    return this->child != nullptr;
+  }
+  bool is_root() {
+    return this->parent == nullptr;
+  }
+  int degree() {
+    BinomialHeapNode<T>* n = this;
+    int degree = 0;
+    for (n = this; n->get_child() != nullptr; n = n->get_child()) {
+      degree++;
+    }
+    return degree;
+  }
+};
+\end{lstlisting}
+\paragraph{BinomialHeap}
+\label{sec:orgf04ace2}
+\begin{lstlisting}[language=C++,label=lst:org0b9ef25,caption= ,captionpos=b,numbers=none]
+template <typename K, typename V>
+class KeyValue {
+private:
+  K key;
+  V value;
+
+public:
+  KeyValue(K key, V value) {
+    this->key = key;
+    this->value = value;
+  }
+  K get_key() {
+    return this->key;
+  }
+  V get_value() {
+    return this->value;
+  }
+  void set_value(V value) {
+    this->value = value;
+  }
+  void set_key(K key) {
+    this->key = key;
+  }
+  friend bool operator <(const KeyValue<K, V>& c1, const KeyValue<K, V>& c2) {
+    return c1.key < c2.key;
+  }
+  friend bool operator >(const KeyValue<K, V>& c1, const KeyValue<K, V>& c2) {
+    return c1.key > c2.key;
+  }
+};
+#include <cassert>
+
+template <typename T>
+class Node : public KeyValue<int, T> {
+private:
+  Node<T>* next;
+
+public:
+  Node(int key, T value) : KeyValue<int, T>(key, value) {}
+  Node(int key) : KeyValue<int, T>(key, key) {}
+  Node<T>* get_next() {
+    return this->next;
+  }
+  void set_next(Node<T>* next) {
+    assert(this != next);
+    this->next = next;
+  }
+  bool has_next() {
+    return this->next != nullptr;
+  }
+  Node<T>* get_tail() {
+    Node<T>* n;
+    for (n = this; n->get_next() != nullptr; n = n->get_next());
+    return n;
+  }
+};
+
+template <typename T>
+class BinomialHeapNode : public Node<T> {
+private:
+  BinomialHeapNode<T>* parent;
+  BinomialHeapNode<T>* child; /* leftmost child */
+  /* right sibling is the field "next" of the parent class */
+public:
+  BinomialHeapNode(int key, T value) : Node<T>(key, value) {}
+  BinomialHeapNode(int key) : Node<T>(key, key) {}
+  BinomialHeapNode<T>* get_parent() {
+    return this->parent;
+  }
+  BinomialHeapNode<T>* get_child() {
+    return this->child;
+  }
+  void set_child(BinomialHeapNode<T>* node) {
+    if (node != nullptr)
+      node->set_parent(this);
+    this->child = node;
+  }
+  void set_parent(BinomialHeapNode<T>* node) {
+    this->parent = node;
+  }
+  bool has_child() {
+    return this->child != nullptr;
+  }
+  bool is_root() {
+    return this->parent == nullptr;
+  }
+  int degree() {
+    BinomialHeapNode<T>* n = this;
+    int degree = 0;
+    for (n = this; n->get_child() != nullptr; n = n->get_child()) {
+      degree++;
+    }
+    return degree;
+  }
+};
+
+template <typename T>
+class BinomialHeap {
+private:
+  BinomialHeapNode<T>* head = nullptr;
+public:
+  BinomialHeap() = default;
+  BinomialHeap(BinomialHeapNode<T>* head) {
+    this->head = head;
+  }
+  int order() {
+    BinomialHeapNode<T>* tail = head->get_tail();
+    return tail->degree();
+  }
+  bool is_empty() {
+    return this->head == nullptr;
+  }
+  BinomialHeap<T>* insert(BinomialHeapNode<T>* node) {
+    if (this->is_empty())
+      this->head = node;
+    else
+      this->unite(new BinomialHeap<T>(node));
+    return this;
+  }
+  BinomialHeapNode<T>* get_head() {
+    return this->head;
+  }
+  void merge(BinomialHeap<T>* other) {
+    BinomialHeapNode<T>* this_iterator = this->head;
+    BinomialHeapNode<T>* n = other->head;
+    while (n != nullptr) {
+      while (this_iterator->has_next() && ((BinomialHeapNode<T>*)this_iterator->get_next())->degree() < n->degree())
+        this_iterator = (BinomialHeapNode<T>*)this_iterator->get_next();
+      BinomialHeapNode<T>* old_n_next = (BinomialHeapNode<T>*)n->get_next();
+      if (n->degree() < this->head->degree()) {
+        n->set_next(this->head);
+        this->head = n;
+        this->head->set_parent(nullptr); /* TODO should reset child and parent */
+      } else {
+        BinomialHeapNode<T>* old_this_next = (BinomialHeapNode<T>*)this_iterator->get_next();
+        this_iterator->set_next(n);
+        n->set_next(old_this_next);
+      }
+      n = old_n_next;
+    }
+  }
+  void unite(BinomialHeap<T>* other) {
+    this->merge(other);
+    BinomialHeapNode<T>* n = this->head;
+    BinomialHeapNode<T>* prev = nullptr;
+    while (n != nullptr && n->has_next()) {
+      BinomialHeapNode<T>* next = (BinomialHeapNode<T>*)n->get_next();
+      BinomialHeapNode<T>* nextnext = n->has_next() ? (BinomialHeapNode<T>*)n->get_next()->get_next() : nullptr;
+      bool next_same = next != nullptr && n->degree() == next->degree();
+      bool nextnext_same = nextnext != nullptr && n->degree() == nextnext->degree();
+      if (!next_same) {
+        prev = n;
+        n = (BinomialHeapNode<T>*)n->get_next();
+        // std::cout << "case 1" << std::endl;
+      } else if (next_same && nextnext_same) {
+        prev = n;
+        n = (BinomialHeapNode<T>*)n->get_next();
+        // std::cout << "case 2" << std::endl;
+      } else if (next_same && !nextnext_same && n->get_key() < next->get_key()) {
+        // remove next and attach it to n
+        // std::cout << "attaching " << next->get_key() << " to " << n->get_key() << std::endl;
+        next->set_next(n->get_child());
+        n->set_next(nextnext);
+        n->set_child(next);
+        // std::cout << "case 3" << std::endl;
+      } else if (next_same && !nextnext_same && n->get_key() > next->get_key()) {
+        // remove n and attach it to next
+        // std::cout << "attaching " << n->get_key() << " to " << next->get_key() << std::endl;
+        BinomialHeapNode<T>* new_n = next;
+        n->set_next(next->get_child());
+        if (prev != nullptr) {
+          prev->set_next(next);
+        } else { /* its the first root now */
+          this->head = next;
+        }
+        next->set_child(n);
+        // std::cout << "case 4" << std::endl;
+        n = new_n;
+      }
+    }
+  }
+};
+\end{lstlisting}
+
+example usage:\\[0pt]
+
+\begin{lstlisting}[language=C++,label= ,caption= ,captionpos=b,numbers=none]
+#include <iostream>
+
+
+
+int main() {
+  BinomialHeap<int> b;
+  for (int i = 0; i < 15; ++i) {
+    std::cout << "inserting " << i << std::endl;
+    b.insert(new BinomialHeapNode<int>(i));
+    print_latex_forest(b.get_head());
+  }
+}
+\end{lstlisting}
+
+inserting 0\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_bg8TDWx}
+\end{center}\\[0pt]
+
+inserting 1\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_AiseR0l}
+\end{center}\\[0pt]
+
+inserting 2\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_pdRlT1g}
+\end{center}\\[0pt]
+
+inserting 3\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_FxYpK8t}
+\end{center}\\[0pt]
+
+inserting 4\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_yIMqZAJ}
+\end{center}\\[0pt]
+
+inserting 5\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_YPj1bvG}
+\end{center}\\[0pt]
+
+inserting 6\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_dXUsV8h}
+\end{center}\\[0pt]
+
+inserting 7\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_VQSCx4j}
+\end{center}\\[0pt]
+
+inserting 8\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_bPWHhV3}
+\end{center}\\[0pt]
+
+inserting 9\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_ApTqukD}
+\end{center}\\[0pt]
+
+inserting 10\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_UmxmjVx}
+\end{center}\\[0pt]
+
+inserting 11\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_EEjJAzU}
+\end{center}\\[0pt]
+
+inserting 12\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_f8PL47H}
+\end{center}\\[0pt]
+
+inserting 13\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_UfMOIm8}
+\end{center}\\[0pt]
+
+inserting 14\\[0pt]
+\begin{center}
+\includesvg[width=.9\linewidth]{/Users/mahmooz/brain/out/tmp_aITCAjb}
+\end{center}\\[0pt]
+\subsection{hash table}
+\label{sec:org4f64d21}
+\begin{definition}
+a \textbf{hash table}, is an \hyperref[sec:orga3b31cf]{abstract data type} that maps keys to values. a hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found. during lookup, the key is hashed and the resulting hash indicates where the corresponding value is stored.\\[0pt]
+it contains the following functions:\\[0pt]
+\begin{itemize}
+\item \texttt{Insert(A, x)}\\[0pt]
+\item \texttt{Delete(A, x)}\\[0pt]
+\item \texttt{Search(A, x)}\\[0pt]
+\end{itemize}
+\end{definition}
+\subsection{theorems}
+\label{sec:org97a5c46}
+\begin{lemma}
+the number of \hyperref[sec:orgec4976f]{node}s in a \hyperref[sec:org8d4eeb6]{complete tree} of height \(h\) is \(n = 2^h-1\)\\[0pt]
+\begin{proof}
+we add all the nodes in a given complete tree according to their levels to get \(n = 1+2+2^2+\cdots+2^{h-1}=2^h-1\)\\[0pt]
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+the height of a complete tree with \(n\) nodes is \(\log_2(n+1)\)\\[0pt]
+\begin{proof}
+according to the previous lemma \(n+1 = 2^h\), therefore \(h = \log_2(n+1)\)\\[0pt]
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+the number of \hyperref[sec:orge114c93]{leaves} in a complete tree with \(n\) nodes and height \(h\) is \(2^{h-1}\)\\[0pt]
+\begin{proof}
+using \href{20220707193301-mathematical_induction.org}{induction}\\[0pt]
+the base case is \(h=1\), a complete tree of height 1 contains 1 node only which is a leaf, so \(2^{h-1}=2^{1-1}=2^0=1\)\\[0pt]
+we assume the statement holds true for every \(h \leq i\)\\[0pt]
+we prove the statements holds true for \(h=i+1\), looking at a complete tree of height \(i+1\), we can build it using a tree of height \(i\) by adding 2 children to every leaf, so \(2 \cdot 2^{i-1} = 2^i\) which means the statement holds true for \(i+1\)\\[0pt]
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+the number of leaves in a complete tree that holds \(n\) nodes is \(\frac{n+1}{2}\)\\[0pt]
+\begin{proof}
+we denote by \(h\) the height of the tree:\\[0pt]
+\[
+  \text{number of leaves} = 2^{h-1} = 2^{\log_2(n+1)-1} = \frac{2^{\log_2(n+1)}}{2} = \frac{n+1}{2}
+\]\\[0pt]
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+in an \hyperref[sec:orgcd32ba8]{almost complete tree}, the number of nodes in a specific level is 2 times the number of nodes in level before it (except for perhaps the last level)\\[0pt]
+\end{lemma}
+
+\begin{lemma}
+the height of an almost complete tree with \(n\) nodes is \(\floor*{\log_2 n}\)\\[0pt]
+\end{lemma}
+
+\begin{lemma}
+the number of leaves in an almost complete tree with \(n\) nodes is \(\ceil*{\frac{n}{2}}\)\\[0pt]
+\end{lemma}
+
+\begin{lemma}
+the number of nodes with height \(i\) in an almost complete tree with \(n\) nodes is \(\ceil*{\frac{n}{2^i+1}}\)\\[0pt]
+\end{lemma}
+
+\begin{lemma}
+for every almost \hyperref[sec:orgcd32ba8]{almost complete tree}complete tree with \(n\) nodes and height \(h\), \(2^{h-1} \leq n \leq 2^h-1\)\\[0pt]
+\begin{proof}
+the biggest almost complete tree of height \(h\) is a complete tree and so \(n \leq \text{nodes in complete tree of height h} = 2^h-1\)\\[0pt]
+the smallest almost complete tree of height \(h\) can be constructed by adding a left child to the leftmost leaf of a complete tree of height \(h-1\), \(n \geq \text{number of nodes in tree of height h-1 plus one} = 2^{h-1}-1+1=2^{h-1}\)\\[0pt]
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+for every almost complete tree with \(n\) nodes and height \(h\), \(\log_2(n+1) \leq h \leq 1+\log_2{n}\)\\[0pt]
+\end{lemma}
+
+\begin{lemma}
+for every almost complete tree with \(n\) nodes and height \(h\), \(2^{h-2} \leq \text{number of leaves} \leq 2^{h-1}\)\\[0pt]
+\end{lemma}
+\subsection{data structures average time complexity table}
+\label{sec:orge3dab2d}
+\begin{note}
+that \(O(h)\) is usually but not necessarily equal to \(O(\log n)\) (when talking about \hyperref[sec:org6b67a14]{tree}s) as sometimes \(h > \log n\)\\[0pt]
+see \url{https://stackoverflow.com/questions/12258114/big-oh-vs-big-ologn-in-trees}\\[0pt]
+\end{note}
+\begin{center}
+\begin{tabular}{lll}
+\hyperref[sec:org8f50ccd]{data structure} & insert & search\\[0pt]
+\hline
+\hyperref[sec:org3b67cf5]{linked list} & \(O(1)\) & \(O(n)\)\\[0pt]
+\hyperref[sec:orgd284d9b]{array list} & \(O(1)\) & \(O(n)\)\\[0pt]
+\hyperref[sec:org4f64d21]{Hash table} & \(O(1)\) & \(O(1)\)\\[0pt]
+\hyperref[sec:orgd6615d4]{binomial heap} & \(O(\log n)\) & \(O(\log n)\)\\[0pt]
+\hyperref[sec:orgff15739]{binary heap} & \(O(\log n)\) & \(O(\log n)\)\\[0pt]
+\hyperref[sec:orga0bf8b2]{Queue} & \(O(1)\) & \(O(n)\)\\[0pt]
+\hyperref[sec:org1fa0f82]{Stack} & \(O(1)\) & \(O(n)\)\\[0pt]
+\hyperref[sec:orge1ff544]{binary search tree} & \(O(h)\) & \(O(h)\)\\[0pt]
+\hyperref[sec:orge9da911]{AVL tree} & \(O(\log n)\) & \(O(\log n)\)\\[0pt]
+\hyperref[sec:org1df410f]{2-3 tree} & \(O(\log n)\) & \(O(\log n)\)\\[0pt]
+\end{tabular}
+\end{center}
+\end{document}

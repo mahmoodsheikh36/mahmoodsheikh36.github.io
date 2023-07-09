@@ -1,0 +1,138 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{formal system}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={formal system},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{note}
+this document and others can be found on my website\\
+\url{https://mahmoodsheikh36.github.io/}
+\end{note}
+\begin{definition}
+a \textbf{formal system} is an abstract structure used for inferring theorems from \href{20230525165114-axiom.org}{axiom} according to a set of \href{20230524202636-rule_of_inference.org}{rules of inference} which are used for carrying out the inference of theorems from axioms.\\[0pt]
+\end{definition}
+\begin{my_example}
+consider the following formal system \(L_\to\):\\[0pt]
+it has the following axioms:\\[0pt]
+\begin{itemize}
+\item A1. \(\alpha \to (\beta \to \alpha)\)\\[0pt]
+\item A2. \((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma))\)\\[0pt]
+\item A3. \((\lnot \beta \to \lnot \alpha) \to ((\lnot \beta \to \alpha) \to \beta)\)\\[0pt]
+\end{itemize}
+we can substitute any propsitions inplace of \(\beta,\alpha,\gamma\) with the \href{20230401203310-logical_connective.org}{connective}s \(\lnot, \to\) only\\[0pt]
+the only rule of inference for this system is \href{20230524210722-modus_ponens.org}{mp}\\[0pt]
+\end{my_example}
+\begin{definition}
+the \href{20230525071323-formal_proof.org}{inference process} in the context of a formal system is as follows:\\[0pt]
+let \(\Gamma\) be the set of \href{20230524212241-premise.org}{premise}s (propositions), a proof sequence from \(\Gamma\) is the sequence \(a_1,a_2,\dots,a_n\) such that each statement in the sequence is one of 3 types:\\[0pt]
+\begin{enumerate}
+\item logical axiom\\[0pt]
+\item a statement from \(\Gamma\)\\[0pt]
+\item is derived from previous statements in the sequence using one of the rules of inference of the system\\[0pt]
+\end{enumerate}
+\begin{my_example}
+premises: \(\alpha \to \beta, \beta \to \gamma\)\\[0pt]
+\href{20230524212250-conclusion.org}{conclusion}: \(\alpha \to \gamma\)\\[0pt]
+\begin{proof}
+\begin{align*}
+  1.\ & \alpha \to \beta & P\\
+  2.\ & \beta \to \gamma & P\\
+  3.\ & (\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)) & A2\\
+  4.\ & (\beta \to \gamma) \to (\alpha \to (\beta \to \gamma)) & A1\\
+  5.\ & \alpha \to (\beta \to \gamma) & 2,4,MP\\
+  6.\ & (\alpha \to \beta) \to (\alpha \to \gamma) & 5,3,MP\\
+  7.\ & \alpha \to \gamma & 1,6,MP
+\end{align*}
+\end{proof}
+\end{my_example}
+\begin{my_example}
+proof that \(x \to x\) is a \href{20230525062442-tautology.org}{tautology}\\[0pt]
+\begin{proof}
+\begin{align*}
+  1.\ & x \to ((x \to x) \to x) & A1\\
+  2.\ & (x \to ((x \to x) \to x)) \to ((x \to (x \to x)) \to (x \to x)) & A2\\
+  3.\ & ((x \to (x \to x)) \to (x \to x)) & 1,2,MP\\
+  4.\ & x \to (x \to x) & A1\\
+  5.\ & x \to x & 4,3,MP
+\end{align*}
+\end{proof}
+\end{my_example}
+\begin{my_example}
+an extended formal system \(L_2\)\\[0pt]
+axioms:\\[0pt]
+A. \(a \lor \lnot a\) such that \(a\) is an arbitrary proposition\\[0pt]
+inference rules:  the inference rules based on the logical equivalences and derivations that appear on the \href{20230525082155-logic_formulas.org}{formulas page}\\[0pt]
+\begin{subquestion}
+prove \(\{D \to B, B \to A, D\} \vdash A\)\\[0pt]
+premises: \(D \to B, B \to A, D\)\\[0pt]
+conclusion: \(A\)\\[0pt]
+\begin{proof}
+\begin{align*}
+  1.\ & D & P\\
+  2.\ & D \to B & P\\
+  3.\ & B & 1,2,I11\\
+  4.\ & B \to A & P\\
+  5.\ & A & 3,4,I11\\
+\end{align*}
+\end{proof}
+\end{subquestion}
+\begin{subquestion}
+prove using the inference process that\\[0pt]
+\begin{itemize}
+\item we can infer "joseph doesnt speak truthfully" from the assumptions "joseph doesnt speak truthfully or joseph is lazy" and "joseph isnt lazy"\\[0pt]
+\item we can infer \(G \land \lnot E\) from the assumptions \(A \to G, D \land \lnot E, D \to B, B \land A\)\\[0pt]
+\item we can infer \(A\) from \(R \to (S \lor A), (P \lor Q) \to R, Q \land (\lnot S)\)\\[0pt]
+\end{itemize}
+\end{subquestion}
+\end{my_example}
+\end{definition}
+sometimes we might want to prove a conclusion \(C\) with an empty set of premises: \(\vdash C\). an argument of this form is valid if \(C\) is a tautology. meaning \(C\) is a tautology iff we can prove that its always true without the need for assumptions: for example \(\vdash (p \land \lnot p) \to r\):\\[0pt]
+\begin{align*}
+  1.\ & p \lor \lnot p & A \quad (\text{axiom})\\
+  2.\ & \lnot p \lor p & 1,E10\\
+  3.\ & \lnot p \lor \lnot (\lnot p) & 2,E9\\
+  4.\ & \lnot (p \land \lnot p) & 3,E17\\
+  5.\ & \lnot (p \land \lnot p) \lor r & 4,I1\\
+  5.\ & (p \land \lnot p) \to r & 5,E20
+\end{align*}
+\begin{lemma}
+if \(\vdash \alpha\) then \(\alpha\) is a tautology, i.e. a proposition that can be formally proved without assumptions is a tautology\\[0pt]
+\end{lemma}
+\begin{lemma}
+if \(\Gamma \vdash \alpha\) then \(\Gamma \implies \alpha\)\\[0pt]
+meaning that every \href{20230401175139-statement.org}{proposition} that has a \href{20230525071323-formal_proof.org}{formal proof} in the set of premises \(\Gamma\) logically follows from \(\Gamma\)\\[0pt]
+\end{lemma}
+\begin{definition}
+a system is \textbf{complete} if for every set of assumptions \(\Gamma\), if \(\Gamma \implies \alpha\) then \(\Gamma \vdash \alpha\), i.e. we can \href{20230525071323-formal_proof.org}{formally prove} every true argument with it\\[0pt]
+\begin{lemma}
+\((\Gamma \implies \alpha) \iff (\Gamma \vdash \alpha)\)\\[0pt]
+\end{lemma}
+\begin{lemma}
+let \(\Gamma\) be a set of assumptions, let \(\alpha,\beta\) be statements, then \(\Gamma \cup \{\alpha\} \vdash \beta\) iff \(\Gamma \vdash (\alpha \to \beta)\)\\[0pt]
+\end{lemma}
+\begin{lemma}
+let \(\Gamma\) be a set of assumptions, let \(\alpha,\beta\) be statements, then \(\Gamma \cup \{\alpha\} \implies \beta\) iff \(\Gamma \implies (\alpha \to \beta)\)\\[0pt]
+\end{lemma}
+\end{definition}
+\end{document}

@@ -1,0 +1,63 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{huffman coding}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={huffman coding},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\textbf{Huffman code} is a particular type of optimal \href{20230119174917-prefix_code.org}{prefix code} that is commonly used for lossless data compression\\
+\begin{my_example}
+the problem that huffman code solves is the following:\\
+\uline{input}: a \href{20230119193145-code_tree.org}{leaf array} that corresponds to a file \(F\)\\
+\uline{output}: optimal \href{20230119193145-code_tree.org}{code tree} of \(F\), \(T_{out}\)\\
+consider the following leaf array\\
+\begin{tabular}{lr}
+char & freq\\
+\hline
+a & 41\\
+b & 17\\
+c & 14\\
+d & 12\\
+e & 9\\
+f & 7\\
+\end{tabular}
+this is the application of \textbf{huffman coding} to the leaf array\\
+\includegraphics{./huffman_example.png}\\
+so we end up with the following code tree:\\
+\includegraphics{./huffman_example2.png}\\
+\end{my_example}
+\includesvg{/home/mahmooz/brain/out/qgNvgf9}\\
+
+the process begins with the leaf nodes containing the frequencies of the symbol they represent. then, the process takes the two nodes with smallest frequency, and creates a new internal node having these two nodes as children. the frequency of the new node is set to the sum of the frequencies of the children. we then apply the process again, on the new internal node and on the remaining nodes (i.e., we exclude the two leaf nodes), we repeat this process until only one node remains, which is the root of the huffman tree.\\
+the algorithm we proposed uses a priority queue where the node with lowest frequency is given highest priority:\\
+\begin{enumerate}
+\item create a leaf node for each symbol and add it to the priority queue.\\
+\item while there is more than one node in the queue:\\
+\begin{enumerate}
+\item remove the two nodes of highest priority (lowest frequency) from the queue\\
+\item create a new internal node with these two nodes as children and with frequency equal to the sum of the two nodes' frequencies.\\
+\item add the new node to the queue.\\
+\end{enumerate}
+\item the remaining node is the root node and the tree is complete.
+\end{enumerate}
+\end{document}

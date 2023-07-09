@@ -1,0 +1,207 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{pgffor}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{cancel}
+\usepackage{amsthm}
+\usepackage{polynom}
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{tikz-3dplot}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark,calc,fit,matrix,arrows,automata,positioning}
+\usepackage{centernot}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage[boxed,linesnumbered,vlined]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage{svg}
+\tikzstyle{every picture}+=[remember picture]
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dom}{domain}
+\DeclareMathOperator{\ran}{range}
+\DeclareMathOperator{\rng}{range}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\cov}{cov}
+\newcommand\dif[1]{\:\textrm{d}#1}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\ihat}{\hat{\textbf{\i}}}
+\newcommand{\jhat}{\hat{\textbf{\j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+\newcommand{\rhat}{\hat{\textbf{r}}}
+\newcommand{\thetahat}{\boldsymbol{\hat{\theta}}}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\cmark}{\text{\ding{51}}}
+\newcommand{\xmark}{\text{\ding{55}}}
+\author{mahmood}
+\date{\today}
+\title{time complexity}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={time complexity},
+ pdfkeywords={},
+ pdfsubject={time complexity of algorithms},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+\lstset{
+  language=C,                             % Code langugage
+  basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+  keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+  commentstyle=\color{gray},              % Comments font
+  numbers=left,                           % Line nums position
+  numberstyle=\tiny,                      % Line-numbers fonts
+  stepnumber=1,                           % Step between two line-numbers
+  numbersep=5pt,                          % How far are line-numbers from code
+  backgroundcolor=\color{lightlightgray}, % Choose background color
+  frame=single,                           % A frame around the code
+  tabsize=2,                              % Default tab size
+  captionpos=b,                           % Caption-position = bottom
+  breaklines=true,                        % Automatic line breaking?
+  breakatwhitespace=false,                % Automatic breaks only at whitespace?
+  showspaces=false,                       % Dont make spaces visible
+  showtabs=false,                         % Dont make tabls visible
+  columns=flexible,                       % Column format
+  morekeywords={__global__, __device__},  % CUDA specific keywords
+  showstringspaces=false,                 % dont show spaces in strings
+}
+% so that latex doesnt complain about sage not being a language
+\lstdefinelanguage{sage}{}
+
+% environment definition for special blocks
+\theoremstyle{definition}
+\newtheorem{my_example}{Example}
+\counterwithin{my_example}{section}
+\counterwithin{my_example}{subsection}
+\newtheorem{definition}{Definition}
+\counterwithin{definition}{section}
+\counterwithin{definition}{subsection}
+\newtheorem{characteristic}{Characteristic}
+\newtheorem{entailment}{Entailment}
+%\newtheore*{proof}{Proof}
+\newtheorem{lemma}{Lemma}
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Subquestion}[question]
+%\newtheorem{note}{Note}
+\newtheorem{answer}{Answer}
+\counterwithin{answer}{question}
+\counterwithin{answer}{subquestion}
+\newtheorem{step}{Step}[answer]
+
+% the following snippet auto resizes images to fit properly
+% Determine if the image is too wide for the page.
+% \makeatletter
+% \def\ScaleIfNeeded{%
+%   \ifdim\Gin@nat@width>\linewidth
+%     \linewidth
+%   \else
+%     \Gin@nat@width
+%   \fi
+% }
+% \makeatother
+% % Resize figures that are too wide for the page.
+% \let\oldincludegraphics\includegraphics
+% \renewcommand\includegraphics[2][]{%
+%   \oldincludegraphics[width=\ScaleIfNeeded]{#2}
+% }
+
+\newenvironment{note}
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, couleur=lightgray]{ note}}
+  {\end{bclogo}}
+\newenvironment{attention}
+  {\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, 
+                couleur=red!15]{Important!}}
+  {\end{bclogo}}
+
+\begin{note}
+the definitions here are proper\\[0pt]
+\end{note}
+\begin{definition}
+let \texttt{P} be a \href{20221223133700-computational_problem.org}{computational problem}, the complexity of \texttt{P} is the \href{20221130014441-time_complexity.org}{time complexity} of the the fastest possible algorithm that solves \texttt{P}\\[0pt]
+\end{definition}
+\begin{definition}
+the time complexity of an algorithm is defined as the amount of time taken by an algorithm to run, as a function of the length of the input\\[0pt]
+\end{definition}
+\begin{lemma}
+let \texttt{P} be a computational problem, let \(f(n)\) be a function over the \href{calculus2.org}{normal} numbers, to prove the time complexity of \texttt{P} to be equal to \(f(n)\) we have to show that:\\[0pt]
+\begin{enumerate}
+\item there exists an algorithm that solves \texttt{P} whose time complexity is \(\Theta(f(n))\)\\[0pt]
+\item the time complexity of every algorithm that solves \texttt{P} is atleast \(\Theta(f(n))\), i.e. the complexity is bound from below by \(f(n)\)\\[0pt]
+\end{enumerate}
+\begin{my_example}
+take the \texttt{merge} algorithm of \href{20230204143850-merge_sort.org}{merge sort} as an example, the time complexity of this algorithm is \(\Theta(n+m)\)\\[0pt]
+\uline{proving the upper bound}:\\[0pt]
+we already know that there exists a solution to \texttt{merge} whose time complexity is \(\Theta(n+m)\)\\[0pt]
+\uline{proving the lower bound}:\\[0pt]
+we have to show that there exists no \texttt{merge} algorithm whose time complexity is less than \(\Theta(n+m)\)\\[0pt]
+because every \texttt{merge} algorithm would have to construct the output vector whose size is \(n+m\) its time complexity cannot be lower than \(\Theta(n+m)\)\\[0pt]
+\end{my_example}
+\begin{my_example}
+consider the \texttt{sum} problem, i.e. a function that sums the numbers in its input vector, its time complexity is \(\Theta(n)\)\\[0pt]
+\uline{proving the lower bound}:\\[0pt]
+we already know that there exist \texttt{sum} functions that run in \(\Theta(n)\) time\\[0pt]
+\uline{proving the upper bound}:\\[0pt]
+we have to show that there exists no \texttt{sum} algorithm whose time complexity is less than \(\Theta(n)\)\\[0pt]
+because every \texttt{sum} algorithm would have to check each item in its input vector atleast ones, we know it has to perform atleast \texttt{n} operations, which means that its time complexity cannot be lower than \(\Theta(n)\)\\[0pt]
+\end{my_example}
+\end{lemma}
+\section{best case}
+\label{sec:org9d0d837}
+\begin{definition}
+best case is the time complexity of the case with the least work done, i.e. the case in which the time complexity is minimal\\[0pt]
+\end{definition}
+\section{average case}
+\label{sec:org710fb4b}
+\begin{definition}
+the average-case complexity of an \href{20220706211958-algorithm.org}{algorithm} is the amount of some computational resource (typically time) used by the algorithm, averaged over all possible inputs.\\[0pt]
+\end{definition}
+\section{worst case}
+\label{sec:org177a419}
+\begin{definition}
+worst case is the time complexity of the case with the most work done, i.e. the case in which the time complexity is maximal\\[0pt]
+\end{definition}
+\section{best conceivable runtime}
+\label{sec:org44596e3}
+the best conceivable runtime means it is the best time you can conceive that the problem could possibly be solved in, and it is definitely impossible for the problem to be solved faster than that\\[0pt]
+\section{examples}
+\label{sec:org69cae2b}
+\begin{my_example}
+\includesvg{/Users/mahmooz/.emacs.d/latex/foKhGee}\\[0pt]
+
+at first glance this might seem like a \(\Theta\left(n^3\right)\) algorithm but its time complexity is actually \(\Theta\left(n^2\right)\)\\[0pt]
+we track the variable \texttt{lastp}, every time we enter the third inner loop it is decremented and is never incremented until it reaches a point at which the \texttt{while} loop wouldnt execute anymore, this can happen \texttt{N} times at most\\[0pt]
+each time the first main loop run, the second and third inner loop both may \textbf{in total} run \texttt{N} times at most because they are both bound by \texttt{lastp} and \texttt{j} which get closer to each other every time either loop runs\\[0pt]
+and so the time complexity of the two inner loops is bound by \(\Theta(N)\), which means the algorithm is bound by \(\Theta(N^2)\)\\[0pt]
+\end{my_example}
+\end{document}

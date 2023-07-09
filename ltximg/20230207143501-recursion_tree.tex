@@ -1,0 +1,145 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{recursion tree}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={recursion tree},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{my_example}
+consider the following \\[0pt]
+\[ T(n) = T\left(\frac{n}{3}\right) + T\left(\frac{2n}{3}\right) + n \]\\[0pt]
+a note to keep in mind is that the sum of all the nodes of the tree must always be equal to \(T(n)\)\\[0pt]
+with that in mind, the first step would be:\\[0pt]
+\includesvg{/Users/mahmooz/brain/out/AT4XkK}\\[0pt]
+
+if we sum all the nodes we can see that indeed \(T(n) = T\left(\dfrac{2n}{3}\right) + T\left(\dfrac{n}{3}\right) + n\)\\[0pt]
+for the next step we need to write \(T\left(\dfrac{2n}{3}\right)\) and \(T\left(\dfrac{n}{3}\right)\) in terms of time complexity for smaller values of \(n\) so we can know what the next row of nodes would be\\[0pt]
+\begin{align*}
+  T\left(\frac{2n}{3}\right) &= T\left(\frac{2 \cdot \frac{2n}{3}}{3}\right) + T\left(\frac{\frac{2n}{3}}{3}\right) + \frac{2n}{3} = T\left(\frac{4n}{9}\right) + T\left(\frac{2n}{9}\right) + \frac{2n}{3}\\
+  T\left(\frac{n}{3}\right) &= T\left(\frac{2 \cdot \frac{n}{3}}{3}\right) + T\left(\frac{\frac{n}{3}}{3}\right) + \frac{n}{3} = T\left(\frac{2n}{9}\right) + T\left(\frac{n}{9}\right) + \frac{n}{3}
+\end{align*}
+according to this, the tree with the new nodes would be:\\[0pt]
+\includesvg{/Users/mahmooz/brain/out/e66eVE}\\[0pt]
+
+we define a \textbf{full row} as a row that is full of nodes, in the previous tree the rows \(1,2,3\) are full, we might notice that the sum of all the nodes of a full row is \(n\)\\[0pt]
+let \(y\) be the last full row\\[0pt]
+because the leftmost node is always the smallest in its row, for a row to be full the leftmost node has to be greater or equal to 1 (\(\dfrac{n}{3^y} \geq 1\) in this case)\\[0pt]
+if \(\dfrac{n}{3^y} \geq 1\) is true then the leftmost node in the row \(y+1\) whose value is \(\dfrac{n}{3^y}\) appears in the tree (because nodes with values greater or equal to 1 do appear in the tree), and so the row \(y+1\) is full, which results in a contradiction because \(y\) is the last full row\\[0pt]
+therefore it must be that \(\dfrac{n}{3^y} < 1 \Rightarrow n < 3^y \Rightarrow y > \log_3{n}\)\\[0pt]
+therefore the tree contains atleast \(\log_3{n}\) full rows, and because the sum of every full row is \(n\) we get:\\[0pt]
+\(T(n) =\) sum of all nodes = sum of nodes in full rows + sum of nodes in unfull rows \(\geq\) sum of nodes in full rows \(\geq\) \(n \cdot \log_3{n} = \Theta(n\log{n})\)\\[0pt]
+and therefore \(T(n) = \Omega(n\log{n})\)\\[0pt]
+let \(x\) be the last row in the tree, the value of the rightmost node in row \(x\) would be \({\left(\dfrac23\right)}^{x-1} \cdot n\)\\[0pt]
+if this value is less than 1 then this node doesnt appear in the tree and all the other nodes in row \(x\) that have a smaller value also dont exist which gives us a contradiction because \(x\) is the last row in the tree\\[0pt]
+therefore we get \({\left(\dfrac23\right)}^{x-1}n \geq 1 \Rightarrow n \geq {\left(\dfrac32\right)}^{x-1} \Rightarrow \log_{3/2}n \geq x - 1 \Rightarrow x \leq 1 + \log_{3/2}n\)\\[0pt]
+and therefore in the tree there is at most \(1 + \log_{3/2}n\) rows, and since the sum of every row in the tree is \(n\) we get:\\[0pt]
+\(T(n)\) = sum of all nodes = sum of all nodes in all rows \(\leq n \cdot\) number of rows in the tree \(\leq n \cdot (1+\log_{3/2}n) = \Theta(n\log{n})\)\\[0pt]
+and therefore \(T(n) = O(n\log{n})\)\\[0pt]
+in summery, we proved that \(T(n) = \Theta(n\log{n})\)\\[0pt]
+\end{my_example}
+\begin{my_example}
+consider the following \\[0pt]
+\[
+  T(n) = 2T\left(\frac{n}{8}\right) + 3T\left(\frac{n}{9}\right) + n
+\]\\[0pt]
+we cant determine \(\Theta\) using the , but we can using a recursion tree\\[0pt]
+the first step would be:\\[0pt]
+\includesvg{/Users/mahmooz/brain/out/0IoNVgg}\\[0pt]
+
+\begin{align*}
+  T\left(\frac{n}{8}\right) &= 2T\left(\frac{n}{8^2}\right) + 3T\left(\frac{n}{8\cdot9}\right) + \frac{n}{8}\\
+  T\left(\frac{n}{9}\right) &= 2T\left(\frac{n}{8\cdot9}\right) + 3T\left(\frac{n}{9^2}\right) + \frac{n}{9}
+\end{align*}
+\includesvg{/Users/mahmooz/brain/out/8OoGIIt}\\[0pt]
+
+the sum of the nodes in level 1 is \(n\), in level 2 its \(n\left(\frac{2}{8}+\frac{3}{9}\right)\), in level 3 its \(n\left(\frac{2}{8}+\frac{3}{9}\right)^2\), and so in level \(i\) it is \(n\left(\frac{2}{8}+\frac{3}{9}\right)^{i-1}\)\\[0pt]
+we denote by \(x\) the last level\\[0pt]
+\begin{align*}
+  T(n) &= \text{sum of all nodes}\\
+  &= \text{sum of all nodes in full rows}\\
+  &\leq n+n\left(\frac{2}{8}+\frac{3}{9}\right)+n\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+n\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\\
+  &\leq n\left(\left(\frac{2}{8}+\frac{3}{9}\right)+\left(\frac{2}{8}+\frac{3}{9}\right)^2+\cdots+\left(\frac{2}{8}+\frac{3}{9}\right)^{x-1}\right)\\
+  &= n\cdot \frac{1}{1-\left(\frac{2}{8}+\frac{3}{9}\right)}\\
+  &= \Theta(n)
+\end{align*}
+note the sum was found using \href{20220711182517-sum_of_geometric_progression.org}{geometric progression formula}\\[0pt]
+and so we have shown that \(T(n) = O(n)\)\\[0pt]
+\[
+  T(n) = \text{sum of all nodes in the tree} \ge \text{root} = n = \Theta(n)
+\]\\[0pt]
+and so we have shown that \(T(n) = \Omega(n)\)\\[0pt]
+and so \(T(n) = \Theta(n)\)\\[0pt]
+\end{my_example}
+\begin{my_example}
+\begin{note}
+this need some correction as the sum of the nodes in the tree isnt exactly \(2^{x-1}\)\\[0pt]
+\end{note}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
+best_sum(A, i) {
+  if i > size(A)
+    return 0
+  return max(best_sum(A, i+1), A[i] + best_sum(A, i+2))
+}
+\end{lstlisting}
+\begin{align*}
+  T(n) &= T(n-1) + T(n-2) + C\\
+  &\le 2T(n-1) + C\\
+  &\le 2(2T(n-2)+C) + C = 4T(n-2) + 3C\\
+  &\le 4(2T(n-3) + C) + 3C = 8T(n-3) + 7C\\
+  &\vdots\\
+  &\le 2^{n-1}T(n-(n-1)) + \left(2^{n-1}-1\right)C\\
+  &\le 2^{n-1}T(1) + \left(2^{n-1}-1\right)C\\
+  &\leq 2^n = \Theta(2^n)
+\end{align*}
+we proved \(T(n) = O(2^n)\), now we try showing \(T(n) = \Omega(2^n)\)\\[0pt]
+\begin{align*}
+  T(n) &= T(n-1) + T(n-2) + C\\
+  &\ge 2T(n-2) + C\\
+  &\ge 2(2T(n-4) + C) + C = 4T(n-4) + 3C\\
+  &\ge 4(2T(n-6) + C) + 3C = 8T(n-6) + 7C\\
+  &\vdots\\
+  &\ge 2^{n/2}T(n-(n-2)) + \left(2^{n/2}-1\right)C\\
+  &\ge 2^{n/2}T(2) + \left(2^{n/2}-1\right)C\\
+  &\ge 2^{n/2} = \Theta\left(2^{n/2}\right)
+\end{align*}
+and so we showed that \(T(n) = \Omega\left(2^{n/2}\right)\), which means there isnt a tight bound on the \href{20221130014441-time_complexity.org}{time complexity} of this function\\[0pt]
+using a \href{20230207143501-recursion_tree.org}{recursion tree}:\\[0pt]
+\includesvg{/Users/mahmooz/brain/out/QIrzGtq}\\[0pt]
+
+\begin{align*}
+  T(n) &= \text{sum of all nodes}\\
+  &= \text{sum of all nodes in all levels}\\
+  &\le 2^{x-1}\\
+  &\le 2^{x} = \Theta(2^x)
+\end{align*}
+we denote by \(y\) the last level with a full row, for this row to exist, \(n-2(y-1) \ge 0 \implies n+2 \ge 2y \implies \frac{n+2}{2} \ge y\), so we have \(\frac{n+2}{2}\) full rows\\[0pt]
+\begin{align*}
+  T(n) &= \text{sum of all nodes}\\
+  &\ge \text{sum of full rows}\\
+  &\ge \sum_{i=1}^{\frac{n+2}{2}} 2^{i-1}\\
+  &\ge 2^{\frac12n+1}-1\\
+  &\ge \frac{2^{n/2}}{2}-1
+\end{align*}
+the division by 2 doesnt affect big omega so \(T(n) = \Omega\left(2^{n/2}\right)\)\\[0pt]
+\end{my_example}
+\end{document}

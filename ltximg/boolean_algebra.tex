@@ -1,0 +1,711 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\usepackage{karnaugh-map}
+\usepackage{pgfplots}
+\usepackage{circuitikz}
+\author{mahmood}
+\date{\today}
+\title{boolean algebra}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={boolean algebra},
+ pdfkeywords={},
+ pdfsubject={boolean algebra course},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{definition}
+a variable can only be \(x \in \{0, 1\}\)\\
+\end{definition}
+\section{AND}
+\label{sec:org9085f40}
+\textbf{AND} is a \href{20221219005229-binary_operation.org}{binary operation}\\
+\begin{gather*}
+  \begin{cases}
+    0 \cdot 0 = 0\\
+    0 \cdot 1 = 0\\
+    1 \cdot 0 = 0\\
+    1 \cdot 1 = 1
+  \end{cases}
+\end{gather*}
+\section{OR}
+\label{sec:orga2f57d8}
+\textbf{OR} is a \href{20221219005229-binary_operation.org}{binary operation}\\
+\begin{gather*}
+  \begin{cases}
+    0 + 0 = 0\\
+    0 + 1 = 1\\
+    1 + 0 = 1\\
+    1 + 1 = 1
+  \end{cases}
+\end{gather*}
+\section{NOT}
+\label{sec:orgc9ff093}
+\textbf{NOT} is a \href{20221219005258-unary_operation.org}{unary operation}\\
+\begin{gather*}
+  \begin{cases}
+    0' = 1\\
+    1' = 0\\
+  \end{cases}
+\end{gather*}
+all of these expressions are equal: \(\lnot x,\overline x,x'\)\\
+\section{basic properties of boolean algebra}
+\label{sec:orga39f5c1}
+\subsection{idempotency}
+\label{sec:orgee24117}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    x + x = x\\
+    x \cdot x = x
+  \end{cases}
+\end{gather*}
+\end{lemma}
+\subsection{identity}
+\label{sec:orgf70aa8f}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    A \cdot 1 = A\\
+    A + 0 = A
+  \end{cases}
+\end{gather*}
+\end{lemma}
+\subsection{annulment}
+\label{sec:orgb37efbc}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    A \cdot 0 = 0\\
+    A + 1 = 1
+  \end{cases}
+\end{gather*}
+\end{lemma}
+\subsection{commutative}
+\label{sec:orgd01e956}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    x + y = y + x\\
+    x \cdot y = y \cdot x
+  \end{cases}
+\end{gather*}
+\end{lemma}
+\subsection{associativity}
+\label{sec:org4284a40}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    (x + y) + z = x + (y + z)\\
+    (x \cdot y) \cdot z = x \cdot (y \cdot z)\\
+  \end{cases}
+\end{gather*}
+\end{lemma}
+\subsection{complement}
+\label{sec:org5274b1f}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    x + x' = 1\\
+    x \cdot x' = 0
+  \end{cases}
+\end{gather*}
+\end{lemma}
+\subsection{distributivity}
+\label{sec:orgb7224e0}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    x \cdot (y + z) = x \cdot y + x \cdot z\\
+    x + y \cdot z = (x + y) \cdot (x + z)
+  \end{cases}
+\end{gather*}
+\end{lemma}
+\subsection{absorption 1}
+\label{sec:org3cc7272}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    x + x \cdot y = x\\
+    x \cdot (x + y) = x
+  \end{cases}
+\end{gather*}
+\begin{proof}
+\begin{align*}
+  x + x \cdot y &= x \cdot 1 + x \cdot y\\
+                &= x(1 + y)\\
+                &= x \cdot 1\\
+                &= x
+\end{align*}
+\begin{align*}
+  x \cdot (x + y) &= (x + 0)(x + y)\\
+                  &= x + 0 \cdot y\\
+                  &= x + 0\\
+                  &= x
+\end{align*}
+\end{proof}
+\end{lemma}
+\subsection{absorption 2}
+\label{sec:orgd64ef6a}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    x + x' \cdot y = x + y\\
+    x \cdot (x' + y) = x \cdot y
+  \end{cases}
+\end{gather*}
+\begin{proof}
+\begin{align*}
+  x + x' \cdot y &= (x + x') \cdot (x + y)\\
+                 &= 1 \cdot (x + y)\\
+                 &= x + y
+\end{align*}
+\end{proof}
+\end{lemma}
+\subsection{consensus}
+\label{sec:org283a0d1}
+\begin{lemma}
+\begin{gather*}
+  \begin{cases}
+    x \cdot y + x' \cdot z + y \cdot z = x \cdot y + x' \cdot z\\
+    (x + y)(x' + z)(y + z) = (x + y)(x' + z)
+  \end{cases}
+\end{gather*}
+\begin{proof}
+\begin{align*}
+  x \cdot y + x' \cdot z + y \cdot z &= x \cdot y + x' \cdot z + y \cdot z \cdot 1\\
+                                     &= x \cdot y + x' \cdot z + y \cdot z \cdot (x + x')\\
+                                     &= xy + x'z + yzx + yzx'\\
+                                     &= xy(1 + z) + x'z(1 + y)\\
+                                     &= xy + x'z
+\end{align*}
+\end{proof}
+\end{lemma}
+\subsection{De Morgan}
+\label{sec:org6ad57b0}
+\begin{lemma}
+\begin{note}
+not sure yet what the 4th formula refers to\\
+\end{note}
+\begin{gather*}
+  \begin{cases}
+    \overline{(\overline{x})} = x\\
+    \overline{(x + y)} = \overline{x} \cdot \overline{y}\\
+    \overline{(xy)} = \overline{x} + \overline{y}\\
+    [T(x_1, x_2, \cdots, x_n, 0, 1, +, \bullet)]' = T(x_1', x_2', \cdots, x_n', 1, 0, \bullet, +)
+  \end{cases}
+\end{gather*}
+\end{lemma}
+\section{switching expression}
+\label{sec:org177e6eb}
+\begin{definition}
+a \textbf{switching expression} is a finite combination of switching variables and the operations \hyperref[sec:org9085f40]{AND},\hyperref[sec:orga2f57d8]{OR},\hyperref[sec:orgc9ff093]{NOT}\\
+\begin{characteristic}
+a combination of switching expressions results in a switching expression, so if \(T_1\) and \(T_2\) are both switching expressions then \(T_1' + T_2\) is also a switching expression\\
+\end{characteristic}
+\begin{my_example}
+an example of simplifying a switching expression\\
+\begin{align*}
+  T(x, y, z) &= x'y'z + yz + xz\\
+             &= z(x'y' + y + x) & \text{distributive property}\\
+             &= z(x' + y + x) & \text{absorption 2 property}\\
+             &= z(1 + y) & \text{complement property}\\
+             &= z \cdot 1 & \text{annulment property}\\
+             &= z & \text{identity property}
+\end{align*}
+\end{my_example}
+\begin{my_example}
+\begin{align*}
+  T(x, y, z) &= (x + y)[x'(y' + z')]' + x'y' + x'z'\\
+             &= (x + y)[x + (y' + z')'] + x'y' + x'z'\\
+             &= (x + y)[x + yz] + x'y' + x'z'\\
+             &= x + yz + x'y' + x'z'\\
+             &= x + yz + y' + x'z'\\
+             &= x + yz + y' + z'\\
+             &= x + z + y' + z'\\
+             &= x + 1 + y'\\
+             &= 1\\
+\end{align*}
+\end{my_example}
+\end{definition}
+\section{switching function}
+\label{sec:org4e6eeb6}
+a function \(f(x_1, x_2, \cdots, x_n)\) that outputs only \(1\) or \(0\) for any combination of variables it receives\\
+\(f\) can only output \(2^n\) different values\\
+\begin{my_example}
+\begin{tabular}{llll}
+\(x_1, \cdots, x_n\) & \(f(x_1, \cdots, x_n)\) & \(f_1\) & \(f_2\)\\
+\hline
+\(0,\cdots,0\) & \(f(0,\cdots,0)\) & \(1\) & \(0\)\\
+\(0, \cdots, 1\) & \(f(0, \cdots, 1)\) & \(0\) & \(0\)\\
+\(0, \cdots, 10\) & \(f(0, \cdots, 10)\) & \(0\) & \(1\)\\
+\(1,1,1, \cdots, 10\) & \(f(1,1,1, \cdots, 0)\) & \(0\) & \(1\)\\
+\(1,1,1, \cdots, 1\) & \(f(1,1,1, \cdots, 1)\) & \(1\) & \(1\)\\
+\end{tabular}
+\end{my_example}
+the number of possible functions for \(n\) variables is \({2^2}^n\)\\
+the complement of \(f\), written as \(f'\), is the function that outputs the value 1 wherever \(f\) outputs 0\\
+\(f+g\) is the sum of both functions \(g\) and \(f\), \(f + g = 1\) if and only if atleast one of both functions gives \(1\) for a given combination\\
+\(f \cdot g\) is the multiplication of both functinos, for a given combination, it gives 1 if and only if both functions give 1 for that specific combination\\
+\begin{my_example}
+\begin{tabular}{llllllll}
+\(x_1\) & \(x_2\) & \(x_3\) & \(f\) & \(f'\) & \(g\) & \(f + g\) & \(f \cdot g\)\\
+\hline
+\(0\) & \(0\) & \(0\) & \(0\) & \(1\) & \(1\) & \(1\) & \(0\)\\
+\(0\) & \(0\) & \(1\) & \(1\) & \(0\) & \(1\) & \(1\) & \(1\)\\
+\(0\) & \(1\) & \(0\) & \(1\) & \(0\) & \(0\) & \(1\) & \(0\)\\
+\(0\) & \(1\) & \(1\) & \(0\) & \(1\) & \(0\) & \(0\) & \(0\)\\
+\(1\) & \(0\) & \(0\) & \(1\) & \(0\) & \(1\) & \(1\) & \(1\)\\
+\(1\) & \(0\) & \(1\) & \(0\) & \(1\) & \(0\) & \(0\) & \(0\)\\
+\(1\) & \(1\) & \(0\) & \(1\) & \(0\) & \(0\) & \(1\) & \(0\)\\
+\(1\) & \(1\) & \(1\) & \(0\) & \(1\) & \(1\) & \(1\) & \(0\)\\
+\end{tabular}
+\end{my_example}
+given \(f\) and \(g\) are switching functions with \(n\) variables, we say \(f\) covers g and write \(g \subseteq f\) if\\
+\[
+  g(x_1, \cdots, x_n) = 1 \implies f(x_1, \cdots, x_n) = 1
+\]\\
+if \(g \subseteq f\) and \(g\) is a multiplication of variables then \(g\) is called an of \(f\) and we write \(g \rightarrow f\)\\
+\begin{lemma}
+\(g \subseteq h + g\)\\
+\begin{proof}
+\begin{gather*}
+  g = 1 \Rightarrow g + h = 1\\
+  g \cdot h = 1 \Rightarrow g = 1
+\end{gather*}
+\end{proof}
+\end{lemma}
+\begin{lemma}
+if \(g \subseteq f\) and \(f \subseteq g\) then \(f = g\)\\
+\begin{proof}
+\[
+  g = 1 \Leftrightarrow f = 1
+\]\\
+\end{proof}
+\end{lemma}
+\begin{lemma}
+\(g + h \subseteq f\) if and only if \(g \subseteq f\) and \(h \subseteq f\)\\
+\begin{proof}
+1st side, assume \(g \subseteq f\) and \(h \subseteq f\), we need to prove \(g + h \subseteq f\)\\
+assume that \(g + h = 1\), then \(g = 1\) is a consequence of \(g \subseteq f\) that \(f = 1\), and \(h = 1\) is a consequence of \(h \subseteq f\) so that \(f = 1\), and so \(g + h \subseteq f\)\\
+2nd side, assume that \(g + h \subseteq f\)\\
+if \(g = 1\) then \(g + h = 1\) and so \(f = 1\) and so \(g \subseteq f\)\\
+if \(h = 1\) then \(g + h = 1\) and so \(f = 1\) and so \(h \subseteq f\)\\
+\end{proof}
+\end{lemma}
+\subsection{minterm}
+\label{sec:org07fe4e3}
+\begin{definition}
+an expression that is a series of multiplications that contain the variables \(x_1, \cdots, x_n\) of a function \(f(x_1, x_2, \cdots, x_n)\) is called a \textbf{minterm}\\
+\end{definition}
+\subsection{maxterm}
+\label{sec:orgee1eb6c}
+\begin{definition}
+an expression that is a series of additions that that contain the variables \(x_1, \cdots, x_n\) of a function \(f(x_1, x_2, \cdots, x_n)\) is called a \textbf{maxterm}\\
+\end{definition}
+\subsection{DNF}
+\label{sec:org03ef0dd}
+\begin{definition}
+when a function is written as a sum of products we get what is called as \textbf{Disjunctive Normal Form}\\
+\end{definition}
+\subsection{CNF}
+\label{sec:org51d7cda}
+\begin{definition}
+when a function is written as a product of sums we get what is called as \textbf{Conjunctive Normal Form}\\
+\end{definition}
+\subsection{finding the switching expressions of a switching function}
+\label{sec:orgcfcd2f8}
+we write a truth table for the function and for each row we write a minterm or a maxterm depending on whether the function outputs 1 or 0, respectively\\
+\begin{tabular}{rrrrrll}
+ & x & y & z & f & \hyperref[sec:org07fe4e3]{minterm}s & \hyperref[sec:orgee1eb6c]{maxterm}s\\
+\hline
+0 & 0 & 0 & 0 & 1 & \(x'y'z'\) & \\
+1 & 0 & 0 & 1 & 0 &  & \(x+y+z'\)\\
+2 & 0 & 1 & 0 & 1 & \(x'yz'\) & \\
+3 & 0 & 1 & 1 & 1 & \(x'yz\) & \\
+4 & 1 & 0 & 0 & 0 &  & \(x'+y+z\)\\
+5 & 1 & 0 & 1 & 0 &  & \(x'+y+z'\)\\
+6 & 1 & 1 & 0 & 1 & \(xyz'\) & \\
+7 & 1 & 1 & 1 & 1 & \(xyz\) & \\
+\end{tabular}
+\(f(x, y, z) = \sum(0,2,3,6,7) = x'y'z' + x'yz' + x'yz' + xyz' + xyz \longrightarrow\) sum of products, \hyperref[sec:org03ef0dd]{DNF}\\
+\(f(x, y, z) = \Pi(1,4,5) = (x+y+z')(x'+y+z)(x'+y+z') \longrightarrow\) product of sums, \hyperref[sec:org51d7cda]{CNF}\\
+\subsection{prime implicant}
+\label{sec:org2137fb0}
+a multiplication expression \(p\) is called a \textbf{Prime implicant} of a \hyperref[sec:org4e6eeb6]{switching function} \(f\) if:\\
+\begin{enumerate}
+\item \(p \rightarrow f\) (\(f\) covers \(p\) or \(p\) is an implicant of \(f\))\\
+\item deletion of every literal in \(p\) results in product that isnt covered by \(f\) meaning \(p_1, NOT \rightarrow f\) (there is atleast one combination where \(p_1 = 0\) but \(f = 0\))\\
+\end{enumerate}
+in the last example \(h = x'y\) is a prime implicant of \(f\) because \(x'\) and \(y\) are implicants of \(f\), \(k\) isnt a prime implicant of \(f\)\\
+the removal of \(z\), \(x'yz\) turns into \(x'y\) which is still an implicant of \(f\)\\
+the removal of \(y \rightarrow x'z\) implicant of \(f\)\\
+the removal of \(x' \rightarrow yz\) implicant of \(f\)\\
+\begin{lemma}
+every sum of products that isnt minimizable that equals \(f\) is a sum of prime implicants of \(f\)\\
+\begin{proof}
+assume in contradiction that there is a sum of products that isnt minimizable that equals \(f\) and contains the product \(\varphi\) that isnt a prime implicant of \(f\)\\
+assume \(f = g + \varphi\), in case of the sum where \(\varphi = 1\) and \(f = 1\) and so \(\varphi \rightarrow f\), in case that \(\varphi\) isnt a prime implicant then its possible to remove from \(\varphi\) atleast 1 literal so that we get \(\varphi_0\) so that \(\varphi_0 \rightarrow f\)\\
+also \(\varphi \rightarrow \varphi_0\) in case \(\varphi\) is a product of literals that \(\varphi_0\) is a part of\\
+\ldots{}..\\
+\end{proof}
+\end{lemma}
+\subsection{essential prime implicant}
+\label{sec:org5d4f600}
+from previous theorems\\
+\begin{enumerate}
+\item a minimal switching expression of a function is the sum of its \emph{Prime Implicants}\\
+\item \textbf{Prime Implicants} correspond to squares in the Karnaugh map that arent a part of bigger squares\\
+\end{enumerate}
+\uline{question}: which \emph{Prime Implicants} exist in the minimal switching expression\\
+\uline{definition}: a product of literals \(P\) is called an \emph{Essential Prime Implicant} of the function \(f\) if:\\
+\begin{enumerate}
+\item \(P\) is a \emph{Prime Implicant} of \(f\)\\
+\item \(P\) covers atleast a minterm of \(f\) that cant be covered by another \emph{Prime Implicant}\\
+\item \uline{note}: a minimal switching expression has to contain all the possible \emph{EPI's} (\emph{Essential Prime Implicants})\\
+\end{enumerate}
+\subsection{the process of finding a minimal switching expression of a switching function}
+\label{sec:org6111edb}
+given the \hyperref[sec:org4e6eeb6]{switching function} \(f\)\\
+\begin{itemize}
+\item find all the \hyperref[sec:org2137fb0]{prime implicant}s of \(f\)\\
+\item from the list of prime implicants, find the \hyperref[sec:org5d4f600]{essential prime implicant}s and put them in an expression\\
+\item remove from the list of \emph{PI} all the \emph{EPI}'s and all the \emph{PI}'s that are covered by \emph{EPI}'s\\
+\item if the set of \emph{EPI}'s covers \(f\), then we're done, otherwise, choose more \emph{PI}'s so that \(f\) is entirely covered by the resulting set of \emph{PI}'s but make sure to pick a minimal number of \emph{PI}'s to do the job, and make sure to pick the \emph{PI}'s with the least number of literals\\
+\end{itemize}
+\begin{note}
+this isnt a definite solution for the problem but its enough for functions with a small number of literals\\
+\end{note}
+using karnaugh maps we can apply this process\\
+each cell maps to a combination of variables, we place each minterm in its corresponding cell, i.e. with the cell that provides the correct corresponding values for the variables\\
+\includesvg{/home/mahmooz/brain/out/cqS6PbM}\\
+
+\includesvg{/home/mahmooz/brain/out/nixxAs4}\\
+
+\includesvg{/home/mahmooz/brain/out/WJLkEpu}\\
+
+by finding rectangles whose area is a power of 2 in these tables we would be finding minterms and the least amount of rectangles we can find would give us the minimal form we're looking for\\
+the variables that cells in a rectangle may share are the ones to be taken for the switching expression\\
+
+\begin{my_example}
+\begin{gather*}
+  f(w,x,y,z) = \sum(4,5,8,12,13,14,15)\\
+  f = xy' + wx + wy'z'
+\end{gather*}
+\begin{figure}[htbp]
+
+\includesvg{/home/mahmooz/brain/out/dQOeJio}
+\caption{\emph{Prime implicants}: \(w\bar{y}\bar{z}, wx, x\bar{y}\), all of them are \emph{EPI}}
+\end{figure}
+\end{my_example}
+\begin{my_example}
+\begin{gather*}
+  f(x,y,z) = \sum(0,2,3,4,5,7)
+\end{gather*}
+\begin{figure}[htbp]
+
+\includesvg{/home/mahmooz/brain/out/96j2WfN}
+\caption{\emph{Prime Implicants}: \(\bar{x}\bar{z}, \bar{x}y, yz, xz, x\bar{y}, \bar{y}\bar{z}\)}
+\end{figure}
+
+none of these \emph{PI}'s isnt \emph{EPI} and all of them are the same size\\
+this function has 2 minimal forms\\
+\(f(x,y,z) = \bar{x}y + xz + \bar{y}\bar{z}\)\\
+\(f(x,y,z) = \bar{x}\bar{z} + yz + x\bar{y}\)\\
+\end{my_example}
+\subsection{dont care}
+\label{sec:orgd886573}
+\textbf{dont care} is a value of a function we get for a combination of values for the variables that isnt defined, and therefore can be either \(1\) or \(0\)\\
+the symbol of the value \emph{Don't care} is \(\phi\), its allowed to switch the value \(\phi\) with either \(1\) or \(0\) according to our needs, this is useful when finding the minimal form of a switching function\\
+\subsection{map expressions}
+\label{sec:org06f3bb0}
+\begin{definition}
+a map expression is a switching expression that appears in the map and that isnt \(0\), \(1\) or \(\phi\)\\
+\begin{characteristic}
+the usage of map exxpressions allows us to describe a function with more than \(n\) variables using a karnaugh map with \(n\) variables\\
+\end{characteristic}
+\begin{my_example}
+consider the following function \(f(x,y,z,A,B,C)\)\\
+\begin{tabular}{rrrrrrr}
+x & y & z & A & B & C & f\\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 1 & 0\\
+0 & 0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 1 & 0\\
+0 & 0 & 0 & 1 & 1 & 0 & 0\\
+0 & 0 & 0 & 1 & 1 & 1 & 0\\
+0 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 1 & 0\\
+0 & 0 & 1 & 0 & 1 & 0 & 1\\
+0 & 0 & 1 & 0 & 1 & 1 & 1\\
+0 & 0 & 1 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 1 & 0 & 1 & 0\\
+0 & 0 & 1 & 1 & 1 & 0 & 1\\
+0 & 0 & 1 & 1 & 1 & 1 & 1\\
+0 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 1 & 0\\
+0 & 1 & 0 & 0 & 1 & 0 & 0\\
+0 & 1 & 0 & 0 & 1 & 1 & 0\\
+0 & 1 & 0 & 1 & 0 & 0 & 1\\
+0 & 1 & 0 & 1 & 0 & 1 & 1\\
+0 & 1 & 0 & 1 & 1 & 0 & 1\\
+0 & 1 & 0 & 1 & 1 & 1 & 1\\
+0 & 1 & 1 & 0 & 0 & 0 & 1\\
+0 & 1 & 1 & 0 & 0 & 1 & 1\\
+0 & 1 & 1 & 0 & 1 & 0 & 1\\
+0 & 1 & 1 & 0 & 1 & 1 & 1\\
+0 & 1 & 1 & 1 & 0 & 0 & 1\\
+0 & 1 & 1 & 1 & 0 & 1 & 1\\
+0 & 1 & 1 & 1 & 1 & 0 & 1\\
+0 & 1 & 1 & 1 & 1 & 1 & 1\\
+1 & 0 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 1 & 1\\
+1 & 0 & 0 & 0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0 & 1 & 1 & 1\\
+1 & 0 & 0 & 1 & 0 & 0 & 0\\
+1 & 0 & 0 & 1 & 0 & 1 & 1\\
+1 & 0 & 0 & 1 & 1 & 0 & 0\\
+1 & 0 & 0 & 1 & 1 & 1 & 1\\
+1 & 0 & 1 & 0 & 0 & 0 & 1\\
+1 & 0 & 1 & 0 & 0 & 1 & 1\\
+1 & 0 & 1 & 0 & 1 & 0 & 0\\
+1 & 0 & 1 & 0 & 1 & 1 & 0\\
+1 & 0 & 1 & 1 & 0 & 0 & 1\\
+1 & 0 & 1 & 1 & 0 & 1 & 1\\
+1 & 0 & 1 & 1 & 1 & 0 & 0\\
+1 & 0 & 1 & 1 & 1 & 1 & 0\\
+1 & 1 & 0 & 0 & 0 & 0 & 0\\
+1 & 1 & 0 & 0 & 0 & 1 & 0\\
+1 & 1 & 0 & 0 & 1 & 0 & 0\\
+1 & 1 & 0 & 0 & 1 & 1 & 0\\
+1 & 1 & 0 & 1 & 0 & 0 & 1\\
+1 & 1 & 0 & 1 & 0 & 1 & 1\\
+1 & 1 & 0 & 1 & 1 & 0 & 1\\
+1 & 1 & 0 & 1 & 1 & 1 & 1\\
+1 & 1 & 1 & 0 & 0 & 0 & \(\phi\)\\
+1 & 1 & 1 & 0 & 0 & 1 & \(\phi\)\\
+1 & 1 & 1 & 0 & 1 & 0 & \(\phi\)\\
+1 & 1 & 1 & 0 & 1 & 1 & \(\phi\)\\
+1 & 1 & 1 & 1 & 0 & 0 & \(\phi\)\\
+1 & 1 & 1 & 1 & 0 & 1 & \(\phi\)\\
+1 & 1 & 1 & 1 & 1 & 0 & \(\phi\)\\
+1 & 1 & 1 & 1 & 1 & 1 & \(\phi\)\\
+\end{tabular}
+we can represent it using a 3 variable karnaugh map\\
+\[ A’BC’ + A’BC + ABC’ + ABC = B(A’C’+A’C+AC’+AC) = B \]\\
+
+\includesvg{/home/mahmooz/brain/out/N9R81Eh}\\
+\end{my_example}
+\end{definition}
+\section{functional completeness}
+\label{sec:orgd41edb1}
+\begin{definition}
+a set of operations forms a \textbf{functionally complete} system if every switching function can be described as a switching expression that only contains operations from that set\\
+\begin{my_example}
+for example \(\{\lnot, +\}\) is functionally complete because \(x \cdot y = (x'+y')'\) and in every switching expression where we have \(x \cdot y\) we can replace it with \(\lnot(\lnot x + \lnot y)\)\\
+\end{my_example}
+\begin{my_example}
+\(\{\cdot, \lnot\}\) is also functionally complete\\
+\end{my_example}
+\begin{lemma}
+a functionally complete system consisting of only 1 function returns the complement of a variable if its passed to all its inputs, and the opposite is true, as in a system that doesnt abide by this rule isnt functionally complete\\
+\begin{my_example}
+given the completely functional system \(\{f(x,y,z,w)\}\), according to this rule, \(f(x,x,x,x) = \overline{x}\)\\
+\end{my_example}
+\begin{my_example}
+take the functionally complete operation \emph{NOR}, we pass \(x\) to all its inputs and we get \(\overline{x}\):\\
+\[ x \downarrow x = \overline{x} \cdot \overline{x} = \overline{x} \]\\
+\end{my_example}
+\end{lemma}
+\begin{lemma}
+one way to prove that a set of operations is completely functional is by describing all the operations of a set that is already known to be functionally complete using the operations in that set\\
+\begin{my_example}
+proof of NOR's functional completeness using the already functionally complete set \(\{\lnot, +\}\):\\
+\begin{gather*}
+  x \downarrow x = x' \cdot x' = x'\\
+  (x \downarrow y) \downarrow (x \downarrow y) = (x' \cdot y')' \cdot (x' \cdot y')' = (x + y)(x + y) = (x + y)\\
+  ((x + y)' + (x + y)')' = (x'y' + x'y')' = (x'y')' \cdot (x'y')' = (x+y)(x+y) = (x+y)
+\end{gather*}
+\end{my_example}
+\end{lemma}
+\end{definition}
+\subsection{list of systems known to be functionally complete}
+\label{sec:org8ef39a2}
+\begin{itemize}
+\item \(\{+, \cdot, \lnot\}\)\\
+\item \(\{+, \lnot\}\)\\
+\item \(\{\cdot, \lnot\}\), because \(x + y = \overline{(\bar{x} \cdot \bar{y})}\)\\
+\item \emph{NOR}: \(x \downarrow y = \overline{x} \cdot \overline{y} = \overline{(x + y)}\)\\
+\item \emph{NAND}: \(x \uparrow y = \overline{x} + \overline{y} = \overline{(xy)}\)\\
+\end{itemize}
+\subsection{partial functional completeness}
+\label{sec:org62859a2}
+\begin{definition}
+a system of operations is \textbf{partially functionally complete} if it need to be combined with \(0\) and \(1\) or both to provide functional completeness\\
+\begin{note}
+even if a set of operations can produce 1's and 0's, its still gonna be partially complete if we substitute 1 or 0 to provide completeness\\
+\begin{my_example}
+\[
+f_1(x,y) = x \oplus y \qquad f_2(x,y) = x + y'
+\]\\
+\(f_1(x,y)=x'y+xy'\)\\
+\(f_1(x,1)=x' \longrightarrow\) derived negation\\
+\(f_2(x, f_2(0, y)) = x+y \longrightarrow\) derived OR operator\\
+so this system is partially complete\\
+\end{my_example}
+\end{note}
+\end{definition}
+\section{Shannon's law}
+\label{sec:orgf6e4163}
+\begin{definition}
+for every switching function \(f(x_1, \cdots, x_n)\) we get:\\
+\begin{align*}
+  f(x_1, \cdots, x_n) &= x_1 \cdot f(1, x_2, \cdots, x_n) + x_1' \cdots f(0, x_2, \cdots, x_n)\\
+  f(x_1, \cdots, x_n) &= [x_1 + f(0, x_2, \cdots, x_n)] \cdot [x_1' + f(1, x_2, \cdots, x_n)]
+\end{align*}
+\begin{characteristic}
+this law helps us move between \hyperref[sec:org03ef0dd]{DNF} and \hyperref[sec:org51d7cda]{CNF} forms without looking at the truth table of a function\\
+\end{characteristic}
+\begin{my_example}
+\begin{align*}
+  f(x, y, z) &= y'xz + y'z'x' + xz\\
+             &= x(y'1z + y'z'1' + 1z) + x'(y'0z + y'z'0' + 0z)\\
+             &= x(y'z + y'z'0 + z) + x'(0 + y'z' + 0)\\
+             &= x(y'z + z) + x'(y'z')
+\end{align*}
+\end{my_example}
+\end{definition}
+\section{XOR}
+\label{sec:orgf13d9a5}
+\begin{tabular}{rrr}
+\(x\) & \(y\) & \(x \oplus y\)\\
+\hline
+0 & 0 & 0\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+1 & 1 & 0\\
+\end{tabular}
+\begin{characteristic}
+\begin{align}
+  A \oplus B &= B \oplus A & \text{commutative}\\
+  (A \oplus B) \oplus C &= A \oplus (B \oplus C) & \text{associative}\\
+  A \bullet (B \oplus C) &= (AB) \oplus (AC) & \text{distributive}\\
+  A \oplus \bar{A} &= 1,\ A \oplus 1 = \bar{A},\ A \oplus 0 = A\\
+  \overline{A \oplus B} &= 1 \text{ only if } A = B
+\end{align}
+\end{characteristic}
+\begin{characteristic}
+if \(A \oplus B = C\) then:\\
+\begin{align*}
+  A \oplus C &= A \oplus (A \oplus B) = (A \oplus A) \oplus B = B\\
+  B \oplus C &= B \oplus (A \oplus B) = (B \oplus B) \oplus A = A\\
+  A \oplus B \oplus C &= A \oplus B \oplus (A \oplus B) = 0
+\end{align*}
+\end{characteristic}
+\section{logic gate}
+\label{sec:org182e608}
+\subsection{AND gate}
+\label{sec:orged54c3e}
+\[
+  t = a \bullet b
+\]\\
+\includesvg{/home/mahmooz/brain/out/bKKN1Bx}\\
+
+\subsection{OR gate}
+\label{sec:org3113977}
+\[
+  t = a + b + c
+\]\\
+\includesvg{/home/mahmooz/brain/out/JEh5DG2}\\
+
+\subsection{NAND gate}
+\label{sec:orgd71d708}
+\[
+  t = \overline{(a \bullet b \bullet c)}
+\]\\
+\includesvg{/home/mahmooz/brain/out/cINGfRg}\\
+
+\subsection{NOR gate}
+\label{sec:orgcd29f6d}
+\[
+  t = \overline{(a + b)}
+\]\\
+\includesvg{/home/mahmooz/brain/out/g8ASPWI}\\
+
+\subsection{XOR gate}
+\label{sec:org414bbfd}
+\[
+  t = a \oplus b
+\]\\
+\includesvg{/home/mahmooz/brain/out/FLVi83R}\\
+
+\subsection{NOT gate}
+\label{sec:org9d9f716}
+\[
+  b = \overline{a}
+\]\\
+\includesvg{/home/mahmooz/brain/out/f4X1VZI}\\
+
+\section{logic circuit}
+\label{sec:org1b137e5}
+a combination of logical gates to represent a more complex switching function is called a logical circuit or a switching circuit\\
+
+the variables of the function are called the \emph{inputs} of the circuit and the output of the function is the \emph{exit} of the circuit\\
+
+the exit of a logical circuit depends only on the current combination of values of its input\\
+
+\[
+  A = T \bullet (H + W) + \overline{W} \bullet P
+\]\\
+
+\includesvg{/home/mahmooz/brain/out/PCw1P6a}\\
+
+\subsection{Digital abstraction}
+\label{sec:orgce1c66e}
+
+how do we represent the values \(0\) and \(1\) using a digital logic circuits?\\
+
+on one side the logic circuits have only 2 variables, voltage and time and they can have any value in a given range\\
+
+and on the other side, boolean algebra has only 2 values which are the constants \(0\) and \(1\)\\
+
+the \uline{solution}:\\
+
+\begin{itemize}
+\item voltage represents logical value, for example, a high voltage represents \(1\) and a low voltage represents \(0\), other voltages, for example a voltage between ``high'' and ``low'' are defined as not represnting of logical values\\
+\item sometimes, it is agreed upon that the output of a circuit represents the value of the switching function, other times its agreed upon that it doesnt\\
+\end{itemize}
+
+\subsubsection{Logical levels}
+\label{sec:orgd752773}
+
+the two logical values \(0\) and \(1\) are represented in \emph{Electronic circuits} using logical levels.\\
+
+an electronic circuit receives electrical energy from a power supply like a battery, the power supply is the high voltage \emph{Vplus} and the low voltage is called \emph{Vminus}\\
+
+the levels of voltages denoted \(v\) in a circuit is limited in the range \(Vminus \leq v \leq Vplus\), the amplitude of voltages is defined as \(\Delta{v} = Vplus - Vminus\)\\
+
+as an example:\\
+
+\begin{align*}
+  Vplus - 0.2\Delta{v} &= 4volt \leq v \leq 5volt = Vplus & \text{represents logical $1$}\\
+  Vminus &= 0volt \leq v \leq 1volt = Vminus + 0.2\Delta{v} & \text{represents logical $0$}
+\end{align*}
+\end{document}

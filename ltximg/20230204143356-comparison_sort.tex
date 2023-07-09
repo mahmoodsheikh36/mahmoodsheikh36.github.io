@@ -1,0 +1,48 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{comparison sort}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={comparison sort},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.5.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{definition}
+a \textbf{comparison sort} is a type of \textbf{sorting algorithm} that only reads the list elements through a single abstract comparison operation (often a "less than or equal to" operator or a three-way comparison) that determines which of two elements should occur first in the final sorted list.\\
+\begin{lemma}
+any comparison-sort based algorithm has a \href{20221130014441-time_complexity.org}{time complexity} that is bound by \(\Omega(n\log n)\)\\
+\begin{my_example}
+a vector \texttt{A} of size \texttt{n} is \textbf{defined} to be a "hill" iff for every \(i \le i < j \le m\) we know \(A[i] \le A[j]\) and for every \(m \le i < j \le n\) we know \(A[i] \geq A[j]\) where \(m\) is a constant and \(i,j\) are variable indicies\\
+prove that any comparison-based algorithm that turns a vector into a hill has to perform \(\Omega(n\log n)\) operations\\
+\begin{answer}
+we assume in contradiction that there exists a comparison-based algorithm that turns a vector into a hill whose time complexity is less than \(\Omega(n\log n)\)\\
+consider the following function:\\
+\includesvg{/home/mahmooz/brain/out/30t764s}\\
+
+each line from 3 to 6 runs in \(\Theta(n)\) time, except the first which we know by the assumption runs in less than \(\Theta(n\log n)\), so the whole function runs in less than \(\Theta(n\log n)\) time\\
+this is a comparison-based function that sorts a given array in less than \(\Theta(n\log n)\) time, which contradicts with our theorem that no sorting function can have a lower time complexity than \(\Theta(n\log n)\)\\
+we arrived at a contradiction and so it has to be true that this function is bound from below by \(\Theta(n\log n)\), i.e. its time complexity is \(\Omega(n\log n)\)\\
+\end{answer}
+\end{my_example}
+\label{orgde41dd1}
+\end{lemma}
+\end{definition}
+\end{document}

@@ -1,0 +1,212 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{\string~/.emacs.d/common}
+\author{mahmood}
+\date{\today}
+\title{logic homework 5}
+\hypersetup{
+ pdfauthor={mahmood},
+ pdftitle={logic homework 5},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.0.50 (Org mode 9.6.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{note}
+this document and others can be found on my website\\
+\url{https://mahmoodsheikh36.github.io/}
+\end{note}
+homework on \href{20230525071323-formal_proof.org}{formal proof}s, using \href{20230525082155-logic_formulas.org}{logic formulas}, \href{20230527163202-deduction_theorem.org}{deduction theorem}\\[0pt]
+\begin{question}
+prove/disprove:\\[0pt]
+\href{20230524212241-premise.org}{premise}s:\\[0pt]
+\begin{enumerate}
+\item \(\lnot p \lor q\)\\[0pt]
+\item \(\lnot q \lor (r \land s)\)\\[0pt]
+\item \(\lnot r \lor p\)\\[0pt]
+\end{enumerate}
+\href{20230524212250-conclusion.org}{conclusion}:\\[0pt]
+\(\lnot (p \lor r)\)\\[0pt]
+\begin{proof}
+\begin{align}
+  (\lnot q \lor r) \land (\lnot q \lor s) &\quad P2,E14\\
+  \lnot q \lor r &\quad 1,I3\\
+  \lnot q \lor s &\quad 1,I4
+\end{align}
+theres no way forward.. imma try a counter example\\[0pt]
+\(p \lor r\) has to be true\\[0pt]
+\(\lnot p \lor q\) has to be true\\[0pt]
+\(\lnot r \lor p\) has to be true\\[0pt]
+pick the combination \(p=T,q=T,r=T,s=T\)\\[0pt]
+\(\lnot p \lor q \equiv F \lor T \equiv T\)\\[0pt]
+\(\lnot q \lor (r \land s) \equiv F \lor (T \land T) \equiv F \lor T \equiv T\)\\[0pt]
+\(\lnot r \lor p \equiv F \lor T \equiv T\)\\[0pt]
+\(\lnot (p \lor r) \equiv \lnot (T \lor T) \equiv \lnot T \equiv F\)\\[0pt]
+we provided an example where the premises are true but the conclusion isnt, so indeed the argument is invalid\\[0pt]
+\end{proof}
+\end{question}
+\begin{question}
+prove/disprove:\\[0pt]
+premises:\\[0pt]
+\begin{enumerate}
+\item \(p \to (q \to r)\)\\[0pt]
+\item \(q \to (p \to r)\)\\[0pt]
+\end{enumerate}
+conclusion:\\[0pt]
+\((p \lor q) \to r\)\\[0pt]
+\begin{proof}
+\begin{align}
+  (p \land q) \to r &\quad P1,E23\\
+  \lnot (p \land q) \lor r &\quad 1,E20\\
+  (\lnot p \lor \lnot q) \lor r &\quad 1,E20
+\end{align}
+couldnt make it any further so im gonna propose a counter example\\[0pt]
+we need an example where the permises are true but the conclusion isnt, the conclusion is false when \(r\) is false but \(p \lor q\) is true, and according to the first line in the incomplete proof, which is true, if \(r\) is false then \(p \land q\) must be false aswell, so we pick the combination \(p=F,q=T,r=F\) which satisfies these conditions\\[0pt]
+\(p \to (q \to r)\) becomes \(F \to (T \to F) \equiv F \to F \equiv T\), check\\[0pt]
+\(q \to (p \to r)\) becomes \(T \to (F \to F) \equiv T \to T \equiv T\), check\\[0pt]
+\((p \lor q) \to r\) becomes \((F \lor T) \to F \equiv T \to F\) which is false, so the conclusion isnt true which means the argument is false\\[0pt]
+\end{proof}
+\end{question}
+\begin{question}
+prove/disprove:\\[0pt]
+premises:\\[0pt]
+\begin{enumerate}
+\item \((a \lor p) \to b\)\\[0pt]
+\item \(c \to (d \land p)\)\\[0pt]
+\end{enumerate}
+conclusion:\\[0pt]
+\((a \lor c) \to (b \land d)\)\\[0pt]
+\begin{proof}
+\begin{align}
+  \lnot c \lor (d \land p) &\quad P2,E20\\
+  (\lnot c \lor d) \land (\lnot c \lor p) &\quad 1,E14\\
+  \lnot (a \lor p) \lor b &\quad P1,E20\\
+  (\lnot a \land \lnot p) \lor b &\quad 3,E16\\
+  \lnot c \lor d &\quad 2,I3\\
+  \lnot c \lor p &\quad 2,I4\\
+  a \lor c &\quad \text{deduction theorem}\\
+  (\lnot a \lor b) \land (\lnot p \lor b)\\
+  \lnot a \lor b\\
+  \lnot p \lor b
+\end{align}
+couldnt continue, will try providing a counter example\\[0pt]
+\(a \lor c\) has to be true\\[0pt]
+\(b \land d\) has to be false\\[0pt]
+we pick \(a=T,p=F,b=T,c=F,d=F\)\\[0pt]
+\((a \lor p) \to b \equiv (F \lor F) \to T \equiv T\)\\[0pt]
+\(c \to (d \land p) \equiv F \to (F \land F) \equiv F \to F \equiv T\)\\[0pt]
+\((a \lor c) \to (b \land d) \equiv (T \lor F) \to (T \land F) \equiv T \to F \equiv F\)\\[0pt]
+we provided an example where the premises are true but the conclusion isnt, so indeed the argument is invalid\\[0pt]
+\end{proof}
+\end{question}
+\begin{question}
+prove/disprove:\\[0pt]
+premises:\\[0pt]
+\begin{enumerate}
+\item \(\lnot b \to \lnot (\lnot g \to c)\)\\[0pt]
+\item \(b \to a\)\\[0pt]
+\item \(\lnot b \to e\)\\[0pt]
+\item \(\lnot e \lor d\)\\[0pt]
+\end{enumerate}
+conclusion:\\[0pt]
+\(\lnot a \to \lnot (c \lor \lnot d)\)\\[0pt]
+\begin{proof}
+\begin{align}
+  \lnot b \lor a &\quad P2,E20\\
+  b \lor e &\quad P3,E20\\
+  \lnot a &\quad \text{deduction theorem assumption}\\
+  \lnot b &\quad 1,3,I6\\
+  e &\quad 2,4,I6\\
+  d &\quad P4,5,I6\\
+  b \lor \lnot (g \lor c) &\quad P1,E20\\
+  \lnot (g \lor c) &\quad 7,I6\\
+  \lnot g \land \lnot c &\quad 8,E16\\
+  \lnot g &\quad 9,I1\\
+  \lnot c &\quad 9,I2\\
+  \lnot c \land d &\quad 6,11,I5\\
+  \lnot (c \lor \lnot d) &\quad 12,E16\\
+  \lnot a \to \lnot (c \lor \lnot d) &\quad 3,13,\text{deduction theorem conclusion}
+\end{align}
+\end{proof}
+\end{question}
+\begin{question}
+prove/disprove:\\[0pt]
+premises:\\[0pt]
+\begin{enumerate}
+\item \(p \to q\)\\[0pt]
+\item \(q \to (r \land s)\)\\[0pt]
+\item \(r \to p\)\\[0pt]
+\end{enumerate}
+conclusion:\\[0pt]
+\((q \lor r) \to (p \land r)\)\\[0pt]
+\begin{proof}
+\begin{align}
+  \lnot p \lor q &\quad P1,E20\\
+  \lnot q \lor (r \land s) &\quad P2,E20\\
+  \lnot r \lor p &\quad P3,E20\\
+  q \lor r &\quad \text{deduction theorem assumption}\\
+  (\lnot q \lor r) \land (\lnot q \lor s) &\quad 2,E14\\
+  \lnot q \lor s &\quad 5,I4\\
+  \lnot q \lor r &\quad 5,I3\\
+  (\lnot q \lor r) \land (q \lor r) &\quad 4,7,I5\\
+  r \lor (\lnot q \land q) &\quad 8,E14\\
+  r &\quad 9,E2\\
+  p &\quad 3,E2\\
+  p \land r &\quad 10,11,I5\\
+  (q \lor r) \to (p \land r) &\quad 4,12,\text{deduction theorem conclusion}
+\end{align}
+\end{proof}
+\end{question}
+\begin{question}
+prove/disprove:\\[0pt]
+premises:\\[0pt]
+\begin{enumerate}
+\item \(p \lor q\)\\[0pt]
+\item \((q \land s) \to \lnot p\)\\[0pt]
+\item \((p \land \lnot s) \lor r\)\\[0pt]
+\end{enumerate}
+conclusion:\\[0pt]
+\((s \lor r) \to p\)\\[0pt]
+\begin{proof}
+\begin{align}
+  \lnot (q \land s) \lor \lnot p &\quad P1,E20\\
+  (\lnot q \lor \lnot s) \lor \lnot p &\quad 1,E17\\
+  \lnot q \lor \lnot s \lor \lnot p &\quad 2,E12\\
+  (p \lor r) \land (\lnot s \lor r) &\quad P3,E14\\
+  s \lor r &\quad \text{deduction theorem assumption}\\
+  \lnot s \lor r &\quad 4,I4\\
+  (s \lor r) \land (\lnot s \lor r) &\quad 5,6,I5\\
+  r \lor (s \land \lnot s) &\quad 7,E14\\
+  r &\quad 8,E2
+\end{align}
+couldnt continue, will try providing a counter example\\[0pt]
+restrictions for the counter example:\\[0pt]
+\begin{itemize}
+\item \(s \lor r\) has to be true\\[0pt]
+\item \(p\) has to be false\\[0pt]
+\item \(p \lor q\) has to be true which means \(q\) has to be true\\[0pt]
+\item \(r\) has to be true because of \(P3\) and \(p\) being false\\[0pt]
+\end{itemize}
+it seems we have a free choice for \(s\)\\[0pt]
+so \(p\) is false, \(q\) is true, \(r\) is true, \(s\) is false, give us:\\[0pt]
+\(p \lor q \equiv F \lor T \equiv T\) check\\[0pt]
+\((p \land s) \to \lnot p \equiv (F \land F) \to T \equiv T\) \\[0pt]
+\((p \land \lnot s) \lor r \equiv (F \land T) \lor T \equiv F \lor T \equiv T\)\\[0pt]
+\((s \lor r) \to p \equiv (F \lor T) \to F \equiv T \to F \equiv F\)\\[0pt]
+we provided an example where the premises are true but the conclusion isnt, so indeed the argument is invalid\\[0pt]
+\end{proof}
+\end{question}
+\end{document}
