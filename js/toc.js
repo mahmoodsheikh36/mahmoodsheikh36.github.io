@@ -66,14 +66,17 @@ window.addEventListener("load", function () {
   let tocContainer = document.getElementById("tocContainer");
   let tocTitle = document.getElementById("tocTitle");
 
-  tocContainer.addEventListener("mouseover", function () {
-    console.log('in');
+  tocContainer.addEventListener("mouseenter", function () {
     tocContainer.classList.add('expanded');
   });
 
-  tocContainer.addEventListener("mouseout", function () {
+  tocContainer.addEventListener("mouseleave", function () {
     tocContainer.classList.remove('expanded');
-    console.log('out');
+  });
+
+  tocContainer.addEventListener("click", function () {
+    // for when it is clicked on mobile after a scroll, mouseenter does not get triggered but click does
+    tocContainer.classList.add('expanded');
   });
 
   // this just makes no sense
@@ -87,7 +90,6 @@ window.addEventListener("load", function () {
   // });
 
   window.addEventListener("scroll", function () {
-    console.log('scroll');
     tocContainer.classList.remove('expanded');
   });
 });
