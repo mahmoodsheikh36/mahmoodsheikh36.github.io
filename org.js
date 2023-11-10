@@ -30,6 +30,11 @@ window.addEventListener("load", function () {
       } else {
         element.setAttribute('data-before-content', cb);
       }
+
+      let title = element.getAttribute('data-title');
+      if (title) {
+        console.log(title);
+      }
     }
   }
 });
