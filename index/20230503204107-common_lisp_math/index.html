@@ -1,0 +1,244 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>common lisp math utils &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info></div><h1 class=post-title>common lisp math utils</h1><div class=post-desc></div><div class=post-line></div><h1 id=essential-functions>essential functions</h1><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defun sigmoid (x)
+  (cond ((&lt; x -70) 0) ;; to avoid float overflow
+        (t (/ 1 (1+ (exp (- x)))))))
+
+(defun sigmoid-derivative (x)
+  (* (sigmoid x) (- 1 (sigmoid x))))
+
+(defun relu (x)
+  (max x 0))
+
+(defun relu-derivative (x)
+  &quot;derivative of relu is undefined at x=0, but here we return 0 for x=0 too&quot;
+  (if (&gt; x 0)
+      1
+      0))
+</code></pre><h1 id=vectors>vectors</h1><div class=note><p>these functions work, but some use lists and some do redundant operations, they need efficiency improvement</p></div><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>;; this might need efficiency improvement, not sure
+(defun vector-add (vec1 &amp;rest more-vecs)
+  &quot;apply vector addition to two collections&quot;
+  (apply #&#39;map (append (list &#39;vector #&#39;+) (append (list vec1) more-vecs))))
+
+;; this definitely needs efficiency improvement, we can just subtract instead of negating vectors then adding them
+(defun vector-sub (vec1 &amp;rest more-vecs)
+  &quot;substract each vector in more-vecs from vec1&quot;
+  (apply #&#39;vector-add
+         (append (list vec1)
+                 (map &#39;list
+                      (lambda (vec2)
+                        (map &#39;vector #&#39;- vec2))
+                      more-vecs))))
+
+(defun vector-dot (vec1 vec2)
+  &quot;dot product&quot;
+  (reduce #&#39;+ (map &#39;vector #&#39;* vec1 vec2)))
+
+(defun vector-mul (vec1 scalar)
+  &quot;multiply vectors elements by scalar&quot;
+  (map &#39;vector (lambda (num) (* num scalar)) vec1))
+
+(defun vector-sum (vec1 &amp;rest more-vecs)
+  &quot;sum of vectors elements&quot;
+  (reduce #&#39;+ (map
+               &#39;vector
+               (lambda (vec2) (reduce #&#39;+ vec2))
+               (append (list vec1) more-vecs))))
+
+(defun vector-elements-prod (vec)
+  (reduce #&#39;* vec))
+</code></pre><h1 id=matrices>matrices</h1><p>im using arrays for matrices, which use different functions than vectors/lists
+matrix multiplication:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes><code>(defun matrix-mul (arr1 arr2)
+  &quot;multiply 2 matrices, arr1*arr2&quot;
+  (let* ((arr1-rows (array-rows arr1))
+         ;; (arr1-cols (car (cdr arr1-dim))) ;; no need
+         (arr2-rows (array-rows arr2))
+         (arr2-cols (array-cols arr2))
+         (out-arr (make-array (list arr1-rows arr2-cols))))
+    (loop for arr1-row from 0 below arr1-rows
+          do (loop for arr2-col from 0 below arr2-cols
+                   do (let ((sum 0))
+                        (loop for i from 0 below arr2-rows
+                              do (let* ((cell1 (aref arr1 arr1-row i))
+                                        (cell2 (aref arr2 i arr2-col)))
+                                   (incf sum (* cell1 cell2))))
+                        (setf (aref out-arr arr1-row arr2-col) sum))))
+    out-arr))
+</code></pre><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes><code>(defun tensor-convolution-size (img-dims ker-dims)
+  &quot;return the expected size of the convolution img*ker&quot;
+  (mapcar (lambda (img-d ker-d) (- img-d (1- ker-d)))
+          img-dims
+          ker-dims))
+
+(defun tensor-convolution (img ker)
+  &quot;convolve two tensors of any ranks/dimensions
+example usage: (tensor-convolution #(1 2 3 4 5) #(6 7))&quot;
+  (let ((ker-dims (array-dimensions ker))
+        (img-dims (array-dimensions img)))
+    ;; need to make ker-dims,out-dims same rank/order as img-dims
+    (loop while (&lt; (length ker-dims) (length img-dims))
+          do (push 1 ker-dims)
+             (setf ker (make-array ker-dims :displaced-to ker)))
+    (let ((out (make-array (tensor-convolution-size img-dims ker-dims)
+                           :initial-element 0)))
+      (tensor-convolution-util img ker out nil nil (array-dimensions out))
+      out)))
+
+(defun tensor-convolution-util (img ker out
+                                img-indicies out-indicies
+                                out-dims)
+  &quot;this util function for tensor-convolution assumes img,ker,out are all of the same rank/order&quot;
+  (if out-dims
+      ;; iterate through each cell in the output tensor
+      (loop for out-i from 0 below (car out-dims)
+            ;; iterate through each kernel-sized block in the input tensor
+            ;; (length img-indicies) gives us the index of the dimension we&#39;re at
+            do (loop for img-i from out-i below (+ out-i
+                                                   (array-dimension
+                                                    ker
+                                                    (length img-indicies)))
+                     do (tensor-convolution-util
+                         img
+                         ker
+                         out
+                         (append img-indicies (list img-i))
+                         (append out-indicies (list out-i))
+                         (cdr out-dims))))
+      (let* ((img-cell (apply #&#39;aref (cons img img-indicies)))
+             (flipped-kernel-indicies (mapcar #&#39;-
+                                              (mapcar #&#39;1- (array-dimensions ker))
+                                              (mapcar #&#39;- img-indicies out-indicies)))
+             (ker-cell (apply #&#39;aref (cons ker flipped-kernel-indicies))))
+        (incf (apply #&#39;aref (cons out out-indicies)) (* img-cell ker-cell)))))
+</code></pre><h2 id=matrix-multiplication-implementation-comparison-between-lists-and-arrays>matrix multiplication implementation comparison between lists and arrays</h2><p>with lists:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(time
+ (progn
+   (matrix-multiplication
+    (make-list 200 :initial-element (make-list 300 :initial-element 10)) ;; 200x300
+    (make-list 300 :initial-element (make-list 200 :initial-element 20))) ;; 300x200
+   10)) ;; to prevent repl from printing
+;; Evaluation took:
+;;   4.010 seconds of real time
+;;   4.007356 seconds of total run time (4.007356 user, 0.000000 system)
+;;   99.93% CPU
+;;   10,006,237,672 processor cycles
+;;   1,625,600 bytes consed
+
+;; 10 (4 bits, #xA, #o12, #b1010)
+</code></pre><p>with arrays:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(time
+ (progn
+   (matrix-mul
+    (make-array &#39;(350 200) :initial-element 10) ;; 200x300
+    (make-array &#39;(200 300) :initial-element 20))  ;; 300x200
+   10))  ;; to prevent repl from printing
+;; Evaluation took:
+;;   0.156 seconds of real time
+;;   0.154420 seconds of total run time (0.154420 user, 0.000000 system)
+;;   98.72% CPU
+;;   385,821,252 processor cycles
+;;   1,280,048 bytes consed
+
+;; 10 (4 bits, #xA, #o12, #b1010)
+</code></pre><h2 id=d-transformation-matrices>2d transformation matrices</h2><p><a href=20230602050340-2d_transformations.html>linearly mapping a grid to another</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes><code>(defun map-grid-matrix (src-x-range dest-x-range src-y-range dest-y-range)
+  (let ((src-x-min (elt src-x-range 0))
+        (dest-x-min (elt dest-x-range 0))
+        (src-y-min (elt src-y-range 0))
+        (dest-y-min (elt dest-y-range 0))
+        (src-x-max (elt src-x-range 1))
+        (dest-x-max (elt dest-x-range 1))
+        (src-y-max (elt src-y-range 1))
+        (dest-y-max (elt dest-y-range 1)))
+    (make-array
+     &#39;(3 3)
+     :initial-contents
+     `((,(/ (- dest-x-max dest-x-min) (- src-x-max src-x-min)) 0 ,(/ (+ (* (- src-x-min) dest-x-max) (* dest-x-min src-x-max)) (- src-x-max src-x-min)))
+       (0 ,(/ (- dest-y-max dest-y-min) (- src-y-max src-y-min)) ,(/ (+ (* (- src-y-min) dest-y-max) (* dest-y-min src-y-max)) (- src-y-max src-y-min)))
+       (0 0 1)))))
+(defun map-grid (mat src-x-range dest-x-range src-y-range dest-y-range)
+  &quot;apply the grid mapping matrix and return a new matrix&quot;
+  (matrix-mul
+   (map-grid-matrix src-x-range dest-x-range src-y-range dest-y-range)
+   mat))
+</code></pre><p>example usage:</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes><code>(matrix-mul (map-grid-matrix &#39;(-1 1) &#39;(0 10) &#39;(0 1) &#39;(0 -10)) #2A((0.5) (0.5) (1)))
+</code></pre><pre class="example highlight"><code>#2A((7.5) (-5.0) (1.0))
+</code></pre><h1 id=linearly-mapping-discrete-range-onto-another><a href=20230608174403-linearly_mapping_discrete_range_onto_another.html>linearly mapping discrete range onto another</a></h1><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes><code>(defun map-num (num src-min src-max dest-min dest-max)
+  &quot;(map-num 0.5 -1 1 -50 50) =&gt; 25.0&quot;
+  (/ (- (+ (* (- num src-min) (- dest-max dest-min)) (* dest-min src-max)) (* dest-min src-min)) (- src-max src-min)))
+</code></pre><h1 id=sets>sets</h1><p>a good resource <a href=https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html>https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html</a>
+the builtin <code>set-difference</code> sometimes reverses the lists it returns for some reason and its bothersome, e.g.:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(set-difference &#39;(K P N A D) &#39;(K P)) ; =&gt; (D A N)
+</code></pre><p>so i had to use my own:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun set-diff (l1 l2 &amp;key (acc &#39;()) (test #&#39;eql))
+  (cond ((null l1) (nreverse acc))
+        ((null l2) (nreverse (append (reverse l1) acc)))
+        ((member (car l1) l2 :test test) (set-diff (cdr l1) l2 :acc acc :test test))
+        (t (set-diff (cdr l1) l2 :acc (cons (car l1) acc) :test test))))
+</code></pre><p>example:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(set-diff &#39;(K P N A D) &#39;(K P)) ; =&gt; (N A D)
+</code></pre><p>a function to check whether a list is a <a href=20231204180210-subset.html>subset</a> of another, with the <code>test</code> being <code>:equal</code></p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun subset? (list1 list2)
+  &quot;check if improper subset with test `equal&#39;, shorthand for `subsetp&#39;
+consider the difference:
+CL-USER&gt; (subsetp &#39;((1) (2)) &#39;((1) (2)))
+NIL
+CL-USER&gt; (subset? &#39;((1) (2)) &#39;((1) (2)))
+T&quot;
+  (subsetp list1 list2 :test #&#39;equal))
+</code></pre><p>check for set equality:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun set-equal? (list1 list2)
+  &quot;the &#39;mathematical&#39; way of doing it, lol, could&#39;ve used `set-exclusive-or&#39;&quot;
+  (and (subset? list1 list2) (subset? list2 list1)))
+</code></pre><h1 id=combinatorics><a href=20221204105120-combinatorics.html>combinatorics</a></h1><p>generating <a href=20221204105120-combinatorics.html>variation</a>s:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun variations (seq &amp;optional (len (length seq)))
+  &quot;get all variations of a sequence, order matters, repetition isnt allowed&quot;
+  (if (equal len 1)
+      (seq-singletons seq)
+      (apply
+       #&#39;append
+       (loop for i from 0 below (length seq)
+             collect (let ((subvariations (variations (remove-nth seq i) (1- len))))
+                       (loop for variation in subvariations
+                             collect (concatenate-type-aware
+                                      (list (subseq seq i (1+ i)) variation))))))))
+(defun variations-upto-length (seq &amp;optional (len (length seq)))
+  (apply #&#39;append
+         (loop for i from 1 upto len
+               collect (variations seq i))))
+</code></pre><p>generating <a href=20221204105120-combinatorics.html>variations with repetition</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun variations-with-repetition (seq &amp;optional (len (length seq)))
+  &quot;generate all variations of the sequence `seq&#39; of length `len&#39;, such that repetition is allowed, returns a list of sequences of length (length(seq)+1)^len&quot;
+  (let ((singletons (map &#39;list (seq-type seq) seq))) ;; construct a singleton (one element sequences) from every element
+    (if (equal len 1)
+        singletons
+        (let ((variations (variations-with-repetition seq (1- len))))
+          (concatenate-type-aware 
+           (loop for variation in variations
+                 collect (loop for singleton in singletons
+                               collect (concatenate-type-aware
+                                        (list singleton variation)))))))))
+
+(defun variations-with-repetition-upto-length (seq len)
+  &quot;generate all variations of the sequence `seq&#39; of lengths 1 to `len&#39;, such that repetition is allowed, returns a list of sequences&quot;
+  (concatenate-type-aware 
+   (loop for i from 1 upto len
+         collect (variations-with-repetition seq i))))
+</code></pre><p>generating <a href=20221204105120-combinatorics.html>combination</a>s:
+to make the problem easier to tackle i took some examples:
+assume the sequence "ashey" and the length 3, the <a href=20230207142803-base_case.html>base case</a> for <a href=20221105001640-recursive_function.html>recursion</a> would be a sequence of length 3, so if we were to progress letter by letter through the sequence we'd get to a function call with the sequence "hey" and the length 3, then when we exit recursion calls back to the call with the sequence "shey", we need to consider the cell "s" with 3 other sequences, "he","hy","ey", which itself is a combination with the sequence "hey" and length 2, so a call to the function should take care of getting the combinations of the subsequences its concatenating which requires a recursive call to the function by with a reduced length and a reduced subsequence, we may use this as a base case, so when we get a length of 2 we return every combination of length 2, this will satisfy the call with the sequence "hey" and length 3 which in turn satisfies the call with the sequence "shey" and length 4, and so on..</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun combinations (seq len)
+  &quot;generate all combinations of the sequence `seq&#39; of length `len&#39;, such that repetition is allowed and order doesnt matter, returns a list of sequences of length binom{length(seq)}{len}&quot;
+  (if (&gt;= len (length seq))
+      (list seq)
+      (if (equal len 1)
+          (seq-singletons seq)
+          (if (equal len 2) ;; is this &quot;base case&quot; necessary?
+              (concatenate-type-aware
+               (loop for i from 0 below (length seq)
+                     collect (loop for j from (1+ i) below (length seq)
+                                   collect (concatenate-type-aware
+                                            (list (subseq seq i (1+ i))
+                                                  (subseq seq j (1+ j)))))))
+              (concatenate-type-aware
+               (loop for i from 0 upto (- (length seq) len)
+                     collect (map &#39;list
+                                  (lambda (subcombination)
+                                    (concatenate-type-aware
+                                     (list (subseq seq i (1+ i)) subcombination)))
+                                  (combinations (subseq seq (1+ i)) (1- len)))))))))
+
+(defun combinations-upto-length (seq &amp;optional (max-len (length seq)))
+  &quot;generate all combinations of the sequence `seq&#39; of lengths 1 to `max-len&#39;, such that repetition is allowed and order doesnt matter, returns a list of sequences&quot;
+  (concatenate-type-aware
+   (loop for i from 1 upto max-len
+         collect (combinations seq i))))
+</code></pre></div></main></body></html>

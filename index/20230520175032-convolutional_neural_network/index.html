@@ -1,0 +1,820 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>convolutional neural network &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2023-05-20 17:50:33 +0000 UTC">May 20, 2023</time></div><h1 class=post-title>convolutional neural network</h1><div class=post-desc></div><div class=post-line></div><h1 id=citations>citations</h1><ul><li><span class=citation data-cites=aima2010>(Peter Norvig 2020)</span> {{{comment(for explanation etc)}}}</li><li><span class=citation data-cites=conv_net_jianxin>(Wu 2017)</span> {{{comment(for the math in the pooling layer)}}}</li><li><span class=citation data-cites=zhifei_cnn>(Zhang 2016)</span> {{{comment(for the full example section)}}}</li></ul><p>and countless other resources that helped me form a good understanding of the topics related to conv networks</p><h1 id=motivation>motivation</h1><p>an image cannot be thought of as a simple <a href=linear_algebra2.html>vector</a> of input pixel values, primarily because <strong>adjacency of pixels in an image matters</strong>. simple <a href=20230502235623-feedforward_neural_network.html>multilayer perceptrons</a> arent suited for images because adjacent neurons in the same layer arent really connected or affected by each other, which isnt the case in images.
+consider an input image with <img src=/ltx/511aa378fd4e02df7e94a3568f7af67e98f23c4e.svg class=InlineMath style=vertical-align:-.12pt> pixels, if the input and the first hidden layer are fully connected, that means we'd have <img src=/ltx/a14d92f7c09661313772a35733db428a3d738cc4.svg class=InlineMath style=vertical-align:-.12pt> weights; for a typical RGB image, thats 9 trillion weights, which is an unreasonable amount of parameters, all the more reason we need to ditch multilayer perceptrons.
+these considerations suggest that we should construct the first hidden layer so that <strong>each
+hidden unit receives input from only a small, local region of the image</strong>. this kills two birds
+with one stone. first, it respects adjacency, at least locally. second, it cuts down the number of weights.
+so far, so good. but we are missing another important property of images: roughly speaking, anything that is detectable in one small, local region of the image–perhaps an eye or a blade of grass–would look the same if it appeared in another small, local region of the image. in other words, we expect image data to exhibit approximate <strong>spatial invariance</strong>, at least at small to moderate scales. we don’t necessarily expect the top halves of photos to look like bottom halves, so there is a scale beyond which spatial invariance no longer holds.
+local spatial invariance can be achieved by constraining the <img src=/ltx/e8812b1e2bf8fbd0f24fbb9e2dc4ad0b3d6152dc.svg class=InlineMath style=vertical-align:-.12pt> weights connecting a local region to a unit in the hidden layer to be the same for each hidden unit. (that is, for hidden units <img src=/ltx/e73ad5821832b8e1cfc32fe8e765b92299ff7df8.svg class=InlineMath style=vertical-align:-.12pt> and <img src=/ltx/97246c485ab0fe3e95f4734c504984e6273eda8f.svg class=InlineMath style=vertical-align:-3.156pt>, the weights <img src=/ltx/87a04147cc16523a5a2ad358e03cb1ed2f6fe6af.svg class=InlineMath style=vertical-align:-4.616004pt> are the same as <img src=/ltx/87a04147cc16523a5a2ad358e03cb1ed2f6fe6af.svg class=InlineMath style=vertical-align:-4.616004pt>) this makes the hidden units into <strong>feature detectors</strong> that detect the same feature wherever it appear in the image. typically, we want the first hidden layer to detect many kinds of features, not just one; so for each local image region we might have <img src=/ltx/af08064d2796b423367bf7bddcd0d4f77c2651fb.svg class=InlineMath style=vertical-align:-.132pt> hidden units with <img src=/ltx/af08064d2796b423367bf7bddcd0d4f77c2651fb.svg class=InlineMath style=vertical-align:-.132pt> distinct sets of weights. this means that there are <img src=/ltx/6236db8a3b8591cc07fc5cb53a1153b87ed1b953.svg class=InlineMath style=vertical-align:-.132pt> weights in all–a number that is not only far smaller than <img src=/ltx/a14d92f7c09661313772a35733db428a3d738cc4.svg class=InlineMath style=vertical-align:-.12pt>, but is actually independent of <img src=/ltx/511aa378fd4e02df7e94a3568f7af67e98f23c4e.svg class=InlineMath style=vertical-align:-.12pt>, the image size. thus, by injecting some prior knowledge–namely, knowledge of adjacency and spatial invariance–we can develop models that have far fewer parameters and can learn much more quickly.
+usually an image is stored in memory as a 2d array (or matrix), each cell containing 3 different values for RGB (red,green,blue), which forms a 3 dimensional array or a <a href=20230627121053-tensor.html>tensor</a> of order 3, which means the network needs to accept tensors as inputs.</p><h1 id=e2b81ede-2188-4fef-aff9-dcce1015a0ae data-roam_aliases='"convolutional layer"' id=convolutional-layers>convolutional layers</h1><p>a convolutional neural network is one that contains spatially local connections, at least in the early layers which we call <strong>convolutional layers</strong>, and has patterns of weights that are replicated across the units in each layer. a pattern of weights that is replicated across multiple local regions is called a <strong>kernel</strong> which is applied with a <a href=20230613023148-convolution.html>convolution</a>.
+in practice, multiple kernels are learned at each convolutional layer, suppose the input to the <img src=/ltx/fcb45963a9c74355642b6531090ba464145bb1f0.svg class=InlineMath style=vertical-align:-.156pt>-th layer is an order 3 tensor with size <img src=/ltx/a548536f08b790b46f85ae9720ee2f2224452f67.svg class=InlineMath style=vertical-align:-.084pt>, a kernel would also be an order 3 tensor with size <img src=/ltx/83dbf8940cd74faaab1ab7e362b7a863128e51f7.svg class=InlineMath style=vertical-align:-.084pt> (<img src=/ltx/09e871dc460bd4ac5d0982639c416f1c1ea4f680.svg class=InlineMath style=vertical-align:-.084pt> and <img src=/ltx/19af2ec37aa8adb9e62aac03dda787a6a45a277d.svg class=InlineMath style=vertical-align:-.012pt> are the dimensions of the kernel and they differ from <img src=/ltx/89f0b6998960b10a54b44cf4ff6670b9ff8d4b8a.svg class=InlineMath style=vertical-align:-1.692pt>, but the depth of both the image and tensor should be equal for the result of the convolution to be of lower dimensionality), assuming <img src=/ltx/17c36d292a5569624f55061f80f164fcf7b31205.svg class=InlineMath style=vertical-align:-.012pt> kernels are used (in other words, <img src=/ltx/17c36d292a5569624f55061f80f164fcf7b31205.svg class=InlineMath style=vertical-align:-.012pt> feature maps), the tensor of kernels (or weights) would be an order 4 tensor in <img src=/ltx/455aeb465d3fd4c892780688683dac74c345aae7.svg class=InlineMath style=vertical-align:-.156pt>, assuming a stride of 1, the output <img src=/ltx/da9d43285f1b86aa3326b3d7da4b4ead4bcdc46e.svg class=InlineMath style=vertical-align:0> would be a tensor of the third order and of size <img src=/ltx/336aad2570ae9ddefb1a0726029f12346f1ce5e4.svg class=InlineMath style=vertical-align:-2.94pt> which is composed of <img src=/ltx/17c36d292a5569624f55061f80f164fcf7b31205.svg class=InlineMath style=vertical-align:-.012pt> feature maps.</p><div class=note><p>its important to maintain the order of dimensions as depth X height X width, because thats the order i use everywhere</p></div><p><img src=attachment:conv_depth-1.webp>
+at each layer, the image is stored as a tensor of order 3 of <strong>depth</strong> <img src=/ltx/17fdc0f0a537172b6f6526d9f28f36c56c658e6c.svg class=InlineMath style=vertical-align:-.012pt>, each layer of this tensor is basically a matrix we call a <strong>feature map</strong> or <strong>channel</strong>, so the image is stored as nested layers of feature maps, it might be easier to take the input to the first layer as an example, which can be thought of as a set of 3 feature maps of RGB values.</p><h1 id=b178762d-646c-4835-b4e4-7566ace26993 data-roam_aliases='downsampling "pooling layer"' id=pooling-layers-and-downsampling>pooling layers and downsampling</h1><p>a <strong>pooling layer</strong> in a neural network summarizes a set of adjacent units from the preceding pooling layer with a single value. pooling works just like a convolution layer, with a kernel size l and stride <img src=/ltx/cb3245ad5ad55255eae144f806954fcdf877e8dc.svg class=InlineMath style=vertical-align:-.132pt>, but the operation that is applied is fixed rather than learned.
+typically, no <a href=20230503000820-activation_function.html>activation function</a> is associated with the pooling layer. there are two common forms of pooling:</p><ul><li><strong>average-pooling</strong> computes the average value of its <img src=/ltx/e8812b1e2bf8fbd0f24fbb9e2dc4ad0b3d6152dc.svg class=InlineMath style=vertical-align:-.12pt> inputs. this is identical to concvolution with a uniform kernel vector <img src=/ltx/2065bbfed3238e3c866b016835d574ecf68786a0.svg class=InlineMath style=vertical-align:-2.808pt>. if we set <img src=/ltx/90f45391e41270584b566a534fd5e624b16a735f.svg class=InlineMath style=vertical-align:-.132pt>, the effect is to coarsen the resolution of the image–to downsample it–by a factor of <img src=/ltx/cb3245ad5ad55255eae144f806954fcdf877e8dc.svg class=InlineMath style=vertical-align:-.132pt>. an object that occupied, say, <img src=/ltx/58f864f63e74f9db613eb757c58d192a07e21b8a.svg class=InlineMath style=vertical-align:-.192pt> pixels, would now occupy only 10 pixels after pooling. the same learned classifier that would be able to recognize the object at a size of 10 pixels in the original image would now be able to recognize that object in the pooled image, even if it was too big to recognize in the original image. in other words, average-pooling facilitates <strong>multiscale recognition</strong>. it also reduces the number of weights required in subsequent layers, leading to lower computational cost and possibly faster learning.</li><li><strong>max-pooling</strong> computes the maximum value of its <img src=/ltx/e8812b1e2bf8fbd0f24fbb9e2dc4ad0b3d6152dc.svg class=InlineMath style=vertical-align:-.12pt> inputs. it can also be used purely for downsampling, but it has a somewhat different semantics. suppose we applied max-pooling to a layer with the values [5,9,4]: the result would be a 9, indicating that somewhere in the input image there is a darker dot that is detected by the kernel. in other words, max-pooling acts as a kind of logical disjunction, saying that a feature exists somewhere in the unit's receptive field.</li></ul><p>if the goal is to classify the image into one of <img src=/ltx/b005b825ab6b3bc150d70a9a926371c18f56772a.svg class=InlineMath style=vertical-align:-.132pt> categories, then the final layer of the network will be a <a href=20230624075433-softmax.html>softmax</a> with <img src=/ltx/b005b825ab6b3bc150d70a9a926371c18f56772a.svg class=InlineMath style=vertical-align:-.132pt> output units. the early layers of the CNN are image-sized, so somewhere in between there must be significant reductions in layer size. convolution layers and pooling layers with stride larger than 1 all serve to reduce the layer size. it's also possible to reduce the layer size simply by having a fully connected layer with fewer units than the preceding layer. CNNs often have one or two such layers preceding the final softmax layer.
+let <img src=/ltx/7c37e399a7d66dad4b2c76deeb2bbdc21df14742.svg class=InlineMath style=vertical-align:-.156pt> be the input to the <img src=/ltx/e8812b1e2bf8fbd0f24fbb9e2dc4ad0b3d6152dc.svg class=InlineMath style=vertical-align:-.12pt>-th pooling layer, the pooling operation requires no parameters (the matrix of weights is nulled), hence parameter learning is not needed for this layer, let the spatial extent (dimensions) of the pooling be <img src=/ltx/1769f17fe4c9cab5cc0ae8d3c021733a65b20141.svg class=InlineMath style=vertical-align:-.084pt>, assume that <img src=/ltx/19af2ec37aa8adb9e62aac03dda787a6a45a277d.svg class=InlineMath style=vertical-align:-.012pt> divides <img src=/ltx/f617c4ad09082cce4b8b3e2e1aefa111c05289f8.svg class=InlineMath style=vertical-align:-.012pt> and <img src=/ltx/09e871dc460bd4ac5d0982639c416f1c1ea4f680.svg class=InlineMath style=vertical-align:-.084pt> divides <img src=/ltx/73dff35580c794d248a70d97a1dc57291480cf1f.svg class=InlineMath style=vertical-align:-.084pt>, the output of pooling (<img src=/ltx/da9d43285f1b86aa3326b3d7da4b4ead4bcdc46e.svg class=InlineMath style=vertical-align:0> or equivalently <img src=/ltx/2804888536dc84e358e88d75a53268bc9322dbe1.svg class=InlineMath style=vertical-align:0>) will be an order 3 tensor of size <img src=/ltx/6f86564ad95a221edc492c638ef5dfb98168b58a.svg class=InlineMath style=vertical-align:-.084pt>, with</p><img src=/ltx/fa40f511d306892aa9c89efaae6e4dd5557f9e4f.svg class=DisplayMath style=vertical-align:-5pt><p>a pooling layer operates upon <img src=/ltx/d438a1d79ee11357b2eb9a8fef014ef6ba273eef.svg class=InlineMath style=vertical-align:0> channel by channel independently. within each channel, the matrix with <img src=/ltx/16707f16b924c14d62763aa2e92630b66b24850c.svg class=InlineMath style=vertical-align:-.084pt> elements are divided into <img src=/ltx/287e7e20b18248b23e5a7ff8d92d31f52fa47781.svg class=InlineMath style=vertical-align:-.084pt> nonoverlapping subregions, each subregion being <img src=/ltx/1769f17fe4c9cab5cc0ae8d3c021733a65b20141.svg class=InlineMath style=vertical-align:-.084pt> in size. the pooling operator then maps a subregion into a single number.</p><img src=/ltx/22c7aa3bc33d5fe716f1c7b0f5e7d80f0943f632.svg class=DisplayMath style=vertical-align:-5.000007pt><p>where <img src=/ltx/d31269ef2cae341004f85afaf0b00e9d1d177b5f.svg class=InlineMath style=vertical-align:-3.156pt>, and <img src=/ltx/1dde472f50138f320b0e104cacbbd2f67e24cd30.svg class=InlineMath style=vertical-align:-.852pt>.
+since pooling layers have no weights they arent directly connected to their preceding layer, so during <a href=20230503165849-backpropagation.html>backpropagation</a>, we cant directly tell what subregion of the previous layer each pixel in <img src=/ltx/da9d43285f1b86aa3326b3d7da4b4ead4bcdc46e.svg class=InlineMath style=vertical-align:0> corresponds to, but we can reverse the pooling operation to "decode" the values from <img src=/ltx/da9d43285f1b86aa3326b3d7da4b4ead4bcdc46e.svg class=InlineMath style=vertical-align:0> back to <img src=/ltx/d438a1d79ee11357b2eb9a8fef014ef6ba273eef.svg class=InlineMath style=vertical-align:0>. assuming a max-pooling layer, we need a triplet <img src=/ltx/96eefa1d8e5cd90d55fd4da2d72b45ca7b3db989.svg class=InlineMath style=vertical-align:-3.156pt> to pinpoint one element in the input <img src=/ltx/d438a1d79ee11357b2eb9a8fef014ef6ba273eef.svg class=InlineMath style=vertical-align:0>, and another triplet <img src=/ltx/72217a75670be66c39509953078cb619327fa281.svg class=InlineMath style=vertical-align:-3.156pt> to locate one element in <img src=/ltx/da9d43285f1b86aa3326b3d7da4b4ead4bcdc46e.svg class=InlineMath style=vertical-align:0>. assuming a max-pooling layer (process is the same for average-pooling), the pooling output <img src=/ltx/93b8ddb3e044b184dac1b3448f617443978446f0.svg class=InlineMath style=vertical-align:-4.616004pt> comes from <img src=/ltx/5cac289dc6797e838ca02841d981749134f30d57.svg class=InlineMath style=vertical-align:-5.000007pt>, iff the following conditions are met:</p><ul><li>they are in the same channel</li><li>the <img src=/ltx/1c9cdfb30c3145bf1f8f47925bf331443f74a7ff.svg class=InlineMath style=vertical-align:-3.156pt>-th spatial entry belongs to the <img src=/ltx/75bf96d2d7372db90fef18e91ce0ce4468a0703c.svg class=InlineMath style=vertical-align:-3.156pt>-th subregion</li><li>the <img src=/ltx/1c9cdfb30c3145bf1f8f47925bf331443f74a7ff.svg class=InlineMath style=vertical-align:-3.156pt>-th spatial entry is the largest one in that subregion</li></ul><p>translating these conditions into equations, we get</p><img src=/ltx/3ec26f9866537a98264dd22b69a9182bbcd03116.svg class=DisplayMath style=vertical-align:-5.000007pt><h1 id=b689eda9-8822-44cb-a47c-aecf85c83a67 id=flatten-layer>flatten layer</h1><p>a layer that takes a tensor and <a href=20230801034747-vectorization.html>vectorizes</a> or <strong>flattens</strong> it, turning it into a 1d vector, it doesnt need any parameters.</p><h1 id=fa945d11-c6dc-400c-a841-8b8f5fa15cd9 data-roam_aliases='"dense layer"' id=fully-connected-convolutional-layers>fully connected convolutional layers</h1><p>suppose the input of a layer <img src=/ltx/d438a1d79ee11357b2eb9a8fef014ef6ba273eef.svg class=InlineMath style=vertical-align:0> has size <img src=/ltx/f959997a27b1038d5c53dea4684f130339dd99f0.svg class=InlineMath style=vertical-align:-.084pt>. if we use convolution kernels whose size is <img src=/ltx/f959997a27b1038d5c53dea4684f130339dd99f0.svg class=InlineMath style=vertical-align:-.084pt>, then <img src=/ltx/f1d3966baecb1da17f87260663c2fd0ea29b1ec2.svg class=InlineMath style=vertical-align:-.012pt> such kernels form an order 4 tensor in <img src=/ltx/63e07d2da993d72e65c09931aaf33d82e09e3705.svg class=InlineMath style=vertical-align:-.084pt>. the output would be <img src=/ltx/9dc6a0cf5878adc82fbe17e4b563a2fdb424c37e.svg class=InlineMath style=vertical-align:-.156pt>, which is why these layers are sometimes used as flatten layers.
+it is obvious that to compute any element in <img src=/ltx/da9d43285f1b86aa3326b3d7da4b4ead4bcdc46e.svg class=InlineMath style=vertical-align:0>, we need to use all elements in the input <img src=/ltx/b1478b2c42cf3f7012d982b27b51fee0f2325174.svg class=InlineMath style=vertical-align:0>. hence, this layer is a fully connected layer, but can be implemented as a convolution layer. hence, we do not need to derive learning rules for a fully connected layer separately.
+if the data has already been flattened in a preceding layer, then the input size would be <img src=/ltx/b8af575c3d3d4667bfd007b4f15363c3683c2acb.svg class=InlineMath style=vertical-align:-.156pt>, we use <img src=/ltx/f1d3966baecb1da17f87260663c2fd0ea29b1ec2.svg class=InlineMath style=vertical-align:-.012pt> kernels of size <img src=/ltx/34312a12896664cf3d953685a93bd87257fe4f42.svg class=InlineMath style=vertical-align:-.012pt>, which form a 2d matrix we can call <img src=/ltx/83f3a9e77e418bbef05e674a921ce378007fcf9b.svg class=InlineMath style=vertical-align:-.036pt> of size <img src=/ltx/3f865f494606c3cf75159db22d67a45a91faa63c.svg class=InlineMath style=vertical-align:-.012pt>. the convolution <img src=/ltx/1d49c0e1a4f96bed244abb8cfdbb55384c9556c5.svg class=InlineMath style=vertical-align:-.036pt>, is exactly the same as the matrix multiplication <img src=/ltx/7ebba4ce45b4ebe96808e8fd5041243a2802f368.svg class=InlineMath style=vertical-align:-2.528004pt> (<img src=/ltx/83f3a9e77e418bbef05e674a921ce378007fcf9b.svg class=InlineMath style=vertical-align:-.036pt> multiplied by the <a href=linear_algebra2.html>transpose</a> of the vector <img src=/ltx/d438a1d79ee11357b2eb9a8fef014ef6ba273eef.svg class=InlineMath style=vertical-align:0>), which results in a matrix of size <img src=/ltx/352547abd2245fbc5598b07277c08311020d3dd0.svg class=InlineMath style=vertical-align:-.012pt>, again meaning <img src=/ltx/da9d43285f1b86aa3326b3d7da4b4ead4bcdc46e.svg class=InlineMath style=vertical-align:0> is just a vector of size <img src=/ltx/f1d3966baecb1da17f87260663c2fd0ea29b1ec2.svg class=InlineMath style=vertical-align:-.012pt>, <img src=/ltx/9dc6a0cf5878adc82fbe17e4b563a2fdb424c37e.svg class=InlineMath style=vertical-align:-.156pt>.
+because the convolution operation in this layer is equal to a matrix multiplication, the fully connected layers here behave in the same manner as in simple <a href=20230502235623-feedforward_neural_network.html>multilayer perceptron</a>s.
+notice that here <img src=/ltx/34312a12896664cf3d953685a93bd87257fe4f42.svg class=InlineMath style=vertical-align:-.012pt> also equals the number of units in the <img src=/ltx/e8812b1e2bf8fbd0f24fbb9e2dc4ad0b3d6152dc.svg class=InlineMath style=vertical-align:-.12pt>-th layer.</p><h1 id=full-example>full example</h1><p>consider the following network:
+<img src=attachment:net.png>
+let <img src=/ltx/34490369195f29c25b62e52cc55990eb41baf75e.svg class=InlineMath style=vertical-align:-2.632004pt> denote the <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt>th kernel of the <img src=/ltx/fcb45963a9c74355642b6531090ba464145bb1f0.svg class=InlineMath style=vertical-align:-.156pt>th layer whose dimensions are denoted by <img src=/ltx/df1f3dbe60eb41b0756dde565cebbad851c831e5.svg class=InlineMath style=vertical-align:-2.528004pt> (depth,height and width of the kernel tensor, respectively, although depth is irrelevant here), where <img src=/ltx/a70fb850aa0e880917a25dcde847a4a7ef7c8920.svg class=InlineMath style=vertical-align:-.852pt>, such that <img src=/ltx/46c79ed08e1cc7870bbc41d64784dd09563c81bd.svg class=InlineMath style=vertical-align:-.12pt> is the number of kernels in the <img src=/ltx/fcb45963a9c74355642b6531090ba464145bb1f0.svg class=InlineMath style=vertical-align:-.156pt>th layer, let <img src=/ltx/a06c72e6ca526e45c4ad67bf2ac3dd7d47e2952d.svg class=InlineMath style=vertical-align:-.012pt> denote the tensor of weights of layer <img src=/ltx/fcb45963a9c74355642b6531090ba464145bb1f0.svg class=InlineMath style=vertical-align:-.156pt>, let <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt> denote the input to the <img src=/ltx/fcb45963a9c74355642b6531090ba464145bb1f0.svg class=InlineMath style=vertical-align:-.156pt>th layer, let <img src=/ltx/f7411e2078c39183f746f32683519131f80a3782.svg class=InlineMath style=vertical-align:-.012pt> denote the output of the <img src=/ltx/fcb45963a9c74355642b6531090ba464145bb1f0.svg class=InlineMath style=vertical-align:-.156pt>th layer, let <img src=/ltx/68992897fae9f74ace45e6dca540bb7061c2a962.svg class=InlineMath style=vertical-align:-.192pt> denote the output before the activation function
+(im using a different notation than in the image but it should be obvious which is which)
+the parameters are</p><ul><li><img src=/ltx/9b92f482e1e4888d8d680f959ad25b12232c8086.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/36120abdbd900de5e752e964f1c37a91e03537a5.svg class=InlineMath style=vertical-align:-.156pt>, <img src=/ltx/b6273efc2d460702bbc104f51dba9191bc6a0aae.svg class=InlineMath style=vertical-align:-2.632004pt> of size <img src=/ltx/57b2053b535d19fb1d6cfd6bc189ea5635f8280d.svg class=InlineMath style=vertical-align:-.204pt> and <img src=/ltx/905105fb9fe644c6ecb1adb4d9671de07d744aa1.svg class=InlineMath style=vertical-align:-.012pt> of size 6, <img src=/ltx/d6e8777d7bed9f470955d1128f487dcf4d300f8a.svg class=InlineMath style=vertical-align:-.852pt></li><li><img src=/ltx/adc5bbc6b2124e089d5b8d584252a5285dce261b.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/aca3145bdbeb8468cb70cacc62367eb54e80ed7c.svg class=InlineMath style=vertical-align:-.156pt>, <img src=/ltx/e6bdbc297f2d5dc9bd56f8b51ebbfea3d345d7e4.svg class=InlineMath style=vertical-align:-2.608004pt> of size <img src=/ltx/0807f138598fb083d7d06d562c3fa0902b475f43.svg class=InlineMath style=vertical-align:-.204pt> and <img src=/ltx/cda14c21e094834e7550176c864851cecd3e3e24.svg class=InlineMath style=vertical-align:-.012pt> of size 2, <img src=/ltx/0c39986a7db2bd38b7b7ce2e87e8bd8fcc1d6ea1.svg class=InlineMath style=vertical-align:-.852pt> (size of the kernel is different from in the original figure)</li><li><img src=/ltx/800cf36758342875884291f8f4c35edede214499.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/0f126578297e898fea48cefac0f268a24e3e2f4d.svg class=InlineMath style=vertical-align:-.192pt>, <img src=/ltx/09e871dc460bd4ac5d0982639c416f1c1ea4f680.svg class=InlineMath style=vertical-align:-.084pt> of size <img src=/ltx/c12b9130b94f86014de2afa3de7251b0bf7e0213.svg class=InlineMath style=vertical-align:-.204pt> and <img src=/ltx/c38db127ccabbe67b5414bb3819e6dc2a44461a3.svg class=InlineMath style=vertical-align:-.012pt> of size <img src=/ltx/74d809f2c429f01ae33a511e44509eb8433f1f60.svg class=InlineMath style=vertical-align:-.192pt></li></ul><p><strong>feedforwarding for convolutional layer <img src=/ltx/9b92f482e1e4888d8d680f959ad25b12232c8086.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/36120abdbd900de5e752e964f1c37a91e03537a5.svg class=InlineMath style=vertical-align:-.156pt></strong>:</p><img src=/ltx/2ece309a804eab76670361e6574bac38c4beacd3.svg class=DisplayMath style=vertical-align:-5.000005pt><p>where <img src=/ltx/36120abdbd900de5e752e964f1c37a91e03537a5.svg class=InlineMath style=vertical-align:-.156pt> (i think its better to keep general notation than write 2 explicitly), <img src=/ltx/d6e8777d7bed9f470955d1128f487dcf4d300f8a.svg class=InlineMath style=vertical-align:-.852pt>, <img src=/ltx/e5b7fd715e96a375eb741505b56758ca9d51b3bf.svg class=InlineMath style=vertical-align:-3.264pt>, <a href=20230613023148-convolution.html>taken from this convolution example</a>
+here <img src=/ltx/6d142391e48c4f3f2891d7d67f693b73fe8e8b2e.svg class=InlineMath style=vertical-align:-2.528004pt>, the dimensions of the output <img src=/ltx/f7411e2078c39183f746f32683519131f80a3782.svg class=InlineMath style=vertical-align:-.012pt> are <img src=/ltx/3f5358d46d82f4f813a8a74ee8627ba0176607f0.svg class=InlineMath style=vertical-align:-.192pt>
+<strong>feedforwarding for average pooling layer <img src=/ltx/9cf0b14fa50e97c05bcc1ac0fa171b9a5275d90c.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/00959295bf31007edea504fbe575a750b83081a3.svg class=InlineMath style=vertical-align:-.192pt></strong>:
+<img src=/ltx/6335207a36fbe512eb069e0ba9a9825e0e801e85.svg class=DisplayMath style=vertical-align:0>
+in words, we iterate through each block of size <img src=/ltx/bcc3ffe7594e36c536177d8042c1fed894425f46.svg class=InlineMath style=vertical-align:-2.528004pt> (in each kernel) and pool it into a single pixel, here the size of the pooling kernels is <img src=/ltx/8b2e9a4a79565b7141381f1cd89a0dcb4bc36395.svg class=InlineMath style=vertical-align:0> and the result is of dimensions <img src=/ltx/066125b173d64334253f4743db0c9a9316690a36.svg class=InlineMath style=vertical-align:-.192pt>
+<strong>feedforwarding for convolutional layer <img src=/ltx/adc5bbc6b2124e089d5b8d584252a5285dce261b.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/aca3145bdbeb8468cb70cacc62367eb54e80ed7c.svg class=InlineMath style=vertical-align:-.156pt></strong>:</p><img src=/ltx/c485edadffe1b3665b235a84878cf8d13c201a2c.svg class=DisplayMath style=vertical-align:-5.000005pt><p>where <img src=/ltx/13731cb0dcb73c7569176f8fdfaee40b1a93ccb3.svg class=InlineMath style=vertical-align:-3.156pt>, output is of dimensions <img src=/ltx/3a29fcfad56a28c687a31fa605e2d675b9177844.svg class=InlineMath style=vertical-align:-.192pt>, we use <img src=/ltx/00dd4128e61f998b32b31098dca82981497b89e9.svg class=InlineMath style=vertical-align:-.18pt> for the depth of the image because in truth what we're finding is <img src=/ltx/3a758fc61d83fe32cfb4220f527cc596e0711694.svg class=InlineMath style=vertical-align:-3.156pt> which is equal to <img src=/ltx/4c2bd213378dc5fdc3984a7c51619a46bda2da78.svg class=InlineMath style=vertical-align:-3.156pt> but we omit an index of <img src=/ltx/ecc4373e10a8902d5d0ff0cca447bc897219b0e3.svg class=InlineMath style=vertical-align:-.012pt> because its "implied" when its to the left</p><div id=note:note1 class=note><p>we use <img src=/ltx/de9b68828babe78c2e228f2d396efe3bcef18159.svg class=InlineMath style=vertical-align:-.144pt> as the index to <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt> because originally it would've been some variable index, but the result of the convolution is a tensor of order 2 (because the operands of the convolution have the same depth), but originally its meant ot be of order 3 (operands are of order 3), so we are "redimensioning" the result implicitly, if we were to use a variable, e.g. <img src=/ltx/d9123c9392f8dfbd0884797c186725aad9f83d32.svg class=InlineMath style=vertical-align:-3.156pt>, <img src=/ltx/691e98f5d3c26ac1ccf6e7d7a68fc694585b84b3.svg class=InlineMath style=vertical-align:-.084pt> would turn out to equal just 0, because substituting <img src=/ltx/35982a44be92ee781ef7277c5cf3fda13ed1307b.svg class=InlineMath style=vertical-align:-.192pt> would result in an "overflow" in the summation, as when <img src=/ltx/2b92082a2cc6a9878300d421d3ac0b8144dde1b3.svg class=InlineMath style=vertical-align:-2.632004pt>, we get <img src=/ltx/cb0d05f76f83970ff5572f7dc8cc8bd0c5326eec.svg class=InlineMath style=vertical-align:-3.264pt>, which isnt defined (max index is <img src=/ltx/5220ca546894dfb90e4ddd23f0c48ac5e0c8b561.svg class=InlineMath style=vertical-align:-2.528004pt> not <img src=/ltx/36a11cadf75549e2b2303492513d198f33f41f78.svg class=InlineMath style=vertical-align:-2.528004pt>), therefore <img src=/ltx/bf4817ba089c7db67fbf9cc872edb0f33d2955ce.svg class=InlineMath style=vertical-align:-3.156pt> isnt defined and <img src=/ltx/2bd16029929cbda22dc445e4d712c79c0d468f6d.svg class=InlineMath style=vertical-align:-.192pt> in all cases, so we might aswell just write 0 or not consider it at all since adding 0 wouldnt affect a number.</p></div><p><strong>feedforwarding for average pooling layer <img src=/ltx/7d181fa6b8b4b04e1b46dc47d9fa53f9c39aec08.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/1afa5e269cee0533a057a0f05bfe6a112a694f4e.svg class=InlineMath style=vertical-align:-.204pt></strong>:
+<img src=/ltx/6335207a36fbe512eb069e0ba9a9825e0e801e85.svg class=DisplayMath style=vertical-align:0>
+here the size of the kernels is <img src=/ltx/8b2e9a4a79565b7141381f1cd89a0dcb4bc36395.svg class=InlineMath style=vertical-align:0> aswell, the output is of dimensions <img src=/ltx/2e8383dc057b98913e91b1259a5c25d36aecd9ce.svg class=InlineMath style=vertical-align:-.012pt>
+<strong>vectorization before fully connected layer <img src=/ltx/0f126578297e898fea48cefac0f268a24e3e2f4d.svg class=InlineMath style=vertical-align:-.192pt></strong> (may have its own layer):
+before
+<img src=/ltx/e5857d45c1bc892b2eb52d4f0a9052c5666facc7.svg class=DisplayMath style=vertical-align:0>
+the output is of size <img src=/ltx/b2bb5abc671ab938d09da4cc78cc60e292d2c63f.svg class=InlineMath style=vertical-align:-.204pt>
+<strong>feedforwarding for fully connected layer <img src=/ltx/800cf36758342875884291f8f4c35edede214499.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/0f126578297e898fea48cefac0f268a24e3e2f4d.svg class=InlineMath style=vertical-align:-.192pt></strong>:</p><div class=note><p>in the image, the output layer and the last fully connected layer are treated as separate layers, this makes little sense because that way the fully connected layers would have no parameters, here we treat them as a single fully connected layer</p></div><img src=/ltx/6a84451ffecaa7915acf2f0c721b081b5f34afe2.svg class=DisplayMath style=vertical-align:-4.999993pt><p>see <a href=note:note1>note:note1</a> as to why i wrote <img src=/ltx/6f678854bdc8303a8632144cdff0d59a8ce10ae0.svg class=InlineMath style=vertical-align:-.18pt>
+let <img src=/ltx/0e27686d4b02b8f5d60099c655d96c9ebbd7418c.svg class=InlineMath style=vertical-align:-3.108pt> denote the flipping of a matrix <img src=/ltx/d0fc731b421b2d516c0ac8ce8657aa7fe927c9ce.svg class=InlineMath style=vertical-align:-.012pt> over both axes so that the indicies may be reversed, i.e. <img src=/ltx/746d376c4da471bb2be856f45896929f0831de97.svg class=InlineMath style=vertical-align:-3.156pt> (a negative index implies an index that is subtracted from the size of the dimension along with the value 1). we can show that this layer resembles the usual fully connected layer from simple multilayer perceptrons by turning the convolution into <a href=linear_algebra2.html>matrix multiplication</a>:</p><img src=/ltx/2c531fc5c3e23ce44badc88dd6413c21ad133258.svg class=DisplayMath style=vertical-align:-4.999993pt><p>where <img src=/ltx/d9607f2c9c4b3b0dd49afb8b3232b110003358b9.svg class=InlineMath style=vertical-align:-.852pt> (layer contains 10 fully connected kernels), the output is of size 10, here <img src=/ltx/6e2217f478163563d34d0a00ef580e05ae6443db.svg class=InlineMath style=vertical-align:-2.528004pt> and the size of each kernel is <img src=/ltx/c5cdac31b8554ef6c543299cce9ea3bec5c8c379.svg class=InlineMath style=vertical-align:-.204pt> (<img src=/ltx/8351d20768c482a51ce65259ca3272a99acbfea6.svg class=InlineMath style=vertical-align:-2.528004pt>)
+in vector notation, we write (notice that <img src=/ltx/4acf173d40625181a405817f77240e57dd8d7a12.svg class=InlineMath style=vertical-align:-3.108pt> results in a vector):
+<img src=/ltx/7ccfb108e66d2e132d778dffe869fbbf07cf22bc.svg class=DisplayMath style=vertical-align:-6pt>
+at this point we'd have arrived at the output layer and the output of the neural network would be <img src=/ltx/76cab0c8d454a61e74d824c99b5e09c3e53eda9d.svg class=InlineMath style=vertical-align:-.012pt> or simply <img src=/ltx/2db77689438f55d4938aaa2a368a285c70f74cf4.svg class=InlineMath style=vertical-align:-.012pt> (the output of the last fully connected layer which itself is the output layer), assuming the quadratic loss function, and assuming the desired output is <img src=/ltx/a1857b0ed73dda0651332e5ff73576c7c57fb5a7.svg class=InlineMath style=vertical-align:-3.264pt>, the loss function would be defined as:
+<img src=/ltx/7f13cefe2b2c3fb1d7d13fb4b6e582612a6223a4.svg class=DisplayMath style=vertical-align:-3pt>
+now we can begin to backpropagate the error, <img src=/ltx/e84593c51e04bfe2f48283be0a45aaa1937a3d58.svg class=InlineMath style=vertical-align:-.048pt> followed by an object denotes the error at that specific object or point:
+<strong>backpropagation for fully connected layer <img src=/ltx/800cf36758342875884291f8f4c35edede214499.svg class=InlineMath style=vertical-align:-.192pt> or <img src=/ltx/0f126578297e898fea48cefac0f268a24e3e2f4d.svg class=InlineMath style=vertical-align:-.192pt></strong>:</p><img src=/ltx/3b11789019de8951cb449d1036965cb49b4e8863.svg class=DisplayMath style=vertical-align:-3.288pt><p>where <img src=/ltx/9309f3bfff16a227b15402bf4265eb826e0b29c2.svg class=InlineMath style=vertical-align:-2.528004pt>, here <img src=/ltx/6ca4034a402389a471ae1d96da9b963e9a1d2ad2.svg class=InlineMath style=vertical-align:-2.528004pt>, notice that <img src=/ltx/85fafaeaa18dd5cfbb06fb13105c3810a7f67bf3.svg class=InlineMath style=vertical-align:-3.288pt>
+let <img src=/ltx/1a12fa62d69c86655cc5009a865d0fac7f585425.svg class=InlineMath style=vertical-align:-3.288pt>, whose size would be 10, then:</p><img src=/ltx/68b5bb56f7b0ab5620434045bb1d502c063ffd84.svg class=DisplayMath style=vertical-align:-3.108pt><p>we arrived at an equation in matrix notation which is convenient (<img src=/ltx/e78ad23a59d457ceaceec8622bdfbae06579ff71.svg class=InlineMath style=vertical-align:-.144pt> was a column vector initially)
+<strong>backpropagation through flatten layer before <img src=/ltx/800cf36758342875884291f8f4c35edede214499.svg class=InlineMath style=vertical-align:-.192pt></strong>
+recall that during feedforwarding, the flatten layer turned the tensor of feature maps which is of the third order into a single vector, the deltas defined by the layer during backpropagation is a vector aswell, which we need to turn them into a tensor of the third order that resembles the delta at each entry in the tensor of the feature maps
+first we find the delta at each entry in the vector:</p><img src=/ltx/833c1b09816c62e1dab2351d2b20131d2921bd74.svg class=DisplayMath style=vertical-align:-3.108pt><p>notice that <img src=/ltx/6e2217f478163563d34d0a00ef580e05ae6443db.svg class=InlineMath style=vertical-align:-2.528004pt>
+where <img src=/ltx/ab4b251480242daa10eb7652420925f87d375015.svg class=InlineMath style=vertical-align:-3.156pt> because 192 is the total size of the tensor received from <img src=/ltx/1afa5e269cee0533a057a0f05bfe6a112a694f4e.svg class=InlineMath style=vertical-align:-.204pt> during feedforwarding
+now the vector of deltas <img src=/ltx/d7990fb876841751c224ea89e0622e6485bdd351.svg class=InlineMath style=vertical-align:-.144pt> needs to be reshaped into a tensor of the third order so that we may then send it to the next layer in the process, <img src=/ltx/1afa5e269cee0533a057a0f05bfe6a112a694f4e.svg class=InlineMath style=vertical-align:-.204pt>, which is a pooling layer
+the reshaping should be the exact inverse of the row-major vectorization we did during feedforwarding
+<img src=/ltx/a4beec08064ef2fd461186817ed8dbcb09743c63.svg class=DisplayMath style=vertical-align:-7pt>
+such that <img src=/ltx/21966cb52e1c3d810ca6f39fb706b13ce6753db6.svg class=InlineMath style=vertical-align:-2.528004pt>, here <img src=/ltx/edbf55422096c22cff12a9bc8e89263039403579.svg class=InlineMath style=vertical-align:-2.528004pt>, note that <img src=/ltx/483ca70e61bc8afb1abc7d0b710dee28f090507d.svg class=InlineMath style=vertical-align:-.048pt>
+<strong>backpropagation through average pooling layer <img src=/ltx/1afa5e269cee0533a057a0f05bfe6a112a694f4e.svg class=InlineMath style=vertical-align:-.204pt></strong>:
+recall that this layer downscaled the input given to it during feedforwarding from its preceding layer <img src=/ltx/aca3145bdbeb8468cb70cacc62367eb54e80ed7c.svg class=InlineMath style=vertical-align:-.156pt>, so during backpropagation, when it responds to the next layer which is the one it got the initial message from during feedforwarding it needs to scale its message back up to the dimensions of the input it got from that layer, that "message" would be the deltas:
+<img src=/ltx/71d6efc42bffcb72b461425952caee080540a228.svg class=DisplayMath style=vertical-align:-4pt>
+<strong>backpropagation through convolutional layer <img src=/ltx/aca3145bdbeb8468cb70cacc62367eb54e80ed7c.svg class=InlineMath style=vertical-align:-.156pt></strong>:</p><img src=/ltx/ce712acc5e34effb301e4f614321fc31524ab62c.svg class=DisplayMath style=vertical-align:-3.600044pt><p>where <img src=/ltx/95d0c8eab11f8f752d422a7a531d8657eadcfebd.svg class=InlineMath style=vertical-align:-2.528004pt>
+see <a href=note:note2>note:note2</a> about the indicies of <img src=/ltx/19114f6e841ba189939f6fd8f81daf4adab7d879.svg class=InlineMath style=vertical-align:-.012pt> (the note talks about the indicies of <img src=/ltx/17c36d292a5569624f55061f80f164fcf7b31205.svg class=InlineMath style=vertical-align:-.012pt> but the same fact applies to <img src=/ltx/19114f6e841ba189939f6fd8f81daf4adab7d879.svg class=InlineMath style=vertical-align:-.012pt> here)
+let <img src=/ltx/0bdd5567b0d52e4be3db2bfb227e0860e72d3023.svg class=InlineMath style=vertical-align:-2.632004pt> be the error after (after in terms of backpropagation, before in terms of feedforwarding) the activation function:
+<img src=/ltx/48029f5f5b5d1c4bd6fa804311d5344a3c43c8d0.svg class=DisplayMath style=vertical-align:-6pt>
+then:
+<img src=/ltx/4c793b2dcea110df46536eb532429843de8310d4.svg class=DisplayMath style=vertical-align:-7pt>
+now for the bias:</p><img src=/ltx/10fb30a61e6da67530b66ba1ba99f44b36a0a813.svg class=DisplayMath style=vertical-align:-5.000007pt><p>now we find the deltas at <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt> or <img src=/ltx/44297356229b7c2ab9a1c7c53dc112011ebbb350.svg class=InlineMath style=vertical-align:-.012pt>, because thats what the next layer in backpropagation, <img src=/ltx/00959295bf31007edea504fbe575a750b83081a3.svg class=InlineMath style=vertical-align:-.192pt>, needs</p><img src=/ltx/cd8086d5bd1cb7028554225a9eb84b011e1f1f68.svg class=DisplayMath style=vertical-align:-3.600037pt><p>such that <img src=/ltx/9bc668f6b38f7ed6a8efdc491ce46a917710f175.svg class=InlineMath style=vertical-align:-2.528004pt>. here, <img src=/ltx/2e64974e44b67fc070d1361ae56d403cf30f1f75.svg class=InlineMath style=vertical-align:-.048pt> are the deltas that need to be passed onto the next layer <img src=/ltx/00959295bf31007edea504fbe575a750b83081a3.svg class=InlineMath style=vertical-align:-.192pt></p><div id=note:note2 class=note><p>its important to notice how in <a href=eq:eq2>eq:eq2</a> (the formula above) the indicies <img src=/ltx/3c18e8ce70564431838460585d3e487846f35fd7.svg class=InlineMath style=vertical-align:-1.692pt>, which are indexing <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt> are each subtracted from the dimensions of the kernels and then the indicies <img src=/ltx/fa14570099ce907239566cda623c5e941bac55f1.svg class=InlineMath style=vertical-align:-3.156pt> which are indexing <img src=/ltx/3ac1004324070547d73357bccc1633314de99939.svg class=InlineMath style=vertical-align:-2.632004pt> are added element-wise aswell, this is important as its a property that is later exploited in the code for backpropagation
+i should also note that the process of backpropagation in a convolutional layer, just like the feedforwarding process, resembles that of a convolutional one, i have yet to find out how to show that this follows from these math formulas
+furthermore, here the expression <a href=eq:eq2>eq:eq2</a> would be correct only when the indicies of <img src=/ltx/17c36d292a5569624f55061f80f164fcf7b31205.svg class=InlineMath style=vertical-align:-.012pt> are in the correct range, so not less than 0 and not bigger than the size of the dimension theyre in, i think this happens because a single <img src=/ltx/44a23ccac21f26cd75f9177de831bb6cddef5696.svg class=InlineMath style=vertical-align:-2.808pt> doesnt affect all entries in the output but we're differentiating with respect to all entries in the output, perhaps in the future i'll improve upon these formulas</p></div><h1 id=architecture>architecture</h1><h2 id=c9825133-bc4b-4029-b514-861bd2f34c0a id=lenet-5>LeNet-5</h2><p>the <strong>lenet-5</strong> one of the earliest and most basic CNN architecture.
+it consists of 7 layers. the first layer consists of an input image with dimensions of 32x32. it is convolved with 6 filters of size 5x5 resulting in dimension of 28x28x6. the second layer is a pooling operation with a filter of size 2×2 and stride of 2. hence the resulting image dimension will be 14x14x6.
+similarly, the third layer also involves in a convolution operation with 16 filters of size 5x5 followed by a fourth pooling layer with similar filter size of 2x2 and stride of 2. thus, the resulting image dimension will be reduced to 5x5x16.
+once the image dimension is reduced, the fifth layer is a fully connected convolutional layer with 120 filters each of size 5×5. in this layer, each of the 120 units in this layer will be connected to the 400 (5x5x16) units from the previous layers. the sixth layer is also a fully connected layer with 84 units.
+the final seventh layer will be a softmax output layer with <img src=/ltx/511aa378fd4e02df7e94a3568f7af67e98f23c4e.svg class=InlineMath style=vertical-align:-.12pt> possible classes depending upon the number of classes in the dataset.</p><figure><img src=attachment:lenet5.png><figcaption>lenet5 basic architecture</figcaption></figure><h1 id=common-lisp-implementation>common lisp implementation</h1><h2 id=an-abstract-structure-for-networks>an abstract structure for networks</h2><p>after having studied cnn's, i realied i need a more flexible data structure for networks than what i had in <a href=20230502235623-feedforward_neural_network.html>simple feedforward networks</a>, because with simple perceptrons i only used one type of layer, with cnn's we need to be able to build networks with arbitrary layers, so i dropped my previous progress and started over:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defgeneric feedforward (layer x)
+  (:documentation &quot;feed-forward, return activations to pass to next layer&quot;))
+
+(defgeneric propbackward (layer layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
+  (:documentation &quot;backward-popagation, return gradients to pass to preceding layer&quot;))
+
+(defclass layer ()
+  ((weights :initarg :weights :initform nil :accessor layer-weights) ;; weights going into the layer&#39;s units
+   (biases :initarg :biases :initform nil :accessor layer-biases)
+   ;; per-layer activation functions (same activation function for all units in the layer)
+   (activation-function :initarg :activation-function :initform #&#39;relu :accessor layer-activation-function)
+   (activation-function-derivative :initarg :activation-function-derivative :initform #&#39;relu-derivative :accessor layer-activation-function-derivative)
+   ;; use tensor-activation-function and tensor-activation-function-derivative only if you want per-unit special activation functions, they take the indicies list (multidimensional index) of a unit and return a function to use for activation
+   (tensor-activation-function :initarg :tensor-activation-function :accessor layer-tensor-activation-function)
+   (tensor-activation-function-derivative :initarg :tensor-activation-function-derivative :accessor layer-tensor-activation-function-derivative)))
+
+(defclass network ()
+  ((layers :initarg :layers :initform nil :accessor network-layers)
+   (learning-rate :initform 0.0005 :initarg :learning-rate :accessor network-learning-rate)))
+
+(defun make-network (&amp;key learning-rate layers)
+  (make-instance
+   &#39;network
+   :layers layers
+   :learning-rate (or learning-rate 0.0005)))
+
+(defmethod network-feedforward ((n network) x)
+  &quot;x is a tensor, feedforward to the last layer and return its output&quot;
+  (with-slots (layers) n
+    ;; last-out is needed to keep the output of the lastly feedforwarded layer, the output of the layers is pushed onto the list which means they are stored in reverse order, to be later popped also in &quot;reverse&quot; order for backprop, this means that the first entry in out-list corresponds to the output layer, this should be better than storing them in normal order because we use a list and later we need to iterate from the output of the last layer to the first layer, each entry in the list is a cons with the first element as the activated output and second as the unactivated output
+    (let ((last-out x)
+          (out-list nil))
+      (loop for layer in layers
+            do (multiple-value-bind (new-out new-out-unactivated)
+                   (feedforward layer last-out)
+                 (push (cons new-out new-out-unactivated) out-list)
+                 (setf last-out new-out)))
+      out-list)))
+</code></pre><h2 id=convolutional-layer>convolutional layer</h2><p>we use the relu by default to reduce the risk of a <a href=20230503170135-vanishing_gradient.html>vanishing gradient</a></p><div class=note><p>i should note that later on, during the writing of <code>propbackward</code> for convolutional layers, i realized that i needed some more data from <code>feedforward</code> than im currently returning, so <code>feedforward</code> functions needed some slight modifications which also meant i needed to rewrite the <code>network-feedforward</code> function
+i needed more data like the unactivated output tensor of a layer, not just the final output of the layer, and the input to the layer
+it also happened to me during the previous implementation in <a href=20230502235623-feedforward_neural_network.html>feedforward neural network</a>, but it seems i didnt learn from my first encounter with that brickwall, lol.</p></div><p>but which weights should a <code>layer</code> object store? the weights that go into it, i.e. the layers that come out of the previous layer and land on \*this\* layer? or should it store the weights that are represented by the connections that come out of it and reach for the next layer in the network? at first it seemed the latter made more sense, but thats not the case, lets reconsider the equation for a neuron's activation <a href=20230502235623-feedforward_neural_network.html>eq</a>, a neurons value is determined by the weights that go into it from the previous layer, not the weights going out of it into the next one, and since a layer is composed of units, and each unit depends on the weights coming into it, it already makes sense that we store the weights that go into the layer in its object, not the weights coming out of it, plus, if we were to use the second approach a layer would have to store the activation function of the next layer not the activation function of itself, which makes no sense.
+i also went through the source code of <a href=https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/keras/engine/base_layer.py>tensorflow</a> and it seems this is what they're doing aswell. this will be the assumption in my code.
+time to implement different types of layers, starting with convolutional layer:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defclass convolutional-layer (layer)
+  ()
+  (:documentation &quot;a layer that arbitrary dimensions for its weights tensor, and convolves it with an arbitrary input tensor (convolution layer of arbitrary dimensions), the weights tensor should be 1 order higher that the input tensor, e.g. if the input tensor is a 3d tensor (image with feature maps), the shape of the weights tensor should be of 4 dimensions (4d tensor), the output tensor of the layer would be of the same order as the input tensor&quot;))
+
+(defun make-convolutional-layer (&amp;key dims activation-function
+                                   activation-function-derivative
+                                   tensor-activation-function
+                                   tensor-activation-function-derivative)
+  &quot;consutrctor for convolutional layers&quot;
+  (make-instance
+   &#39;convolutional-layer
+   :weights (random-tensor dims)
+   :biases (random-tensor (car dims))
+   :activation-function activation-function
+   :activation-function-derivative activation-function-derivative
+   :tensor-activation-function tensor-activation-function
+   :tensor-activation-function-derivative tensor-activation-function-derivative))
+
+(defmethod feedforward ((l convolutional-layer) x)
+  &quot;x is an arbitrary tensor&quot;
+  (with-slots (weights biases activation-function tensor-activation-function) l
+    (let* ((num-kernels (array-dimension weights 0))
+           (convolution-out-size
+             (mapcar
+              (lambda (img-d ker-d) (- img-d (1- ker-d)))
+              (array-dimensions x)
+              (cdr (array-dimensions weights))))
+           (out (make-array (append (list num-kernels) convolution-out-size))))
+      (loop for kernel-idx from 0 below num-kernels
+            do (set-array-nth
+                out
+                (array-map (lambda (cell) (+ cell (aref biases kernel-idx)))
+                           (tensor-convolution
+                            x
+                            (array-nth weights kernel-idx)))
+                kernel-idx))
+      ;; we return 2 values, the output tensor and the unactivated output tensor
+      (if tensor-activation-function
+          ;; apply per-unit activation functions
+          (values
+           (array-map-indicies out tensor-activation-function)
+           out)
+          ;; apply single activation function to all units in the layer
+          (values (array-map activation-function out) out)))))
+
+(defclass 3d-convolutional-layer (convolutional-layer)
+  ()
+  (:documentation &quot;a convolutional layer with 4d weights tensor and 3d input/output tensors, the depths of the input and weight tensors should be the same, this is used for convolving images with feature maps (channels)
+to see the difference between this and the parent class consider the following examples:
+CL-USER&gt; (array-dimensions (let ((l (make-convolutional-layer :dims &#39;(2 3 3 3))))
+                    (feedforward l (random-tensor &#39;(3 6 6)))))
+=&gt; (2 1 4 4)
+CL-USER&gt; (array-dimensions (let ((l (make-3d-convolutional-layer-from-dims :dims &#39;(2 3 3 3))))
+                    (feedforward l (random-tensor &#39;(3 6 6)))))
+=&gt; (2 4 4)
+&quot;))
+
+(defmethod feedforward :around ((l 3d-convolutional-layer) x)
+  &quot;grab the output of the parent arbitrary-convolution class, reshape it and return it, as there is always redundant dimension in the 4d tensor, this happens because the tensors (input and weights) have the same depth when doing image convolution&quot;
+  (multiple-value-bind (out unactivated-out) (call-next-method) ;; output of parent class&#39; feedforward
+    (let ((actual-convolution-out-size
+            (append (list (array-dimension out 0))
+                    (cdr (cdr (array-dimensions out))))))
+      (values (make-array actual-convolution-out-size :displaced-to out)
+              (make-array actual-convolution-out-size :displaced-to unactivated-out)))))
+
+(defun make-3d-convolutional-layer-from-dims (&amp;key dims activation-function activation-function-derivative tensor-activation-function tensor-activation-function-derivative)
+  &quot;consutrctor for convolutional layers&quot;
+  (make-instance
+   &#39;3d-convolutional-layer
+   :activation-function activation-function
+   :activation-function-derivative activation-function-derivative
+   :tensor-activation-function tensor-activation-function
+   :tensor-activation-function-derivative tensor-activation-function-derivative
+   :weights (random-tensor dims)
+   :biases (random-tensor (car dims))))
+
+(defun make-3d-convolutional-layer (&amp;key activation-function activation-function-derivative num-kernels kernel-depth kernel-height kernel-width tensor-activation-function tensor-activation-function-derivative)
+  &quot;consutrctor for convolutional layers&quot;
+  (make-instance
+   &#39;3d-convolutional-layer
+   :activation-function activation-function
+   :activation-function-derivative activation-function-derivative
+   :tensor-activation-function tensor-activation-function
+   :tensor-activation-function-derivative tensor-activation-function-derivative
+   :weights (random-tensor (list num-kernels kernel-depth kernel-height kernel-width))
+   :biases (random-tensor num-kernels)))
+</code></pre><h2 id=pooling-layer>pooling layer</h2><p>pooling layer:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defclass pooling-layer (layer)
+  ((rows :initarg :rows :accessor pooling-layer-rows)
+   (cols :initarg :cols :accessor pooling-layer-cols)
+   (pooling-function :initarg :pooling-function :accessor pooling-layer-function)
+   (unpooling-function :initarg :unpooling-function :accessor pooling-layer-unpooling-function))) ;; unpooling-function will make sense when you read later on
+
+(defun max-pooling-function (myvec)
+  (reduce #&#39;max myvec))
+
+(defun average-pooling-function (myvec)
+  (/ (reduce #&#39;+ myvec) (length myvec)))
+
+(defun make-pooling-layer (&amp;key rows cols pooling-function unpooling-function)
+  (make-instance
+   &#39;pooling-layer
+   :rows rows
+   :cols cols
+   :pooling-function (or pooling-function #&#39;average-pooling-function)
+   :unpooling-function (or unpooling-function #&#39;average-unpooling-function)))
+
+(defmethod feedforward ((l pooling-layer) x)
+  &quot;x is a tensor of the third order, which in case of the first layer is the actual image&quot;
+  (with-slots (rows cols pooling-function) l
+    (let* ((num-channels (array-depth x))
+           (img-rows (array-rows x))
+           (img-cols (array-cols x))
+           (out-rows (/ img-rows rows))
+           (out-cols (/ img-cols cols))
+           (out (make-array (list num-channels out-rows out-cols))))
+      (loop for channel-idx from 0 below num-channels
+            do (loop for img-row-idx from 0 below img-rows by rows
+                     do (loop for img-col-idx from 0 below img-cols by cols
+                              do (let ((out-row-idx (/ img-row-idx rows))
+                                       (out-col-idx (/ img-col-idx cols)))
+                                   (setf
+                                    (aref out channel-idx out-row-idx out-col-idx)
+                                    (funcall
+                                     pooling-function
+                                     (vectorize-array
+                                      (subarray
+                                       x
+                                       (list channel-idx img-row-idx img-col-idx)
+                                       (list rows cols)))))))))
+      out)))
+</code></pre><h2 id=flatten-layer-1>flatten layer</h2><p>a flatten layer, which is used to reduce dimensionality to 1d (to vectorize the input tensor), and doesnt have any parameters:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defclass flatten-layer (layer) ())
+
+(defun make-flatten-layer () (make-instance &#39;flatten-layer))
+
+(defmethod feedforward ((l flatten-layer) x)
+  (vectorize-array x))
+</code></pre><h2 id=dense-layer>dense layer</h2><p>a dense layer, or a fully connected layer:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defclass dense-layer (convolutional-layer) ())
+
+(defun make-dense-layer (&amp;key num-units prev-layer-num-units
+                           activation-function activation-function-derivative
+                           tensor-activation-function tensor-activation-function-derivative)
+  (make-instance
+   &#39;dense-layer
+   :activation-function activation-function
+   :activation-function-derivative activation-function-derivative
+   :tensor-activation-function tensor-activation-function
+   :tensor-activation-function-derivative tensor-activation-function-derivative
+   :weights (random-tensor (list num-units prev-layer-num-units))
+   :biases (random-tensor num-units)))
+
+(defmethod feedforward :around ((l dense-layer) x)
+  &quot;return the output of the convolution, properly reshaped&quot;
+  (multiple-value-bind (out unactivated-out) (call-next-method)
+    (values (make-array (list (array-dimension out 0)) :displaced-to out)
+            (make-array (list (array-dimension out 0)) :displaced-to unactivated-out))))
+</code></pre><h2 id=test-code>test code</h2><p>feedforwarding test in convolutional layers, with an (randomly generated) input image of depth 3 (3 channels), width 6 and height 6 (in the code columns and rows, respectively), like in <a href=fig:convlayer>fig:convlayer</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-results=verbatim data-exports=both><code>(let ((l (make-convolutional-layer :dims &#39;(5 3 4 3)
+                                   :activation-function #&#39;relu
+                                   :activation-function-derivative #&#39;relu-derivative)))
+  (array-dimensions (feedforward l (random-tensor &#39;(3 10 6)))))
+</code></pre><pre class="example highlight"><code>(5 1 7 4)
+</code></pre><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-results=verbatim data-exports=both><code>(let ((l (make-3d-convolutional-layer-from-dims
+          :dims &#39;(5 3 4 3)
+          :activation-function #&#39;relu
+          :activation-function-derivative #&#39;relu-derivative)))
+  (array-dimensions (feedforward l (random-tensor &#39;(3 10 6)))))
+</code></pre><pre class="example highlight"><code>(5 7 4)
+</code></pre><p>the code outputs a tensor of size 2x4x4, as expected and as seen in the figure.
+feedforwarding test in pooling layers:</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-exports=both><code>(let ((l (make-pooling-layer :rows 16 :cols 16)))
+  (feedforward l (random-tensor &#39;(3 32 32))))
+</code></pre><pre class="example highlight"><code>#3A(((-0.09865912f0 0.0050482843f0) (0.033965267f0 0.009567747f0))
+    ((-0.048119776f0 0.053631075f0) (0.0039087785f0 -0.045654505f0))
+    ((0.011538963f0 0.012444877f0) (0.009892253f0 0.018327955f0)))
+</code></pre><p>feedforwarding test in dense layers:</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-results=verbatim data-exports=both><code>(let ((l (make-dense-layer :num-units 20 :prev-layer-num-units 30
+                           :activation-function #&#39;sigmoid
+                           :activation-function-derivative #&#39;sigmoid-derivative)))
+  (feedforward l (random-tensor &#39;(30))))
+</code></pre><pre class="example highlight"><code>#(0.07897233f0 0.6648786f0 0.5233108f0 0.16540164f0 0.5859843f0 0.3620081f0
+  0.881382f0 0.6328014f0 0.9851791f0 0.54547656f0 0.2188674f0 0.46183386f0
+  0.52967626f0 0.255327f0 0.5279645f0 0.70072246f0 0.022833973f0 0.043903537f0
+  0.5002063f0 0.37229472f0)
+#(-2.4563925f0 0.6851117f0 0.09331077f0 -1.6185739f0 0.34738904f0 -0.566659f0
+  2.0055835f0 0.54425377f0 4.196786f0 0.18241026f0 -1.2722789f0 -0.15296215f0
+  0.11884463f0 -1.0704002f0 0.11197477f0 0.8507405f0 -3.756407f0 -3.080864f0
+  8.253455f-4 -0.52238494f0)
+</code></pre><p>feedforwarding test in flatten layers:</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-results=verbatim data-exports=both><code>(feedforward (make-flatten-layer) (random-tensor &#39;(2 3 3)))
+</code></pre><pre class="example highlight"><code>#(0.7158413f0 -0.65535855f0 -0.95929027f0 0.8278158f0 -0.56471443f0
+  -0.40639305f0 0.8319006f0 -0.039112806f0 -0.61821413f0 -0.8546965f0
+  -0.8576379f0 -0.77950644f0 0.54494023f0 -0.5361223f0 -0.012234688f0
+  0.868943f0 -0.96434f0 -0.61873984f0)
+</code></pre><p>now that we have implemented the necessary layers, we can start building convolutional networks, we start with <a href=20230520175032-convolutional_neural_network.html>LeNet-5</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(defparameter *lenet5*
+  (make-network
+   :layers (list
+            (make-3d-convolutional-layer-from-dims
+             :dims &#39;(6 1 5 5)
+             :activation-function #&#39;relu
+             :activation-function-derivative #&#39;relu-derivative)
+            (make-pooling-layer :rows 2 :cols 2)
+            (make-3d-convolutional-layer-from-dims
+             :dims &#39;(16 6 5 5)
+             :activation-function #&#39;relu
+             :activation-function-derivative #&#39;relu-derivative)
+            (make-pooling-layer :rows 2 :cols 2)
+            (make-flatten-layer)
+            (make-dense-layer :num-units 120 :prev-layer-num-units 400
+                              :activation-function #&#39;relu
+                              :activation-function-derivative #&#39;relu-derivative)
+            (make-dense-layer :num-units 84 :prev-layer-num-units 120
+                              :activation-function #&#39;relu
+                              :activation-function-derivative #&#39;relu-derivative)
+            (make-dense-layer :num-units 10 :prev-layer-num-units 84
+                              :activation-function #&#39;sigmoid
+                              :activation-function-derivative #&#39;sigmoid-derivative))))
+</code></pre><p>we can perform a simple feedforwarding test with a randomly permuted "image":</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-results=verbatim data-exports=both><code>(car (network-feedforward *lenet5* (random-tensor &#39;(1 32 32))))
+</code></pre><pre class="example highlight"><code>(#(1.0 0 1.0 0 0 0 0 1.0 3.6099282e-22 1.0)
+ . #(542.2019 -1379.9155 469.97314 -319.0183 -235.80972 -294.26898 -628.3136
+     134.56656 -49.373184 454.5819))
+</code></pre><p>we got 10 values out, as expected (the size of the output layer is 10)</p><h2 id=convolutional-layer-backprop>convolutional layer backprop</h2><p>its time to implement <a href=20230503165849-backpropagation.html>backpropagation</a>!
+a table of the variables in the code and their counterparts in the math formulas:</p><img src=/ltx/3d03bdb46778829f7530416ee3c66331270bcbb3.svg class=DisplayMath style=vertical-align:-5pt><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defmethod propbackward ((l convolutional-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
+  &quot;compute the gradients of the layer, propped-deltas is a tensor of the errors or &#39;deltas&#39; at the output nodes which is propagated back from the succeeding layer in the network, layer-x is the input image tensor that was passed to the layer during feedforwarding, layer-y is the output of the layers&#39; feedforwarding (activation of nodes), the assumption here is that the last dimensions of weight,image tensors are equal so that the image tensor keeps its rank/order, notice that (for now) this function assumes the equality of the order of input and output tensors&quot;
+  (with-slots (weights biases
+               activation-function-derivative
+               tensor-activation-function-derivative)
+      l
+    ;; here we restore the dropped dimension, if any (a dimension is dropped if the tensors convolved have the same depth, which happens in your standard 3d convolutions with images, im not even sure why im writing code for a more general case..), we do this because its then easier to apply the math, note that all three arrays layer-y,layer-y-unactivated,propped-deltas here have the same dimensions, also note that here reshaping the arrays by adding a dimension with size 1 doesnt affect the arrays actual sizes, only their dimensionality and order/rank
+    (when (not (eq (length (array-dimensions weights))
+                   (length (array-dimensions layer-y))))
+      (setf layer-y
+            (make-array (append (list (array-dimension layer-y 0) 1)
+                                (cdr (array-dimensions layer-y)))
+                        :displaced-to layer-y))
+      (setf layer-y-unactivated
+            (make-array (append (list (array-dimension layer-y-unactivated 0) 1)
+                                (cdr (array-dimensions layer-y-unactivated)))
+                        :displaced-to layer-y-unactivated))
+      (setf propped-deltas 
+            (make-array (append (list (array-dimension propped-deltas 0) 1)
+                                (cdr (array-dimensions propped-deltas)))
+                        :displaced-to propped-deltas)))
+
+    (let ((x-deltas (make-array (array-dimensions layer-x))) ;; \Delta I in the math section, the deltas at the inputs, these are to be backpropped
+          (s-deltas (make-array (array-dimensions layer-y)))) ;; \Delta S in the math, the deltas &quot;after&quot; the activation function
+      ;; compute s-deltas
+      (loop for layer-y-idx from 0 below (array-size layer-y) do
+        (let* ((layer-y-indicies (array-index-row-major layer-y layer-y-idx))
+               (layer-y-unactivated-entry (apply #&#39;aref (append (list layer-y-unactivated) layer-y-indicies))) ;; S^\ell[k,i,j]
+               (propped-delta (apply #&#39;aref (append (list propped-deltas) layer-y-indicies)))) ;; \Delta\hat Y[k,i,j]
+          (if tensor-activation-function-derivative
+              (setf (apply #&#39;aref (append (list s-deltas) layer-y-indicies)) (* propped-delta (funcall tensor-activation-function-derivative layer-y-unactivated layer-y-indicies)))
+              (setf (apply #&#39;aref (append (list s-deltas) layer-y-indicies)) (* propped-delta (funcall activation-function-derivative layer-y-unactivated-entry))))))
+
+      ;; compute x-deltas, this was replaced with the next sexp, im not sure if it even works but i feel like keeping it here, it is the code for the math in [[eq:old_x_delta]]
+      ;; (loop for layer-x-idx from 0 below (array-size layer-x) do
+      ;;   (let ((layer-x-indicies (array-index-row-major layer-x layer-x-idx)))
+      ;;     (loop for layer-y-idx from 0 below (array-size layer-y) do
+      ;;       (let* ((layer-y-indicies (array-index-row-major layer-y layer-y-idx))
+      ;;              (s-delta (apply #&#39;aref (append (list s-deltas) layer-y-indicies)))
+      ;;              ;; see [[note:note2]], this is the pattern for the indicies of the weight to be multiplied by the entry in the input
+      ;;              (weight-indicies (append (list (1- (array-dimension weights 0))) (mapcar #&#39;+ (mapcar #&#39;- (cdr (array-dimensions weights)) layer-x-indicies) (cdr layer-y-indicies) (make-list (length layer-x-indicies) :initial-element -1)))) ;; we add (..,-1,-1,-1) because in the math the indexing starts at 1 not 0
+      ;;              (in-range t))
+      ;;         ;; use in-range to check whether weight indicies are within the range of the weights tensor, again refer to [[note:note2]]
+      ;;         (loop for i from 0 below (length weight-indicies) do
+      ;;           (if (or (not (&lt; (elt weight-indicies i) (array-dimension weights i)))
+      ;;                   (&lt; (elt weight-indicies i) 0))
+      ;;               (setf in-range nil)))
+      ;;         (when in-range
+      ;;           (let* ((weight (apply #&#39;aref (append (list weights) weight-indicies)))
+      ;;                  (x-delta-to-add (* s-delta weight)))
+      ;;             ;; update an x-delta
+      ;;             (incf (apply #&#39;aref (append (list x-deltas) layer-x-indicies)) x-delta-to-add)))))))
+
+      ;; an updated solution to compute x-deltas discussed in [[any:optimization1]], first attempt
+      ;; (loop for layer-x-idx from 0 below (array-size layer-x) do
+      ;;   (let ((layer-x-indicies (array-index-row-major layer-x layer-x-idx)))
+      ;;     (loop for weight-idx from 0 below (array-size weights) do
+      ;;       (let* ((weight-indicies (array-index-row-major weights weight-idx))
+      ;;              (s-delta-indicies (append
+      ;;                                 (list (car weight-indicies))
+      ;;                                 (mapcar #&#39;-
+      ;;                                         layer-x-indicies
+      ;;                                         (cdr weight-indicies))))
+      ;;              (desired-weight-indicies
+      ;;                (append
+      ;;                 (list (car weight-indicies))
+      ;;                 (mapcar #&#39;-
+      ;;                         (cdr (array-dimensions weights))
+      ;;                         (cdr weight-indicies)
+      ;;                         (make-list (length (cdr weight-indicies))
+      ;;                                    :initial-element 1))))
+      ;;              (in-range t))
+      ;;         (loop for i from 0 below (length desired-weight-indicies) do
+      ;;           (if (or (not (&lt; (elt desired-weight-indicies i)
+      ;;                           (array-dimension weights i)))
+      ;;                   (&lt; (elt desired-weight-indicies i) 0))
+      ;;               (setf in-range nil)))
+      ;;         (loop for i from 0 below (length s-delta-indicies) do
+      ;;           (if (or (not (&lt; (elt s-delta-indicies i)
+      ;;                           (array-dimension s-deltas i)))
+      ;;                   (&lt; (elt s-delta-indicies i) 0))
+      ;;               (setf in-range nil)))
+      ;;         (when in-range
+      ;;           (let* ((weight (apply #&#39;aref (append (list weights)
+      ;;                                                desired-weight-indicies)))
+      ;;                  (s-delta (apply #&#39;aref (append (list s-deltas)
+      ;;                                                 s-delta-indicies)))
+      ;;                  (x-delta-to-add (* s-delta weight)))
+      ;;             ;; update an x-delta
+      ;;             (incf (apply #&#39;aref (append (list x-deltas) layer-x-indicies)) x-delta-to-add)))))))
+
+      ;; third attempt for [[any:optimization1]], here we&#39;re dropping the second-to-highest dimension because we dont need to iterate over it for every entry in layer-x, this saves us alot of iterations as it actually reduces the exponent of the time complexity (each dimension is basically another nested for loop), currently this doesnt support cases where D_K != D_I
+      (let ((needed-weight-dimensions (cons (car (array-dimensions weights))
+                                            (cdr (cdr (array-dimensions weights))))))
+        (loop for layer-x-idx from 0 below (array-size layer-x) do
+          (let ((layer-x-indicies (array-index-row-major layer-x layer-x-idx)))
+            (loop for weight-idx from 0 below (reduce #&#39;* needed-weight-dimensions) do
+              (let* ((weight-indicies (from-row-major needed-weight-dimensions weight-idx))
+                     (s-delta-indicies (append
+                                        (cons (car weight-indicies) (cons 0 nil))
+                                        (mapcar #&#39;-
+                                                (cdr layer-x-indicies)
+                                                (cdr weight-indicies))))
+                     (desired-weight-indicies
+                       (cons
+                        (car weight-indicies)
+                        (mapcar #&#39;-
+                                (cdr (array-dimensions weights))
+                                (cons (car layer-x-indicies) (cdr weight-indicies))
+                                (make-list (length weight-indicies)
+                                           :initial-element 1))))
+                     (in-range t))
+                (loop for i from 0 below (length desired-weight-indicies) do
+                  (if (or (not (&lt; (elt desired-weight-indicies i)
+                                  (array-dimension weights i)))
+                          (&lt; (elt desired-weight-indicies i) 0))
+                      (setf in-range nil)))
+                (loop for i from 0 below (length s-delta-indicies) do
+                  (if (or (not (&lt; (elt s-delta-indicies i)
+                                  (array-dimension s-deltas i)))
+                          (&lt; (elt s-delta-indicies i) 0))
+                      (setf in-range nil)))
+                (when in-range
+                  (let* ((weight (apply #&#39;aref (append (list weights)
+                                                       desired-weight-indicies)))
+                         (s-delta (apply #&#39;aref (append (list s-deltas)
+                                                        s-delta-indicies)))
+                         (x-delta-to-add (* s-delta weight)))
+                    ;; update an x-delta
+                    (incf (apply #&#39;aref (append (list x-deltas) layer-x-indicies)) x-delta-to-add))))))))
+
+      ;; update the biases
+      ;; why are we iterating through biases as if its a multidimesional array/tensor? its just a vector, this is misleading, but im leaving it this way for now
+      (loop for bias-idx from 0 below (array-size biases) do
+        (let ((bias-indicies (array-index-row-major biases bias-idx))
+              (gradient 0)
+              (needed-y-dimensions (cdr (array-dimensions layer-y))))
+          (loop for layer-y-idx from 0 below (reduce #&#39;* needed-y-dimensions) do
+            (let* ((layer-y-indicies (cons (car bias-indicies)
+                                           (from-row-major needed-y-dimensions layer-y-idx)))
+                   (s-delta (apply #&#39;aref (append (list s-deltas) layer-y-indicies))))
+              (incf gradient s-delta)))
+          ;; update bias
+          (decf (apply #&#39;aref (cons biases bias-indicies)) (* learning-rate gradient))))
+
+      ;; update the weights
+      (loop for weight-idx from 0 below (array-size weights) do
+        (let ((weight-indicies (array-index-row-major weights weight-idx))
+              (gradient 0)
+              (needed-y-dimensions (cdr (array-dimensions layer-y))))
+          ;; needed-y-dimensions are the dimensions we need to iterate through in the layer y, we dont need to iterate through the entire output as a weight is only connected to the output units that are connected to its kernel
+          (loop for layer-y-idx from 0 below (reduce #&#39;* needed-y-dimensions) do
+            ;; add the kernel index to the layer-y-indicies
+            (let* ((layer-y-indicies (cons (car weight-indicies) (from-row-major needed-y-dimensions layer-y-idx)))
+                   (s-delta (apply #&#39;aref (append (list s-deltas) layer-y-indicies)))
+                   (i-indicies (mapcar #&#39;+ (mapcar #&#39;- (cdr (array-dimensions weights)) (cdr weight-indicies) (make-list (length (cdr weight-indicies)) :initial-element 1)) (cons 0 layer-y-indicies)))
+                   (in-range t))
+              ;; check if i-indicies are in the correct range
+              (loop for i from 0 below (length i-indicies) do
+                (if (or (not (&lt; (elt i-indicies i) (array-dimension layer-x i)))
+                        (&lt; (elt i-indicies i) 0))
+                    (setf in-range nil)))
+              (when in-range
+                ;; (print (not (member (cons i-indicies layer-y-indicies) added :test #&#39;equal)))
+                (let ((i (apply #&#39;aref (append (list layer-x) i-indicies))))
+                  (incf gradient (* s-delta i))))))
+          ;; update weight
+          (decf (apply #&#39;aref (append (list weights) weight-indicies)) (* learning-rate gradient))))
+      x-deltas)))
+</code></pre><p>now we need to write the propbackward function for networks so we can conduct simple propbackward tests before continuing</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defmethod network-propbackward ((n network) network-x network-y feedforward-out)
+  &quot;feedforward-out is the result of the network-feedforward function, its a list of cons&#39; of out and unactivated-out, network-x and network-y should be the input and the desired output to the network, respectively&quot;
+  (with-slots (layers learning-rate) n
+    (let* ((output-layer (car (car feedforward-out)))
+           ;; initialize the propped deltas to (hat y - y), because we use squared error loss function
+           (propped-deltas (array-map #&#39;- output-layer network-y)))
+      ;; iterate through each layer
+      (loop for layer-index from (1- (length layers)) above -1 do
+        ;; from the feedforward-out list, get the output of the current layer&#39;s feedforward (activated and non-activated), they are stored in reverse order so we use pop
+        (let* ((mycons (pop feedforward-out))
+               (layer-out (car mycons))
+               (layer-unactivated-out (cdr mycons))
+               (layer (elt layers layer-index))
+               ;; the input to this layer is the output of the next (or previous in feedforward terms) layer, except for the first layer which receives input from the input layer which isnt in the list because its not actually a layer
+               (layer-in (if (car feedforward-out) (car (car feedforward-out)) network-x)))
+          ;; propbackward to the next layer, storing the deltas returned into propped-deltas to be passed onto the next layer
+          (setf propped-deltas (propbackward layer layer-in layer-out layer-unactivated-out propped-deltas learning-rate)))))))
+</code></pre><p>before implementing backpropagation for the pooling layer we need to think about how each type of pooling layer should handle the backpropagatted gradients, if we consider the average pooling layer, all pixels in a "pooled portion" of the image have an equal effect on the loss function, but in a max pooling layer, only the pixel with the maximum value has an effect and the rest of the pixels have no effect whatsoever because they dont affect the values of the pixels in succeeding layers
+since i already had different functions for pooling, <code>average-pooling-function</code> and <code>max-pooling-function</code>, i decided to implement the concept of "unpooling function", which take a slice of the input image, one that corresponds to a pixel in the output of the layer and was reduced into that pixel during feedforward, it also takes the gradient at that pixel and splits it into a 2d layer of "subgradients" that corresponds to the slice of the image, for example in the "average unpooling function" <code>average-unpooling-function</code>, the gradient of the pixel in the output is divided equally to a grid of <img src=/ltx/c53607061b1f60d97bf04f39180a113e17d4374d.svg class=InlineMath style=vertical-align:-2.528004pt> which is then added to the tensor of deltas at the same position the 2d grid of pixels have in the input image tensor, this tensor of deltas is to be forwarded later to the next layer during backprop
+i had to go back and edit the definition of the <code>pooling-layer</code> class to include the new <code>unpooling-function</code> slot and the function <code>make-pooling-layer</code> to provide a default unpooling function aswell</p><h2 id=pooling-layer-backprop>pooling layer backprop</h2><p>backprop for pooling layer:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defmethod propbackward ((l pooling-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
+  &quot;a pooling layer doesnt care about layer-y,layer-y-unactivated or learning-rate, it just needs to upscale the deltas and pass them on&quot;
+  (with-slots (unpooling-function rows cols) l
+    (let ((deltas (make-array (array-dimensions layer-x))))
+      (loop for channel-idx from 0 below (array-depth deltas) do
+        (loop for img-row-idx from 0 below (array-rows deltas) by rows do
+          (loop for img-col-idx from 0 below (array-cols deltas) by cols do
+            (let* ((delta-row-idx (/ img-row-idx rows))
+                   (delta-col-idx (/ img-col-idx cols))
+                   (img-subgrid (subarray layer-x
+                                          (list channel-idx img-row-idx img-col-idx)
+                                          (list rows cols)))
+                   (gradient (aref propped-deltas channel-idx delta-row-idx delta-col-idx))
+                   (delta-grid (funcall unpooling-function img-subgrid gradient)))
+              (copy-into-array deltas delta-grid (list
+                                                  channel-idx
+                                                  img-row-idx
+                                                  img-col-idx))))))
+      deltas)))
+
+(defun average-unpooling-function (img-subgrid gradient)
+  &quot;example usage: (progn (setf a (random-tensor &#39;(4 4))) (average-unpooling-function a 0.7))&quot;
+  (make-array
+   (array-dimensions img-subgrid)
+   :initial-element (/ gradient (array-size img-subgrid))))
+
+(defun max-unpooling-function (img-subgrid gradient)
+  &quot;example usage: (progn (setf a (random-tensor &#39;(4 4))) (max-unpooling-function a 0.7))&quot;
+  (let* ((gradient-grid (make-array (array-dimensions img-subgrid)))
+         (max-value (aref img-subgrid 0 0))
+         (max-cell-indicies &#39;(0 0)))
+    (loop for row from 0 below (array-rows img-subgrid) do
+      (loop for col from 0 below (array-cols img-subgrid) do
+        (let ((val (aref img-subgrid row col)))
+          (if (&gt; val max-value)
+              (progn
+                (setf max-value val)
+                (setf max-cell-indicies (list row col)))))))
+    (setf (apply #&#39;aref (append (list gradient-grid) max-cell-indicies)) gradient)
+    gradient-grid))
+</code></pre><h2 id=flatten-layer-backprop>flatten layer backprop</h2><p>backprop for flatten layers is probably the simplest, we only need to reshape the deltas and pass them on:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defmethod propbackward ((l flatten-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
+  &quot;a pooling layer doesnt care about layer-y-unactivated,propped-deltas or learning-rate&quot;
+  (make-array (array-dimensions layer-x) :displaced-to propped-deltas))
+</code></pre><h2 id=test-code-1>test code</h2><p>time for a simple propbackward test:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defun lenet-test-1 ()
+  (let* ((x (random-tensor &#39;(1 32 32)))
+         (y (make-array &#39;(10)))
+         (out (network-feedforward *lenet5* x)))
+    (network-propbackward *lenet5* x y out)))
+;; (time (lenet-test-1))
+</code></pre><p>while this worked, it was really slow:</p><pre class="example highlight"><code>Evaluation took:
+  3.116 seconds of real time
+  3.117175 seconds of total run time (3.113856 user, 0.003319 system)
+  [ Run times consist of 0.028 seconds GC time, and 3.090 seconds non-GC time. ]
+  100.03% CPU
+  7,783,051,200 processor cycles
+  7,346,708,400 bytes consed
+</code></pre><p>3 seconds for a single feedforward,backprop pass is pretty horrible for a relatively small network
+i used <a href=20230429181052-sbcl.html>sbcl</a>'s <a href=http://www.lichteblau.com/sbcl/doc/manual/sbcl/Statistical-Profiler.html>sb-prof</a> for more insight:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(require :sb-sprof)
+(sb-sprof:with-profiling (:report :graph)
+  (lenet-test-1))
+</code></pre><p>but that didnt help much, as expected most of the time was taken by the backprop functions
+although there are some things that can be improved (i think im doing unnecessary memory duplication with arrays) to make the single-threaded code run faster, i just decided it was time to take a multithreaded approach (perhaps even train on the gpu in the future with <a href=20230614171231-cuda_common_lisp.html>cl-cuda</a>)</p><h2 id=printingformatting-networks>printing/formatting networks</h2><p>it would help to be able to inspect a network and see for example how many parameters it has so we implement a <code>print-object</code> function:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defmethod print-object ((n network) stream)
+  (print-unreadable-object (n stream :type t :identity t)
+    (let ((total-weights 0))
+      (loop for layer in (network-layers n) do
+        (when (layer-weights layer)
+          (incf total-weights (array-size (layer-weights layer))))
+        (format stream &quot;~%  ~a&quot; layer))
+      (format stream
+              &quot;~&amp;total network weights: ~a, learning rate: ~a&quot;
+              total-weights
+              (network-learning-rate n)))))
+
+(defmethod print-object ((l pooling-layer) stream)
+  (print-unreadable-object (l stream :type t)
+    (format stream
+            &quot;rows: ~a, columns: ~a&quot;
+            (pooling-layer-rows l)
+            (pooling-layer-cols l))))
+
+(defmethod print-object ((l convolutional-layer) stream)
+  (print-unreadable-object (l stream :type t)
+    (format stream
+            &quot;weights: ~a, dimensions: ~a&quot;
+            (array-size (layer-weights l))
+            (array-dimensions (layer-weights l)))))
+</code></pre><p>example usage:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>CL-USER&gt; *lenet5*
+#&lt;NETWORK 
+  #&lt;3D-CONVOLUTIONAL-LAYER weights: 150, dimensions: (6 1 5 5)&gt;
+  #&lt;POOLING-LAYER rows: 2, columns: 2&gt;
+  #&lt;3D-CONVOLUTIONAL-LAYER weights: 2400, dimensions: (16 6 5 5)&gt;
+  #&lt;POOLING-LAYER rows: 2, columns: 2&gt;
+  #&lt;FLATTEN-LAYER {1013A58653}&gt;
+  #&lt;DENSE-LAYER weights: 48000, dimensions: (120 400)&gt;
+  #&lt;DENSE-LAYER weights: 10080, dimensions: (84 120)&gt;
+  #&lt;DENSE-LAYER weights: 840, dimensions: (10 84)&gt;
+total network weights: 61470&gt;
+</code></pre><h2 id=full-pass-propagation-and-training>full pass propagation and training</h2><p>now we need a function that takes a set of examples and trains a network</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defmethod network-full-pass ((nw network) x y)
+  &quot;do a full pass in the network, feedforward and propbackward (backpropagation)&quot;
+  (network-propbackward nw x y (network-feedforward nw x)))
+
+(defmethod network-train ((nw network) samples &amp;optional (epochs 1))
+  &quot;train on the given data, xs[i],ys[i] represent the input,output of the ith example, xs,ys are lists, preferrably of the simple-vector type&quot;
+  (loop for epoch from 0 below epochs do
+    (loop for sample in samples
+          do (let* ((x (car sample))
+                    (y (cdr sample)))
+               (network-full-pass nw x y)))))
+</code></pre><h2 id=test-code-2>test code</h2><p>lets try a simple example:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defun cnn-test-1 ()
+  (let* ((xs &#39;(#(0 0 1) #(1 1 1) #(1 0 1) #(0 1 1)))
+         (ys &#39;(#(0) #(1) #(1) #(0)))
+         (data-samples (mapcar #&#39;cons xs ys))
+         (nw (make-network
+              :learning-rate 0.01
+              :layers (list
+                       ;; (make-dense-layer :num-units 5 :prev-layer-num-units 3)
+                       ;; (make-dense-layer :num-units 1 :prev-layer-num-units 5)))))
+                       (make-3d-convolutional-layer-from-dims
+                        :dims &#39;(4 3)
+                        :activation-function #&#39;sigmoid
+                        :activation-function-derivative #&#39;sigmoid-derivative)
+                       (make-3d-convolutional-layer-from-dims
+                        :dims &#39;(1 4)
+                        :activation-function #&#39;sigmoid
+                        :activation-function-derivative #&#39;sigmoid-derivative)))))
+    (print &quot;doing 100k epochs&quot;)
+    (network-train nw data-samples 100000)
+    (format t &quot;~%loss: ~A&quot; (network-test nw data-samples))
+    (format t &quot;~%this should equal 0: ~a&quot; (car (car (network-feedforward nw #(0 0 1)))))
+    (format t &quot;~%this should equal 1: ~a&quot; (car (car (network-feedforward nw #(1 1 1)))))
+    (format t &quot;~%this should equal 1: ~a&quot; (car (car (network-feedforward nw #(1 0 1)))))
+    (format t &quot;~%this should equal 0: ~a&quot; (car (car (network-feedforward nw #(0 0 0)))))
+    (format t &quot;~%this should equal 0: ~a&quot; (car (car (network-feedforward nw #(0 1 1)))))))
+</code></pre><p>test run:</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-results=output data-exports=both><code>(cnn-test-1)
+</code></pre><pre class="example highlight"><code>
+&quot;doing 100k epochs&quot; 
+loss: 0.07140527340555194
+this should equal 0: #(0.0193214891516944)
+this should equal 1: #(0.9785556472163439)
+this should equal 1: #(0.9836150950875087)
+this should equal 0: #(0.28466690862319854)
+this should equal 0: #(0.014254526557710118)
+</code></pre><p>yes this the farthest thing from perfect, but the data isnt either, we'll see how it performs on real-world data later
+i gave <a href=20230806001155-training_on_mnist_2.html>training on mnist with cnn</a> a shot and tackled the issue of a <a href=20230503170135-vanishing_gradient.html>vanishing gradient</a> while at it, but again, it was really slow, we must tackle the issue of speed/efficiency</p><h2 id=backprop-optimization>backprop optimization</h2><div id=any:optimization1 class=any><p>if we reconsider the equations <a href=eq:weight_delta>eq:weight_delta</a>, we'll find that we're doing alot of redundant work, as mentioned in <a href=note:note2>note:note2</a>, there are indicies we're iterating over that we have to ignore, so we could cut them out of the loop which will tremendously reduce the number of iterations
+lets reconsider the equation:
+<img src=/ltx/74fbb67ebebf29074ee8a6cd3bceff8a4168ca80.svg class=DisplayMath style=vertical-align:-7pt>
+basically, here we're finding the derivative of the loss function with respect to a single weight in <img src=/ltx/17c36d292a5569624f55061f80f164fcf7b31205.svg class=InlineMath style=vertical-align:-.012pt> indexed by <img src=/ltx/5ddf4e591840b7335b4b767946f8b26b092a7bba.svg class=InlineMath style=vertical-align:-1.692pt>, using the all the errors from each output pixel in <img src=/ltx/f7411e2078c39183f746f32683519131f80a3782.svg class=InlineMath style=vertical-align:-.012pt>, indexed by <img src=/ltx/176408d150eb0b38fb8f392de95414e2b738ba6a.svg class=InlineMath style=vertical-align:-3.156pt>, now we for a single weight with indicies <img src=/ltx/5ddf4e591840b7335b4b767946f8b26b092a7bba.svg class=InlineMath style=vertical-align:-1.692pt> dont need to iterate with <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt> through the number of layers as we only need to consider the feature map that the weight affects, as each kernel with its weights only affect a single feature map in the output, here, that map is <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt> which we consider a fixed constant when we're dealing with a single weight (which is why i preferred to write <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt> as a subscript), other pixels in feature maps other than <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt> arent affected by our weight and using the errors at those pixels wouldnt affect the gradient's value (they add 0). (there are still some pixels that we can drop depending on the place of the weight in the kernel, and the kernel's stride, but i dont think that can give us a noticable improvement in performance)
+the real bottleneck for training is currently computing <img src=/ltx/2b89fd323e5a48f8dbdc67458a5a384094d8d82a.svg class=InlineMath style=vertical-align:-.048pt> for convolutional layers, which is what we need to work on, lets reconsider the following equation
+<img src=/ltx/029513cef53e3b3dd695fb3ca7dc3b74e191dab7.svg class=DisplayMath style=vertical-align:-7pt>
+here, we're considering the derivative of every pixel in the output image with respect to the entry in <img src=/ltx/bad812ebb18adcd6498d25fd39383769c37966c9.svg class=InlineMath style=vertical-align:-2.808pt> that we wanna find, but in truth, each pixel in <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt> only affects <img src=/ltx/e871a12f63a17560ccb873ffab265368245e42ae.svg class=InlineMath style=vertical-align:-2.528004pt> output pixels <strong>at most</strong> (this is basically the size of the weight tensor <img src=/ltx/b6ef7548c092c2fb8964e36d14e4cf7e7ce376a1.svg class=InlineMath style=vertical-align:-.012pt>), intuitively, one may be able to imagine this to see each kernel sliding over the input <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt>, in this process each pixel gets multiplied by a subset of the sliding kernel, depending on whether it is close to the edge of the image and on the sliding stride, each time the image slides in some direction, our input pixel gets multiplied by a new weight, until the kernel slides away and isnt "hovering" over our pixel anymore, this process is illustrated in <a href=fig:sliding_kernel>fig:sliding_kernel</a></p><p><img src=attachment:sliding.gif>
+this can also be seen in the formula for the output pixels:
+<img src=/ltx/64bfd9e15dfbb3679babf42be329fa18d9794cd1.svg class=DisplayMath style=vertical-align:-5pt>
+for each combination of the indicies <img src=/ltx/176408d150eb0b38fb8f392de95414e2b738ba6a.svg class=InlineMath style=vertical-align:-3.156pt>, we iterate through a block in <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt> (and in <img src=/ltx/5422dfe0c6d87cf3e1d90facf51296cce7dacfeb.svg class=InlineMath style=vertical-align:-2.632004pt>) of size <img src=/ltx/c6fe32bfe54a57ec6bc43ed09e2b224fd0135503.svg class=InlineMath style=vertical-align:-2.528004pt>, but the size of <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt> is <img src=/ltx/e9a6883933045b943d4813d36aa89aea035f180e.svg class=InlineMath style=vertical-align:-2.528004pt>, and the latter is usually a much greater number, so not in every combination does the arbitrary entry <img src=/ltx/bad812ebb18adcd6498d25fd39383769c37966c9.svg class=InlineMath style=vertical-align:-2.808pt> play a role in setting the value of <img src=/ltx/bb95dbb4ed8c75a311b275a0ae7e17625ae1eb62.svg class=InlineMath style=vertical-align:-3.156pt>, to see how many times exactly is <img src=/ltx/bad812ebb18adcd6498d25fd39383769c37966c9.svg class=InlineMath style=vertical-align:-2.808pt> is used we build the equations <img src=/ltx/7f6f0dd4731b18e30360dfe6b2c54aff4faa3a5a.svg class=InlineMath style=vertical-align:-3.264pt> from the indicies in the formula, and solve for <img src=/ltx/176408d150eb0b38fb8f392de95414e2b738ba6a.svg class=InlineMath style=vertical-align:-3.156pt>, the values we get for <img src=/ltx/176408d150eb0b38fb8f392de95414e2b738ba6a.svg class=InlineMath style=vertical-align:-3.156pt> are the indicies of the pixels which <img src=/ltx/bad812ebb18adcd6498d25fd39383769c37966c9.svg class=InlineMath style=vertical-align:-2.808pt> "relates to"
+we get <img src=/ltx/a0d443d28b70c1fdd52c173fd45c6813fa8dcc9e.svg class=InlineMath style=vertical-align:-3.264pt>, now we know that <img src=/ltx/922098a207bf3f02a33d4ef2339437155e900e3a.svg class=InlineMath style=vertical-align:-3.156pt>, because thats the size of the output tensor <img src=/ltx/f7411e2078c39183f746f32683519131f80a3782.svg class=InlineMath style=vertical-align:-.012pt>, and we know <img src=/ltx/4c47ac2049845570939175e316afc23542f4626c.svg class=InlineMath style=vertical-align:-2.94pt>.
+what the equations <img src=/ltx/a0d443d28b70c1fdd52c173fd45c6813fa8dcc9e.svg class=InlineMath style=vertical-align:-3.264pt> basically tell us is that, since <img src=/ltx/97246c485ab0fe3e95f4734c504984e6273eda8f.svg class=InlineMath style=vertical-align:-3.156pt> only depends on the value of <img src=/ltx/c520a248da6d8575fe8e53ee3aae3611a4fe647e.svg class=InlineMath style=vertical-align:-.144pt>, which we have, and on <img src=/ltx/c8b1e5e43c1ec6d765f94e1676b22f15a53d36f1.svg class=InlineMath style=vertical-align:-.132pt>, which we need to iterate for, as <img src=/ltx/073f1f1c185690922eddd297d66fafcf05bb136d.svg class=InlineMath style=vertical-align:-2.528004pt> we only need to do <img src=/ltx/30155a5f9ec17aebc7d57cdaaea606c3a7bffc8d.svg class=InlineMath style=vertical-align:-2.528004pt> for it (we have to iterate for <img src=/ltx/949cfc8adadedce43b38f839c636882517a32b57.svg class=InlineMath style=vertical-align:-.852pt> as its a free variable and doesnt depend on others), combining that with <img src=/ltx/e73ad5821832b8e1cfc32fe8e765b92299ff7df8.svg class=InlineMath style=vertical-align:-.12pt>, which depends on the then-constant <img src=/ltx/95d992406b65bde951c2c91c0bc8be133bcd2406.svg class=InlineMath style=vertical-align:-.132pt> (<img src=/ltx/3c18e8ce70564431838460585d3e487846f35fd7.svg class=InlineMath style=vertical-align:-1.692pt> arent constants, but in this context they are, thats the assumption here) and <img src=/ltx/c1354cf565754d7a979e3c491899d83ac1be5baa.svg class=InlineMath style=vertical-align:-3.264pt> which varies as <img src=/ltx/1f57a3e3b075c889832808a87f5ba8f6882954ed.svg class=InlineMath style=vertical-align:-3.264pt>, in total this gives us <img src=/ltx/8e14137309c5106f2515d3a8186e26e217b6632b.svg class=InlineMath style=vertical-align:-2.528004pt> iterations for a single arbitrary entry in <img src=/ltx/fa4be1b00b8717130486dd0b560789dc53fbe11d.svg class=InlineMath style=vertical-align:-.012pt>, which is definitely (alot) less (and also independent of the size of the input) than <img src=/ltx/b06e7241db4aa194b384315b3b348d7c9057ea6b.svg class=InlineMath style=vertical-align:-2.94pt> which is the number of iterations we were doing before.
+combining all of those ideas we get the formula:
+<img src=/ltx/b73024c20ddd53a5d37b19081da0b8ac87b80fd8.svg class=DisplayMath style=vertical-align:-5pt>
+we substitute this in <a href=eq:old_x_delta>eq:old_x_delta</a> in place of the previous version, and redo the differentation process:</p><img src=/ltx/12bfae5aca7461dbf53bf6c881726a8cc921ec36.svg class=DisplayMath style=vertical-align:-3.600037pt><p>we can better the formulas for all deltas even further but thats for the future, maybe.
+after coming up with this, i had to go back and edit the backpropagation function for convolutional layer to use the new formula instead of the old one</p></div><h2 id=distributed-training>distributed training</h2><p>perhaps <a href=20230806193125-neural_network_parallelism.html>distributed training</a> would help, so i decided to work on a simple multithreaded solution before going for a gpu solution
+here implement distributed training by data parallelism with the help of <a href=20230810172437-common_lisp_lparallel.html>lparallel</a>, two packages are needed, <code>lparallel</code> and <code>serapeum</code>, both installable from <a href=20230224163920-common_lisp.html>quicklisp</a></p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(ql:quickload :serapeum)
+(ql:quickload :lparallel)
+</code></pre><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defgeneric copy (obj)
+  (:documentation &quot;make a copy of an object&quot;))
+
+(defmethod copy ((nw network))
+  &quot;copy a neural network&quot;
+  (make-network :layers (mapcar #&#39;copy (network-layers nw))
+                :learning-rate (network-learning-rate nw)))
+
+(defmethod copy ((l layer))
+  &quot;copy a layer, a layer that inherits from this might have to add its own code to copy objects that arent copied by the base copy (this copy)&quot;
+  (let ((new-weights)
+        (new-biases))
+    (when (layer-weights l)
+      (setf new-weights (make-array (array-dimensions (layer-weights l))))
+      (copy-into-array new-weights (layer-weights l)))
+    (when (layer-biases l)
+      (setf new-biases (make-array (array-dimensions (layer-biases l))))
+      (copy-into-array new-biases (layer-biases l)))
+    (make-instance (type-of l)
+                   :weights new-weights
+                   :biases new-biases
+                   :activation-function (layer-activation-function l)
+                   :activation-function-derivative (layer-activation-function-derivative l))))
+
+(defmethod copy :around ((l pooling-layer))
+  &quot;a pooling-layer has to copy more objects than the usual layer in which case the base copy function is not sufficient, this fixes that&quot;
+  (let ((new-layer (call-next-method)))
+    (setf (pooling-layer-rows new-layer) (pooling-layer-rows l))
+    (setf (pooling-layer-cols new-layer) (pooling-layer-cols l))
+    (setf (pooling-layer-function new-layer) (pooling-layer-function l))
+    (setf (pooling-layer-unpooling-function new-layer) (pooling-layer-unpooling-function l))
+    new-layer))
+
+(defun zeroize-network-weights (nw)
+  &quot;turn all the parameters of the network 0&quot;
+  (loop for layer in (network-layers nw) do
+    (when (layer-weights layer)
+      (setf (layer-weights layer)
+            (make-array (array-dimensions (layer-weights layer)))))))
+
+(defun add-network-weights (dest-nw src-nw)
+  &quot;add the weights of src-nw to the weights of dest-nw, src-nw has to be a copy of dest-nw&quot;
+  (loop for dest-layer in (network-layers dest-nw)
+        for src-layer in (network-layers src-nw)
+        do (when (layer-weights dest-layer)
+             (array-map-into
+              #&#39;+
+              (layer-weights dest-layer)
+              (layer-weights dest-layer)
+              (layer-weights src-layer)))))
+
+(defun divide-network-weights (nw num)
+  &quot;divide all the weights of a network by num&quot;
+  (loop for layer in (network-layers nw) do
+    (when (layer-weights layer)
+      (array-map-into
+       (lambda (weight) (/ weight num))
+       (layer-weights layer)
+       (layer-weights layer)))))
+
+;; whether to terminate training or not
+(defparameter *lparallel-training* nil)
+
+(defun network-train-distributed-cpu (nw samples &amp;optional (epochs 2))
+  &quot;samples should be conses of type simple-vector, train nw with lparallel with the number of cores your cpu has&quot;
+  (setf *lparallel-training* t)
+  (let* ((nw-alias (copy nw)) ;; updates are done to nw-alias, at the end of training copied to nw
+         (batch-size 10) ;; each core is gonna get that many x,y samples
+         (workers (serapeum:count-cpus)) ;; set workers to number of available cpu cores
+         (total-samples (length samples))
+         (total-batches (floor total-samples batch-size)) ;; floor is just integer division here
+         (lparallel:*kernel* (lparallel:make-kernel workers))) ;; lparallel&#39;s kernel takes care of parallelism
+    (when (&gt; (mod total-samples batch-size) 0) (incf total-batches 1))
+
+    ;; total-rounds is the number of times we construct workers and give them each a network to train
+    (loop for epoch from 0 below epochs do
+      (let* ((total-rounds (floor total-batches workers))
+             (channel (lparallel:make-channel))
+             (batch-idx 0))
+        (when (&gt; (mod total-batches workers) 0) (incf total-rounds))
+        ;; on each round we push batches to workers
+        (loop for round from 0 below total-rounds while *lparallel-training* do
+          (let ((active-workers 0) ;; on a round we might not need all the workers so we gotta keep track of how many workers are actually active to know how many results to ask the lparallel kernel for
+                (lparallel:*task-category* &#39;nn)) ;; this allows for (lparallel:kill-tasks &#39;nn)
+            (loop for worker-idx from 0 below workers do
+              (when (&lt; batch-idx total-batches)
+                (let ((batch-samples (subseq samples
+                                             (* batch-idx batch-size)
+                                             (+ (* batch-idx batch-size) batch-size)))
+                      (nw-copy (copy nw-alias)))
+                  (format t &quot;pushing batch ~a/~a~%&quot; (1+ batch-idx) total-batches)
+                  (lparallel:submit-task
+                   channel
+                   (lambda ()
+                     (loop for sample in batch-samples while *lparallel-training* do
+                       (let* ((x (car sample))
+                              (y (cdr sample))
+                              (out (network-feedforward nw-copy x)))
+                         (network-propbackward nw-copy x y out)))
+                     nw-copy)))
+                (incf batch-idx 1)
+                (incf active-workers 1)))
+            ;; reset the nw weights to 0, as its new weights will be the averages of the copies
+            (zeroize-network-weights nw-alias)
+            (loop for worker-idx from 0 below active-workers do
+              (let ((trained-nw-copy (lparallel:receive-result channel)))
+                ;; (format t &quot;received from worker ~a~%&quot; worker-idx)
+                (add-network-weights nw-alias trained-nw-copy)))
+            ;; (format t &quot;~a workers done~%&quot; active-workers)
+            (divide-network-weights nw-alias active-workers)
+            (zeroize-network-weights nw)
+            (add-network-weights nw nw-alias)))
+        (format t &quot;~%epoch done~A~%&quot; epoch))
+      (lparallel:end-kernel))))
+</code></pre><p>it seems that the <code>kill-tasks</code> function from the <code>lparallel</code> library doesnt work, so i had to implement my own way of terminating the threads and the training process using <code>*lparallel-training*</code>, so when we wanna stop training we set it to <code>nil</code>, using perhaps <code>slime-interactive-eval</code> if using slime
+although cpu multithreading can speed up training, a gpu is still alot faster in cases like this</p><h2 id=analyzing-accuracy-and-loss>analyzing accuracy and loss</h2><p>we also need a function to get the total error of the network:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defmethod network-test ((nw network) samples)
+  (let ((loss 0))
+    (loop for sample in samples do
+      (let ((x (car sample))
+            (y (cdr sample)))
+        (multiple-value-bind (activations unsquashed-activations)
+            (network-feedforward nw x)
+          (let* ((output-layer (car (car activations)))
+                 (loss-to-add (reduce-array (array-map #&#39;abs (array-map #&#39;- output-layer y)) #&#39;+)))
+            (incf loss loss-to-add)))))
+    loss))
+</code></pre><h2 id=saving-parameters-to-disk>saving parameters to disk</h2><p>we may also want to save the weights of a network to a file for later reloading:</p><div class=note><p>TODO: currently this doesnt save biases, needs to be fixed</p></div><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes data-eval=no-export><code>(defun network-save-weights (nw filepath)
+  &quot;save the weight tensors of the layers of the network nw to file specified by filepath&quot;
+  (let ((weight-tensors-list))
+    (with-open-file (stream filepath
+                            :direction :output
+                            :if-exists :supersede
+                            :if-does-not-exist :create)
+      (loop for layer in (network-layers nw) do
+        (setf weight-tensors-list
+              (append weight-tensors-list (list (layer-weights layer)))))
+      (format stream &quot;~A~%&quot; weight-tensors-list))))
+
+(defun network-load-weights (nw filepath)
+  &quot;load the weight tensors of a network nw from file specified by filepath&quot;
+  (let ((weight-tensors-list (with-open-file (in filepath)
+                               (read in))))
+    (loop for layer in (network-layers nw) do
+      (let ((weight-tensor (pop weight-tensors-list)))
+        (setf (layer-weights layer) weight-tensor)))))
+</code></pre><p>we simply save them in their lisp representation, and read them later as lisp objects</p></div></main></body></html>

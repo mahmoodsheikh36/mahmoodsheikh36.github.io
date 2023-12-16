@@ -1,0 +1,36 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>selection sort &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2023-02-04 14:34:48 +0000 UTC">February 4, 2023</time></div><h1 class=post-title>selection sort</h1><div class=post-desc></div><div class=post-line></div><p><strong>selection sort</strong> maintains two subarrays in a given array, one subarray that is sorted and the other unsorted, it sorts a given array by repeatedly finding the minimum element (considering ascending order) from the unsorted part and putting it at the beginning
+in every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray.
+<a href=20221130014441-time_complexity.html>time complexity</a> is <img src=/ltx/df46882d3b36ff01fb9088145af0e7e3ac4a5d0c.svg class=InlineMath style=vertical-align:-2.94pt></p><img src=/ltx/ef5b1f7aa8a4ed8f2a3d4ee7fb5a7b4cfcf25059.svg class=DisplayMath style=vertical-align:0><pre id=SelectionSort class="Cpp highlight" data-noeval=yes><code>template &lt;typename T&gt;
+void selection_sort(T arr[], int len) {
+  for (int i = 0; i &lt; len; ++i) {
+    // find index of minimum in unsorted subarray
+    int min_idx = i;
+    for (int j = i+1; j &lt; len; ++j) {
+      if (arr[j] &lt; arr[min_idx]) {
+        min_idx = j;
+      }
+    }
+
+    // add minimum to the sorted subarray
+    T tmp = arr[i];
+    arr[i] = arr[min_idx];
+    arr[min_idx] = tmp;
+  }
+}
+</code></pre><p>example usage:</p><pre class="Cpp highlight" data-exports=both data-noweb=strip-export data-cache=yes data-results=verbatim><code>#include &lt;iostream&gt;
+&lt;&lt;SelectionSort&gt;&gt;
+int main() {
+  int arr[] = {8, 1, 2, 10, 50, 18};
+  selection_sort(arr, std::size(arr));
+  for (int i = 0; i &lt; std::size(arr); ++i) {
+    std::cout &lt;&lt; arr[i] &lt;&lt; std::endl;
+  }
+}
+</code></pre><pre class="example highlight"><code>1
+2
+8
+10
+18
+50
+</code></pre></div></main></body></html>

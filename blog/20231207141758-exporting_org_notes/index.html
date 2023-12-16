@@ -1,0 +1,252 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>exporting from org mode with pandoc &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2023-12-07 14:17:59 +0000 UTC">December 7, 2023</time></div><h1 class=post-title>exporting from org mode with pandoc</h1><div class=post-desc></div><div class=post-line></div><h1 id=motivation>motivation</h1><p>the need for an emacs-independent exporting of notes arose from the fact that i was using org version 9.7-pre in which exporting functionality is basically broken.</p><h1 id=pandoc>pandoc</h1><p>because i didnt want to rewrite the wheel, i landed on using pandoc, it has a huge community and i trust it to maintain org-mode parsability in the long run. there are some missing features in pandoc exporting which is why im writing this.
+a starting point would be the following command:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>pandoc infile.org --standalone --output outfile.html
+</code></pre><h1 id=custom-css>custom css</h1><p>if you have a css file that you'd like included, use the <code>--css</code> argument</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>pandoc infile.org\
+       --standalone\
+       --output outfile.html\
+       --css style.css
+</code></pre><h1 id=custom-html-preamblepostamble>custom html preamble/postamble</h1><p>or more generally, if you have an html file you'd like included in the header, use the <code>--include-in-header</code> argument</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>pandoc infile.org\
+       --standalone\
+       --output outfile.html\
+       --css style.css\
+       --include-in-header=header.html
+</code></pre><h1 id=bibliography>bibliography</h1><p>if you have a bibliography file you want pandoc to use to handle citations, you can make use of the <code>--bibliography</code>, <code>--biblatex</code>, <code>--citeproc</code> arguments</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>pandoc infile.org\
+       --standalone\
+       --include-in-header=header.html\
+       --output outfile.html\
+       --css style.css\
+       --bibliography=mybibfile.bib --biblatex --citeproc
+</code></pre><h1 id=latex-rendering>latex rendering</h1><p>pandoc supports multiple ways of handling latex snippets, it can use <code>mathjax</code> with the <code>--mathjax</code> argument, a better option for full latex support is rendering them with <code>dvisvgm</code>, using this lua filter that makes use of pandoc's filter api, which is a modified version of <a href=https://github.com/oltolm/pandoc-latex-math>https://github.com/oltolm/pandoc-latex-math</a></p><pre class="lua highlight" data-eval=no><code>--- source: https://github.com/oltolm/pandoc-latex-math
+
+local system = require(&quot;pandoc.system&quot;)
+
+function appendDepthToSVGFile(depth, svgPath)
+    local f = io.open(svgPath, &quot;a&quot;)
+    f:write(string.format(&quot;&lt;!-- depth=%spt --&gt;\n&quot;, depth))
+    f:close()
+end
+
+function NewLatexRender()
+    return {
+        preamble = [[
+            \usepackage{amsmath}
+            \usepackage{amsfonts}
+            \usepackage{amssymb}
+            \usepackage[T2A,T1]{fontenc}
+            \usepackage{colordvi}
+            \usepackage[active,tightpage]{preview}
+        ]],
+        latexClass = &quot;article&quot;,
+        fontEncoding = &quot;utf8&quot;,
+        fontSize = 12,
+        bgcolor = &quot;#FFFFFF&quot;,
+        latexPath = &quot;latex&quot;,
+        dvisvgmPath = &quot;dvisvgm&quot;
+    }
+end
+
+function html2rgb(color)
+    return &#39;&#39;
+end
+
+function wrapFormula(lr, latexFormula)
+    local bgcolor = lr.bgcolor ~= &quot;#FFFFFF&quot; and string.format(&quot;\\background{%s}\n&quot;, html2rgb(lr.bgcolor)) or &#39;&#39;
+    local tex = string.format([[\documentclass[%dpt]{%s}
+        \usepackage[%s]{inputenc}
+        %s
+        \begin{document}
+        %s
+        \begin{preview}
+        %s
+        \end{preview}
+        \end{document}
+        ]], lr.fontSize, lr.latexClass, lr.fontEncoding, lr.preamble, bgcolor, latexFormula)
+    -- io.write(string.format(&quot;tex: [[%s]]\n&quot;, tex))
+    return tex
+end
+
+function getDepth(out)
+    local depth = string.match(out, &quot;depth=(%d*%.?%d*)&quot;)
+    return tonumber(depth)
+end
+
+function renderLatex(lr, latexFormula)
+    local latexDocument = wrapFormula(lr, latexFormula)
+    local currDir = system.get_working_directory()
+    local svgFileName = pandoc.sha1(latexDocument) .. &quot;.svg&quot;
+    local svgPath = currDir .. &quot;/&quot; .. svgFileName
+    local f = io.open(svgPath, &quot;r&quot;)
+    if f ~= nil then
+        local depth = getDepth(f:read(&quot;a&quot;))
+        f:close()
+        --io.write(string.format(&quot;found SVG file=%s with depth=%spt\n&quot;, svgPath, depth))
+        return depth, svgFileName
+    end
+    -- SVG file does not exist
+    local depth = system.with_temporary_directory(&quot;latexmath&quot;, function(tmpDir)
+        return system.with_working_directory(tmpDir, function()
+            io.write(string.format(&quot;changed directory to (%s)\n&quot;, tmpDir))
+            local tmpFile = io.open(&quot;latexmath.tex&quot;, &quot;w&quot;)
+            tmpFile:write(latexDocument)
+            tmpFile:close()
+            local out = command(lr, svgPath)
+            local depth = getDepth(out)
+            if depth == nil then
+                io.write(string.format(&quot;%s: depth not found\n&quot;, svgPath))
+                return nil
+            end
+            io.write(string.format(&quot;%s: depth=%spt\n&quot;, svgPath, depth))
+            appendDepthToSVGFile(depth, svgPath)
+            return depth
+        end)
+    end)
+    return depth, svgFileName
+end
+
+function command(lr, svgPath)
+    pandoc.pipe(lr.latexPath, {&quot;--interaction=nonstopmode&quot;, &quot;latexmath.tex&quot;}, &#39;&#39;)
+    -- local out = pandoc.pipe(lr.dvisvgmPath, {&quot;--no-fonts&quot;, &quot;-o&quot;, svgPath, &quot;latexmath.dvi&quot;}, &#39;&#39;)
+    local f = io.popen(lr.dvisvgmPath .. &quot; --no-fonts -o \&quot;&quot; .. svgPath .. &quot;\&quot; latexmath.dvi 2&gt;&amp;1&quot;)
+    local out = f:read(&quot;a&quot;)
+    f:close()
+    -- io.write(string.format(&quot;out: [[%s]]\n&quot;, out))
+    return out
+end
+
+function Math(elem)
+    local latexFormula1
+    local latexFormula = elem.text
+    if elem.mathtype == &quot;InlineMath&quot; then
+        latexFormula1 = string.format(&quot;\\(%s\\)&quot;, latexFormula)
+    else
+        -- DisplayMath
+        latexFormula1 = string.format(&quot;\\[%s\\]&quot;, latexFormula)
+    end
+    local lr = NewLatexRender()
+    local depth, svgFileName = renderLatex(lr, latexFormula1)
+    local attr = {
+        alt = latexFormula
+    }
+    if depth ~= nil then
+        attr[&quot;style&quot;] = string.format(&quot;vertical-align:-%spt&quot;, depth)
+    end
+    -- io.write(string.format(&quot;%s\n&quot;, dump(attr)))
+    return pandoc.Image(&#39;&#39;, svgFileName, &#39;&#39;, attr)
+end
+
+function dump(o)
+    if type(o) == &#39;table&#39; then
+        local s = &#39;{ &#39;
+        for k, v in pairs(o) do
+            if type(k) ~= &#39;number&#39; then
+                k = &#39;&quot;&#39; .. k .. &#39;&quot;&#39;
+            end
+            s = s .. &#39;[&#39; .. k .. &#39;] = &#39; .. dump(v) .. &#39;,&#39;
+        end
+        return s .. &#39;} &#39;
+    else
+        return tostring(o)
+    end
+end
+</code></pre><p>assuming this script is written in a file <code>tex.lua</code>, to use this filter, our command becomes:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>pandoc infile.org\
+       --standalone\
+       --include-in-header=header.html\
+       --output header.html\
+       --css style.css\
+       --bibliography=mybibfile.bib --biblatex --citeproc\
+       --lua-filter tex.lua
+</code></pre><h1 id=internal-links>internal links</h1><p>consider the following org mode snippet:</p><pre class="org highlight"><code>#+attr_html: :id my-def
+#+begin_definition
+we define a set \(A\) to be any unordered collection of objects
+#+end_definition
+
+by [[my-def][this definition]], the object {1,2,3} is a set.
+</code></pre><p>although pandoc does expectedly render the definition block as a div with class <code>definition</code>, the link <code>[[my-def][this definition]]</code> doesnt get rendered properly by pandoc, neither does the <code>#+name</code> property.
+after some messing around, i found that pandoc does handle the <code>attr_html</code> property of org blocks properly, e.g.</p><pre class="org highlight"><code>#+attr_html: :id my-def
+#+begin_definition
+we define a set \(A\) to be any unordered collection of objects
+#+end_definition
+
+by [[my-def][this definition]], the object {1,2,3} is a set.
+</code></pre><p>results in the definition div having the id <code>my-def</code>, but we wouldnt want to modify our org files just to make them compatible with pandoc, instead we can do something "hacky" by modifying the stream before piping it into pandoc</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+attr_html: :id/#+attr_html: :id/&#39; infile.org |\
+    pandoc --from org\
+           --to html5\
+           --standalone\
+           --include-in-header=header.html\
+           --output header.html\
+           --css style.css\
+           --bibliography=mybibfile.bib --biblatex --citeproc\
+           --lua-filter tex.lua
+</code></pre><p>this way, the <code>#+name</code> property of the block becomes the <code>id</code> of its corresponding html block, but this still doesnt fix the link issue, since links get rendered as <code>span</code>'s and not proper links, to fix this we can use the following lua filter:</p><pre class="lua highlight" data-eval=no><code>function Span(span)
+  -- print(dump(elem))
+  if span.classes:includes &#39;spurious-link&#39; then
+    local content = span.content[1].content
+    local target = span.attributes.target
+    return pandoc.Link(content, &#39;#&#39; .. target)
+  end
+end
+</code></pre><p>assuming this code is placed in the file <code>internal_links.lua</code>, our shell command becomes:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+attr_html: :id/#+attr_html: :id/&#39; infile.org |\
+    pandoc --from org\
+           --to html5\
+           --standalone\
+           --include-in-header=header.html\
+           --output header.html\
+           --css style.css\
+           --bibliography=mybibfile.bib --biblatex --citeproc\
+           --lua-filter tex.lua\
+           --lua-filter internal_links.lua
+</code></pre><h1 id=org-roam-links>org-roam links</h1><p>pandoc on its own has no context of org-roam links, but org-roam stores everything it needs to operate in <code>/.emacs.d/org-roam.db</code>, this file is automatically updated if the option <code>org-roam-db-autosync-mode</code> is set to <code>t</code>, this way other programs can be used to query information from org-roam without needing to visit the org files themselves.
+based on this fact the following filter that is a modified version of <a href=https://www.amoradi.org/20210730173543.html>https://www.amoradi.org/20210730173543.html</a> is used:</p><pre class="python highlight" data-session=yes><code>#!/usr/bin/env python3.10
+
+# source: https://www.amoradi.org/20210730173543.html
+
+import panflute as pf
+import sqlite3
+import pathlib
+import sys
+import os
+import pprint
+import urllib
+
+ORG_ROAM_DB_PATH = &quot;~/.emacs.d/org-roam.db&quot;
+
+db = None
+
+def sanitize_link(elem, doc):
+    if type(elem) != pf.Link:
+        return None
+
+    if not elem.url.startswith(&quot;id:&quot;):
+        return None
+
+    file_id = elem.url.split(&quot;:&quot;)[1]
+
+    cur = db.cursor()
+    cur.execute(f&quot;select id, file, title from nodes where id = &#39;\&quot;{file_id}\&quot;&#39;;&quot;)
+    data = cur.fetchone()
+
+    # data contains string that are quoted, we need to remove the quotes
+    file_id = data[0][1:-1]
+    file_name = urllib.parse.quote(os.path.splitext(os.path.basename(data[1][1:-1]))[0])
+
+    elem.url = f&quot;{file_name}.html&quot;
+    return elem
+
+def main(doc=None):
+    return pf.run_filter(sanitize_link, doc=doc)
+
+if __name__ == &quot;__main__&quot;:
+    db = sqlite3.connect(os.path.expanduser(ORG_ROAM_DB_PATH))
+    main()
+</code></pre><p>assuming the <code>panflute</code> python package is installed globally, and that this snippet is placed in the file <code>roam_links.py</code>, our exporting shell command becomes:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+attr_html: :id/#+attr_html: :id/&#39; infile.org |\
+    pandoc --from org\
+           --to html5\
+           --standalone\
+           --include-in-header=header.html\
+           --output header.html\
+           --css style.css\
+           --bibliography=mybibfile.bib --biblatex --citeproc\
+           --lua-filter tex.lua\
+           --lua-filter internal_links.lua\
+           --filter roam_links.py
+</code></pre></div></main></body></html>

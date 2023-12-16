@@ -1,0 +1,474 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>artificial intelligence homework 3 &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info></div><h1 class=post-title>artificial intelligence homework 3</h1><div class=post-desc></div><div class=post-line></div><div class=note><p>scroll to the end if you're only interested in the solution and the steps in raw text..</p></div><p>homework on <a href=20230822145930-constraint_satisfaction_problem.html>constraint satisfaction problem</a>
+using <a href=20230813012934-common_lisp_graphs.html>common lisp graphs</a>
+<a href=20230314001051-graph.html>graph</a> image from homework:
+<img src=/Tue_Aug_22_08:26:06_PM_IDT_2023.png class=figure></p><ul><li>gotta solve this as an <strong>rgba map coloring problem</strong></li><li>make use of forward checking</li><li>variable ordering heuristic: prioritize <a href=20230314001051-graph.html>vertices</a> that are the least constraining (least edges, least constraints on others) to most constraining (most edges), in case of a draw, use the variable with the most remaining colors (least constrained), if there is another tie, choose the leftmost vertex in the constraint graph</li><li>no value ordering heuristics</li></ul><p>first we define the graph:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defparameter
+    *mygraph*
+  (make-graph
+   :adjacency-list
+   &#39;((a . ((b . nil) (c . nil) (d . nil))) ;; 3 edges connected to A
+     (b . ((c . nil) (j . nil) (e . nil)))
+     (c . ((f . nil)))
+     (l . ((m . nil) (e . nil) (g . nil) (d . nil)))
+     (d . ((g . nil)))
+     (j . ((i . nil) (g . nil)))
+     (m . ((f . nil) (n . nil)))
+     (e . ((h . nil) (g . nil)))
+     (g . ((i . nil) (f . nil) (o . nil)))
+     (f . ((o . nil) (i . nil)))
+     (i . ((k . nil) (n . nil)))
+     (o . ((p . nil) (h . nil)))
+     (h . ((k . nil)))
+     (n . ((k . nil) (p . nil)))
+     (p . ((k . nil)))
+     (k . nil))))
+</code></pre><p>visualize it with tikz:</p><pre class="commonlisp highlight" data-org-language=lisp data-results="drawer output" data-cache=yes data-exports=both><code>(graph-generate-tikz *mygraph* :node-distance 80)
+</code></pre><div class="RESULTS drawer"><img src=/ltx/96398299c6408b106686593b1102cda2f46cd960.svg class=DisplayMath style=vertical-align:0></div><p>a constraint satisfaction problem is defined by its variables, domains and contrains
+since i had written the problem in its <a href=20230822171303-constraint_graph.html>constraint graph</a> form, i had to write a function to convert it into its "original" form, its variables, domains and it defines the constraint of neighbors not having the same color, which is from the map coloring problem (so this method is not really general, but specific to this problem):</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defstruct constraint-satisfaction-problem
+  variables domains constraints)
+
+(defun parse-color-map-constraint-graph (g)
+  &quot;input g is the constraint graph of the map coloring problem, the function assumes the vector &#39;values-assoc-list&#39; represents the values of variables, it should take the form &#39;((var1 value1) (var2 value2)) which allows it to be used as an association list&quot;
+  (let ((variables)
+        (domains)
+        (constraints))
+    (setf variables (map &#39;list #&#39;car (graph-adjacency-list g)))
+    ;; each domain&#39;s variable is just a list of the symbols r,g,b,a representing the 3 colors and the alpha value (in this case alpha is just another &quot;color&quot; tho...)
+    (setf domains (make-array (length variables) :initial-element &#39;(r g b a)))
+    (setf
+     constraints
+     (list
+      (lambda (csp gr values-assoc-list) ;; one constraint, no equal values for neighboring states
+        (let ((wrong nil))
+          (loop for entry in (graph-adjacency-list g) do
+            (let ((source-vertex (car entry))
+                  (edges (cdr entry)))
+              (loop for edge in edges do
+                (let ((dest-vertex (edge-dest edge)))
+                  (when (and (assoc source-vertex values-assoc-list)
+                             (assoc dest-vertex values-assoc-list))
+                    (setf wrong
+                          (or wrong
+                              (equal (cdr (assoc source-vertex values-assoc-list))
+                                     (cdr (assoc dest-vertex values-assoc-list))))))))))
+          (not wrong)))))
+    ;; return those values
+    (make-constraint-satisfaction-problem
+     :variables variables
+     :domains domains
+     :constraints constraints)))
+</code></pre><p>here i implement a generalized algorithm for constraint satisfaction problem solving:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun solve-csp-with-graph (csp gr variable-ordering-heuristics
+                             &amp;optional (values-alist nil))
+  &quot;`csp&#39; is the constraint satisfaction problem, `gr&#39; is the constraint graph, variable-ordering-heuristics are heuristics to decide which variable to pick, applied in order on each branching step until one returns a variable to pick, if no heuristics pick a variable the first nonvisited one will be picked (unless no variables are left with options in which case the function terminates), this doesnt support value ordering heuristics, cuz my homework didnt ask for it :( and i cba, this function may modify the domains during forward checking inference&quot;
+  (with-slots (variables domains constraints) csp
+    (let* ((unvisited-vars (set-diff
+                            variables
+                            (mapcar #&#39;car values-alist)
+                            :test #&#39;equal))
+           (unvisited-reduced-vars unvisited-vars))
+      (let ((next-var nil))
+        ;; apply the heuristics in order, the reduced list of variables returned by every heuristic is passed to the next heuristic which applies its own reductions and passes it on to the next heuristic, and so on..
+        (loop for heuristic in variable-ordering-heuristics if (not next-var)
+              do (setf unvisited-reduced-vars (funcall heuristic csp gr unvisited-reduced-vars)))
+        ;; last heuristic, choose the leftmost variable in the reduced list of variables, which could be just a list of one item if the preceding heuristics reduced it enough, eitherway, we grab the leftmost variable in the list
+        (setf next-var (car unvisited-reduced-vars))
+        (when (not next-var)
+          (return-from solve-csp-with-graph values-alist)) ;; no vars left
+        ;; handle the variable we picked
+        (let* ((variable-index (position next-var variables))
+               (domain (elt domains variable-index)))
+          (when (not domain) ;; no values left for variable, we hit a deadend
+;;            (format t &quot;~A has no available values, we hit a deadend, propagating back~%&quot; next-var)
+            (return-from solve-csp-with-graph nil))
+          ;; no need to check legality of picking a value, since we&#39;re doing forward checking and pruning the domains beforehand
+          (loop for value in domain do
+            (let ((domain-removed-values-alist nil) ;; store the modifications done to the domains so we may undo them if needed
+                  (new-values-alist (append values-alist (list (cons next-var value)))))
+              (loop for neighbor-var in (graph-vertex-neighbors gr next-var) do
+                ;; apply forward checking and modify the domains of connected variables accordingly
+                (let* ((neighbor-var-idx (position neighbor-var variables))
+                       (neighbor-var-domain (elt domains neighbor-var-idx)))
+                  (loop for neighbor-var-value in neighbor-var-domain do
+                    (loop for constraint in constraints do
+                      (let* ((hypothetical-values-alist (cons (cons neighbor-var
+                                                                    neighbor-var-value)
+                                                              new-values-alist))
+                             (legal (funcall constraint csp gr hypothetical-values-alist)))
+                        (when (not legal)
+                          (setf domain-removed-values-alist
+                                (cons (cons neighbor-var-idx
+                                            value)
+                                      domain-removed-values-alist))
+                          (setf (elt domains neighbor-var-idx)
+                                (remove value neighbor-var-domain))))))))
+;;             (format t &quot;chose variable ~A with value ~A~%&quot; next-var value)
+;;             (format t
+;;                     &quot;after forward checking for ~A, domains: ~A~%&quot;
+;;                      next-var
+;;                      (mapcar (lambda (var)
+;;                                (if (assoc var new-values-alist)
+;;                                    (format nil &quot;~A=~A&quot; var (cdr (assoc var new-values-alist)))
+;;                                    (format nil &quot;~A\\(\\in\\)~A&quot; var (elt domains (position var variables)))))
+;;                              variables))
+              (let ((propped-values-alist
+                      (solve-csp-with-graph csp
+                                            gr
+                                            variable-ordering-heuristics
+                                            new-values-alist)))
+                (if propped-values-alist
+                    (return-from solve-csp-with-graph propped-values-alist)
+                    ;; we hit a deadend somewhere, loop to the next value, but undo modifications
+                    (loop for removed-value-entry in domain-removed-values-alist do
+                      (let ((modified-var-idx (car removed-value-entry)) ;; the index of the var/domain that was modified
+                            (removed-value (cdr removed-value-entry))) ;; the value that was removed
+                        (setf (elt domains modified-var-idx)
+                              (cons removed-value (elt domains modified-var-idx))))))))))))))
+
+;; this could be implementing by looping through all variables once for each variable &#39;x&#39; to apply the constraint functions and check how many other variables &#39;x&#39; constraints, this would take O(n^2), here it takes O(n) because we&#39;re just using the constraint graph and can get the number of edges directly
+(defun least-constraining-variable-heuristic (csp gr variable-list)
+  &quot;checks which variable applies the least constraints on others, only return it if no other variable applies the same number of constraints&quot;
+  (multiple-value-bind (var var-idx)
+      (argmin
+       variable-list
+       :key (lambda (variable)
+              (length (graph-vertex-neighbors gr variable))))
+    (let ((args-to-return)) ;; list of the args that are argmin
+      (loop for other-var in variable-list do
+        (when (equal (length (graph-vertex-neighbors gr other-var))
+                     (length (graph-vertex-neighbors gr var)))
+          (setf args-to-return (cons other-var args-to-return))))
+      args-to-return)))
+
+(defun most-constrained-variable-heuristic (csp gr variable-list)
+  &quot;checks which variable has the least possible values (most constrained)&quot;
+  (with-slots (domains variables) csp
+    (multiple-value-bind (var var-idx)
+        (argmax
+         variable-list
+         :key (lambda (variable)
+                (let ((domain (elt domains (position variable variables))))
+                  (length domain))))
+      (let ((args-to-return)) ;; list of the args that are argmin
+        (loop for other-var in variable-list do
+          (when (equal (length (elt domains (position other-var variables)))
+                       (length (elt domains (position var variables))))
+            (setf args-to-return (cons other-var args-to-return))))
+        args-to-return))))
+
+(defun least-constrained-variable-heuristic (csp gr variable-list)
+  &quot;checks which variable has the least possible values (most constrained)&quot;
+  (with-slots (domains variables) csp
+    (multiple-value-bind (var var-idx)
+        (argmin
+         variable-list
+         :key (lambda (variable)
+                (let ((domain (elt domains (position variable variables))))
+                  (length domain))))
+      (let ((args-to-return)) ;; list of the args that are argmin
+        (loop for other-var in variable-list do
+          (when (equal (length (elt domains (position other-var variables)))
+                       (length (elt domains (position var variables))))
+            (setf args-to-return (cons other-var args-to-return))))
+        args-to-return))))
+</code></pre><p>applying the algorithm:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun solve ()
+  (solve-csp-with-graph
+   (PARSE-COLOR-MAP-CONSTRAINT-GRAPH *mygraph*)
+   *mygraph*
+   (list #&#39;least-constraining-variable-heuristic #&#39;most-constrained-variable-heuristic)))
+</code></pre><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-exports=both><code>(solve)
+</code></pre><pre class="example highlight"><code>((A . R) (J . R) (M . R) (H . R) (P . R) (C . G) (D . G) (E . G) (O . G) (N . B) (B . B) (L . B) (K . A) (F . B) (I . G) (G . A))
+</code></pre><p>visualizing the constraint graph with the colors we obtained by solving the problem:</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-exports=both data-results="output drawer"><code>(let ((values-assoc-list (solve)))
+  (graph-generate-tikz
+   *mygraph*
+   :node-distance 80
+   :format-function (lambda (variable)
+                      (format nil &quot;~A ~A&quot; variable
+                              (case (cdr (assoc variable values-assoc-list))
+                                (r &quot;[red]&quot;)
+                                (g &quot;[green]&quot;)
+                                (b &quot;[blue]&quot;)
+                                (a &quot;[orange]&quot;)
+                                (otherwise &quot;&quot;)))))) ;; otherwise for NIL, or use (nil), nil alone doesnt work with case
+</code></pre><div class="RESULTS drawer"><img src=/ltx/ac92b882b9bf1c44938d2f4c733767135b6c2e77.svg class=DisplayMath style=vertical-align:0></div><p>showing the inference/decision steps (i went back and modified the algorithm to print stuff)
+this just shows the domain of variables at each step</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes data-exports=both data-results="output drawer"><code>(solve)
+</code></pre><div class="RESULTS drawer"><p>chose variable A with value R
+after forward checking for A, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) C<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) D<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+J<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) M<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+E<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+O<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) H<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) P<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A))
+chose variable J with value R
+after forward checking for J, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) C<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) D<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) J=R
+M<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) E<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) O<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+H<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+P<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A))
+chose variable M with value R
+after forward checking for M, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) C<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) D<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) J=R M=R
+E<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+O<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) H<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) P<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A)
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A))
+chose variable H with value R
+after forward checking for H, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) C<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) D<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) J=R M=R
+E<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+O<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) H=R N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+P<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(R G B A) K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A))
+chose variable P with value R
+after forward checking for P, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) C<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) D<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) J=R M=R
+E<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+O<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) H=R N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) P=R
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A))
+chose variable C with value G
+after forward checking for C, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+D<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) J=R M=R E<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) O<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) H=R
+N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) P=R K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A))
+chose variable D with value G
+after forward checking for D, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) D=G
+J=R M=R E<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+O<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) H=R N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) P=R
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A))
+chose variable E with value G
+after forward checking for E, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) D=G
+J=R M=R E=G G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) O<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) H=R
+N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) P=R K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A))
+chose variable O with value G
+after forward checking for O, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) D=G
+J=R M=R E=G G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A) O=G H=R N<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A)
+P=R K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G B A))
+chose variable N with value G
+after forward checking for N, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) D=G
+J=R M=R E=G G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) O=G H=R N=G P=R
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A))
+chose variable B with value B
+after forward checking for B, domains: (A=R B=B C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) D=G J=R M=R
+E=G G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) O=G H=R N=G P=R
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A))
+chose variable L with value B
+after forward checking for L, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+O=G H=R N=G P=R K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A))
+chose variable K with value B
+after forward checking for K, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A)
+O=G H=R N=G P=R K=B)
+chose variable F with value B
+after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) O=G H=R N=G
+P=R K=B)
+chose variable I with value A
+after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I=A O=G H=R N=G P=R K=B)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value A
+after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=G
+P=R K=B)
+I has no available values, we hit a deadend, propagating back
+chose variable K with value A
+after forward checking for K, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B)
+O=G H=R N=G P=R K=A)
+chose variable F with value A
+after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) O=G H=R N=G
+P=R K=A)
+chose variable I with value B
+after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I=B O=G H=R N=G P=R K=A)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value B
+after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=G
+P=R K=A)
+I has no available values, we hit a deadend, propagating back
+chose variable L with value A
+after forward checking for L, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B)
+O=G H=R N=G P=R K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A))
+chose variable K with value B
+after forward checking for K, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A)
+O=G H=R N=G P=R K=B)
+chose variable F with value B
+after forward checking for F, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) O=G H=R N=G
+P=R K=B)
+chose variable I with value A
+after forward checking for I, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I=A O=G H=R N=G P=R K=B)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value A
+after forward checking for F, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=G
+P=R K=B)
+I has no available values, we hit a deadend, propagating back
+chose variable K with value A
+after forward checking for K, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B)
+O=G H=R N=G P=R K=A)
+chose variable F with value A
+after forward checking for F, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) O=G H=R N=G
+P=R K=A)
+chose variable I with value B
+after forward checking for I, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I=B O=G H=R N=G P=R K=A)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value B
+after forward checking for F, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=G
+P=R K=A)
+I has no available values, we hit a deadend, propagating back
+chose variable B with value A
+after forward checking for B, domains: (A=R B=A C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) D=G J=R M=R
+E=G G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) O=G H=R N=G P=R
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A))
+chose variable L with value B
+after forward checking for L, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B)
+O=G H=R N=G P=R K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A))
+chose variable K with value B
+after forward checking for K, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A)
+O=G H=R N=G P=R K=B)
+chose variable F with value B
+after forward checking for F, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) O=G H=R N=G
+P=R K=B)
+chose variable I with value A
+after forward checking for I, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I=A O=G H=R N=G P=R K=B)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value A
+after forward checking for F, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=G
+P=R K=B)
+I has no available values, we hit a deadend, propagating back
+chose variable K with value A
+after forward checking for K, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B)
+O=G H=R N=G P=R K=A)
+chose variable F with value A
+after forward checking for F, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) O=G H=R N=G
+P=R K=A)
+chose variable I with value B
+after forward checking for I, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I=B O=G H=R N=G P=R K=A)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value B
+after forward checking for F, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=G
+P=R K=A)
+I has no available values, we hit a deadend, propagating back
+chose variable L with value A
+after forward checking for L, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B)
+O=G H=R N=G P=R K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A))
+chose variable K with value B
+after forward checking for K, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A)
+O=G H=R N=G P=R K=B)
+chose variable F with value B
+after forward checking for F, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) O=G H=R N=G
+P=R K=B)
+chose variable I with value A
+after forward checking for I, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I=A O=G H=R N=G P=R K=B)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value A
+after forward checking for F, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=G
+P=R K=B)
+I has no available values, we hit a deadend, propagating back
+chose variable K with value A
+after forward checking for K, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B)
+O=G H=R N=G P=R K=A)
+chose variable F with value A
+after forward checking for F, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B) O=G H=R N=G
+P=R K=A)
+chose variable I with value B
+after forward checking for I, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I=B O=G H=R N=G P=R K=A)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value B
+after forward checking for F, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=G
+P=R K=A)
+I has no available values, we hit a deadend, propagating back
+chose variable N with value B
+after forward checking for N, domains: (A=R B<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) D=G
+J=R M=R E=G G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G A) O=G H=R N=B P=R
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G A))
+chose variable B with value B
+after forward checking for B, domains: (A=R B=B C=G L<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) D=G J=R M=R
+E=G G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A)
+I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G A) O=G H=R N=B P=R
+K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G A))
+chose variable L with value B
+after forward checking for L, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G A)
+O=G H=R N=B P=R K<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G A))
+chose variable K with value G
+after forward checking for K, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(B A) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A)
+O=G H=R N=B P=R K=G)
+chose variable F with value B
+after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) O=G H=R N=B
+P=R K=G)
+chose variable I with value A
+after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=B I=A O=G H=R N=B P=R K=G)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value A
+after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL O=G H=R N=B
+P=R K=G)
+I has no available values, we hit a deadend, propagating back
+chose variable K with value A
+after forward checking for K, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A B) I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G)
+O=G H=R N=B P=R K=A)
+chose variable F with value A
+after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G) O=G H=R N=B
+P=R K=A)
+chose variable I with value G
+after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>NIL F=A I=G O=G H=R N=B P=R K=A)
+G has no available values, we hit a deadend, propagating back
+chose variable F with value B
+after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F=B I<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(G) O=G H=R N=B
+P=R K=A)
+chose variable I with value G
+after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
+G<img src=/ltx/5a9d54e071570105ab238084865d80069b2fe0d4.svg class=InlineMath style=vertical-align:-.144pt>(A) F=B I=G O=G H=R N=B P=R K=A)
+chose variable G with value A
+after forward checking for G, domains: (A=R B=B C=G L=B D=G J=R M=R E=G G=A F=B
+I=G O=G H=R N=B P=R K=A)</p></div></div></main></body></html>

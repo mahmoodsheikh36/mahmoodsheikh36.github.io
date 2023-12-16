@@ -1,0 +1,134 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>multivariate linear regression &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2023-04-20 20:48:09 +0000 UTC">April 20, 2023</time></div><h1 class=post-title>multivariate linear regression</h1><div class=post-desc></div><div class=post-line></div><p><span class=citation data-cites=aima2010>(Peter Norvig 2020)</span>
+we can easily extend from <a href=20230313223324-univariate_linear_regression.html>univariate linear regression</a> to <strong>multivariate linear regression</strong>, such that each example <img src=/ltx/6f00dd1d61681f114acac677e6f6cfb1309a9487.svg class=InlineMath style=vertical-align:-4.616004pt> is an n-element <a href=linear_algebra2.html>vector</a>. our <a href=20230225234105-hypothesis_space.html>hypothesis space</a> is the <a href=20231204180210-set.html>set</a> of <a href=20231111073425-function.html>function</a>s of the form</p><img src=/ltx/c24dcd3637d1593f6b44a23a782ebb4099019018.svg class=DisplayMath style=vertical-align:-5.000003pt><p>the <img src=/ltx/b69e8c2ca536ab1fd7f10299763ecc96240f41a5.svg class=InlineMath style=vertical-align:-2.632004pt> term, the intercept, stands out as different from the others. we can fix that by inventing a dummy input attribute, <img src=/ltx/7a7080cc1729c1bbea7ef2f832d632b6ae1d63b6.svg class=InlineMath style=vertical-align:-4.616004pt>, which is defined as always equal to 1. then <img src=/ltx/c0c58338710350c54dc0ac5fee8650391c88c9ae.svg class=InlineMath style=vertical-align:-.12pt> is simply the <a href=linear_algebra2.html>dot product</a> of the weights and the input vector, or equivalently the <a href=linear_algebra2.html>matrix</a> product of the <a href=linear_algebra2.html>transpose</a> of the weights and hte input vector:
+<img src=/ltx/70b1be95dc7d3b8cfa6c0b3b067ee6756dabf20b.svg class=DisplayMath style=vertical-align:-3pt>
+the best vector of weights, <img src=/ltx/58a425177de634954d26809b2cbb07a1f75f4803.svg class=InlineMath style=vertical-align:0> minimizes squared-error loss over the examples:
+<img src=/ltx/e9d45f5dfb22ec818bfaf60d2e68096f85286290.svg class=DisplayMath style=vertical-align:-7pt>
+here we have a <a href=20230422235527-continuous.html>continuous</a> weight space and we cannot find a closed-form solution. we use a hill-climbing algorithm that follows the gradient of the function. in this case, because we are trying to minimize the loss, we will use <a href=20230422235640-gradient_descent.html>gradient descent</a>. we choose any starting point in weight space–here, a point in the <img src=/ltx/208dcb73777d4c919a85bcea0287ca20be59d6f9.svg class=InlineMath style=vertical-align:-2.94pt> plane–and then move to a neighboring point that is downhill, repeating until we converge on the minimum possible loss, recall that the sum is minimized when the partial derivatives with respect to each of the weights are zero</p><img src=/ltx/5db77bf606845f9befd2d09b6d9c076d1370d9ff.svg class=DisplayMath style=vertical-align:-1.543963pt><p>the parameter <img src=/ltx/1171829de529ed8d009a24cd22c4aca126564d4f.svg class=InlineMath style=vertical-align:-.192pt> (the step size), is usually called the <a href=20230423002354-learning_rate.html>learning rate</a> when we are trying to minimize loss in a learning problem. it can be a fixed constant, or it can decay over time as the learning process proceeds.
+here the update equation for each weight <img src=/ltx/49e616782fb40cf027fa68251edf52d1250e4955.svg class=InlineMath style=vertical-align:-2.608004pt> is
+<img src=/ltx/7793bc4dbe56402c96d4a694ceb86545155cd9a9.svg class=DisplayMath style=vertical-align:-7pt>
+in this equation we're considering not only the derivative of the loss function with respect to the weight we're updating but the derivatives of all of the loss functions with respect to each weight (unlike in the pseudocode above), i think this might be better but im not sure, i should evaluate both methods
+it is also possible to solve analytically for the <img src=/ltx/715d228519d6c761aa8d94e15f7195fff8314eb2.svg class=InlineMath style=vertical-align:0> that minimizes loss. let <img src=/ltx/b681e11547bbc909338afe23019c07b2b5667853.svg class=InlineMath style=vertical-align:-2.333324pt> be the vector of outputs for the training examples, and <img src=/ltx/bfd449959e6baa79b7e5418f967e11ef3dcc7046.svg class=InlineMath style=vertical-align:0> be the data matrix, i.e., the matrix of inputs with one n-dimensional example per row. then the solution
+<img src=/ltx/d5043e1716b352e39cace8cec5abebe1cd99bc9c.svg class=DisplayMath style=vertical-align:0>
+minimizes the squared error.</p><div class=note><p>im confused a little here, if we can solve for it analyitcally then why would we consider gradient descent in the first place (solving analytically requires less computing time)?
+turns out, when fitting higher degree functions its not analytically solvable</p></div><p>with univariate linear regression we didnt have to worry about <a href=20230420220702-overfitting.html>overfitting</a>. but with multivariate linear regression in high-dimensional spaces it is possible that some dimension that is actually irrelevant appears by chance to be useful, resulting in overfitting.
+thus, it is common to use <strong>regularization</strong> on multivariate linear functions to avoid overfitting. recall that with regularization we minimize the total cost of a hypothesis, counting both the empirical loss and the complexity of the hypothesis:
+<img src=/ltx/d1da92ea6e1630b3331cde7689d5afa9ea58d0ae.svg class=DisplayMath style=vertical-align:0>
+for linear functions the complexity can be specified as a function of the weights. we can consider a family of regularization functions:
+<img src=/ltx/8ee1129f2a380469d3b1b2b9875da88fc7df6d81.svg class=DisplayMath style=vertical-align:-3pt>
+as with loss functions, with <img src=/ltx/7d513b55c58d759e809c4f6290d6ae3c05b22e27.svg class=InlineMath style=vertical-align:-3.108pt>, we have <img src=/ltx/b7184d20d9b500051a5fe9066ae27c5d02993111.svg class=InlineMath style=vertical-align:-2.528004pt> regularization, which minimizes the sum of the absolute values; with <img src=/ltx/ef08805eb48b208fa0b660573648f503f2487dc9.svg class=InlineMath style=vertical-align:-3.108pt>, <img src=/ltx/bee609d3db1459d588d9210e8cc7d70eb98525ff.svg class=InlineMath style=vertical-align:-2.520004pt> regularization minimizes the sum of squares. which regularization function should you pick? that depends on the specific problem, but <img src=/ltx/b7184d20d9b500051a5fe9066ae27c5d02993111.svg class=InlineMath style=vertical-align:-2.528004pt> regularization has an important advantage: it tends to produce a <strong>sparse model</strong>. that is, it often sets many weights to zero, effictively declaring the corresponding attributes to be irrelevant–just as <span class=smallcaps>Decision-Tree-Learning</span> does (although by a different mechanism).hypothesis that discard attributes can be easier for a human to understand, and may be less likely to overfit</p><h1 id=fitting-higher-order-functions>fitting higher order functions</h1><p>if we wanted to fit a given data set to a higher order function, say quadratic, we just introduce <img src=/ltx/511aa378fd4e02df7e94a3568f7af67e98f23c4e.svg class=InlineMath style=vertical-align:-.12pt> new weights and apply them to <img src=/ltx/793e281f39a4e25b77dd2a75976582d35de6a1f1.svg class=InlineMath style=vertical-align:-4.616004pt> and add these new symbols to the <a href=#hypothesis_set_equation>hypothesis set equation</a></p><h1 id=98c4ead7-c672-419f-84c2-f7f147be1111 id=lisp-implementation>lisp implementation</h1><p>enough talk, its time to implement this in <a href=20230224163920-common_lisp.html>common lisp</a>
+first we need the data</p><pre class="commonlisp highlight" data-org-language=lisp data-exports=both><code>(defun generate-points-along-line (n)
+  &quot;generate `n&#39; points along a line with some random noise.&quot;
+  (let ((slope 2)          ; slope of the line
+        (intercept 1)      ; y-intercept of the line
+        (noise-variance 5) ; variance of the noise
+        (points))      ; list of points
+    (dotimes (i n)
+      (let* ((x (+ i 1))
+             (y (+ (* slope x) intercept))
+             (noise (/ (random (* 1000 noise-variance)) 1000))) ; random noise
+        (push (list x (+ y noise)) points)))
+    points))
+
+(generate-points-along-line 5)
+</code></pre><table><tbody><tr class=odd><td>5</td><td>1616/125</td></tr><tr class=even><td>4</td><td>1449/125</td></tr><tr class=odd><td>3</td><td>2567/250</td></tr><tr class=even><td>2</td><td>9027/1000</td></tr><tr class=odd><td>1</td><td>509/125</td></tr></tbody></table><p>we need a way to visualize this so we use tikz</p><pre class="commonlisp highlight" data-org-language=lisp data-results="output drawer" data-exports=both data-cache=yes><code>(defun tikz-points-plot (points)
+  &quot;turn points into a runnable latex tikz block&quot;
+  ;; (format t &quot;#+begin_src latex :file (temp-file \&quot;svg\&quot;) :exports results~%\\begin{tikzpicture}&quot;)
+  (format t &quot;\\begin{tikzpicture}&quot;)
+  (let ((max-x (car (car points)))
+        (min-x (car (car points)))
+        (max-y (car (car points)))
+        (min-y (car (car points))))
+    (loop for point in points
+          do (cond ((&gt; (car point) max-x) (setf max-x (car point))))
+             (cond ((&lt; (car point) min-x) (setf min-x (car point))))
+             (cond ((&gt; (nth 1 point) max-y) (setf max-y (nth 1 point))))
+             (cond ((&lt; (nth 1 point) min-y) (setf min-y (nth 1 point)))))
+    (format t &quot;\\begin{axis}[axis lines=middle, xlabel=\(x\), ylabel=\(y\), xmin=~a, xmax=~a, ymin=~a, ymax=~a]&quot;
+            (cond ((&lt; min-x 0) (* 1.1 min-x))
+                  ((&gt; min-x 0) (* 0.9 min-x))
+                  ((equal 0 min-x) -1))
+            (cond ((&lt; max-x 0) (* 0.9 max-x))
+                  ((&gt; max-x 0) (* 1.1 max-x))
+                  ((equal 0 max-x) 1))
+            (cond ((&lt; min-y 0) (* 1.1 min-y))
+                  ((&gt; min-y 0) (* 0.9 min-y))
+                  ((equal 0 min-y) -1))
+            (cond ((&lt; max-y 0) (* 0.9 max-y))
+                  ((&gt; max-y 0) (* 1.1 max-y))
+                  ((equal 0 max-y) 1))))
+  (loop for point in points
+        do (format t &quot;\\draw[fill=blue] (axis cs: ~a,~a) circle (2pt);&quot; (car point) (nth 1 point)))
+  ;; (format t &quot;\\end{axis}\\end{tikzpicture}~%#+end_src&quot;))
+  (format t &quot;\\end{axis}\\end{tikzpicture}&quot;))
+
+(let ((points (generate-points-along-line 50)))
+  (tikz-points-plot points))
+</code></pre><div class="RESULTS drawer"><img src=/ltx/0790e2b730b5923b18a2306032287d64a5566e69.svg class=DisplayMath style=vertical-align:0></div><p>i decided not to go with random data for now though… maybe later
+i got a <a href=attachment:heart.data.csv>small dataset</a> from <a href=https://www.scribbr.com/statistics/multiple-linear-regression/>https://www.scribbr.com/statistics/multiple-linear-regression/</a>, the goal is to find the rates of heart disease as a function of biking to work and smoking, so we have 3 weights to adjust (never forget the intercept!)</p><pre class="commonlisp highlight" data-org-language=lisp><code>(defun loss (actual-output desired-output)
+  (expt (- actual-output desired-output) 2))
+
+(defun generate-hypothesis (data)
+  (let* ((hypothesis-degree (length (car data)))
+         (weights (loop for i from 0 below hypothesis-degree collect (/ (random 100) 100))))
+    (values
+     (lambda (vector) (reduce #&#39;+ (mapcar #&#39;* (append &#39;(1) vector) weights)))
+     weights)))
+
+(defun predict (hypothesis vector)
+  (funcall hypothesis vector))
+
+(multiple-value-bind (hypothesis weights) (generate-hypothesis &#39;((1 2 3) (2 3 4)))
+  (print (predict hypothesis &#39;(1 1))))
+</code></pre><p>then we gotta load the dataset using cl-csv</p><pre class="commonlisp highlight" data-org-language=lisp data-var='data-file=(concat (org-attach-dir) "/heart.data.csv")' data-results=silent><code>(ql:quickload &quot;cl-csv&quot;)
+(defparameter *data* (cl-csv:read-csv (pathname data-file)))
+(setf *data* (mapcar #&#39;cdr *data*)) ;; get rid of the first column, its useless
+(defun parse-float (mystr) ;; hacky way..
+  (read-from-string mystr))
+(setf *data* (mapcar (lambda (mylist) (mapcar #&#39;parse-float mylist)) (cdr *data*)))
+</code></pre><p>now we implement the gradient descent</p><pre class="commonlisp highlight" data-org-language=lisp data-results=output data-cache=yes data-exports=both><code>(defun predict-all (data hypothesis weights)
+  (let ((total-loss 0))
+    (loop for vector in data
+          do (setf total-loss (+ (predict hypothesis vector) total-loss))
+             (let ((desired-output (car vector))
+                   (x-values (cdr vector))
+                   (this-examples-loss 0))
+               (setf this-examples-loss (loss desired-output (predict hypothesis x-values)))
+               (setf total-loss (+ total-loss this-examples-loss))))
+    total-loss))
+
+(setq *learning-rate* 0.000000005)
+(multiple-value-setq (hypothesis weights) (generate-hypothesis *data*))
+(predict-all *data* hypothesis weights)
+
+(defun step-down-gradient-descent (data weights)
+  (let ((old-weights (copy-list weights))
+        (counter 0))
+    (map-into
+     weights
+     (lambda (weight)
+       (let ((change-in-weight 0))
+         (loop for example in data
+               do (let ((desired-output (car example))
+                        (actual-output (reduce #&#39;+ (mapcar #&#39;* (append &#39;(1) (cdr example)) old-weights)))
+                        (my-x (nth counter example)))
+                    ;; (format t &quot;~a * (~a - ~a)~%&quot; my-x desired-output actual-output)
+                    (incf change-in-weight (* my-x (- desired-output actual-output))))
+                  (incf weight (* change-in-weight *learning-rate*)))
+         (incf counter))
+       weight)
+     weights)))
+
+;; (loop for i from 0 below 10
+;;       do (step-down-gradient-descent *data* weights)
+;;          (format t &quot;weights: ~a, loss: ~a~%&quot; weights (predict-all *data* hypothesis weights)))
+
+;; (loop for i from 0 below 100000
+;;       do (step-down-gradient-descent *data* weights))
+(loop for i from 0 below 100000
+      do (step-down-gradient-descent *data* weights))
+(format t &quot;weights: ~a, loss: ~a~%&quot; weights (predict-all *data* hypothesis weights))
+</code></pre><pre class="example highlight"><code>weights: (15.316911 -0.2039037 0.17000248), loss: 10013.191
+</code></pre><p>the function we got is very close to the actual function which is (according to the article i lined) <code>heart disease = 15 + (-0.2*biking) + (0.178*smoking)</code></p><div class=note><p>messing with the learning rate dramatically affected the final output, took me a bit of time to find a good value
+if we had higher float decision we would've gotten better results but after some amount of iterations the loss just stops changing and converges to a specific number
+the loss might seem like a high number at first but its really just because the values themselves in the dataset arent small</p></div><div class=note><p>after messing with the learning-rate value, i realized how huge of an effect it had on the behavior of the algorithm, a slightly bigger step size causes the loss and weights to diverge for some reason and i cant see why</p></div></div></main></body></html>

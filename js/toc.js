@@ -3,6 +3,12 @@
 let oldWidth = -1, oldHeight = -1;
 
 function measureToc() {
+  // if the table of contents is empty, remove the menu
+  if (document.getElementById('tocCollapsible').children.length === 0 || document.getElementById('TableOfContents').children.length === 0) {
+    document.getElementById('tocContainer').style.display = 'none';
+    return;
+  }
+
   if (window.innerWidth === oldWidth && window.innerHeight === oldHeight) {
     // In addition to being a bit of optimization, this clause somehow prevents triggering a
     // bug in Firefox 98.2.0 on Android that makes the stickiness of the table of contents
