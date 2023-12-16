@@ -168,7 +168,7 @@ we define a set \(A\) to be any unordered collection of objects
 #+end_definition
 
 by [[my-def][this definition]], the object {1,2,3} is a set.
-</code></pre><p>results in the definition div having the id <code>my-def</code>, but we wouldnt want to modify our org files just to make them compatible with pandoc, instead we can do something "hacky" by modifying the stream before piping it into pandoc</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+attr_html: :id/#+attr_html: :id/&#39; infile.org |\
+</code></pre><p>results in the definition div having the id <code>my-def</code>, but we wouldnt want to modify our org files just to make them compatible with pandoc, instead we can do something "hacky" by modifying the stream before piping it into pandoc</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+name:/#+attr_html: :id/&#39; infile.org |\
     pandoc --from org\
            --to html5\
            --standalone\
@@ -185,7 +185,7 @@ by [[my-def][this definition]], the object {1,2,3} is a set.
     return pandoc.Link(content, &#39;#&#39; .. target)
   end
 end
-</code></pre><p>assuming this code is placed in the file <code>internal_links.lua</code>, our shell command becomes:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+attr_html: :id/#+attr_html: :id/&#39; infile.org |\
+</code></pre><p>assuming this code is placed in the file <code>internal_links.lua</code>, our shell command becomes:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+name:/#+attr_html: :id/&#39; infile.org |\
     pandoc --from org\
            --to html5\
            --standalone\
@@ -238,7 +238,7 @@ def main(doc=None):
 if __name__ == &quot;__main__&quot;:
     db = sqlite3.connect(os.path.expanduser(ORG_ROAM_DB_PATH))
     main()
-</code></pre><p>assuming the <code>panflute</code> python package is installed globally, and that this snippet is placed in the file <code>roam_links.py</code>, our exporting shell command becomes:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+attr_html: :id/#+attr_html: :id/&#39; infile.org |\
+</code></pre><p>assuming the <code>panflute</code> python package is installed globally, and that this snippet is placed in the file <code>roam_links.py</code>, our exporting shell command becomes:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>sed &#39;s/#+name:/#+attr_html: :id/&#39; infile.org |\
     pandoc --from org\
            --to html5\
            --standalone\
