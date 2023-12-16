@@ -6,7 +6,7 @@
 </code></pre><p>and then <a href=20220807193113-gpg.html>encrypt that file</a></p><h1 id=5147B120-16D2-48F9-A6AE-D8DAD8363779 id=gpg-pinentry-error>gpg pinentry error</h1><p>if you get the following error:</p><pre class="c highlight" data-org-language=C data-noeval=yes><code>gpg: problem with the agent: No pinentry
 </code></pre><p>you might be able to fix this by running this command:</p><pre class="bash highlight"><code>echo &quot;pinentry-program /usr/bin/pinentry&quot; &gt; ~/.gnupg/pgp-agent.conf
 pkill pgp-agent
-</code></pre><p>and install the program <code>pinentry</code> from using your package manager
+</code></pre><p>and install the program <code>pinentry</code> using your package manager
 or if you're on <a href=20220730010042-nixos.html>nixos</a> like myself:</p><pre class="bash highlight"><code>echo &quot;pinentry-program /run/current-system/sw/bin/pinentry&quot; &gt; ~/.gnupg/pgp-agent.conf
 pkill pgp-agent
 </code></pre><p>and add the program <code>pinentry</code> to your <code>environment.systemPackages</code> and run <code>sudo nixos-rebuild switch</code> to build the new configuration</p></div></main></body></html>
