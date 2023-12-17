@@ -1,5 +1,5 @@
 <!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>exporting from org mode with pandoc &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
-<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2023-12-07 14:17:59 +0000 UTC">December 7, 2023</time></div><h1 class=post-title>exporting from org mode with pandoc</h1><div class=post-desc></div><div class=post-line></div><h1 id=motivation>motivation</h1><p>the need for an emacs-independent exporting of notes arose from the fact that i was using org version 9.7-pre in which exporting functionality is basically broken.</p><h1 id=pandoc>pandoc</h1><p>because i didnt want to reinvent the wheel, i landed on using pandoc, it has a huge community and i trust it to maintain org-mode parsability in the long run. there are some missing features in pandoc exporting which is why im writing this.
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info></div><h1 class=post-title>exporting from org mode with pandoc</h1><div class=post-desc></div><div class=post-line></div><h1 id=motivation>motivation</h1><p>the need for an emacs-independent exporting of notes arose from the fact that i was using org version 9.7-pre in which exporting functionality is basically broken.</p><h1 id=pandoc>pandoc</h1><p>because i didnt want to reinvent the wheel, i landed on using pandoc, it has a huge community and i trust it to maintain org-mode parsability in the long run. there are some missing features in pandoc exporting which is why im writing this.
 a starting point would be the following command:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>pandoc infile.org --standalone --output outfile.html
 </code></pre><h1 id=custom-css>custom css</h1><p>if you have a css file that you'd like included, use the <code>--css</code> argument</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>pandoc infile.org\
        --standalone\
@@ -22,7 +22,8 @@ local system = require(&quot;pandoc.system&quot;)
 
 function appendDepthToSVGFile(depth, svgPath)
     local f = io.open(svgPath, &quot;a&quot;)
-    f:write(string.format(&quot;&lt;!-- depth=%spt --&gt;\n&quot;, depth))
+    f:write(string.format(&quot;&lt;!-- depth=%spt --&gt;
+&quot;, depth))
     f:close()
 end
 
@@ -50,18 +51,20 @@ function html2rgb(color)
 end
 
 function wrapFormula(lr, latexFormula)
-    local bgcolor = lr.bgcolor ~= &quot;#FFFFFF&quot; and string.format(&quot;\\background{%s}\n&quot;, html2rgb(lr.bgcolor)) or &#39;&#39;
+    local bgcolor = lr.bgcolor ~= &quot;#FFFFFF&quot; and string.format(&quot;\background{%s}
+&quot;, html2rgb(lr.bgcolor)) or &#39;&#39;
     local tex = string.format([[\documentclass[%dpt]{%s}
         \usepackage[%s]{inputenc}
         %s
-        \begin{document}
+        egin{document}
         %s
-        \begin{preview}
+        egin{preview}
         %s
-        \end{preview}
-        \end{document}
+        nd{preview}
+        nd{document}
         ]], lr.fontSize, lr.latexClass, lr.fontEncoding, lr.preamble, bgcolor, latexFormula)
-    -- io.write(string.format(&quot;tex: [[%s]]\n&quot;, tex))
+    -- io.write(string.format(&quot;tex: [[%s]]
+&quot;, tex))
     return tex
 end
 
@@ -79,23 +82,27 @@ function renderLatex(lr, latexFormula)
     if f ~= nil then
         local depth = getDepth(f:read(&quot;a&quot;))
         f:close()
-        --io.write(string.format(&quot;found SVG file=%s with depth=%spt\n&quot;, svgPath, depth))
+        --io.write(string.format(&quot;found SVG file=%s with depth=%spt
+&quot;, svgPath, depth))
         return depth, svgFileName
     end
     -- SVG file does not exist
     local depth = system.with_temporary_directory(&quot;latexmath&quot;, function(tmpDir)
         return system.with_working_directory(tmpDir, function()
-            io.write(string.format(&quot;changed directory to (%s)\n&quot;, tmpDir))
+            io.write(string.format(&quot;changed directory to (%s)
+&quot;, tmpDir))
             local tmpFile = io.open(&quot;latexmath.tex&quot;, &quot;w&quot;)
             tmpFile:write(latexDocument)
             tmpFile:close()
             local out = command(lr, svgPath)
             local depth = getDepth(out)
             if depth == nil then
-                io.write(string.format(&quot;%s: depth not found\n&quot;, svgPath))
+                io.write(string.format(&quot;%s: depth not found
+&quot;, svgPath))
                 return nil
             end
-            io.write(string.format(&quot;%s: depth=%spt\n&quot;, svgPath, depth))
+            io.write(string.format(&quot;%s: depth=%spt
+&quot;, svgPath, depth))
             appendDepthToSVGFile(depth, svgPath)
             return depth
         end)
@@ -109,7 +116,8 @@ function command(lr, svgPath)
     local f = io.popen(lr.dvisvgmPath .. &quot; --no-fonts -o \&quot;&quot; .. svgPath .. &quot;\&quot; latexmath.dvi 2&gt;&amp;1&quot;)
     local out = f:read(&quot;a&quot;)
     f:close()
-    -- io.write(string.format(&quot;out: [[%s]]\n&quot;, out))
+    -- io.write(string.format(&quot;out: [[%s]]
+&quot;, out))
     return out
 end
 
@@ -117,10 +125,10 @@ function Math(elem)
     local latexFormula1
     local latexFormula = elem.text
     if elem.mathtype == &quot;InlineMath&quot; then
-        latexFormula1 = string.format(&quot;\\(%s\\)&quot;, latexFormula)
+        latexFormula1 = string.format(&quot;\(%s\)&quot;, latexFormula)
     else
         -- DisplayMath
-        latexFormula1 = string.format(&quot;\\[%s\\]&quot;, latexFormula)
+        latexFormula1 = string.format(&quot;\[%s\]&quot;, latexFormula)
     end
     local lr = NewLatexRender()
     local depth, svgFileName = renderLatex(lr, latexFormula1)
@@ -130,7 +138,8 @@ function Math(elem)
     if depth ~= nil then
         attr[&quot;style&quot;] = string.format(&quot;vertical-align:-%spt&quot;, depth)
     end
-    -- io.write(string.format(&quot;%s\n&quot;, dump(attr)))
+    -- io.write(string.format(&quot;%s
+&quot;, dump(attr)))
     return pandoc.Image(&#39;&#39;, svgFileName, &#39;&#39;, attr)
 end
 

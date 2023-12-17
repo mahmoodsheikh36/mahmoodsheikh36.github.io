@@ -25,6 +25,7 @@ window.addEventListener("load", function () {
       "code-output",
       "code",
       "axiom",
+      "thought",
   ];
   for (let cb of customBlocks) {
     for (let element of document.getElementsByClassName(cb)) {

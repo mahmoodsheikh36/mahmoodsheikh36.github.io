@@ -1,5 +1,5 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>data structures &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
-<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info></div><h1 class=post-title>data structures</h1><div class=post-desc></div><div class=post-line></div><div class=note><p>for most data structures i havent implemented deletion yet..
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="my notes and code related to data structures"><title>data structures &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2022-12-22 19:56:48 +0000 UTC">December 22, 2022</time></div><h1 class=post-title>data structures</h1><div class=post-desc>my notes and code related to data structures</div><div class=post-line></div><div class=note><p>for most data structures i havent implemented deletion yet..
 also its good to note that most of the code isnt optimized to hell, but it doesnt really matter since its only for education purposes and you should probably be using the data structures provided by the programming language's standard library</p></div><h1 id=0a5db5cf-aa21-49b2-9f25-54b2abd1b300 id=data-structure>data structure</h1><div class=definition><p>a <strong>data structure</strong> is a collection of data and operations on said data, the data is represented as objects, and each object <code>x</code> has:</p><ul><li><code>key(x)</code>: a key that is used to identify the object (usually a number that uniquely identifies the object)</li><li><code>info(x)</code> or <code>value(x)</code>: contains the data needed to store for the object (usually without the key)</li></ul><div class=my_example><p>for example, if <code>x</code> is a person, <code>key(x)</code> could be the person's ID, <code>value(x)</code> would be information on said person, like age, height, weight etc..</p></div></div><h2 id=dfdada04-47c8-42dd-a52c-5fe695e18e74 id=keyvalue>KeyValue</h2><p>a helper class that represents a key-value/pair relation, used as a building block for many data structures</p><pre id=KeyValue class="Cpp highlight" data-noeval=yes><code>template &lt;typename K, typename V&gt;
 class KeyValue {
 private:
@@ -568,7 +568,8 @@ public:
   /* inorder print */
   void print() {
     if (!this-&gt;is_empty()) this-&gt;get_root()-&gt;print();
-    std::cout &lt;&lt; &quot;\n&quot;;
+    std::cout &lt;&lt; &quot;
+&quot;;
   }
   void empty() {
     delete this-&gt;root;
@@ -1018,7 +1019,7 @@ public:
   std::string to_string() {
     std::string str = &quot;&quot;;
     for (int i = 0; i &lt; SIZE; ++i) {
-      std::string num_str = this-&gt;keys[i] == 0 ? &quot;$\\varnothing$&quot; : std::to_string(this-&gt;keys[i]);
+      std::string num_str = this-&gt;keys[i] == 0 ? &quot;$\varnothing$&quot; : std::to_string(this-&gt;keys[i]);
       str += num_str + (i == SIZE - 1 ? &quot;&quot; : &quot; &quot;);
     }
     return str;
