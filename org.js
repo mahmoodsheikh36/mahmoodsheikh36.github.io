@@ -6,8 +6,6 @@ window.addEventListener("load", function () {
       'lemma',
       'proof',
       'entail',
-      "lemma",
-      "proof",
       "entailment",
       "definition",
       "note",
@@ -30,8 +28,10 @@ window.addEventListener("load", function () {
   for (let cb of customBlocks) {
     let elements = document.getElementsByClassName(cb);
     for (let element of elements) {
+//      console.log(elements);
+//      if (element.classList.contains('custom-block'))
+//        continue;
       let wrapper = document.createElement('div');
-      wrapper.classList.add('custom-block-wrapper');
       wrapper.classList.add('custom-block');
       if (cb == 'my_example') {
         wrapper.setAttribute('data-before-content', 'example');
