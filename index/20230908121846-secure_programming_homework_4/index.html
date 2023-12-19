@@ -49,7 +49,7 @@ output from a non-vulnerable bash:
 5.1.16(1)-release
 () { echo &quot;hello&quot;; }
 /bin/bash: line 5: sayh: command not found
-</code></pre></div><h1 id=using-gdb-to-see-the-bug>using gdb to see the bug</h1><p>to explore the source code "properly" (with the correct compiler flags for errors etc) with <a href=emacs.html>emacs</a> i had to use <a href=20230915011543-bear.html>bear</a>
+</code></pre></div><h1 id=using-gdb-to-see-the-bug>using gdb to see the bug</h1><p>to explore the source code "properly" (with the correct compiler flags for errors etc) with <a href=/index/emacs.html>emacs</a> i had to use <a href=/index/20230915011543-bear.html>bear</a>
 this is the full text from the terminal:</p><pre class="bash highlight" data-org-language=sh data-eval=no><code>bash-4.3 λ export sayh=&#39;() { echo &quot;it works&quot;; }&#39;; gdb --args ./bash -c &#39;sayh&#39;
 GNU gdb (GDB) 13.2
 Copyright (C) 2023 Free Software Foundation, Inc.
@@ -93,7 +93,7 @@ it works
 [Inferior 1 (process 1535344) exited normally]
 (gdb) 
 </code></pre><p>we break at the line 362 in the file <code>variables.c</code> which is the following:</p><pre class="c highlight" data-org-language=C data-eval=no><code>parse_and_execute (temp_string, name, SEVAL_NONINT|SEVAL_NOHIST);
-</code></pre><p>we see that the value of <code>temp_string</code> equals <code>"sayh () { echo \"it works\"; }"</code>, which is then passed to <code>parse_and_execute</code> to be executed, which results in the function <code>sayh</code> being defined, as would happen in any bash version, e.g. (at the time of writing) in the most recent version on <a href=20220703221611-arch_linux.html>arch linux</a>:</p><pre class="bash highlight" data-results=verbatim data-exports=both><code>echo $BASH_VERSION
+</code></pre><p>we see that the value of <code>temp_string</code> equals <code>"sayh () { echo \"it works\"; }"</code>, which is then passed to <code>parse_and_execute</code> to be executed, which results in the function <code>sayh</code> being defined, as would happen in any bash version, e.g. (at the time of writing) in the most recent version on <a href=/index/20220703221611-arch_linux.html>arch linux</a>:</p><pre class="bash highlight" data-results=verbatim data-exports=both><code>echo $BASH_VERSION
 sayh () { echo \&quot;it works\&quot;; }
 sayh
 </code></pre><pre class="example highlight"><code>5.1.16(1)-release

@@ -36,6 +36,7 @@ window.addEventListener("load", function () {
       } else {
         element.setAttribute('data-before-content', cb);
       }
+      element.classList.add('custom-block');
 
       let title = element.getAttribute('data-title');
       if (title) {

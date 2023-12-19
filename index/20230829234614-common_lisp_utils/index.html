@@ -225,7 +225,7 @@ CL-USER&gt; (concatenate-type-aware &#39;(#(1 2 3) #(10)))
 </code></pre><p>delete nth element of a sequence:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun remove-nth (seq n)
   &quot;remove the n-th element from the sequence `seq&#39;, returns a new sequence with the desired result, the function doesnt modify `seq&#39;&quot;
   (remove-if (lambda (_) t) seq :start n :count 1))
-</code></pre><p>split a sequence into <a href=20230927150124-singleton.html>singleton</a> sequences (of the same type as the original sequence)</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun seq-singletons (seq)
+</code></pre><p>split a sequence into <a href=/index/20230927150124-singleton.html>singleton</a> sequences (of the same type as the original sequence)</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun seq-singletons (seq)
   &quot;turn a sequence into a list of singletons (1-element sequences) of the same type&quot;
   (let ((my-seq-type (seq-type seq)))
     (map &#39;list my-seq-type seq)))
