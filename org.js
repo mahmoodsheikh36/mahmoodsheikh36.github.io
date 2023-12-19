@@ -30,7 +30,6 @@ window.addEventListener("load", function () {
   for (let cb of customBlocks) {
     let elements = document.getElementsByClassName(cb);
     for (let element of elements) {
-      console.log(element);
       let wrapper = document.createElement('div');
       wrapper.classList.add('custom-block-wrapper');
       wrapper.classList.add('custom-block');
