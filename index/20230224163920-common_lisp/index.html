@@ -85,7 +85,7 @@ we construct an object using <code>make-instance</code>:</p><pre class="commonli
 </code></pre><pre class="example highlight"><code>
 #(#(1 2) #(3) 4) 
 #(1 2) 
-</code></pre><h1 id=multithreading>multithreading</h1><p>in <a href=/index/20230429181052-sbcl.html>sbcl</a> <code>sb-thread:make-thread</code> takes a function to call in a newly created thread.</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(sb-thread:make-thread
+</code></pre><h1 id=multithreading>multithreading</h1><p>in <a href=20230429181052-sbcl.html>sbcl</a> <code>sb-thread:make-thread</code> takes a function to call in a newly created thread.</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(sb-thread:make-thread
  (lambda ()
    (progn
      (sleep 0) ;; give other threads a chance to run, then return here

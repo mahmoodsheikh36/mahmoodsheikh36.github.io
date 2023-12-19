@@ -137,7 +137,7 @@ example usage: (tensor-convolution #(1 2 3 4 5) #(6 7))&quot;
 ;;   1,280,048 bytes consed
 
 ;; 10 (4 bits, #xA, #o12, #b1010)
-</code></pre><h2 id=d-transformation-matrices>2d transformation matrices</h2><p><a href=/index/20230602050340-2d_transformations.html>linearly mapping a grid to another</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes><code>(defun map-grid-matrix (src-x-range dest-x-range src-y-range dest-y-range)
+</code></pre><h2 id=d-transformation-matrices>2d transformation matrices</h2><p><a href=20230602050340-2d_transformations.html>linearly mapping a grid to another</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes><code>(defun map-grid-matrix (src-x-range dest-x-range src-y-range dest-y-range)
   (let ((src-x-min (elt src-x-range 0))
         (dest-x-min (elt dest-x-range 0))
         (src-y-min (elt src-y-range 0))
@@ -159,7 +159,7 @@ example usage: (tensor-convolution #(1 2 3 4 5) #(6 7))&quot;
    mat))
 </code></pre><p>example usage:</p><pre class="commonlisp highlight" data-org-language=lisp data-cache=yes><code>(matrix-mul (map-grid-matrix &#39;(-1 1) &#39;(0 10) &#39;(0 1) &#39;(0 -10)) #2A((0.5) (0.5) (1)))
 </code></pre><pre class="example highlight"><code>#2A((7.5) (-5.0) (1.0))
-</code></pre><h1 id=linearly-mapping-discrete-range-onto-another><a href=/index/20230608174403-linearly_mapping_discrete_range_onto_another.html>linearly mapping discrete range onto another</a></h1><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes><code>(defun map-num (num src-min src-max dest-min dest-max)
+</code></pre><h1 id=linearly-mapping-discrete-range-onto-another><a href=20230608174403-linearly_mapping_discrete_range_onto_another.html>linearly mapping discrete range onto another</a></h1><pre class="commonlisp highlight" data-org-language=lisp data-results=silent data-tangle=yes><code>(defun map-num (num src-min src-max dest-min dest-max)
   &quot;(map-num 0.5 -1 1 -50 50) =&gt; 25.0&quot;
   (/ (- (+ (* (- num src-min) (- dest-max dest-min)) (* dest-min src-max)) (* dest-min src-min)) (- src-max src-min)))
 </code></pre><h1 id=sets>sets</h1><p>a good resource <a href=https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html>https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html</a>
@@ -170,7 +170,7 @@ the builtin <code>set-difference</code> sometimes reverses the lists it returns 
         ((member (car l1) l2 :test test) (set-diff (cdr l1) l2 :acc acc :test test))
         (t (set-diff (cdr l1) l2 :acc (cons (car l1) acc) :test test))))
 </code></pre><p>example:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(set-diff &#39;(K P N A D) &#39;(K P)) ; =&gt; (N A D)
-</code></pre><p>a function to check whether a list is a <a href=/index/20231204180210-subset.html>subset</a> of another, with the <code>test</code> being <code>:equal</code></p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun subset? (list1 list2)
+</code></pre><p>a function to check whether a list is a <a href=20231204180210-subset.html>subset</a> of another, with the <code>test</code> being <code>:equal</code></p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun subset? (list1 list2)
   &quot;check if improper subset with test `equal&#39;, shorthand for `subsetp&#39;
 consider the difference:
 CL-USER&gt; (subsetp &#39;((1) (2)) &#39;((1) (2)))
@@ -181,7 +181,7 @@ T&quot;
 </code></pre><p>check for set equality:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun set-equal? (list1 list2)
   &quot;the &#39;mathematical&#39; way of doing it, lol, could&#39;ve used `set-exclusive-or&#39;&quot;
   (and (subset? list1 list2) (subset? list2 list1)))
-</code></pre><h1 id=combinatorics><a href=/index/20221204105120-combinatorics.html>combinatorics</a></h1><p>generating <a href=/index/20221204105120-combinatorics.html>variation</a>s:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun variations (seq &amp;optional (len (length seq)))
+</code></pre><h1 id=combinatorics><a href=20221204105120-combinatorics.html>combinatorics</a></h1><p>generating <a href=20221204105120-combinatorics.html>variation</a>s:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun variations (seq &amp;optional (len (length seq)))
   &quot;get all variations of a sequence, order matters, repetition isnt allowed&quot;
   (if (equal len 1)
       (seq-singletons seq)
@@ -196,7 +196,7 @@ T&quot;
   (apply #&#39;append
          (loop for i from 1 upto len
                collect (variations seq i))))
-</code></pre><p>generating <a href=/index/20221204105120-combinatorics.html>variations with repetition</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun variations-with-repetition (seq &amp;optional (len (length seq)))
+</code></pre><p>generating <a href=20221204105120-combinatorics.html>variations with repetition</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun variations-with-repetition (seq &amp;optional (len (length seq)))
   &quot;generate all variations of the sequence `seq&#39; of length `len&#39;, such that repetition is allowed, returns a list of sequences of length (length(seq)+1)^len&quot;
   (let ((singletons (map &#39;list (seq-type seq) seq))) ;; construct a singleton (one element sequences) from every element
     (if (equal len 1)
@@ -213,9 +213,9 @@ T&quot;
   (concatenate-type-aware 
    (loop for i from 1 upto len
          collect (variations-with-repetition seq i))))
-</code></pre><p>generating <a href=/index/20221204105120-combinatorics.html>combination</a>s:
+</code></pre><p>generating <a href=20221204105120-combinatorics.html>combination</a>s:
 to make the problem easier to tackle i took some examples:
-assume the sequence "ashey" and the length 3, the <a href=/index/20230207142803-base_case.html>base case</a> for <a href=/index/20221105001640-recursive_function.html>recursion</a> would be a sequence of length 3, so if we were to progress letter by letter through the sequence we'd get to a function call with the sequence "hey" and the length 3, then when we exit recursion calls back to the call with the sequence "shey", we need to consider the cell "s" with 3 other sequences, "he","hy","ey", which itself is a combination with the sequence "hey" and length 2, so a call to the function should take care of getting the combinations of the subsequences its concatenating which requires a recursive call to the function by with a reduced length and a reduced subsequence, we may use this as a base case, so when we get a length of 2 we return every combination of length 2, this will satisfy the call with the sequence "hey" and length 3 which in turn satisfies the call with the sequence "shey" and length 4, and so on..</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun combinations (seq len)
+assume the sequence "ashey" and the length 3, the <a href=20230207142803-base_case.html>base case</a> for <a href=20221105001640-recursive_function.html>recursion</a> would be a sequence of length 3, so if we were to progress letter by letter through the sequence we'd get to a function call with the sequence "hey" and the length 3, then when we exit recursion calls back to the call with the sequence "shey", we need to consider the cell "s" with 3 other sequences, "he","hy","ey", which itself is a combination with the sequence "hey" and length 2, so a call to the function should take care of getting the combinations of the subsequences its concatenating which requires a recursive call to the function by with a reduced length and a reduced subsequence, we may use this as a base case, so when we get a length of 2 we return every combination of length 2, this will satisfy the call with the sequence "hey" and length 3 which in turn satisfies the call with the sequence "shey" and length 4, and so on..</p><pre class="commonlisp highlight" data-org-language=lisp data-results=silent><code>(defun combinations (seq len)
   &quot;generate all combinations of the sequence `seq&#39; of length `len&#39;, such that repetition is allowed and order doesnt matter, returns a list of sequences of length binom{length(seq)}{len}&quot;
   (if (&gt;= len (length seq))
       (list seq)

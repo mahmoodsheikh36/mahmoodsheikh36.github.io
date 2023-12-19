@@ -332,7 +332,7 @@ CREDENTIALS_DIRECTORY=/run/credentials/getty@tty1.service
 LESS_TERMCAP_so=[01;33m
 LESS_TERMCAP_se=[0m
 SHELL=/bin/zsh
-</code></pre><p>we change it to a <a href=/index/20230808220944-setuid.html>setuid</a> program whose owner is root:</p><pre class="bash highlight" dir=(org-attach-dir) data-results=silent><code>gcc setuid_first.c
+</code></pre><p>we change it to a <a href=20230808220944-setuid.html>setuid</a> program whose owner is root:</p><pre class="bash highlight" dir=(org-attach-dir) data-results=silent><code>gcc setuid_first.c
 sudo chown root:root a.out
 sudo chmod u+s a.out
 </code></pre><p>checking whether env vars are passed to setuid programs:</p><pre class="bash highlight" dir=(org-attach-dir) data-exports=both data-results=verbatim><code>export PATH LD_LIBRARY_PATH ANY_NAME
