@@ -28,14 +28,14 @@ A -&gt; 2
 1 -&gt; 3
 3 -&gt; b
 </code></pre><p>a function to produce the tikz for a graph to be drawn using <a href=https://tikz.dev/tikz-graphs>https://tikz.dev/tikz-graphs</a> with force-based algorithms (<a href=https://tikz.dev/gd-force>https://tikz.dev/gd-force</a>)</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(defun generate-graph-tikz (g)
-  (format t &quot;\tikz\graph[spring layout] {~%&quot;)
+  (format t &quot;\\tikz\\graph[spring layout] {~%&quot;)
   (map nil
        (lambda (edge)
          (format t &quot;~A -- ~A,~%&quot; (edge-src edge) (edge-dest edge)))
        g)
   (format t &quot;};&quot;))
 </code></pre><p>example usage:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no data-results=output data-exports=both><code>(generate-graph-tikz #((0 1) (1 2) (1 3) (0 5))) 
-</code></pre><pre class="example highlight"><code>	ikz\graph[spring layout] {
+</code></pre><pre class="example highlight"><code>\tikz\graph[spring layout] {
 0 -- 1,
 1 -- 2,
 1 -- 3,
@@ -49,16 +49,16 @@ A -&gt; 2
 \usetikzlibrary{positioning,calc,graphs,graphdrawing,quotes}
 \usegdlibrary{force}
 
-egin{document}
+\begin{document}
 
-	ikz\graph[spring layout] {
+\tikz\graph[spring layout] {
 0 -&gt; 1,
 1 -&gt; 2,
 1 -&gt; 3,
 0 -&gt; 5,
 };
 
-nd{document}
+\end{document}
 </code></pre><p>and compiled to <code>dvi</code> with</p><pre class="bash highlight" data-eval=no><code>lualatex --output-format=dvi &lt;yourfile&gt;.tex
 </code></pre><p>a <code>yourfile.dvi</code> will be generated, use <code>dvisvgm</code> to convert that to an <code>svg</code>:</p><pre class="bash highlight" data-eval=no><code>dvisvgm yourfile
 </code></pre><p>this will generate an svg image
@@ -173,10 +173,10 @@ A -&gt; 2, 0
                                             (tikz-params nil)
                                             (tikz-postamble nil))
   (let ((tikz-str &quot;&quot;))
-    (setf tikz-str (concatenate &#39;string tikz-str (format nil &quot;\begin{tikzpicture}~%&quot;)))
+    (setf tikz-str (concatenate &#39;string tikz-str (format nil &quot;\\begin{tikzpicture}~%&quot;)))
     (if tikz-params
-        (setf tikz-str (concatenate &#39;string tikz-str (format nil &quot;\graph[~A] {~%&quot; tikz-params)))
-        (setf tikz-str (concatenate &#39;string tikz-str (format nil &quot;\graph[spring electrical layout, node distance=~A] {~%&quot; node-distance))))
+        (setf tikz-str (concatenate &#39;string tikz-str (format nil &quot;\\graph[~A] {~%&quot; tikz-params)))
+        (setf tikz-str (concatenate &#39;string tikz-str (format nil &quot;\\graph[spring electrical layout, node distance=~A] {~%&quot; node-distance))))
     (map nil
          (lambda (vertex)
            (if (cdr vertex)
@@ -208,7 +208,7 @@ A -&gt; 2, 0
          (graph-adjacency-list g))
     (when tikz-postamble
       (setf tikz-str (concatenate &#39;string tikz-str tikz-postamble)))
-    (setf tikz-str (concatenate &#39;string tikz-str (format nil &quot;};\end{tikzpicture}&quot;)))
+    (setf tikz-str (concatenate &#39;string tikz-str (format nil &quot;};\\end{tikzpicture}&quot;)))
     (when should-print
       (format t tikz-str))
     tikz-str))

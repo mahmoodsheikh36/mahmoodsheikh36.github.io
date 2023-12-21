@@ -73,8 +73,7 @@ int main() {
   cudaFree(device_c);
 
   for (int i = 0; i &lt; N; ++i) {
-    printf(&quot;%d: %f
-&quot;, i, host_c[i]);
+    printf(&quot;%d: %f\n&quot;, i, host_c[i]);
   }
 
   // free host memory
@@ -199,8 +198,7 @@ int main() {
   }
   MatMul(a,b,c);
   for (int i = 0; i &lt; c.width * c.height; ++i) {
-    printf(&quot;%f
-&quot;, c.elements[i]);
+    printf(&quot;%f\n&quot;, c.elements[i]);
   }
 }
 </code></pre><p>to divide the work with shared memory we load submatrices into each thread block so that threads of each block can operate on the respective submatrix

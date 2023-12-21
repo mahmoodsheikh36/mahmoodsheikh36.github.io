@@ -33,8 +33,8 @@ first we need the data</p><pre class="commonlisp highlight" data-org-language=li
 (generate-points-along-line 5)
 </code></pre><table><tbody><tr class=odd><td>5</td><td>1616/125</td></tr><tr class=even><td>4</td><td>1449/125</td></tr><tr class=odd><td>3</td><td>2567/250</td></tr><tr class=even><td>2</td><td>9027/1000</td></tr><tr class=odd><td>1</td><td>509/125</td></tr></tbody></table><p>we need a way to visualize this so we use tikz</p><pre class="commonlisp highlight" data-org-language=lisp data-results="output drawer" data-exports=both data-cache=yes><code>(defun tikz-points-plot (points)
   &quot;turn points into a runnable latex tikz block&quot;
-  ;; (format t &quot;#+begin_src latex :file (temp-file \&quot;svg\&quot;) :exports results~%\begin{tikzpicture}&quot;)
-  (format t &quot;\begin{tikzpicture}&quot;)
+  ;; (format t &quot;#+begin_src latex :file (temp-file \&quot;svg\&quot;) :exports results~%\\begin{tikzpicture}&quot;)
+  (format t &quot;\\begin{tikzpicture}&quot;)
   (let ((max-x (car (car points)))
         (min-x (car (car points)))
         (max-y (car (car points)))
@@ -44,7 +44,7 @@ first we need the data</p><pre class="commonlisp highlight" data-org-language=li
              (cond ((&lt; (car point) min-x) (setf min-x (car point))))
              (cond ((&gt; (nth 1 point) max-y) (setf max-y (nth 1 point))))
              (cond ((&lt; (nth 1 point) min-y) (setf min-y (nth 1 point)))))
-    (format t &quot;\begin{axis}[axis lines=middle, xlabel=\(x\), ylabel=\(y\), xmin=~a, xmax=~a, ymin=~a, ymax=~a]&quot;
+    (format t &quot;\\begin{axis}[axis lines=middle, xlabel=\(x\), ylabel=\(y\), xmin=~a, xmax=~a, ymin=~a, ymax=~a]&quot;
             (cond ((&lt; min-x 0) (* 1.1 min-x))
                   ((&gt; min-x 0) (* 0.9 min-x))
                   ((equal 0 min-x) -1))
@@ -58,9 +58,9 @@ first we need the data</p><pre class="commonlisp highlight" data-org-language=li
                   ((&gt; max-y 0) (* 1.1 max-y))
                   ((equal 0 max-y) 1))))
   (loop for point in points
-        do (format t &quot;\draw[fill=blue] (axis cs: ~a,~a) circle (2pt);&quot; (car point) (nth 1 point)))
-  ;; (format t &quot;\end{axis}\end{tikzpicture}~%#+end_src&quot;))
-  (format t &quot;\end{axis}\end{tikzpicture}&quot;))
+        do (format t &quot;\\draw[fill=blue] (axis cs: ~a,~a) circle (2pt);&quot; (car point) (nth 1 point)))
+  ;; (format t &quot;\\end{axis}\\end{tikzpicture}~%#+end_src&quot;))
+  (format t &quot;\\end{axis}\\end{tikzpicture}&quot;))
 
 (let ((points (generate-points-along-line 50)))
   (tikz-points-plot points))

@@ -350,7 +350,7 @@ a table of the variables in the code and their counterparts in the math formulas
       ;; compute s-deltas
       (loop for layer-y-idx from 0 below (array-size layer-y) do
         (let* ((layer-y-indicies (array-index-row-major layer-y layer-y-idx))
-               (layer-y-unactivated-entry (apply #&#39;aref (append (list layer-y-unactivated) layer-y-indicies))) ;; S^ll[k,i,j]
+               (layer-y-unactivated-entry (apply #&#39;aref (append (list layer-y-unactivated) layer-y-indicies))) ;; S^\ell[k,i,j]
                (propped-delta (apply #&#39;aref (append (list propped-deltas) layer-y-indicies)))) ;; \Delta\hat Y[k,i,j]
           (if tensor-activation-function-derivative
               (setf (apply #&#39;aref (append (list s-deltas) layer-y-indicies)) (* propped-delta (funcall tensor-activation-function-derivative layer-y-unactivated layer-y-indicies)))

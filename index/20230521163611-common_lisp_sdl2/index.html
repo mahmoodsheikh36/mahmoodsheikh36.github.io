@@ -235,7 +235,7 @@ we need a generic way to represent objects that are renderable onto a window so 
 (freetype2:set-char-size *face* (* 24 64) 0 36 36)
 ;; trivial output:
 (freetype2:print-with-face *face* &quot;Hello&quot;)
-(ft2:get-char-index *face* #)
+(ft2:get-char-index *face* #\a)
 (ft2:load-char *face* #\A)
 (ft2:render-glyph *face*)
 (ft2:do-string-render (*face* &quot;o&quot; bitmap x y)
