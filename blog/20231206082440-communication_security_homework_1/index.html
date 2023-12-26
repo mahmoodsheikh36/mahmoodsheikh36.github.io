@@ -1,0 +1,127 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="homework on scytale [[id:5140c138-62e3-4330-a0cb-debd60c6ae84][cipher]]"><title>communication security homework 1 &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2023-12-06 08:24:41 +0000 UTC">December 6, 2023</time></div><h1 class=post-title>communication security homework 1</h1><div class=post-desc>homework on scytale [[id:5140c138-62e3-4330-a0cb-debd60c6ae84][cipher]]</div><div class=post-line></div><h1 id=encryption>encryption</h1><p>the diameter of the cylinder should be the key, but without taking into consideration some more complex parameters such as the size of the font and how that affects the number of characters per a single circle around the cylinder, we'll just consider the key to be the number of possible characters to be written vertically above each other over a piece of paper that can surround the cylinder once.
+consider the plaintext "this is my homework" (without the spaces). with the key 3, this should be turned into:</p><pre class="example highlight"><code>thisis
+myhome
+work
+</code></pre><p>which turns into tmwhyoihrsokimse (start from top left, go down to the end of line and then move on to the next vertical line until finished).
+here, we assume that the top of the strip of parchment that is written on starts at the top left, and that when its rotated around the cylinder, it doesnt run out before the letters do, so that the parchment is atleast as long as the plaintext and its length is a multiple of the key, i.e. <img src=/ltx/409c4aaf3313b23a205a905fd93447303bbbae0c.svg class=InlineMath style=vertical-align:-.192pt> where <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt> is the key and <img src=/ltx/f9333a634bcf9178071e0c3516ec4798d9d59709.svg class=InlineMath style=vertical-align:-5.000007pt> where <img src=/ltx/fcb45963a9c74355642b6531090ba464145bb1f0.svg class=InlineMath style=vertical-align:-.156pt> is the length of the plaintext. after all, we have to make some decisions when encrypting, because we have a choice between</p><pre class="example highlight"><code>thisis
+myhome
+work
+</code></pre><p>and</p><pre class="example highlight"><code>thisis
+myhom
+ework
+</code></pre><p>which should say the same thing, but we only consider the former.
+we need to turn the above example into a general algorithm for the cipher, one way would be to split the plaintext into portions of length <img src=/ltx/c8b1e5e43c1ec6d765f94e1676b22f15a53d36f1.svg class=InlineMath style=vertical-align:-.132pt>, and then iterate through these portions of text <img src=/ltx/c8b1e5e43c1ec6d765f94e1676b22f15a53d36f1.svg class=InlineMath style=vertical-align:-.132pt> times, picking the <img src=/ltx/e73ad5821832b8e1cfc32fe8e765b92299ff7df8.svg class=InlineMath style=vertical-align:-.12pt>'th letter of each portion on each iteration, where <img src=/ltx/e73ad5821832b8e1cfc32fe8e765b92299ff7df8.svg class=InlineMath style=vertical-align:-.12pt> is the index of the loop.</p><pre class="python highlight" data-results=silent data-session=yes data-tangle='(org-attach-expand "ex1.py")'><code>def encrypt(plaintext, key):
+    &quot;&quot;&quot;scytale cipher encryptor, key should be an integer&quot;&quot;&quot;
+    portion_length = len(plaintext) // key
+    if len(plaintext) % key &gt; 0:
+        portion_length += 1
+
+    # extract the portions (horizontal lines)
+    portions = []
+    for i in range(key):
+        portion_start_idx = i * portion_length
+        portion_end_idx = portion_start_idx + portion_length
+        portions.append(plaintext[portion_start_idx:portion_end_idx])
+
+    # iterate through the portions, extracting the final line
+    # line is initially a list of strings, to avoid string concatenation on each iteration, think java&#39;s stringbuilders
+    line = []
+    for i in range(portion_length):
+        for j in range(key):
+            portion = portions[j]
+            if len(portion) &gt; i:
+                mychar = portion[i]
+                line.append(mychar)
+    return &#39;&#39;.join(line)
+</code></pre><p>this function runs in time linear to the plaintext length (dont let the nested loop fool you into thinking its quadratic!).
+example usage of the function:</p><pre class="python highlight" data-session=yes data-results=output data-exports=both data-tangle='(org-attach-expand "ex1.py")'><code>print(encrypt(&#39;hellothere&#39;, 2))
+print(encrypt(&#39;this is my homework&#39;.replace(&#39; &#39;, &#39;&#39;), 3))
+print(encrypt(&#39;I am hurt very badly help&#39;.replace(&#39; &#39;, &#39;&#39;), 4))
+</code></pre><pre class="example highlight"><code>htehlelroe
+tmwhyoihrsokimse
+Iryyatbhmvaehedlurlp
+</code></pre><h1 id=decryption>decryption</h1><p>every <img src=/ltx/45594df16d7a8b6801ff7f13da22b4821f644eb4.svg class=InlineMath style=vertical-align:-2.94pt>th letter belongs to the same portion, except if <img src=/ltx/f10a45868f0534e391395a0dc0ed1584f63ba3a5.svg class=InlineMath style=vertical-align:-.192pt>, then the last letters of some groups of <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt> dont exist</p><pre class="python highlight" data-results=silent data-session=yes data-tangle='(org-attach-expand "ex1.py")'><code>def decrypt(ciphertext, key):
+    portion_length = len(ciphertext) // key
+    if len(ciphertext) % key &gt; 0:
+        portion_length += 1
+    portions = [[] for _ in range(key)]
+    gap = portion_length * key - len(ciphertext)
+    rect_i = 0
+    i = 0
+    while i &lt; len(ciphertext):
+        if (rect_i + 1) % key == 0 and (rect_i + 1) // key &gt; (portion_length - gap) and\
+           rect_i &lt; len(ciphertext):
+            pass
+        else:
+            portions[rect_i % key].append(ciphertext[i])
+            i += 1
+        rect_i += 1
+    return &#39;&#39;.join([&#39;&#39;.join(portion) for portion in portions])
+</code></pre><p>example usage of the function:</p><pre class="python highlight" data-session=yes data-results=output data-exports=both data-tangle='(org-attach-expand "ex1.py")'><code>print(decrypt(encrypt(&#39;hellothere&#39;, 2), 2))
+print(decrypt(encrypt(&#39;this is my homework&#39;.replace(&#39; &#39;, &#39;&#39;), 3), 3))
+print(decrypt(encrypt(&#39;I am hurt very badly help&#39;.replace(&#39; &#39;, &#39;&#39;), 4), 4))
+</code></pre><pre class="example highlight"><code>hellothere
+thisismyhomework
+Iamhurtverybadlyhelp
+</code></pre><h1 id=breaking-the-cipher>breaking the cipher</h1><p>automatic letter-frequency analysis combined with key space bruteforce could solve this, i mean iterating through all possible keys upto the length of the text and for each key checking if the frequency of letters decrypting with it produces to see if they match the traditional letter-frequency in english texts, but that wouldnt work for small texts and isnt guaranteed to work anyway
+the key space could be reduced to numbers that divide the text length evenly to simplify the problem 🤔 but im not sure im even allowed to do that
+the idea i eventually came up with is iterating through every possible key, decrypting the text using the key and comparing the distribution of bigrams in the received text to the average distribution of bigrams in english text, the key that results in the closest distribution to the average distribution would be the most likely one.
+for a given ciphertext <img src=/ltx/e87d8d225d16ee9b79524fe71f57ca7b026cdbba.svg class=InlineMath style=vertical-align:-2.624004pt>, let <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt> be an arbitrary key, <img src=/ltx/30593cb286392741e5ef8abd95cec9f4718acd61.svg class=InlineMath style=vertical-align:-2.94pt> would be the message received by decrypting using the key <img src=/ltx/8b7337baf8cf225196f7ca2fa1b5d0cf0eb23cae.svg class=InlineMath style=vertical-align:-.192pt>, each bigram (pair) <img src=/ltx/d419000a1ba1c81647fc24208fd390215a12b9c5.svg class=InlineMath style=vertical-align:-2.624004pt> would be a <a href=20230104221353-random_variable.html>random variable</a> drawn from the <a href=20230120140123-probability_distribution.html>distribution</a> given in <a href=#tab-eng-bigram-freq>tab-eng-bigram-freq</a>, we assume these random variables are <a href=20231201151453-independent_random_variable.html>independent and identically distributed</a>.
+<a href=#tab-eng-bigram-freq>tab-eng-bigram-freq</a> doesnt provide probabilities (or frequencies) for all possible pairs of letters, as the total possibilities is <img src=/ltx/99100781289cc26419bc6bc38bda4d5401a6b7be.svg class=InlineMath style=vertical-align:-.192pt>. if the pair isnt in the table, we consider its frequency to be equal to the lowest frequency in the table.
+here, we use the technique of <a href=20231123203727-maximum_likelihood_estimation.html>maximum likelihood estimation</a>, we want to find the estimate <img src=/ltx/6db4696d5ba987ddc03d906c8974d6b8be5ae2c4.svg class=InlineMath style=vertical-align:-.192pt>:
+<img src=/ltx/8397d4cbccc8f04454f2526bc3a4eb40ef8ea939.svg class=DisplayMath style=vertical-align:-5pt>
+where <img src=/ltx/98e20642780b0bc06296ecba058f059d591012b9.svg class=InlineMath style=vertical-align:-.264pt> is our <a href=20231208212741-key_space.html>key space</a>.
+because we're assuming the random variables are i.d.d, the their <a href=20230120140031-joint_probability_distribution.html>joint probability</a> is simply the product of their probabilities, and since the key space is finite and is bounded by the size of the ciphertext, we could just iterate through each possible key to find the one that produces the maximum likelihood.</p><pre class="python highlight" data-session=yes data-tangle='(org-attach-expand "ex1.py")' data-var="FREQS=/home/mahmooz/brain/notes/20231216104956-bigram.org:tab-eng-bigram-freq" data-noweb=yes data-results=output data-exports=both><code># &lt;&lt;src-scytale-encrypt()&gt;&gt;
+# &lt;&lt;src-scytale-decrypt()&gt;&gt;
+
+import re
+
+FREQS_MAP = {entry[0]: entry[1] for entry in FREQS}
+
+def min_probability():
+    mymin = 100
+    for freq in FREQS_MAP.values():
+        if freq &lt; mymin:
+            mymin = freq
+    return mymin / 100
+
+V_MIN_PROBABILITY = min_probability()
+
+def likelihood(text):
+    idx = 0
+    v_likelihood = 1
+    while idx &lt; len(text):
+        bigram = text[idx:idx+2]
+        if bigram in FREQS_MAP:
+            v_likelihood *= FREQS_MAP[bigram]
+        else:
+            v_likelihood *= V_MIN_PROBABILITY
+        idx += 1
+    return v_likelihood
+
+def break_cipher(ciphertext):
+    min_l = -1
+    min_l_key = None
+    for key in range(1, len(ciphertext) + 1):
+        new_l = likelihood(decrypt(ciphertext, key))
+        if new_l &gt; min_l:
+            min_l = new_l
+            min_l_key = key
+    return min_l_key
+
+dummy_text = &quot;&quot;&quot;Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book&quot;&quot;&quot;
+dummy_text = &quot;&quot;.join(re.findall(&quot;[a-zA-Z]+&quot;, dummy_text)).lower()
+
+print(break_cipher(encrypt(dummy_text, 5)))
+print(break_cipher(encrypt(dummy_text, 3)))
+print(break_cipher(encrypt(dummy_text, 7)))
+</code></pre><pre class="example highlight"><code>5
+3
+7
+</code></pre><p>the algorithm correctly guesses the keys in the 3 cases.</p><h1 id=appendix>appendix</h1><p><a href=id:9bf8cff1-f40e-4a2c-a1b3-535382703507>english bigram frequency distribution</a>
+<a href=20231208212630-mono_alphabetic_substitution_cipher.html>mono-alphabetic substitution cipher</a></p><pre class="bash highlight" dir="'attach" data-var="pdffile=(pdf-out-file)" data-results=silent><code>cp $orgfile &quot;homework1.txt&quot;
+cp $pdffile &quot;homework1.pdf&quot;
+cp /home/mahmooz/brain/out/20231216104956-bigram.pdf homework1_bigram.pdf
+zip homework1.zip homework1.txt homework1_bigram.pdf homework1.pdf ex1.py
+</code></pre></div></main></body></html>

