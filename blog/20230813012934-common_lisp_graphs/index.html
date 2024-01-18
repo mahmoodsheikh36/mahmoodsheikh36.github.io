@@ -58,7 +58,7 @@
 </span></span><span style=display:flex><span><span style=color:#66d9ef>\end</span>{document}
 </span></span></code></pre></div><p>and compiled to <code>dvi</code> with<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>lualatex --output-format<span style=color:#f92672>=</span>dvi &lt;yourfile&gt;.tex
 </span></span></code></pre></div><p>a <code>yourfile.dvi</code> will be generated, use <code>dvisvgm</code> to convert that to an <code>svg</code>:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>dvisvgm yourfile
-</span></span></code></pre></div><p>this will generate an svg image<br>an implementation of <a href=/index/20230812222929-a_algorithm/>A* algorithm</a>:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun a-star (graph src dest heuristic-function)
+</span></span></code></pre></div><p>this will generate an svg image<br>an implementation of <b>A* algorithm</b>:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defun a-star (graph src dest heuristic-function)
 </span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;a (naive?) implementation of A* search algorithm, solely written to avoid doing homework manually&#34;</span>
 </span></span><span style=display:flex><span>  (a-star-helper graph src <span style=color:#66d9ef>nil</span> dest <span style=color:#ae81ff>0</span> heuristic-function))
 </span></span><span style=display:flex><span>
@@ -224,7 +224,7 @@ C -- ["5"] B,
 J -- ["8"] 1,
 B -- ["1"] J,
 };\end{tikzpicture}
-' style=height:12.6853em;vertical-align:-.0005em;display:inline-block class="org-latex org-latex-inline"></span></div><p>a function to get all edges that are indicent to a specific vertex:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defmethod graph-vertex-neighbors ((g graph) vertex)
+' style=height:12.7832em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-inline"></span></div><p>a function to get all edges that are indicent to a specific vertex:<br></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lisp data-lang=lisp><span style=display:flex><span>(defmethod graph-vertex-neighbors ((g graph) vertex)
 </span></span><span style=display:flex><span>  (with-slots (adjacency-list) g
 </span></span><span style=display:flex><span>    (<span style=color:#66d9ef>let</span> ((neighbors <span style=color:#66d9ef>nil</span>))
 </span></span><span style=display:flex><span>      (loop for entry in adjacency-list do
