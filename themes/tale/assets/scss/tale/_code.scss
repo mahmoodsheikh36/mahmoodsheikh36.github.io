@@ -1,0 +1,53 @@
+pre,
+code {
+  font-family: $monospaced;
+}
+
+code {
+  background-color: var(--grey-4);
+  border-radius: 3px;
+  color: var(--code-color);
+  font-size: 85%;
+  padding: .25em .5em;
+  //white-space: pre-wrap;
+}
+
+pre {
+  margin: 0 0 1rem;
+}
+
+pre code {
+  background-color: transparent;
+  color: inherit;
+  font-size: 100%;
+  padding: 0;
+}
+
+pre code > span {
+    // This isn't very pretty, but the precise RGB values are generated
+    // server-side, the usual trick of putting the colors in CSS variables does
+    // not quite work and this is the best I could come up with.
+    filter: var(--code-filter);
+}
+.highlight {
+  background-color: var(--grey-4);
+  border-radius: 3px;
+  line-height: 1.4;
+  //padding: 1rem;
+  padding: 5px;
+}
+
+pre {
+    margin-bottom: 0;
+    overflow-x: auto;
+}
+
+.lineno {
+    color: var(--default-tint);
+    display: inline-block; // Ensures the null space also isn't selectable
+    padding: 0 .75rem 0 .25rem;
+    // Make sure numbers aren't selectable
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}

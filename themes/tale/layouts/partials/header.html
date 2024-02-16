@@ -1,0 +1,12 @@
+<nav class="nav">
+  <div class="nav-container">
+    <a href="{{ "/" | relURL }}">
+      {{ if .IsPage }}
+        <span class="nav-title">{{ .Site.Title }}</span>
+      {{ else }}
+        <span class="nav-title">{{ .Site.Title }}</span>
+      {{ end }}
+    </a>
+    {{ partial "header-menu.html" . }}
+  </div>
+</nav>

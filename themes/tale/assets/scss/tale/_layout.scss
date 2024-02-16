@@ -1,0 +1,119 @@
+* {
+    @include transition($color-transition);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 800px;
+  width: 80%;
+}
+
+// Carve out an exception from the 80% narrowing of the viewport for the table
+// of contents. This is ugly, but there isn't a better way, since the table of
+// contents must be a child of the "main" element so that it its scrolling
+// behavior is intuitive.
+main > *,
+footer,
+.nav-container {
+  display: block;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 90%;
+}
+
+main {
+    margin-top: 10px;
+}
+
+#darkModeToggle {
+    position: sticky;
+    font-size: 2rem;
+    cursor: pointer;
+    top: 1px;
+    height: 0px;
+    text-align: right;
+    margin-right: 30px;
+    z-index: 1;
+}
+
+.nav {
+  box-shadow: 0 2px 2px -2px var(--shadow-color);
+  overflow: auto;
+
+  &-container {
+    margin: 0.5rem auto;
+    position: relative;
+    text-align: center;
+  }
+
+  &-title {
+    @include transition($color-transition, opacity .2s ease-out);
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: normal;
+    color: var(--default-color);
+    display: inline-block;
+    margin: 0;
+    font-size: 20px;
+    // padding-right: .2rem;
+
+    &:hover,
+    &:focus {
+      opacity: .6;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    // margin: 1rem 0 0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  li {
+    @include transition($color-transition, opacity .2s ease-out);
+    color: var(--default-color);
+    display: inline-block;
+    opacity: .6;
+    padding: 0 2rem 0 0;
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+
+  a {
+    color: var(--default-color);
+    font-family: $sans-serif;
+  }
+}
+
+@media (min-width: 600px) {
+  .nav {
+    &-container {
+      text-align: left;
+    }
+
+    ul {
+      bottom: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+footer {
+  font-family: $serif-secondary;
+  padding: 2rem 0;
+  text-align: center;
+
+  span {
+    color: var(--default-color);
+    font-size: .8rem;
+  }
+}

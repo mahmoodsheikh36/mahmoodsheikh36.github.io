@@ -1,0 +1,80 @@
+aside.toc {
+    position: sticky;
+    top: 10px;
+    height: 0;
+    overflow: display;
+    z-index: 1;
+    margin-left: 30px;
+}
+
+#tocTitle {
+    // This is so that we can measure it in JS
+    width: fit-content;
+}
+
+#tocContainer.expanded {
+    width: calc(2rem + var(--measured-expanded-width));
+}
+
+#tocContainer.expanded div#tocCollapsible {
+    height: var(--measured-height);
+    width: var(--measured-expanded-width);
+}
+
+#tocContainer {
+    background-color: var(--grey-3);
+    border-radius: 1rem;
+    padding: 1rem;
+    max-width: 70%;
+
+    // This makes the gap between the two contained divs vanish. Why that gap
+    // exists, no clue.
+    display: flex;
+    flex-direction: column;
+
+    // We want to hide the table of contents before revealing it on hover
+    overflow: hidden;
+
+    // In addition to the measured width of the title, we need to add the two
+    // rems for the border (we are using box-sizing: border-box). Also add a
+    // reasonable default value to minimize visual changes while the page is
+    // loading.
+    width: calc(2rem + var(--measured-title-width));
+    --measured-title-width: 2.4rem;
+
+@include transition(
+	$color-transition,
+	width .1s ease-out,
+	height .1s ease-out);
+}
+
+#tocContainer > div {
+    border-left: 0.4rem solid var(--default-shade);
+    padding-left: 1rem;
+}
+
+#tocContainer div#tocCollapsible {
+    // Collapsed by default
+    height: 0;
+
+    // If we did not force this element to a given width, it would keep
+    // re-wrapping during the opening/closing transition.
+    width: var(--measured-expanded-width);
+
+    // No transition on width so that there is no re-wrapping during the
+    // opening/closing transition
+    @include transition($color-transition, height .1s ease-out);
+}
+
+nav#TableOfContents ul {
+    list-style-type: none;
+    padding-inline-start: 1rem;
+}
+
+nav#TableOfContents > ul {
+    padding-inline-start: 0;
+}
+
+nav#TableOfContents li {
+    margin-top: 0.4rem;
+}

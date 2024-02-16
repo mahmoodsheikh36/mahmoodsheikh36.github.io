@@ -1,0 +1,87 @@
+* {
+  @include box-sizing;
+  line-height: 1.5;
+}
+
+html,
+body {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: $serif-primary;
+  font-size: 14px;
+  overflow-y: scroll;
+
+  @media (min-width: 600px) {
+    font-size: 16px;
+  }
+}
+
+body {
+  -webkit-text-size-adjust: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--default-shade);
+  font-family: $sans-serif;
+  line-height: normal;
+}
+
+a {
+  color: var(--blue);
+  // color: var(--default-color);
+  text-decoration: none;
+}
+
+// source for style: https://freefrontend.com/css-quote-styles/
+// import the font for quotes
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+blockquote {
+	  font-family: 'Special Elite', cursive;
+	  // background: #ece5c9;
+	  font-size: 25px;
+	  position: relative;
+    text-align: center;
+    width: fit-content;
+    margin: 20px auto;
+
+    &:before, &:after {
+	      position: absolute;
+        color: #f1efe6;
+	      font-size: 6rem;
+    }
+
+    &:before {
+	      content: '“';
+	      left: -50px;
+	      top: -30px;
+    }
+
+    &:after {
+	      content: '”';
+	      right: -10px;
+    }
+
+    cite {
+	      font-size: initial;
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+td {
+    vertical-align: top;
+}

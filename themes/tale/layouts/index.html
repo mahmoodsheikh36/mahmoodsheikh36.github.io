@@ -1,0 +1,27 @@
+{{ define "main" }}
+
+<main>
+  {{ partial "index/introduction.html" . }}
+
+  <div class="post">
+    <blockquote>
+      while there is life,<br>
+      there is hope.<br>
+      <cite>said by someone</cite>
+    </blockquote>
+    <h2>latest blog posts</h2>
+    <div class="catalogue">
+      {{ range first 3 (where .Site.RegularPages "Type" "blog") }}
+        {{ .Render "summary" }}
+      {{ end }}
+    </div>
+    <h2>other links</h2>
+    <ul>
+      <li><i class="fa-brands fa-github"></i> <a href="https://github.com/mahmoodsheikh36/mahmoodsheikh36.github.io"> this website's code</a></li>
+      <li><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/mahmoodsh362/"> instagram</a></li>
+      <li><i class="fa-solid fa-envelope"></i> <a href="mailto:mahmod.m2015@gmail.com"> email</a></li>
+    </ul>
+  </div>
+</main>
+
+{{ end }}
