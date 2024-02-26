@@ -1,10 +1,12 @@
 +++
 title = "working with graphs in common lisp"
 author = ["mahmood"]
-description = "[[id:c9c929ba-a434-44eb-a6ef-6a4cfbde350f][graph]]s in [[id:C3E00718-FDF6-457F-9B91-FFCFDE1591E2][common lisp]]"
 tags = ["lispcode"]
 draft = false
 +++
+
+working with [BROKEN LINK: c9c929ba-a434-44eb-a6ef-6a4cfbde350f]s in [BROKEN LINK: C3E00718-FDF6-457F-9B91-FFCFDE1591E2] <br/>
+
 
 ## my initial approach {#my-initial-approach}
 
