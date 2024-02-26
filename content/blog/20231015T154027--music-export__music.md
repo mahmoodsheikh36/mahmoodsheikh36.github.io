@@ -8,446 +8,541 @@ draft = false
 
 ## instrumental post-rock/ambient {#instrumental-post-rock-ambient}
 
-\#+begin_export html <br/>
-&lt;div class="collage"&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_For Now I Am Winter_Ólafur Arnalds.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;For Now I Am Winter&lt;/span&gt; <br/>
-&lt;span&gt;Ólafur Arnalds&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Young Mountain_This Will Destroy You.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Young Mountain&lt;/span&gt; <br/>
-&lt;span&gt;This Will Destroy You&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_ST_This Will Destroy You.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;ST&lt;/span&gt; <br/>
-&lt;span&gt;This Will Destroy You&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Golevka_The Evpatoria Report.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Golevka&lt;/span&gt; <br/>
-&lt;span&gt;The Evpatoria Report&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Maar_The Evpatoria Report.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Maar&lt;/span&gt; <br/>
-&lt;span&gt;The Evpatoria Report&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Nights of Wonder_I Am No Hero.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Nights of Wonder&lt;/span&gt; <br/>
-&lt;span&gt;I Am No Hero&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Nowhere Now Here_MONO.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Nowhere Now Here&lt;/span&gt; <br/>
-&lt;span&gt;MONO&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Hymn to the Immortal Wind_MONO.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Hymn to the Immortal Wind&lt;/span&gt; <br/>
-&lt;span&gt;MONO&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Chasing After Shadows... Living With the Ghosts_Hammock.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Chasing After Shadows... Living With the Ghosts&lt;/span&gt; <br/>
-&lt;span&gt;Hammock&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Myra_Spurv.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Myra&lt;/span&gt; <br/>
-&lt;span&gt;Spurv&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Dust_Show Me A Dinosaur.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Dust&lt;/span&gt; <br/>
-&lt;span&gt;Show Me A Dinosaur&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_( )_Sigur Rós.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;( )&lt;/span&gt; <br/>
-&lt;span&gt;Sigur Rós&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Takk_Sigur Rós.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Takk&lt;/span&gt; <br/>
-&lt;span&gt;Sigur Rós&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_In Never Out_pg.lost.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;In Never Out&lt;/span&gt; <br/>
-&lt;span&gt;pg.lost&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Oscillate_pg.lost.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Oscillate&lt;/span&gt; <br/>
-&lt;span&gt;pg.lost&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Happy Songs for Happy People_Mogwai.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Happy Songs for Happy People&lt;/span&gt; <br/>
-&lt;span&gt;Mogwai&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Earth Is Not a Cold Dead Place_Explosions In The Sky.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Earth Is Not a Cold Dead Place&lt;/span&gt; <br/>
-&lt;span&gt;Explosions In The Sky&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_All of a Sudden I Miss Everyone_Explosions In The Sky.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;All of a Sudden I Miss Everyone&lt;/span&gt; <br/>
-&lt;span&gt;Explosions In The Sky&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_songs for someone_April Rain.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;songs for someone&lt;/span&gt; <br/>
-&lt;span&gt;April Rain&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_All Is Violent, All Is Bright_God Is An Astronaut.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;All Is Violent, All Is Bright&lt;/span&gt; <br/>
-&lt;span&gt;God Is An Astronaut&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Epitaph_God Is An Astronaut.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Epitaph&lt;/span&gt; <br/>
-&lt;span&gt;God Is An Astronaut&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Somnia_God Is An Astronaut.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Somnia&lt;/span&gt; <br/>
-&lt;span&gt;God Is An Astronaut&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Canopy_Silent Whale Becomes a Dream.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Canopy&lt;/span&gt; <br/>
-&lt;span&gt;Silent Whale Becomes a Dream&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_A Winged Victory for the Sullen_A Winged Victory for the Sullen.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;A Winged Victory for the Sullen&lt;/span&gt; <br/>
-&lt;span&gt;A Winged Victory for the Sullen&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Void Moments of Inertia_Once Upon a Winter.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Void Moments of Inertia&lt;/span&gt; <br/>
-&lt;span&gt;Once Upon a Winter&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Any Fool Can Regret Yesterday_Baulta.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Any Fool Can Regret Yesterday&lt;/span&gt; <br/>
-&lt;span&gt;Baulta&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Artemis_Still Mountains.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Artemis&lt;/span&gt; <br/>
-&lt;span&gt;Still Mountains&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Departure Songs_We Lost The Sea.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Departure Songs&lt;/span&gt; <br/>
-&lt;span&gt;We Lost The Sea&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_How Lonely Sits the City_The Ascent of Everest.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;How Lonely Sits the City&lt;/span&gt; <br/>
-&lt;span&gt;The Ascent of Everest&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_I Was Here For A Moment, Then I Was Gone_Maybeshewill.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;I Was Here For A Moment, Then I Was Gone&lt;/span&gt; <br/>
-&lt;span&gt;Maybeshewill&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Beyond The Sea, Beneath The Sky_I Hear Sirens.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Beyond The Sea, Beneath The Sky&lt;/span&gt; <br/>
-&lt;span&gt;I Hear Sirens&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Snake Behind the Sun_Shy, Low.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Snake Behind the Sun&lt;/span&gt; <br/>
-&lt;span&gt;Shy, Low&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Dust and Disquiet_Caspian.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Dust and Disquiet&lt;/span&gt; <br/>
-&lt;span&gt;Caspian&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_You Are the Conductor_Caspian.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;You Are the Conductor&lt;/span&gt; <br/>
-&lt;span&gt;Caspian&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_These Small Spaces_This Patch of Sky.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;These Small Spaces&lt;/span&gt; <br/>
-&lt;span&gt;This Patch of Sky&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Greater Lights_Ranges.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Greater Lights&lt;/span&gt; <br/>
-&lt;span&gt;Ranges&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Must You Smash Your Ears Before You Learn to Listen With Your Eyes_Joy Wants Eternity.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Must You Smash Your Ears Before You Learn to Listen With Your Eyes&lt;/span&gt; <br/>
-&lt;span&gt;Joy Wants Eternity&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Fog Is Rising_Joy Wants Eternity.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Fog Is Rising&lt;/span&gt; <br/>
-&lt;span&gt;Joy Wants Eternity&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_You Who Pretend To Sleep_Joy Wants Eternity.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;You Who Pretend To Sleep&lt;/span&gt; <br/>
-&lt;span&gt;Joy Wants Eternity&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Muses_Audiolepsia.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Muses&lt;/span&gt; <br/>
-&lt;span&gt;Audiolepsia&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Numinous_Those Who Ride With Giants.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Numinous&lt;/span&gt; <br/>
-&lt;span&gt;Those Who Ride With Giants&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Soundtracks for the Blind_Swans.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Soundtracks for the Blind&lt;/span&gt; <br/>
-&lt;span&gt;Swans&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Earth Fell Away_Carved Into the Sun.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Earth Fell Away&lt;/span&gt; <br/>
-&lt;span&gt;Carved Into the Sun&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Into The Blue Again_The Album Leaf.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Into The Blue Again&lt;/span&gt; <br/>
-&lt;span&gt;The Album Leaf&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_At The Soundless Dawn_Red Sparowes.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;At The Soundless Dawn&lt;/span&gt; <br/>
-&lt;span&gt;Red Sparowes&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Voyager_As Seas Exhale.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Voyager&lt;/span&gt; <br/>
-&lt;span&gt;As Seas Exhale&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Healing Process_As Seas Exhale.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Healing Process&lt;/span&gt; <br/>
-&lt;span&gt;As Seas Exhale&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The End of Something_Collapse Under The Empire.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The End of Something&lt;/span&gt; <br/>
-&lt;span&gt;Collapse Under The Empire&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Hole_65daysofstatic.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Hole&lt;/span&gt; <br/>
-&lt;span&gt;65daysofstatic&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Seven Years Without the Sun_Gather Your Quiet.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Seven Years Without the Sun&lt;/span&gt; <br/>
-&lt;span&gt;Gather Your Quiet&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_New Others Part One_This Will Destroy You.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;New Others Part One&lt;/span&gt; <br/>
-&lt;span&gt;This Will Destroy You&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Sisyphus_As Seas Exhale.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Sisyphus&lt;/span&gt; <br/>
-&lt;span&gt;As Seas Exhale&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Way Home_Sleep Dealer.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Way Home&lt;/span&gt; <br/>
-&lt;span&gt;Sleep Dealer&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Red Forest_If These Trees Could Talk.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Red Forest&lt;/span&gt; <br/>
-&lt;span&gt;If These Trees Could Talk&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Aurora_Sleep Dealer.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Aurora&lt;/span&gt; <br/>
-&lt;span&gt;Sleep Dealer&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_...And They Have Escaped the Weight of Darkness_Ólafur Arnalds.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;...And They Have Escaped the Weight of Darkness&lt;/span&gt; <br/>
-&lt;span&gt;Ólafur Arnalds&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Chopin Project_Ólafur Arnalds.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Chopin Project&lt;/span&gt; <br/>
-&lt;span&gt;Ólafur Arnalds&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Found Songs_Ólafur Arnalds.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Found Songs&lt;/span&gt; <br/>
-&lt;span&gt;Ólafur Arnalds&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Living Room Songs_Ólafur Arnalds.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Living Room Songs&lt;/span&gt; <br/>
-&lt;span&gt;Ólafur Arnalds&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Mysterium_Hammock.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Mysterium&lt;/span&gt; <br/>
-&lt;span&gt;Hammock&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Oblivion Hymns_Hammock.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Oblivion Hymns&lt;/span&gt; <br/>
-&lt;span&gt;Hammock&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Undivided Five_A Winged Victory for the Sullen.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Undivided Five&lt;/span&gt; <br/>
-&lt;span&gt;A Winged Victory for the Sullen&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Blue Hour_Federico Albanese.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Blue Hour&lt;/span&gt; <br/>
-&lt;span&gt;Federico Albanese&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Hiatus_Thisquietarmy.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Hiatus&lt;/span&gt; <br/>
-&lt;span&gt;Thisquietarmy&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Vessels_Thisquietarmy.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Vessels&lt;/span&gt; <br/>
-&lt;span&gt;Thisquietarmy&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Unconquered_Thisquietarmy.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Unconquered&lt;/span&gt; <br/>
-&lt;span&gt;Thisquietarmy&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_And Their Refinement of the Decline_Stars Of The Lid.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;And Their Refinement of the Decline&lt;/span&gt; <br/>
-&lt;span&gt;Stars Of The Lid&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Ballasted Orchestra_Stars Of The Lid.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Ballasted Orchestra&lt;/span&gt; <br/>
-&lt;span&gt;Stars Of The Lid&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Tired Sounds of Stars of the Lid_Stars Of The Lid.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Tired Sounds of Stars of the Lid&lt;/span&gt; <br/>
-&lt;span&gt;Stars Of The Lid&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Avec Laudenum_Stars Of The Lid.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Avec Laudenum&lt;/span&gt; <br/>
-&lt;span&gt;Stars Of The Lid&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Effective Disconnect_Brian McBride.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Effective Disconnect&lt;/span&gt; <br/>
-&lt;span&gt;Brian McBride&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_When the Detail Lost Its Freedom_Brian McBride.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;When the Detail Lost Its Freedom&lt;/span&gt; <br/>
-&lt;span&gt;Brian McBride&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Coast  Range  Arc_Loscil.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Coast  Range  Arc&lt;/span&gt; <br/>
-&lt;span&gt;Loscil&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Minima Moralia_Chihei Hatakeyama.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Minima Moralia&lt;/span&gt; <br/>
-&lt;span&gt;Chihei Hatakeyama&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Owl Splinters_Deaf Center.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Owl Splinters&lt;/span&gt; <br/>
-&lt;span&gt;Deaf Center&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Endless Fragments of Time_Deep Watch.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Endless Fragments of Time&lt;/span&gt; <br/>
-&lt;span&gt;Deep Watch&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Wilderness of Mirrors_Lawrence English.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Wilderness of Mirrors&lt;/span&gt; <br/>
-&lt;span&gt;Lawrence English&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Selva Oscura_William Basinski.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Selva Oscura&lt;/span&gt; <br/>
-&lt;span&gt;William Basinski&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Light_Hazy.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Light&lt;/span&gt; <br/>
-&lt;span&gt;Hazy&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Costero_Slow Meadow.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Costero&lt;/span&gt; <br/>
-&lt;span&gt;Slow Meadow&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Divenire_Ludovico Einaudi.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Divenire&lt;/span&gt; <br/>
-&lt;span&gt;Ludovico Einaudi&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Gravity_Ben Lukas Boysen.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Gravity&lt;/span&gt; <br/>
-&lt;span&gt;Ben Lukas Boysen&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_This Is for Our Sins_Lowercase Noises.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;This Is for Our Sins&lt;/span&gt; <br/>
-&lt;span&gt;Lowercase Noises&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Seraphim_How to Disappear Completely.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Seraphim&lt;/span&gt; <br/>
-&lt;span&gt;How to Disappear Completely&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
+<div class="collage">
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_For Now I Am Winter_Ólafur Arnalds.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">For Now I Am Winter</span>
+<span>Ólafur Arnalds</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Young Mountain_This Will Destroy You.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Young Mountain</span>
+<span>This Will Destroy You</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_ST_This Will Destroy You.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">ST</span>
+<span>This Will Destroy You</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Golevka_The Evpatoria Report.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Golevka</span>
+<span>The Evpatoria Report</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Maar_The Evpatoria Report.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Maar</span>
+<span>The Evpatoria Report</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Nights of Wonder_I Am No Hero.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Nights of Wonder</span>
+<span>I Am No Hero</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Nowhere Now Here_MONO.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Nowhere Now Here</span>
+<span>MONO</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Hymn to the Immortal Wind_MONO.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Hymn to the Immortal Wind</span>
+<span>MONO</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Chasing After Shadows... Living With the Ghosts_Hammock.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Chasing After Shadows... Living With the Ghosts</span>
+<span>Hammock</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Myra_Spurv.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Myra</span>
+<span>Spurv</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Dust_Show Me A Dinosaur.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Dust</span>
+<span>Show Me A Dinosaur</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_( )_Sigur Rós.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">( )</span>
+<span>Sigur Rós</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Takk_Sigur Rós.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Takk</span>
+<span>Sigur Rós</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_In Never Out_pg.lost.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">In Never Out</span>
+<span>pg.lost</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Oscillate_pg.lost.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Oscillate</span>
+<span>pg.lost</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Happy Songs for Happy People_Mogwai.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Happy Songs for Happy People</span>
+<span>Mogwai</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Earth Is Not a Cold Dead Place_Explosions In The Sky.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Earth Is Not a Cold Dead Place</span>
+<span>Explosions In The Sky</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_All of a Sudden I Miss Everyone_Explosions In The Sky.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">All of a Sudden I Miss Everyone</span>
+<span>Explosions In The Sky</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_songs for someone_April Rain.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">songs for someone</span>
+<span>April Rain</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_All Is Violent, All Is Bright_God Is An Astronaut.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">All Is Violent, All Is Bright</span>
+<span>God Is An Astronaut</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Epitaph_God Is An Astronaut.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Epitaph</span>
+<span>God Is An Astronaut</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Somnia_God Is An Astronaut.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Somnia</span>
+<span>God Is An Astronaut</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Canopy_Silent Whale Becomes a Dream.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Canopy</span>
+<span>Silent Whale Becomes a Dream</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_A Winged Victory for the Sullen_A Winged Victory for the Sullen.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">A Winged Victory for the Sullen</span>
+<span>A Winged Victory for the Sullen</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Void Moments of Inertia_Once Upon a Winter.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Void Moments of Inertia</span>
+<span>Once Upon a Winter</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Any Fool Can Regret Yesterday_Baulta.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Any Fool Can Regret Yesterday</span>
+<span>Baulta</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Artemis_Still Mountains.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Artemis</span>
+<span>Still Mountains</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Departure Songs_We Lost The Sea.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Departure Songs</span>
+<span>We Lost The Sea</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_How Lonely Sits the City_The Ascent of Everest.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">How Lonely Sits the City</span>
+<span>The Ascent of Everest</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_I Was Here For A Moment, Then I Was Gone_Maybeshewill.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">I Was Here For A Moment, Then I Was Gone</span>
+<span>Maybeshewill</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Beyond The Sea, Beneath The Sky_I Hear Sirens.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Beyond The Sea, Beneath The Sky</span>
+<span>I Hear Sirens</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Snake Behind the Sun_Shy, Low.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Snake Behind the Sun</span>
+<span>Shy, Low</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Dust and Disquiet_Caspian.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Dust and Disquiet</span>
+<span>Caspian</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_You Are the Conductor_Caspian.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">You Are the Conductor</span>
+<span>Caspian</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_These Small Spaces_This Patch of Sky.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">These Small Spaces</span>
+<span>This Patch of Sky</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Greater Lights_Ranges.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Greater Lights</span>
+<span>Ranges</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Must You Smash Your Ears Before You Learn to Listen With Your Eyes_Joy Wants Eternity.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Must You Smash Your Ears Before You Learn to Listen With Your Eyes</span>
+<span>Joy Wants Eternity</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Fog Is Rising_Joy Wants Eternity.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Fog Is Rising</span>
+<span>Joy Wants Eternity</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_You Who Pretend To Sleep_Joy Wants Eternity.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">You Who Pretend To Sleep</span>
+<span>Joy Wants Eternity</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Muses_Audiolepsia.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Muses</span>
+<span>Audiolepsia</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Numinous_Those Who Ride With Giants.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Numinous</span>
+<span>Those Who Ride With Giants</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Endless Dive_Endless Dive.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Endless Dive</span>
+<span>Endless Dive</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Soundtracks for the Blind_Swans.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Soundtracks for the Blind</span>
+<span>Swans</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Earth Fell Away_Carved Into the Sun.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Earth Fell Away</span>
+<span>Carved Into the Sun</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Into The Blue Again_The Album Leaf.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Into The Blue Again</span>
+<span>The Album Leaf</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_At The Soundless Dawn_Red Sparowes.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">At The Soundless Dawn</span>
+<span>Red Sparowes</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Voyager_As Seas Exhale.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Voyager</span>
+<span>As Seas Exhale</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Healing Process_As Seas Exhale.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Healing Process</span>
+<span>As Seas Exhale</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The End of Something_Collapse Under The Empire.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The End of Something</span>
+<span>Collapse Under The Empire</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Hole_65daysofstatic.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Hole</span>
+<span>65daysofstatic</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Seven Years Without the Sun_Gather Your Quiet.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Seven Years Without the Sun</span>
+<span>Gather Your Quiet</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_New Others Part One_This Will Destroy You.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">New Others Part One</span>
+<span>This Will Destroy You</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Sisyphus_As Seas Exhale.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Sisyphus</span>
+<span>As Seas Exhale</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Way Home_Sleep Dealer.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Way Home</span>
+<span>Sleep Dealer</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Red Forest_If These Trees Could Talk.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Red Forest</span>
+<span>If These Trees Could Talk</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Aurora_Sleep Dealer.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Aurora</span>
+<span>Sleep Dealer</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_...And They Have Escaped the Weight of Darkness_Ólafur Arnalds.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">...And They Have Escaped the Weight of Darkness</span>
+<span>Ólafur Arnalds</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Chopin Project_Ólafur Arnalds.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Chopin Project</span>
+<span>Ólafur Arnalds</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Found Songs_Ólafur Arnalds.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Found Songs</span>
+<span>Ólafur Arnalds</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Living Room Songs_Ólafur Arnalds.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Living Room Songs</span>
+<span>Ólafur Arnalds</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Mysterium_Hammock.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Mysterium</span>
+<span>Hammock</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Oblivion Hymns_Hammock.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Oblivion Hymns</span>
+<span>Hammock</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Undivided Five_A Winged Victory for the Sullen.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Undivided Five</span>
+<span>A Winged Victory for the Sullen</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Blue Hour_Federico Albanese.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Blue Hour</span>
+<span>Federico Albanese</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Hiatus_Thisquietarmy.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Hiatus</span>
+<span>Thisquietarmy</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Vessels_Thisquietarmy.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Vessels</span>
+<span>Thisquietarmy</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Unconquered_Thisquietarmy.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Unconquered</span>
+<span>Thisquietarmy</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_And Their Refinement of the Decline_Stars Of The Lid.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">And Their Refinement of the Decline</span>
+<span>Stars Of The Lid</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Ballasted Orchestra_Stars Of The Lid.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Ballasted Orchestra</span>
+<span>Stars Of The Lid</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Tired Sounds of Stars of the Lid_Stars Of The Lid.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Tired Sounds of Stars of the Lid</span>
+<span>Stars Of The Lid</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Avec Laudenum_Stars Of The Lid.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Avec Laudenum</span>
+<span>Stars Of The Lid</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Effective Disconnect_Brian McBride.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Effective Disconnect</span>
+<span>Brian McBride</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_When the Detail Lost Its Freedom_Brian McBride.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">When the Detail Lost Its Freedom</span>
+<span>Brian McBride</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Coast  Range  Arc_Loscil.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Coast  Range  Arc</span>
+<span>Loscil</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Minima Moralia_Chihei Hatakeyama.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Minima Moralia</span>
+<span>Chihei Hatakeyama</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Owl Splinters_Deaf Center.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Owl Splinters</span>
+<span>Deaf Center</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Endless Fragments of Time_Deep Watch.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Endless Fragments of Time</span>
+<span>Deep Watch</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Wilderness of Mirrors_Lawrence English.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Wilderness of Mirrors</span>
+<span>Lawrence English</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Selva Oscura_William Basinski.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Selva Oscura</span>
+<span>William Basinski</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Light_Hazy.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Light</span>
+<span>Hazy</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Costero_Slow Meadow.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Costero</span>
+<span>Slow Meadow</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Divenire_Ludovico Einaudi.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Divenire</span>
+<span>Ludovico Einaudi</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Gravity_Ben Lukas Boysen.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Gravity</span>
+<span>Ben Lukas Boysen</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_This Is for Our Sins_Lowercase Noises.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">This Is for Our Sins</span>
+<span>Lowercase Noises</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Seraphim_How to Disappear Completely.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Seraphim</span>
+<span>How to Disappear Completely</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Nuance_Noir Reva.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Nuance</span>
+<span>Noir Reva</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Stella Meae_Non Somnia.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Stella Meae</span>
+<span>Non Somnia</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Silencia_Hammock.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Silencia</span>
+<span>Hammock</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Sometimes_Goldmund.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Sometimes</span>
+<span>Goldmund</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Charcoal_Brambles.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Charcoal</span>
+<span>Brambles</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Daydreaming_Rafael Anton Irisarri.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Daydreaming</span>
+<span>Rafael Anton Irisarri</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Malady Of Elegance_Goldmund.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Malady Of Elegance</span>
+<span>Goldmund</span>
+</div>
+</div>
 
 
 ## post-rock/punk {#post-rock-punk}
 
 non-instrumental post-rock, may contain hardcore bands <br/>
 
-\#+begin_export html <br/>
-&lt;div class="collage"&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_Great Escape_Crippled Black Phoenix.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;Great Escape&lt;/span&gt; <br/>
-&lt;span&gt;Crippled Black Phoenix&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
-&lt;div class="card" style="max-width: 150px;"&gt; <br/>
-&lt;img src="/covers/cover_The Quietest Place On Earth_We Lost The Sea.jpg" style="max-width: 150px;" /&gt; <br/>
-&lt;span style="color: rgb(175, 39, 39);"&gt;The Quietest Place On Earth&lt;/span&gt; <br/>
-&lt;span&gt;We Lost The Sea&lt;/span&gt; <br/>
-&lt;/div&gt; <br/>
+<div class="collage">
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Great Escape_Crippled Black Phoenix.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Great Escape</span>
+<span>Crippled Black Phoenix</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Quietest Place On Earth_We Lost The Sea.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Quietest Place On Earth</span>
+<span>We Lost The Sea</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Keep You_Pianos Become The Teeth.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Keep You</span>
+<span>Pianos Become The Teeth</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_no ghostless place_Raised By Swans.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">no ghostless place</span>
+<span>Raised By Swans</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Forever Blue_A.A. Williams.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Forever Blue</span>
+<span>A.A. Williams</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_King Nine_Blueneck.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">King Nine</span>
+<span>Blueneck</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Bright Wide Colder_Last Leaf Down.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Bright Wide Colder</span>
+<span>Last Leaf Down</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Nest_Brutus.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Nest</span>
+<span>Brutus</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Made of Breath Only_sleepmakeswaves.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Made of Breath Only</span>
+<span>sleepmakeswaves</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Want_Wreck and Reference.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Want</span>
+<span>Wreck and Reference</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_I Let It in and It Took Everything_Loathe.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">I Let It in and It Took Everything</span>
+<span>Loathe</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Let Me Down Easy_Birthright.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Let Me Down Easy</span>
+<span>Birthright</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Everything Between Paint and a Wall_Grandview.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Everything Between Paint and a Wall</span>
+<span>Grandview</span>
+</div>
+</div>
 
 
 ## post-metal/sludge/blackgaze {#post-metal-sludge-blackgaze}
@@ -462,6 +557,11 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <img src="/covers/cover_Remission_BOG.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Remission</span>
 <span>BOG</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Glacious_Sundrowned.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Glacious</span>
+<span>Sundrowned</span>
 </div>
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Doubt_King Woman.jpg" style="max-width: 150px;" />
@@ -579,6 +679,11 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <span>MSW</span>
 </div>
 <div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Ausserwelt_Year Of No Light.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Ausserwelt</span>
+<span>Year Of No Light</span>
+</div>
+<div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Quietly_Mouth Of The Architect.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Quietly</span>
 <span>Mouth Of The Architect</span>
@@ -604,14 +709,34 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <span>Thou</span>
 </div>
 <div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Tyrant_Thou.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Tyrant</span>
+<span>Thou</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Caustic_Primitive Man.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Caustic</span>
+<span>Primitive Man</span>
+</div>
+<div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Blessings of the Highest Order_Thou.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Blessings of the Highest Order</span>
 <span>Thou</span>
 </div>
 <div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Unreal Never Lived_YOB.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Unreal Never Lived</span>
+<span>YOB</span>
+</div>
+<div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Star is way way is Eye_NORNA.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Star is way way is Eye</span>
 <span>NORNA</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Human = Garbage_Dystopia.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Human = Garbage</span>
+<span>Dystopia</span>
 </div>
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Lapsus_Light Bearer.jpg" style="max-width: 150px;" />
@@ -664,9 +789,19 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <span>Fen</span>
 </div>
 <div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Try Not to Destroy Everything you Love_An Autumn for Crippled Children.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Try Not to Destroy Everything you Love</span>
+<span>An Autumn for Crippled Children</span>
+</div>
+<div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Beautiful Ghosts_Unreqvited.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Beautiful Ghosts</span>
 <span>Unreqvited</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_I Want to Be There_Sadness.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">I Want to Be There</span>
+<span>Sadness</span>
 </div>
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Diorama_MØL.jpg" style="max-width: 150px;" />
@@ -687,6 +822,16 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <img src="/covers/cover_III-Trauma_Harakiri for the Sky.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">III-Trauma</span>
 <span>Harakiri for the Sky</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Heretoir_Heretoir.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Heretoir</span>
+<span>Heretoir</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Home_Numenorean.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Home</span>
+<span>Numenorean</span>
 </div>
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Tunnel Blanket_This Will Destroy You.jpg" style="max-width: 150px;" />
@@ -1051,6 +1196,11 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <span>Solip</span>
 </div>
 <div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Blush Response & Warm_Blush Response.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Blush Response & Warm</span>
+<span>Blush Response</span>
+</div>
+<div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Molten Young Lovers_Airiel.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Molten Young Lovers</span>
 <span>Airiel</span>
@@ -1213,6 +1363,11 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <span>When Nothing Remains</span>
 </div>
 <div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Drowned by Guilt_Forest of Shadows.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Drowned by Guilt</span>
+<span>Forest of Shadows</span>
+</div>
+<div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Regression to Nothingness_Inborn Suffering.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Regression to Nothingness</span>
 <span>Inborn Suffering</span>
@@ -1257,6 +1412,26 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <span style="color: rgb(175, 39, 39);">Return to the Void</span>
 <span>Shape Of Despair</span>
 </div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Alone in the Mist_Shape Of Despair.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Alone in the Mist</span>
+<span>Shape Of Despair</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Illusion's Play_Shape Of Despair.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Illusion's Play</span>
+<span>Shape Of Despair</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Angels Of Distress_Shape Of Despair.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Angels Of Distress</span>
+<span>Shape Of Despair</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Hour of the Nightingale_Trees of Eternity.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Hour of the Nightingale</span>
+<span>Trees of Eternity</span>
+</div>
 </div>
 
 
@@ -1269,6 +1444,16 @@ depressive suicidal black metal <br/>
 <img src="/covers/cover_Deathcade_Nocturnal Depression.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Deathcade</span>
 <span>Nocturnal Depression</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Damp Chill of Life_None.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Damp Chill of Life</span>
+<span>None</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Agony_Afraid of Destiny.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Agony</span>
+<span>Afraid of Destiny</span>
 </div>
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_My Mind Is Too Weak to Forget_Dreariness.jpg" style="max-width: 150px;" />
