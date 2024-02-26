@@ -1,10 +1,13 @@
 +++
 title = "conv gan with pytorch"
 author = ["mahmood"]
-description = "an example [[id:a1f1be08-2a45-423b-8291-95f3b1520694][convolutional generative adversarial network]] written with [[id:ab4b28fc-d12f-4b67-bc69-9651074f1871][pytorch]]"
+description = "an example convolutional generative adversarial network written with pytorch"
 tags = ["cs"]
 draft = false
 +++
+
+-   [convolutional generative adversarial network](20231023T202148--convolutional-generative-adversarial-network__.org) <br/>
+-   [pytorch](20231019T195156--pytorch__.org) <br/>
 
 <div class="note">
 
@@ -258,7 +261,7 @@ def generate_fake_samples_for_discriminator(n_samples):
 finally, we need to train the discriminator model. this involves repeatedly retrieving samples of real images and samples of generated (fake) images and updating the model for a fixed number of iterations. <br/>
 we will ignore the idea of epochs for now (e.g. complete passes through the training dataset) and fit the discriminator model for a fixed number of batches. the model will learn to discriminate between real and fake images rapidly and it doesnt take many batches before it learns to discriminate perfectly. <br/>
 the `train_discriminator()` function implements this, using a batch size of 256 images where 128 are real and 128 are fake each iteration. <br/>
-we update the discriminator separately for real and fake examples so that we can calculate the accuracy of the model on each sample prior to the update. this gives insight into how the discriminator model is performing over time. we also use the [matplotlib](20220809T215936--python__python-code.org) library to plot the loss over time. <br/>
+we update the discriminator separately for real and fake examples so that we can calculate the accuracy of the model on each sample prior to the update. this gives insight into how the discriminator model is performing over time. we also use the [matplotlib](20220809T215936--python__code_language.org) library to plot the loss over time. <br/>
 
 <a id="code-snippet--src-train-discriminator"></a>
 ```python

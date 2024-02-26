@@ -6,7 +6,7 @@ tags = ["cs", "lispcode"]
 draft = false
 +++
 
-[logic programming](20230921T193636--logic-programming__.org) in [common lisp](20230224T163920--common-lisp__.org) <br/>
+[logic programming](20230921T193636--logic-programming__.org) in [common lisp](20230224T163920--common-lisp__code_language.org) <br/>
 
 
 ## logical statements {#logical-statements}
@@ -67,7 +67,7 @@ in our previous example, this doesnt make much difference as we were dealing wit
  (IMPLIES (AND (NOT (WIDOWER ?X)) (FATHER ?X)) (MARRIED ?X)))
 ```
 
-how about substitutions? how do we represent for example the substitution <img src="/ltximg/7856bdfd213.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we just use an [association list](20230224T163920--common-lisp__.org): <br/>
+how about substitutions? how do we represent for example the substitution <img src="/ltximg/7856bdfd213.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we just use an [association list](20230224T163920--common-lisp__code_language.org): <br/>
 
 ```lisp
 (let ((sub nil)) ;; sub is the substitution

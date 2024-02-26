@@ -5,7 +5,7 @@ tags = ["lispcode"]
 draft = false
 +++
 
-working with [BROKEN LINK: c9c929ba-a434-44eb-a6ef-6a4cfbde350f]s in [BROKEN LINK: C3E00718-FDF6-457F-9B91-FFCFDE1591E2] <br/>
+working with [graph](20230314T001051--graph__math.org)s in [common lisp](20230224T163920--common-lisp__code_language.org) <br/>
 
 
 ## my initial approach {#my-initial-approach}
