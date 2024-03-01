@@ -2,6 +2,7 @@
 title = "music export"
 author = ["mahmood"]
 description = "a stripped-down, automatically exported subset of the albums i like. no particular order."
+date = 2024-03-01T00:00:00+02:00
 tags = ["music"]
 draft = false
 +++
@@ -47,6 +48,11 @@ draft = false
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Hymn to the Immortal Wind_MONO.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Hymn to the Immortal Wind</span>
+<span>MONO</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Pilgrimage of the Soul_MONO.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Pilgrimage of the Soul</span>
 <span>MONO</span>
 </div>
 <div class="card" style="max-width: 150px;">
@@ -290,6 +296,16 @@ draft = false
 <span>Sleep Dealer</span>
 </div>
 <div class="card" style="max-width: 150px;">
+<img src="/covers/cover_You Are There_MONO.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">You Are There</span>
+<span>MONO</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Bridges_Transmission Zero.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Bridges</span>
+<span>Transmission Zero</span>
+</div>
+<div class="card" style="max-width: 150px;">
 <img src="/covers/cover_...And They Have Escaped the Weight of Darkness_Ólafur Arnalds.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">...And They Have Escaped the Weight of Darkness</span>
 <span>Ólafur Arnalds</span>
@@ -310,6 +326,16 @@ draft = false
 <span>Ólafur Arnalds</span>
 </div>
 <div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Palmless Prayer  Mass Murder Refrain_MONO.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Palmless Prayer  Mass Murder Refrain</span>
+<span>MONO</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_One Step More and You Die_MONO.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">One Step More and You Die</span>
+<span>MONO</span>
+</div>
+<div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Mysterium_Hammock.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Mysterium</span>
 <span>Hammock</span>
@@ -317,6 +343,11 @@ draft = false
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Oblivion Hymns_Hammock.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Oblivion Hymns</span>
+<span>Hammock</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Silencia_Hammock.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Silencia</span>
 <span>Hammock</span>
 </div>
 <div class="card" style="max-width: 150px;">
@@ -616,6 +647,11 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Salvation_Cult Of Luna.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Salvation</span>
+<span>Cult Of Luna</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_The Beyond_Cult Of Luna.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">The Beyond</span>
 <span>Cult Of Luna</span>
 </div>
 <div class="card" style="max-width: 150px;">
@@ -1365,6 +1401,11 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 <div class="card" style="max-width: 150px;">
 <img src="/covers/cover_Drowned by Guilt_Forest of Shadows.jpg" style="max-width: 150px;" />
 <span style="color: rgb(175, 39, 39);">Drowned by Guilt</span>
+<span>Forest of Shadows</span>
+</div>
+<div class="card" style="max-width: 150px;">
+<img src="/covers/cover_Among the Dormant Watchers_Forest of Shadows.jpg" style="max-width: 150px;" />
+<span style="color: rgb(175, 39, 39);">Among the Dormant Watchers</span>
 <span>Forest of Shadows</span>
 </div>
 <div class="card" style="max-width: 150px;">

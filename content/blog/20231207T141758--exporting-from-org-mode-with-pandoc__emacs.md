@@ -1,6 +1,7 @@
 +++
 title = "exporting from org mode with pandoc"
 author = ["mahmood"]
+date = 2024-02-26T00:00:00+02:00
 tags = ["emacs"]
 draft = false
 +++

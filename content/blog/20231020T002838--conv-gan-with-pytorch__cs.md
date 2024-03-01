@@ -2,6 +2,7 @@
 title = "conv gan with pytorch"
 author = ["mahmood"]
 description = "an example convolutional generative adversarial network written with pytorch"
+date = 2024-02-26T00:00:00+02:00
 tags = ["cs"]
 draft = false
 +++
@@ -41,7 +42,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 ## load the data {#load-the-data}
 
-we start by loading the mnist dataset (the 28x28 images of hand-written digits), we use the `torchvision` package from `pypi` which provides various datasets for [machine learning](20230225T233819--machine-learning__.org) <br/>
+we start by loading the mnist dataset (the 28x28 images of hand-written digits), we use the `torchvision` package from `pypi` which provides various datasets for [machine learning](20230225T233819--machine-learning__cs.org) <br/>
 
 <a id="code-snippet--src-load-dataset"></a>
 ```python
@@ -108,7 +109,7 @@ gen_images_img(train_x[:30].cpu().reshape((-1, 28, 28)), f)
 
 ## discriminator {#discriminator}
 
-the discriminator model must take a sample image from our dataset as input and output a classification, a prediction as to whether the sample is real or fake. or perhaps the likelihood of the sample being real, which means the discriminator does [binary classification](20230225T234426--boolean-classification__.org). <br/>
+the discriminator model must take a sample image from our dataset as input and output a classification, a prediction as to whether the sample is real or fake. or perhaps the likelihood of the sample being real, which means the discriminator does [binary classification](20230225T234426--boolean-classification__cs.org). <br/>
 pytorch makes defining neural nets easy by inheriting from `nn.Module`, here, since we're dealing with images, we use [convolutional layer](20230520T175032--convolutional-neural-network__cs_lispcode_math.org)s, in combinations with [dropout layers](20231106T204103--dropout__.org) which arent "mandatory" but they help improve results, the last layers are a [flatten layer](20230520T175032--convolutional-neural-network__cs_lispcode_math.org) and a linear layer, the output for a single image would be a float in the range 0-1. <br/>
 
 <a id="code-snippet--src-discriminator"></a>
@@ -215,7 +216,7 @@ train_x = train_dataset.data.detach().clone().to(device)
 train_y = train_dataset.targets.detach().clone().to(device)
 ```
 
-as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the [interval](20231008T200908--interval__.org) <img src="/ltximg/0aac0ab99d3.svg" alt="\([0,1]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions: <br/>
+as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the [interval](20231008T200908--interval__.org) <img src="/ltximg/0aac0ab99d3.svg" alt="\([0,1]\)" style="height: 1.0470em; vertical-align: -0.2785em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions: <br/>
 
 <a id="code-snippet--src-normalize-training-tensors"></a>
 ```python
@@ -402,6 +403,26 @@ printing a summary of the model: <br/>
 summary(Generator(100).to(device), (1, 100)) # forwarding test of a randomly perturbed noise vector
 ```
 
+```text
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Linear-1              [-1, 1, 6272]         633,472
+   ConvTranspose2d-2          [-1, 128, 14, 14]         262,272
+   ConvTranspose2d-3          [-1, 128, 28, 28]         262,272
+            Conv2d-4            [-1, 1, 28, 28]           6,273
+================================================================
+Total params: 1,164,289
+Trainable params: 1,164,289
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 1.01
+Params size (MB): 4.44
+Estimated Total Size (MB): 5.45
+----------------------------------------------------------------
+```
+
 the input to the generator needs to be vectors generated from the latent space. the `generate_latent_points()` function below implements this and generates a batch with the desired number of points in the latent space that can be used as input to the generator model. <br/>
 
 <a id="code-snippet--src-generate-latent-points"></a>
@@ -434,6 +455,8 @@ n_samples = 30
 X, _ = generate_fake_samples_with_generator(generator, n_samples)
 gen_images_img(X.reshape((-1, 28, 28)), f)
 ```
+
+{{< figure src="/ox-hugo/dUD33Ha.png" >}} <br/>
 
 
 ### training the generator {#training-the-generator}

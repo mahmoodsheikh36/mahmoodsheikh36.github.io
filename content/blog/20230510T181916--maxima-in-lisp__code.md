@@ -2,6 +2,7 @@
 title = "maxima in lisp"
 author = ["mahmood"]
 description = "how to use maxima code in common lisp"
+date = 2024-02-26T00:00:00+02:00
 tags = ["code"]
 draft = false
 +++
