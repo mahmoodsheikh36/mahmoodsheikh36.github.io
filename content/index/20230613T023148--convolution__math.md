@@ -27,10 +27,10 @@ extending to 2 dimensional functions we'd get: <br/>
 
 <div class="my_example">
 
-in [machine learning](20230225T233819--machine-learning__cs.org), specifically in [convolutional neural network](20230520T175032--convolutional-neural-network__cs_lispcode_math.org), the convolution operation is used do detect features in an **image**, one of the operands is the image and the second is the **kernel**, see [1](#orge2887be) <br/>
+in [machine learning](20230225T233819--machine-learning__cs.org), specifically in [convolutional neural network](20230520T175032--convolutional-neural-network__cs_lispcode_math.org), the convolution operation is used do detect features in an **image**, one of the operands is the image and the second is the **kernel**, see [1](#org55cb481) <br/>
 
 
-<div id="orge2887be" class="equation-container">
+<div id="org55cb481" class="equation-container">
 <span class="equation">
 <img src="/ltximg/ca1d765e3ab.svg" alt="\begin{tikzpicture}[mmat/.style={matrix of math nodes,column sep=-\pgflinewidth/2,
     row sep=-\pgflinewidth/2,cells={nodes={draw,inner sep=3pt,thin}},draw=#1,thick,inner sep=0pt},
