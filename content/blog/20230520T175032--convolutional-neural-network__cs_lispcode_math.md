@@ -36,7 +36,7 @@ its important to maintain the order of dimensions as depth X height X width, bec
 
 </div>
 
-<a id="org4910043"></a>
+<a id="org5bd4b29"></a>
 
 ![](/ox-hugo/conv_depth-1.webp) <br/>
 at each layer, the image is stored as a tensor of order 3 of **depth** <img src="/ltximg/1461d4513b0.svg" alt="\(D^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" />, each layer of this tensor is basically a matrix we call a **feature map** or **channel**, so the image is stored as nested layers of feature maps, it might be easier to take the input to the first layer as an example, which can be thought of as a set of 3 feature maps of RGB values. <br/>
@@ -276,7 +276,7 @@ recall that this layer downscaled the input given to it during feedforwarding fr
 **backpropagation through convolutional layer <img src="/ltximg/2ccc99231af.svg" alt="\(\ell=4\)" style="height: 0.8098em; vertical-align: -0.0619em; display: inline-block" class="org-latex org-latex-inline" />**: <br/>
 
 
-<div id="org92228ef" class="equation-container">
+<div id="orgcede053" class="equation-container">
 <span class="equation">
 <img src="/ltximg/29e95394d2b.svg" alt="\begin{align*}
   \Delta K^\ell_k[r,u,v] &amp;amp;= \frac{\partial L}{\partial K_k^\ell[r,u,v]}\\
@@ -313,7 +313,7 @@ now for the bias: <br/>
 now we find the deltas at <img src="/ltximg/7f76e3e9760.svg" alt="\(I^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="/ltximg/d3b27471d83.svg" alt="\(\hat Y^{\ell-1}\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" />, because thats what the next layer in backpropagation, <img src="/ltximg/e1414a5c467.svg" alt="\(\ell=3\)" style="height: 0.8128em; vertical-align: -0.0649em; display: inline-block" class="org-latex org-latex-inline" />, needs <br/>
 
 
-<div id="orgca8e627" class="equation-container">
+<div id="org2df5ad2" class="equation-container">
 <span class="equation">
 <img src="/ltximg/93881dc71ee.svg" alt="\begin{align}
   \Delta I^\ell[r,u,v] &amp;amp;= \frac{\partial L}{\partial I^\ell[r,u,v]}\\
@@ -1173,9 +1173,9 @@ lets reconsider the equation: <br/>
 basically, here we're finding the derivative of the loss function with respect to a single weight in <img src="/ltximg/debd18d6c6c.svg" alt="\(K\)" style="height: 0.7569em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" /> indexed by <img src="/ltximg/d62f63ecff1.svg" alt="\(k,r,u,v\)" style="height: 0.9441em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, using the all the errors from each output pixel in <img src="/ltximg/0f209a2ce1e.svg" alt="\(\hat Y^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" />, indexed by <img src="/ltximg/e1ca9f01ec7.svg" alt="\(k,i,j\)" style="height: 1.0637em; vertical-align: -0.3069em; display: inline-block" class="org-latex org-latex-inline" />, now we for a single weight with indicies <img src="/ltximg/d62f63ecff1.svg" alt="\(k,r,u,v\)" style="height: 0.9441em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" /> dont need to iterate with <img src="/ltximg/e8a991de421.svg" alt="\(k\)" style="height: 0.8216em; vertical-align: -0.0649em; display: inline-block" class="org-latex org-latex-inline" /> through the number of layers as we only need to consider the feature map that the weight affects, as each kernel with its weights only affect a single feature map in the output, here, that map is <img src="/ltximg/e8a991de421.svg" alt="\(k\)" style="height: 0.8216em; vertical-align: -0.0649em; display: inline-block" class="org-latex org-latex-inline" /> which we consider a fixed constant when we're dealing with a single weight (which is why i preferred to write <img src="/ltximg/e8a991de421.svg" alt="\(k\)" style="height: 0.8216em; vertical-align: -0.0649em; display: inline-block" class="org-latex org-latex-inline" /> as a subscript), other pixels in feature maps other than <img src="/ltximg/e8a991de421.svg" alt="\(k\)" style="height: 0.8216em; vertical-align: -0.0649em; display: inline-block" class="org-latex org-latex-inline" /> arent affected by our weight and using the errors at those pixels wouldnt affect the gradient's value (they add 0). (there are still some pixels that we can drop depending on the place of the weight in the kernel, and the kernel's stride, but i dont think that can give us a noticable improvement in performance) <br/>
 the real bottleneck for training is currently computing <img src="/ltximg/a1a68f873b5.svg" alt="\(\Delta I\)" style="height: 0.7853em; vertical-align: -0.0531em; display: inline-block" class="org-latex org-latex-inline" /> for convolutional layers, which is what we need to work on, lets reconsider the following equation <br/>
 <img src="/ltximg/d095746ac79.svg" alt="\[ \Delta I^\ell[r,u,v] = \sum_{k=1}^{D_I^{\ell+1}} \sum_{i=1}^{H_I^{\ell+1}} \sum_{j=1}^{W_I^{\ell+1}} \frac{\partial L}{\partial \hat Y_k^\ell[i,j]}\frac{\partial \hat Y_k^\ell[i,j]}{\partial I^\ell[r,u,v]} \]" style="height: 3.5471em; display: block" class="org-latex org-latex-block" /> <br/>
-here, we're considering the derivative of every pixel in the output image with respect to the entry in <img src="/ltximg/8c18104388e.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.2578em; vertical-align: -0.2785em; display: inline-block" class="org-latex org-latex-inline" /> that we wanna find, but in truth, each pixel in <img src="/ltximg/7f76e3e9760.svg" alt="\(I^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" /> only affects <img src="/ltximg/5e94f3da49b.svg" alt="\(t^\ell \times H_K^\ell \times W_K^\ell\)" style="height: 1.2350em; vertical-align: -0.2557em; display: inline-block" class="org-latex org-latex-inline" /> output pixels **at most** (this is basically the size of the weight tensor <img src="/ltximg/7565053c420.svg" alt="\(K^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" />), intuitively, one may be able to imagine this to see each kernel sliding over the input <img src="/ltximg/7f76e3e9760.svg" alt="\(I^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" />, in this process each pixel gets multiplied by a subset of the sliding kernel, depending on whether it is close to the edge of the image and on the sliding stride, each time the image slides in some direction, our input pixel gets multiplied by a new weight, until the kernel slides away and isnt "hovering" over our pixel anymore, this process is illustrated in [3](#orgc546221) <br/>
+here, we're considering the derivative of every pixel in the output image with respect to the entry in <img src="/ltximg/8c18104388e.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.2578em; vertical-align: -0.2785em; display: inline-block" class="org-latex org-latex-inline" /> that we wanna find, but in truth, each pixel in <img src="/ltximg/7f76e3e9760.svg" alt="\(I^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" /> only affects <img src="/ltximg/5e94f3da49b.svg" alt="\(t^\ell \times H_K^\ell \times W_K^\ell\)" style="height: 1.2350em; vertical-align: -0.2557em; display: inline-block" class="org-latex org-latex-inline" /> output pixels **at most** (this is basically the size of the weight tensor <img src="/ltximg/7565053c420.svg" alt="\(K^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" />), intuitively, one may be able to imagine this to see each kernel sliding over the input <img src="/ltximg/7f76e3e9760.svg" alt="\(I^\ell\)" style="height: 1.0295em; vertical-align: -0.0502em; display: inline-block" class="org-latex org-latex-inline" />, in this process each pixel gets multiplied by a subset of the sliding kernel, depending on whether it is close to the edge of the image and on the sliding stride, each time the image slides in some direction, our input pixel gets multiplied by a new weight, until the kernel slides away and isnt "hovering" over our pixel anymore, this process is illustrated in [3](#org695bfef) <br/>
 
-<a id="orgc546221"></a>
+<a id="org695bfef"></a>
 
 ![](/ox-hugo/sliding.gif) <br/>
 this can also be seen in the formula for the output pixels: <br/>
@@ -1188,7 +1188,7 @@ combining all of those ideas we get the formula: <br/>
 we substitute this in eq-convnet-I-delta-1 in place of the previous version, and redo the differentation process: <br/>
 
 
-<div id="org30eb511" class="equation-container">
+<div id="org0dd58c9" class="equation-container">
 <span class="equation">
 <img src="/ltximg/e779427e1a9.svg" alt="\begin{align}
   \Delta I^\ell[r,u,v] &amp;amp;= \frac{\partial L}{\partial I^\ell[r,u,v]}\\

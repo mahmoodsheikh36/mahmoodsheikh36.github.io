@@ -1,7 +1,7 @@
 +++
 title = "connect to remote common lisp repl with sly/slime"
 author = ["mahmood"]
-date = 2024-02-26T00:00:00+02:00
+date = 2024-03-02T00:00:00+02:00
 tags = ["public"]
 draft = false
 +++
