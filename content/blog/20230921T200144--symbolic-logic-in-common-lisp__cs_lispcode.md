@@ -51,7 +51,7 @@ in lisp we could write it as: <br/>
 
 the choice of the symbols `implies, and` could vary, but essentially we should write code that deals properly with these symbols based on their names. other symbols we may use are `or, iff`. <br/>
 so a knowledge base is just a (nested) list of [proposition](20230401T175139--statement__math.org)s. <br/>
-what about [predicate](20230607T114855--predicate__math.org)s? e.g. statements like <img src="/ltximg/9dfa8b51712.svg" alt="\(Human(John)\)" style="height: 1.0686em; vertical-align: -0.2893em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use `'(Human John)`, so instead of **infix notation**, we use lisp's infamous **prefix notation**, we dont need to worry about `(Human John)` sharing the same form as `(and x1 x2)`, as `and` can be considered just a boolean function like `Human`, after all. any expression that is in the form `(whatever x1 x2 ... xn)` would imply that `whatever` is meant to be treated as a boolean function. <br/>
+what about [predicate](20230607T114855--predicate__math.org)s? e.g. statements like <img src="/ltximg/9dfa8b51712.svg" alt="\(Human(John)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use `'(Human John)`, so instead of **infix notation**, we use lisp's infamous **prefix notation**, we dont need to worry about `(Human John)` sharing the same form as `(and x1 x2)`, as `and` can be considered just a boolean function like `Human`, after all. any expression that is in the form `(whatever x1 x2 ... xn)` would imply that `whatever` is meant to be treated as a boolean function. <br/>
 first obstacle we may face is the issue of distinguishing a variable from a [constant](20220727T110413--scalar__.org) symbol, how can we tell whether a symbol represents a variable or a constant (an immutable object)? after all both are just symbols (in our implementation), for example consider `person` vs `John`, inherently, `person` is a variable that applies to everyone and `John` is a constant that only describes one person (in a simplified context where John refers to a friend, for example). a simple solution to this problem would be to use special syntax for variables, like `?x`, here, `?x` would mean we're dealing with a variable, and a symbol without a question mark prefix, for example `x`, is recognized as a constant. <br/>
 in our previous example, this doesnt make much difference as we were dealing with constants only, consider this example which demonstrates how we apply the idea of prefixing variables with a question mark: <br/>
 
@@ -68,7 +68,7 @@ in our previous example, this doesnt make much difference as we were dealing wit
  (IMPLIES (AND (NOT (WIDOWER ?X)) (FATHER ?X)) (MARRIED ?X)))
 ```
 
-how about substitutions? how do we represent for example the substitution <img src="/ltximg/7856bdfd213.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0754em; vertical-align: -0.3157em; display: inline-block" class="org-latex org-latex-inline" />, we just use an [association list](20230224T163920--common-lisp__code_language.org): <br/>
+how about substitutions? how do we represent for example the substitution <img src="/ltximg/7856bdfd213.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we just use an [association list](20230224T163920--common-lisp__code_language.org): <br/>
 
 ```lisp
 (let ((sub nil)) ;; sub is the substitution
@@ -404,7 +404,7 @@ v13/{(SELLS ?X ?Y ?Z)} -&amp;gt; v12/{(CRIMINAL ?X)},
 v14/{(WEAPON ?Y)} -&amp;gt; v12/{(CRIMINAL ?X)},
 v15/{(AMERICAN ?X)} -&amp;gt; v12/{(CRIMINAL ?X)},
 };\end{tikzpicture}
-" style="height: 4.5092em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 4.4338em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -506,7 +506,7 @@ v7/{(MISSILE M1)} -&amp;gt; v4/{(WEAPON M1)},
 v8/{(OWNS NONO M1)} -&amp;gt; v3/{(SELLS WEST M1 NONO)},
 v7/{(MISSILE M1)} -&amp;gt; v3/{(SELLS WEST M1 NONO)},
 };\end{tikzpicture}
-" style="height: 12.9135em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 12.6871em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 

@@ -1,11 +1,13 @@
 +++
 title = "common lisp math utils"
 author = ["mahmood"]
-description = "some math utilities for common lisp"
-date = 2024-03-02T00:00:00+02:00
+date = 2024-03-05T00:00:00+02:00
 tags = ["lisp-code"]
 draft = false
 +++
+
+some math utilities for [common lisp](20230224T163920--common-lisp__code_language.org) <br/>
+
 
 ## essential functions {#essential-functions}
 

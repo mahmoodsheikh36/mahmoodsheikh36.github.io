@@ -8,8 +8,8 @@ draft = false
 
 <div class="definition" id="def-conv">
 
-the convolution operation is defined as the [integral](20240102T073445--integral__math.org) of the product of two [function](20231111T073425--function__math.org)s <img src="/ltximg/07b4ff5424d.svg" alt="\((f,g)\)" style="height: 1.0823em; vertical-align: -0.3030em; display: inline-block" class="org-latex org-latex-inline" /> after one is reflected about the y-axis and shifted: <br/>
-<img src="/ltximg/bd821999b7f.svg" alt="\[ (f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau) \dif{\tau} \]" style="height: 2.6040em; display: block" class="org-latex org-latex-block" /> <br/>
+the convolution operation is defined as the [integral](20240102T073445--integral__math.org) of the product of two [function](20231111T073425--function__math.org)s <img src="/ltximg/07b4ff5424d.svg" alt="\((f,g)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> after one is reflected about the y-axis and shifted: <br/>
+<img src="/ltximg/bd821999b7f.svg" alt="\[ (f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau) \dif{\tau} \]" style="height: 2.5579em; display: block" class="org-latex org-latex-block" /> <br/>
 (Maria Vakalopoulou, Stergios Christodoulidis, Ninon Burgos, Olivier Colliot, Vincent Lepetit. Deep learning: basics and convolutional neural networks (CNN). Olivier Colliot. Machine Learning for Brain Disorders, Springer, In press. hal-03957224, 2023) <br/>
 
 </div>
@@ -18,19 +18,19 @@ in essence, the convolution operation shows how one function affects the other <
 
 <div class="definition" id="def-conv-dicrete">
 
-for two functions <img src="/ltximg/63fa44381e1.svg" alt="\(f:\mathbb{Z} \to \mathbb{C},g:\mathbb{Z} \to \mathbb{C}\)" style="height: 1.0597em; vertical-align: -0.3030em; display: inline-block" class="org-latex org-latex-inline" />, the discrete convolution of <img src="/ltximg/23458be1d31.svg" alt="\(f\)" style="height: 1.0597em; vertical-align: -0.3030em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/3e5ccd5b193.svg" alt="\(g\)" style="height: 0.8069em; vertical-align: -0.3030em; display: inline-block" class="org-latex org-latex-inline" /> is given by: <br/>
-<img src="/ltximg/66a87a2cb19.svg" alt="\[ (f*g)[n] = \sum_{m=-\infty}^{\infty} f[m]g[n-m] \]" style="height: 2.8605em; display: block" class="org-latex org-latex-block" /> <br/>
+for two functions <img src="/ltximg/63fa44381e1.svg" alt="\(f:\mathbb{Z} \to \mathbb{C},g:\mathbb{Z} \to \mathbb{C}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, the discrete convolution of <img src="/ltximg/23458be1d31.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/3e5ccd5b193.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is given by: <br/>
+<img src="/ltximg/66a87a2cb19.svg" alt="\[ (f*g)[n] = \sum_{m=-\infty}^{\infty} f[m]g[n-m] \]" style="height: 3.1214em; display: block" class="org-latex org-latex-block" /> <br/>
 extending to 2 dimensional functions we'd get: <br/>
-<img src="/ltximg/cb455c8698f.svg" alt="\[ (f*g)[i,j] = \sum_{m} \sum_{n} f[m,n]g[i-m,j-n] \]" style="height: 2.4226em; display: block" class="org-latex org-latex-block" /> <br/>
+<img src="/ltximg/cb455c8698f.svg" alt="\[ (f*g)[i,j] = \sum_{m} \sum_{n} f[m,n]g[i-m,j-n] \]" style="height: 2.4994em; display: block" class="org-latex org-latex-block" /> <br/>
 
 </div>
 
 <div class="my_example">
 
-in [machine learning](20230225T233819--machine-learning__cs.org), specifically in [convolutional neural network](20230520T175032--convolutional-neural-network__cs_lispcode_math.org), the convolution operation is used do detect features in an **image**, one of the operands is the image and the second is the **kernel**, see [1](#org2bf230e) <br/>
+in [machine learning](20230225T233819--machine-learning__cs.org), specifically in [convolutional neural network](20230520T175032--convolutional-neural-network__cs_lispcode_math.org), the convolution operation is used do detect features in an **image**, one of the operands is the image and the second is the **kernel**, see [1](#org7aed3f4) <br/>
 
 
-<div id="org2bf230e" class="equation-container">
+<div id="org7aed3f4" class="equation-container">
 <span class="equation">
 <img src="/ltximg/ca1d765e3ab.svg" alt="\begin{tikzpicture}[mmat/.style={matrix of math nodes,column sep=-\pgflinewidth/2,
     row sep=-\pgflinewidth/2,cells={nodes={draw,inner sep=3pt,thin}},draw=#1,thick,inner sep=0pt},
@@ -83,7 +83,7 @@ in [machine learning](20230225T233819--machine-learning__cs.org), specifically i
     \fill[red!20] (f1.north west) rectangle (f1.south east);
   \end{scope}
 \end{tikzpicture}
-" style="height: 10.3693em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 10.0359em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -114,16 +114,16 @@ convolution is [commutative](20220923T212910--commutative__math.org) <br/>
 
 <div class="my_example" id="exa-conv-1">
 
-given an image <img src="/ltximg/9b84f0449c6.svg" alt="\(I_{i_r \times i_c}\)" style="height: 1.1123em; vertical-align: -0.4055em; display: inline-block" class="org-latex org-latex-inline" /> and a kernel <img src="/ltximg/bcf9d406563.svg" alt="\(K_{k_r \times k_c}\)" style="height: 1.1123em; vertical-align: -0.4055em; display: inline-block" class="org-latex org-latex-inline" />, assuming a stride of 1 and no padding, the resulting matrix <img src="/ltximg/62e07211058.svg" alt="\(M_{m_r \times m_c}\)" style="height: 1.1123em; vertical-align: -0.4055em; display: inline-block" class="org-latex org-latex-inline" /> would be of dimensions <img src="/ltximg/f5ac15f290f.svg" alt="\((i_r - (k_r - 1)) \times (i_c - (k_c - 1))\)" style="height: 1.0686em; vertical-align: -0.2893em; display: inline-block" class="org-latex org-latex-inline" />, so <img src="/ltximg/fa34997ed42.svg" alt="\(m_r=i_r-(k_r-1),m_c=(i_c-(k_c-1))\)" style="height: 1.0686em; vertical-align: -0.2893em; display: inline-block" class="org-latex org-latex-inline" /> and the operation would be defined as: <br/>
-<img src="/ltximg/0e1ce35c9f4.svg" alt="\[ (I*K)[r,c] = \sum_{n=r}^{r+k_r-1}\sum_{j=c}^{c+k_c-1} I[n,j]K[k_r-n+r,k_c-j+c] \quad 1 \le r \le m_r,1 \le c \le m_c \]" style="height: 3.3227em; display: block" class="org-latex org-latex-block" /> <br/>
+given an image <img src="/ltximg/9b84f0449c6.svg" alt="\(I_{i_r \times i_c}\)" style="height: 1.0130em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and a kernel <img src="/ltximg/bcf9d406563.svg" alt="\(K_{k_r \times k_c}\)" style="height: 1.0130em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, assuming a stride of 1 and no padding, the resulting matrix <img src="/ltximg/62e07211058.svg" alt="\(M_{m_r \times m_c}\)" style="height: 1.0130em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> would be of dimensions <img src="/ltximg/f5ac15f290f.svg" alt="\((i_r - (k_r - 1)) \times (i_c - (k_c - 1))\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, so <img src="/ltximg/fa34997ed42.svg" alt="\(m_r=i_r-(k_r-1),m_c=(i_c-(k_c-1))\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the operation would be defined as: <br/>
+<img src="/ltximg/0e1ce35c9f4.svg" alt="\[ (I*K)[r,c] = \sum_{n=r}^{r+k_r-1}\sum_{j=c}^{c+k_c-1} I[n,j]K[k_r-n+r,k_c-j+c] \quad 1 \le r \le m_r,1 \le c \le m_c \]" style="height: 3.3943em; display: block" class="org-latex org-latex-block" /> <br/>
 or equivalently (since both convolution and multiplication are commutative): <br/>
-<img src="/ltximg/a92c69accc5.svg" alt="\[ (I*K)[r,c] = \sum_{n=0}^{k_r-1} \sum_{j=0}^{k_c-1} I[n+r,j+c]K[k_r-n,k_c-j] \quad 1 \le r \le m_r,1 \le c \le m_c \]" style="height: 3.3227em; display: block" class="org-latex org-latex-block" /> <br/>
+<img src="/ltximg/a92c69accc5.svg" alt="\[ (I*K)[r,c] = \sum_{n=0}^{k_r-1} \sum_{j=0}^{k_c-1} I[n+r,j+c]K[k_r-n,k_c-j] \quad 1 \le r \le m_r,1 \le c \le m_c \]" style="height: 3.3943em; display: block" class="org-latex org-latex-block" /> <br/>
 
 </div>
 
 <div class="lemma" id="lem-conv-derivative">
 
-<img src="/ltximg/428e49460c9.svg" alt="\[ \frac{\partial}{\partial x}(f*g) = \frac{\partial f}{\partial x}*g \]" style="height: 2.2877em; display: block" class="org-latex org-latex-block" /> <br/>
+<img src="/ltximg/428e49460c9.svg" alt="\[ \frac{\partial}{\partial x}(f*g) = \frac{\partial f}{\partial x}*g \]" style="height: 2.2121em; display: block" class="org-latex org-latex-block" /> <br/>
 
 </div>
 

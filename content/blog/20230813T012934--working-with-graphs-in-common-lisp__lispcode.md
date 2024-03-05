@@ -306,7 +306,7 @@ C -- [&quot;5&quot;] B,
 J -- [&quot;8&quot;] 1,
 B -- [&quot;1&quot;] J,
 };\end{tikzpicture}
-" style="height: 12.8435em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 12.8057em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 

@@ -2,7 +2,7 @@
 title = "conv gan with pytorch"
 author = ["mahmood"]
 description = "an example convolutional generative adversarial network written with pytorch"
-date = 2024-02-26T00:00:00+02:00
+date = 2024-03-03T00:00:00+02:00
 tags = ["cs"]
 draft = false
 +++
@@ -216,7 +216,7 @@ train_x = train_dataset.data.detach().clone().to(device)
 train_y = train_dataset.targets.detach().clone().to(device)
 ```
 
-as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the [interval](20231008T200908--interval__.org) <img src="/ltximg/0aac0ab99d3.svg" alt="\([0,1]\)" style="height: 1.0470em; vertical-align: -0.2785em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions: <br/>
+as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the [interval](20231008T200908--interval__.org) <img src="/ltximg/0aac0ab99d3.svg" alt="\([0,1]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions: <br/>
 
 <a id="code-snippet--src-normalize-training-tensors"></a>
 ```python

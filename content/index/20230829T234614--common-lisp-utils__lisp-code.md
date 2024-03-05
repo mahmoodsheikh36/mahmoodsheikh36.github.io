@@ -1,12 +1,12 @@
 +++
 title = "common lisp utils"
 author = ["mahmood"]
-date = 2024-03-02T00:00:00+02:00
+date = 2024-03-05T00:00:00+02:00
 tags = ["lisp-code"]
 draft = false
 +++
 
-a collection of utility functions for [BROKEN LINK: C3E00718-FDF6-457F-9B91-FFCFDE1591E2] <br/>
+a collection of utility functions for [common lisp](20230224T163920--common-lisp__code_language.org). <br/>
 
 
 ## arrays {#arrays}
