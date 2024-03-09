@@ -296,7 +296,7 @@ example usage: <br/>
 
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/6f803d99b75.svg" alt="\begin{tikzpicture}
+<img src="/ltximg/fedce555448.svg" alt="\begin{tikzpicture}
 \graph[spring electrical layout, node distance=50] {
 1 -- [&quot;2&quot;] 3,
 3 -- [&quot;9&quot;] B,

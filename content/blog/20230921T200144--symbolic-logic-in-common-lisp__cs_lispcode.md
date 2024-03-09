@@ -17,7 +17,7 @@ we make use of the symbolic capabilities of lisp, we use quoting and symbols to 
 
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/625db08e1b7.svg" alt="\begin{align*}
+<img src="/ltximg/41f12093e06.svg" alt="\begin{align*}
   &amp;amp;P \implies Q\\
   &amp;amp;L \land M \implies P\\
   &amp;amp;B \land L \implies M\\
@@ -51,7 +51,7 @@ in lisp we could write it as: <br/>
 
 the choice of the symbols `implies, and` could vary, but essentially we should write code that deals properly with these symbols based on their names. other symbols we may use are `or, iff`. <br/>
 so a knowledge base is just a (nested) list of [proposition](20230401T175139--statement__math.org)s. <br/>
-what about [predicate](20230607T114855--predicate__math.org)s? e.g. statements like <img src="/ltximg/9dfa8b51712.svg" alt="\(Human(John)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use `'(Human John)`, so instead of **infix notation**, we use lisp's infamous **prefix notation**, we dont need to worry about `(Human John)` sharing the same form as `(and x1 x2)`, as `and` can be considered just a boolean function like `Human`, after all. any expression that is in the form `(whatever x1 x2 ... xn)` would imply that `whatever` is meant to be treated as a boolean function. <br/>
+what about [predicate](20230607T114855--predicate__math.org)s? e.g. statements like <img src="/ltximg/b28bc30c4a2.svg" alt="\(Human(John)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use `'(Human John)`, so instead of **infix notation**, we use lisp's infamous **prefix notation**, we dont need to worry about `(Human John)` sharing the same form as `(and x1 x2)`, as `and` can be considered just a boolean function like `Human`, after all. any expression that is in the form `(whatever x1 x2 ... xn)` would imply that `whatever` is meant to be treated as a boolean function. <br/>
 first obstacle we may face is the issue of distinguishing a variable from a [constant](20220727T110413--scalar__.org) symbol, how can we tell whether a symbol represents a variable or a constant (an immutable object)? after all both are just symbols (in our implementation), for example consider `person` vs `John`, inherently, `person` is a variable that applies to everyone and `John` is a constant that only describes one person (in a simplified context where John refers to a friend, for example). a simple solution to this problem would be to use special syntax for variables, like `?x`, here, `?x` would mean we're dealing with a variable, and a symbol without a question mark prefix, for example `x`, is recognized as a constant. <br/>
 in our previous example, this doesnt make much difference as we were dealing with constants only, consider this example which demonstrates how we apply the idea of prefixing variables with a question mark: <br/>
 
@@ -68,7 +68,7 @@ in our previous example, this doesnt make much difference as we were dealing wit
  (IMPLIES (AND (NOT (WIDOWER ?X)) (FATHER ?X)) (MARRIED ?X)))
 ```
 
-how about substitutions? how do we represent for example the substitution <img src="/ltximg/7856bdfd213.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we just use an [association list](20230224T163920--common-lisp__code_language.org): <br/>
+how about substitutions? how do we represent for example the substitution <img src="/ltximg/9fa39c9ab85.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we just use an [association list](20230224T163920--common-lisp__code_language.org): <br/>
 
 ```lisp
 (let ((sub nil)) ;; sub is the substitution
@@ -389,7 +389,7 @@ example usage: <br/>
 
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/4ba0bde9505.svg" alt="\begin{tikzpicture}
+<img src="/ltximg/d96efeea069.svg" alt="\begin{tikzpicture}
 \graph[layered layout, grow=up, edges={-{Stealth[]}}, edges=rounded corners] {
 v1/{(ENEMY NONO AMERICA)},
 v2/{(AMERICAN WEST)},
@@ -495,7 +495,7 @@ example usage: <br/>
 
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/79946a04a04.svg" alt="\begin{tikzpicture}
+<img src="/ltximg/d6fe0bd495a.svg" alt="\begin{tikzpicture}
 \graph[layered layout, grow=up, edges={-{Stealth[]}}, edges=rounded corners, level sep=40px] {
 v1/{(HOSTILE NONO)} -&amp;gt; v2/{(CRIMINAL WEST)},
 v3/{(SELLS WEST M1 NONO)} -&amp;gt; v2/{(CRIMINAL WEST)},
