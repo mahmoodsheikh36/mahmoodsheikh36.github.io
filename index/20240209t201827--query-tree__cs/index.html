@@ -1,0 +1,31 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>query tree &#183; mahmood</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=/org.css><script src=/org.js></script>
+<link rel=icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/%20images/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/%20images/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/%20images/apple-touch-icon.png><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css><link href rel=alternate type=application/rss+xml title=mahmood><script src=/js/darkmode.js></script></head><body><nav class=nav><div class=nav-container><a href=/><span class=nav-title>mahmood</span></a><ul><li><a href=/><span>home</span></a></li><li><a href=/blog><span>blog</span></a></li><li><a href=/index/><span>index</span></a></li><li><a href=/about><span>about</span></a></li></ul></div></nav><div id=darkModeToggle onclick=toggleDarkMode()>&#9680;</div><main><aside class=toc><script src=/js/toc.js></script><div id=tocContainer><div id=tocTitle>&#9776;</div><div id=tocCollapsible><nav id=TableOfContents></nav></div></div></aside><div class=post><div class=post-info><time datetime="2024-02-09 20:18:00 +0200 +0200">February 9, 2024</time></div><h1 class=post-title>query tree</h1><div class=post-desc></div><div class=post-line></div><div class=dummy><p>a query tree is a <a href=20240201T173023--tree-data-structure__math.org>tree data structure</a> that corresponds to an extended <a href=20231212T163612--relational-algebra__math.org>relational algebra</a> expression. it represents the input relations of the query as <a href=20240213T202734--leaf__cs.org>leaf</a> nodes of the tree, and it represents the relational algebra operations as internal nodes. an execution of the query tree consists of executing an internal node operation whenever its operands are available and then replacing that internal node by the relation that results from executing the operation. the order of execution of operations starts at the leaf nodes, which represents the input database relations for the query, and ends at the root node, which represents the final operation of the query. the execution terminates when the root node operation is executed and produces the result relation for the query.<br>(Ramez Elmasri, Shamkant B. Navathe, 2015 chapter 19.1.1 notation for query trees and query graphs)<br></p></div><div class=my_example><p><a id=code-snippet--fig-elmasri-q2></a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> Pnumber, Dnum, Lname, Address, Bdate
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>   PROJECT, DEPARTMENT, EMPLOYEE
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span>  Dnum <span style=color:#f92672>=</span> Dnumber <span style=color:#66d9ef>AND</span> Mgr_ssn <span style=color:#f92672>=</span> Ssn <span style=color:#66d9ef>AND</span>
+</span></span><span style=display:flex><span>       Plocation <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Stafford&#39;</span>
+</span></span></code></pre></div><p>(from Ramez Elmasri, Shamkant B. Navathe, 2015 Query 2)<br></p><div id=org49074b4 class=equation-container><span class=equation><img src=/ltximg/81f0dc465e9.svg alt="\begin{tikzpicture}[sibling distance=5cm]
+  \node {\(\pi_{\text{P.Pnumber,P.Dnum,E.Lname,E.Address,E.Bdate}}\)}
+  child {
+    node {\(\Join_{\text{D.Mgr\_ssn=E.Ssn}}\)}
+    child {
+      node {\(\Join_{\text{P.Dnum=D.Dnumber}}\)}
+      child {
+        node {\(\sigma_{\text{P.Plocation='Stafford'}}\)}
+        child {
+          node[circle, draw] {P}
+        }
+      }
+      child {
+        node[circle, draw] {D}
+      }
+    }
+    child {
+      node[circle, draw] {E}
+    }
+  };
+\end{tikzpicture}
+" style=height:12.8046em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-inline"></span></div><p>(from Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 19.1)<br><a href=#org49074b4>1</a> corresponds to the following relational algebra expression:<br></p><div class=equation-container><span class=equation><img src=/ltximg/368c968a8d7.svg alt="\begin{align*}
+  \pi_{\text{P.Pnumber,P.Dnum,E.Lname,E.Address,E.Bdate}}(((\sigma_{\text{P.Plocation='Stafford'}}(\text{PROJECT}))\\
+  \Join_{\text{P.Dnum=D.Dnumber}}(\text{DEPARTMENT})) \Join_{\text{Mgr\_ssn=Ssn}}(\text{EMPLOYEE})).
+\end{align*}
+" style=height:3.0972em;vertical-align:-.402em;display:inline-block class="org-latex org-latex-inline"></span></div><p>(from Ramez Elmasri, Shamkant B. Navathe, 2015 chapter 19 query optimization)<br></p></div></div></main></body></html>
