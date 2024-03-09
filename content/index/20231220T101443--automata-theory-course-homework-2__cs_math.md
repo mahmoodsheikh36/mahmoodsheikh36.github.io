@@ -18,7 +18,7 @@ let <img src="/ltximg/7c012388408.svg" alt="\(L\)" style="height: 0.7680em; vert
 applying the union construction to 2 automatons where the first, <img src="/ltximg/48b414399ef.svg" alt="\(A_1\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> (see fig-automata-homework2-1) recognizes words starting with the symbol <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the second, <img src="/ltximg/86271645528.svg" alt="\(A_2\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> recognizes words starting with the symbol <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> makes the problem easier. <br/>
 
 
-<div id="org5bb2310" class="equation-container">
+<div id="orgfffd814" class="equation-container">
 <span class="equation">
 <img src="/ltximg/81ada6c8961.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state] (q_0) {\(q_0\)};
@@ -51,7 +51,7 @@ an equivalent automaton that recognizes the same pattern where the symbols <img 
 i realized later that it could be done more easily, see fig-automata-homework2-2. <br/>
 
 
-<div id="org98b433a" class="equation-container">
+<div id="org0375f77" class="equation-container">
 <span class="equation">
 <img src="/ltximg/3b4d863b3f2.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state, initial] (q_0) {\(q_0\)};

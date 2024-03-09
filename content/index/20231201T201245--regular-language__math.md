@@ -43,7 +43,7 @@ machine <img src="/ltximg/bd89d606b5a.svg" alt="\(N\)" style="height: 0.7680em; 
 we represent this construction in fig-reglang-1. on the left, we indicate the start and accept states of machines <img src="/ltximg/7fd83df0cb9.svg" alt="\(N_1\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/06f158c2d4d.svg" alt="\(N_2\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> with large circles and some additional states with small circles. on the right, we show how to combine <img src="/ltximg/7fd83df0cb9.svg" alt="\(N_1\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/06f158c2d4d.svg" alt="\(N_2\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> into <img src="/ltximg/bd89d606b5a.svg" alt="\(N\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> by adding additional transition arrows. <br/>
 
 
-<div id="org9d543dc" class="equation-container">
+<div id="org6b844e0" class="equation-container">
 <span class="equation">
 <img src="/ltximg/7ecdb636c65.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state, initial] (q_0) {\(q_0\)};
@@ -145,7 +145,7 @@ we propose the following equivalence from the definition of <img src="/ltximg/bd
 where <img src="/ltximg/ecb2c62c6d7.svg" alt="\(\sigma \in \Sigma, w \in \Sigma^*\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, and so by [induction](20220707T193301--induction__math.org), we can turn it into: <br/>
 
 
-<div id="orgc497c5f" class="equation-container">
+<div id="orgc78708e" class="equation-container">
 <span class="equation">
 <img src="/ltximg/e59a19fade3.svg" alt="\begin{equation}
   ((q,s),uw) \sststile{M}{*} ((q',s'),w) \iff (q,uw) \sststile{M_1}{*}(q',w) \text{ and }(s,uw)\sststile{M_1}{*}(s',w)
@@ -170,7 +170,7 @@ we need to show that <br/>
 by def-dfa-reglang, the language that <img src="/ltximg/bfb79e58d2f.svg" alt="\(M\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> recognizes is <br/>
 
 
-<div id="org4e32ba9" class="equation-container">
+<div id="orgcdd5319" class="equation-container">
 <span class="equation">
 <img src="/ltximg/8ab86d6b761.svg" alt="\begin{equation}
   L(M)=\{w\mid((r_1,r_2),w) \sststile{M}{*}((\hat q_1,\hat q_2),\varepsilon), (\hat q_1,\hat q_2) \in F_1 \times F_2\}
