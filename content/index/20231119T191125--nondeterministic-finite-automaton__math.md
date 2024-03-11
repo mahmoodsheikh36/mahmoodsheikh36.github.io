@@ -1,7 +1,7 @@
 +++
 title = "nondeterministic finite automaton"
 author = ["mahmood"]
-date = 2024-03-01T00:00:00+02:00
+date = 2024-03-11T00:00:00+02:00
 tags = ["math"]
 draft = false
 +++

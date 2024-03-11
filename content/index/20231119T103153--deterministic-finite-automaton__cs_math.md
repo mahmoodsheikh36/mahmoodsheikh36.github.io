@@ -1,7 +1,7 @@
 +++
 title = "deterministic finite automaton"
 author = ["mahmood"]
-date = 2024-02-26T00:00:00+02:00
+date = 2024-03-11T00:00:00+02:00
 tags = ["cs", "math"]
 draft = false
 +++
