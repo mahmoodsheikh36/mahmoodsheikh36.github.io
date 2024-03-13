@@ -64,7 +64,7 @@ CUDA arrays are opaque memory layouts optimized for texture fetching. <br/>
 
 ## code {#code}
 
-see [connect to remote common lisp repl with sly/slime](20230614T172149--connect-to-remote-common-lisp-repl-with-slyslime.org) for connecting to a remote common lisp repl with [emacs](20240204T953236--emacs__program.org) <br/>
+see [connect to remote common lisp repl with sly/slime](20230614T172149--connect-to-remote-common-lisp-repl-with-slyslime__codde.org) for connecting to a remote common lisp repl with [emacs](20240204T953236--emacs__program.org) <br/>
 
 <div class="note">
 
