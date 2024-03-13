@@ -33,7 +33,7 @@ for another example, the expression <br/>
 denotes the composition of the functions <img src="/ltximg/36fbd7e1276.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/2631cefd988.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />; that is, the function that on input <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> applies <img src="/ltximg/2631cefd988.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, then applies <img src="/ltximg/36fbd7e1276.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to the result. the expression <br/>
 
 
-<div id="orgb66c696" class="equation-container">
+<div id="org95690af" class="equation-container">
 <span class="equation">
 <img src="/ltximg/6a846c18278.svg" alt="\begin{equation}
    \lambda f.\lambda g.\lambda x.f(gx)
@@ -70,6 +70,35 @@ we use different variables in the successor functions below for clarity. the sym
 we could have substituted <img src="/ltximg/6c1dfafe67c.svg" alt="\(gx\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="/ltximg/73a97ac470e.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> in the second step or <img src="/ltximg/aa374fee0bb.svg" alt="\((\lambda z.(z+1))x\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="/ltximg/73a97ac470e.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> in the third; we would have arrived at the same final result. <br/>
 functions represented by <img src="/ltximg/8e8d33fa109.svg" alt="\(\lambda\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />-terms have only one input. a function with two inputs <img src="/ltximg/99f19d75c7b.svg" alt="\(x,y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> that returns a value <img src="/ltximg/bfb79e58d2f.svg" alt="\(M\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is modeled by a function with one input <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> that returns a function with one input <img src="/ltximg/73a97ac470e.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> that returns a value <img src="/ltximg/bfb79e58d2f.svg" alt="\(M\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. The technical term for this trick is currying (after Haskell B. Curry). <br/>
 (copied from Dexter C. Kozen, 1997 lecture 37) <br/>
+
+</div>
+
+<div class="my_example">
+
+the function <img src="/ltximg/111f9b3de84.svg" alt="\(f(x_1,x_2)=x_1+x_2\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> has the following derivation. <br/>
+
+
+<div class="equation-container">
+<span class="equation">
+<img src="/ltximg/831cd9ed064.svg" alt="\begin{align*}
+  &amp;amp;f_1=\lambda x[x+1] &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-1}\\
+  &amp;amp;f_2=\lambda x[x] &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-3}\\
+  &amp;amp;f_3=\lambda x_1x_2x_3[x_2] &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-3}\\
+  &amp;amp;f_4=f_1 \circ f_3 &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-4}\\
+  &amp;amp;f_5(0,x_2)=f_2(x_2)\\
+  &amp;amp;f_5(x_1+1,x_2)=f_4(x_1,f_5(x_1,x_2),x_2) &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-4}
+\end{align*}
+" style="height: 8.9772em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+
+<div class="note">
+
+is this derivation doing redundant work? <br/>
+
+</div>
+
+(copied from Robert I. Soare, 1987 chapter 2 formal definitions of computable functions definition 2.1) <br/>
 
 </div>
 

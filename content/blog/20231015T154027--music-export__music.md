@@ -2,7 +2,7 @@
 title = "music export"
 author = ["mahmood"]
 description = "a stripped-down, automatically exported subset of the albums i like. no particular order."
-date = 2024-03-01T00:00:00+02:00
+date = 2024-03-13T00:00:00+02:00
 tags = ["music"]
 draft = false
 +++
@@ -10,495 +10,500 @@ draft = false
 ## instrumental post-rock/ambient {#instrumental-post-rock-ambient}
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_For Now I Am Winter_Ólafur Arnalds.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">For Now I Am Winter</span>
-<span>Ólafur Arnalds</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Young Mountain_This Will Destroy You.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Young Mountain</span>
-<span>This Will Destroy You</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_ST_This Will Destroy You.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">ST</span>
-<span>This Will Destroy You</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Golevka_The Evpatoria Report.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Golevka</span>
-<span>The Evpatoria Report</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Maar_The Evpatoria Report.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Maar</span>
-<span>The Evpatoria Report</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Nights of Wonder_I Am No Hero.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Nights of Wonder</span>
-<span>I Am No Hero</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Nowhere Now Here_MONO.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Nowhere Now Here</span>
-<span>MONO</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Hymn to the Immortal Wind_MONO.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Hymn to the Immortal Wind</span>
-<span>MONO</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Pilgrimage of the Soul_MONO.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Pilgrimage of the Soul</span>
-<span>MONO</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Chasing After Shadows... Living With the Ghosts_Hammock.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Chasing After Shadows... Living With the Ghosts</span>
-<span>Hammock</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Myra_Spurv.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Myra</span>
-<span>Spurv</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Dust_Show Me A Dinosaur.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Dust</span>
-<span>Show Me A Dinosaur</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_( )_Sigur Rós.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">( )</span>
-<span>Sigur Rós</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Takk_Sigur Rós.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Takk</span>
-<span>Sigur Rós</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_In Never Out_pg.lost.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">In Never Out</span>
-<span>pg.lost</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Oscillate_pg.lost.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Oscillate</span>
-<span>pg.lost</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Happy Songs for Happy People_Mogwai.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Happy Songs for Happy People</span>
-<span>Mogwai</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Earth Is Not a Cold Dead Place_Explosions In The Sky.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Earth Is Not a Cold Dead Place</span>
-<span>Explosions In The Sky</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_All of a Sudden I Miss Everyone_Explosions In The Sky.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">All of a Sudden I Miss Everyone</span>
-<span>Explosions In The Sky</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_songs for someone_April Rain.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">songs for someone</span>
-<span>April Rain</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_All Is Violent, All Is Bright_God Is An Astronaut.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">All Is Violent, All Is Bright</span>
-<span>God Is An Astronaut</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Epitaph_God Is An Astronaut.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Epitaph</span>
-<span>God Is An Astronaut</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Somnia_God Is An Astronaut.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Somnia</span>
-<span>God Is An Astronaut</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Canopy_Silent Whale Becomes a Dream.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Canopy</span>
-<span>Silent Whale Becomes a Dream</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_A Winged Victory for the Sullen_A Winged Victory for the Sullen.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">A Winged Victory for the Sullen</span>
-<span>A Winged Victory for the Sullen</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Void Moments of Inertia_Once Upon a Winter.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Void Moments of Inertia</span>
-<span>Once Upon a Winter</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Any Fool Can Regret Yesterday_Baulta.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Any Fool Can Regret Yesterday</span>
-<span>Baulta</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Artemis_Still Mountains.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Artemis</span>
-<span>Still Mountains</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Departure Songs_We Lost The Sea.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Departure Songs</span>
-<span>We Lost The Sea</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_How Lonely Sits the City_The Ascent of Everest.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">How Lonely Sits the City</span>
-<span>The Ascent of Everest</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_I Was Here For A Moment, Then I Was Gone_Maybeshewill.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">I Was Here For A Moment, Then I Was Gone</span>
-<span>Maybeshewill</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Beyond The Sea, Beneath The Sky_I Hear Sirens.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Beyond The Sea, Beneath The Sky</span>
-<span>I Hear Sirens</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Snake Behind the Sun_Shy, Low.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Snake Behind the Sun</span>
-<span>Shy, Low</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Dust and Disquiet_Caspian.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Dust and Disquiet</span>
-<span>Caspian</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_You Are the Conductor_Caspian.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">You Are the Conductor</span>
-<span>Caspian</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_These Small Spaces_This Patch of Sky.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">These Small Spaces</span>
-<span>This Patch of Sky</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Greater Lights_Ranges.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Greater Lights</span>
-<span>Ranges</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Must You Smash Your Ears Before You Learn to Listen With Your Eyes_Joy Wants Eternity.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Must You Smash Your Ears Before You Learn to Listen With Your Eyes</span>
-<span>Joy Wants Eternity</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Fog Is Rising_Joy Wants Eternity.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Fog Is Rising</span>
-<span>Joy Wants Eternity</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_You Who Pretend To Sleep_Joy Wants Eternity.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">You Who Pretend To Sleep</span>
-<span>Joy Wants Eternity</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Muses_Audiolepsia.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Muses</span>
-<span>Audiolepsia</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Numinous_Those Who Ride With Giants.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Numinous</span>
-<span>Those Who Ride With Giants</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Endless Dive_Endless Dive.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Endless Dive</span>
-<span>Endless Dive</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Soundtracks for the Blind_Swans.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Soundtracks for the Blind</span>
-<span>Swans</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Earth Fell Away_Carved Into the Sun.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Earth Fell Away</span>
-<span>Carved Into the Sun</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Into The Blue Again_The Album Leaf.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Into The Blue Again</span>
-<span>The Album Leaf</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_At The Soundless Dawn_Red Sparowes.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">At The Soundless Dawn</span>
-<span>Red Sparowes</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Voyager_As Seas Exhale.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Voyager</span>
-<span>As Seas Exhale</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Healing Process_As Seas Exhale.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Healing Process</span>
-<span>As Seas Exhale</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The End of Something_Collapse Under The Empire.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The End of Something</span>
-<span>Collapse Under The Empire</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Hole_65daysofstatic.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Hole</span>
-<span>65daysofstatic</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Seven Years Without the Sun_Gather Your Quiet.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Seven Years Without the Sun</span>
-<span>Gather Your Quiet</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_New Others Part One_This Will Destroy You.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">New Others Part One</span>
-<span>This Will Destroy You</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Sisyphus_As Seas Exhale.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Sisyphus</span>
-<span>As Seas Exhale</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Way Home_Sleep Dealer.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Way Home</span>
-<span>Sleep Dealer</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Red Forest_If These Trees Could Talk.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Red Forest</span>
-<span>If These Trees Could Talk</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Aurora_Sleep Dealer.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Aurora</span>
-<span>Sleep Dealer</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_You Are There_MONO.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">You Are There</span>
-<span>MONO</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Bridges_Transmission Zero.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Bridges</span>
-<span>Transmission Zero</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_...And They Have Escaped the Weight of Darkness_Ólafur Arnalds.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">...And They Have Escaped the Weight of Darkness</span>
-<span>Ólafur Arnalds</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Chopin Project_Ólafur Arnalds.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Chopin Project</span>
-<span>Ólafur Arnalds</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Found Songs_Ólafur Arnalds.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Found Songs</span>
-<span>Ólafur Arnalds</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Living Room Songs_Ólafur Arnalds.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Living Room Songs</span>
-<span>Ólafur Arnalds</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Palmless Prayer  Mass Murder Refrain_MONO.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Palmless Prayer  Mass Murder Refrain</span>
-<span>MONO</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_One Step More and You Die_MONO.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">One Step More and You Die</span>
-<span>MONO</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Mysterium_Hammock.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Mysterium</span>
-<span>Hammock</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Oblivion Hymns_Hammock.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Oblivion Hymns</span>
-<span>Hammock</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Silencia_Hammock.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Silencia</span>
-<span>Hammock</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Undivided Five_A Winged Victory for the Sullen.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Undivided Five</span>
-<span>A Winged Victory for the Sullen</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Blue Hour_Federico Albanese.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Blue Hour</span>
-<span>Federico Albanese</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Hiatus_Thisquietarmy.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Hiatus</span>
-<span>Thisquietarmy</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Vessels_Thisquietarmy.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Vessels</span>
-<span>Thisquietarmy</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Unconquered_Thisquietarmy.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Unconquered</span>
-<span>Thisquietarmy</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_And Their Refinement of the Decline_Stars Of The Lid.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">And Their Refinement of the Decline</span>
-<span>Stars Of The Lid</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Ballasted Orchestra_Stars Of The Lid.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Ballasted Orchestra</span>
-<span>Stars Of The Lid</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Tired Sounds of Stars of the Lid_Stars Of The Lid.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Tired Sounds of Stars of the Lid</span>
-<span>Stars Of The Lid</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Avec Laudenum_Stars Of The Lid.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Avec Laudenum</span>
-<span>Stars Of The Lid</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Effective Disconnect_Brian McBride.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Effective Disconnect</span>
-<span>Brian McBride</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_When the Detail Lost Its Freedom_Brian McBride.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">When the Detail Lost Its Freedom</span>
-<span>Brian McBride</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Coast  Range  Arc_Loscil.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Coast  Range  Arc</span>
-<span>Loscil</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Minima Moralia_Chihei Hatakeyama.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Minima Moralia</span>
-<span>Chihei Hatakeyama</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Owl Splinters_Deaf Center.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Owl Splinters</span>
-<span>Deaf Center</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Endless Fragments of Time_Deep Watch.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Endless Fragments of Time</span>
-<span>Deep Watch</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Wilderness of Mirrors_Lawrence English.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Wilderness of Mirrors</span>
-<span>Lawrence English</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Selva Oscura_William Basinski.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Selva Oscura</span>
-<span>William Basinski</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Light_Hazy.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Light</span>
-<span>Hazy</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Costero_Slow Meadow.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Costero</span>
-<span>Slow Meadow</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Divenire_Ludovico Einaudi.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Divenire</span>
-<span>Ludovico Einaudi</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Gravity_Ben Lukas Boysen.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Gravity</span>
-<span>Ben Lukas Boysen</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_This Is for Our Sins_Lowercase Noises.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">This Is for Our Sins</span>
-<span>Lowercase Noises</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Seraphim_How to Disappear Completely.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Seraphim</span>
-<span>How to Disappear Completely</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Nuance_Noir Reva.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Nuance</span>
-<span>Noir Reva</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Stella Meae_Non Somnia.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Stella Meae</span>
-<span>Non Somnia</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Silencia_Hammock.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Silencia</span>
-<span>Hammock</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Sometimes_Goldmund.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Sometimes</span>
-<span>Goldmund</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Charcoal_Brambles.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Charcoal</span>
-<span>Brambles</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Daydreaming_Rafael Anton Irisarri.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Daydreaming</span>
-<span>Rafael Anton Irisarri</span>
-</div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Malady Of Elegance_Goldmund.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Malady Of Elegance</span>
-<span>Goldmund</span>
+<div class="card">
+<img src="/covers/cover_For Now I Am Winter_Ólafur Arnalds.jpg" class="album-cover" />
+<span class="album-name">For Now I Am Winter</span>
+<span class="artist-name">Ólafur Arnalds</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Young Mountain_This Will Destroy You.jpg" class="album-cover" />
+<span class="album-name">Young Mountain</span>
+<span class="artist-name">This Will Destroy You</span>
+</div>
+<div class="card">
+<img src="/covers/cover_ST_This Will Destroy You.jpg" class="album-cover" />
+<span class="album-name">ST</span>
+<span class="artist-name">This Will Destroy You</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Golevka_The Evpatoria Report.jpg" class="album-cover" />
+<span class="album-name">Golevka</span>
+<span class="artist-name">The Evpatoria Report</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Maar_The Evpatoria Report.jpg" class="album-cover" />
+<span class="album-name">Maar</span>
+<span class="artist-name">The Evpatoria Report</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Nights of Wonder_I Am No Hero.jpg" class="album-cover" />
+<span class="album-name">Nights of Wonder</span>
+<span class="artist-name">I Am No Hero</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Nowhere Now Here_MONO.jpg" class="album-cover" />
+<span class="album-name">Nowhere Now Here</span>
+<span class="artist-name">MONO</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Hymn to the Immortal Wind_MONO.jpg" class="album-cover" />
+<span class="album-name">Hymn to the Immortal Wind</span>
+<span class="artist-name">MONO</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Pilgrimage of the Soul_MONO.jpg" class="album-cover" />
+<span class="album-name">Pilgrimage of the Soul</span>
+<span class="artist-name">MONO</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Chasing After Shadows... Living With the Ghosts_Hammock.jpg" class="album-cover" />
+<span class="album-name">Chasing After Shadows... Living With the Ghosts</span>
+<span class="artist-name">Hammock</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Myra_Spurv.jpg" class="album-cover" />
+<span class="album-name">Myra</span>
+<span class="artist-name">Spurv</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Dust_Show Me A Dinosaur.jpg" class="album-cover" />
+<span class="album-name">Dust</span>
+<span class="artist-name">Show Me A Dinosaur</span>
+</div>
+<div class="card">
+<img src="/covers/cover_( )_Sigur Rós.jpg" class="album-cover" />
+<span class="album-name">( )</span>
+<span class="artist-name">Sigur Rós</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Takk_Sigur Rós.jpg" class="album-cover" />
+<span class="album-name">Takk</span>
+<span class="artist-name">Sigur Rós</span>
+</div>
+<div class="card">
+<img src="/covers/cover_In Never Out_pg.lost.jpg" class="album-cover" />
+<span class="album-name">In Never Out</span>
+<span class="artist-name">pg.lost</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Oscillate_pg.lost.jpg" class="album-cover" />
+<span class="album-name">Oscillate</span>
+<span class="artist-name">pg.lost</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Happy Songs for Happy People_Mogwai.jpg" class="album-cover" />
+<span class="album-name">Happy Songs for Happy People</span>
+<span class="artist-name">Mogwai</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Earth Is Not a Cold Dead Place_Explosions In The Sky.jpg" class="album-cover" />
+<span class="album-name">The Earth Is Not a Cold Dead Place</span>
+<span class="artist-name">Explosions In The Sky</span>
+</div>
+<div class="card">
+<img src="/covers/cover_All of a Sudden I Miss Everyone_Explosions In The Sky.jpg" class="album-cover" />
+<span class="album-name">All of a Sudden I Miss Everyone</span>
+<span class="artist-name">Explosions In The Sky</span>
+</div>
+<div class="card">
+<img src="/covers/cover_songs for someone_April Rain.jpg" class="album-cover" />
+<span class="album-name">songs for someone</span>
+<span class="artist-name">April Rain</span>
+</div>
+<div class="card">
+<img src="/covers/cover_All Is Violent, All Is Bright_God Is An Astronaut.jpg" class="album-cover" />
+<span class="album-name">All Is Violent, All Is Bright</span>
+<span class="artist-name">God Is An Astronaut</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Epitaph_God Is An Astronaut.jpg" class="album-cover" />
+<span class="album-name">Epitaph</span>
+<span class="artist-name">God Is An Astronaut</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Somnia_God Is An Astronaut.jpg" class="album-cover" />
+<span class="album-name">Somnia</span>
+<span class="artist-name">God Is An Astronaut</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Canopy_Silent Whale Becomes a Dream.jpg" class="album-cover" />
+<span class="album-name">Canopy</span>
+<span class="artist-name">Silent Whale Becomes a Dream</span>
+</div>
+<div class="card">
+<img src="/covers/cover_A Winged Victory for the Sullen_A Winged Victory for the Sullen.jpg" class="album-cover" />
+<span class="album-name">A Winged Victory for the Sullen</span>
+<span class="artist-name">A Winged Victory for the Sullen</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Void Moments of Inertia_Once Upon a Winter.jpg" class="album-cover" />
+<span class="album-name">Void Moments of Inertia</span>
+<span class="artist-name">Once Upon a Winter</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Any Fool Can Regret Yesterday_Baulta.jpg" class="album-cover" />
+<span class="album-name">Any Fool Can Regret Yesterday</span>
+<span class="artist-name">Baulta</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Artemis_Still Mountains.jpg" class="album-cover" />
+<span class="album-name">Artemis</span>
+<span class="artist-name">Still Mountains</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Departure Songs_We Lost The Sea.jpg" class="album-cover" />
+<span class="album-name">Departure Songs</span>
+<span class="artist-name">We Lost The Sea</span>
+</div>
+<div class="card">
+<img src="/covers/cover_How Lonely Sits the City_The Ascent of Everest.jpg" class="album-cover" />
+<span class="album-name">How Lonely Sits the City</span>
+<span class="artist-name">The Ascent of Everest</span>
+</div>
+<div class="card">
+<img src="/covers/cover_I Was Here For A Moment, Then I Was Gone_Maybeshewill.jpg" class="album-cover" />
+<span class="album-name">I Was Here For A Moment, Then I Was Gone</span>
+<span class="artist-name">Maybeshewill</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Beyond The Sea, Beneath The Sky_I Hear Sirens.jpg" class="album-cover" />
+<span class="album-name">Beyond The Sea, Beneath The Sky</span>
+<span class="artist-name">I Hear Sirens</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Snake Behind the Sun_Shy, Low.jpg" class="album-cover" />
+<span class="album-name">Snake Behind the Sun</span>
+<span class="artist-name">Shy, Low</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Dust and Disquiet_Caspian.jpg" class="album-cover" />
+<span class="album-name">Dust and Disquiet</span>
+<span class="artist-name">Caspian</span>
+</div>
+<div class="card">
+<img src="/covers/cover_You Are the Conductor_Caspian.jpg" class="album-cover" />
+<span class="album-name">You Are the Conductor</span>
+<span class="artist-name">Caspian</span>
+</div>
+<div class="card">
+<img src="/covers/cover_These Small Spaces_This Patch of Sky.jpg" class="album-cover" />
+<span class="album-name">These Small Spaces</span>
+<span class="artist-name">This Patch of Sky</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Greater Lights_Ranges.jpg" class="album-cover" />
+<span class="album-name">The Greater Lights</span>
+<span class="artist-name">Ranges</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Must You Smash Your Ears Before You Learn to Listen With Your Eyes_Joy Wants Eternity.jpg" class="album-cover" />
+<span class="album-name">Must You Smash Your Ears Before You Learn to Listen With Your Eyes</span>
+<span class="artist-name">Joy Wants Eternity</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Fog Is Rising_Joy Wants Eternity.jpg" class="album-cover" />
+<span class="album-name">The Fog Is Rising</span>
+<span class="artist-name">Joy Wants Eternity</span>
+</div>
+<div class="card">
+<img src="/covers/cover_You Who Pretend To Sleep_Joy Wants Eternity.jpg" class="album-cover" />
+<span class="album-name">You Who Pretend To Sleep</span>
+<span class="artist-name">Joy Wants Eternity</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Muses_Audiolepsia.jpg" class="album-cover" />
+<span class="album-name">Muses</span>
+<span class="artist-name">Audiolepsia</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Numinous_Those Who Ride With Giants.jpg" class="album-cover" />
+<span class="album-name">Numinous</span>
+<span class="artist-name">Those Who Ride With Giants</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Endless Dive_Endless Dive.jpg" class="album-cover" />
+<span class="album-name">Endless Dive</span>
+<span class="artist-name">Endless Dive</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Soundtracks for the Blind_Swans.jpg" class="album-cover" />
+<span class="album-name">Soundtracks for the Blind</span>
+<span class="artist-name">Swans</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Earth Fell Away_Carved Into the Sun.jpg" class="album-cover" />
+<span class="album-name">The Earth Fell Away</span>
+<span class="artist-name">Carved Into the Sun</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Into The Blue Again_The Album Leaf.jpg" class="album-cover" />
+<span class="album-name">Into The Blue Again</span>
+<span class="artist-name">The Album Leaf</span>
+</div>
+<div class="card">
+<img src="/covers/cover_At The Soundless Dawn_Red Sparowes.jpg" class="album-cover" />
+<span class="album-name">At The Soundless Dawn</span>
+<span class="artist-name">Red Sparowes</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Voyager_As Seas Exhale.jpg" class="album-cover" />
+<span class="album-name">Voyager</span>
+<span class="artist-name">As Seas Exhale</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Healing Process_As Seas Exhale.jpg" class="album-cover" />
+<span class="album-name">The Healing Process</span>
+<span class="artist-name">As Seas Exhale</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The End of Something_Collapse Under The Empire.jpg" class="album-cover" />
+<span class="album-name">The End of Something</span>
+<span class="artist-name">Collapse Under The Empire</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Hole_65daysofstatic.jpg" class="album-cover" />
+<span class="album-name">Hole</span>
+<span class="artist-name">65daysofstatic</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Seven Years Without the Sun_Gather Your Quiet.jpg" class="album-cover" />
+<span class="album-name">Seven Years Without the Sun</span>
+<span class="artist-name">Gather Your Quiet</span>
+</div>
+<div class="card">
+<img src="/covers/cover_New Others Part One_This Will Destroy You.jpg" class="album-cover" />
+<span class="album-name">New Others Part One</span>
+<span class="artist-name">This Will Destroy You</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Sisyphus_As Seas Exhale.jpg" class="album-cover" />
+<span class="album-name">Sisyphus</span>
+<span class="artist-name">As Seas Exhale</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Way Home_Sleep Dealer.jpg" class="album-cover" />
+<span class="album-name">The Way Home</span>
+<span class="artist-name">Sleep Dealer</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Red Forest_If These Trees Could Talk.jpg" class="album-cover" />
+<span class="album-name">Red Forest</span>
+<span class="artist-name">If These Trees Could Talk</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Aurora_Sleep Dealer.jpg" class="album-cover" />
+<span class="album-name">Aurora</span>
+<span class="artist-name">Sleep Dealer</span>
+</div>
+<div class="card">
+<img src="/covers/cover_You Are There_MONO.jpg" class="album-cover" />
+<span class="album-name">You Are There</span>
+<span class="artist-name">MONO</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Bridges_Transmission Zero.jpg" class="album-cover" />
+<span class="album-name">Bridges</span>
+<span class="artist-name">Transmission Zero</span>
+</div>
+<div class="card">
+<img src="/covers/cover_...And They Have Escaped the Weight of Darkness_Ólafur Arnalds.jpg" class="album-cover" />
+<span class="album-name">...And They Have Escaped the Weight of Darkness</span>
+<span class="artist-name">Ólafur Arnalds</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Chopin Project_Ólafur Arnalds.jpg" class="album-cover" />
+<span class="album-name">The Chopin Project</span>
+<span class="artist-name">Ólafur Arnalds</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Found Songs_Ólafur Arnalds.jpg" class="album-cover" />
+<span class="album-name">Found Songs</span>
+<span class="artist-name">Ólafur Arnalds</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Living Room Songs_Ólafur Arnalds.jpg" class="album-cover" />
+<span class="album-name">Living Room Songs</span>
+<span class="artist-name">Ólafur Arnalds</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Palmless Prayer  Mass Murder Refrain_MONO.jpg" class="album-cover" />
+<span class="album-name">Palmless Prayer  Mass Murder Refrain</span>
+<span class="artist-name">MONO</span>
+</div>
+<div class="card">
+<img src="/covers/cover_One Step More and You Die_MONO.jpg" class="album-cover" />
+<span class="album-name">One Step More and You Die</span>
+<span class="artist-name">MONO</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Mysterium_Hammock.jpg" class="album-cover" />
+<span class="album-name">Mysterium</span>
+<span class="artist-name">Hammock</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Oblivion Hymns_Hammock.jpg" class="album-cover" />
+<span class="album-name">Oblivion Hymns</span>
+<span class="artist-name">Hammock</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Silencia_Hammock.jpg" class="album-cover" />
+<span class="album-name">Silencia</span>
+<span class="artist-name">Hammock</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Undivided Five_A Winged Victory for the Sullen.jpg" class="album-cover" />
+<span class="album-name">The Undivided Five</span>
+<span class="artist-name">A Winged Victory for the Sullen</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Blue Hour_Federico Albanese.jpg" class="album-cover" />
+<span class="album-name">The Blue Hour</span>
+<span class="artist-name">Federico Albanese</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Hiatus_Thisquietarmy.jpg" class="album-cover" />
+<span class="album-name">Hiatus</span>
+<span class="artist-name">Thisquietarmy</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Vessels_Thisquietarmy.jpg" class="album-cover" />
+<span class="album-name">Vessels</span>
+<span class="artist-name">Thisquietarmy</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Unconquered_Thisquietarmy.jpg" class="album-cover" />
+<span class="album-name">Unconquered</span>
+<span class="artist-name">Thisquietarmy</span>
+</div>
+<div class="card">
+<img src="/covers/cover_And Their Refinement of the Decline_Stars Of The Lid.jpg" class="album-cover" />
+<span class="album-name">And Their Refinement of the Decline</span>
+<span class="artist-name">Stars Of The Lid</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Ballasted Orchestra_Stars Of The Lid.jpg" class="album-cover" />
+<span class="album-name">The Ballasted Orchestra</span>
+<span class="artist-name">Stars Of The Lid</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Tired Sounds of Stars of the Lid_Stars Of The Lid.jpg" class="album-cover" />
+<span class="album-name">The Tired Sounds of Stars of the Lid</span>
+<span class="artist-name">Stars Of The Lid</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Avec Laudenum_Stars Of The Lid.jpg" class="album-cover" />
+<span class="album-name">Avec Laudenum</span>
+<span class="artist-name">Stars Of The Lid</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Effective Disconnect_Brian McBride.jpg" class="album-cover" />
+<span class="album-name">The Effective Disconnect</span>
+<span class="artist-name">Brian McBride</span>
+</div>
+<div class="card">
+<img src="/covers/cover_When the Detail Lost Its Freedom_Brian McBride.jpg" class="album-cover" />
+<span class="album-name">When the Detail Lost Its Freedom</span>
+<span class="artist-name">Brian McBride</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Coast  Range  Arc_Loscil.jpg" class="album-cover" />
+<span class="album-name">Coast  Range  Arc</span>
+<span class="artist-name">Loscil</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Minima Moralia_Chihei Hatakeyama.jpg" class="album-cover" />
+<span class="album-name">Minima Moralia</span>
+<span class="artist-name">Chihei Hatakeyama</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Owl Splinters_Deaf Center.jpg" class="album-cover" />
+<span class="album-name">Owl Splinters</span>
+<span class="artist-name">Deaf Center</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Endless Fragments of Time_Deep Watch.jpg" class="album-cover" />
+<span class="album-name">Endless Fragments of Time</span>
+<span class="artist-name">Deep Watch</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Wilderness of Mirrors_Lawrence English.jpg" class="album-cover" />
+<span class="album-name">Wilderness of Mirrors</span>
+<span class="artist-name">Lawrence English</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Selva Oscura_William Basinski.jpg" class="album-cover" />
+<span class="album-name">Selva Oscura</span>
+<span class="artist-name">William Basinski</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Light_Hazy.jpg" class="album-cover" />
+<span class="album-name">Light</span>
+<span class="artist-name">Hazy</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Costero_Slow Meadow.jpg" class="album-cover" />
+<span class="album-name">Costero</span>
+<span class="artist-name">Slow Meadow</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Slow Meadow_Slow Meadow.jpg" class="album-cover" />
+<span class="album-name">Slow Meadow</span>
+<span class="artist-name">Slow Meadow</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Divenire_Ludovico Einaudi.jpg" class="album-cover" />
+<span class="album-name">Divenire</span>
+<span class="artist-name">Ludovico Einaudi</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Gravity_Ben Lukas Boysen.jpg" class="album-cover" />
+<span class="album-name">Gravity</span>
+<span class="artist-name">Ben Lukas Boysen</span>
+</div>
+<div class="card">
+<img src="/covers/cover_This Is for Our Sins_Lowercase Noises.jpg" class="album-cover" />
+<span class="album-name">This Is for Our Sins</span>
+<span class="artist-name">Lowercase Noises</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Seraphim_How to Disappear Completely.jpg" class="album-cover" />
+<span class="album-name">Seraphim</span>
+<span class="artist-name">How to Disappear Completely</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Nuance_Noir Reva.jpg" class="album-cover" />
+<span class="album-name">Nuance</span>
+<span class="artist-name">Noir Reva</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Stella Meae_Non Somnia.jpg" class="album-cover" />
+<span class="album-name">Stella Meae</span>
+<span class="artist-name">Non Somnia</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Silencia_Hammock.jpg" class="album-cover" />
+<span class="album-name">Silencia</span>
+<span class="artist-name">Hammock</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Sometimes_Goldmund.jpg" class="album-cover" />
+<span class="album-name">Sometimes</span>
+<span class="artist-name">Goldmund</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Charcoal_Brambles.jpg" class="album-cover" />
+<span class="album-name">Charcoal</span>
+<span class="artist-name">Brambles</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Daydreaming_Rafael Anton Irisarri.jpg" class="album-cover" />
+<span class="album-name">Daydreaming</span>
+<span class="artist-name">Rafael Anton Irisarri</span>
+</div>
+<div class="card">
+<img src="/covers/cover_The Malady Of Elegance_Goldmund.jpg" class="album-cover" />
+<span class="album-name">The Malady Of Elegance</span>
+<span class="artist-name">Goldmund</span>
 </div>
 </div>
 
@@ -508,70 +513,70 @@ draft = false
 non-instrumental post-rock, may contain hardcore bands <br/>
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Great Escape_Crippled Black Phoenix.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Great Escape</span>
-<span>Crippled Black Phoenix</span>
+<div class="card">
+<img src="/covers/cover_Great Escape_Crippled Black Phoenix.jpg" class="album-cover" />
+<span class="album-name">Great Escape</span>
+<span class="artist-name">Crippled Black Phoenix</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Quietest Place On Earth_We Lost The Sea.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Quietest Place On Earth</span>
-<span>We Lost The Sea</span>
+<div class="card">
+<img src="/covers/cover_The Quietest Place On Earth_We Lost The Sea.jpg" class="album-cover" />
+<span class="album-name">The Quietest Place On Earth</span>
+<span class="artist-name">We Lost The Sea</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Keep You_Pianos Become The Teeth.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Keep You</span>
-<span>Pianos Become The Teeth</span>
+<div class="card">
+<img src="/covers/cover_Keep You_Pianos Become The Teeth.jpg" class="album-cover" />
+<span class="album-name">Keep You</span>
+<span class="artist-name">Pianos Become The Teeth</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_no ghostless place_Raised By Swans.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">no ghostless place</span>
-<span>Raised By Swans</span>
+<div class="card">
+<img src="/covers/cover_no ghostless place_Raised By Swans.jpg" class="album-cover" />
+<span class="album-name">no ghostless place</span>
+<span class="artist-name">Raised By Swans</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Forever Blue_A.A. Williams.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Forever Blue</span>
-<span>A.A. Williams</span>
+<div class="card">
+<img src="/covers/cover_Forever Blue_A.A. Williams.jpg" class="album-cover" />
+<span class="album-name">Forever Blue</span>
+<span class="artist-name">A.A. Williams</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_King Nine_Blueneck.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">King Nine</span>
-<span>Blueneck</span>
+<div class="card">
+<img src="/covers/cover_King Nine_Blueneck.jpg" class="album-cover" />
+<span class="album-name">King Nine</span>
+<span class="artist-name">Blueneck</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Bright Wide Colder_Last Leaf Down.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Bright Wide Colder</span>
-<span>Last Leaf Down</span>
+<div class="card">
+<img src="/covers/cover_Bright Wide Colder_Last Leaf Down.jpg" class="album-cover" />
+<span class="album-name">Bright Wide Colder</span>
+<span class="artist-name">Last Leaf Down</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Nest_Brutus.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Nest</span>
-<span>Brutus</span>
+<div class="card">
+<img src="/covers/cover_Nest_Brutus.jpg" class="album-cover" />
+<span class="album-name">Nest</span>
+<span class="artist-name">Brutus</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Made of Breath Only_sleepmakeswaves.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Made of Breath Only</span>
-<span>sleepmakeswaves</span>
+<div class="card">
+<img src="/covers/cover_Made of Breath Only_sleepmakeswaves.jpg" class="album-cover" />
+<span class="album-name">Made of Breath Only</span>
+<span class="artist-name">sleepmakeswaves</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Want_Wreck and Reference.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Want</span>
-<span>Wreck and Reference</span>
+<div class="card">
+<img src="/covers/cover_Want_Wreck and Reference.jpg" class="album-cover" />
+<span class="album-name">Want</span>
+<span class="artist-name">Wreck and Reference</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_I Let It in and It Took Everything_Loathe.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">I Let It in and It Took Everything</span>
-<span>Loathe</span>
+<div class="card">
+<img src="/covers/cover_I Let It in and It Took Everything_Loathe.jpg" class="album-cover" />
+<span class="album-name">I Let It in and It Took Everything</span>
+<span class="artist-name">Loathe</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Let Me Down Easy_Birthright.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Let Me Down Easy</span>
-<span>Birthright</span>
+<div class="card">
+<img src="/covers/cover_Let Me Down Easy_Birthright.jpg" class="album-cover" />
+<span class="album-name">Let Me Down Easy</span>
+<span class="artist-name">Birthright</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Everything Between Paint and a Wall_Grandview.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Everything Between Paint and a Wall</span>
-<span>Grandview</span>
+<div class="card">
+<img src="/covers/cover_Everything Between Paint and a Wall_Grandview.jpg" class="album-cover" />
+<span class="album-name">Everything Between Paint and a Wall</span>
+<span class="artist-name">Grandview</span>
 </div>
 </div>
 
@@ -579,315 +584,320 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 ## post-metal/sludge/blackgaze {#post-metal-sludge-blackgaze}
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Raya_Pothamus.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Raya</span>
-<span>Pothamus</span>
+<div class="card">
+<img src="/covers/cover_Raya_Pothamus.jpg" class="album-cover" />
+<span class="album-name">Raya</span>
+<span class="artist-name">Pothamus</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Remission_BOG.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Remission</span>
-<span>BOG</span>
+<div class="card">
+<img src="/covers/cover_Ausserwelt_Year Of No Light.jpg" class="album-cover" />
+<span class="album-name">Ausserwelt</span>
+<span class="artist-name">Year Of No Light</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Glacious_Sundrowned.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Glacious</span>
-<span>Sundrowned</span>
+<div class="card">
+<img src="/covers/cover_Remission_BOG.jpg" class="album-cover" />
+<span class="album-name">Remission</span>
+<span class="artist-name">BOG</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Doubt_King Woman.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Doubt</span>
-<span>King Woman</span>
+<div class="card">
+<img src="/covers/cover_Glacious_Sundrowned.jpg" class="album-cover" />
+<span class="album-name">Glacious</span>
+<span class="artist-name">Sundrowned</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Stare into Death and Be Still_Ulcerate.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Stare into Death and Be Still</span>
-<span>Ulcerate</span>
+<div class="card">
+<img src="/covers/cover_Doubt_King Woman.jpg" class="album-cover" />
+<span class="album-name">Doubt</span>
+<span class="artist-name">King Woman</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_A Dawn to Fear_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">A Dawn to Fear</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_Stare into Death and Be Still_Ulcerate.jpg" class="album-cover" />
+<span class="album-name">Stare into Death and Be Still</span>
+<span class="artist-name">Ulcerate</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Somewhere Along The Highway_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Somewhere Along The Highway</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_A Dawn to Fear_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">A Dawn to Fear</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Cult Of Luna_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Cult Of Luna</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_Somewhere Along The Highway_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">Somewhere Along The Highway</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Long Road North_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Long Road North</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_Cult Of Luna_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">Cult Of Luna</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Raging River_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Raging River</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_The Long Road North_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">The Long Road North</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Mariner_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Mariner</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_The Raging River_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">The Raging River</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Eternal Kingdom_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Eternal Kingdom</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_Mariner_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">Mariner</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Vertikal_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Vertikal</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_Eternal Kingdom_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">Eternal Kingdom</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Salvation_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Salvation</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_Vertikal_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">Vertikal</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Beyond_Cult Of Luna.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Beyond</span>
-<span>Cult Of Luna</span>
+<div class="card">
+<img src="/covers/cover_Salvation_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">Salvation</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Esoteric Oppression_The Moth Gatherer.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Esoteric Oppression</span>
-<span>The Moth Gatherer</span>
+<div class="card">
+<img src="/covers/cover_The Beyond_Cult Of Luna.jpg" class="album-cover" />
+<span class="album-name">The Beyond</span>
+<span class="artist-name">Cult Of Luna</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Earth Is the Sky_The Moth Gatherer.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Earth Is the Sky</span>
-<span>The Moth Gatherer</span>
+<div class="card">
+<img src="/covers/cover_Esoteric Oppression_The Moth Gatherer.jpg" class="album-cover" />
+<span class="album-name">Esoteric Oppression</span>
+<span class="artist-name">The Moth Gatherer</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Mass VI_Amenra.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Mass VI</span>
-<span>Amenra</span>
+<div class="card">
+<img src="/covers/cover_The Earth Is the Sky_The Moth Gatherer.jpg" class="album-cover" />
+<span class="album-name">The Earth Is the Sky</span>
+<span class="artist-name">The Moth Gatherer</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_De Doorn_Amenra.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">De Doorn</span>
-<span>Amenra</span>
+<div class="card">
+<img src="/covers/cover_Mass VI_Amenra.jpg" class="album-cover" />
+<span class="album-name">Mass VI</span>
+<span class="artist-name">Amenra</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Monument_Onhou.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Monument</span>
-<span>Onhou</span>
+<div class="card">
+<img src="/covers/cover_De Doorn_Amenra.jpg" class="album-cover" />
+<span class="album-name">De Doorn</span>
+<span class="artist-name">Amenra</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Unmaker_LLNN.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Unmaker</span>
-<span>LLNN</span>
+<div class="card">
+<img src="/covers/cover_Monument_Onhou.jpg" class="album-cover" />
+<span class="album-name">Monument</span>
+<span class="artist-name">Onhou</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Hell II_Hell.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Hell II</span>
-<span>Hell</span>
+<div class="card">
+<img src="/covers/cover_Unmaker_LLNN.jpg" class="album-cover" />
+<span class="album-name">Unmaker</span>
+<span class="artist-name">LLNN</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Gospel of the Vile_Dwaal.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Gospel of the Vile</span>
-<span>Dwaal</span>
+<div class="card">
+<img src="/covers/cover_Hell II_Hell.jpg" class="album-cover" />
+<span class="album-name">Hell II</span>
+<span class="artist-name">Hell</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Hyperion_Dirge.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Hyperion</span>
-<span>Dirge</span>
+<div class="card">
+<img src="/covers/cover_Gospel of the Vile_Dwaal.jpg" class="album-cover" />
+<span class="album-name">Gospel of the Vile</span>
+<span class="artist-name">Dwaal</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Plague God_Absent in Body.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Plague God</span>
-<span>Absent in Body</span>
+<div class="card">
+<img src="/covers/cover_Hyperion_Dirge.jpg" class="album-cover" />
+<span class="album-name">Hyperion</span>
+<span class="artist-name">Dirge</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Negative Transfer_NŪR.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Negative Transfer</span>
-<span>NŪR</span>
+<div class="card">
+<img src="/covers/cover_Plague God_Absent in Body.jpg" class="album-cover" />
+<span class="album-name">Plague God</span>
+<span class="artist-name">Absent in Body</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Obliviosus_MSW.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Obliviosus</span>
-<span>MSW</span>
+<div class="card">
+<img src="/covers/cover_Negative Transfer_NŪR.jpg" class="album-cover" />
+<span class="album-name">Negative Transfer</span>
+<span class="artist-name">NŪR</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Ausserwelt_Year Of No Light.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Ausserwelt</span>
-<span>Year Of No Light</span>
+<div class="card">
+<img src="/covers/cover_Obliviosus_MSW.jpg" class="album-cover" />
+<span class="album-name">Obliviosus</span>
+<span class="artist-name">MSW</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Quietly_Mouth Of The Architect.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Quietly</span>
-<span>Mouth Of The Architect</span>
+<div class="card">
+<img src="/covers/cover_Quietly_Mouth Of The Architect.jpg" class="album-cover" />
+<span class="album-name">Quietly</span>
+<span class="artist-name">Mouth Of The Architect</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_As I Cast Ruin Upon the Lens That Reveals My Every Flaw_Cavernlight.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">As I Cast Ruin Upon the Lens That Reveals My Every Flaw</span>
-<span>Cavernlight</span>
+<div class="card">
+<img src="/covers/cover_As I Cast Ruin Upon the Lens That Reveals My Every Flaw_Cavernlight.jpg" class="album-cover" />
+<span class="album-name">As I Cast Ruin Upon the Lens That Reveals My Every Flaw</span>
+<span class="artist-name">Cavernlight</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Cairn_Mizmor.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Cairn</span>
-<span>Mizmor</span>
+<div class="card">
+<img src="/covers/cover_Cairn_Mizmor.jpg" class="album-cover" />
+<span class="album-name">Cairn</span>
+<span class="artist-name">Mizmor</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Assassine(s)_CELESTE.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Assassine(s)</span>
-<span>CELESTE</span>
+<div class="card">
+<img src="/covers/cover_Assassine(s)_CELESTE.jpg" class="album-cover" />
+<span class="album-name">Assassine(s)</span>
+<span class="artist-name">CELESTE</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Magus_Thou.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Magus</span>
-<span>Thou</span>
+<div class="card">
+<img src="/covers/cover_Magus_Thou.jpg" class="album-cover" />
+<span class="album-name">Magus</span>
+<span class="artist-name">Thou</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Tyrant_Thou.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Tyrant</span>
-<span>Thou</span>
+<div class="card">
+<img src="/covers/cover_Tyrant_Thou.jpg" class="album-cover" />
+<span class="album-name">Tyrant</span>
+<span class="artist-name">Thou</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Caustic_Primitive Man.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Caustic</span>
-<span>Primitive Man</span>
+<div class="card">
+<img src="/covers/cover_Caustic_Primitive Man.jpg" class="album-cover" />
+<span class="album-name">Caustic</span>
+<span class="artist-name">Primitive Man</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Blessings of the Highest Order_Thou.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Blessings of the Highest Order</span>
-<span>Thou</span>
+<div class="card">
+<img src="/covers/cover_Blessings of the Highest Order_Thou.jpg" class="album-cover" />
+<span class="album-name">Blessings of the Highest Order</span>
+<span class="artist-name">Thou</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Unreal Never Lived_YOB.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Unreal Never Lived</span>
-<span>YOB</span>
+<div class="card">
+<img src="/covers/cover_The Unreal Never Lived_YOB.jpg" class="album-cover" />
+<span class="album-name">The Unreal Never Lived</span>
+<span class="artist-name">YOB</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Star is way way is Eye_NORNA.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Star is way way is Eye</span>
-<span>NORNA</span>
+<div class="card">
+<img src="/covers/cover_Star is way way is Eye_NORNA.jpg" class="album-cover" />
+<span class="album-name">Star is way way is Eye</span>
+<span class="artist-name">NORNA</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Human = Garbage_Dystopia.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Human = Garbage</span>
-<span>Dystopia</span>
+<div class="card">
+<img src="/covers/cover_Human = Garbage_Dystopia.jpg" class="album-cover" />
+<span class="album-name">Human = Garbage</span>
+<span class="artist-name">Dystopia</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Lapsus_Light Bearer.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Lapsus</span>
-<span>Light Bearer</span>
+<div class="card">
+<img src="/covers/cover_Lapsus_Light Bearer.jpg" class="album-cover" />
+<span class="album-name">Lapsus</span>
+<span class="artist-name">Light Bearer</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_WakeLift_Rosetta.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">WakeLift</span>
-<span>Rosetta</span>
+<div class="card">
+<img src="/covers/cover_WakeLift_Rosetta.jpg" class="album-cover" />
+<span class="album-name">WakeLift</span>
+<span class="artist-name">Rosetta</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Rheia_Oathbreaker.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Rheia</span>
-<span>Oathbreaker</span>
+<div class="card">
+<img src="/covers/cover_Rheia_Oathbreaker.jpg" class="album-cover" />
+<span class="album-name">Rheia</span>
+<span class="artist-name">Oathbreaker</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Plantgazer_Show Me A Dinosaur.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Plantgazer</span>
-<span>Show Me A Dinosaur</span>
+<div class="card">
+<img src="/covers/cover_Plantgazer_Show Me A Dinosaur.jpg" class="album-cover" />
+<span class="album-name">Plantgazer</span>
+<span class="artist-name">Show Me A Dinosaur</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Death Spells_Holy Fawn.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Death Spells</span>
-<span>Holy Fawn</span>
+<div class="card">
+<img src="/covers/cover_Death Spells_Holy Fawn.jpg" class="album-cover" />
+<span class="album-name">Death Spells</span>
+<span class="artist-name">Holy Fawn</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Dimensional Bleed_Holy Fawn.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Dimensional Bleed</span>
-<span>Holy Fawn</span>
+<div class="card">
+<img src="/covers/cover_Dimensional Bleed_Holy Fawn.jpg" class="album-cover" />
+<span class="album-name">Dimensional Bleed</span>
+<span class="artist-name">Holy Fawn</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Spiritual Instinct_Alcest.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Spiritual Instinct</span>
-<span>Alcest</span>
+<div class="card">
+<img src="/covers/cover_Spiritual Instinct_Alcest.jpg" class="album-cover" />
+<span class="album-name">Spiritual Instinct</span>
+<span class="artist-name">Alcest</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Écailles de lune_Alcest.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Écailles de lune</span>
-<span>Alcest</span>
+<div class="card">
+<img src="/covers/cover_Écailles de lune_Alcest.jpg" class="album-cover" />
+<span class="album-name">Écailles de lune</span>
+<span class="artist-name">Alcest</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Kodama_Alcest.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Kodama</span>
-<span>Alcest</span>
+<div class="card">
+<img src="/covers/cover_Kodama_Alcest.jpg" class="album-cover" />
+<span class="album-name">Kodama</span>
+<span class="artist-name">Alcest</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Dead Light_Fen.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Dead Light</span>
-<span>Fen</span>
+<div class="card">
+<img src="/covers/cover_The Dead Light_Fen.jpg" class="album-cover" />
+<span class="album-name">The Dead Light</span>
+<span class="artist-name">Fen</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Try Not to Destroy Everything you Love_An Autumn for Crippled Children.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Try Not to Destroy Everything you Love</span>
-<span>An Autumn for Crippled Children</span>
+<div class="card">
+<img src="/covers/cover_Try Not to Destroy Everything you Love_An Autumn for Crippled Children.jpg" class="album-cover" />
+<span class="album-name">Try Not to Destroy Everything you Love</span>
+<span class="artist-name">An Autumn for Crippled Children</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Beautiful Ghosts_Unreqvited.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Beautiful Ghosts</span>
-<span>Unreqvited</span>
+<div class="card">
+<img src="/covers/cover_Beautiful Ghosts_Unreqvited.jpg" class="album-cover" />
+<span class="album-name">Beautiful Ghosts</span>
+<span class="artist-name">Unreqvited</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_I Want to Be There_Sadness.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">I Want to Be There</span>
-<span>Sadness</span>
+<div class="card">
+<img src="/covers/cover_I Want to Be There_Sadness.jpg" class="album-cover" />
+<span class="album-name">I Want to Be There</span>
+<span class="artist-name">Sadness</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Diorama_MØL.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Diorama</span>
-<span>MØL</span>
+<div class="card">
+<img src="/covers/cover_Diorama_MØL.jpg" class="album-cover" />
+<span class="album-name">Diorama</span>
+<span class="artist-name">MØL</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Jord_MØL.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Jord</span>
-<span>MØL</span>
+<div class="card">
+<img src="/covers/cover_Jord_MØL.jpg" class="album-cover" />
+<span class="album-name">Jord</span>
+<span class="artist-name">MØL</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Arson_Harakiri for the Sky.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Arson</span>
-<span>Harakiri for the Sky</span>
+<div class="card">
+<img src="/covers/cover_Arson_Harakiri for the Sky.jpg" class="album-cover" />
+<span class="album-name">Arson</span>
+<span class="artist-name">Harakiri for the Sky</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_III-Trauma_Harakiri for the Sky.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">III-Trauma</span>
-<span>Harakiri for the Sky</span>
+<div class="card">
+<img src="/covers/cover_III-Trauma_Harakiri for the Sky.jpg" class="album-cover" />
+<span class="album-name">III-Trauma</span>
+<span class="artist-name">Harakiri for the Sky</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Heretoir_Heretoir.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Heretoir</span>
-<span>Heretoir</span>
+<div class="card">
+<img src="/covers/cover_Heretoir_Heretoir.jpg" class="album-cover" />
+<span class="album-name">Heretoir</span>
+<span class="artist-name">Heretoir</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Home_Numenorean.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Home</span>
-<span>Numenorean</span>
+<div class="card">
+<img src="/covers/cover_Home_Numenorean.jpg" class="album-cover" />
+<span class="album-name">Home</span>
+<span class="artist-name">Numenorean</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Tunnel Blanket_This Will Destroy You.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Tunnel Blanket</span>
-<span>This Will Destroy You</span>
+<div class="card">
+<img src="/covers/cover_Tunnel Blanket_This Will Destroy You.jpg" class="album-cover" />
+<span class="album-name">Tunnel Blanket</span>
+<span class="artist-name">This Will Destroy You</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Weighing Souls With Sand_The Angelic Process.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Weighing Souls With Sand</span>
-<span>The Angelic Process</span>
+<div class="card">
+<img src="/covers/cover_Weighing Souls With Sand_The Angelic Process.jpg" class="album-cover" />
+<span class="album-name">Weighing Souls With Sand</span>
+<span class="artist-name">The Angelic Process</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Sol Sistere_Sol Sistere.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Sol Sistere</span>
-<span>Sol Sistere</span>
+<div class="card">
+<img src="/covers/cover_Sol Sistere_Sol Sistere.jpg" class="album-cover" />
+<span class="album-name">Sol Sistere</span>
+<span class="artist-name">Sol Sistere</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Fires_Elderwind.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Fires</span>
-<span>Elderwind</span>
+<div class="card">
+<img src="/covers/cover_Fires_Elderwind.jpg" class="album-cover" />
+<span class="album-name">Fires</span>
+<span class="artist-name">Elderwind</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Rotting Garden_Grima.jpg" class="album-cover" />
+<span class="album-name">Rotting Garden</span>
+<span class="artist-name">Grima</span>
 </div>
 </div>
 
@@ -895,285 +905,290 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 ## indie {#indie}
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Baby Teeth_Flower Face.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Baby Teeth</span>
-<span>Flower Face</span>
+<div class="card">
+<img src="/covers/cover_Baby Teeth_Flower Face.jpg" class="album-cover" />
+<span class="album-name">Baby Teeth</span>
+<span class="artist-name">Flower Face</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Fever Dreams_Flower Face.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Fever Dreams</span>
-<span>Flower Face</span>
+<div class="card">
+<img src="/covers/cover_Fever Dreams_Flower Face.jpg" class="album-cover" />
+<span class="album-name">Fever Dreams</span>
+<span class="artist-name">Flower Face</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Inbred_Ethel Cain.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Inbred</span>
-<span>Ethel Cain</span>
+<div class="card">
+<img src="/covers/cover_Inbred_Ethel Cain.jpg" class="album-cover" />
+<span class="album-name">Inbred</span>
+<span class="artist-name">Ethel Cain</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Preacher's Daughter_Ethel Cain.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Preacher's Daughter</span>
-<span>Ethel Cain</span>
+<div class="card">
+<img src="/covers/cover_Preacher's Daughter_Ethel Cain.jpg" class="album-cover" />
+<span class="album-name">Preacher's Daughter</span>
+<span class="artist-name">Ethel Cain</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Golden Age_Ethel Cain.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Golden Age</span>
-<span>Ethel Cain</span>
+<div class="card">
+<img src="/covers/cover_Golden Age_Ethel Cain.jpg" class="album-cover" />
+<span class="album-name">Golden Age</span>
+<span class="artist-name">Ethel Cain</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Goodbye To All That_Shamrain.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Goodbye To All That</span>
-<span>Shamrain</span>
+<div class="card">
+<img src="/covers/cover_Goodbye To All That_Shamrain.jpg" class="album-cover" />
+<span class="album-name">Goodbye To All That</span>
+<span class="artist-name">Shamrain</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Someplace Else_Shamrain.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Someplace Else</span>
-<span>Shamrain</span>
+<div class="card">
+<img src="/covers/cover_Someplace Else_Shamrain.jpg" class="album-cover" />
+<span class="album-name">Someplace Else</span>
+<span class="artist-name">Shamrain</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_I'm Wide Awake, It's Morning_Bright Eyes.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">I'm Wide Awake, It's Morning</span>
-<span>Bright Eyes</span>
+<div class="card">
+<img src="/covers/cover_I'm Wide Awake, It's Morning_Bright Eyes.jpg" class="album-cover" />
+<span class="album-name">I'm Wide Awake, It's Morning</span>
+<span class="artist-name">Bright Eyes</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Notes to an Absent Lover_Barzin.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Notes to an Absent Lover</span>
-<span>Barzin</span>
+<div class="card">
+<img src="/covers/cover_Notes to an Absent Lover_Barzin.jpg" class="album-cover" />
+<span class="album-name">Notes to an Absent Lover</span>
+<span class="artist-name">Barzin</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Myopia_Agnes Obel.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Myopia</span>
-<span>Agnes Obel</span>
+<div class="card">
+<img src="/covers/cover_Myopia_Agnes Obel.jpg" class="album-cover" />
+<span class="album-name">Myopia</span>
+<span class="artist-name">Agnes Obel</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_If You Wait_London Grammar.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">If You Wait</span>
-<span>London Grammar</span>
+<div class="card">
+<img src="/covers/cover_If You Wait_London Grammar.jpg" class="album-cover" />
+<span class="album-name">If You Wait</span>
+<span class="artist-name">London Grammar</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Where Have All the Flowers Gone_Deb Never.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Where Have All the Flowers Gone</span>
-<span>Deb Never</span>
+<div class="card">
+<img src="/covers/cover_Where Have All the Flowers Gone_Deb Never.jpg" class="album-cover" />
+<span class="album-name">Where Have All the Flowers Gone</span>
+<span class="artist-name">Deb Never</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Disintegration_The Cure.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Disintegration</span>
-<span>The Cure</span>
+<div class="card">
+<img src="/covers/cover_Disintegration_The Cure.jpg" class="album-cover" />
+<span class="album-name">Disintegration</span>
+<span class="artist-name">The Cure</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Engine of Hell_Emma Ruth Rundle.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Engine of Hell</span>
-<span>Emma Ruth Rundle</span>
+<div class="card">
+<img src="/covers/cover_Engine of Hell_Emma Ruth Rundle.jpg" class="album-cover" />
+<span class="album-name">Engine of Hell</span>
+<span class="artist-name">Emma Ruth Rundle</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_WOMB_Purity Ring.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">WOMB</span>
-<span>Purity Ring</span>
+<div class="card">
+<img src="/covers/cover_WOMB_Purity Ring.jpg" class="album-cover" />
+<span class="album-name">WOMB</span>
+<span class="artist-name">Purity Ring</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_shrines_Purity Ring.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">shrines</span>
-<span>Purity Ring</span>
+<div class="card">
+<img src="/covers/cover_shrines_Purity Ring.jpg" class="album-cover" />
+<span class="album-name">shrines</span>
+<span class="artist-name">Purity Ring</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_another eternity_Purity Ring.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">another eternity</span>
-<span>Purity Ring</span>
+<div class="card">
+<img src="/covers/cover_another eternity_Purity Ring.jpg" class="album-cover" />
+<span class="album-name">another eternity</span>
+<span class="artist-name">Purity Ring</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Immunity_Clairo.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Immunity</span>
-<span>Clairo</span>
+<div class="card">
+<img src="/covers/cover_Immunity_Clairo.jpg" class="album-cover" />
+<span class="album-name">Immunity</span>
+<span class="artist-name">Clairo</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Sprained Ankle_Julien Baker.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Sprained Ankle</span>
-<span>Julien Baker</span>
+<div class="card">
+<img src="/covers/cover_Sprained Ankle_Julien Baker.jpg" class="album-cover" />
+<span class="album-name">Sprained Ankle</span>
+<span class="artist-name">Julien Baker</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Turn Out the Lights_Julien Baker.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Turn Out the Lights</span>
-<span>Julien Baker</span>
+<div class="card">
+<img src="/covers/cover_Turn Out the Lights_Julien Baker.jpg" class="album-cover" />
+<span class="album-name">Turn Out the Lights</span>
+<span class="artist-name">Julien Baker</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Good Riddance_Gracie Abrams.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Good Riddance</span>
-<span>Gracie Abrams</span>
+<div class="card">
+<img src="/covers/cover_Good Riddance_Gracie Abrams.jpg" class="album-cover" />
+<span class="album-name">Good Riddance</span>
+<span class="artist-name">Gracie Abrams</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Fuzzybrain_Dayglow.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Fuzzybrain</span>
-<span>Dayglow</span>
+<div class="card">
+<img src="/covers/cover_Fuzzybrain_Dayglow.jpg" class="album-cover" />
+<span class="album-name">Fuzzybrain</span>
+<span class="artist-name">Dayglow</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Oh Wonder_Oh Wonder.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Oh Wonder</span>
-<span>Oh Wonder</span>
+<div class="card">
+<img src="/covers/cover_Oh Wonder_Oh Wonder.jpg" class="album-cover" />
+<span class="album-name">Oh Wonder</span>
+<span class="artist-name">Oh Wonder</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_After Fillmore County_Vansire.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">After Fillmore County</span>
-<span>Vansire</span>
+<div class="card">
+<img src="/covers/cover_After Fillmore County_Vansire.jpg" class="album-cover" />
+<span class="album-name">After Fillmore County</span>
+<span class="artist-name">Vansire</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_color theory_Soccer Mommy.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">color theory</span>
-<span>Soccer Mommy</span>
+<div class="card">
+<img src="/covers/cover_color theory_Soccer Mommy.jpg" class="album-cover" />
+<span class="album-name">color theory</span>
+<span class="artist-name">Soccer Mommy</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_A Collection of Fleeting Moments and Daydreams_Orion Sun.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">A Collection of Fleeting Moments and Daydreams</span>
-<span>Orion Sun</span>
+<div class="card">
+<img src="/covers/cover_A Collection of Fleeting Moments and Daydreams_Orion Sun.jpg" class="album-cover" />
+<span class="album-name">A Collection of Fleeting Moments and Daydreams</span>
+<span class="artist-name">Orion Sun</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Charli_Charli XCX.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Charli</span>
-<span>Charli XCX</span>
+<div class="card">
+<img src="/covers/cover_Charli_Charli XCX.jpg" class="album-cover" />
+<span class="album-name">Charli</span>
+<span class="artist-name">Charli XCX</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Ask Me Tomorrow_Mojave 3.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Ask Me Tomorrow</span>
-<span>Mojave 3</span>
+<div class="card">
+<img src="/covers/cover_Ask Me Tomorrow_Mojave 3.jpg" class="album-cover" />
+<span class="album-name">Ask Me Tomorrow</span>
+<span class="artist-name">Mojave 3</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Titanic Rising_Weyes Blood.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Titanic Rising</span>
-<span>Weyes Blood</span>
+<div class="card">
+<img src="/covers/cover_Titanic Rising_Weyes Blood.jpg" class="album-cover" />
+<span class="album-name">Titanic Rising</span>
+<span class="artist-name">Weyes Blood</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Remind Me Tomorrow_Sharon Van Etten.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Remind Me Tomorrow</span>
-<span>Sharon Van Etten</span>
+<div class="card">
+<img src="/covers/cover_Remind Me Tomorrow_Sharon Van Etten.jpg" class="album-cover" />
+<span class="album-name">Remind Me Tomorrow</span>
+<span class="artist-name">Sharon Van Etten</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_All Mirrors_Angel Olsen.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">All Mirrors</span>
-<span>Angel Olsen</span>
+<div class="card">
+<img src="/covers/cover_All Mirrors_Angel Olsen.jpg" class="album-cover" />
+<span class="album-name">All Mirrors</span>
+<span class="artist-name">Angel Olsen</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Hurt_Ruby Haunt.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Hurt</span>
-<span>Ruby Haunt</span>
+<div class="card">
+<img src="/covers/cover_Hurt_Ruby Haunt.jpg" class="album-cover" />
+<span class="album-name">Hurt</span>
+<span class="artist-name">Ruby Haunt</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Party_Andy Shauf.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Party</span>
-<span>Andy Shauf</span>
+<div class="card">
+<img src="/covers/cover_The Party_Andy Shauf.jpg" class="album-cover" />
+<span class="album-name">The Party</span>
+<span class="artist-name">Andy Shauf</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Songs I Wrote in My Bedroom_Anson Seabra.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Songs I Wrote in My Bedroom</span>
-<span>Anson Seabra</span>
+<div class="card">
+<img src="/covers/cover_Songs I Wrote in My Bedroom_Anson Seabra.jpg" class="album-cover" />
+<span class="album-name">Songs I Wrote in My Bedroom</span>
+<span class="artist-name">Anson Seabra</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Malibu Nights_LANY.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Malibu Nights</span>
-<span>LANY</span>
+<div class="card">
+<img src="/covers/cover_Malibu Nights_LANY.jpg" class="album-cover" />
+<span class="album-name">Malibu Nights</span>
+<span class="artist-name">LANY</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Fishbowl_Lucy Blue.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Fishbowl</span>
-<span>Lucy Blue</span>
+<div class="card">
+<img src="/covers/cover_Fishbowl_Lucy Blue.jpg" class="album-cover" />
+<span class="album-name">Fishbowl</span>
+<span class="artist-name">Lucy Blue</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_A Black Mile To The Surface_Manchester Orchestra.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">A Black Mile To The Surface</span>
-<span>Manchester Orchestra</span>
+<div class="card">
+<img src="/covers/cover_A Black Mile To The Surface_Manchester Orchestra.jpg" class="album-cover" />
+<span class="album-name">A Black Mile To The Surface</span>
+<span class="artist-name">Manchester Orchestra</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Strange Pleasures_Still Corners.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Strange Pleasures</span>
-<span>Still Corners</span>
+<div class="card">
+<img src="/covers/cover_Strange Pleasures_Still Corners.jpg" class="album-cover" />
+<span class="album-name">Strange Pleasures</span>
+<span class="artist-name">Still Corners</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Depression Cherry_Beach House.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Depression Cherry</span>
-<span>Beach House</span>
+<div class="card">
+<img src="/covers/cover_Depression Cherry_Beach House.jpg" class="album-cover" />
+<span class="album-name">Depression Cherry</span>
+<span class="artist-name">Beach House</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_If You're in the Water_The Saxophones.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">If You're in the Water</span>
-<span>The Saxophones</span>
+<div class="card">
+<img src="/covers/cover_If You're in the Water_The Saxophones.jpg" class="album-cover" />
+<span class="album-name">If You're in the Water</span>
+<span class="artist-name">The Saxophones</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_please put me in a medically induced coma_carolesdaughter.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">please put me in a medically induced coma</span>
-<span>carolesdaughter</span>
+<div class="card">
+<img src="/covers/cover_please put me in a medically induced coma_carolesdaughter.jpg" class="album-cover" />
+<span class="album-name">please put me in a medically induced coma</span>
+<span class="artist-name">carolesdaughter</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_late night thoughts_shy martin.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">late night thoughts</span>
-<span>shy martin</span>
+<div class="card">
+<img src="/covers/cover_late night thoughts_shy martin.jpg" class="album-cover" />
+<span class="album-name">late night thoughts</span>
+<span class="artist-name">shy martin</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_I Could Live In Hope_Low.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">I Could Live In Hope</span>
-<span>Low</span>
+<div class="card">
+<img src="/covers/cover_I Could Live In Hope_Low.jpg" class="album-cover" />
+<span class="album-name">I Could Live In Hope</span>
+<span class="artist-name">Low</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Appaloosa Bones_Gregory Alan Isakov.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Appaloosa Bones</span>
-<span>Gregory Alan Isakov</span>
+<div class="card">
+<img src="/covers/cover_Appaloosa Bones_Gregory Alan Isakov.jpg" class="album-cover" />
+<span class="album-name">Appaloosa Bones</span>
+<span class="artist-name">Gregory Alan Isakov</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Jinx_Crumb.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Jinx</span>
-<span>Crumb</span>
+<div class="card">
+<img src="/covers/cover_Jinx_Crumb.jpg" class="album-cover" />
+<span class="album-name">Jinx</span>
+<span class="artist-name">Crumb</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Tell Me I'm Pretty_Cage The Elephant.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Tell Me I'm Pretty</span>
-<span>Cage The Elephant</span>
+<div class="card">
+<img src="/covers/cover_Tell Me I'm Pretty_Cage The Elephant.jpg" class="album-cover" />
+<span class="album-name">Tell Me I'm Pretty</span>
+<span class="artist-name">Cage The Elephant</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Melophobia_Cage The Elephant.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Melophobia</span>
-<span>Cage The Elephant</span>
+<div class="card">
+<img src="/covers/cover_Melophobia_Cage The Elephant.jpg" class="album-cover" />
+<span class="album-name">Melophobia</span>
+<span class="artist-name">Cage The Elephant</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Wave_Patrick Watson.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Wave</span>
-<span>Patrick Watson</span>
+<div class="card">
+<img src="/covers/cover_Wave_Patrick Watson.jpg" class="album-cover" />
+<span class="album-name">Wave</span>
+<span class="artist-name">Patrick Watson</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Melodrama_Lorde.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Melodrama</span>
-<span>Lorde</span>
+<div class="card">
+<img src="/covers/cover_Melodrama_Lorde.jpg" class="album-cover" />
+<span class="album-name">Melodrama</span>
+<span class="artist-name">Lorde</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Two_Liza Anne.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Two</span>
-<span>Liza Anne</span>
+<div class="card">
+<img src="/covers/cover_Two_Liza Anne.jpg" class="album-cover" />
+<span class="album-name">Two</span>
+<span class="artist-name">Liza Anne</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Inference 3_Fog Lake.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Inference 3</span>
-<span>Fog Lake</span>
+<div class="card">
+<img src="/covers/cover_Inference 3_Fog Lake.jpg" class="album-cover" />
+<span class="album-name">Inference 3</span>
+<span class="artist-name">Fog Lake</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Giving The World Away_Hatchie.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Giving The World Away</span>
-<span>Hatchie</span>
+<div class="card">
+<img src="/covers/cover_Giving The World Away_Hatchie.jpg" class="album-cover" />
+<span class="album-name">Giving The World Away</span>
+<span class="artist-name">Hatchie</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_A Different Age_Current Joys.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">A Different Age</span>
-<span>Current Joys</span>
+<div class="card">
+<img src="/covers/cover_A Different Age_Current Joys.jpg" class="album-cover" />
+<span class="album-name">A Different Age</span>
+<span class="artist-name">Current Joys</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_A Black Mile To The Surface_Manchester Orchestra.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">A Black Mile To The Surface</span>
-<span>Manchester Orchestra</span>
+<div class="card">
+<img src="/covers/cover_A Black Mile To The Surface_Manchester Orchestra.jpg" class="album-cover" />
+<span class="album-name">A Black Mile To The Surface</span>
+<span class="artist-name">Manchester Orchestra</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Evil_Interpol.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Evil</span>
-<span>Interpol</span>
+<div class="card">
+<img src="/covers/cover_Evil_Interpol.jpg" class="album-cover" />
+<span class="album-name">Evil</span>
+<span class="artist-name">Interpol</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Interpol_Interpol.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Interpol</span>
-<span>Interpol</span>
+<div class="card">
+<img src="/covers/cover_Interpol_Interpol.jpg" class="album-cover" />
+<span class="album-name">Interpol</span>
+<span class="artist-name">Interpol</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Turn On The Bright Lights_Interpol.jpg" class="album-cover" />
+<span class="album-name">Turn On The Bright Lights</span>
+<span class="artist-name">Interpol</span>
 </div>
 </div>
 
@@ -1181,110 +1196,110 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 ## shoegaze {#shoegaze}
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Feels Like You_Whirr.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Feels Like You</span>
-<span>Whirr</span>
+<div class="card">
+<img src="/covers/cover_Feels Like You_Whirr.jpg" class="album-cover" />
+<span class="album-name">Feels Like You</span>
+<span class="artist-name">Whirr</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Around_Whirr.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Around</span>
-<span>Whirr</span>
+<div class="card">
+<img src="/covers/cover_Around_Whirr.jpg" class="album-cover" />
+<span class="album-name">Around</span>
+<span class="artist-name">Whirr</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Luminol_Midwife.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Luminol</span>
-<span>Midwife</span>
+<div class="card">
+<img src="/covers/cover_Luminol_Midwife.jpg" class="album-cover" />
+<span class="album-name">Luminol</span>
+<span class="artist-name">Midwife</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_I Let It in and It Took Everything_Loathe.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">I Let It in and It Took Everything</span>
-<span>Loathe</span>
+<div class="card">
+<img src="/covers/cover_I Let It in and It Took Everything_Loathe.jpg" class="album-cover" />
+<span class="album-name">I Let It in and It Took Everything</span>
+<span class="artist-name">Loathe</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_[trauma ray]_trauma ray.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">[trauma ray]</span>
-<span>trauma ray</span>
+<div class="card">
+<img src="/covers/cover_[trauma ray]_trauma ray.jpg" class="album-cover" />
+<span class="album-name">[trauma ray]</span>
+<span class="artist-name">trauma ray</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Just For A Day_Slowdive.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Just For A Day</span>
-<span>Slowdive</span>
+<div class="card">
+<img src="/covers/cover_Just For A Day_Slowdive.jpg" class="album-cover" />
+<span class="album-name">Just For A Day</span>
+<span class="artist-name">Slowdive</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Slowdive_Slowdive.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Slowdive</span>
-<span>Slowdive</span>
+<div class="card">
+<img src="/covers/cover_Slowdive_Slowdive.jpg" class="album-cover" />
+<span class="album-name">Slowdive</span>
+<span class="artist-name">Slowdive</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Souvlaki_Slowdive.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Souvlaki</span>
-<span>Slowdive</span>
+<div class="card">
+<img src="/covers/cover_Souvlaki_Slowdive.jpg" class="album-cover" />
+<span class="album-name">Souvlaki</span>
+<span class="artist-name">Slowdive</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Black Aura My Sun_Deserta.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Black Aura My Sun</span>
-<span>Deserta</span>
+<div class="card">
+<img src="/covers/cover_Black Aura My Sun_Deserta.jpg" class="album-cover" />
+<span class="album-name">Black Aura My Sun</span>
+<span class="artist-name">Deserta</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Lack_Solip.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Lack</span>
-<span>Solip</span>
+<div class="card">
+<img src="/covers/cover_Lack_Solip.jpg" class="album-cover" />
+<span class="album-name">Lack</span>
+<span class="artist-name">Solip</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Blush Response & Warm_Blush Response.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Blush Response & Warm</span>
-<span>Blush Response</span>
+<div class="card">
+<img src="/covers/cover_Blush Response & Warm_Blush Response.jpg" class="album-cover" />
+<span class="album-name">Blush Response & Warm</span>
+<span class="artist-name">Blush Response</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Molten Young Lovers_Airiel.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Molten Young Lovers</span>
-<span>Airiel</span>
+<div class="card">
+<img src="/covers/cover_Molten Young Lovers_Airiel.jpg" class="album-cover" />
+<span class="album-name">Molten Young Lovers</span>
+<span class="artist-name">Airiel</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Doubt_King Woman.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Doubt</span>
-<span>King Woman</span>
+<div class="card">
+<img src="/covers/cover_Doubt_King Woman.jpg" class="album-cover" />
+<span class="album-name">Doubt</span>
+<span class="artist-name">King Woman</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Uncontrollable_Miserable.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Uncontrollable</span>
-<span>Miserable</span>
+<div class="card">
+<img src="/covers/cover_Uncontrollable_Miserable.jpg" class="album-cover" />
+<span class="album-name">Uncontrollable</span>
+<span class="artist-name">Miserable</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Bedlocked_Bedlocked.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Bedlocked</span>
-<span>Bedlocked</span>
+<div class="card">
+<img src="/covers/cover_Bedlocked_Bedlocked.jpg" class="album-cover" />
+<span class="album-name">Bedlocked</span>
+<span class="artist-name">Bedlocked</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Hurt_Ruby Haunt.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Hurt</span>
-<span>Ruby Haunt</span>
+<div class="card">
+<img src="/covers/cover_Hurt_Ruby Haunt.jpg" class="album-cover" />
+<span class="album-name">Hurt</span>
+<span class="artist-name">Ruby Haunt</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Common Era_Belong.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Common Era</span>
-<span>Belong</span>
+<div class="card">
+<img src="/covers/cover_Common Era_Belong.jpg" class="album-cover" />
+<span class="album-name">Common Era</span>
+<span class="artist-name">Belong</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Wane into It_Drowse.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Wane into It</span>
-<span>Drowse</span>
+<div class="card">
+<img src="/covers/cover_Wane into It_Drowse.jpg" class="album-cover" />
+<span class="album-name">Wane into It</span>
+<span class="artist-name">Drowse</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Burden_Give Up to Failure.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Burden</span>
-<span>Give Up to Failure</span>
+<div class="card">
+<img src="/covers/cover_Burden_Give Up to Failure.jpg" class="album-cover" />
+<span class="album-name">Burden</span>
+<span class="artist-name">Give Up to Failure</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_loveless_my bloody valentine.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">loveless</span>
-<span>my bloody valentine</span>
+<div class="card">
+<img src="/covers/cover_loveless_my bloody valentine.jpg" class="album-cover" />
+<span class="album-name">loveless</span>
+<span class="artist-name">my bloody valentine</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Iroha_Iroha.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Iroha</span>
-<span>Iroha</span>
+<div class="card">
+<img src="/covers/cover_Iroha_Iroha.jpg" class="album-cover" />
+<span class="album-name">Iroha</span>
+<span class="artist-name">Iroha</span>
 </div>
 </div>
 
@@ -1292,25 +1307,25 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 ## melodeath {#melodeath}
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Atoma_Dark Tranquillity.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Atoma</span>
-<span>Dark Tranquillity</span>
+<div class="card">
+<img src="/covers/cover_Atoma_Dark Tranquillity.jpg" class="album-cover" />
+<span class="album-name">Atoma</span>
+<span class="artist-name">Dark Tranquillity</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Beyond_Omnium Gatherum.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Beyond</span>
-<span>Omnium Gatherum</span>
+<div class="card">
+<img src="/covers/cover_Beyond_Omnium Gatherum.jpg" class="album-cover" />
+<span class="album-name">Beyond</span>
+<span class="artist-name">Omnium Gatherum</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Grave New World_Soulfallen.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Grave New World</span>
-<span>Soulfallen</span>
+<div class="card">
+<img src="/covers/cover_Grave New World_Soulfallen.jpg" class="album-cover" />
+<span class="album-name">Grave New World</span>
+<span class="artist-name">Soulfallen</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Weight Of Oceans_In Mourning.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Weight Of Oceans</span>
-<span>In Mourning</span>
+<div class="card">
+<img src="/covers/cover_The Weight Of Oceans_In Mourning.jpg" class="album-cover" />
+<span class="album-name">The Weight Of Oceans</span>
+<span class="artist-name">In Mourning</span>
 </div>
 </div>
 
@@ -1318,160 +1333,165 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 ## deathdoom/funeral doom {#deathdoom-funeral-doom}
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Dor_Clouds.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Dor</span>
-<span>Clouds</span>
+<div class="card">
+<img src="/covers/cover_Dor_Clouds.jpg" class="album-cover" />
+<span class="album-name">Dor</span>
+<span class="artist-name">Clouds</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Departe_Clouds.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Departe</span>
-<span>Clouds</span>
+<div class="card">
+<img src="/covers/cover_Departe_Clouds.jpg" class="album-cover" />
+<span class="album-name">Departe</span>
+<span class="artist-name">Clouds</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Doliu_Clouds.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Doliu</span>
-<span>Clouds</span>
+<div class="card">
+<img src="/covers/cover_Doliu_Clouds.jpg" class="album-cover" />
+<span class="album-name">Doliu</span>
+<span class="artist-name">Clouds</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Morning Never Came_Swallow The Sun.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Morning Never Came</span>
-<span>Swallow The Sun</span>
+<div class="card">
+<img src="/covers/cover_The Morning Never Came_Swallow The Sun.jpg" class="album-cover" />
+<span class="album-name">The Morning Never Came</span>
+<span class="artist-name">Swallow The Sun</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Horizonless_Loss.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Horizonless</span>
-<span>Loss</span>
+<div class="card">
+<img src="/covers/cover_Horizonless_Loss.jpg" class="album-cover" />
+<span class="album-name">Horizonless</span>
+<span class="artist-name">Loss</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Aeternum Vale_Doom:VS.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Aeternum Vale</span>
-<span>Doom:VS</span>
+<div class="card">
+<img src="/covers/cover_Aeternum Vale_Doom:VS.jpg" class="album-cover" />
+<span class="album-name">Aeternum Vale</span>
+<span class="artist-name">Doom:VS</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Pale Light of Fireflies_Evadne.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Pale Light of Fireflies</span>
-<span>Evadne</span>
+<div class="card">
+<img src="/covers/cover_The Pale Light of Fireflies_Evadne.jpg" class="album-cover" />
+<span class="album-name">The Pale Light of Fireflies</span>
+<span class="artist-name">Evadne</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_A Mother Named Death_Evadne.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">A Mother Named Death</span>
-<span>Evadne</span>
+<div class="card">
+<img src="/covers/cover_A Mother Named Death_Evadne.jpg" class="album-cover" />
+<span class="album-name">A Mother Named Death</span>
+<span class="artist-name">Evadne</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Shortest Way_Evadne.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Shortest Way</span>
-<span>Evadne</span>
+<div class="card">
+<img src="/covers/cover_The Shortest Way_Evadne.jpg" class="album-cover" />
+<span class="album-name">The Shortest Way</span>
+<span class="artist-name">Evadne</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Sovran_Draconian.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Sovran</span>
-<span>Draconian</span>
+<div class="card">
+<img src="/covers/cover_Sovran_Draconian.jpg" class="album-cover" />
+<span class="album-name">Sovran</span>
+<span class="artist-name">Draconian</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Auer_Marianas Rest.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Auer</span>
-<span>Marianas Rest</span>
+<div class="card">
+<img src="/covers/cover_Auer_Marianas Rest.jpg" class="album-cover" />
+<span class="album-name">Auer</span>
+<span class="artist-name">Marianas Rest</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Fata Morgana_Marianas Rest.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Fata Morgana</span>
-<span>Marianas Rest</span>
+<div class="card">
+<img src="/covers/cover_Fata Morgana_Marianas Rest.jpg" class="album-cover" />
+<span class="album-name">Fata Morgana</span>
+<span class="artist-name">Marianas Rest</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Last Mirror_Ataraxy.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Last Mirror</span>
-<span>Ataraxy</span>
+<div class="card">
+<img src="/covers/cover_The Last Mirror_Ataraxy.jpg" class="album-cover" />
+<span class="album-name">The Last Mirror</span>
+<span class="artist-name">Ataraxy</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Let Me Drown With You_Rise to the Sky.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Let Me Drown With You</span>
-<span>Rise to the Sky</span>
+<div class="card">
+<img src="/covers/cover_Let Me Drown With You_Rise to the Sky.jpg" class="album-cover" />
+<span class="album-name">Let Me Drown With You</span>
+<span class="artist-name">Rise to the Sky</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Antithesis of Light_Evoken.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Antithesis of Light</span>
-<span>Evoken</span>
+<div class="card">
+<img src="/covers/cover_Antithesis of Light_Evoken.jpg" class="album-cover" />
+<span class="album-name">Antithesis of Light</span>
+<span class="artist-name">Evoken</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_As All Torn Asunder_When Nothing Remains.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">As All Torn Asunder</span>
-<span>When Nothing Remains</span>
+<div class="card">
+<img src="/covers/cover_As All Torn Asunder_When Nothing Remains.jpg" class="album-cover" />
+<span class="album-name">As All Torn Asunder</span>
+<span class="artist-name">When Nothing Remains</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Drowned by Guilt_Forest of Shadows.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Drowned by Guilt</span>
-<span>Forest of Shadows</span>
+<div class="card">
+<img src="/covers/cover_Drowned by Guilt_Forest of Shadows.jpg" class="album-cover" />
+<span class="album-name">Drowned by Guilt</span>
+<span class="artist-name">Forest of Shadows</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Among the Dormant Watchers_Forest of Shadows.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Among the Dormant Watchers</span>
-<span>Forest of Shadows</span>
+<div class="card">
+<img src="/covers/cover_Among the Dormant Watchers_Forest of Shadows.jpg" class="album-cover" />
+<span class="album-name">Among the Dormant Watchers</span>
+<span class="artist-name">Forest of Shadows</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Regression to Nothingness_Inborn Suffering.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Regression to Nothingness</span>
-<span>Inborn Suffering</span>
+<div class="card">
+<img src="/covers/cover_Regression to Nothingness_Inborn Suffering.jpg" class="album-cover" />
+<span class="album-name">Regression to Nothingness</span>
+<span class="artist-name">Inborn Suffering</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Bleak Silver Streams_Lethian Dreams.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Bleak Silver Streams</span>
-<span>Lethian Dreams</span>
+<div class="card">
+<img src="/covers/cover_Bleak Silver Streams_Lethian Dreams.jpg" class="album-cover" />
+<span class="album-name">Bleak Silver Streams</span>
+<span class="artist-name">Lethian Dreams</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_The Maniacal Vale_Esoteric.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">The Maniacal Vale</span>
-<span>Esoteric</span>
+<div class="card">
+<img src="/covers/cover_The Maniacal Vale_Esoteric.jpg" class="album-cover" />
+<span class="album-name">The Maniacal Vale</span>
+<span class="artist-name">Esoteric</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Stygian_Atramentus.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Stygian</span>
-<span>Atramentus</span>
+<div class="card">
+<img src="/covers/cover_Stygian_Atramentus.jpg" class="album-cover" />
+<span class="album-name">Stygian</span>
+<span class="artist-name">Atramentus</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Mirror Reaper_Bell Witch.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Mirror Reaper</span>
-<span>Bell Witch</span>
+<div class="card">
+<img src="/covers/cover_Mirror Reaper_Bell Witch.jpg" class="album-cover" />
+<span class="album-name">Mirror Reaper</span>
+<span class="artist-name">Bell Witch</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Subaqueous_Drown.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Subaqueous</span>
-<span>Drown</span>
+<div class="card">
+<img src="/covers/cover_Subaqueous_Drown.jpg" class="album-cover" />
+<span class="album-name">Subaqueous</span>
+<span class="artist-name">Drown</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Bleak Vistae_Tyranny.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Bleak Vistae</span>
-<span>Tyranny</span>
+<div class="card">
+<img src="/covers/cover_Bleak Vistae_Tyranny.jpg" class="album-cover" />
+<span class="album-name">Bleak Vistae</span>
+<span class="artist-name">Tyranny</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Monotony Fields_Shape Of Despair.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Monotony Fields</span>
-<span>Shape Of Despair</span>
+<div class="card">
+<img src="/covers/cover_Monotony Fields_Shape Of Despair.jpg" class="album-cover" />
+<span class="album-name">Monotony Fields</span>
+<span class="artist-name">Shape Of Despair</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Return to the Void_Shape Of Despair.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Return to the Void</span>
-<span>Shape Of Despair</span>
+<div class="card">
+<img src="/covers/cover_Return to the Void_Shape Of Despair.jpg" class="album-cover" />
+<span class="album-name">Return to the Void</span>
+<span class="artist-name">Shape Of Despair</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Alone in the Mist_Shape Of Despair.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Alone in the Mist</span>
-<span>Shape Of Despair</span>
+<div class="card">
+<img src="/covers/cover_Alone in the Mist_Shape Of Despair.jpg" class="album-cover" />
+<span class="album-name">Alone in the Mist</span>
+<span class="artist-name">Shape Of Despair</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Illusion's Play_Shape Of Despair.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Illusion's Play</span>
-<span>Shape Of Despair</span>
+<div class="card">
+<img src="/covers/cover_Illusion's Play_Shape Of Despair.jpg" class="album-cover" />
+<span class="album-name">Illusion's Play</span>
+<span class="artist-name">Shape Of Despair</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Angels Of Distress_Shape Of Despair.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Angels Of Distress</span>
-<span>Shape Of Despair</span>
+<div class="card">
+<img src="/covers/cover_Angels Of Distress_Shape Of Despair.jpg" class="album-cover" />
+<span class="album-name">Angels Of Distress</span>
+<span class="artist-name">Shape Of Despair</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Hour of the Nightingale_Trees of Eternity.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Hour of the Nightingale</span>
-<span>Trees of Eternity</span>
+<div class="card">
+<img src="/covers/cover_Hour of the Nightingale_Trees of Eternity.jpg" class="album-cover" />
+<span class="album-name">Hour of the Nightingale</span>
+<span class="artist-name">Trees of Eternity</span>
+</div>
+<div class="card">
+<img src="/covers/cover_Breach Us_Hymn.jpg" class="album-cover" />
+<span class="album-name">Breach Us</span>
+<span class="artist-name">Hymn</span>
 </div>
 </div>
 
@@ -1481,50 +1501,50 @@ non-instrumental post-rock, may contain hardcore bands <br/>
 depressive suicidal black metal <br/>
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Deathcade_Nocturnal Depression.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Deathcade</span>
-<span>Nocturnal Depression</span>
+<div class="card">
+<img src="/covers/cover_Deathcade_Nocturnal Depression.jpg" class="album-cover" />
+<span class="album-name">Deathcade</span>
+<span class="artist-name">Nocturnal Depression</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Damp Chill of Life_None.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Damp Chill of Life</span>
-<span>None</span>
+<div class="card">
+<img src="/covers/cover_Damp Chill of Life_None.jpg" class="album-cover" />
+<span class="album-name">Damp Chill of Life</span>
+<span class="artist-name">None</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Agony_Afraid of Destiny.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Agony</span>
-<span>Afraid of Destiny</span>
+<div class="card">
+<img src="/covers/cover_Agony_Afraid of Destiny.jpg" class="album-cover" />
+<span class="album-name">Agony</span>
+<span class="artist-name">Afraid of Destiny</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_My Mind Is Too Weak to Forget_Dreariness.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">My Mind Is Too Weak to Forget</span>
-<span>Dreariness</span>
+<div class="card">
+<img src="/covers/cover_My Mind Is Too Weak to Forget_Dreariness.jpg" class="album-cover" />
+<span class="album-name">My Mind Is Too Weak to Forget</span>
+<span class="artist-name">Dreariness</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Self Loather_Ghost Bath.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Self Loather</span>
-<span>Ghost Bath</span>
+<div class="card">
+<img src="/covers/cover_Self Loather_Ghost Bath.jpg" class="album-cover" />
+<span class="album-name">Self Loather</span>
+<span class="artist-name">Ghost Bath</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Same Old Silences_Imber Luminis.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Same Old Silences</span>
-<span>Imber Luminis</span>
+<div class="card">
+<img src="/covers/cover_Same Old Silences_Imber Luminis.jpg" class="album-cover" />
+<span class="album-name">Same Old Silences</span>
+<span class="artist-name">Imber Luminis</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_As All Light Leaves Her_Advent Sorrow.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">As All Light Leaves Her</span>
-<span>Advent Sorrow</span>
+<div class="card">
+<img src="/covers/cover_As All Light Leaves Her_Advent Sorrow.jpg" class="album-cover" />
+<span class="album-name">As All Light Leaves Her</span>
+<span class="artist-name">Advent Sorrow</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Dipsomania_Psychonaut 4.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Dipsomania</span>
-<span>Psychonaut 4</span>
+<div class="card">
+<img src="/covers/cover_Dipsomania_Psychonaut 4.jpg" class="album-cover" />
+<span class="album-name">Dipsomania</span>
+<span class="artist-name">Psychonaut 4</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Songs to Leave_Forgotten Tomb.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Songs to Leave</span>
-<span>Forgotten Tomb</span>
+<div class="card">
+<img src="/covers/cover_Songs to Leave_Forgotten Tomb.jpg" class="album-cover" />
+<span class="album-name">Songs to Leave</span>
+<span class="artist-name">Forgotten Tomb</span>
 </div>
 </div>
 
@@ -1532,25 +1552,25 @@ depressive suicidal black metal <br/>
 ## metalcore {#metalcore}
 
 <div class="collage">
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Holy Hell_Architects.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Holy Hell</span>
-<span>Architects</span>
+<div class="card">
+<img src="/covers/cover_Holy Hell_Architects.jpg" class="album-cover" />
+<span class="album-name">Holy Hell</span>
+<span class="artist-name">Architects</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_All Our Gods Have Abandoned Us_Architects.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">All Our Gods Have Abandoned Us</span>
-<span>Architects</span>
+<div class="card">
+<img src="/covers/cover_All Our Gods Have Abandoned Us_Architects.jpg" class="album-cover" />
+<span class="album-name">All Our Gods Have Abandoned Us</span>
+<span class="artist-name">Architects</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_For Those That Wish To Exist_Architects.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">For Those That Wish To Exist</span>
-<span>Architects</span>
+<div class="card">
+<img src="/covers/cover_For Those That Wish To Exist_Architects.jpg" class="album-cover" />
+<span class="album-name">For Those That Wish To Exist</span>
+<span class="artist-name">Architects</span>
 </div>
-<div class="card" style="max-width: 150px;">
-<img src="/covers/cover_Lovelorn_Before I Turn.jpg" style="max-width: 150px;" />
-<span style="color: rgb(175, 39, 39);">Lovelorn</span>
-<span>Before I Turn</span>
+<div class="card">
+<img src="/covers/cover_Lovelorn_Before I Turn.jpg" class="album-cover" />
+<span class="album-name">Lovelorn</span>
+<span class="artist-name">Before I Turn</span>
 </div>
 </div>
 

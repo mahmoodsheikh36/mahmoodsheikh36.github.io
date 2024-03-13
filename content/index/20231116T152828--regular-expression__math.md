@@ -8,7 +8,7 @@ draft = false
 
 <div class="note">
 
-regular expressions differ in syntax from one context to another, and the theory behind them is vaster than i had thought, they are usually studied in [automata theory](20231116T143632--automata-theory__.org). <br/>
+regular expressions differ in syntax from one context to another, and the theory behind them is vaster than i had thought, they are usually studied in [automata theory](20231116T143632--automata-theory__cs.org). <br/>
 
 </div>
 
