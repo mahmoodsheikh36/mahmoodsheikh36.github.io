@@ -3,7 +3,7 @@
 </span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>   PROJECT, DEPARTMENT, EMPLOYEE
 </span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span>  Dnum <span style=color:#f92672>=</span> Dnumber <span style=color:#66d9ef>AND</span> Mgr_ssn <span style=color:#f92672>=</span> Ssn <span style=color:#66d9ef>AND</span>
 </span></span><span style=display:flex><span>       Plocation <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Stafford&#39;</span>
-</span></span></code></pre></div><p>(from Ramez Elmasri, Shamkant B. Navathe, 2015 Query 2)<br></p><div id=orge0f871f class=equation-container><span class=equation><img src=/ltximg/81f0dc465e9.svg alt="\begin{tikzpicture}[sibling distance=5cm]
+</span></span></code></pre></div><p>(from Ramez Elmasri, Shamkant B. Navathe, 2015 Query 2)<br></p><div id=orgf421770 class=equation-container><span class=equation><img src=/ltximg/81f0dc465e9.svg alt="\begin{tikzpicture}[sibling distance=5cm]
   \node {\(\pi_{\text{P.Pnumber,P.Dnum,E.Lname,E.Address,E.Bdate}}\)}
   child {
     node {\(\Join_{\text{D.Mgr\_ssn=E.Ssn}}\)}
@@ -24,8 +24,8 @@
     }
   };
 \end{tikzpicture}
-" style=height:12.8046em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-inline"></span></div><p>(from Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 19.1)<br><a href=#orge0f871f>1</a> corresponds to the following relational algebra expression:<br></p><div class=equation-container><span class=equation><img src=/ltximg/368c968a8d7.svg alt="\begin{align*}
-  \pi_{\text{P.Pnumber,P.Dnum,E.Lname,E.Address,E.Bdate}}(((\sigma_{\text{P.Plocation='Stafford'}}(\text{PROJECT}))\\
-  \Join_{\text{P.Dnum=D.Dnumber}}(\text{DEPARTMENT})) \Join_{\text{Mgr\_ssn=Ssn}}(\text{EMPLOYEE})).
+" style=height:12.8046em;vertical-align:-.0492em;display:inline-block class="org-latex org-latex-inline"></span></div><p>fig-query-tree-q2 corresponds to the following relational algebra expression:<br></p><div class=equation-container><span class=equation><img src=/ltximg/0af8902d8d3.svg alt="\begin{align*}
+  \pi_{\text{P.Pnumber,P.Dnum,E.Lname,E.Address,E.Bdate}}((&amp;amp;(\sigma_{\text{P.Plocation='Stafford'}}(\text{PROJECT}))\\
+  &amp;amp;\Join_{\text{P.Dnum=D.Dnumber}}(\text{DEPARTMENT})) \Join_{\text{Mgr\_ssn=Ssn}}(\text{EMPLOYEE})).
 \end{align*}
 " style=height:3.0972em;vertical-align:-.402em;display:inline-block class="org-latex org-latex-inline"></span></div><p>(from Ramez Elmasri, Shamkant B. Navathe, 2015 chapter 19 query optimization)<br></p></div></div></main></body></html>
