@@ -15,10 +15,10 @@ let <img src="/ltximg/7c012388408.svg" alt="\(L\)" style="height: 0.7680em; vert
 
 <div class="solution">
 
-applying the union construction to 2 automatons where the first, <img src="/ltximg/48b414399ef.svg" alt="\(A_1\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> (see fig-automata-homework2-1) recognizes words starting with the symbol <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the second, <img src="/ltximg/86271645528.svg" alt="\(A_2\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> recognizes words starting with the symbol <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> makes the problem easier. <br/>
+applying the union construction to 2 automatons where the first, <img src="/ltximg/48b414399ef.svg" alt="\(A_1\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> (see fig-automata-homework2-1) recognizes words starting with the symbol <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the second, <img src="/ltximg/86271645528.svg" alt="\(A_2\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> recognizes words starting with the symbol <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.6806em; vertical-align: --0.0000em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.6806em; vertical-align: --0.0000em; display: inline-block" class="org-latex org-latex-inline" /> makes the problem easier. <br/>
 
 
-<div id="org35c2e24" class="equation-container">
+<div id="orgb5e73a8" class="equation-container">
 <span class="equation">
 <img src="/ltximg/81ada6c8961.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state] (q_0) {\(q_0\)};
@@ -42,7 +42,7 @@ applying the union construction to 2 automatons where the first, <img src="/ltxi
 </span>
 </div>
 
-an equivalent automaton that recognizes the same pattern where the symbols <img src="/ltximg/f16b4bfd4b6.svg" alt="\(a,b\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> have inverted roles can be constructed in the same fashion, and both automatons can be unionized to construct an NFA that recognizes both patterns. the loop on state <img src="/ltximg/8e22f36a85f.svg" alt="\(q\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> can be dropped when the NFA is constructed to let the computation path simply die if the first symbol isnt <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (or <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in the case of the inverted situation). <br/>
+an equivalent automaton that recognizes the same pattern where the symbols <img src="/ltximg/f16b4bfd4b6.svg" alt="\(a,b\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> have inverted roles can be constructed in the same fashion, and both automatons can be unionized to construct an NFA that recognizes both patterns. the loop on state <img src="/ltximg/8e22f36a85f.svg" alt="\(q\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> can be dropped when the NFA is constructed to let the computation path simply die if the first symbol isnt <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (or <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.6806em; vertical-align: --0.0000em; display: inline-block" class="org-latex org-latex-inline" /> in the case of the inverted situation). <br/>
 
 </div>
 
@@ -51,7 +51,7 @@ an equivalent automaton that recognizes the same pattern where the symbols <img 
 i realized later that it could be done more easily, see fig-automata-homework2-2. <br/>
 
 
-<div id="orgc58b0e5" class="equation-container">
+<div id="org4372724" class="equation-container">
 <span class="equation">
 <img src="/ltximg/3b4d863b3f2.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state, initial] (q_0) {\(q_0\)};
@@ -163,7 +163,7 @@ let <img src="/ltximg/f3b2de5caa1.svg" alt="\(B,C\)" style="height: 0.9586em; ve
 </span>
 </div>
 
-prove that if <img src="/ltximg/792bcfb99f0.svg" alt="\(B\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/a4ae72f0ffd.svg" alt="\(C\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are regular languages then <img src="/ltximg/05bfa766f0b.svg" alt="\(L_{B1C}\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> is aswell. <br/>
+prove that if <img src="/ltximg/792bcfb99f0.svg" alt="\(B\)" style="height: 0.6697em; vertical-align: --0.0000em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/a4ae72f0ffd.svg" alt="\(C\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are regular languages then <img src="/ltximg/05bfa766f0b.svg" alt="\(L_{B1C}\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> is aswell. <br/>
 note: the notation <img src="/ltximg/615b114bb95.svg" alt="\(\#_1(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> denotes the number of times the symbol <img src="/ltximg/7bfe1637077.svg" alt="\(1\)" style="height: 0.7155em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> appears in the word <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. <br/>
 
 </div>

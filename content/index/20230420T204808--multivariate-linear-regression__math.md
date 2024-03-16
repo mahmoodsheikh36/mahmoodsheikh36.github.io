@@ -11,7 +11,7 @@ draft = false
 we can easily extend from [univariate linear regression](20230313T223324--univariate-linear-regression__math.org) to **multivariate linear regression**, such that each example <img src="/ltximg/677254fdc1d.svg" alt="\(x_j\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> is an n-element [vector](20231222T075237--vector__math.org). our [hypothesis space](20230225T234105--hypothesis-space__.org) is the [set](20240205T193039--set__math.org) of [function](20231111T073425--function__math.org)s of the form <br/>
 
 
-<div id="orgd21f38a" class="equation-container">
+<div id="orgdfdf660" class="equation-container">
 <span class="equation">
 <img src="/ltximg/e0adc91558e.svg" alt="\begin{equation}
   h_{\brm{w}}(\brm{x}_j) = w_0+w_1x_{j,1} + \dots + w_nx_{j,n} = w_0+\sum_{i} w_ix_{j,i}
@@ -69,7 +69,7 @@ as with loss functions, with <img src="/ltximg/6f909b6e3f4.svg" alt="\(q=1\)" st
 
 ## fitting higher order functions {#fitting-higher-order-functions}
 
-if we wanted to fit a given data set to a higher order function, say quadratic, we just introduce <img src="/ltximg/b32b0f8a94b.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> new weights and apply them to <img src="/ltximg/7e277f08dc2.svg" alt="\(x_{j,1}^2 \dots x_{j,n}^2\)" style="height: 1.2846em; vertical-align: -0.4377em; display: inline-block" class="org-latex org-latex-inline" /> and add these new symbols to the [hypothesis set equation](#orgd21f38a) <br/>
+if we wanted to fit a given data set to a higher order function, say quadratic, we just introduce <img src="/ltximg/b32b0f8a94b.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> new weights and apply them to <img src="/ltximg/7e277f08dc2.svg" alt="\(x_{j,1}^2 \dots x_{j,n}^2\)" style="height: 1.2846em; vertical-align: -0.4377em; display: inline-block" class="org-latex org-latex-inline" /> and add these new symbols to the [hypothesis set equation](#orgdfdf660) <br/>
 
 
 ## lisp implementation {#lisp-implementation}
