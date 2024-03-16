@@ -27,10 +27,10 @@ extending to 2 dimensional functions we'd get: <br/>
 
 <div class="my_example">
 
-in [machine learning](20230225T233819--machine-learning__cs.org), specifically in [convolutional neural network](20230520T175032--convolutional-neural-network__cs_lispcode_math.org), the convolution operation is used do detect features in an **image**, one of the operands is the image and the second is the **kernel**, see [1](#org92b2383) <br/>
+in [machine learning](20230225T233819--machine-learning__cs.org), specifically in [convolutional neural network](20230520T175032--convolutional-neural-network__cs_lispcode_math.org), the convolution operation is used do detect features in an **image**, one of the operands is the image and the second is the **kernel**, see [1](#orgc8c6122) <br/>
 
 
-<div id="org92b2383" class="equation-container">
+<div id="orgc8c6122" class="equation-container">
 <span class="equation">
 <img src="/ltximg/ce8e875d112.svg" alt="\begin{tikzpicture}[mmat/.style={matrix of math nodes,column sep=-\pgflinewidth/2,
     row sep=-\pgflinewidth/2,cells={nodes={draw,inner sep=3pt,thin}},draw=#1,thick,inner sep=0pt},
@@ -89,7 +89,7 @@ in [machine learning](20230225T233819--machine-learning__cs.org), specifically i
 
 although the kernel has to be rotated around every axis before we begin sliding it over the image, otherwise we'd be doing cross-correlation instead of convolution <br/>
 an example of a flipped kernel: <br/>
-<img src="/ltximg/e769f1883ae.svg" alt="\[ \bmqty{a &amp;amp; b &amp;amp; c\\ d &amp;amp; e &amp;amp; f\\ g &amp;amp; h &amp;amp; i} \xrightarrow{\text{vertical+horizontal rotation}} \bmqty{i &amp;amp; h &amp;amp; g\\ f &amp;amp; e &amp;amp; d\\ c &amp;amp; b &amp;amp; a} \]" style="height: 3.7244em; display: block" class="org-latex org-latex-block" /> <br/>
+<img src="/ltximg/e769f1883ae.svg" alt="\[ \bmqty{a &amp;amp; b &amp;amp; c\\ d &amp;amp; e &amp;amp; f\\ g &amp;amp; h &amp;amp; i} \xrightarrow{\text{vertical+horizontal rotation}} \bmqty{i &amp;amp; h &amp;amp; g\\ f &amp;amp; e &amp;amp; d\\ c &amp;amp; b &amp;amp; a} \]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" /> <br/>
 
 </div>
 

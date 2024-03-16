@@ -33,7 +33,7 @@ for another example, the expression <br/>
 denotes the composition of the functions <img src="/ltximg/36fbd7e1276.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/2631cefd988.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />; that is, the function that on input <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> applies <img src="/ltximg/2631cefd988.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, then applies <img src="/ltximg/36fbd7e1276.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to the result. the expression <br/>
 
 
-<div id="org279637d" class="equation-container">
+<div id="org34a9ef7" class="equation-container">
 <span class="equation">
 <img src="/ltximg/6a846c18278.svg" alt="\begin{equation}
    \lambda f.\lambda g.\lambda x.f(gx)
@@ -73,7 +73,7 @@ functions represented by <img src="/ltximg/8e8d33fa109.svg" alt="\(\lambda\)" st
 
 </div>
 
-<div class="my_example">
+<div class="my_example" id="exa-lambda-calc-1">
 
 the function <img src="/ltximg/111f9b3de84.svg" alt="\(f(x_1,x_2)=x_1+x_2\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> has the following derivation. <br/>
 

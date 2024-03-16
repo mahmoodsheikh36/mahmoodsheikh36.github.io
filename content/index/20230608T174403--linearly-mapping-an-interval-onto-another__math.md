@@ -42,7 +42,7 @@ assume a [vector space](20231222T081227--vector-space__math.org) <img src="/ltxi
 </div>
 
 and a [vector](20231222T075237--vector__math.org) <img src="/ltximg/91a917c23d0.svg" alt="\(\brm{x} \in V\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />: <br/>
-<img src="/ltximg/9eb71c31e3f.svg" alt="\[ \brm{x} = \pmqty{x_1\\ x_2\\ \vdots\\ x_n} \]" style="height: 5.5433em; display: block" class="org-latex org-latex-block" /> <br/>
+<img src="/ltximg/9eb71c31e3f.svg" alt="\[ \brm{x} = \pmqty{x_1\\ x_2\\ \vdots\\ x_n} \]" style="height: 1.8094em; display: block" class="org-latex org-latex-block" /> <br/>
 where <img src="/ltximg/677254fdc1d.svg" alt="\(x_j\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> for all <img src="/ltximg/ce66d839722.svg" alt="\(1 \le j \le n\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is bound in the interval <img src="/ltximg/4e338833ed3.svg" alt="\([s_{ja},s_{jb}]\)" style="height: 1.1138em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" />, i.e. <br/>
 
 
@@ -59,7 +59,7 @@ where <img src="/ltximg/677254fdc1d.svg" alt="\(x_j\)" style="height: 0.8007em; 
 </div>
 
 we wanna find the vector <img src="/ltximg/a1b6bad21c1.svg" alt="\(\brm{v}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />: <br/>
-<img src="/ltximg/b8b789f709b.svg" alt="\[ \brm{v} = \pmqty{v_1\\ v_2\\ \vdots\\ v_n} \]" style="height: 5.5433em; display: block" class="org-latex org-latex-block" /> <br/>
+<img src="/ltximg/b8b789f709b.svg" alt="\[ \brm{v} = \pmqty{v_1\\ v_2\\ \vdots\\ v_n} \]" style="height: 1.8094em; display: block" class="org-latex org-latex-block" /> <br/>
 such that <br/>
 
 
@@ -80,7 +80,7 @@ so we write the [linear transformation](20231222T080528--linear-map__math.org) (
   \frac{x_1d_{1b}-x_1d_{1a}-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
   \frac{x_2d_{2b}-x_2d_{2a}-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
   \hspace{1.5 mm} \vdots\\
-  \frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]" style="height: 6.0764em; display: block" class="org-latex org-latex-block" /> <br/>
+  \frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]" style="height: 2.5935em; display: block" class="org-latex org-latex-block" /> <br/>
 obviously this function doesnt preserve the origin as <img src="/ltximg/d7031ab1bfa.svg" alt="\(L(\vec{0})\neq \vec{0}\)" style="height: 1.2387em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, so its an affine transformation, we separate the intercept so we can drop it and add it later: <br/>
 <img src="/ltximg/e7a77d4d460.svg" alt="\[ L\left(\pmqty{x_1\\ x_2\\ \vdots\\ x_n}\right) = \pmqty{
   \frac{x_1d_{1b}-x_1d_{1a}}{s_{1b}-s_{1a}}\\
@@ -90,7 +90,7 @@ obviously this function doesnt preserve the origin as <img src="/ltximg/d7031ab1
   \pmqty{\frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
   \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
   \hspace{1.5 mm} \vdots\\
-  \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]" style="height: 6.0764em; display: block" class="org-latex org-latex-block" /> <br/>
+  \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]" style="height: 2.5935em; display: block" class="org-latex org-latex-block" /> <br/>
 we drop the [intercept](20230608T210313--intercept__.org) and find the [transformation matrix](20230604T202340--affine-transformation-matrix__.org) of the function without it, which is a [square matrix](20240205T193136--square-matrix__math.org) of size <img src="/ltximg/380de92f946.svg" alt="\(n \times n\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> <br/>
 <img src="/ltximg/bbe35acc8ee.svg" alt="\[ \pmqty{
 \frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\
@@ -98,7 +98,7 @@ we drop the [intercept](20230608T210313--intercept__.org) and find the [transfor
 0 &amp;amp; 0 &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots\\
 \vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; 0\\
 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}}\\
-} \]" style="height: 8.4284em; display: block" class="org-latex org-latex-block" /> <br/>
+} \]" style="height: 2.4817em; display: block" class="org-latex org-latex-block" /> <br/>
 
 <div class="note">
 
@@ -113,7 +113,7 @@ then we add the intercept with [homogeneous coordinates](20221229T010338--homoge
 \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots &amp;amp; \vdots\\
 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}} &amp;amp; \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}\\
 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1\\
-} \]" style="height: 7.2524em; display: block" class="org-latex org-latex-block" /> <br/>
+} \]" style="height: 2.4817em; display: block" class="org-latex org-latex-block" /> <br/>
 so to conclude, the formula <br/>
 <img src="/ltximg/70e76610238.svg" alt="\[ \pmqty{v_1\\ v_2\\ \vdots\\ v_n\\ 1} = \pmqty{
 \frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
@@ -121,6 +121,6 @@ so to conclude, the formula <br/>
 \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots &amp;amp; \vdots\\
 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}} &amp;amp; \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}\\
 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1\\
-} \cdot \pmqty{x_1\\ x_2\\ \vdots\\ x_n\\ 1} \]" style="height: 7.2524em; display: block" class="org-latex org-latex-block" /> <br/>
+} \cdot \pmqty{x_1\\ x_2\\ \vdots\\ x_n\\ 1} \]" style="height: 2.4817em; display: block" class="org-latex org-latex-block" /> <br/>
 transforms the vector <img src="/ltximg/58b87651132.svg" alt="\(\brm{x}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> from a given set of intervals onto another, resulting in <img src="/ltximg/a1b6bad21c1.svg" alt="\(\brm{v}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 
