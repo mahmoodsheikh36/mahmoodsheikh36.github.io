@@ -20,7 +20,7 @@ let <img src="/ltximg/425ec271bb3.svg" alt="\(U\)" style="height: 0.7680em; vert
 </span>
 </div>
 
-(JOHN H. HUBBARD, BARBARA BURKE HUBBARD, 2015) <br/>
+(john h. hubbard, barbara burke hubbard, 2015) <br/>
 
 </div>
 
@@ -43,7 +43,7 @@ let <img src="/ltximg/425ec271bb3.svg" alt="\(U\)" style="height: 0.7680em; vert
 </div>
 
 the letter <img src="/ltximg/619b9ef96ff.svg" alt="\(\Delta\)" style="height: 0.8000em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> denotes the "change in"; <img src="/ltximg/a8fa8ea4280.svg" alt="\(\Delta f\)" style="height: 0.9906em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is the change in the function; <img src="/ltximg/d61cbce11a1.svg" alt="\(\Delta x=h\)" style="height: 0.8000em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the change in the variable <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. the function <img src="/ltximg/71aee5effa5.svg" alt="\(mh\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> that multiplies <img src="/ltximg/7c0ac91e792.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> by the derivative <img src="/ltximg/1c6b9242d2b.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is thus a [linear function](20231222T080528--linear-map__math.org) of the change in <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. <br/>
-(JOHN H. HUBBARD, BARBARA BURKE HUBBARD, 2015 definition 1.7.5) <br/>
+(john h. hubbard, barbara burke hubbard, 2015 definition 1.7.5) <br/>
 
 </div>
 
@@ -62,7 +62,7 @@ let <img src="/ltximg/28b7b899d72.svg" alt="\(U \subseteq \mathbb{R}^n\)" style=
 </div>
 
 then <img src="/ltximg/a5ead3743e6.svg" alt="\(\brm{f}\)" style="height: 0.7704em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is _differentiable_ at <img src="/ltximg/b07d3491618.svg" alt="\(\brm{a}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="/ltximg/7c012388408.svg" alt="\(L\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is unique and is the _derivative_ of <img src="/ltximg/a5ead3743e6.svg" alt="\(\brm{f}\)" style="height: 0.7704em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> at <img src="/ltximg/b07d3491618.svg" alt="\(\brm{a}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, denoted <img src="/ltximg/2d2b4b7a5f0.svg" alt="\(\matderiv{\brm{f}(\brm{a})}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and whose [transformation matrix](20240205T184408--transformation-matrix__math.org) is of dimensions <img src="/ltximg/3a14de9ca2e.svg" alt="\(m \times n\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />. <br/>
-(JOHN H. HUBBARD, BARBARA BURKE HUBBARD, 2015 proposition and definition 1.7.9 (derivative)) <br/>
+(john h. hubbard, barbara burke hubbard, 2015 proposition and definition 1.7.9 (derivative)) <br/>
 
 </div>
 
@@ -149,7 +149,7 @@ this gives <br/>
 </div>
 
 so <img src="/ltximg/cfa6cbd168b.svg" alt="\(AH+HA\)" style="height: 0.8494em; vertical-align: -0.1305em; display: inline-block" class="org-latex org-latex-inline" /> is indeed the derivative. <br/>
-(JOHN H. HUBBARD, BARBARA BURKE HUBBARD, 2015 example 1.7.17) <br/>
+(john h. hubbard, barbara burke hubbard, 2015 example 1.7.17) <br/>
 
 </div>
 
@@ -187,7 +187,7 @@ let <img src="/ltximg/28b7b899d72.svg" alt="\(U \subseteq \mathbb{R}^n\)" style=
 
 1.  if <img src="/ltximg/59b8b256499.svg" alt="\(\brm{f}:U \to \mathbb{R}^m\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is a constant function, then <img src="/ltximg/a5ead3743e6.svg" alt="\(\brm{f}\)" style="height: 0.7704em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is differentiable, and its derivative is <img src="/ltximg/be0ae6c538a.svg" alt="\([0]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> (the zero linear transformation <img src="/ltximg/4af48657e82.svg" alt="\(\brm{R}^n \to \mathbb{R}^m\)" style="height: 0.8235em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, represented by the <img src="/ltximg/3a14de9ca2e.svg" alt="\(m \times n\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> matrix filled with 0's) <br/>
 2.  if <img src="/ltximg/2a7f7af6d97.svg" alt="\(\brm{f}:\mathbb{R}^n \to \mathbb{R}^m\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is linear, then it is differentiable everywhere, and its derivative at all points <img src="/ltximg/b07d3491618.svg" alt="\(\brm{a}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is <img src="/ltximg/a5ead3743e6.svg" alt="\(\brm{f}\)" style="height: 0.7704em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, i.e., <img src="/ltximg/4981d4eab95.svg" alt="\(\matderiv{\brm{f}(\brm{a})}\vec{v}=\brm{f}(\vec{v})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />. <br/>
-3.  if <img src="/ltximg/8359d5b7b0a.svg" alt="\(f_1,\dots,f_m:U \to \mathbb{R}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> are <img src="/ltximg/1c6b9242d2b.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> scalar-valued functions differentiable at <img src="/ltximg/b07d3491618.svg" alt="\(\brm{a}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, then the vector-valued mapping <img src="/ltximg/126999cfd4a.svg" alt="\(\brm{f}=\pmqty{f_1\\ \vdots\\ f_m}:U \to \mathbb{R}^m\)" style="height: 1.7550em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is differentiable at <img src="/ltximg/b07d3491618.svg" alt="\(\brm{a}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, with derivative <br/>
+3.  if <img src="/ltximg/8359d5b7b0a.svg" alt="\(f_1,\dots,f_m:U \to \mathbb{R}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> are <img src="/ltximg/1c6b9242d2b.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> scalar-valued functions differentiable at <img src="/ltximg/b07d3491618.svg" alt="\(\brm{a}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, then the vector-valued mapping <img src="/ltximg/126999cfd4a.svg" alt="\(\brm{f}=\pmqty{f_1\\ \vdots\\ f_m}:U \to \mathbb{R}^m\)" style="height: 4.2693em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> is differentiable at <img src="/ltximg/b07d3491618.svg" alt="\(\brm{a}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, with derivative <br/>
     
     
     <div class="equation-container">
@@ -195,7 +195,7 @@ let <img src="/ltximg/28b7b899d72.svg" alt="\(U \subseteq \mathbb{R}^n\)" style=
     <img src="/ltximg/64aa131977b.svg" alt="   \begin{equation}
          \matderiv{\brm{f}(\brm{a})}\vec{v}=\bmqty{\matderiv{f_1(\brm{a})}\vec{v}\\ \vdots\\ \matderiv{f_m(\brm{a})}\vec{v}}.
        \end{equation}
-    " style="height: 1.9074em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
+    " style="height: 4.3673em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
     </span>
     </div>
     
@@ -245,7 +245,7 @@ let <img src="/ltximg/28b7b899d72.svg" alt="\(U \subseteq \mathbb{R}^n\)" style=
     </span>
     </div>
 
-(JOHN H. HUBBARD, BARBARA BURKE HUBBARD, 2015 theorem 1.8.1) <br/>
+(john h. hubbard, barbara burke hubbard, 2015 theorem 1.8.1) <br/>
 
 </div>
 

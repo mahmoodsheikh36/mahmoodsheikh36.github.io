@@ -29,7 +29,7 @@ but to make our hypothesis applicable to more [function space](20231124T204049--
 <img src="/ltximg/e2d77c7a46c.svg" alt="\begin{equation}
   \brm{\Phi}(\brm{x}): \mathbb{R}^A \to \mathbb{R}^M = \pmqty{\Phi_0(\brm{x})\\ \Phi_1(\brm{x})\\ \vdots\\ \Phi_{M-1}(\brm{x})} \quad (\forall 0 \le m &amp;lt; M)(\Phi_m: \mathbb{R}^A \to \mathbb{R}),
 \end{equation}
-" style="height: 1.9074em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 5.5433em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
