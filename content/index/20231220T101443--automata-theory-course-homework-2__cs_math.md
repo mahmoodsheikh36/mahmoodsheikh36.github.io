@@ -9,16 +9,16 @@ draft = false
 
 <div class="problem">
 
-let <img src="/ltximg/7c012388408.svg" alt="\(L\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> be the [language](20231116T134552--language__math.org) of all the words over <img src="/ltximg/6fc6a12653e.svg" alt="\(\{a,b\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> of which the first symbol is similar to the second to last one. (note: all possible words of length 2 are in the language). draw a [nondeterministic finite automaton](20231119T191125--nondeterministic-finite-automaton__math.org) that accepts this language. <br/>
+let <img src="/ltximg/7c012388408.svg" alt="\(L\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> be the language of all the words over <img src="/ltximg/6fc6a12653e.svg" alt="\(\{a,b\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> of which the first symbol is similar to the second to last one. (note: all possible words of length 2 are in the language). draw a nondeterministic finite automaton that accepts this language. <br/>
 
 </div>
 
 <div class="solution">
 
-applying the union construction to 2 automatons where the first, <img src="/ltximg/48b414399ef.svg" alt="\(A_1\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> (see fig-automata-homework2-1) recognizes words starting with the symbol <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the second, <img src="/ltximg/86271645528.svg" alt="\(A_2\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> recognizes words starting with the symbol <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> makes the problem easier. <br/>
+applying the union construction to 2 automatons where the first, <img src="/ltximg/48b414399ef.svg" alt="\(A_1\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> (see [fig-automata-homework2-1](20231220T101443--automata-theory-course-homework-2__cs_math.md)) recognizes words starting with the symbol <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/942eecb938a.svg" alt="\(a\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the second, <img src="/ltximg/86271645528.svg" alt="\(A_2\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> recognizes words starting with the symbol <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and whose second-to-last symbol is also <img src="/ltximg/42cac82f75e.svg" alt="\(b\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> makes the problem easier. <br/>
 
 
-<div id="org9ea4ede" class="equation-container">
+<div id="org701c298" class="equation-container">
 <span class="equation">
 <img src="/ltximg/81ada6c8961.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state] (q_0) {\(q_0\)};
@@ -48,10 +48,10 @@ an equivalent automaton that recognizes the same pattern where the symbols <img 
 
 <div class="solution">
 
-i realized later that it could be done more easily, see fig-automata-homework2-2. <br/>
+i realized later that it could be done more easily, see [fig-automata-homework2-2](20231220T101443--automata-theory-course-homework-2__cs_math.md). <br/>
 
 
-<div id="orgc05d4c9" class="equation-container">
+<div id="org57ce685" class="equation-container">
 <span class="equation">
 <img src="/ltximg/3b4d863b3f2.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state, initial] (q_0) {\(q_0\)};
@@ -85,7 +85,7 @@ i realized later that it could be done more easily, see fig-automata-homework2-2
 
 <div class="problem">
 
-let <img src="/ltximg/020ed90e7fc.svg" alt="\(L_1,L_2\)" style="height: 0.9586em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> be [regular language](20231201T201245--regular-language__math.org)s. we define <img src="/ltximg/7c012388408.svg" alt="\(L\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in the following manner: <br/>
+let <img src="/ltximg/020ed90e7fc.svg" alt="\(L_1,L_2\)" style="height: 0.9586em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> be [regular language](../20231201T201245--regular-language__math.md)s. we define <img src="/ltximg/7c012388408.svg" alt="\(L\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in the following manner: <br/>
 
 
 <div class="equation-container">
@@ -103,7 +103,7 @@ prove that <img src="/ltximg/7c012388408.svg" alt="\(L\)" style="height: 0.7680e
 
 <div class="solution">
 
-by lem-reglang-concat-closure, we can assume <img src="/ltximg/7d0f7f6e8eb.svg" alt="\(L_1 = L_x \circ L_z\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> where <img src="/ltximg/b8d48d2ba48.svg" alt="\(L_x,L_z\)" style="height: 0.9586em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> are two regular languages which each contain <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/9ab179244a8.svg" alt="\(z\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, respectively. again by lem-reglang-concat-closure we can construct another language <img src="/ltximg/4bb14a24f27.svg" alt="\(L_{xyz}\)" style="height: 1.0484em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="/ltximg/ef03b6fceda.svg" alt="\(L_{xyz} = L_x \circ L_y \circ L_z\)" style="height: 1.0484em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> where <img src="/ltximg/033ca90d11c.svg" alt="\(L_z\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> contains <img src="/ltximg/9ab179244a8.svg" alt="\(z\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. and by def-langconcat <img src="/ltximg/4bb14a24f27.svg" alt="\(L_{xyz}\)" style="height: 1.0484em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> contains <img src="/ltximg/f7b1d6926bf.svg" alt="\(xyz\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (is a language of all possible <img src="/ltximg/f7b1d6926bf.svg" alt="\(xyz\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />). <br/>
+by [lemma of closure under concatenation](20231201T201245--regular-language__math.md), we can assume <img src="/ltximg/7d0f7f6e8eb.svg" alt="\(L_1 = L_x \circ L_z\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> where <img src="/ltximg/b8d48d2ba48.svg" alt="\(L_x,L_z\)" style="height: 0.9586em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> are two regular languages which each contain <img src="/ltximg/264a89f023b.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/9ab179244a8.svg" alt="\(z\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, respectively. again by [lem-reglang-concat-closure](20231201T201245--regular-language__math.md) we can construct another language <img src="/ltximg/4bb14a24f27.svg" alt="\(L_{xyz}\)" style="height: 1.0484em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="/ltximg/ef03b6fceda.svg" alt="\(L_{xyz} = L_x \circ L_y \circ L_z\)" style="height: 1.0484em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> where <img src="/ltximg/033ca90d11c.svg" alt="\(L_z\)" style="height: 0.9150em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> contains <img src="/ltximg/9ab179244a8.svg" alt="\(z\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. and by def-langconcat <img src="/ltximg/4bb14a24f27.svg" alt="\(L_{xyz}\)" style="height: 1.0484em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> contains <img src="/ltximg/f7b1d6926bf.svg" alt="\(xyz\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (is a language of all possible <img src="/ltximg/f7b1d6926bf.svg" alt="\(xyz\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />). <br/>
 im not sure if im supposed to prove closure under concatenation, but the proof would be simply by concatenating two automatons that recognize each of both languages and connecting the first automaton's accepting states to the second automaton's initial state via arrows with <img src="/ltximg/528554eb55e.svg" alt="\(\varepsilon\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />'s along them (we'd also need to disable the accepting status of the previously accepting states in the first automaton). <br/>
 
 </div>
@@ -188,7 +188,7 @@ the idea is this: let <img src="/ltximg/8c517f62919.svg" alt="\(A_B=(Q_B,\Sigma,
 </span>
 </div>
 
-actually i realize theres no need for a sink, we can just ignore inputs of 0, so the latter expression in eq-automata-homework2-1 can be discarded. <br/>
+actually i realize theres no need for a sink, we can just ignore inputs of 0, so the latter expression in [eq-automata-homework2-1](20231220T101443--automata-theory-course-homework-2__cs_math.md) can be discarded. <br/>
 
 </div>
 

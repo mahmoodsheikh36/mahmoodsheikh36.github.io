@@ -13,7 +13,7 @@ i ended up giving up on using maxima as a visualization/symbolic math computatio
 
 </div>
 
-[maxima](20230510T181855--maxima__.org) is written in [lisp](20230215T220838--lisp__.org) and so it can be used as a modified/extended lisp runtime <br/>
+maxima is written in lisp and so it can be used as a modified/extended lisp runtime <br/>
 
 
 ## how to {#how-to}
@@ -24,7 +24,7 @@ to start the lisp runtime use the command: <br/>
 rmaxima -r 'to_lisp();'
 ```
 
-can also run this in [emacs](20240204T953236--emacs__program.org)' slime/sly with `(sly "rmaxima -r to_lisp();")` <br/>
+can also run this in emacs' slime/sly with `(sly "rmaxima -r to_lisp();")` <br/>
 alternatively, we can clone maxima's source code to the subdirectory `local-projects` of the quicklisp installation directory (usually `~/quicklisp` unless you've modified it), follow the instructions at <https://sourceforge.net/p/maxima/code/ci/master/tree/INSTALL.lisp#l66> to compile maxima and you'll be able to load it as a library: <br/>
 
 ```lisp

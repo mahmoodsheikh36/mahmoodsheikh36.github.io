@@ -6,7 +6,7 @@ tags = ["lisp-code"]
 draft = false
 +++
 
-some math utilities for [common lisp](20230224T163920--common-lisp__code_language.org) <br/>
+some math utilities for common lisp <br/>
 
 
 ## essential functions {#essential-functions}
@@ -195,7 +195,7 @@ with arrays: <br/>
 
 ### 2d transformation matrices {#2d-transformation-matrices}
 
-[linearly mapping a grid to another](20230602T050340--2d-transformations__math.org): <br/>
+linearly mapping a grid to another: <br/>
 
 <a id="code-snippet--src-map-grid"></a>
 ```lisp
@@ -232,7 +232,7 @@ example usage: <br/>
 ```
 
 
-## [linearly mapping discrete range onto another](20230608T174403--linearly-mapping-an-interval-onto-another__math.org) {#linearly-mapping-discrete-range-onto-another--20230608t174403-linearly-mapping-an-interval-onto-another-math-dot-org}
+## [linearly mapping discrete range onto another](../20230608T174403--linearly-mapping-an-interval-onto-another__math.md) {#linearly-mapping-discrete-range-onto-another--dot-dot-20230608t174403-linearly-mapping-an-interval-onto-another-math-dot-md}
 
 <a id="code-snippet--src-map-num"></a>
 ```lisp
@@ -268,7 +268,7 @@ example: <br/>
 (set-diff '(K P N A D) '(K P)) ; => (N A D)
 ```
 
-a function to check whether a list is a [subset](20240205T193040--subset__math.org) of another, with the `test` being `:equal` <br/>
+a function to check whether a list is a subset of another, with the `test` being `:equal` <br/>
 
 ```lisp
 (defun subset? (list1 list2)
@@ -290,9 +290,9 @@ check for set equality: <br/>
 ```
 
 
-## [combinatorics](20221204T105120--combinatorics__math.org) {#combinatorics--20221204t105120-combinatorics-math-dot-org}
+## combinatorics {#combinatorics--dot-dot-20221204t105120-combinatorics-math-dot-md}
 
-generating [variation](20221204T105120--combinatorics__math.org)s: <br/>
+generating variations: <br/>
 
 ```lisp
 (defun variations (seq &optional (len (length seq)))
@@ -312,7 +312,7 @@ generating [variation](20221204T105120--combinatorics__math.org)s: <br/>
                collect (variations seq i))))
 ```
 
-generating [variations with repetition](20221204T105120--combinatorics__math.org): <br/>
+generating variations with repetition: <br/>
 
 ```lisp
 (defun variations-with-repetition (seq &optional (len (length seq)))
@@ -334,9 +334,9 @@ generating [variations with repetition](20221204T105120--combinatorics__math.org
          collect (variations-with-repetition seq i))))
 ```
 
-generating [combination](20221204T105120--combinatorics__math.org)s: <br/>
+generating combinations: <br/>
 to make the problem easier to tackle i took some examples: <br/>
-assume the sequence "ashey" and the length 3, the [base case](20230207T142803--base-case__.org) for [recursion](20221105T001640--recursive-functions-in-programming__cs.org) would be a sequence of length 3, so if we were to progress letter by letter through the sequence we'd get to a function call with the sequence "hey" and the length 3, then when we exit recursion calls back to the call with the sequence "shey", we need to consider the cell "s" with 3 other sequences, "he","hy","ey", which itself is a combination with the sequence "hey" and length 2, so a call to the function should take care of getting the combinations of the subsequences its concatenating which requires a recursive call to the function by with a reduced length and a reduced subsequence, we may use this as a base case, so when we get a length of 2 we return every combination of length 2, this will satisfy the call with the sequence "hey" and length 3 which in turn satisfies the call with the sequence "shey" and length 4, and so on.. <br/>
+assume the sequence "ashey" and the length 3, the base case for recursion would be a sequence of length 3, so if we were to progress letter by letter through the sequence we'd get to a function call with the sequence "hey" and the length 3, then when we exit recursion calls back to the call with the sequence "shey", we need to consider the cell "s" with 3 other sequences, "he","hy","ey", which itself is a combination with the sequence "hey" and length 2, so a call to the function should take care of getting the combinations of the subsequences its concatenating which requires a recursive call to the function by with a reduced length and a reduced subsequence, we may use this as a base case, so when we get a length of 2 we return every combination of length 2, this will satisfy the call with the sequence "hey" and length 3 which in turn satisfies the call with the sequence "shey" and length 4, and so on.. <br/>
 
 ```lisp
 (defun combinations (seq len)

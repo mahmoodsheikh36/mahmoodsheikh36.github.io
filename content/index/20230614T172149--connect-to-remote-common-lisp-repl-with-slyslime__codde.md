@@ -8,7 +8,7 @@ draft = false
 
 assuming `sbcl` is installed on the destination server and the one to be used <br/>
 
--   start by installing [quicklisp](20230224T163920--common-lisp__code_language.org) on the server <br/>
+-   start by installing quicklisp on the server <br/>
 -   start the sbcl repl <br/>
 -   install slynk/swank for sly/slime, respectively, `(ql:quickload :slynk)` <br/>
 -   start the server with `(slynk:create-server)`, the default port is 4005 <br/>

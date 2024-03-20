@@ -8,15 +8,15 @@ draft = false
 
 <div class="note">
 
-the notation i used is more similar to the one in [elmasri's book](20231209T121607--elmasri-fundamentals-of-database-systems__book_cs_math.org) than the one used in practice lectures, but it shouldnt matter (hopefully to you too). <br/>
+the notation i used is more similar to the one in elmasri's book than the one used in practice lectures, but it shouldnt matter (hopefully to you too). <br/>
 
 </div>
 
-using the same schema as in [homework 1](20231209T093627--database-course-homework-1__math.org) <br/>
+using the same schema as in homework 1 <br/>
 
 <div class="problem">
 
-write the following queries in [relational algebra](20231212T163612--relational-algebra__math.org) <br/>
+write the following queries in relational algebra <br/>
 
 <div class="subproblem">
 
@@ -54,7 +54,7 @@ retrieve the id and location (city, street, and house number) of the customers t
 
 <div class="solution">
 
-we use a [semi join](20240110T195820--semi-join__math.org) and then a [project operation](20240109T111349--project-operation__math.org) <br/>
+we use a semi join and then a project operation <br/>
 
 
 <div class="equation-container">
@@ -62,7 +62,7 @@ we use a [semi join](20240110T195820--semi-join__math.org) and then a [project o
 <img src="/ltximg/e1707a2ae10.svg" alt="\begin{equation}
   \pi_{\text{id, hometown, street, house\_number}}\left(\text{customer} \operatorname*{\ltimes}_{\substack{\text{id } = \text{ customer\_id}\\ \text{start\_date } \le\ CURRENT\_TIME\ \le \text{ end\_date}}} \text{car\_owner}\right)
 \end{equation}
-" style="height: 3.8549em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 4.8466em; vertical-align: -0.2491em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -95,7 +95,7 @@ retrieve the id and customer name (first and last name) of customers that have m
   &amp;amp;TEMP \gets \left(\text{customer} \Join_{\text{id = customer\_id}} \left(\sigma_{\text{start\_date } \le\ CURRENT\_DATE\ \le \text{ end\_date}}\text{car\_owner}\right)\right)\\
   &amp;amp;\pi_{\text{id, first\_name+' '+last\_name}}\left(\sigma_{\text{COUNT\_car\_number}\ &amp;gt;\ 2}\left(_{\text{id, first\_name, last\_name}}\mathcal{G}_{COUNT \text{ car\_number}}(TEMP)\right)\right)
 \end{align}
-" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 5.5472em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -110,7 +110,7 @@ retrieve the ids and customer names of all customers and the numbers of cars tha
 <div class="solution">
 
 i assume the goal is to retrieve the entries of the car numbers and not the number of cars, hopefully thats what you meant because the original text is ambiguous. <br/>
-an [outer join](20240110T202306--outer-join__math.org) is needed here to make sure all customers are considered even if they dont own cars <br/>
+an outer join is needed here to make sure all customers are considered even if they dont own cars <br/>
 
 
 <div class="equation-container">
@@ -118,7 +118,7 @@ an [outer join](20240110T202306--outer-join__math.org) is needed here to make su
 <img src="/ltximg/0254da76e7d.svg" alt="\begin{equation}
   \sigma_{\text{id, car\_number}}\text{customer} \leftouterjoin_{\text{id } = \text{ customer\_id}} \sigma_{\text{start\_date } \le\ CURRENT\_DATE\ \le \text{ end\_date}}(\text{car\_owner})
 \end{equation}
-" style="height: 1.5486em; vertical-align: -0.3234em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 2.6503em; vertical-align: -0.2491em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -164,7 +164,7 @@ this is the naive solution, i cant think of a better one <br/>
   &amp;amp;v\_car\_maintenance \gets \text{car} \Join_{\text{number = car\_number}}\left(\operatorname*{\Join}_{\substack{type \in v\_types}} \sigma_{\text{maintenance\_type = }type}(\text{car\_maintenance})\right) \label{database-homework2-eq1}\\
   &amp;amp;\pi_{\text{car\_number, car\_type, company, production\_year}}\left(v\_car\_maintenance \Join_{\text{car\_number = number}} \text{car}\right)
 \end{align}
-" style="height: 5.9392em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 7.2132em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -203,7 +203,7 @@ retrieve the name of the garage that has done the most maintenances <br/>
   &amp;amp;v\_maintenance \gets \pi_{\text{garage\_name, num\_of\_maintenances}}\left(\prescript{}{\text{garage\_name}}{\mathcal{G}}_{COUNT \text{ num\_of\_maintenances}}(\text{car\_maintenance})\right)\\
   &amp;amp;\pi_{\text{garage\_name}}\left(\prescript{}{\text{garage\_name}}{\mathcal{G}}_{MAX \text{ num\_of\_maintenances}}(v\_maintenance)\right)
 \end{align}
-" style="height: 3.3105em; vertical-align: -0.4547em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 4.5845em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -224,7 +224,7 @@ retrieve the details of customers (first name, last name and phone number), the 
   &amp;amp;v\_cust2 \gets \rho_{\text{customer\_id, motorcycle\_number, motorcycle\_company}}\left(\pi_{\text{customer\_id, car\_number}}\left(\text{car\_owner} * \sigma_{\text{car\_type='motorcycle'}}(\text{car})\right)\right)\\
   &amp;amp;\pi_{\text{first\_name+' '+last\_name, phone\_number, motorcycle\_number, motorcycle\_company}}\left(\text{customer} \Join_{\text{id=customer\_id}} (v\_cust1 * v\_cust2)\right)
 \end{align}
-" style="height: 4.6750em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 7.1250em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -242,7 +242,7 @@ retrieve the id, first name and last name of all customers. in addition add a fi
 
 <div class="solution">
 
-we use [outer join](20240110T202306--outer-join__math.org)s <br/>
+we use outer joins <br/>
 
 
 <div class="equation-container">
@@ -289,7 +289,7 @@ we use [outer join](20240110T202306--outer-join__math.org)s <br/>
     (\sigma_{\text{start\_date}\le CURRENT\_TIME &amp;lt; \text{ end\_date}}(\text{customer} \leftouterjoin_{\text{id=customer\_id}} \text{car\_owner}))\\
   &amp;amp;nocar \cup oldcar \cup presentcar
 \end{align}
-" style="height: 18.3721em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 22.1941em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 

@@ -6,12 +6,12 @@ tags = ["lispcode"]
 draft = false
 +++
 
-working with [graph](20230314T001051--graph__math.org)s in [common lisp](20230224T163920--common-lisp__code_language.org) <br/>
+working with graphs in common lisp <br/>
 
 
 ## my initial approach {#my-initial-approach}
 
-for simplicity ill represent a [graph](20230314T001051--graph__math.org) as a list of cons's, if we are dealing with a [weighted graph](20230412T150436--weighted-graph__math.org), we use the second item in the cons as a cons with the first item being the node and the second being the weight <br/>
+for simplicity ill represent a graph as a list of cons's, if we are dealing with a weighted graph, we use the second item in the cons as a cons with the first item being the node and the second being the weight <br/>
 i implemented the helper functions `node-weight` and `node` for this purpose <br/>
 an edge is written/stored in the format `'(<src> . (<dest> . <weight>))` or simply `'(<src> . <dest>)` if it has no weight <br/>
 but what about a directed graph? maybe thats to worry about later (maybe just this structure but use `'(node1 . node2)` and `'(node2 . node1)` for bidirectional edges and pass an argument to functions that specifies whether graphs are directed so they have to respect the order of the cons) <br/>
@@ -93,7 +93,7 @@ dvisvgm yourfile
 ```
 
 this will generate an svg image <br/>
-an implementation of [A\* algorithm](20230812T222929--a-algorithm__math.org): <br/>
+an implementation of A\* algorithm: <br/>
 
 ```lisp
 (defun a-star (graph src dest heuristic-function)
@@ -156,9 +156,9 @@ an implementation of [A\* algorithm](20230812T222929--a-algorithm__math.org): <b
 ```
 
 
-## [adjacency list](20230314T193059--adjacency-list__math.org) implementation {#adjacency-list--20230314t193059-adjacency-list-math-dot-org--implementation}
+## adjacency list implementation {#adjacency-list--dot-dot-20230314t193059-adjacency-list-math-dot-md--implementation}
 
-an adjancy list is list of [linked list](20240201T173115--linked-list__.org)s, where each linked list stores a vertex and its outgoing edges, this makes representing directed graphs simple, so i decided to rewrite my code and to this approach <br/>
+an adjancy list is list of linked lists, where each linked list stores a vertex and its outgoing edges, this makes representing directed graphs simple, so i decided to rewrite my code and to this approach <br/>
 a vertex stores a list of edges, an "edge" stores the destination vertex and the weight (if the graph is directed we can tell which direction an edge because its source and destination vertex are determined already in the structure, so its direction must be from the source to the destination), here, an edge need not store its source vertex because the source vertex links to it already, if a function expects to receive a list of edges, not an adjacency list, then perhaps a list could be used in the form `'(source dest weight)`. <br/>
 whether a graph is directed or not is not implemented (currently) in code logic, it depends on the programmers intentions with the graph, this code only provides the necessary abstraction, perhaps a type `graph` can be implemented to store a boolean of whether the graph is directed or not, or each edge would store a boolean to denote whether its actually directed from the source to the destination or not <br/>
 implementation of basic functions: <br/>

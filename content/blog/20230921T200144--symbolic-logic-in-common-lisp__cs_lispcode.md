@@ -7,12 +7,12 @@ tags = ["cs", "lispcode"]
 draft = false
 +++
 
-[logic programming](20230921T193636--logic-programming__.org) in [common lisp](20230224T163920--common-lisp__code_language.org) <br/>
+logic programming in common lisp <br/>
 
 
 ## logical statements {#logical-statements}
 
-we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical [statement](20230401T175139--statement__math.org)s, e.g. given the following [knowledge base](20230919T190349--knowledge-base__.org) of [horn clause](20230919T154252--horn-clause__.org)s: <br/>
+we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical statements, e.g. given the following knowledge base of horn clauses: <br/>
 
 
 <div class="equation-container">
@@ -50,9 +50,9 @@ in lisp we could write it as: <br/>
 ```
 
 the choice of the symbols `implies, and` could vary, but essentially we should write code that deals properly with these symbols based on their names. other symbols we may use are `or, iff`. <br/>
-so a knowledge base is just a (nested) list of [proposition](20230401T175139--statement__math.org)s. <br/>
-what about [predicate](20230607T114855--predicate__math.org)s? e.g. statements like <img src="/ltximg/b28bc30c4a2.svg" alt="\(Human(John)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use `'(Human John)`, so instead of **infix notation**, we use lisp's infamous **prefix notation**, we dont need to worry about `(Human John)` sharing the same form as `(and x1 x2)`, as `and` can be considered just a boolean function like `Human`, after all. any expression that is in the form `(whatever x1 x2 ... xn)` would imply that `whatever` is meant to be treated as a boolean function. <br/>
-first obstacle we may face is the issue of distinguishing a variable from a [constant](20220727T110413--scalar__.org) symbol, how can we tell whether a symbol represents a variable or a constant (an immutable object)? after all both are just symbols (in our implementation), for example consider `person` vs `John`, inherently, `person` is a variable that applies to everyone and `John` is a constant that only describes one person (in a simplified context where John refers to a friend, for example). a simple solution to this problem would be to use special syntax for variables, like `?x`, here, `?x` would mean we're dealing with a variable, and a symbol without a question mark prefix, for example `x`, is recognized as a constant. <br/>
+so a knowledge base is just a (nested) list of propositions. <br/>
+what about predicates? e.g. statements like <img src="/ltximg/b28bc30c4a2.svg" alt="\(Human(John)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use `'(Human John)`, so instead of **infix notation**, we use lisp's infamous **prefix notation**, we dont need to worry about `(Human John)` sharing the same form as `(and x1 x2)`, as `and` can be considered just a boolean function like `Human`, after all. any expression that is in the form `(whatever x1 x2 ... xn)` would imply that `whatever` is meant to be treated as a boolean function. <br/>
+first obstacle we may face is the issue of distinguishing a variable from a constant symbol, how can we tell whether a symbol represents a variable or a constant (an immutable object)? after all both are just symbols (in our implementation), for example consider `person` vs `John`, inherently, `person` is a variable that applies to everyone and `John` is a constant that only describes one person (in a simplified context where John refers to a friend, for example). a simple solution to this problem would be to use special syntax for variables, like `?x`, here, `?x` would mean we're dealing with a variable, and a symbol without a question mark prefix, for example `x`, is recognized as a constant. <br/>
 in our previous example, this doesnt make much difference as we were dealing with constants only, consider this example which demonstrates how we apply the idea of prefixing variables with a question mark: <br/>
 
 ```lisp
@@ -68,7 +68,7 @@ in our previous example, this doesnt make much difference as we were dealing wit
  (IMPLIES (AND (NOT (WIDOWER ?X)) (FATHER ?X)) (MARRIED ?X)))
 ```
 
-how about substitutions? how do we represent for example the substitution <img src="/ltximg/9fa39c9ab85.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we just use an [association list](20230224T163920--common-lisp__code_language.org): <br/>
+how about substitutions? how do we represent for example the substitution <img src="/ltximg/9fa39c9ab85.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we just use an association list: <br/>
 
 ```lisp
 (let ((sub nil)) ;; sub is the substitution
@@ -82,9 +82,9 @@ how about substitutions? how do we represent for example the substitution <img s
 ```
 
 
-## early [inference engine](20230922T003520--inference-engine__.org)s {#early-inference-engine--20230922t003520-inference-engine-dot-org--s}
+## early inference engines {#early-inference-engine--dot-dot-20230922t003520-inference-engine-dot-md--s}
 
-imma start off with the [unification](20230918T185446--unification__math.org) algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the **occur check** and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates <br/>
+imma start off with the unification algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the **occur check** and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates <br/>
 
 ```lisp
 (defun variable? (x)
@@ -140,7 +140,7 @@ a test: <br/>
 ((?X . JOHN))
 ```
 
-next up, we need to implement [forward chaining](20230919T153235--forward-chaining__math.org) and [backward chaining](20230919T153820--backward-chaining__.org) which take in a knowledge base of statements which are [definite clause](20230919T024957--definite-clause__math.org)s and do [algorithmic inference](20230920T180840--inference-algorithm__.org), this code makes use of [common lisp math utils](20230503T204107--common-lisp-math-utils__lisp-code.org) <br/>
+next up, we need to implement forward chaining and backward chaining which take in a knowledge base of statements which are definite clauses and do algorithmic inference, this code makes use of [common lisp math utils](../20230503T204107--common-lisp-math-utils__lisp-code.md) <br/>
 
 ```lisp
 (defun find-variables-in-statement (statement)
@@ -297,7 +297,7 @@ example usage: <br/>
       kb2)))
 ```
 
-some functions (that do their best) to "unpack" a knowledge base by unpacking conjunctions and implications into multiple smaller statements that are easier to deal with (there isnt much we can do when the precedent of an implication is a [logical connective](20230401T203310--logical-connective__math.org)) <br/>
+some functions (that do their best) to "unpack" a knowledge base by unpacking conjunctions and implications into multiple smaller statements that are easier to deal with (there isnt much we can do when the precedent of an implication is a logical connective) <br/>
 
 ```lisp
 (defun unpack-implication (implication)
@@ -326,7 +326,7 @@ some functions (that do their best) to "unpack" a knowledge base by unpacking co
     new-kb))
 ```
 
-a function to generate a graph from a knowledge base, see [common lisp graphs](20230813T012934--working-with-graphs-in-common-lisp__lispcode.org): <br/>
+a function to generate a graph from a knowledge base, see [common lisp graphs](../20230813T012934--working-with-graphs-in-common-lisp__lispcode.md): <br/>
 
 ```lisp
 (defun generate-graph-from-knowledge-base (kb)
@@ -408,7 +408,7 @@ v15/{(AMERICAN ?X)} -&amp;gt; v12/{(CRIMINAL ?X)},
 </span>
 </div>
 
-functions to generate a graph from the forward chaining process (see [common lisp graphs](20230813T012934--working-with-graphs-in-common-lisp__lispcode.org)): <br/>
+functions to generate a graph from the forward chaining process (see [common lisp graphs](../20230813T012934--working-with-graphs-in-common-lisp__lispcode.md)): <br/>
 
 ```lisp
 (defun forward-chaining-generate-inference-graph (inference-alist-list)
@@ -510,7 +510,7 @@ v7/{(MISSILE M1)} -&amp;gt; v3/{(SELLS WEST M1 NONO)},
 </span>
 </div>
 
-the [backward chaining](20230919T153820--backward-chaining__.org) algorithm (we dont implement it as a generator here): <br/>
+the backward chaining algorithm (we dont implement it as a generator here): <br/>
 
 ```lisp
 (defun backward-chaining (knowledge-base query)

@@ -13,14 +13,14 @@ scroll to the end if you're only interested in the solution and the steps in raw
 
 </div>
 
-homework on [constraint satisfaction problem](20230822T145930--constraint-satisfaction-problem__math.org) <br/>
-using [common lisp graphs](20230813T012934--working-with-graphs-in-common-lisp__lispcode.org) <br/>
-[graph](20230314T001051--graph__math.org) image from homework: <br/>
+homework on constraint satisfaction problem <br/>
+using [common lisp graphs](../20230813T012934--working-with-graphs-in-common-lisp__lispcode.md) <br/>
+graph image from homework: <br/>
 ![](/ox-hugo/Tue_Aug_22_08:26:06_PM_IDT_2023.png) <br/>
 
 -   gotta solve this as an **rgba map coloring problem** <br/>
 -   make use of forward checking <br/>
--   variable ordering heuristic: prioritize [vertices](20230314T001051--graph__math.org) that are the least constraining (least edges, least constraints on others) to most constraining (most edges), in case of a draw, use the variable with the most remaining colors (least constrained), if there is another tie, choose the leftmost vertex in the constraint graph <br/>
+-   variable ordering heuristic: prioritize vertices that are the least constraining (least edges, least constraints on others) to most constraining (most edges), in case of a draw, use the variable with the most remaining colors (least constrained), if there is another tie, choose the leftmost vertex in the constraint graph <br/>
 -   no value ordering heuristics <br/>
 
 first we define the graph: <br/>
@@ -96,7 +96,7 @@ P -- K,
 </div>
 
 a constraint satisfaction problem is defined by its variables, domains and contrains <br/>
-since i had written the problem in its [constraint graph](20230822T171303--constraint-graph__.org) form, i had to write a function to convert it into its "original" form, its variables, domains and it defines the constraint of neighbors not having the same color, which is from the map coloring problem (so this method is not really general, but specific to this problem): <br/>
+since i had written the problem in its constraint graph form, i had to write a function to convert it into its "original" form, its variables, domains and it defines the constraint of neighbors not having the same color, which is from the map coloring problem (so this method is not really general, but specific to this problem): <br/>
 
 ```lisp
 (defstruct constraint-satisfaction-problem

@@ -8,10 +8,10 @@ draft = false
 
 <div class="dummy">
 
-we can easily extend from [univariate linear regression](20230313T223324--univariate-linear-regression__math.org) to **multivariate linear regression**, such that each example <img src="/ltximg/677254fdc1d.svg" alt="\(x_j\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> is an n-element [vector](20231222T075237--vector__math.org). our [hypothesis space](20230225T234105--hypothesis-space__.org) is the [set](20240205T193039--set__math.org) of [function](20231111T073425--function__math.org)s of the form <br/>
+we can easily extend from univariate linear regression to **multivariate linear regression**, such that each example <img src="/ltximg/677254fdc1d.svg" alt="\(x_j\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> is an n-element vector. our hypothesis space is the set of functions of the form <br/>
 
 
-<div id="org4e2021f" class="equation-container">
+<div id="org30ab02c" class="equation-container">
 <span class="equation">
 <img src="/ltximg/e0adc91558e.svg" alt="\begin{equation}
   h_{\brm{w}}(\brm{x}_j) = w_0+w_1x_{j,1} + \dots + w_nx_{j,n} = w_0+\sum_{i} w_ix_{j,i}
@@ -20,11 +20,11 @@ we can easily extend from [univariate linear regression](20230313T223324--univar
 </span>
 </div>
 
-the <img src="/ltximg/f819dfb7649.svg" alt="\(w_0\)" style="height: 0.6673em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> term, the intercept, stands out as different from the others. we can fix that by inventing a dummy input attribute, <img src="/ltximg/ecc8bb2cd05.svg" alt="\(x_j,_0\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" />, which is defined as always equal to 1. then <img src="/ltximg/7c0ac91e792.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is simply the [dot product](20231222T081158--dot-product__math.org) of the weights and the input vector, or equivalently the [matrix](20231222T075331--matrix__math.org) product of the [transpose](20240205T193137--transpose__math.org) of the weights and hte input vector: <br/>
+the <img src="/ltximg/f819dfb7649.svg" alt="\(w_0\)" style="height: 0.6673em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> term, the intercept, stands out as different from the others. we can fix that by inventing a dummy input attribute, <img src="/ltximg/ecc8bb2cd05.svg" alt="\(x_j,_0\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" />, which is defined as always equal to 1. then <img src="/ltximg/7c0ac91e792.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is simply the dot product of the weights and the input vector, or equivalently the matrix product of the transpose of the weights and hte input vector: <br/>
 <img src="/ltximg/b2f66aefcbc.svg" alt="\[ h_{\brm{w}}(\brm{x}_j) = \brm{w} \cdot \brm{x}_j = \brm{w}^\mathrm{T} \brm{x}_j = \sum_{i} w_ix_{j,i} \]" style="height: 2.5286em; display: block" class="org-latex org-latex-block" /> <br/>
 the best vector of weights, <img src="/ltximg/f24a6e3efd1.svg" alt="\(\brm{w}^*\)" style="height: 0.7732em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> minimizes squared-error loss over the examples: <br/>
 <img src="/ltximg/f14854a2cca.svg" alt="\[ \brm{w}^* = \argmin_{\brm{w}} \sum_{j} L_2(y_j, \brm{w} \cdot \brm{x}_j) \]" style="height: 2.6620em; display: block" class="org-latex org-latex-block" /> <br/>
-here we have a [continuous](20230422T235527--continuous-function__math.org) weight space and we cannot find a closed-form solution. we use a hill-climbing algorithm that follows the gradient of the function. in this case, because we are trying to minimize the loss, we will use [gradient descent](20230422T235640--gradient-descent__math.org). we choose any starting point in weight space--here, a point in the <img src="/ltximg/6850b6d4bc3.svg" alt="\((w_0,w_1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> plane--and then move to a neighboring point that is downhill, repeating until we converge on the minimum possible loss, recall that the sum is minimized when the partial derivatives with respect to each of the weights are zero <br/>
+here we have a continuous weight space and we cannot find a closed-form solution. we use a hill-climbing algorithm that follows the gradient of the function. in this case, because we are trying to minimize the loss, we will use gradient descent. we choose any starting point in weight space--here, a point in the <img src="/ltximg/6850b6d4bc3.svg" alt="\((w_0,w_1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> plane--and then move to a neighboring point that is downhill, repeating until we converge on the minimum possible loss, recall that the sum is minimized when the partial derivatives with respect to each of the weights are zero <br/>
 
 
 <div class="equation-container">
@@ -41,7 +41,7 @@ here we have a [continuous](20230422T235527--continuous-function__math.org) weig
 </span>
 </div>
 
-the parameter <img src="/ltximg/d972b0c4622.svg" alt="\(\alpha\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (the step size), is usually called the [learning rate](20230423T002354--learning-rate__.org) when we are trying to minimize loss in a learning problem. it can be a fixed constant, or it can decay over time as the learning process proceeds. <br/>
+the parameter <img src="/ltximg/d972b0c4622.svg" alt="\(\alpha\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (the step size), is usually called the learning rate when we are trying to minimize loss in a learning problem. it can be a fixed constant, or it can decay over time as the learning process proceeds. <br/>
 here the update equation for each weight <img src="/ltximg/c22a655ff19.svg" alt="\(w_i\)" style="height: 0.6673em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> is <br/>
 <img src="/ltximg/b425b9abbc7.svg" alt="\[ w_i \gets w_i + \alpha \sum_{j} x_{j,i}(y_j-h_{\brm{w}}(\brm{x}_j)) \]" style="height: 2.6620em; display: block" class="org-latex org-latex-block" /> <br/>
 in this equation we're considering not only the derivative of the loss function with respect to the weight we're updating but the derivatives of all of the loss functions with respect to each weight (unlike in the pseudocode above), i think this might be better but im not sure, i should evaluate both methods <br/>
@@ -56,7 +56,7 @@ turns out, when fitting higher degree functions its not analytically solvable <b
 
 </div>
 
-with univariate linear regression we didnt have to worry about [overfitting](20230420T220702--overfitting__.org). but with multivariate linear regression in high-dimensional spaces it is possible that some dimension that is actually irrelevant appears by chance to be useful, resulting in overfitting. <br/>
+with univariate linear regression we didnt have to worry about overfitting. but with multivariate linear regression in high-dimensional spaces it is possible that some dimension that is actually irrelevant appears by chance to be useful, resulting in overfitting. <br/>
 thus, it is common to use **regularization** on multivariate linear functions to avoid overfitting. recall that with regularization we minimize the total cost of a hypothesis, counting both the empirical loss and the complexity of the hypothesis: <br/>
 <img src="/ltximg/2c55ec77d39.svg" alt="\[ Cost(h) = EmpLoss(h) + \lambda\ Complexity(h) \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" /> <br/>
 for linear functions the complexity can be specified as a function of the weights. we can consider a family of regularization functions: <br/>
@@ -69,12 +69,12 @@ as with loss functions, with <img src="/ltximg/6f909b6e3f4.svg" alt="\(q=1\)" st
 
 ## fitting higher order functions {#fitting-higher-order-functions}
 
-if we wanted to fit a given data set to a higher order function, say quadratic, we just introduce <img src="/ltximg/b32b0f8a94b.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> new weights and apply them to <img src="/ltximg/7e277f08dc2.svg" alt="\(x_{j,1}^2 \dots x_{j,n}^2\)" style="height: 1.2846em; vertical-align: -0.4377em; display: inline-block" class="org-latex org-latex-inline" /> and add these new symbols to the [hypothesis set equation](#org4e2021f) <br/>
+if we wanted to fit a given data set to a higher order function, say quadratic, we just introduce <img src="/ltximg/b32b0f8a94b.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> new weights and apply them to <img src="/ltximg/7e277f08dc2.svg" alt="\(x_{j,1}^2 \dots x_{j,n}^2\)" style="height: 1.2846em; vertical-align: -0.4377em; display: inline-block" class="org-latex org-latex-inline" /> and add these new symbols to the [hypothesis set equation](#org30ab02c) <br/>
 
 
 ## lisp implementation {#lisp-implementation}
 
-enough talk, its time to implement this in [common lisp](20230224T163920--common-lisp__code_language.org) <br/>
+enough talk, its time to implement this in common lisp <br/>
 first we need the data <br/>
 
 ```lisp

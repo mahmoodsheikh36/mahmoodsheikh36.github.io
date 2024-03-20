@@ -7,7 +7,7 @@ draft = false
 +++
 
 using `cl-cuda` <br/>
-load it using [quicklisp](20230224T163920--common-lisp__code_language.org): <br/>
+load it using quicklisp: <br/>
 
 ```lisp
 (ql:quickload :cl-cuda)
@@ -64,7 +64,7 @@ CUDA arrays are opaque memory layouts optimized for texture fetching. <br/>
 
 ## code {#code}
 
-see [connect to remote common lisp repl with sly/slime](20230614T172149--connect-to-remote-common-lisp-repl-with-slyslime__codde.org) for connecting to a remote common lisp repl with [emacs](20240204T953236--emacs__program.org) <br/>
+see [connect to remote common lisp repl with sly/slime](../20230614T172149--connect-to-remote-common-lisp-repl-with-slyslime__codde.md) for connecting to a remote common lisp repl with emacs <br/>
 
 <div class="note">
 
@@ -181,7 +181,7 @@ similar same code but in cl: <br/>
 
 mostly taken from <https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html> and <https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model> <br/>
 before implementing matrix multiplication for the **gpu** we need to consider some things <br/>
-the product of two matrices <img src="/ltximg/490ca71a53d.svg" alt="\(A_{M \times K},B_{K \times N}\)" style="height: 0.9967em; vertical-align: -0.2779em; display: inline-block" class="org-latex org-latex-inline" /> results in a matrix <img src="/ltximg/4d994746510.svg" alt="\(C_{M \times N}\)" style="height: 0.9967em; vertical-align: -0.2779em; display: inline-block" class="org-latex org-latex-inline" /> which contains <img src="/ltximg/8f7eccfd7bc.svg" alt="\(M \cdot N\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> values, each of which is a [dot product](20231222T081158--dot-product__math.org) of K-element [vector](20231222T075237--vector__math.org)s. thus a total of <img src="/ltximg/da67a4bfa55.svg" alt="\(M \cdot N \cdot K\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> [fused multiply-add](20230616T025501--fma__.org)s are needed to compute the product. each FMA is 2 operations, a (scalar) multiplication and an addition, so a total of <img src="/ltximg/3f7fbeb5e35.svg" alt="\(2 \cdot M \cdot N \cdot K\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> [flops](20230616T021925--flops__.org) are required, if we were to consider [gemm](20230616T024401--gemm__.org), the parameters <img src="/ltximg/f196a6f2956.svg" alt="\(\alpha,\beta\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> would also play a role in the number of flops required, but the effect these scalars have can be negligable for sufficiently large matrices. <br/>
+the product of two matrices <img src="/ltximg/490ca71a53d.svg" alt="\(A_{M \times K},B_{K \times N}\)" style="height: 0.9967em; vertical-align: -0.2779em; display: inline-block" class="org-latex org-latex-inline" /> results in a matrix <img src="/ltximg/4d994746510.svg" alt="\(C_{M \times N}\)" style="height: 0.9967em; vertical-align: -0.2779em; display: inline-block" class="org-latex org-latex-inline" /> which contains <img src="/ltximg/8f7eccfd7bc.svg" alt="\(M \cdot N\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> values, each of which is a dot product of K-element vectors. thus a total of <img src="/ltximg/da67a4bfa55.svg" alt="\(M \cdot N \cdot K\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> fused multiply-adds are needed to compute the product. each FMA is 2 operations, a (scalar) multiplication and an addition, so a total of <img src="/ltximg/3f7fbeb5e35.svg" alt="\(2 \cdot M \cdot N \cdot K\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> flops are required, if we were to consider gemm, the parameters <img src="/ltximg/f196a6f2956.svg" alt="\(\alpha,\beta\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> would also play a role in the number of flops required, but the effect these scalars have can be negligable for sufficiently large matrices. <br/>
 in the example of vector addition, we used **global memory** (using `cudaMalloc` in C and `with-memory-block` in CL), which is (very) slow compared to **shared memory** which is allocated per **thread block**. we also did one **floating point operation** per memory access, so with as many flops as we have you can already see how slow we are going. <br/>
 to speed this up we're gonna use shared memory so that threads in a thread block can collaborate in computing a submatrix of the output matrix and to reduce calls to global memory <br/>
 first, an implementation without shared memory: <br/>

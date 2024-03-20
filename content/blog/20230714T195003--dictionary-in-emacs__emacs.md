@@ -18,7 +18,7 @@ you can also force it to use `dict.org` without confirmation: <br/>
 (setq dictionary-server "dict.org")
 ```
 
-or if you want to run a local dictionary server, on [arch linux](20220703T221611--arch-linux__.org) you'd need: <br/>
+or if you want to run a local dictionary server, on arch linux you'd need: <br/>
 
 ```bash
 sudo pacman -S dictd

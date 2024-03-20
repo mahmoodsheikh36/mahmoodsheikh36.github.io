@@ -7,8 +7,8 @@ tags = ["cs"]
 draft = false
 +++
 
--   [convolutional generative adversarial network](20231023T202148--convolutional-generative-adversarial-network__.org) <br/>
--   [pytorch](20231019T195156--pytorch__.org) <br/>
+-   convolutional generative adversarial network <br/>
+-   pytorch <br/>
 
 <div class="note">
 
@@ -42,7 +42,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 ## load the data {#load-the-data}
 
-we start by loading the mnist dataset (the 28x28 images of hand-written digits), we use the `torchvision` package from `pypi` which provides various datasets for [machine learning](20230225T233819--machine-learning__cs.org) <br/>
+we start by loading the mnist dataset (the 28x28 images of hand-written digits), we use the `torchvision` package from `pypi` which provides various datasets for machine learning <br/>
 
 <a id="code-snippet--src-load-dataset"></a>
 ```python
@@ -109,8 +109,8 @@ gen_images_img(train_x[:30].cpu().reshape((-1, 28, 28)), f)
 
 ## discriminator {#discriminator}
 
-the discriminator model must take a sample image from our dataset as input and output a classification, a prediction as to whether the sample is real or fake. or perhaps the likelihood of the sample being real, which means the discriminator does [binary classification](20230225T234426--boolean-classification__cs.org). <br/>
-pytorch makes defining neural nets easy by inheriting from `nn.Module`, here, since we're dealing with images, we use [convolutional layer](20230520T175032--convolutional-neural-network__cs_lispcode_math.org)s, in combinations with [dropout layers](20231106T204103--dropout__.org) which arent "mandatory" but they help improve results, the last layers are a [flatten layer](20230520T175032--convolutional-neural-network__cs_lispcode_math.org) and a linear layer, the output for a single image would be a float in the range 0-1. <br/>
+the discriminator model must take a sample image from our dataset as input and output a classification, a prediction as to whether the sample is real or fake. or perhaps the likelihood of the sample being real, which means the discriminator does binary classification. <br/>
+pytorch makes defining neural nets easy by inheriting from `nn.Module`, here, since we're dealing with images, we use [convolutional layer](../20230520T175032--convolutional-neural-network__cs_lispcode_math.md)s, in combinations with dropout layers which arent "mandatory" but they help improve results, the last layers are a [flatten layer](../20230520T175032--convolutional-neural-network__cs_lispcode_math.md) and a linear layer, the output for a single image would be a float in the range 0-1. <br/>
 
 <a id="code-snippet--src-discriminator"></a>
 ```python
@@ -216,7 +216,7 @@ train_x = train_dataset.data.detach().clone().to(device)
 train_y = train_dataset.targets.detach().clone().to(device)
 ```
 
-as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the [interval](20231008T200908--interval__.org) <img src="/ltximg/7acbe9d541a.svg" alt="\([0,1]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions: <br/>
+as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the interval <img src="/ltximg/7acbe9d541a.svg" alt="\([0,1]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions: <br/>
 
 <a id="code-snippet--src-normalize-training-tensors"></a>
 ```python
@@ -236,7 +236,7 @@ after: torch.Size([60000, 1, 28, 28])
 
 ### training the discriminator {#training-the-discriminator}
 
-we could systematically enumerate all samples in the training dataset, and that is a good approach, but good training via [stochastic gradient descent](20230503T195522--stochastic-gradient-descent__.org) requires that the training dataset be shuffled prior to each epoch. a simpler approach is to select random samples of images from the training dataset. <br/>
+we could systematically enumerate all samples in the training dataset, and that is a good approach, but good training via stochastic gradient descent requires that the training dataset be shuffled prior to each epoch. a simpler approach is to select random samples of images from the training dataset. <br/>
 the `generate_real_samples_for_discriminator()` function below takes the training dataset as an argument and selects a random subset of images; it also returns class labels for the images, specifically a class label of 1, to indicate that the images are real. <br/>
 
 <a id="code-snippet--src-gen-real-samples"></a>
@@ -262,7 +262,7 @@ def generate_fake_samples_for_discriminator(n_samples):
 finally, we need to train the discriminator model. this involves repeatedly retrieving samples of real images and samples of generated (fake) images and updating the model for a fixed number of iterations. <br/>
 we will ignore the idea of epochs for now (e.g. complete passes through the training dataset) and fit the discriminator model for a fixed number of batches. the model will learn to discriminate between real and fake images rapidly and it doesnt take many batches before it learns to discriminate perfectly. <br/>
 the `train_discriminator()` function implements this, using a batch size of 256 images where 128 are real and 128 are fake each iteration. <br/>
-we update the discriminator separately for real and fake examples so that we can calculate the accuracy of the model on each sample prior to the update. this gives insight into how the discriminator model is performing over time. we also use the [matplotlib](20220809T215936--python__code_language.org) library to plot the loss over time. <br/>
+we update the discriminator separately for real and fake examples so that we can calculate the accuracy of the model on each sample prior to the update. this gives insight into how the discriminator model is performing over time. we also use the matplotlib library to plot the loss over time. <br/>
 
 <a id="code-snippet--src-train-discriminator"></a>
 ```python
@@ -347,12 +347,12 @@ as we can see, the loss gradually declines which means the discriminator (theore
 
 ## generator {#generator}
 
-the generator model is responsible for creating new, fake but plausible images of handwritten digits. it does so by taking a point from the [latent space](20230907T030104--latent-space__.org) as input and outputting a tensor representing a grayscale image. <br/>
-the latent space is an arbitrarily defined [finite](20231015T221141--finite-set__math.org) [vector space](20231222T081227--vector-space__math.org). it has no meaning, but by drawing points from this space and feeding them to the generator model during training, the generator model will assign meaning to the latent points and, in turn, to the latent space. at the end of training, the latent vector space would have an internal structure that is a compressed representation of the output space (the MNIST image dataset), that only the generator knows how to turn into plausible images that fool the discriminator. <br/>
-in our case, developing a generator model requires that we transform a vector from the latent space to a 2D array with 28x28 values that represent a grayscale image. there are a number of ways to achieve this but there is one approach that has proven effective in deep [convolutional generative adversarial network](20231023T202148--convolutional-generative-adversarial-network__.org). it involves two main elements: <br/>
+the generator model is responsible for creating new, fake but plausible images of handwritten digits. it does so by taking a point from the latent space as input and outputting a tensor representing a grayscale image. <br/>
+the latent space is an arbitrarily defined finite vector space. it has no meaning, but by drawing points from this space and feeding them to the generator model during training, the generator model will assign meaning to the latent points and, in turn, to the latent space. at the end of training, the latent vector space would have an internal structure that is a compressed representation of the output space (the MNIST image dataset), that only the generator knows how to turn into plausible images that fool the discriminator. <br/>
+in our case, developing a generator model requires that we transform a vector from the latent space to a 2D array with 28x28 values that represent a grayscale image. there are a number of ways to achieve this but there is one approach that has proven effective in deep convolutional generative adversarial network. it involves two main elements: <br/>
 
--   first, we use a [dense layer](20230520T175032--convolutional-neural-network__cs_lispcode_math.org) as the first hidden layer that has enough nodes to represent a low-resolution version of the output image. specifically, an image half the size (one quarter the area) of the output image. <br/>
--   second, we dont just want one low-resolution version of the image; we want many parallel versions or interpretations of the input. this is a pattern in convolutional neural networks where we have many parallel filters resulting in multiple parallel activation maps, called [feature map](20230724T025435--feature-map__.org)s, with different interpretations of the input. we want the same thing in reverse: many parallel versions of our output with different learned features that can be collapsed in the output layer into a final image. <br/>
+-   first, we use a [dense layer](../20230520T175032--convolutional-neural-network__cs_lispcode_math.md) as the first hidden layer that has enough nodes to represent a low-resolution version of the output image. specifically, an image half the size (one quarter the area) of the output image. <br/>
+-   second, we dont just want one low-resolution version of the image; we want many parallel versions or interpretations of the input. this is a pattern in convolutional neural networks where we have many parallel filters resulting in multiple parallel activation maps, called feature maps, with different interpretations of the input. we want the same thing in reverse: many parallel versions of our output with different learned features that can be collapsed in the output layer into a final image. <br/>
 
 therefore, the first hidden layer (the dense one) needs enough nodes for multiple low-resolution versions of our output image, in our case 128 images sized 7x7 (or more accurately, 1x7x7), so there would be a total of 6272 nodes in our first dense layer. <br/>
 the activations from these nodes can then be reshaped into something image-like to pass into a convolutional layer, such as 128 different 7x7 feature maps. <br/>
@@ -549,7 +549,7 @@ f
 
 ![](/ox-hugo/3PW7kEK.png) <br/>
 after 5000 batches these were the results i got, which arent much, with further training i could've gotten better results, but i needed a better approach to get faster convergence. <br/>
-as we're only training the generator on random inputs, and the discriminator stays frozen, only one competitor is making progress, whereas if the two were competing, as in a true [zero-sum game](20230817T031634--zero-sum-game__.org), we'd get better results, because as the discriminator gets better, the generator would also need to get better in order to be able to fool its competitor, so a better approach would be to train both at the same time, and to train the discriminator on the outputs of the generator, which we label as fake, so that it'd get better at detecting the generator's attempts at fooling it, which in turn makes the generator get better at trying to fool the discriminator. <br/>
+as we're only training the generator on random inputs, and the discriminator stays frozen, only one competitor is making progress, whereas if the two were competing, as in a true zero-sum game, we'd get better results, because as the discriminator gets better, the generator would also need to get better in order to be able to fool its competitor, so a better approach would be to train both at the same time, and to train the discriminator on the outputs of the generator, which we label as fake, so that it'd get better at detecting the generator's attempts at fooling it, which in turn makes the generator get better at trying to fool the discriminator. <br/>
 the following method, `train_gan`, implements this approach, and on each epoch (iteration through the entire dataset), it generates some samples for later evaluation (ofcourse a better approach would be to copy the model itself), for further appreciation and more insight into how the model's output changes over epochs. <br/>
 
 <a id="code-snippet--src-train-gan"></a>

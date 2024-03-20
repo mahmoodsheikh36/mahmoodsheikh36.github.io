@@ -6,7 +6,7 @@ tags = ["lisp-code"]
 draft = false
 +++
 
-a collection of utility functions for [common lisp](20230224T163920--common-lisp__code_language.org). <br/>
+a collection of utility functions for common lisp. <br/>
 
 
 ## arrays {#arrays}
@@ -348,7 +348,7 @@ delete nth element of a sequence: <br/>
   (remove-if (lambda (_) t) seq :start n :count 1))
 ```
 
-split a sequence into [singleton](20230927T150124--singleton__.org) sequences (of the same type as the original sequence) <br/>
+split a sequence into singleton sequences (of the same type as the original sequence) <br/>
 
 ```lisp
 (defun seq-singletons (seq)

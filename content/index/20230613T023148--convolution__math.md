@@ -8,7 +8,7 @@ draft = false
 
 <div class="definition" id="def-conv">
 
-the convolution operation is defined as the [integral](20240102T073445--integral__math.org) of the product of two [function](20231111T073425--function__math.org)s <img src="/ltximg/0aebd621cde.svg" alt="\((f,g)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> after one is reflected about the y-axis and shifted: <br/>
+the convolution operation is defined as the integral of the product of two functions <img src="/ltximg/0aebd621cde.svg" alt="\((f,g)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> after one is reflected about the y-axis and shifted: <br/>
 <img src="/ltximg/3d46cdb1e73.svg" alt="\[ (f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau) \dif{\tau} \]" style="height: 2.5579em; display: block" class="org-latex org-latex-block" /> <br/>
 (Maria Vakalopoulou, Stergios Christodoulidis, Ninon Burgos, Olivier Colliot, Vincent Lepetit. Deep learning: basics and convolutional neural networks (CNN). Olivier Colliot. Machine Learning for Brain Disorders, Springer, In press. hal-03957224, 2023) <br/>
 
@@ -27,10 +27,10 @@ extending to 2 dimensional functions we'd get: <br/>
 
 <div class="my_example">
 
-in [machine learning](20230225T233819--machine-learning__cs.org), specifically in [convolutional neural network](20230520T175032--convolutional-neural-network__cs_lispcode_math.org), the convolution operation is used do detect features in an **image**, one of the operands is the image and the second is the **kernel**, see [1](#orga43d174) <br/>
+in machine learning, specifically in [convolutional neural network](../20230520T175032--convolutional-neural-network__cs_lispcode_math.md), the convolution operation is used do detect features in an **image**, one of the operands is the image and the second is the **kernel**, see [1](#org9a0db97) <br/>
 
 
-<div id="orga43d174" class="equation-container">
+<div id="org9a0db97" class="equation-container">
 <span class="equation">
 <img src="/ltximg/ce8e875d112.svg" alt="\begin{tikzpicture}[mmat/.style={matrix of math nodes,column sep=-\pgflinewidth/2,
     row sep=-\pgflinewidth/2,cells={nodes={draw,inner sep=3pt,thin}},draw=#1,thick,inner sep=0pt},
@@ -95,7 +95,7 @@ an example of a flipped kernel: <br/>
 
 <div class="dummy">
 
-if you look at fig-conv-1, you may notice the edges essentially get "trimmed off", converting a 7x7 matrix into a 5×5 one. the pixels on the edge are never at the center of the kernel, because there is nothing for the kernel to extend to beyond the edge. but we often would like the size of the output to equal the input. <br/>
+if you look at [fig-conv-1](20230613T023148--convolution__math.md), you may notice the edges essentially get "trimmed off", converting a 7x7 matrix into a 5×5 one. the pixels on the edge are never at the center of the kernel, because there is nothing for the kernel to extend to beyond the edge. but we often would like the size of the output to equal the input. <br/>
 to solve this, a _padding_ is introduced to the image, where "fake" pixels are placed around the image to extend its dimensions so that the result of the convolution would grow to equal the size we want. <br/>
 
 </div>
@@ -108,7 +108,7 @@ often when applying a convolution, we want an output with a lower size than the 
 
 <div class="dummy">
 
-convolution is [commutative](20220923T212910--commutative__math.org) <br/>
+convolution is commutative <br/>
 
 </div>
 
