@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood" />
+<meta name="generator" content="Org Mode" />
+<title>connect to remote common lisp repl with sly/slime</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/archive.html'>archive</a>
+  <a href='/about.html'>about</a>
+</div><h1 class="main-title">connect to remote common lisp repl with sly/slime</h1>
+</div>
+<div id="content" class="content">
+<p>
+assuming <code>sbcl</code> is installed on the destination server and the one to be used
+</p>
+<ul class="org-ul">
+<li>start by installing quicklisp on the server</li>
+<li>start the sbcl repl</li>
+<li>install slynk/swank for sly/slime, respectively, <code>(ql:quickload :slynk)</code></li>
+<li>start the server with <code>(slynk:create-server)</code>, the default port is 4005</li>
+<li>create an ssh tunnel from local machine to remote machine using <code>ssh -L4005:localhost:4005 &lt;remote-machine-address&gt;</code></li>
+<li>connect from the local emacs instance to the remote common lisp swank instance using <code>M-x sly-connect</code>, with the destination being the server and the port being 4005</li>
+</ul>
+<p>
+note that direct remote connections to swank/slynk arent possible (by default) so we have to use an ssh tunnel (see <a href="https://comp.lang.lisp.narkive.com/ze9FYwCl/how-to-connect-with-slime-to-remote-sbcl">https://comp.lang.lisp.narkive.com/ze9FYwCl/how-to-connect-with-slime-to-remote-sbcl</a>)
+a one-liner to start the slynk server:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sbcl --eval <span style="color: #f06a3f;">'(ql:quickload :slynk)'</span> --eval <span style="color: #f06a3f;">'(slynk:create-server)'</span>
+</pre>
+</div>
+</div>
+</body>
+</html>

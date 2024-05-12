@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood" />
+<meta name="generator" content="Org Mode" />
+<title>lambda calculus</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/archive.html'>archive</a>
+  <a href='/about.html'>about</a>
+</div><h1 class="main-title">lambda calculus</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="orgb4d7d0e">
+<p>
+the <i><img src="ltx/ad1eb53bc38.svg" alt="\(\lambda\)" style="height: 0.7956em; vertical-align: -0.0585em; display: inline-block" class="org-latex org-latex-inline" />-calculus</i> consists of a set of objects called <img src="ltx/ad1eb53bc38.svg" alt="\(\lambda\)" style="height: 0.7956em; vertical-align: -0.0585em; display: inline-block" class="org-latex org-latex-inline" />-terms and some rules for manipulating them. it was originally designed to capture formally the notions of functional abstraction and functional application and their interaction.
+</p>
+
+<p>
+the <img src="ltx/ad1eb53bc38.svg" alt="\(\lambda\)" style="height: 0.7956em; vertical-align: -0.0585em; display: inline-block" class="org-latex org-latex-inline" />-calculus has had a profound impact on computing. one can see the basic principles of the <img src="ltx/ad1eb53bc38.svg" alt="\(\lambda\)" style="height: 0.7956em; vertical-align: -0.0585em; display: inline-block" class="org-latex org-latex-inline" />-calculus at work in the functional programming language lisp and its more modern offspring SCHEME and DYLAN.
+</p>
+
+<p>
+in mathematics, <img src="ltx/ad1eb53bc38.svg" alt="\(\lambda\)" style="height: 0.7956em; vertical-align: -0.0585em; display: inline-block" class="org-latex org-latex-inline" />-notation is commonly used to represent functions. the expression <img src="ltx/29036af1498.svg" alt="\(\lambda x.E(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> denotes a function that on input <img src="ltx/bd05245349f.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> computes <img src="ltx/f754aa3a3ac.svg" alt="\(E(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />. to apply this function to an input, one substitutes the input for the variable <img src="ltx/bd05245349f.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in the body <img src="ltx/f754aa3a3ac.svg" alt="\(E(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and evaluates the resulting expression.
+</p>
+
+<p>
+for example, the expression
+<img src="ltx/6fc9bf759b1.svg" alt="\[ \lambda x.(x + 1) \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+might be used to denote the successor function on natural numbers. to apply this function to the input 7, we would substitute 7 for <img src="ltx/bd05245349f.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in the body and evaluate:
+<img src="ltx/48c1aa9c50c.svg" alt="\[ (\lambda x.(x + 1))7 \to 7 + 1 = 8. \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+in the programming language DYLAN, one would write
+</p>
+<div class="org-src-container">
+<pre class="src src-dylan">(method (x) (+ x 1))
+</pre>
+</div>
+<p>
+for the same thing. the keyword <code>method</code> is really <img src="ltx/ad1eb53bc38.svg" alt="\(\lambda\)" style="height: 0.7956em; vertical-align: -0.0585em; display: inline-block" class="org-latex org-latex-inline" /> in disguise. if you typed
+</p>
+<div class="org-src-container">
+<pre class="src src-dylan">((method (x) (+ x 1)) 7)
+</pre>
+</div>
+<p>
+at a DYLAN interpreter, it would print out 8.
+</p>
+
+<p>
+for another example, the expression
+<img src="ltx/8fd17c4aea1.svg" alt="\[ \lambda x.f(gx) \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+denotes the composition of the functions <img src="ltx/7a9cbb0ba64.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/4294823b7db.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />; that is, the function that on input <img src="ltx/bd05245349f.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> applies <img src="ltx/4294823b7db.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to <img src="ltx/bd05245349f.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, then applies <img src="ltx/7a9cbb0ba64.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to the result. the expression
+</p>
+
+<div id="org6a7a882" class="equation-container">
+<span class="equation">
+<img src="ltx/86580357956.svg" alt="\begin{equation}
+   \lambda f.\lambda g.\lambda x.f(gx)
+\end{equation}
+" style="height: 1.5194em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+denotes the function that takes functions <img src="ltx/7a9cbb0ba64.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/4294823b7db.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> as input and gives back their composition <img src="ltx/2422a5a7a54.svg" alt="\(\lambda x.f(gx)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />. In DYLAN one would write
+</p>
+<div class="org-src-container">
+<pre class="src src-dylan">(method (f)
+  (method (g)
+    (method (x) (f (g x)))))
+</pre>
+</div>
+<p>
+to see how this works, let's apply <a href="/lambda_calculus.html">eq-lambda-calc-1</a> to the successor function twice.
+</p>
+
+<p>
+we use different variables in the successor functions below for clarity. the symbol <img src="ltx/f92af6ee63e.svg" alt="\(\to\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> denotes one substitution step.
+</p>
+
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/052420de1e1.svg" alt="\begin{align*}
+  &amp;amp;(\lambda f.\lambda g.\lambda x.(f(gx)))(\lambda y.(y+1))(\lambda z.(z+1)) &amp;amp;\text{substitute } \lambda y.(y+1) \text{ for } f\\
+  &amp;amp;\to(\lambda g.\lambda x.((\lambda y.(y+1))(gx)))(\lambda z.(z+1)) &amp;amp; \text{substitute } \lambda z.(z+1) \text{ for } g\\
+  &amp;amp;\to\lambda x.((\lambda y.(y+1))((\lambda z.(z+1))x)) &amp;amp; \text{substitute } x \text{ for } z\\
+  &amp;amp;\to\lambda x.((\lambda y.(y+1))(x+1)) &amp;amp; \text{substitute } x+1 \text{ for } y\\
+  &amp;amp;\to\lambda x.((x+1)+1)
+\end{align*}
+" style="height: 7.5072em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+we could have substituted <img src="ltx/42ae4fbda2a.svg" alt="\(gx\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="ltx/e4f3ae35206.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> in the second step or <img src="ltx/e9ea2a55e52.svg" alt="\((\lambda z.(z+1))x\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="ltx/e4f3ae35206.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> in the third; we would have arrived at the same final result.
+</p>
+
+<p>
+functions represented by <img src="ltx/ad1eb53bc38.svg" alt="\(\lambda\)" style="height: 0.7956em; vertical-align: -0.0585em; display: inline-block" class="org-latex org-latex-inline" />-terms have only one input. a function with two inputs <img src="ltx/7e3c4bda7e0.svg" alt="\(x,y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> that returns a value <img src="ltx/ac5c1e800f4.svg" alt="\(M\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is modeled by a function with one input <img src="ltx/bd05245349f.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> that returns a function with one input <img src="ltx/e4f3ae35206.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> that returns a value <img src="ltx/ac5c1e800f4.svg" alt="\(M\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. The technical term for this trick is currying (after Haskell B. Curry).
+</p>
+
+<p>
+(copied from Dexter C. Kozen, 1997 lecture 37)
+</p>
+
+</div>
+<div class="my_example" id="org980a245">
+<p>
+the function <img src="ltx/642cfb7e343.svg" alt="\(f(x_1,x_2)=x_1+x_2\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> has the following derivation.
+</p>
+
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/67c0855b76b.svg" alt="\begin{align*}
+  &amp;amp;f_1=\lambda x[x+1] &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-1}\\
+  &amp;amp;f_2=\lambda x[x] &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-3}\\
+  &amp;amp;f_3=\lambda x_1x_2x_3[x_2] &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-3}\\
+  &amp;amp;f_4=f_1 \circ f_3 &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-4}\\
+  &amp;amp;f_5(0,x_2)=f_2(x_2)\\
+  &amp;amp;f_5(x_1+1,x_2)=f_4(x_1,f_5(x_1,x_2),x_2) &amp;amp; \text{by }\ref{blk:blk-recursive-func-schema-4}
+\end{align*}
+" style="height: 8.9772em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<div class="note" id="org1060bdb">
+<p>
+is this derivation doing redundant work?
+</p>
+
+</div>
+<p>
+(copied from Robert I. Soare, 1987 chapter 2 formal definitions of computable functions definition 2.1)
+</p>
+
+</div>
+</div>
+</body>
+</html>

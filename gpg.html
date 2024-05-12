@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood" />
+<meta name="description" content="encrypting files with gpg" />
+<meta name="generator" content="Org Mode" />
+<title>gpg</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/archive.html'>archive</a>
+  <a href='/about.html'>about</a>
+</div><h1 class="main-title">gpg</h1><span class="desc"></span>
+</div>
+<div id="content" class="content">
+<div id="outline-container-org145ad14" class="outline-2">
+<h2 id="org145ad14">encrypt file with password</h2>
+<div class="outline-text-2" id="text-org145ad14">
+<div class="org-src-container">
+<pre class="src src-bash">gpg -o &lt;output-file&gt; -c &lt;file-to-encrypt&gt;
+</pre>
+</div>
+<p>
+the argument <code>-o</code> takes the path to the output file (the encrypted one) and the flag <code>-c</code> tells <code>gpg</code> that we want to encrypt, you will be prompted to enter a password
+</p>
+</div>
+</div>
+<div id="outline-container-orgfe6f6ac" class="outline-2">
+<h2 id="orgfe6f6ac">decrypt file with password</h2>
+<div class="outline-text-2" id="text-orgfe6f6ac">
+<div class="org-src-container">
+<pre class="src src-bash">gpg -o &lt;output-file&gt; -d &lt;file-to-decrypt&gt;
+</pre>
+</div>
+<p>
+the argument <code>-o</code> takes the path to the output file (the decrypted one) and the flag <code>-d</code> tells <code>gpg</code> that we want to decrypt
+</p>
+</div>
+</div>
+<div id="outline-container-org491c0bf" class="outline-2">
+<h2 id="org491c0bf">encrypt directory with password</h2>
+<div class="outline-text-2" id="text-org491c0bf">
+<p>
+to encrypt a directory, we simply compress it into a file:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">tar -cvf archive.tar &lt;directory&gt;
+</pre>
+</div>
+<p>
+for faster compression but bigger file size:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">tar --use-compress-program=<span style="color: #f06a3f;">"pigz -k -9 "</span> -cf archive.tar &lt;directory-to-compress&gt;
+</pre>
+</div>
+<p>
+and then encrypt that file
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood" />
+<meta name="description" content="inferring a transformation matrix for linear interpolation" />
+<meta name="generator" content="Org Mode" />
+<title>linearly mapping an interval onto another</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/archive.html'>archive</a>
+  <a href='/about.html'>about</a>
+</div><h1 class="main-title">linearly mapping an interval onto another</h1><span class="desc"></span>
+</div>
+<div id="content" class="content">
+<p>
+basically the idea is that, given an real interval <img src="ltx/b01178b09dd.svg" alt="\([a,b]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the number <img src="ltx/bd05245349f.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/6f1bf284f0f.svg" alt="\(a \le x \le b\)" style="height: 0.9122em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /> and another interval <img src="ltx/7d1f838cc64.svg" alt="\([c,d]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we wanna find the number <img src="ltx/69dee6b62dc.svg" alt="\(x'\)" style="height: 0.8351em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/c0fdb3834c4.svg" alt="\(\frac{x'-c}{d-c}=\frac{x-a}{b-a}\)" style="height: 1.4718em; vertical-align: -0.4688em; display: inline-block" class="org-latex org-latex-inline" />
+we need to isolate <img src="ltx/69dee6b62dc.svg" alt="\(x'\)" style="height: 0.8351em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />:
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/1894a5b4a84.svg" alt="\begin{gather*}
+  x'b-x'a-cb+ca=xd-xc-ad+ac\\
+  x'b-x'a-cb+\cancel{ca}=xd-xc-ad+\cancel{ac}\\
+  x'b-x'a-cb=xd-xc-ad\\
+  x'b-x'a=xd-xc-ad+cb\\
+  x'(b-a)=xd-xc-ad+cb\\
+  \boxed{x'=\frac{xd-xc-ad+cb}{b-a}}
+\end{gather*}
+" style="height: 10.6630em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<div id="outline-container-orgfcd7444" class="outline-2">
+<h2 id="orgfcd7444">extending to higher dimensions</h2>
+<div class="outline-text-2" id="text-orgfcd7444">
+<p>
+assume a vector space <img src="ltx/c57f492d6fc.svg" alt="\(V\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> with a dimension of <img src="ltx/ddcbd3a127e.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, given the 2 sets of real intervals
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/0b0a5724c5c.svg" alt="\begin{align*}
+  S&amp;amp;=\{[s_{1a},s_{1b}],[s_{2a,2b}],\dots,[s_{na},s_{nb}]\} &amp;amp;\text{source intervals}\\
+  D&amp;amp;=\{[d_{1a},d_{1b}],[d_{2a,2b}],\dots,[d_{na},d_{nb}]\} &amp;amp;\text{destination intervals}
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+and a vector <img src="ltx/d6b984a28aa.svg" alt="\(\brm{x} \in V\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />:
+<img src="ltx/88036f3a6bc.svg" alt="\[ \brm{x} = \pmqty{x_1\\ x_2\\ \vdots\\ x_n} \]" style="height: 6.0764em; display: block" class="org-latex org-latex-block" />
+where <img src="ltx/c8268d1154f.svg" alt="\(x_j\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> for all <img src="ltx/d301dd9e114.svg" alt="\(1 \le j \le n\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is bound in the interval <img src="ltx/cbd0e553171.svg" alt="\([s_{ja},s_{jb}]\)" style="height: 1.1138em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" />, i.e.
+</p>
+
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/3e23e6bb03b.svg" alt="\begin{gather*}
+  s_{1a} \le x_1 \le s_{1b}\\
+  s_{2a} \le x_2 \le s_{2b}\\
+  \vdots\\
+  s_{na} \le x_n \le s_{nb}
+\end{gather*}
+" style="height: 6.7962em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+we wanna find the vector <img src="ltx/c2d64411b05.svg" alt="\(\brm{v}\)" style="height: 0.5339em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />:
+<img src="ltx/727b66ac47a.svg" alt="\[ \brm{v} = \pmqty{v_1\\ v_2\\ \vdots\\ v_n} \]" style="height: 6.0764em; display: block" class="org-latex org-latex-block" />
+such that
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/a16c55139c5.svg" alt="\begin{align*}
+  v_1 &amp;amp;= \frac{x_1d_{1b}-x_1d_{1a}-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
+  v_2 &amp;amp;= \frac{x_2d_{2b}-x_2d_{2a}-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
+  &amp;amp;\hspace{1.5 mm} \vdots\\
+  v_n &amp;amp;= \frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}
+\end{align*}
+" style="height: 9.6977em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+so we write the linear transformation (might not be necessarily linear but affine)
+<img src="ltx/a876ec637f0.svg" alt="\[ L\left(\pmqty{x_1\\ x_2\\ \vdots\\ x_n}\right) = \pmqty{
+  \frac{x_1d_{1b}-x_1d_{1a}-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
+  \frac{x_2d_{2b}-x_2d_{2a}-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
+  \hspace{1.5 mm} \vdots\\
+  \frac{x_nd_{nb}-x_nd_{na}-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]" style="height: 6.6644em; display: block" class="org-latex org-latex-block" />
+obviously this function doesnt preserve the origin as <img src="ltx/ceb936cf5e2.svg" alt="\(L(\vec{0})\neq \vec{0}\)" style="height: 1.2531em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, so its an affine transformation, we separate the intercept so we can drop it and add it later:
+<img src="ltx/80c4c8e2fad.svg" alt="\[ L\left(\pmqty{x_1\\ x_2\\ \vdots\\ x_n}\right) = \pmqty{
+  \frac{x_1d_{1b}-x_1d_{1a}}{s_{1b}-s_{1a}}\\
+  \frac{x_2d_{2b}-x_2d_{2a}}{s_{2b}-s_{2a}}\\
+  \hspace{1.5 mm} \vdots\\
+  \frac{x_nd_{nb}-x_nd_{na}}{s_{nb}-s_{na}}} +
+  \pmqty{\frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
+  \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
+  \hspace{1.5 mm} \vdots\\
+  \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}} \]" style="height: 6.6644em; display: block" class="org-latex org-latex-block" />
+we drop the intercept and find the transformation matrix of the function without it, which is a square matrix of size <img src="ltx/7ac51711287.svg" alt="\(n \times n\)" style="height: 0.7517em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="ltx/5fdc170b5d6.svg" alt="\[ \pmqty{
+\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} &amp;amp; 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0\\
+0 &amp;amp; \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} &amp;amp; 0 &amp;amp; \ddots &amp;amp; 0\\
+0 &amp;amp; 0 &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \vdots\\
+\vdots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; \ddots &amp;amp; 0\\
+0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}}\\
+} \]" style="height: 9.0165em; display: block" class="org-latex org-latex-block" />
+</p>
+<div class="note" id="org922a5d1">
+<p>
+im taking it for granted that the <img src="ltx/910da899660.svg" alt="\(L\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> without the intercept is linear, in reality we need to check if the properties of a linear function are preserved in <img src="ltx/910da899660.svg" alt="\(L\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+</p>
+
+</div>
+<p>
+then we add the intercept with homogeneous coordinates to get the final matrix, which is a square matrix of size <img src="ltx/71e2632a4ec.svg" alt="\((n+1) \times (n+1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="ltx/679c563e59c.svg" alt="\[ \pmqty{
+\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
+0 &amp;amp; \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
+\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots &amp;amp; \vdots\\
+0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}} &amp;amp; \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}\\
+0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1\\
+} \]" style="height: 7.2524em; display: block" class="org-latex org-latex-block" />
+so to conclude, the formula
+<img src="ltx/97892da2573.svg" alt="\[ \pmqty{v_1\\ v_2\\ \vdots\\ v_n\\ 1} = \pmqty{
+\frac{d_{1b}-d_{1a}}{s_{1b}-s_{1a}} &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{1a}d_{1b}+d_{1a}s_{1b}}{s_{1b}-s_{1a}}\\
+0 &amp;amp; \frac{d_{2b}-d_{2a}}{s_{2b}-s_{2a}} &amp;amp; \cdots &amp;amp; 0 &amp;amp; \frac{-s_{2a}d_{2b}+d_{2a}s_{2b}}{s_{2b}-s_{2a}}\\
+\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots &amp;amp; \vdots\\
+0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; \frac{d_{nb}-d_{na}}{s_{nb}-s_{na}} &amp;amp; \frac{-s_{na}d_{nb}+d_{na}s_{nb}}{s_{nb}-s_{na}}\\
+0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1\\
+} \cdot \pmqty{x_1\\ x_2\\ \vdots\\ x_n\\ 1} \]" style="height: 7.2524em; display: block" class="org-latex org-latex-block" />
+transforms the vector <img src="ltx/1dcc6f283b4.svg" alt="\(\brm{x}\)" style="height: 0.5339em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> from a given set of intervals onto another, resulting in <img src="ltx/c2d64411b05.svg" alt="\(\brm{v}\)" style="height: 0.5339em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></p>
+</div>
+</div>
+</div>
+</body>
+</html>

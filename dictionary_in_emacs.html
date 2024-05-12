@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood" />
+<meta name="generator" content="Org Mode" />
+<title>dictionary in emacs</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/archive.html'>archive</a>
+  <a href='/about.html'>about</a>
+</div><h1 class="main-title">dictionary in emacs</h1>
+</div>
+<div id="content" class="content">
+<p>
+emacs can lookup words in dictionaries, the simplest usage is through the function <code>dictionary-search</code> and confirming with <code>y</code> when emacs asks you whether to use <code>dict.org</code> (the website), i have this bound as a key:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #d0730f;">(</span>general-define-key <span style="color: #ff7a7f; font-weight: bold;">:states</span> '<span style="color: #64aa0f;">(</span>normal motion<span style="color: #64aa0f;">)</span> <span style="color: #ff7a7f; font-weight: bold;">:keymaps</span> 'override <span style="color: #f06a3f;">"SPC s a"</span> 'dictionary-search<span style="color: #d0730f;">)</span>
+</pre>
+</div>
+<p>
+you can also force it to use <code>dict.org</code> without confirmation:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">setq</span> dictionary-server <span style="color: #f06a3f;">"dict.org"</span><span style="color: #d0730f;">)</span>
+</pre>
+</div>
+<p>
+or if you want to run a local dictionary server, on arch linux you'd need:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo pacman -S dictd
+yay -S dict-gcide dict-wn dict-moby-thesaurus <span style="color: #cf9f7f; font-style: italic;"># </span><span style="color: #cf9f7f; font-style: italic;">dicts only available in aur</span>
+sudo systemctl enable dictd
+</pre>
+</div>
+<p>
+and just use <code>dictionary-search</code>, it works with no need for further configuration.</p>
+</div>
+</body>
+</html>
