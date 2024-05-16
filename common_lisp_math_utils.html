@@ -28,11 +28,11 @@
 <p>
 some math utilities for common lisp
 </p>
-<div id="outline-container-orgae12839" class="outline-2">
-<h2 id="orgae12839">essential functions</h2>
-<div class="outline-text-2" id="text-orgae12839">
+<div id="outline-container-org4158a6e" class="outline-2">
+<h2 id="org4158a6e">essential functions</h2>
+<div class="outline-text-2" id="text-org4158a6e">
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgfe49eb6"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">sigmoid</span> <span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span>
+<pre class="src src-lisp" id="orge2d236b"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">sigmoid</span> <span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span>
   <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>&lt; x -70<span style="color: #3dbbb0;">)</span> 0<span style="color: #ef656a;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">to avoid float overflow</span>
         <span style="color: #ef656a;">(</span>t <span style="color: #3dbbb0;">(</span>/ 1 <span style="color: #df8f6f;">(</span>1+ <span style="color: #379cf6;">(</span>exp <span style="color: #ff7a7f;">(</span>- x<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 
@@ -51,17 +51,17 @@ some math utilities for common lisp
 </div>
 </div>
 </div>
-<div id="outline-container-org31c21ef" class="outline-2">
-<h2 id="org31c21ef">vectors</h2>
-<div class="outline-text-2" id="text-org31c21ef">
-<div class="note" id="org6c8bc72">
+<div id="outline-container-orgd625750" class="outline-2">
+<h2 id="orgd625750">vectors</h2>
+<div class="outline-text-2" id="text-orgd625750">
+<div class="math-block note" data-blocktype="note" id="org51ca32a">
 <p>
 these functions work, but some use lists and some do redundant operations, they need efficiency improvement
 </p>
 
 </div>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org0f98d2b"><span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">this might need efficiency improvement, not sure</span>
+<pre class="src src-lisp" id="orged45753"><span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">this might need efficiency improvement, not sure</span>
 <span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">vector-add</span> <span style="color: #64aa0f;">(</span>vec1 <span style="color: #2fa526;">&amp;rest</span> more-vecs<span style="color: #64aa0f;">)</span>
   <span style="color: #5f9f6f; font-style: italic;">"apply vector addition to two collections"</span>
   <span style="color: #64aa0f;">(</span>apply #'map <span style="color: #ef656a;">(</span>append <span style="color: #3dbbb0;">(</span>list 'vector #'+<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>append <span style="color: #df8f6f;">(</span>list vec1<span style="color: #df8f6f;">)</span> more-vecs<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
@@ -97,15 +97,15 @@ these functions work, but some use lists and some do redundant operations, they 
 </div>
 </div>
 </div>
-<div id="outline-container-org05bc2c7" class="outline-2">
-<h2 id="org05bc2c7">matrices</h2>
-<div class="outline-text-2" id="text-org05bc2c7">
+<div id="outline-container-org5b1768a" class="outline-2">
+<h2 id="org5b1768a">matrices</h2>
+<div class="outline-text-2" id="text-org5b1768a">
 <p>
 im using arrays for matrices, which use different functions than vectors/lists
 matrix multiplication:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgc82ee11"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">matrix-mul</span> <span style="color: #64aa0f;">(</span>arr1 arr2<span style="color: #64aa0f;">)</span>
+<pre class="src src-lisp" id="org26b28a7"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">matrix-mul</span> <span style="color: #64aa0f;">(</span>arr1 arr2<span style="color: #64aa0f;">)</span>
   <span style="color: #5f9f6f; font-style: italic;">"multiply 2 matrices, arr1*arr2"</span>
   <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>arr1-rows <span style="color: #df8f6f;">(</span>array-rows arr1<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
          <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">(arr1-cols (car (cdr arr1-dim))) ;; no need</span>
@@ -125,7 +125,7 @@ matrix multiplication:
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp" id="org6d6c3cc"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">tensor-convolution-size</span> <span style="color: #64aa0f;">(</span>img-dims ker-dims<span style="color: #64aa0f;">)</span>
+<pre class="src src-lisp" id="orgdef85c8"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">tensor-convolution-size</span> <span style="color: #64aa0f;">(</span>img-dims ker-dims<span style="color: #64aa0f;">)</span>
   <span style="color: #5f9f6f; font-style: italic;">"return the expected size of the convolution img*ker"</span>
   <span style="color: #64aa0f;">(</span>mapcar <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #3dbbb0;">(</span>img-d ker-d<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>- img-d <span style="color: #df8f6f;">(</span>1- ker-d<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
           img-dims
@@ -174,9 +174,9 @@ matrix multiplication:
 </pre>
 </div>
 </div>
-<div id="outline-container-org80543ae" class="outline-3">
-<h3 id="org80543ae">matrix multiplication implementation comparison between lists and arrays</h3>
-<div class="outline-text-3" id="text-org80543ae">
+<div id="outline-container-org64fe8d6" class="outline-3">
+<h3 id="org64fe8d6">matrix multiplication implementation comparison between lists and arrays</h3>
+<div class="outline-text-3" id="text-org64fe8d6">
 <p>
 with lists:
 </p>
@@ -219,14 +219,14 @@ with arrays:
 </div>
 </div>
 </div>
-<div id="outline-container-orga1b1db3" class="outline-3">
-<h3 id="orga1b1db3">2d transformation matrices</h3>
-<div class="outline-text-3" id="text-orga1b1db3">
+<div id="outline-container-org61ec8ad" class="outline-3">
+<h3 id="org61ec8ad">2d transformation matrices</h3>
+<div class="outline-text-3" id="text-org61ec8ad">
 <p>
 linearly mapping a grid to another:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgaabd25e"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">map-grid-matrix</span> <span style="color: #64aa0f;">(</span>src-x-range dest-x-range src-y-range dest-y-range<span style="color: #64aa0f;">)</span>
+<pre class="src src-lisp" id="orgff05e0f"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">map-grid-matrix</span> <span style="color: #64aa0f;">(</span>src-x-range dest-x-range src-y-range dest-y-range<span style="color: #64aa0f;">)</span>
   <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>src-x-min <span style="color: #df8f6f;">(</span>elt src-x-range 0<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
         <span style="color: #3dbbb0;">(</span>dest-x-min <span style="color: #df8f6f;">(</span>elt dest-x-range 0<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
         <span style="color: #3dbbb0;">(</span>src-y-min <span style="color: #df8f6f;">(</span>elt src-y-range 0<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
@@ -262,20 +262,20 @@ example usage:
 </div>
 </div>
 </div>
-<div id="outline-container-org12052b7" class="outline-2">
-<h2 id="org12052b7"><a href="/linearly_mapping_an_interval_onto_another.html">linearly mapping discrete range onto another</a></h2>
-<div class="outline-text-2" id="text-org12052b7">
+<div id="outline-container-org96673bb" class="outline-2">
+<h2 id="org96673bb"><a href="/linearly_mapping_an_interval_onto_another.html">linearly mapping discrete range onto another</a></h2>
+<div class="outline-text-2" id="text-org96673bb">
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgf7fb158"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">map-num</span> <span style="color: #64aa0f;">(</span>num src-min src-max dest-min dest-max<span style="color: #64aa0f;">)</span>
+<pre class="src src-lisp" id="org9287222"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">map-num</span> <span style="color: #64aa0f;">(</span>num src-min src-max dest-min dest-max<span style="color: #64aa0f;">)</span>
   <span style="color: #5f9f6f; font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
   <span style="color: #64aa0f;">(</span>/ <span style="color: #ef656a;">(</span>- <span style="color: #3dbbb0;">(</span>+ <span style="color: #df8f6f;">(</span>* <span style="color: #379cf6;">(</span>- num src-min<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>- dest-max dest-min<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>* dest-min src-max<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>* dest-min src-min<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>- src-max src-min<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org82f8ae4" class="outline-2">
-<h2 id="org82f8ae4">sets</h2>
-<div class="outline-text-2" id="text-org82f8ae4">
+<div id="outline-container-org50a8ad4" class="outline-2">
+<h2 id="org50a8ad4">sets</h2>
+<div class="outline-text-2" id="text-org50a8ad4">
 <p>
 a good resource <a href="https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html">https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html</a>
 the builtin <code>set-difference</code> sometimes reverses the lists it returns for some reason and its bothersome, e.g.:
@@ -288,7 +288,7 @@ the builtin <code>set-difference</code> sometimes reverses the lists it returns 
 so i had to use my own:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org040b903"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">set-diff</span> <span style="color: #64aa0f;">(</span>l1 l2 <span style="color: #2fa526;">&amp;key</span> <span style="color: #ef656a;">(</span>acc '<span style="color: #3dbbb0;">()</span><span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>test #'eql<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+<pre class="src src-lisp" id="orgbde3dbf"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">set-diff</span> <span style="color: #64aa0f;">(</span>l1 l2 <span style="color: #2fa526;">&amp;key</span> <span style="color: #ef656a;">(</span>acc '<span style="color: #3dbbb0;">()</span><span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>test #'eql<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
   <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>null l1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>nreverse acc<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
         <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>null l2<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>nreverse <span style="color: #df8f6f;">(</span>append <span style="color: #379cf6;">(</span>reverse l1<span style="color: #379cf6;">)</span> acc<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
         <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>member <span style="color: #df8f6f;">(</span>car l1<span style="color: #df8f6f;">)</span> l2 <span style="color: #ff7a7f; font-weight: bold;">:test</span> test<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>set-diff <span style="color: #df8f6f;">(</span>cdr l1<span style="color: #df8f6f;">)</span> l2 <span style="color: #ff7a7f; font-weight: bold;">:acc</span> acc <span style="color: #ff7a7f; font-weight: bold;">:test</span> test<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
@@ -327,9 +327,9 @@ check for set equality:
 </div>
 </div>
 </div>
-<div id="outline-container-org70eb23d" class="outline-2">
-<h2 id="org70eb23d">combinatorics</h2>
-<div class="outline-text-2" id="text-org70eb23d">
+<div id="outline-container-orgcc9ad76" class="outline-2">
+<h2 id="orgcc9ad76">combinatorics</h2>
+<div class="outline-text-2" id="text-orgcc9ad76">
 <p>
 generating variations:
 </p>
