@@ -28,9 +28,9 @@
 <p>
 working with graphs in common lisp
 </p>
-<div id="outline-container-orgf5ab514" class="outline-2">
-<h2 id="orgf5ab514">my initial approach</h2>
-<div class="outline-text-2" id="text-orgf5ab514">
+<div id="outline-container-orga2055e8" class="outline-2">
+<h2 id="orga2055e8">my initial approach</h2>
+<div class="outline-text-2" id="text-orga2055e8">
 <p>
 for simplicity ill represent a graph as a list of cons's, if we are dealing with a weighted graph, we use the second item in the cons as a cons with the first item being the node and the second being the weight
 i implemented the helper functions <code>node-weight</code> and <code>node</code> for this purpose
@@ -38,33 +38,33 @@ an edge is written/stored in the format <code>'(&lt;src&gt; . (&lt;dest&gt; . &l
 but what about a directed graph? maybe thats to worry about later (maybe just this structure but use <code>'(node1 . node2)</code> and <code>'(node2 . node1)</code> for bidirectional edges and pass an argument to functions that specifies whether graphs are directed so they have to respect the order of the cons)
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">edge-weight</span> <span style="color: #64aa0f;">(</span>e<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"get the weight of an edge"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>dest-cons <span style="color: #df8f6f;">(</span>cdr e<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>eq <span style="color: #379cf6;">(</span>type-of dest-cons<span style="color: #379cf6;">)</span> 'cons<span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>cdr dest-cons<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-           <span style="color: #3dbbb0;">(</span>t dest-cons<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">edge-weight</span> (e)
+  <span style="font-style: italic;">"get the weight of an edge"</span>
+  (<span style="font-weight: bold;">let</span> ((dest-cons (cdr e)))
+    (<span style="font-weight: bold;">cond</span> ((eq (type-of dest-cons) 'cons) (cdr dest-cons))
+           (t dest-cons))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">node</span> <span style="color: #64aa0f;">(</span>n<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"turn a possible cons into a node"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>eq <span style="color: #df8f6f;">(</span>type-of n<span style="color: #df8f6f;">)</span> 'cons<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>car n<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">if a node is a cons, the node itself is the car</span>
-        <span style="color: #ef656a;">(</span>t n<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">if a node is itself (number,symbol,whatever), return it</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">node</span> (n)
+  <span style="font-style: italic;">"turn a possible cons into a node"</span>
+  (<span style="font-weight: bold;">cond</span> ((eq (type-of n) 'cons) (car n)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">if a node is a cons, the node itself is the car</span>
+        (t n))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">if a node is itself (number,symbol,whatever), return it</span>
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">edge-src</span> <span style="color: #64aa0f;">(</span>e<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>node <span style="color: #ef656a;">(</span>car e<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">edge-src</span> (e)
+  (node (car e)))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">edge-dest</span> <span style="color: #64aa0f;">(</span>e<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>node <span style="color: #ef656a;">(</span>cdr e<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">edge-dest</span> (e)
+  (node (cdr e)))
 </pre>
 </div>
 <p>
 example:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>mygraph #<span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>0 . a<span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>a . 2<span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>1 . <span style="color: #379cf6;">(</span>3 . 4<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>3 . |b|<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>map nil
-       <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #3dbbb0;">(</span>mycons<span style="color: #3dbbb0;">)</span>
-         <span style="color: #3dbbb0;">(</span>format t <span style="color: #f06a3f;">"~A -&gt; ~A~%"</span> <span style="color: #df8f6f;">(</span>edge-src mycons<span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>edge-dest mycons<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-       mygraph<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((mygraph #((0 . a) (a . 2) (1 . (3 . 4)) (3 . |b|))))
+  (map nil
+       (<span style="font-weight: bold;">lambda</span> (mycons)
+         (format t <span style="font-style: italic;">"~A -&gt; ~A~%"</span> (edge-src mycons) (edge-dest mycons)))
+       mygraph))
 </pre>
 </div>
 
@@ -80,20 +80,20 @@ A -&gt; 2
 a function to produce the tikz for a graph to be drawn using <a href="https://tikz.dev/tikz-graphs">https://tikz.dev/tikz-graphs</a> with force-based algorithms (<a href="https://tikz.dev/gd-force">https://tikz.dev/gd-force</a>)
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">generate-graph-tikz</span> <span style="color: #64aa0f;">(</span>g<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>format t <span style="color: #f06a3f;">"\\tikz\\graph[spring layout] {~%"</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>map nil
-       <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #3dbbb0;">(</span>edge<span style="color: #3dbbb0;">)</span>
-         <span style="color: #3dbbb0;">(</span>format t <span style="color: #f06a3f;">"~A -- ~A,~%"</span> <span style="color: #df8f6f;">(</span>edge-src edge<span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>edge-dest edge<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-       g<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>format t <span style="color: #f06a3f;">"};"</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">generate-graph-tikz</span> (g)
+  (format t <span style="font-style: italic;">"\\tikz\\graph[spring layout] {~%"</span>)
+  (map nil
+       (<span style="font-weight: bold;">lambda</span> (edge)
+         (format t <span style="font-style: italic;">"~A -- ~A,~%"</span> (edge-src edge) (edge-dest edge)))
+       g)
+  (format t <span style="font-style: italic;">"};"</span>))
 </pre>
 </div>
 <p>
 example usage:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>generate-graph-tikz #<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>0 1<span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>1 2<span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>1 3<span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>0 5<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> 
+<pre class="src src-lisp">(generate-graph-tikz #((0 1) (1 2) (1 3) (0 5))) 
 </pre>
 </div>
 
@@ -127,70 +127,70 @@ this will generate an svg image
 an implementation of A* algorithm:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">a-star</span> <span style="color: #64aa0f;">(</span>graph src dest heuristic-function<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"a (naive?) implementation of A* search algorithm, solely written to avoid doing homework manually"</span>
-  <span style="color: #64aa0f;">(</span>a-star-helper graph src nil dest 0 heuristic-function<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">a-star</span> (graph src dest heuristic-function)
+  <span style="font-style: italic;">"a (naive?) implementation of A* search algorithm, solely written to avoid doing homework manually"</span>
+  (a-star-helper graph src nil dest 0 heuristic-function))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">a-star-helper</span> <span style="color: #64aa0f;">(</span>graph node parent dest cost heuristic-function<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"a recursive function to help with a-star, return the path"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>frontier <span style="color: #df8f6f;">(</span>adjacent-edges graph node<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>sort frontier
-          <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #df8f6f;">(</span>edge1 edge2<span style="color: #df8f6f;">)</span>
-            <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>next1 <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #c48702;">(</span><span style="color: #d0730f;">(</span>eq <span style="color: #64aa0f;">(</span>edge-dest edge1<span style="color: #64aa0f;">)</span> node<span style="color: #d0730f;">)</span> <span style="color: #d0730f;">(</span>edge-src edge1<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span>
-                                <span style="color: #c48702;">(</span><span style="color: #d0730f;">(</span>eq <span style="color: #64aa0f;">(</span>edge-src edge1<span style="color: #64aa0f;">)</span> node<span style="color: #d0730f;">)</span> <span style="color: #d0730f;">(</span>edge-dest edge1<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-                   <span style="color: #ff7a7f;">(</span>next2 <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #c48702;">(</span><span style="color: #d0730f;">(</span>eq <span style="color: #64aa0f;">(</span>edge-dest edge2<span style="color: #64aa0f;">)</span> node<span style="color: #d0730f;">)</span> <span style="color: #d0730f;">(</span>edge-src edge2<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span>
-                                <span style="color: #c48702;">(</span><span style="color: #d0730f;">(</span>eq <span style="color: #64aa0f;">(</span>edge-src edge2<span style="color: #64aa0f;">)</span> node<span style="color: #d0730f;">)</span> <span style="color: #d0730f;">(</span>edge-dest edge2<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-                   <span style="color: #ff7a7f;">(</span>cost1 <span style="color: #2fa526;">(</span>+ <span style="color: #c48702;">(</span>edge-weight edge1<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>funcall heuristic-function next1<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-                   <span style="color: #ff7a7f;">(</span>cost2 <span style="color: #2fa526;">(</span>+ <span style="color: #c48702;">(</span>edge-weight edge2<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>funcall heuristic-function next2<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-              <span style="color: #379cf6;">(</span>&lt; cost1 cost2<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> while frontier do
-      <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">grab the node with the least cost from the frontier</span>
-      <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>edge <span style="color: #ff7a7f;">(</span>car frontier<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-             <span style="color: #379cf6;">(</span>next <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #2fa526;">(</span><span style="color: #c48702;">(</span>eq <span style="color: #d0730f;">(</span>edge-dest edge<span style="color: #d0730f;">)</span> node<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>edge-src edge<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-                         <span style="color: #2fa526;">(</span><span style="color: #c48702;">(</span>eq <span style="color: #d0730f;">(</span>edge-src edge<span style="color: #d0730f;">)</span> node<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>edge-dest edge<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #379cf6;">(</span>eq next dest<span style="color: #379cf6;">)</span>
-            <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">return-from</span> a-star-helper <span style="color: #ff7a7f;">(</span>cons node <span style="color: #2fa526;">(</span>cons dest nil<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">arrived at destination</span>
-            <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #ff7a7f;">(</span>eq next parent<span style="color: #ff7a7f;">)</span>
-                <span style="color: #ff7a7f;">(</span>pop frontier<span style="color: #ff7a7f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">dont go back to parent!, get rid of that edge</span>
-                <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #2fa526;">(</span><span style="color: #c48702;">(</span>new-path <span style="color: #d0730f;">(</span>a-star-helper graph
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">a-star-helper</span> (graph node parent dest cost heuristic-function)
+  <span style="font-style: italic;">"a recursive function to help with a-star, return the path"</span>
+  (<span style="font-weight: bold;">let</span> ((frontier (adjacent-edges graph node)))
+    (sort frontier
+          (<span style="font-weight: bold;">lambda</span> (edge1 edge2)
+            (<span style="font-weight: bold;">let*</span> ((next1 (<span style="font-weight: bold;">cond</span> ((eq (edge-dest edge1) node) (edge-src edge1))
+                                ((eq (edge-src edge1) node) (edge-dest edge1))))
+                   (next2 (<span style="font-weight: bold;">cond</span> ((eq (edge-dest edge2) node) (edge-src edge2))
+                                ((eq (edge-src edge2) node) (edge-dest edge2))))
+                   (cost1 (+ (edge-weight edge1) (funcall heuristic-function next1)))
+                   (cost2 (+ (edge-weight edge2) (funcall heuristic-function next2))))
+              (&lt; cost1 cost2))))
+    (<span style="font-weight: bold;">loop</span> while frontier do
+      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">grab the node with the least cost from the frontier</span>
+      (<span style="font-weight: bold;">let*</span> ((edge (car frontier))
+             (next (<span style="font-weight: bold;">cond</span> ((eq (edge-dest edge) node) (edge-src edge))
+                         ((eq (edge-src edge) node) (edge-dest edge)))))
+        (<span style="font-weight: bold;">if</span> (eq next dest)
+            (<span style="font-weight: bold;">return-from</span> a-star-helper (cons node (cons dest nil))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">arrived at destination</span>
+            (<span style="font-weight: bold;">if</span> (eq next parent)
+                (pop frontier) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">dont go back to parent!, get rid of that edge</span>
+                (<span style="font-weight: bold;">let</span> ((new-path (a-star-helper graph
                                                next
                                                node
                                                dest
-                                               <span style="color: #64aa0f;">(</span>+ cost <span style="color: #ef656a;">(</span>edge-weight edge<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-                                               heuristic-function<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-                  <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">if</span> new-path
-                      <span style="color: #c48702;">(</span><span style="color: #c48702; font-weight: bold;">return-from</span> a-star-helper <span style="color: #d0730f;">(</span>cons node new-path<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">keep returning, we're done</span>
-                      <span style="color: #c48702;">(</span>pop frontier<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">subpath hit a dead end, pop it and continue looping</span>
-    <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">we exhausted the frontier, we hit a dead end, return false/empty list</span>
-    nil<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+                                               (+ cost (edge-weight edge))
+                                               heuristic-function)))
+                  (<span style="font-weight: bold;">if</span> new-path
+                      (<span style="font-weight: bold;">return-from</span> a-star-helper (cons node new-path)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">keep returning, we're done</span>
+                      (pop frontier))))))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">subpath hit a dead end, pop it and continue looping</span>
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">we exhausted the frontier, we hit a dead end, return false/empty list</span>
+    nil))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">adjacent-edges</span> <span style="color: #64aa0f;">(</span>graph node<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"get a list of the edges adjacent to a node"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>adjacent-edges-list nil<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below <span style="color: #3dbbb0;">(</span>length graph<span style="color: #3dbbb0;">)</span> do
-      <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>edge <span style="color: #ff7a7f;">(</span>elt graph i<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #379cf6;">(</span>or <span style="color: #ff7a7f;">(</span>eq <span style="color: #2fa526;">(</span>edge-src edge<span style="color: #2fa526;">)</span> node<span style="color: #ff7a7f;">)</span>
-                  <span style="color: #ff7a7f;">(</span>eq <span style="color: #2fa526;">(</span>edge-dest edge<span style="color: #2fa526;">)</span> node<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-          <span style="color: #379cf6;">(</span>push edge adjacent-edges-list<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    adjacent-edges-list<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">adjacent-edges</span> (graph node)
+  <span style="font-style: italic;">"get a list of the edges adjacent to a node"</span>
+  (<span style="font-weight: bold;">let</span> ((adjacent-edges-list nil))
+    (<span style="font-weight: bold;">loop</span> for i from 0 below (length graph) do
+      (<span style="font-weight: bold;">let*</span> ((edge (elt graph i)))
+        (<span style="font-weight: bold;">when</span> (or (eq (edge-src edge) node)
+                  (eq (edge-dest edge) node))
+          (push edge adjacent-edges-list))))
+    adjacent-edges-list))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">neighbors-of</span> <span style="color: #64aa0f;">(</span>graph node<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"get the neighbors of a node"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>neighbors nil<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below <span style="color: #3dbbb0;">(</span>length graph<span style="color: #3dbbb0;">)</span> do
-      <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>edge <span style="color: #ff7a7f;">(</span>elt graph i<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-             <span style="color: #379cf6;">(</span>neighbor <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #2fa526;">(</span><span style="color: #c48702;">(</span>eq <span style="color: #d0730f;">(</span>edge-src edge<span style="color: #d0730f;">)</span> node<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>edge-dest edge<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-                             <span style="color: #2fa526;">(</span><span style="color: #c48702;">(</span>eq <span style="color: #d0730f;">(</span>edge-dest edge<span style="color: #d0730f;">)</span> node<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>edge-src edge<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #379cf6;">(</span>and neighbor <span style="color: #ff7a7f;">(</span>not <span style="color: #2fa526;">(</span>member neighbor neighbors<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-          <span style="color: #379cf6;">(</span>push neighbor neighbors<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    neighbors<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">neighbors-of</span> (graph node)
+  <span style="font-style: italic;">"get the neighbors of a node"</span>
+  (<span style="font-weight: bold;">let</span> ((neighbors nil))
+    (<span style="font-weight: bold;">loop</span> for i from 0 below (length graph) do
+      (<span style="font-weight: bold;">let*</span> ((edge (elt graph i))
+             (neighbor (<span style="font-weight: bold;">cond</span> ((eq (edge-src edge) node) (edge-dest edge))
+                             ((eq (edge-dest edge) node) (edge-src edge)))))
+        (<span style="font-weight: bold;">when</span> (and neighbor (not (member neighbor neighbors)))
+          (push neighbor neighbors))))
+    neighbors))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org4ba3c97" class="outline-2">
-<h2 id="org4ba3c97">adjacency list implementation</h2>
-<div class="outline-text-2" id="text-org4ba3c97">
+<div id="outline-container-org925d314" class="outline-2">
+<h2 id="org925d314">adjacency list implementation</h2>
+<div class="outline-text-2" id="text-org925d314">
 <p>
 an adjancy list is list of linked lists, where each linked list stores a vertex and its outgoing edges, this makes representing directed graphs simple, so i decided to rewrite my code and to this approach
 a vertex stores a list of edges, an "edge" stores the destination vertex and the weight (if the graph is directed we can tell which direction an edge because its source and destination vertex are determined already in the structure, so its direction must be from the source to the destination), here, an edge need not store its source vertex because the source vertex links to it already, if a function expects to receive a list of edges, not an adjacency list, then perhaps a list could be used in the form <code>'(source dest weight)</code>.
@@ -201,61 +201,61 @@ whether a graph is directed or not is not implemented (currently) in code logic,
 implementation of basic functions:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">edge-dest</span> <span style="color: #64aa0f;">(</span>e<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>car e<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">edge-dest</span> (e)
+  (car e))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">edge-weight</span> <span style="color: #64aa0f;">(</span>e<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>cdr e<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">edge-weight</span> (e)
+  (cdr e))
 
-<span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">(defun outgoing-edges (v)</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">"get the outgoing edges of a vertex (an entry in the adjacency list)"</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">(cdr v))</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defun outgoing-edges (v)</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">"get the outgoing edges of a vertex (an entry in the adjacency list)"</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">(cdr v))</span>
 </pre>
 </div>
 <p>
 perhaps we should make a graph class to provide a more "abstract interface":
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defclass</span> <span style="color: #2fa526;">graph</span> <span style="color: #64aa0f;">()</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>adjacency-list
-    <span style="color: #ff7a7f; font-weight: bold;">:initform</span> nil
-    <span style="color: #ff7a7f; font-weight: bold;">:initarg</span> <span style="color: #ff7a7f; font-weight: bold;">:adjacency-list</span>
-    <span style="color: #ff7a7f; font-weight: bold;">:accessor</span> graph-adjacency-list
-    <span style="color: #ff7a7f; font-weight: bold;">:documentation</span> <span style="color: #5f9f6f; font-style: italic;">"a simple association list, each entry stores the edges associated with a vertex, that vertex being the source for those edges"</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">graph</span> ()
+  ((adjacency-list
+    <span style="font-weight: bold;">:initform</span> nil
+    <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:adjacency-list</span>
+    <span style="font-weight: bold;">:accessor</span> graph-adjacency-list
+    <span style="font-weight: bold;">:documentation</span> <span style="font-style: italic;">"a simple association list, each entry stores the edges associated with a vertex, that vertex being the source for those edges"</span>)))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">make-graph</span> <span style="color: #64aa0f;">(</span><span style="color: #2fa526;">&amp;key</span> adjacency-list<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>make-instance 'graph <span style="color: #ff7a7f; font-weight: bold;">:adjacency-list</span> adjacency-list<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">make-graph</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;key</span> adjacency-list)
+  (make-instance 'graph <span style="font-weight: bold;">:adjacency-list</span> adjacency-list))
 </pre>
 </div>
 <p>
 example construction of a graph:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">print-object</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>gr graph<span style="color: #ef656a;">)</span> stream<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>print-unreadable-object <span style="color: #ef656a;">(</span>gr stream <span style="color: #ff7a7f; font-weight: bold;">:type</span> t<span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>format t <span style="color: #f06a3f;">"source-&gt;destination,weight~%"</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>map
+<pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">print-object</span> ((gr graph) stream)
+  (print-unreadable-object (gr stream <span style="font-weight: bold;">:type</span> t)
+    (format t <span style="font-style: italic;">"source-&gt;destination,weight~%"</span>)
+    (map
      nil
-     <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #df8f6f;">(</span>vertex<span style="color: #df8f6f;">)</span>
-       <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for edge in <span style="color: #379cf6;">(</span>cdr vertex<span style="color: #379cf6;">)</span> do
-         <span style="color: #379cf6;">(</span>format
+     (<span style="font-weight: bold;">lambda</span> (vertex)
+       (<span style="font-weight: bold;">loop</span> for edge in (cdr vertex) do
+         (format
           stream
-          <span style="color: #f06a3f;">"~A -&gt; ~A, ~A~%"</span>
-          <span style="color: #ff7a7f;">(</span>car vertex<span style="color: #ff7a7f;">)</span>
-          <span style="color: #ff7a7f;">(</span>edge-dest edge<span style="color: #ff7a7f;">)</span>
-          <span style="color: #ff7a7f;">(</span>or <span style="color: #2fa526;">(</span>edge-weight edge<span style="color: #2fa526;">)</span> 0<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>graph-adjacency-list gr<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+          <span style="font-style: italic;">"~A -&gt; ~A, ~A~%"</span>
+          (car vertex)
+          (edge-dest edge)
+          (or (edge-weight edge) 0))))
+     (graph-adjacency-list gr))))
 </pre>
 </div>
 <p>
 example usage:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">or equivalently, #((0 (a . 5) (3 . 9)) (a (2 . nil)) (1 (3 . 4)) (3 (|b| . 5)))</span>
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>adjacency-list '<span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>0 . <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>a . 5<span style="color: #ff7a7f;">)</span> <span style="color: #ff7a7f;">(</span>3 . 9<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>a . <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>2 . nil<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-                         <span style="color: #df8f6f;">(</span>1 . <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>3 . 4<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>3 . <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>|b| . 5<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-       <span style="color: #ef656a;">(</span>mygraph <span style="color: #3dbbb0;">(</span>make-graph <span style="color: #ff7a7f; font-weight: bold;">:adjacency-list</span> adjacency-list<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>format t <span style="color: #f06a3f;">"~A"</span> mygraph<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">or equivalently, #((0 (a . 5) (3 . 9)) (a (2 . nil)) (1 (3 . 4)) (3 (|b| . 5)))</span>
+(<span style="font-weight: bold;">let*</span> ((adjacency-list '((0 . ((a . 5) (3 . 9))) (a . ((2 . nil)))
+                         (1 . ((3 . 4))) (3 . ((|b| . 5)))))
+       (mygraph (make-graph <span style="font-weight: bold;">:adjacency-list</span> adjacency-list)))
+  (format t <span style="font-style: italic;">"~A"</span> mygraph))
 </pre>
 </div>
 
@@ -274,67 +274,67 @@ A -&gt; 2, 0
 generating graph diagrams with tikz:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">graph-generate-tikz</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>g graph<span style="color: #ef656a;">)</span> <span style="color: #2fa526;">&amp;key</span> <span style="color: #ef656a;">(</span>node-distance 50<span style="color: #ef656a;">)</span>
-                                            <span style="color: #ef656a;">(</span>format-function #'identity<span style="color: #ef656a;">)</span>
-                                            <span style="color: #ef656a;">(</span>should-print t<span style="color: #ef656a;">)</span>
-                                            <span style="color: #ef656a;">(</span>directed nil<span style="color: #ef656a;">)</span>
-                                            <span style="color: #ef656a;">(</span>tikz-params nil<span style="color: #ef656a;">)</span>
-                                            <span style="color: #ef656a;">(</span>tikz-postamble nil<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>tikz-str <span style="color: #f06a3f;">""</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>setf tikz-str <span style="color: #3dbbb0;">(</span>concatenate 'string tikz-str <span style="color: #df8f6f;">(</span>format nil <span style="color: #f06a3f;">"\\begin{tikzpicture}~%"</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">if</span> tikz-params
-        <span style="color: #3dbbb0;">(</span>setf tikz-str <span style="color: #df8f6f;">(</span>concatenate 'string tikz-str <span style="color: #379cf6;">(</span>format nil <span style="color: #f06a3f;">"\\graph[~A] {~%"</span> tikz-params<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>setf tikz-str <span style="color: #df8f6f;">(</span>concatenate 'string tikz-str <span style="color: #379cf6;">(</span>format nil <span style="color: #f06a3f;">"\\graph[spring electrical layout, node distance=~A] {~%"</span> node-distance<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>map nil
-         <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #df8f6f;">(</span>vertex<span style="color: #df8f6f;">)</span>
-           <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #379cf6;">(</span>cdr vertex<span style="color: #379cf6;">)</span>
-               <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for edge in <span style="color: #ff7a7f;">(</span>cdr vertex<span style="color: #ff7a7f;">)</span> do
-                 <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #2fa526;">(</span>edge-weight edge<span style="color: #2fa526;">)</span>
-                     <span style="color: #2fa526;">(</span>setf tikz-str
-                           <span style="color: #c48702;">(</span>concatenate 'string
+<pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">graph-generate-tikz</span> ((g graph) <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (node-distance 50)
+                                            (format-function #'identity)
+                                            (should-print t)
+                                            (directed nil)
+                                            (tikz-params nil)
+                                            (tikz-postamble nil))
+  (<span style="font-weight: bold;">let</span> ((tikz-str <span style="font-style: italic;">""</span>))
+    (setf tikz-str (concatenate 'string tikz-str (format nil <span style="font-style: italic;">"\\begin{tikzpicture}~%"</span>)))
+    (<span style="font-weight: bold;">if</span> tikz-params
+        (setf tikz-str (concatenate 'string tikz-str (format nil <span style="font-style: italic;">"\\graph[~A] {~%"</span> tikz-params)))
+        (setf tikz-str (concatenate 'string tikz-str (format nil <span style="font-style: italic;">"\\graph[spring electrical layout, node distance=~A] {~%"</span> node-distance))))
+    (map nil
+         (<span style="font-weight: bold;">lambda</span> (vertex)
+           (<span style="font-weight: bold;">if</span> (cdr vertex)
+               (<span style="font-weight: bold;">loop</span> for edge in (cdr vertex) do
+                 (<span style="font-weight: bold;">if</span> (edge-weight edge)
+                     (setf tikz-str
+                           (concatenate 'string
                                         tikz-str
-                                        <span style="color: #d0730f;">(</span>format nil
-                                                <span style="color: #f06a3f;">"~A ~A [\"~A\"] ~A,~%"</span>
-                                                <span style="color: #64aa0f;">(</span>funcall format-function <span style="color: #ef656a;">(</span>car vertex<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-                                                <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> directed <span style="color: #f06a3f;">"-&gt;"</span> <span style="color: #f06a3f;">"--"</span><span style="color: #64aa0f;">)</span>
-                                                <span style="color: #64aa0f;">(</span>edge-weight edge<span style="color: #64aa0f;">)</span>
-                                                <span style="color: #64aa0f;">(</span>funcall format-function <span style="color: #ef656a;">(</span>edge-dest edge<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-                     <span style="color: #2fa526;">(</span>setf tikz-str
-                           <span style="color: #c48702;">(</span>concatenate 'string
+                                        (format nil
+                                                <span style="font-style: italic;">"~A ~A [\"~A\"] ~A,~%"</span>
+                                                (funcall format-function (car vertex))
+                                                (<span style="font-weight: bold;">if</span> directed <span style="font-style: italic;">"-&gt;"</span> <span style="font-style: italic;">"--"</span>)
+                                                (edge-weight edge)
+                                                (funcall format-function (edge-dest edge)))))
+                     (setf tikz-str
+                           (concatenate 'string
                                         tikz-str
-                                        <span style="color: #d0730f;">(</span>format nil
-                                                <span style="color: #f06a3f;">"~A ~A ~A,~%"</span>
-                                                <span style="color: #64aa0f;">(</span>funcall format-function <span style="color: #ef656a;">(</span>car vertex<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-                                                <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> directed <span style="color: #f06a3f;">"-&gt;"</span> <span style="color: #f06a3f;">"--"</span><span style="color: #64aa0f;">)</span>
-                                                <span style="color: #64aa0f;">(</span>funcall format-function <span style="color: #ef656a;">(</span>edge-dest edge<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-               <span style="color: #379cf6;">(</span>setf tikz-str
-                     <span style="color: #ff7a7f;">(</span>concatenate 'string
+                                        (format nil
+                                                <span style="font-style: italic;">"~A ~A ~A,~%"</span>
+                                                (funcall format-function (car vertex))
+                                                (<span style="font-weight: bold;">if</span> directed <span style="font-style: italic;">"-&gt;"</span> <span style="font-style: italic;">"--"</span>)
+                                                (funcall format-function (edge-dest edge)))))))
+               (setf tikz-str
+                     (concatenate 'string
                                   tikz-str
-                                  <span style="color: #2fa526;">(</span>format nil
-                                          <span style="color: #f06a3f;">"~A,~%"</span>
-                                          <span style="color: #c48702;">(</span>funcall format-function <span style="color: #d0730f;">(</span>car vertex<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-         <span style="color: #3dbbb0;">(</span>graph-adjacency-list g<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">when</span> tikz-postamble
-      <span style="color: #3dbbb0;">(</span>setf tikz-str <span style="color: #df8f6f;">(</span>concatenate 'string tikz-str tikz-postamble<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>setf tikz-str <span style="color: #3dbbb0;">(</span>concatenate 'string tikz-str <span style="color: #df8f6f;">(</span>format nil <span style="color: #f06a3f;">"};\\end{tikzpicture}"</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">when</span> should-print
-      <span style="color: #3dbbb0;">(</span>format t tikz-str<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    tikz-str<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+                                  (format nil
+                                          <span style="font-style: italic;">"~A,~%"</span>
+                                          (funcall format-function (car vertex)))))))
+         (graph-adjacency-list g))
+    (<span style="font-weight: bold;">when</span> tikz-postamble
+      (setf tikz-str (concatenate 'string tikz-str tikz-postamble)))
+    (setf tikz-str (concatenate 'string tikz-str (format nil <span style="font-style: italic;">"};\\end{tikzpicture}"</span>)))
+    (<span style="font-weight: bold;">when</span> should-print
+      (format t tikz-str))
+    tikz-str))
 </pre>
 </div>
 <p>
 example usage:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>mygraph <span style="color: #3dbbb0;">(</span>make-graph <span style="color: #ff7a7f; font-weight: bold;">:adjacency-list</span>
-                           '<span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>1 . <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>3 . 2<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                             <span style="color: #379cf6;">(</span>3 . <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>b . 9<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                             <span style="color: #379cf6;">(</span>b . <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>1 . 4<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                             <span style="color: #379cf6;">(</span>b . <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>3 . 10<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                             <span style="color: #379cf6;">(</span>c . <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>b . 5<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                             <span style="color: #379cf6;">(</span>j . <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>1 . 8<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                             <span style="color: #379cf6;">(</span>b . <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>j . 1<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-      <span style="color: #64aa0f;">(</span>graph-generate-tikz mygraph<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((mygraph (make-graph <span style="font-weight: bold;">:adjacency-list</span>
+                           '((1 . ((3 . 2)))
+                             (3 . ((b . 9)))
+                             (b . ((1 . 4)))
+                             (b . ((3 . 10)))
+                             (c . ((b . 5)))
+                             (j . ((1 . 8)))
+                             (b . ((j . 1)))))))
+      (graph-generate-tikz mygraph))
 </pre>
 </div>
 
@@ -351,7 +351,7 @@ C -- [&quot;5&quot;] B,
 J -- [&quot;8&quot;] 1,
 B -- [&quot;1&quot;] J,
 };\end{tikzpicture}
-" style="height: 12.8268em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 12.7700em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -359,37 +359,37 @@ B -- [&quot;1&quot;] J,
 a function to get all edges that are indicent to a specific vertex:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">graph-vertex-neighbors</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>g graph<span style="color: #ef656a;">)</span> vertex<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">with-slots</span> <span style="color: #ef656a;">(</span>adjacency-list<span style="color: #ef656a;">)</span> g
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>neighbors nil<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-      <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for entry in adjacency-list do
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>edges <span style="color: #2fa526;">(</span>cdr entry<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-               <span style="color: #ff7a7f;">(</span>source-vertex <span style="color: #2fa526;">(</span>car entry<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-          <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for edge in edges do
-            <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #2fa526;">(</span><span style="color: #c48702;">(</span>dest-vertex <span style="color: #d0730f;">(</span>edge-dest edge<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-              <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #c48702;">(</span>equal vertex dest-vertex<span style="color: #c48702;">)</span>
-                <span style="color: #c48702;">(</span>push source-vertex neighbors<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-              <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #c48702;">(</span>equal vertex source-vertex<span style="color: #c48702;">)</span>
-                <span style="color: #c48702;">(</span>push dest-vertex neighbors<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-      neighbors<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">graph-vertex-neighbors</span> ((g graph) vertex)
+  (<span style="font-weight: bold;">with-slots</span> (adjacency-list) g
+    (<span style="font-weight: bold;">let</span> ((neighbors nil))
+      (<span style="font-weight: bold;">loop</span> for entry in adjacency-list do
+        (<span style="font-weight: bold;">let*</span> ((edges (cdr entry))
+               (source-vertex (car entry)))
+          (<span style="font-weight: bold;">loop</span> for edge in edges do
+            (<span style="font-weight: bold;">let</span> ((dest-vertex (edge-dest edge)))
+              (<span style="font-weight: bold;">when</span> (equal vertex dest-vertex)
+                (push source-vertex neighbors))
+              (<span style="font-weight: bold;">when</span> (equal vertex source-vertex)
+                (push dest-vertex neighbors))))))
+      neighbors)))
 </pre>
 </div>
 <p>
 some simple utility functions for graphs:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">graph-add-edge</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>g graph<span style="color: #ef656a;">)</span> src dest <span style="color: #2fa526;">&amp;optional</span> <span style="color: #ef656a;">(</span>weight nil<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>vertex-list <span style="color: #df8f6f;">(</span>assoc src <span style="color: #379cf6;">(</span>graph-adjacency-list g<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">the list that stores the edges for the source vertex `</span><span style="color: #64aa0f; font-style: italic;">src</span><span style="color: #cf9f7f; font-style: italic;">'</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">if</span> vertex-list
-        <span style="color: #3dbbb0;">(</span>nconc vertex-list <span style="color: #df8f6f;">(</span>list <span style="color: #379cf6;">(</span>cons dest weight<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>setf <span style="color: #df8f6f;">(</span>graph-adjacency-list g<span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>acons src <span style="color: #379cf6;">(</span>list <span style="color: #ff7a7f;">(</span>cons dest weight<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>graph-adjacency-list g<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">graph-add-edge</span> ((g graph) src dest <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (weight nil))
+  (<span style="font-weight: bold;">let</span> ((vertex-list (assoc src (graph-adjacency-list g)))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">the list that stores the edges for the source vertex `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">src</span><span style="font-weight: bold; font-style: italic;">'</span>
+    (<span style="font-weight: bold;">if</span> vertex-list
+        (nconc vertex-list (list (cons dest weight)))
+        (setf (graph-adjacency-list g) (acons src (list (cons dest weight)) (graph-adjacency-list g))))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">graph-add-vertex</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>g graph<span style="color: #ef656a;">)</span> v<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #ef656a;">(</span>not <span style="color: #3dbbb0;">(</span>has-vertex g v<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>setf <span style="color: #3dbbb0;">(</span>graph-adjacency-list g<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>acons v nil <span style="color: #df8f6f;">(</span>graph-adjacency-list g<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">graph-add-vertex</span> ((g graph) v)
+  (<span style="font-weight: bold;">when</span> (not (has-vertex g v))
+    (setf (graph-adjacency-list g) (acons v nil (graph-adjacency-list g)))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">has-vertex</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>g graph<span style="color: #ef656a;">)</span> v<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>not <span style="color: #ef656a;">(</span>null <span style="color: #3dbbb0;">(</span>assoc v <span style="color: #df8f6f;">(</span>graph-adjacency-list g<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">has-vertex</span> ((g graph) v)
+  (not (null (assoc v (graph-adjacency-list g)))))
 </pre>
 </div>
 </div>

@@ -26,7 +26,7 @@
 </div><h1 class="main-title">artificial intelligence homework 3</h1><span class="desc"></span>
 </div>
 <div id="content" class="content">
-<div class="note" id="orga4d9877">
+<div class="math-block note" data-blocktype="note" id="org5df9a49">
 <p>
 scroll to the end if you're only interested in the solution and the steps in raw text..
 </p>
@@ -48,33 +48,33 @@ graph image from homework:
 first we define the graph:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defparameter</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span>
     *mygraph*
-  <span style="color: #64aa0f;">(</span>make-graph
-   <span style="color: #ff7a7f; font-weight: bold;">:adjacency-list</span>
-   '<span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>a . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>b . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>c . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>d . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">3 edges connected to A</span>
-     <span style="color: #3dbbb0;">(</span>b . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>c . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>j . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>e . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>c . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>f . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>l . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>m . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>e . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>g . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>d . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>d . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>g . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>j . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>i . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>g . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>m . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>f . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>n . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>e . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>h . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>g . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>g . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>i . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>f . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>o . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>f . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>o . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>i . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>i . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>k . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>n . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>o . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>p . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>h . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>h . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>k . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>n . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>k . nil<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>p . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>p . <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>k . nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-     <span style="color: #3dbbb0;">(</span>k . nil<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+  (make-graph
+   <span style="font-weight: bold;">:adjacency-list</span>
+   '((a . ((b . nil) (c . nil) (d . nil))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">3 edges connected to A</span>
+     (b . ((c . nil) (j . nil) (e . nil)))
+     (c . ((f . nil)))
+     (l . ((m . nil) (e . nil) (g . nil) (d . nil)))
+     (d . ((g . nil)))
+     (j . ((i . nil) (g . nil)))
+     (m . ((f . nil) (n . nil)))
+     (e . ((h . nil) (g . nil)))
+     (g . ((i . nil) (f . nil) (o . nil)))
+     (f . ((o . nil) (i . nil)))
+     (i . ((k . nil) (n . nil)))
+     (o . ((p . nil) (h . nil)))
+     (h . ((k . nil)))
+     (n . ((k . nil) (p . nil)))
+     (p . ((k . nil)))
+     (k . nil))))
 </pre>
 </div>
 <p>
 visualize it with tikz:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>graph-generate-tikz *mygraph* <span style="color: #ff7a7f; font-weight: bold;">:node-distance</span> 80<span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(graph-generate-tikz *mygraph* <span style="font-weight: bold;">:node-distance</span> 80)
 </pre>
 </div>
 
@@ -115,7 +115,7 @@ N -- K,
 N -- P,
 P -- K,
 };\end{tikzpicture}
-" style="height: 33.8393em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 33.7521em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -124,158 +124,158 @@ a constraint satisfaction problem is defined by its variables, domains and contr
 since i had written the problem in its constraint graph form, i had to write a function to convert it into its "original" form, its variables, domains and it defines the constraint of neighbors not having the same color, which is from the map coloring problem (so this method is not really general, but specific to this problem):
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defstruct</span> <span style="color: #2fa526;">constraint-satisfaction-problem</span>
-  variables domains constraints<span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">constraint-satisfaction-problem</span>
+  variables domains constraints)
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">parse-color-map-constraint-graph</span> <span style="color: #64aa0f;">(</span>g<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"input g is the constraint graph of the map coloring problem, the function assumes the vector 'values-assoc-list' represents the values of variables, it should take the form '((var1 value1) (var2 value2)) which allows it to be used as an association list"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>variables<span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>domains<span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>constraints<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>setf variables <span style="color: #3dbbb0;">(</span>map 'list #'car <span style="color: #df8f6f;">(</span>graph-adjacency-list g<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">each domain's variable is just a list of the symbols r,g,b,a representing the 3 colors and the alpha value (in this case alpha is just another "color" tho...)</span>
-    <span style="color: #ef656a;">(</span>setf domains <span style="color: #3dbbb0;">(</span>make-array <span style="color: #df8f6f;">(</span>length variables<span style="color: #df8f6f;">)</span> <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> '<span style="color: #df8f6f;">(</span>r g b a<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>setf
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">parse-color-map-constraint-graph</span> (g)
+  <span style="font-style: italic;">"input g is the constraint graph of the map coloring problem, the function assumes the vector 'values-assoc-list' represents the values of variables, it should take the form '((var1 value1) (var2 value2)) which allows it to be used as an association list"</span>
+  (<span style="font-weight: bold;">let</span> ((variables)
+        (domains)
+        (constraints))
+    (setf variables (map 'list #'car (graph-adjacency-list g)))
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">each domain's variable is just a list of the symbols r,g,b,a representing the 3 colors and the alpha value (in this case alpha is just another "color" tho...)</span>
+    (setf domains (make-array (length variables) <span style="font-weight: bold;">:initial-element</span> '(r g b a)))
+    (setf
      constraints
-     <span style="color: #3dbbb0;">(</span>list
-      <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #379cf6;">(</span>csp gr values-assoc-list<span style="color: #379cf6;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">one constraint, no equal values for neighboring states</span>
-        <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>wrong nil<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-          <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for entry in <span style="color: #2fa526;">(</span>graph-adjacency-list g<span style="color: #2fa526;">)</span> do
-            <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #c48702;">(</span><span style="color: #d0730f;">(</span>source-vertex <span style="color: #64aa0f;">(</span>car entry<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-                  <span style="color: #d0730f;">(</span>edges <span style="color: #64aa0f;">(</span>cdr entry<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span>
-              <span style="color: #c48702;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for edge in edges do
-                <span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>dest-vertex <span style="color: #3dbbb0;">(</span>edge-dest edge<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-                  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #ef656a;">(</span>and <span style="color: #3dbbb0;">(</span>assoc source-vertex values-assoc-list<span style="color: #3dbbb0;">)</span>
-                             <span style="color: #3dbbb0;">(</span>assoc dest-vertex values-assoc-list<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-                    <span style="color: #ef656a;">(</span>setf wrong
-                          <span style="color: #3dbbb0;">(</span>or wrong
-                              <span style="color: #df8f6f;">(</span>equal <span style="color: #379cf6;">(</span>cdr <span style="color: #ff7a7f;">(</span>assoc source-vertex values-assoc-list<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                                     <span style="color: #379cf6;">(</span>cdr <span style="color: #ff7a7f;">(</span>assoc dest-vertex values-assoc-list<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-          <span style="color: #ff7a7f;">(</span>not wrong<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">return those values</span>
-    <span style="color: #ef656a;">(</span>make-constraint-satisfaction-problem
-     <span style="color: #ff7a7f; font-weight: bold;">:variables</span> variables
-     <span style="color: #ff7a7f; font-weight: bold;">:domains</span> domains
-     <span style="color: #ff7a7f; font-weight: bold;">:constraints</span> constraints<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+     (list
+      (<span style="font-weight: bold;">lambda</span> (csp gr values-assoc-list) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">one constraint, no equal values for neighboring states</span>
+        (<span style="font-weight: bold;">let</span> ((wrong nil))
+          (<span style="font-weight: bold;">loop</span> for entry in (graph-adjacency-list g) do
+            (<span style="font-weight: bold;">let</span> ((source-vertex (car entry))
+                  (edges (cdr entry)))
+              (<span style="font-weight: bold;">loop</span> for edge in edges do
+                (<span style="font-weight: bold;">let</span> ((dest-vertex (edge-dest edge)))
+                  (<span style="font-weight: bold;">when</span> (and (assoc source-vertex values-assoc-list)
+                             (assoc dest-vertex values-assoc-list))
+                    (setf wrong
+                          (or wrong
+                              (equal (cdr (assoc source-vertex values-assoc-list))
+                                     (cdr (assoc dest-vertex values-assoc-list))))))))))
+          (not wrong)))))
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">return those values</span>
+    (make-constraint-satisfaction-problem
+     <span style="font-weight: bold;">:variables</span> variables
+     <span style="font-weight: bold;">:domains</span> domains
+     <span style="font-weight: bold;">:constraints</span> constraints)))
 </pre>
 </div>
 <p>
 here i implement a generalized algorithm for constraint satisfaction problem solving:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">solve-csp-with-graph</span> <span style="color: #64aa0f;">(</span>csp gr variable-ordering-heuristics
-                             <span style="color: #2fa526;">&amp;optional</span> <span style="color: #ef656a;">(</span>values-alist nil<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"`</span><span style="color: #64aa0f; font-style: italic;">csp</span><span style="color: #5f9f6f; font-style: italic;">' is the constraint satisfaction problem, `</span><span style="color: #64aa0f; font-style: italic;">gr</span><span style="color: #5f9f6f; font-style: italic;">' is the constraint graph, variable-ordering-heuristics are heuristics to decide which variable to pick, applied in order on each branching step until one returns a variable to pick, if no heuristics pick a variable the first nonvisited one will be picked (unless no variables are left with options in which case the function terminates), this doesnt support value ordering heuristics, cuz my homework didnt ask for it :( and i cba, this function may modify the domains during forward checking inference"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">with-slots</span> <span style="color: #ef656a;">(</span>variables domains constraints<span style="color: #ef656a;">)</span> csp
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>unvisited-vars <span style="color: #379cf6;">(</span>set-diff
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">solve-csp-with-graph</span> (csp gr variable-ordering-heuristics
+                             <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (values-alist nil))
+  <span style="font-style: italic;">"`</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">csp</span><span style="font-style: italic;">' is the constraint satisfaction problem, `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">gr</span><span style="font-style: italic;">' is the constraint graph, variable-ordering-heuristics are heuristics to decide which variable to pick, applied in order on each branching step until one returns a variable to pick, if no heuristics pick a variable the first nonvisited one will be picked (unless no variables are left with options in which case the function terminates), this doesnt support value ordering heuristics, cuz my homework didnt ask for it :( and i cba, this function may modify the domains during forward checking inference"</span>
+  (<span style="font-weight: bold;">with-slots</span> (variables domains constraints) csp
+    (<span style="font-weight: bold;">let*</span> ((unvisited-vars (set-diff
                             variables
-                            <span style="color: #ff7a7f;">(</span>mapcar #'car values-alist<span style="color: #ff7a7f;">)</span>
-                            <span style="color: #ff7a7f; font-weight: bold;">:test</span> #'equal<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-           <span style="color: #df8f6f;">(</span>unvisited-reduced-vars unvisited-vars<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-      <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>next-var nil<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">apply the heuristics in order, the reduced list of variables returned by every heuristic is passed to the next heuristic which applies its own reductions and passes it on to the next heuristic, and so on..</span>
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for heuristic in variable-ordering-heuristics if <span style="color: #379cf6;">(</span>not next-var<span style="color: #379cf6;">)</span>
-              do <span style="color: #379cf6;">(</span>setf unvisited-reduced-vars <span style="color: #ff7a7f;">(</span>funcall heuristic csp gr unvisited-reduced-vars<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">last heuristic, choose the leftmost variable in the reduced list of variables, which could be just a list of one item if the preceding heuristics reduced it enough, eitherway, we grab the leftmost variable in the list</span>
-        <span style="color: #df8f6f;">(</span>setf next-var <span style="color: #379cf6;">(</span>car unvisited-reduced-vars<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #379cf6;">(</span>not next-var<span style="color: #379cf6;">)</span>
-          <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">return-from</span> solve-csp-with-graph values-alist<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">no vars left</span>
-        <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">handle the variable we picked</span>
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>variable-index <span style="color: #2fa526;">(</span>position next-var variables<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-               <span style="color: #ff7a7f;">(</span>domain <span style="color: #2fa526;">(</span>elt domains variable-index<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-          <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #ff7a7f;">(</span>not domain<span style="color: #ff7a7f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">no values left for variable, we hit a deadend</span>
-<span style="color: #cf9f7f; font-style: italic;">;;            </span><span style="color: #cf9f7f; font-style: italic;">(format t "~A has no available values, we hit a deadend, propagating back~%" next-var)</span>
-            <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">return-from</span> solve-csp-with-graph nil<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-          <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">no need to check legality of picking a value, since we're doing forward checking and pruning the domains beforehand</span>
-          <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for value in domain do
-            <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #2fa526;">(</span><span style="color: #c48702;">(</span>domain-removed-values-alist nil<span style="color: #c48702;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">store the modifications done to the domains so we may undo them if needed</span>
-                  <span style="color: #c48702;">(</span>new-values-alist <span style="color: #d0730f;">(</span>append values-alist <span style="color: #64aa0f;">(</span>list <span style="color: #ef656a;">(</span>cons next-var value<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-              <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for neighbor-var in <span style="color: #c48702;">(</span>graph-vertex-neighbors gr next-var<span style="color: #c48702;">)</span> do
-                <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">apply forward checking and modify the domains of connected variables accordingly</span>
-                <span style="color: #c48702;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>neighbor-var-idx <span style="color: #ef656a;">(</span>position neighbor-var variables<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-                       <span style="color: #64aa0f;">(</span>neighbor-var-domain <span style="color: #ef656a;">(</span>elt domains neighbor-var-idx<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-                  <span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for neighbor-var-value in neighbor-var-domain do
-                    <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for constraint in constraints do
-                      <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>hypothetical-values-alist <span style="color: #379cf6;">(</span>cons <span style="color: #ff7a7f;">(</span>cons neighbor-var
-                                                                    neighbor-var-value<span style="color: #ff7a7f;">)</span>
-                                                              new-values-alist<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-                             <span style="color: #df8f6f;">(</span>legal <span style="color: #379cf6;">(</span>funcall constraint csp gr hypothetical-values-alist<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-                        <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #df8f6f;">(</span>not legal<span style="color: #df8f6f;">)</span>
-                          <span style="color: #df8f6f;">(</span>setf domain-removed-values-alist
-                                <span style="color: #379cf6;">(</span>cons <span style="color: #ff7a7f;">(</span>cons neighbor-var-idx
-                                            value<span style="color: #ff7a7f;">)</span>
-                                      domain-removed-values-alist<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-                          <span style="color: #df8f6f;">(</span>setf <span style="color: #379cf6;">(</span>elt domains neighbor-var-idx<span style="color: #379cf6;">)</span>
-                                <span style="color: #379cf6;">(</span>remove value neighbor-var-domain<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-<span style="color: #cf9f7f; font-style: italic;">;;             </span><span style="color: #cf9f7f; font-style: italic;">(format t "chose variable ~A with value ~A~%" next-var value)</span>
-<span style="color: #cf9f7f; font-style: italic;">;;             </span><span style="color: #cf9f7f; font-style: italic;">(format t</span>
-<span style="color: #cf9f7f; font-style: italic;">;;                     </span><span style="color: #cf9f7f; font-style: italic;">"after forward checking for ~A, domains: ~A~%"</span>
-<span style="color: #cf9f7f; font-style: italic;">;;                      </span><span style="color: #cf9f7f; font-style: italic;">next-var</span>
-<span style="color: #cf9f7f; font-style: italic;">;;                      </span><span style="color: #cf9f7f; font-style: italic;">(mapcar (lambda (var)</span>
-<span style="color: #cf9f7f; font-style: italic;">;;                                </span><span style="color: #cf9f7f; font-style: italic;">(if (assoc var new-values-alist)</span>
-<span style="color: #cf9f7f; font-style: italic;">;;                                    </span><span style="color: #cf9f7f; font-style: italic;">(format nil "~A=~A" var (cdr (assoc var new-values-alist)))</span>
-<span style="color: #cf9f7f; font-style: italic;">;;                                    </span><span style="color: #cf9f7f; font-style: italic;">(format nil "~A\\(\\in\\)~A" var (elt domains (position var variables)))))</span>
-<span style="color: #cf9f7f; font-style: italic;">;;                              </span><span style="color: #cf9f7f; font-style: italic;">variables))</span>
-              <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #c48702;">(</span><span style="color: #d0730f;">(</span>propped-values-alist
-                      <span style="color: #64aa0f;">(</span>solve-csp-with-graph csp
+                            (mapcar #'car values-alist)
+                            <span style="font-weight: bold;">:test</span> #'equal))
+           (unvisited-reduced-vars unvisited-vars))
+      (<span style="font-weight: bold;">let</span> ((next-var nil))
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">apply the heuristics in order, the reduced list of variables returned by every heuristic is passed to the next heuristic which applies its own reductions and passes it on to the next heuristic, and so on..</span>
+        (<span style="font-weight: bold;">loop</span> for heuristic in variable-ordering-heuristics if (not next-var)
+              do (setf unvisited-reduced-vars (funcall heuristic csp gr unvisited-reduced-vars)))
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">last heuristic, choose the leftmost variable in the reduced list of variables, which could be just a list of one item if the preceding heuristics reduced it enough, eitherway, we grab the leftmost variable in the list</span>
+        (setf next-var (car unvisited-reduced-vars))
+        (<span style="font-weight: bold;">when</span> (not next-var)
+          (<span style="font-weight: bold;">return-from</span> solve-csp-with-graph values-alist)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">no vars left</span>
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">handle the variable we picked</span>
+        (<span style="font-weight: bold;">let*</span> ((variable-index (position next-var variables))
+               (domain (elt domains variable-index)))
+          (<span style="font-weight: bold;">when</span> (not domain) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">no values left for variable, we hit a deadend</span>
+<span style="font-weight: bold; font-style: italic;">;;            </span><span style="font-weight: bold; font-style: italic;">(format t "~A has no available values, we hit a deadend, propagating back~%" next-var)</span>
+            (<span style="font-weight: bold;">return-from</span> solve-csp-with-graph nil))
+          <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">no need to check legality of picking a value, since we're doing forward checking and pruning the domains beforehand</span>
+          (<span style="font-weight: bold;">loop</span> for value in domain do
+            (<span style="font-weight: bold;">let</span> ((domain-removed-values-alist nil) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">store the modifications done to the domains so we may undo them if needed</span>
+                  (new-values-alist (append values-alist (list (cons next-var value)))))
+              (<span style="font-weight: bold;">loop</span> for neighbor-var in (graph-vertex-neighbors gr next-var) do
+                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">apply forward checking and modify the domains of connected variables accordingly</span>
+                (<span style="font-weight: bold;">let*</span> ((neighbor-var-idx (position neighbor-var variables))
+                       (neighbor-var-domain (elt domains neighbor-var-idx)))
+                  (<span style="font-weight: bold;">loop</span> for neighbor-var-value in neighbor-var-domain do
+                    (<span style="font-weight: bold;">loop</span> for constraint in constraints do
+                      (<span style="font-weight: bold;">let*</span> ((hypothetical-values-alist (cons (cons neighbor-var
+                                                                    neighbor-var-value)
+                                                              new-values-alist))
+                             (legal (funcall constraint csp gr hypothetical-values-alist)))
+                        (<span style="font-weight: bold;">when</span> (not legal)
+                          (setf domain-removed-values-alist
+                                (cons (cons neighbor-var-idx
+                                            value)
+                                      domain-removed-values-alist))
+                          (setf (elt domains neighbor-var-idx)
+                                (remove value neighbor-var-domain))))))))
+<span style="font-weight: bold; font-style: italic;">;;             </span><span style="font-weight: bold; font-style: italic;">(format t "chose variable ~A with value ~A~%" next-var value)</span>
+<span style="font-weight: bold; font-style: italic;">;;             </span><span style="font-weight: bold; font-style: italic;">(format t</span>
+<span style="font-weight: bold; font-style: italic;">;;                     </span><span style="font-weight: bold; font-style: italic;">"after forward checking for ~A, domains: ~A~%"</span>
+<span style="font-weight: bold; font-style: italic;">;;                      </span><span style="font-weight: bold; font-style: italic;">next-var</span>
+<span style="font-weight: bold; font-style: italic;">;;                      </span><span style="font-weight: bold; font-style: italic;">(mapcar (lambda (var)</span>
+<span style="font-weight: bold; font-style: italic;">;;                                </span><span style="font-weight: bold; font-style: italic;">(if (assoc var new-values-alist)</span>
+<span style="font-weight: bold; font-style: italic;">;;                                    </span><span style="font-weight: bold; font-style: italic;">(format nil "~A=~A" var (cdr (assoc var new-values-alist)))</span>
+<span style="font-weight: bold; font-style: italic;">;;                                    </span><span style="font-weight: bold; font-style: italic;">(format nil "~A\\(\\in\\)~A" var (elt domains (position var variables)))))</span>
+<span style="font-weight: bold; font-style: italic;">;;                              </span><span style="font-weight: bold; font-style: italic;">variables))</span>
+              (<span style="font-weight: bold;">let</span> ((propped-values-alist
+                      (solve-csp-with-graph csp
                                             gr
                                             variable-ordering-heuristics
-                                            new-values-alist<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span>
-                <span style="color: #c48702;">(</span><span style="color: #c48702; font-weight: bold;">if</span> propped-values-alist
-                    <span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">return-from</span> solve-csp-with-graph propped-values-alist<span style="color: #d0730f;">)</span>
-                    <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">we hit a deadend somewhere, loop to the next value, but undo modifications</span>
-                    <span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for removed-value-entry in domain-removed-values-alist do
-                      <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>modified-var-idx <span style="color: #df8f6f;">(</span>car removed-value-entry<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">the index of the var/domain that was modified</span>
-                            <span style="color: #3dbbb0;">(</span>removed-value <span style="color: #df8f6f;">(</span>cdr removed-value-entry<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">the value that was removed</span>
-                        <span style="color: #ef656a;">(</span>setf <span style="color: #3dbbb0;">(</span>elt domains modified-var-idx<span style="color: #3dbbb0;">)</span>
-                              <span style="color: #3dbbb0;">(</span>cons removed-value <span style="color: #df8f6f;">(</span>elt domains modified-var-idx<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+                                            new-values-alist)))
+                (<span style="font-weight: bold;">if</span> propped-values-alist
+                    (<span style="font-weight: bold;">return-from</span> solve-csp-with-graph propped-values-alist)
+                    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">we hit a deadend somewhere, loop to the next value, but undo modifications</span>
+                    (<span style="font-weight: bold;">loop</span> for removed-value-entry in domain-removed-values-alist do
+                      (<span style="font-weight: bold;">let</span> ((modified-var-idx (car removed-value-entry)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">the index of the var/domain that was modified</span>
+                            (removed-value (cdr removed-value-entry))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">the value that was removed</span>
+                        (setf (elt domains modified-var-idx)
+                              (cons removed-value (elt domains modified-var-idx))))))))))))))
 
-<span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">this could be implementing by looping through all variables once for each variable 'x' to apply the constraint functions and check how many other variables 'x' constraints, this would take O(n^2), here it takes O(n) because we're just using the constraint graph and can get the number of edges directly</span>
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">least-constraining-variable-heuristic</span> <span style="color: #64aa0f;">(</span>csp gr variable-list<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"checks which variable applies the least constraints on others, only return it if no other variable applies the same number of constraints"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">multiple-value-bind</span> <span style="color: #ef656a;">(</span>var var-idx<span style="color: #ef656a;">)</span>
-      <span style="color: #ef656a;">(</span>argmin
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">this could be implementing by looping through all variables once for each variable 'x' to apply the constraint functions and check how many other variables 'x' constraints, this would take O(n^2), here it takes O(n) because we're just using the constraint graph and can get the number of edges directly</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">least-constraining-variable-heuristic</span> (csp gr variable-list)
+  <span style="font-style: italic;">"checks which variable applies the least constraints on others, only return it if no other variable applies the same number of constraints"</span>
+  (<span style="font-weight: bold;">multiple-value-bind</span> (var var-idx)
+      (argmin
        variable-list
-       <span style="color: #ff7a7f; font-weight: bold;">:key</span> <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #df8f6f;">(</span>variable<span style="color: #df8f6f;">)</span>
-              <span style="color: #df8f6f;">(</span>length <span style="color: #379cf6;">(</span>graph-vertex-neighbors gr variable<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>args-to-return<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">list of the args that are argmin</span>
-      <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for other-var in variable-list do
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #379cf6;">(</span>equal <span style="color: #ff7a7f;">(</span>length <span style="color: #2fa526;">(</span>graph-vertex-neighbors gr other-var<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-                     <span style="color: #ff7a7f;">(</span>length <span style="color: #2fa526;">(</span>graph-vertex-neighbors gr var<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-          <span style="color: #379cf6;">(</span>setf args-to-return <span style="color: #ff7a7f;">(</span>cons other-var args-to-return<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-      args-to-return<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+       <span style="font-weight: bold;">:key</span> (<span style="font-weight: bold;">lambda</span> (variable)
+              (length (graph-vertex-neighbors gr variable))))
+    (<span style="font-weight: bold;">let</span> ((args-to-return)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">list of the args that are argmin</span>
+      (<span style="font-weight: bold;">loop</span> for other-var in variable-list do
+        (<span style="font-weight: bold;">when</span> (equal (length (graph-vertex-neighbors gr other-var))
+                     (length (graph-vertex-neighbors gr var)))
+          (setf args-to-return (cons other-var args-to-return))))
+      args-to-return)))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">most-constrained-variable-heuristic</span> <span style="color: #64aa0f;">(</span>csp gr variable-list<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"checks which variable has the least possible values (most constrained)"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">with-slots</span> <span style="color: #ef656a;">(</span>domains variables<span style="color: #ef656a;">)</span> csp
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">multiple-value-bind</span> <span style="color: #3dbbb0;">(</span>var var-idx<span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>argmax
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">most-constrained-variable-heuristic</span> (csp gr variable-list)
+  <span style="font-style: italic;">"checks which variable has the least possible values (most constrained)"</span>
+  (<span style="font-weight: bold;">with-slots</span> (domains variables) csp
+    (<span style="font-weight: bold;">multiple-value-bind</span> (var var-idx)
+        (argmax
          variable-list
-         <span style="color: #ff7a7f; font-weight: bold;">:key</span> <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #379cf6;">(</span>variable<span style="color: #379cf6;">)</span>
-                <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>domain <span style="color: #c48702;">(</span>elt domains <span style="color: #d0730f;">(</span>position variable variables<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-                  <span style="color: #ff7a7f;">(</span>length domain<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-      <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>args-to-return<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">list of the args that are argmin</span>
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for other-var in variable-list do
-          <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #ff7a7f;">(</span>equal <span style="color: #2fa526;">(</span>length <span style="color: #c48702;">(</span>elt domains <span style="color: #d0730f;">(</span>position other-var variables<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-                       <span style="color: #2fa526;">(</span>length <span style="color: #c48702;">(</span>elt domains <span style="color: #d0730f;">(</span>position var variables<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-            <span style="color: #ff7a7f;">(</span>setf args-to-return <span style="color: #2fa526;">(</span>cons other-var args-to-return<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-        args-to-return<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+         <span style="font-weight: bold;">:key</span> (<span style="font-weight: bold;">lambda</span> (variable)
+                (<span style="font-weight: bold;">let</span> ((domain (elt domains (position variable variables))))
+                  (length domain))))
+      (<span style="font-weight: bold;">let</span> ((args-to-return)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">list of the args that are argmin</span>
+        (<span style="font-weight: bold;">loop</span> for other-var in variable-list do
+          (<span style="font-weight: bold;">when</span> (equal (length (elt domains (position other-var variables)))
+                       (length (elt domains (position var variables))))
+            (setf args-to-return (cons other-var args-to-return))))
+        args-to-return))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">least-constrained-variable-heuristic</span> <span style="color: #64aa0f;">(</span>csp gr variable-list<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"checks which variable has the least possible values (most constrained)"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">with-slots</span> <span style="color: #ef656a;">(</span>domains variables<span style="color: #ef656a;">)</span> csp
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">multiple-value-bind</span> <span style="color: #3dbbb0;">(</span>var var-idx<span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>argmin
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">least-constrained-variable-heuristic</span> (csp gr variable-list)
+  <span style="font-style: italic;">"checks which variable has the least possible values (most constrained)"</span>
+  (<span style="font-weight: bold;">with-slots</span> (domains variables) csp
+    (<span style="font-weight: bold;">multiple-value-bind</span> (var var-idx)
+        (argmin
          variable-list
-         <span style="color: #ff7a7f; font-weight: bold;">:key</span> <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #379cf6;">(</span>variable<span style="color: #379cf6;">)</span>
-                <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>domain <span style="color: #c48702;">(</span>elt domains <span style="color: #d0730f;">(</span>position variable variables<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-                  <span style="color: #ff7a7f;">(</span>length domain<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-      <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>args-to-return<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">list of the args that are argmin</span>
-        <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for other-var in variable-list do
-          <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">when</span> <span style="color: #ff7a7f;">(</span>equal <span style="color: #2fa526;">(</span>length <span style="color: #c48702;">(</span>elt domains <span style="color: #d0730f;">(</span>position other-var variables<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-                       <span style="color: #2fa526;">(</span>length <span style="color: #c48702;">(</span>elt domains <span style="color: #d0730f;">(</span>position var variables<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-            <span style="color: #ff7a7f;">(</span>setf args-to-return <span style="color: #2fa526;">(</span>cons other-var args-to-return<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-        args-to-return<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+         <span style="font-weight: bold;">:key</span> (<span style="font-weight: bold;">lambda</span> (variable)
+                (<span style="font-weight: bold;">let</span> ((domain (elt domains (position variable variables))))
+                  (length domain))))
+      (<span style="font-weight: bold;">let</span> ((args-to-return)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">list of the args that are argmin</span>
+        (<span style="font-weight: bold;">loop</span> for other-var in variable-list do
+          (<span style="font-weight: bold;">when</span> (equal (length (elt domains (position other-var variables)))
+                       (length (elt domains (position var variables))))
+            (setf args-to-return (cons other-var args-to-return))))
+        args-to-return))))
 </pre>
 </div>
 
@@ -283,15 +283,15 @@ here i implement a generalized algorithm for constraint satisfaction problem sol
 applying the algorithm:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">solve</span> <span style="color: #64aa0f;">()</span>
-  <span style="color: #64aa0f;">(</span>solve-csp-with-graph
-   <span style="color: #ef656a;">(</span>PARSE-COLOR-MAP-CONSTRAINT-GRAPH *mygraph*<span style="color: #ef656a;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">solve</span> ()
+  (solve-csp-with-graph
+   (PARSE-COLOR-MAP-CONSTRAINT-GRAPH *mygraph*)
    *mygraph*
-   <span style="color: #ef656a;">(</span>list #'least-constraining-variable-heuristic #'most-constrained-variable-heuristic<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+   (list #'least-constraining-variable-heuristic #'most-constrained-variable-heuristic)))
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>solve<span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(solve)
 </pre>
 </div>
 
@@ -304,18 +304,18 @@ applying the algorithm:
 visualizing the constraint graph with the colors we obtained by solving the problem:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>values-assoc-list <span style="color: #3dbbb0;">(</span>solve<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>graph-generate-tikz
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((values-assoc-list (solve)))
+  (graph-generate-tikz
    *mygraph*
-   <span style="color: #ff7a7f; font-weight: bold;">:node-distance</span> 80
-   <span style="color: #ff7a7f; font-weight: bold;">:format-function</span> <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #3dbbb0;">(</span>variable<span style="color: #3dbbb0;">)</span>
-                      <span style="color: #3dbbb0;">(</span>format nil <span style="color: #f06a3f;">"~A ~A"</span> variable
-                              <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">case</span> <span style="color: #379cf6;">(</span>cdr <span style="color: #ff7a7f;">(</span>assoc variable values-assoc-list<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                                <span style="color: #379cf6;">(</span>r <span style="color: #f06a3f;">"[red]"</span><span style="color: #379cf6;">)</span>
-                                <span style="color: #379cf6;">(</span>g <span style="color: #f06a3f;">"[green]"</span><span style="color: #379cf6;">)</span>
-                                <span style="color: #379cf6;">(</span>b <span style="color: #f06a3f;">"[blue]"</span><span style="color: #379cf6;">)</span>
-                                <span style="color: #379cf6;">(</span>a <span style="color: #f06a3f;">"[orange]"</span><span style="color: #379cf6;">)</span>
-                                <span style="color: #379cf6;">(</span>otherwise <span style="color: #f06a3f;">""</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">otherwise for NIL, or use (nil), nil alone doesnt work with case</span>
+   <span style="font-weight: bold;">:node-distance</span> 80
+   <span style="font-weight: bold;">:format-function</span> (<span style="font-weight: bold;">lambda</span> (variable)
+                      (format nil <span style="font-style: italic;">"~A ~A"</span> variable
+                              (<span style="font-weight: bold;">case</span> (cdr (assoc variable values-assoc-list))
+                                (r <span style="font-style: italic;">"[red]"</span>)
+                                (g <span style="font-style: italic;">"[green]"</span>)
+                                (b <span style="font-style: italic;">"[blue]"</span>)
+                                (a <span style="font-style: italic;">"[orange]"</span>)
+                                (otherwise <span style="font-style: italic;">""</span>)))))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">otherwise for NIL, or use (nil), nil alone doesnt work with case</span>
 </pre>
 </div>
 
@@ -357,7 +357,7 @@ N [blue] -- P [red],
 P [red] -- K [orange],
 K [orange],
 };\end{tikzpicture}
-" style="height: 33.8393em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 33.7521em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -366,289 +366,289 @@ showing the inference/decision steps (i went back and modified the algorithm to 
 this just shows the domain of variables at each step
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>solve<span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(solve)
 </pre>
 </div>
 
 <p>
 chose variable A with value R
-after forward checking for A, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        J<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) M<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) H<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) P<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A))
+after forward checking for A, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        J<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) M<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) H<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) P<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A))
 chose variable J with value R
-after forward checking for J, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R
-                                        M<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        H<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        P<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A))
+after forward checking for J, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R
+                                        M<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        H<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        P<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A))
 chose variable M with value R
-after forward checking for M, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R M=R
-                                        E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) H<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A))
+after forward checking for M, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R M=R
+                                        E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) H<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A)
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A))
 chose variable H with value R
-after forward checking for H, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R M=R
-                                        E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        P<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
+after forward checking for H, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R M=R
+                                        E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        P<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(R G B A) K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
 chose variable P with value R
-after forward checking for P, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R M=R
-                                        E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P=R
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
+after forward checking for P, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) C<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R M=R
+                                        E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P=R
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
 chose variable C with value G
-after forward checking for C, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R M=R E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R
-                                        N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
+after forward checking for C, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        D<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) J=R M=R E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R
+                                        N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
 chose variable D with value G
-after forward checking for D, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
-                                        J=R M=R E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P=R
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
+after forward checking for D, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
+                                        J=R M=R E<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P=R
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
 chose variable E with value G
-after forward checking for E, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
-                                        J=R M=R E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R
-                                        N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
+after forward checking for E, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
+                                        J=R M=R E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) O<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) H=R
+                                        N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
 chose variable O with value G
-after forward checking for O, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
-                                        J=R M=R E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A) O=G H=R N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
-                                        P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
+after forward checking for O, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
+                                        J=R M=R E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A) O=G H=R N<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A)
+                                        P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G B A))
 chose variable N with value G
-after forward checking for N, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
-                                        J=R M=R E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) O=G H=R N=G P=R
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A))
+after forward checking for N, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
+                                        J=R M=R E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) O=G H=R N=G P=R
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A))
 chose variable B with value B
-after forward checking for B, domains: (A=R B=B C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G J=R M=R
-                                        E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) O=G H=R N=G P=R
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A))
+after forward checking for B, domains: (A=R B=B C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G J=R M=R
+                                        E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) O=G H=R N=G P=R
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A))
 chose variable L with value B
 after forward checking for L, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        O=G H=R N=G P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A))
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        O=G H=R N=G P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A))
 chose variable K with value B
 after forward checking for K, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A)
                                         O=G H=R N=G P=R K=B)
 chose variable F with value B
 after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=G
                                         P=R K=B)
 chose variable I with value A
 after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=G P=R K=B)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=G P=R K=B)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value A
 after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
                                         P=R K=B)
 I has no available values, we hit a deadend, propagating back
 chose variable K with value A
 after forward checking for K, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B)
                                         O=G H=R N=G P=R K=A)
 chose variable F with value A
 after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) O=G H=R N=G
                                         P=R K=A)
 chose variable I with value B
 after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=B O=G H=R N=G P=R K=A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=B O=G H=R N=G P=R K=A)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value B
 after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
                                         P=R K=A)
 I has no available values, we hit a deadend, propagating back
 chose variable L with value A
 after forward checking for L, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B)
-                                        O=G H=R N=G P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A))
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B)
+                                        O=G H=R N=G P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A))
 chose variable K with value B
 after forward checking for K, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A)
                                         O=G H=R N=G P=R K=B)
 chose variable F with value B
 after forward checking for F, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=G
                                         P=R K=B)
 chose variable I with value A
 after forward checking for I, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=G P=R K=B)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=G P=R K=B)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value A
 after forward checking for F, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
                                         P=R K=B)
 I has no available values, we hit a deadend, propagating back
 chose variable K with value A
 after forward checking for K, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B)
                                         O=G H=R N=G P=R K=A)
 chose variable F with value A
 after forward checking for F, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) O=G H=R N=G
                                         P=R K=A)
 chose variable I with value B
 after forward checking for I, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=B O=G H=R N=G P=R K=A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=B O=G H=R N=G P=R K=A)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value B
 after forward checking for F, domains: (A=R B=B C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
                                         P=R K=A)
 I has no available values, we hit a deadend, propagating back
 chose variable B with value A
-after forward checking for B, domains: (A=R B=A C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G J=R M=R
-                                        E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) O=G H=R N=G P=R
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A))
+after forward checking for B, domains: (A=R B=A C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G J=R M=R
+                                        E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) O=G H=R N=G P=R
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A))
 chose variable L with value B
 after forward checking for L, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B)
-                                        O=G H=R N=G P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A))
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B)
+                                        O=G H=R N=G P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A))
 chose variable K with value B
 after forward checking for K, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A)
                                         O=G H=R N=G P=R K=B)
 chose variable F with value B
 after forward checking for F, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=G
                                         P=R K=B)
 chose variable I with value A
 after forward checking for I, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=G P=R K=B)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=G P=R K=B)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value A
 after forward checking for F, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
                                         P=R K=B)
 I has no available values, we hit a deadend, propagating back
 chose variable K with value A
 after forward checking for K, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B)
                                         O=G H=R N=G P=R K=A)
 chose variable F with value A
 after forward checking for F, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) O=G H=R N=G
                                         P=R K=A)
 chose variable I with value B
 after forward checking for I, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=B O=G H=R N=G P=R K=A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=B O=G H=R N=G P=R K=A)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value B
 after forward checking for F, domains: (A=R B=A C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
                                         P=R K=A)
 I has no available values, we hit a deadend, propagating back
 chose variable L with value A
 after forward checking for L, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B)
-                                        O=G H=R N=G P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A))
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B)
+                                        O=G H=R N=G P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A))
 chose variable K with value B
 after forward checking for K, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A)
                                         O=G H=R N=G P=R K=B)
 chose variable F with value B
 after forward checking for F, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=G
                                         P=R K=B)
 chose variable I with value A
 after forward checking for I, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=G P=R K=B)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=G P=R K=B)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value A
 after forward checking for F, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
                                         P=R K=B)
 I has no available values, we hit a deadend, propagating back
 chose variable K with value A
 after forward checking for K, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B)
                                         O=G H=R N=G P=R K=A)
 chose variable F with value A
 after forward checking for F, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B) O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B) O=G H=R N=G
                                         P=R K=A)
 chose variable I with value B
 after forward checking for I, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=B O=G H=R N=G P=R K=A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=B O=G H=R N=G P=R K=A)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value B
 after forward checking for F, domains: (A=R B=A C=G L=A D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=G
                                         P=R K=A)
 I has no available values, we hit a deadend, propagating back
 chose variable N with value B
-after forward checking for N, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
-                                        J=R M=R E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G A) O=G H=R N=B P=R
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G A))
+after forward checking for N, domains: (A=R B<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G
+                                        J=R M=R E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G A) O=G H=R N=B P=R
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G A))
 chose variable B with value B
-after forward checking for B, domains: (A=R B=B C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G J=R M=R
-                                        E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A)
-                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G A) O=G H=R N=B P=R
-                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G A))
+after forward checking for B, domains: (A=R B=B C=G L<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) D=G J=R M=R
+                                        E=G G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A)
+                                        I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G A) O=G H=R N=B P=R
+                                        K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G A))
 chose variable L with value B
 after forward checking for L, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G A)
-                                        O=G H=R N=B P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G A))
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G A)
+                                        O=G H=R N=B P=R K<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G A))
 chose variable K with value G
 after forward checking for K, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(B A) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A)
                                         O=G H=R N=B P=R K=G)
 chose variable F with value B
 after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=B
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) O=G H=R N=B
                                         P=R K=G)
 chose variable I with value A
 after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=B P=R K=G)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=B I=A O=G H=R N=B P=R K=G)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value A
 after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=B
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL O=G H=R N=B
                                         P=R K=G)
 I has no available values, we hit a deadend, propagating back
 chose variable K with value A
 after forward checking for K, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A B) I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G)
                                         O=G H=R N=B P=R K=A)
 chose variable F with value A
 after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G) O=G H=R N=B
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G) O=G H=R N=B
                                         P=R K=A)
 chose variable I with value G
 after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=G O=G H=R N=B P=R K=A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />NIL F=A I=G O=G H=R N=B P=R K=A)
 G has no available values, we hit a deadend, propagating back
 chose variable F with value B
 after forward checking for F, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(G) O=G H=R N=B
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(G) O=G H=R N=B
                                         P=R K=A)
 chose variable I with value G
 after forward checking for I, domains: (A=R B=B C=G L=B D=G J=R M=R E=G
-                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I=G O=G H=R N=B P=R K=A)
+                                        G<img src="ltx/a12fe299618.svg" alt="\(\in\)" style="height: 0.6452em; vertical-align: -0.0756em; display: inline-block" class="org-latex org-latex-inline" />(A) F=B I=G O=G H=R N=B P=R K=A)
 chose variable G with value A
 after forward checking for G, domains: (A=R B=B C=G L=B D=G J=R M=R E=G G=A F=B
                                         I=G O=G H=R N=B P=R K=A)

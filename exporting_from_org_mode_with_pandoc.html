@@ -25,17 +25,17 @@
 </div><h1 class="main-title">exporting from org mode with pandoc</h1>
 </div>
 <div id="content" class="content">
-<div id="outline-container-org21ceb26" class="outline-2">
-<h2 id="org21ceb26">motivation</h2>
-<div class="outline-text-2" id="text-org21ceb26">
+<div id="outline-container-org14968be" class="outline-2">
+<h2 id="org14968be">motivation</h2>
+<div class="outline-text-2" id="text-org14968be">
 <p>
 the need for an emacs-independent exporting of notes arose from the fact that i was using org version 9.7-pre in which exporting functionality is basically broken.
 </p>
 </div>
 </div>
-<div id="outline-container-org723f537" class="outline-2">
-<h2 id="org723f537">pandoc</h2>
-<div class="outline-text-2" id="text-org723f537">
+<div id="outline-container-org90002a7" class="outline-2">
+<h2 id="org90002a7">pandoc</h2>
+<div class="outline-text-2" id="text-org90002a7">
 <p>
 because i didnt want to reinvent the wheel, i landed on using pandoc, it has a huge community and i trust it to maintain org-mode parsability in the long run. there are some missing features in pandoc exporting which is why im writing this.
 </p>
@@ -49,223 +49,223 @@ a starting point would be the following command:
 </div>
 </div>
 </div>
-<div id="outline-container-org8abd437" class="outline-2">
-<h2 id="org8abd437">custom css</h2>
-<div class="outline-text-2" id="text-org8abd437">
+<div id="outline-container-org199a4ce" class="outline-2">
+<h2 id="org199a4ce">custom css</h2>
+<div class="outline-text-2" id="text-org199a4ce">
 <p>
 if you have a css file that you'd like included, use the <code>--css</code> argument
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">pandoc infile.org<span style="color: #f06a3f;">\</span>
-       --standalone<span style="color: #f06a3f;">\</span>
-       --output outfile.html<span style="color: #f06a3f;">\</span>
+<pre class="src src-sh">pandoc infile.org<span style="font-style: italic;">\</span>
+       --standalone<span style="font-style: italic;">\</span>
+       --output outfile.html<span style="font-style: italic;">\</span>
        --css style.css
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge200834" class="outline-2">
-<h2 id="orge200834">custom html preamble/postamble</h2>
-<div class="outline-text-2" id="text-orge200834">
+<div id="outline-container-orgd3f8e27" class="outline-2">
+<h2 id="orgd3f8e27">custom html preamble/postamble</h2>
+<div class="outline-text-2" id="text-orgd3f8e27">
 <p>
 or more generally, if you have an html file you'd like included in the header, use the <code>--include-in-header</code> argument
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">pandoc infile.org<span style="color: #f06a3f;">\</span>
-       --standalone<span style="color: #f06a3f;">\</span>
-       --output outfile.html<span style="color: #f06a3f;">\</span>
-       --css style.css<span style="color: #f06a3f;">\</span>
+<pre class="src src-sh">pandoc infile.org<span style="font-style: italic;">\</span>
+       --standalone<span style="font-style: italic;">\</span>
+       --output outfile.html<span style="font-style: italic;">\</span>
+       --css style.css<span style="font-style: italic;">\</span>
        --include-in-header=header.html
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfa022d8" class="outline-2">
-<h2 id="orgfa022d8">bibliography</h2>
-<div class="outline-text-2" id="text-orgfa022d8">
+<div id="outline-container-org8c02706" class="outline-2">
+<h2 id="org8c02706">bibliography</h2>
+<div class="outline-text-2" id="text-org8c02706">
 <p>
 if you have a bibliography file you want pandoc to use to handle citations, you can make use of the <code>--bibliography</code>, <code>--biblatex</code>, <code>--citeproc</code> arguments
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">pandoc infile.org<span style="color: #f06a3f;">\</span>
-       --standalone<span style="color: #f06a3f;">\</span>
-       --include-in-header=header.html<span style="color: #f06a3f;">\</span>
-       --output outfile.html<span style="color: #f06a3f;">\</span>
-       --css style.css<span style="color: #f06a3f;">\</span>
+<pre class="src src-sh">pandoc infile.org<span style="font-style: italic;">\</span>
+       --standalone<span style="font-style: italic;">\</span>
+       --include-in-header=header.html<span style="font-style: italic;">\</span>
+       --output outfile.html<span style="font-style: italic;">\</span>
+       --css style.css<span style="font-style: italic;">\</span>
        --bibliography=mybibfile.bib --biblatex --citeproc
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf9aa357" class="outline-2">
-<h2 id="orgf9aa357">latex rendering</h2>
-<div class="outline-text-2" id="text-orgf9aa357">
+<div id="outline-container-orga8abdd5" class="outline-2">
+<h2 id="orga8abdd5">latex rendering</h2>
+<div class="outline-text-2" id="text-orga8abdd5">
 <p>
 pandoc supports multiple ways of handling latex snippets, it can use <code>mathjax</code> with the <code>--mathjax</code> argument, a better option for full latex support is rendering them with <code>dvisvgm</code>, using this lua filter that makes use of pandoc's filter api, which is a modified version of <a href="https://github.com/oltolm/pandoc-latex-math">https://github.com/oltolm/pandoc-latex-math</a>
 </p>
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #cf9f7f; font-style: italic;">--- </span><span style="color: #cf9f7f; font-style: italic;">source: https://github.com/oltolm/pandoc-latex-math</span>
+<pre class="src src-lua"><span style="font-weight: bold; font-style: italic;">--- </span><span style="font-weight: bold; font-style: italic;">source: https://github.com/oltolm/pandoc-latex-math</span>
 
-<span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">system</span> = <span style="color: #ff7a7f; font-weight: bold;">require</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"pandoc.system"</span><span style="color: #d0730f;">)</span>
+<span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">system</span> = <span style="font-weight: bold;">require</span>(<span style="font-style: italic;">"pandoc.system"</span>)
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">appendDepthToSVGFile</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">depth</span>, <span style="color: #6fafff;">svgPath</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">f</span> = <span style="color: #ff7a7f; font-weight: bold;">io</span>.<span style="color: #ff7a7f; font-weight: bold;">open</span><span style="color: #d0730f;">(</span>svgPath, <span style="color: #f06a3f;">"a"</span><span style="color: #d0730f;">)</span>
-    f:write<span style="color: #d0730f;">(</span><span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #64aa0f;">(</span><span style="color: #f06a3f;">"&lt;!-- depth=%spt --&gt;\n"</span>, depth<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-    f:close<span style="color: #d0730f;">()</span>
-<span style="color: #c48702; font-weight: bold;">end</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">appendDepthToSVGFile</span>(<span style="font-weight: bold; font-style: italic;">depth</span>, <span style="font-weight: bold; font-style: italic;">svgPath</span>)
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">f</span> = <span style="font-weight: bold;">io</span>.<span style="font-weight: bold;">open</span>(svgPath, <span style="font-style: italic;">"a"</span>)
+    f:write(<span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">"&lt;!-- depth=%spt --&gt;\n"</span>, depth))
+    f:close()
+<span style="font-weight: bold;">end</span>
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">NewLatexRender</span><span style="color: #d0730f;">()</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> <span style="color: #d0730f;">{</span>
-        preamble = <span style="color: #f06a3f;">[[</span>
-<span style="color: #f06a3f;">            \usepackage{amsmath}</span>
-<span style="color: #f06a3f;">            \usepackage{amsfonts}</span>
-<span style="color: #f06a3f;">            \usepackage{amssymb}</span>
-<span style="color: #f06a3f;">            \usepackage[T2A,T1]{fontenc}</span>
-<span style="color: #f06a3f;">            \usepackage{colordvi}</span>
-<span style="color: #f06a3f;">            \usepackage[active,tightpage]{preview}</span>
-<span style="color: #f06a3f;">        ]]</span>,
-        latexClass = <span style="color: #f06a3f;">"article"</span>,
-        fontEncoding = <span style="color: #f06a3f;">"utf8"</span>,
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">NewLatexRender</span>()
+    <span style="font-weight: bold;">return</span> {
+        preamble = <span style="font-style: italic;">[[</span>
+<span style="font-style: italic;">            \usepackage{amsmath}</span>
+<span style="font-style: italic;">            \usepackage{amsfonts}</span>
+<span style="font-style: italic;">            \usepackage{amssymb}</span>
+<span style="font-style: italic;">            \usepackage[T2A,T1]{fontenc}</span>
+<span style="font-style: italic;">            \usepackage{colordvi}</span>
+<span style="font-style: italic;">            \usepackage[active,tightpage]{preview}</span>
+<span style="font-style: italic;">        ]]</span>,
+        latexClass = <span style="font-style: italic;">"article"</span>,
+        fontEncoding = <span style="font-style: italic;">"utf8"</span>,
         fontSize = 12,
-        bgcolor = <span style="color: #f06a3f;">"#FFFFFF"</span>,
-        latexPath = <span style="color: #f06a3f;">"latex"</span>,
-        dvisvgmPath = <span style="color: #f06a3f;">"dvisvgm"</span>
-    <span style="color: #d0730f;">}</span>
-<span style="color: #c48702; font-weight: bold;">end</span>
+        bgcolor = <span style="font-style: italic;">"#FFFFFF"</span>,
+        latexPath = <span style="font-style: italic;">"latex"</span>,
+        dvisvgmPath = <span style="font-style: italic;">"dvisvgm"</span>
+    }
+<span style="font-weight: bold;">end</span>
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">html2rgb</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">color</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> <span style="color: #f06a3f;">''</span>
-<span style="color: #c48702; font-weight: bold;">end</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">html2rgb</span>(<span style="font-weight: bold; font-style: italic;">color</span>)
+    <span style="font-weight: bold;">return</span> <span style="font-style: italic;">''</span>
+<span style="font-weight: bold;">end</span>
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">wrapFormula</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">lr</span>, <span style="color: #6fafff;">latexFormula</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">bgcolor</span> = lr.bgcolor ~= <span style="color: #f06a3f;">"#FFFFFF"</span> <span style="color: #c48702; font-weight: bold;">and</span> <span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"\\background{%s}\n"</span>, html2rgb<span style="color: #64aa0f;">(</span>lr.bgcolor<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> <span style="color: #c48702; font-weight: bold;">or</span> <span style="color: #f06a3f;">''</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">tex</span> = <span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">[[\documentclass[%dpt]{%s}</span>
-<span style="color: #f06a3f;">        \usepackage[%s]{inputenc}</span>
-<span style="color: #f06a3f;">        %s</span>
-<span style="color: #f06a3f;">        \begin{document}</span>
-<span style="color: #f06a3f;">        %s</span>
-<span style="color: #f06a3f;">        \begin{preview}</span>
-<span style="color: #f06a3f;">        %s</span>
-<span style="color: #f06a3f;">        \end{preview}</span>
-<span style="color: #f06a3f;">        \end{document}</span>
-<span style="color: #f06a3f;">        ]]</span>, lr.fontSize, lr.latexClass, lr.fontEncoding, lr.preamble, bgcolor, latexFormula<span style="color: #d0730f;">)</span>
-    <span style="color: #cf9f7f; font-style: italic;">-- </span><span style="color: #cf9f7f; font-style: italic;">io.write(string.format("tex: [[%s]]\n", tex))</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> tex
-<span style="color: #c48702; font-weight: bold;">end</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">wrapFormula</span>(<span style="font-weight: bold; font-style: italic;">lr</span>, <span style="font-weight: bold; font-style: italic;">latexFormula</span>)
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">bgcolor</span> = lr.bgcolor ~= <span style="font-style: italic;">"#FFFFFF"</span> <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">"\\background{%s}\n"</span>, html2rgb(lr.bgcolor)) <span style="font-weight: bold;">or</span> <span style="font-style: italic;">''</span>
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">tex</span> = <span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">[[\documentclass[%dpt]{%s}</span>
+<span style="font-style: italic;">        \usepackage[%s]{inputenc}</span>
+<span style="font-style: italic;">        %s</span>
+<span style="font-style: italic;">        \begin{document}</span>
+<span style="font-style: italic;">        %s</span>
+<span style="font-style: italic;">        \begin{preview}</span>
+<span style="font-style: italic;">        %s</span>
+<span style="font-style: italic;">        \end{preview}</span>
+<span style="font-style: italic;">        \end{document}</span>
+<span style="font-style: italic;">        ]]</span>, lr.fontSize, lr.latexClass, lr.fontEncoding, lr.preamble, bgcolor, latexFormula)
+    <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">io.write(string.format("tex: [[%s]]\n", tex))</span>
+    <span style="font-weight: bold;">return</span> tex
+<span style="font-weight: bold;">end</span>
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">getDepth</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">out</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">depth</span> = <span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">match</span><span style="color: #d0730f;">(</span>out, <span style="color: #f06a3f;">"depth=(%d*%.?%d*)"</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> <span style="color: #ff7a7f; font-weight: bold;">tonumber</span><span style="color: #d0730f;">(</span>depth<span style="color: #d0730f;">)</span>
-<span style="color: #c48702; font-weight: bold;">end</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">getDepth</span>(<span style="font-weight: bold; font-style: italic;">out</span>)
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">depth</span> = <span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">match</span>(out, <span style="font-style: italic;">"depth=(%d*%.?%d*)"</span>)
+    <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">tonumber</span>(depth)
+<span style="font-weight: bold;">end</span>
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">renderLatex</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">lr</span>, <span style="color: #6fafff;">latexFormula</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">latexDocument</span> = wrapFormula<span style="color: #d0730f;">(</span>lr, latexFormula<span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">currDir</span> = system.get_working_directory<span style="color: #d0730f;">()</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">svgFileName</span> = pandoc.sha1<span style="color: #d0730f;">(</span>latexDocument<span style="color: #d0730f;">)</span> .. <span style="color: #f06a3f;">".svg"</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">svgPath</span> = currDir .. <span style="color: #f06a3f;">"/"</span> .. svgFileName
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">f</span> = <span style="color: #ff7a7f; font-weight: bold;">io</span>.<span style="color: #ff7a7f; font-weight: bold;">open</span><span style="color: #d0730f;">(</span>svgPath, <span style="color: #f06a3f;">"r"</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">if</span> f ~= <span style="color: #64aa0f;">nil</span> <span style="color: #c48702; font-weight: bold;">then</span>
-        <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">depth</span> = getDepth<span style="color: #d0730f;">(</span>f:read<span style="color: #64aa0f;">(</span><span style="color: #f06a3f;">"a"</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        f:close<span style="color: #d0730f;">()</span>
-        <span style="color: #cf9f7f; font-style: italic;">--</span><span style="color: #cf9f7f; font-style: italic;">io.write(string.format("found SVG file=%s with depth=%spt\n", svgPath, depth))</span>
-        <span style="color: #c48702; font-weight: bold;">return</span> depth, svgFileName
-    <span style="color: #c48702; font-weight: bold;">end</span>
-    <span style="color: #cf9f7f; font-style: italic;">-- </span><span style="color: #cf9f7f; font-style: italic;">SVG file does not exist</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">depth</span> = system.with_temporary_directory<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"latexmath"</span>, <span style="color: #c48702; font-weight: bold;">function</span><span style="color: #64aa0f;">(</span><span style="color: #6fafff;">tmpDir</span><span style="color: #64aa0f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">return</span> system.with_working_directory<span style="color: #64aa0f;">(</span>tmpDir, <span style="color: #c48702; font-weight: bold;">function</span><span style="color: #ef656a;">()</span>
-            <span style="color: #ff7a7f; font-weight: bold;">io</span>.<span style="color: #ff7a7f; font-weight: bold;">write</span><span style="color: #ef656a;">(</span><span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #3dbbb0;">(</span><span style="color: #f06a3f;">"changed directory to (%s)\n"</span>, tmpDir<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-            <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">tmpFile</span> = <span style="color: #ff7a7f; font-weight: bold;">io</span>.<span style="color: #ff7a7f; font-weight: bold;">open</span><span style="color: #ef656a;">(</span><span style="color: #f06a3f;">"latexmath.tex"</span>, <span style="color: #f06a3f;">"w"</span><span style="color: #ef656a;">)</span>
-            tmpFile:write<span style="color: #ef656a;">(</span>latexDocument<span style="color: #ef656a;">)</span>
-            tmpFile:close<span style="color: #ef656a;">()</span>
-            <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">out</span> = command<span style="color: #ef656a;">(</span>lr, svgPath<span style="color: #ef656a;">)</span>
-            <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">depth</span> = getDepth<span style="color: #ef656a;">(</span>out<span style="color: #ef656a;">)</span>
-            <span style="color: #c48702; font-weight: bold;">if</span> depth == <span style="color: #64aa0f;">nil</span> <span style="color: #c48702; font-weight: bold;">then</span>
-                <span style="color: #ff7a7f; font-weight: bold;">io</span>.<span style="color: #ff7a7f; font-weight: bold;">write</span><span style="color: #ef656a;">(</span><span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #3dbbb0;">(</span><span style="color: #f06a3f;">"%s: depth not found\n"</span>, svgPath<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-                <span style="color: #c48702; font-weight: bold;">return</span> <span style="color: #64aa0f;">nil</span>
-            <span style="color: #c48702; font-weight: bold;">end</span>
-            <span style="color: #ff7a7f; font-weight: bold;">io</span>.<span style="color: #ff7a7f; font-weight: bold;">write</span><span style="color: #ef656a;">(</span><span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #3dbbb0;">(</span><span style="color: #f06a3f;">"%s: depth=%spt\n"</span>, svgPath, depth<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-            appendDepthToSVGFile<span style="color: #ef656a;">(</span>depth, svgPath<span style="color: #ef656a;">)</span>
-            <span style="color: #c48702; font-weight: bold;">return</span> depth
-        <span style="color: #c48702; font-weight: bold;">end</span><span style="color: #64aa0f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">end</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> depth, svgFileName
-<span style="color: #c48702; font-weight: bold;">end</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">renderLatex</span>(<span style="font-weight: bold; font-style: italic;">lr</span>, <span style="font-weight: bold; font-style: italic;">latexFormula</span>)
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">latexDocument</span> = wrapFormula(lr, latexFormula)
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">currDir</span> = system.get_working_directory()
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">svgFileName</span> = pandoc.sha1(latexDocument) .. <span style="font-style: italic;">".svg"</span>
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">svgPath</span> = currDir .. <span style="font-style: italic;">"/"</span> .. svgFileName
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">f</span> = <span style="font-weight: bold;">io</span>.<span style="font-weight: bold;">open</span>(svgPath, <span style="font-style: italic;">"r"</span>)
+    <span style="font-weight: bold;">if</span> f ~= <span style="font-weight: bold; text-decoration: underline;">nil</span> <span style="font-weight: bold;">then</span>
+        <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">depth</span> = getDepth(f:read(<span style="font-style: italic;">"a"</span>))
+        f:close()
+        <span style="font-weight: bold; font-style: italic;">--</span><span style="font-weight: bold; font-style: italic;">io.write(string.format("found SVG file=%s with depth=%spt\n", svgPath, depth))</span>
+        <span style="font-weight: bold;">return</span> depth, svgFileName
+    <span style="font-weight: bold;">end</span>
+    <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">SVG file does not exist</span>
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">depth</span> = system.with_temporary_directory(<span style="font-style: italic;">"latexmath"</span>, <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">tmpDir</span>)
+        <span style="font-weight: bold;">return</span> system.with_working_directory(tmpDir, <span style="font-weight: bold;">function</span>()
+            <span style="font-weight: bold;">io</span>.<span style="font-weight: bold;">write</span>(<span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">"changed directory to (%s)\n"</span>, tmpDir))
+            <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">tmpFile</span> = <span style="font-weight: bold;">io</span>.<span style="font-weight: bold;">open</span>(<span style="font-style: italic;">"latexmath.tex"</span>, <span style="font-style: italic;">"w"</span>)
+            tmpFile:write(latexDocument)
+            tmpFile:close()
+            <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">out</span> = command(lr, svgPath)
+            <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">depth</span> = getDepth(out)
+            <span style="font-weight: bold;">if</span> depth == <span style="font-weight: bold; text-decoration: underline;">nil</span> <span style="font-weight: bold;">then</span>
+                <span style="font-weight: bold;">io</span>.<span style="font-weight: bold;">write</span>(<span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">"%s: depth not found\n"</span>, svgPath))
+                <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">nil</span>
+            <span style="font-weight: bold;">end</span>
+            <span style="font-weight: bold;">io</span>.<span style="font-weight: bold;">write</span>(<span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">"%s: depth=%spt\n"</span>, svgPath, depth))
+            appendDepthToSVGFile(depth, svgPath)
+            <span style="font-weight: bold;">return</span> depth
+        <span style="font-weight: bold;">end</span>)
+    <span style="font-weight: bold;">end</span>)
+    <span style="font-weight: bold;">return</span> depth, svgFileName
+<span style="font-weight: bold;">end</span>
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">command</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">lr</span>, <span style="color: #6fafff;">svgPath</span><span style="color: #d0730f;">)</span>
-    pandoc.pipe<span style="color: #d0730f;">(</span>lr.latexPath, <span style="color: #64aa0f;">{</span><span style="color: #f06a3f;">"--interaction=nonstopmode"</span>, <span style="color: #f06a3f;">"latexmath.tex"</span><span style="color: #64aa0f;">}</span>, <span style="color: #f06a3f;">''</span><span style="color: #d0730f;">)</span>
-    <span style="color: #cf9f7f; font-style: italic;">-- </span><span style="color: #cf9f7f; font-style: italic;">local out = pandoc.pipe(lr.dvisvgmPath, {"--no-fonts", "-o", svgPath, "latexmath.dvi"}, '')</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">f</span> = <span style="color: #ff7a7f; font-weight: bold;">io</span>.<span style="color: #ff7a7f; font-weight: bold;">popen</span><span style="color: #d0730f;">(</span>lr.dvisvgmPath .. <span style="color: #f06a3f;">" --no-fonts -o \""</span> .. svgPath .. <span style="color: #f06a3f;">"\" latexmath.dvi 2&gt;&amp;1"</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">out</span> = f:read<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"a"</span><span style="color: #d0730f;">)</span>
-    f:close<span style="color: #d0730f;">()</span>
-    <span style="color: #cf9f7f; font-style: italic;">-- </span><span style="color: #cf9f7f; font-style: italic;">io.write(string.format("out: [[%s]]\n", out))</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> out
-<span style="color: #c48702; font-weight: bold;">end</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">command</span>(<span style="font-weight: bold; font-style: italic;">lr</span>, <span style="font-weight: bold; font-style: italic;">svgPath</span>)
+    pandoc.pipe(lr.latexPath, {<span style="font-style: italic;">"--interaction=nonstopmode"</span>, <span style="font-style: italic;">"latexmath.tex"</span>}, <span style="font-style: italic;">''</span>)
+    <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">local out = pandoc.pipe(lr.dvisvgmPath, {"--no-fonts", "-o", svgPath, "latexmath.dvi"}, '')</span>
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">f</span> = <span style="font-weight: bold;">io</span>.<span style="font-weight: bold;">popen</span>(lr.dvisvgmPath .. <span style="font-style: italic;">" --no-fonts -o \""</span> .. svgPath .. <span style="font-style: italic;">"\" latexmath.dvi 2&gt;&amp;1"</span>)
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">out</span> = f:read(<span style="font-style: italic;">"a"</span>)
+    f:close()
+    <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">io.write(string.format("out: [[%s]]\n", out))</span>
+    <span style="font-weight: bold;">return</span> out
+<span style="font-weight: bold;">end</span>
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">Math</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">elem</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">latexFormula1</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">latexFormula</span> = elem.text
-    <span style="color: #c48702; font-weight: bold;">if</span> elem.mathtype == <span style="color: #f06a3f;">"InlineMath"</span> <span style="color: #c48702; font-weight: bold;">then</span>
-        latexFormula1 = <span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"\\(%s\\)"</span>, latexFormula<span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">else</span>
-        <span style="color: #cf9f7f; font-style: italic;">-- </span><span style="color: #cf9f7f; font-style: italic;">DisplayMath</span>
-        latexFormula1 = <span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"\\[%s\\]"</span>, latexFormula<span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">end</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">lr</span> = NewLatexRender<span style="color: #d0730f;">()</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">depth</span>, <span style="color: #6fafff;">svgFileName</span> = renderLatex<span style="color: #d0730f;">(</span>lr, latexFormula1<span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">attr</span> = <span style="color: #d0730f;">{</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">Math</span>(<span style="font-weight: bold; font-style: italic;">elem</span>)
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">latexFormula1</span>
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">latexFormula</span> = elem.text
+    <span style="font-weight: bold;">if</span> elem.mathtype == <span style="font-style: italic;">"InlineMath"</span> <span style="font-weight: bold;">then</span>
+        latexFormula1 = <span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">"\\(%s\\)"</span>, latexFormula)
+    <span style="font-weight: bold;">else</span>
+        <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">DisplayMath</span>
+        latexFormula1 = <span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">"\\[%s\\]"</span>, latexFormula)
+    <span style="font-weight: bold;">end</span>
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">lr</span> = NewLatexRender()
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">depth</span>, <span style="font-weight: bold; font-style: italic;">svgFileName</span> = renderLatex(lr, latexFormula1)
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">attr</span> = {
         alt = latexFormula
-    <span style="color: #d0730f;">}</span>
-    <span style="color: #c48702; font-weight: bold;">if</span> depth ~= <span style="color: #64aa0f;">nil</span> <span style="color: #c48702; font-weight: bold;">then</span>
-        attr<span style="color: #d0730f;">[</span><span style="color: #f06a3f;">"style"</span><span style="color: #d0730f;">]</span> = <span style="color: #ff7a7f; font-weight: bold;">string</span>.<span style="color: #ff7a7f; font-weight: bold;">format</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"vertical-align:-%spt"</span>, depth<span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">end</span>
-    <span style="color: #cf9f7f; font-style: italic;">-- </span><span style="color: #cf9f7f; font-style: italic;">io.write(string.format("%s\n", dump(attr)))</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> pandoc.Image<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">''</span>, svgFileName, <span style="color: #f06a3f;">''</span>, attr<span style="color: #d0730f;">)</span>
-<span style="color: #c48702; font-weight: bold;">end</span>
+    }
+    <span style="font-weight: bold;">if</span> depth ~= <span style="font-weight: bold; text-decoration: underline;">nil</span> <span style="font-weight: bold;">then</span>
+        attr[<span style="font-style: italic;">"style"</span>] = <span style="font-weight: bold;">string</span>.<span style="font-weight: bold;">format</span>(<span style="font-style: italic;">"vertical-align:-%spt"</span>, depth)
+    <span style="font-weight: bold;">end</span>
+    <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">io.write(string.format("%s\n", dump(attr)))</span>
+    <span style="font-weight: bold;">return</span> pandoc.Image(<span style="font-style: italic;">''</span>, svgFileName, <span style="font-style: italic;">''</span>, attr)
+<span style="font-weight: bold;">end</span>
 
-<span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">dump</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">o</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #ff7a7f; font-weight: bold;">type</span><span style="color: #d0730f;">(</span>o<span style="color: #d0730f;">)</span> == <span style="color: #f06a3f;">'table'</span> <span style="color: #c48702; font-weight: bold;">then</span>
-        <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">s</span> = <span style="color: #f06a3f;">'{ '</span>
-        <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">k</span>, <span style="color: #6fafff;">v</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">pairs</span><span style="color: #d0730f;">(</span>o<span style="color: #d0730f;">)</span> <span style="color: #c48702; font-weight: bold;">do</span>
-            <span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #ff7a7f; font-weight: bold;">type</span><span style="color: #d0730f;">(</span>k<span style="color: #d0730f;">)</span> ~= <span style="color: #f06a3f;">'number'</span> <span style="color: #c48702; font-weight: bold;">then</span>
-                k = <span style="color: #f06a3f;">'"'</span> .. k .. <span style="color: #f06a3f;">'"'</span>
-            <span style="color: #c48702; font-weight: bold;">end</span>
-            s = s .. <span style="color: #f06a3f;">'['</span> .. k .. <span style="color: #f06a3f;">'] = '</span> .. dump<span style="color: #d0730f;">(</span>v<span style="color: #d0730f;">)</span> .. <span style="color: #f06a3f;">','</span>
-        <span style="color: #c48702; font-weight: bold;">end</span>
-        <span style="color: #c48702; font-weight: bold;">return</span> s .. <span style="color: #f06a3f;">'} '</span>
-    <span style="color: #c48702; font-weight: bold;">else</span>
-        <span style="color: #c48702; font-weight: bold;">return</span> <span style="color: #ff7a7f; font-weight: bold;">tostring</span><span style="color: #d0730f;">(</span>o<span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">end</span>
-<span style="color: #c48702; font-weight: bold;">end</span>
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">dump</span>(<span style="font-weight: bold; font-style: italic;">o</span>)
+    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">type</span>(o) == <span style="font-style: italic;">'table'</span> <span style="font-weight: bold;">then</span>
+        <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">s</span> = <span style="font-style: italic;">'{ '</span>
+        <span style="font-weight: bold;">for</span> <span style="font-weight: bold; font-style: italic;">k</span>, <span style="font-weight: bold; font-style: italic;">v</span> <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">pairs</span>(o) <span style="font-weight: bold;">do</span>
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">type</span>(k) ~= <span style="font-style: italic;">'number'</span> <span style="font-weight: bold;">then</span>
+                k = <span style="font-style: italic;">'"'</span> .. k .. <span style="font-style: italic;">'"'</span>
+            <span style="font-weight: bold;">end</span>
+            s = s .. <span style="font-style: italic;">'['</span> .. k .. <span style="font-style: italic;">'] = '</span> .. dump(v) .. <span style="font-style: italic;">','</span>
+        <span style="font-weight: bold;">end</span>
+        <span style="font-weight: bold;">return</span> s .. <span style="font-style: italic;">'} '</span>
+    <span style="font-weight: bold;">else</span>
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">tostring</span>(o)
+    <span style="font-weight: bold;">end</span>
+<span style="font-weight: bold;">end</span>
 </pre>
 </div>
 <p>
 assuming this script is written in a file <code>tex.lua</code>, to use this filter, our command becomes:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">pandoc infile.org<span style="color: #f06a3f;">\</span>
-       --standalone<span style="color: #f06a3f;">\</span>
-       --include-in-header=header.html<span style="color: #f06a3f;">\</span>
-       --output outfile.html<span style="color: #f06a3f;">\</span>
-       --css style.css<span style="color: #f06a3f;">\</span>
-       --bibliography=mybibfile.bib --biblatex --citeproc<span style="color: #f06a3f;">\</span>
+<pre class="src src-sh">pandoc infile.org<span style="font-style: italic;">\</span>
+       --standalone<span style="font-style: italic;">\</span>
+       --include-in-header=header.html<span style="font-style: italic;">\</span>
+       --output outfile.html<span style="font-style: italic;">\</span>
+       --css style.css<span style="font-style: italic;">\</span>
+       --bibliography=mybibfile.bib --biblatex --citeproc<span style="font-style: italic;">\</span>
        --lua-filter tex.lua
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org446564d" class="outline-2">
-<h2 id="org446564d">internal links</h2>
-<div class="outline-text-2" id="text-org446564d">
+<div id="outline-container-org665a32d" class="outline-2">
+<h2 id="org665a32d">internal links</h2>
+<div class="outline-text-2" id="text-org665a32d">
 <p>
 consider the following org mode snippet:
 </p>
 <div class="org-src-container">
-<pre class="src src-org"><span style="color: #c48702; font-weight: bold;">#+name</span>: my-def
-<span style="color: #c48702; font-weight: bold;">#+begin_definition</span>
-we define a set <img src="../../.cache/org-persist/73/335d99-376f-4034-abf6-2a380346c8ef-f036037c7c3cb87dab2081da0ab0fc87.svg" alt="\(A\)" /> to be any unordered collection of objects
-<span style="color: #c48702; font-weight: bold;">#+end_definition</span>
+<pre class="src src-org"><span style="font-weight: bold; font-style: italic;">#+name: my-def</span>
+<span style="font-weight: bold; font-style: italic;">#+begin_definition</span>
+we define a set <img src="../../../../tmp/org-persist-5NoDW6/ed/0c058e-cb0e-4f70-8532-c1322c8eaedc-549608d2142f69cb9fc0a22810ae19ce.svg" alt="\(A\)" /> to be any unordered collection of objects
+<span style="font-weight: bold; font-style: italic;">#+end_definition</span>
 
-by <span style="color: #c48702; font-weight: bold;">[[my-def][this definition]]</span>, the object {1,2,3} is a set.
+by <span style="text-decoration: underline;"><a href="my-def">this definition</a></span>, the object {1,2,3} is a set.
 
 </pre>
 </div>
@@ -278,12 +278,12 @@ after some messing around, i found that pandoc does handle the <code>attr_html</
 </p>
 
 <div class="org-src-container">
-<pre class="src src-org"><span style="color: #c48702; font-weight: bold;">#+attr_html</span>:<span style="color: #c48702; font-weight: bold;"> :id </span>my-def
-<span style="color: #c48702; font-weight: bold;">#+begin_definition</span>
-we define a set <img src="../../.cache/org-persist/73/335d99-376f-4034-abf6-2a380346c8ef-f036037c7c3cb87dab2081da0ab0fc87.svg" alt="\(A\)" /> to be any unordered collection of objects
-<span style="color: #c48702; font-weight: bold;">#+end_definition</span>
+<pre class="src src-org"><span style="font-weight: bold; font-style: italic;">#+attr_html: :id my-def</span>
+<span style="font-weight: bold; font-style: italic;">#+begin_definition</span>
+we define a set <img src="../../../../tmp/org-persist-5NoDW6/ed/0c058e-cb0e-4f70-8532-c1322c8eaedc-549608d2142f69cb9fc0a22810ae19ce.svg" alt="\(A\)" /> to be any unordered collection of objects
+<span style="font-weight: bold; font-style: italic;">#+end_definition</span>
 
-by <span style="color: #c48702; font-weight: bold;">[[my-def][this definition]]</span>, the object {1,2,3} is a set.
+by <span style="text-decoration: underline;"><a href="my-def">this definition</a></span>, the object {1,2,3} is a set.
 
 </pre>
 </div>
@@ -291,14 +291,14 @@ by <span style="color: #c48702; font-weight: bold;">[[my-def][this definition]]<
 results in the definition div having the id <code>my-def</code>, but we wouldnt want to modify our org files just to make them compatible with pandoc, instead we can do something "hacky" by modifying the stream before piping it into pandoc
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">sed <span style="color: #f06a3f;">'s/#+name:/#+attr_html: :id/'</span> infile.org |<span style="color: #f06a3f;">\</span>
-    pandoc --from org<span style="color: #f06a3f;">\</span>
-           --to html5<span style="color: #f06a3f;">\</span>
-           --standalone<span style="color: #f06a3f;">\</span>
-           --include-in-header=header.html<span style="color: #f06a3f;">\</span>
-           --output outfile.html<span style="color: #f06a3f;">\</span>
-           --css style.css<span style="color: #f06a3f;">\</span>
-           --bibliography=mybibfile.bib --biblatex --citeproc<span style="color: #f06a3f;">\</span>
+<pre class="src src-sh">sed <span style="font-style: italic;">'s/#+name:/#+attr_html: :id/'</span> infile.org |<span style="font-style: italic;">\</span>
+    pandoc --from org<span style="font-style: italic;">\</span>
+           --to html5<span style="font-style: italic;">\</span>
+           --standalone<span style="font-style: italic;">\</span>
+           --include-in-header=header.html<span style="font-style: italic;">\</span>
+           --output outfile.html<span style="font-style: italic;">\</span>
+           --css style.css<span style="font-style: italic;">\</span>
+           --bibliography=mybibfile.bib --biblatex --citeproc<span style="font-style: italic;">\</span>
            --lua-filter tex.lua
 </pre>
 </div>
@@ -306,37 +306,37 @@ results in the definition div having the id <code>my-def</code>, but we wouldnt 
 this way, the <code>#+name</code> property of the block becomes the <code>id</code> of its corresponding html block, but this still doesnt fix the link issue, since links get rendered as <code>span</code>'s and not proper links, to fix this we can use the following lua filter:
 </p>
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #c48702; font-weight: bold;">function</span> <span style="color: #3dbbb0;">Span</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">span</span><span style="color: #d0730f;">)</span>
-  <span style="color: #cf9f7f; font-style: italic;">-- </span><span style="color: #cf9f7f; font-style: italic;">print(dump(elem))</span>
-  <span style="color: #c48702; font-weight: bold;">if</span> span.classes:includes <span style="color: #f06a3f;">'spurious-link'</span> <span style="color: #c48702; font-weight: bold;">then</span>
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">content</span> = span.content<span style="color: #d0730f;">[</span>1<span style="color: #d0730f;">]</span>.content
-    <span style="color: #c48702; font-weight: bold;">local</span> <span style="color: #6fafff;">target</span> = span.attributes.target
-    <span style="color: #c48702; font-weight: bold;">return</span> pandoc.Link<span style="color: #d0730f;">(</span>content, <span style="color: #f06a3f;">'#'</span> .. target<span style="color: #d0730f;">)</span>
-  <span style="color: #c48702; font-weight: bold;">end</span>
-<span style="color: #c48702; font-weight: bold;">end</span>
+<pre class="src src-lua"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">Span</span>(<span style="font-weight: bold; font-style: italic;">span</span>)
+  <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">print(dump(elem))</span>
+  <span style="font-weight: bold;">if</span> span.classes:includes <span style="font-style: italic;">'spurious-link'</span> <span style="font-weight: bold;">then</span>
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">content</span> = span.content[1].content
+    <span style="font-weight: bold;">local</span> <span style="font-weight: bold; font-style: italic;">target</span> = span.attributes.target
+    <span style="font-weight: bold;">return</span> pandoc.Link(content, <span style="font-style: italic;">'#'</span> .. target)
+  <span style="font-weight: bold;">end</span>
+<span style="font-weight: bold;">end</span>
 </pre>
 </div>
 <p>
 assuming this code is placed in the file <code>internal_links.lua</code>, our shell command becomes:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">sed <span style="color: #f06a3f;">'s/#+name:/#+attr_html: :id/'</span> infile.org |<span style="color: #f06a3f;">\</span>
-    pandoc --from org<span style="color: #f06a3f;">\</span>
-           --to html5<span style="color: #f06a3f;">\</span>
-           --standalone<span style="color: #f06a3f;">\</span>
-           --include-in-header=header.html<span style="color: #f06a3f;">\</span>
-           --output outfile.html<span style="color: #f06a3f;">\</span>
-           --css style.css<span style="color: #f06a3f;">\</span>
-           --bibliography=mybibfile.bib --biblatex --citeproc<span style="color: #f06a3f;">\</span>
-           --lua-filter tex.lua<span style="color: #f06a3f;">\</span>
+<pre class="src src-sh">sed <span style="font-style: italic;">'s/#+name:/#+attr_html: :id/'</span> infile.org |<span style="font-style: italic;">\</span>
+    pandoc --from org<span style="font-style: italic;">\</span>
+           --to html5<span style="font-style: italic;">\</span>
+           --standalone<span style="font-style: italic;">\</span>
+           --include-in-header=header.html<span style="font-style: italic;">\</span>
+           --output outfile.html<span style="font-style: italic;">\</span>
+           --css style.css<span style="font-style: italic;">\</span>
+           --bibliography=mybibfile.bib --biblatex --citeproc<span style="font-style: italic;">\</span>
+           --lua-filter tex.lua<span style="font-style: italic;">\</span>
            --lua-filter internal_links.lua
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgea200eb" class="outline-2">
-<h2 id="orgea200eb">org-roam links</h2>
-<div class="outline-text-2" id="text-orgea200eb">
+<div id="outline-container-orga715862" class="outline-2">
+<h2 id="orga715862">org-roam links</h2>
+<div class="outline-text-2" id="text-orga715862">
 <p>
 pandoc on its own has no context of org-roam links, but org-roam stores everything it needs to operate in <code>~/.emacs.d/org-roam.db</code>, this file is automatically updated if the option <code>org-roam-db-autosync-mode</code> is set to <code>t</code>, this way other programs can be used to query information from org-roam without needing to visit the org files themselves.
 </p>
@@ -345,64 +345,64 @@ pandoc on its own has no context of org-roam links, but org-roam stores everythi
 based on this fact the following filter that is a modified version of <a href="https://www.amoradi.org/20210730173543.html">https://www.amoradi.org/20210730173543.html</a> is used:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #cf9f7f; font-style: italic;">#!/usr/bin/env python3.10</span>
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/usr/bin/env python3.10</span>
 
-<span style="color: #cf9f7f; font-style: italic;"># source: https://www.amoradi.org/20210730173543.html</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">source: https://www.amoradi.org/20210730173543.html</span>
 
-<span style="color: #c48702; font-weight: bold;">import</span> panflute <span style="color: #c48702; font-weight: bold;">as</span> pf
-<span style="color: #c48702; font-weight: bold;">import</span> sqlite3
-<span style="color: #c48702; font-weight: bold;">import</span> pathlib
-<span style="color: #c48702; font-weight: bold;">import</span> sys
-<span style="color: #c48702; font-weight: bold;">import</span> os
-<span style="color: #c48702; font-weight: bold;">import</span> pprint
-<span style="color: #c48702; font-weight: bold;">import</span> urllib
+<span style="font-weight: bold;">import</span> panflute <span style="font-weight: bold;">as</span> pf
+<span style="font-weight: bold;">import</span> sqlite3
+<span style="font-weight: bold;">import</span> pathlib
+<span style="font-weight: bold;">import</span> sys
+<span style="font-weight: bold;">import</span> os
+<span style="font-weight: bold;">import</span> pprint
+<span style="font-weight: bold;">import</span> urllib
 
-<span style="color: #6fafff;">ORG_ROAM_DB_PATH</span> = <span style="color: #f06a3f;">"~/.emacs.d/org-roam.db"</span>
+<span style="font-weight: bold; font-style: italic;">ORG_ROAM_DB_PATH</span> = <span style="font-style: italic;">"~/.emacs.d/org-roam.db"</span>
 
-<span style="color: #6fafff;">db</span> = <span style="color: #64aa0f;">None</span>
+<span style="font-weight: bold; font-style: italic;">db</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
 
-<span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">sanitize_link</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">elem</span>, <span style="color: #6fafff;">doc</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #ff7a7f; font-weight: bold;">type</span><span style="color: #d0730f;">(</span>elem<span style="color: #d0730f;">)</span> != pf.Link:
-        <span style="color: #c48702; font-weight: bold;">return</span> <span style="color: #64aa0f;">None</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">sanitize_link</span>(elem, doc):
+    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">type</span>(elem) != pf.Link:
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">None</span>
 
-    <span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #c48702; font-weight: bold;">not</span> elem.url.startswith<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"id:"</span><span style="color: #d0730f;">)</span>:
-        <span style="color: #c48702; font-weight: bold;">return</span> <span style="color: #64aa0f;">None</span>
+    <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> elem.url.startswith(<span style="font-style: italic;">"id:"</span>):
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">None</span>
 
-    <span style="color: #6fafff;">file_id</span> = elem.url.split<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">":"</span><span style="color: #d0730f;">)[</span>1<span style="color: #d0730f;">]</span>
+    <span style="font-weight: bold; font-style: italic;">file_id</span> = elem.url.split(<span style="font-style: italic;">":"</span>)[1]
 
-    <span style="color: #6fafff;">cur</span> = db.cursor<span style="color: #d0730f;">()</span>
-    cur.execute<span style="color: #d0730f;">(</span>f<span style="color: #f06a3f;">"select id, file, title from nodes where id = '</span><span style="color: #00b066;">\"</span>{file_id}<span style="color: #00b066;">\"</span><span style="color: #f06a3f;">';"</span><span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">data</span> = cur.fetchone<span style="color: #d0730f;">()</span>
+    <span style="font-weight: bold; font-style: italic;">cur</span> = db.cursor()
+    cur.execute(f<span style="font-style: italic;">"select id, file, title from nodes where id = '\"</span>{file_id}<span style="font-style: italic;">\"';"</span>)
+    <span style="font-weight: bold; font-style: italic;">data</span> = cur.fetchone()
 
-    <span style="color: #cf9f7f; font-style: italic;"># data contains string that are quoted, we need to remove the quotes</span>
-    <span style="color: #6fafff;">file_id</span> = data<span style="color: #d0730f;">[</span>0<span style="color: #d0730f;">][</span>1:-1<span style="color: #d0730f;">]</span>
-    <span style="color: #6fafff;">file_name</span> = urllib.parse.quote<span style="color: #d0730f;">(</span>os.path.splitext<span style="color: #64aa0f;">(</span>os.path.basename<span style="color: #ef656a;">(</span>data<span style="color: #3dbbb0;">[</span>1<span style="color: #3dbbb0;">][</span>1:-1<span style="color: #3dbbb0;">]</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)[</span>0<span style="color: #64aa0f;">]</span><span style="color: #d0730f;">)</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">data contains string that are quoted, we need to remove the quotes</span>
+    <span style="font-weight: bold; font-style: italic;">file_id</span> = data[0][1:-1]
+    <span style="font-weight: bold; font-style: italic;">file_name</span> = urllib.parse.quote(os.path.splitext(os.path.basename(data[1][1:-1]))[0])
 
-    elem.<span style="color: #6fafff;">url</span> = f<span style="color: #f06a3f;">"</span>{file_name}<span style="color: #f06a3f;">.html"</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> elem
+    elem.<span style="font-weight: bold; font-style: italic;">url</span> = f<span style="font-style: italic;">"</span>{file_name}<span style="font-style: italic;">.html"</span>
+    <span style="font-weight: bold;">return</span> elem
 
-<span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">main</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">doc</span>=<span style="color: #64aa0f;">None</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #c48702; font-weight: bold;">return</span> pf.run_filter<span style="color: #d0730f;">(</span>sanitize_link, doc=doc<span style="color: #d0730f;">)</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>(doc=<span style="font-weight: bold; text-decoration: underline;">None</span>):
+    <span style="font-weight: bold;">return</span> pf.run_filter(sanitize_link, doc=doc)
 
-<span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #ff7a7f; font-weight: bold;">__name__</span> == <span style="color: #f06a3f;">"__main__"</span>:
-    <span style="color: #6fafff;">db</span> = sqlite3.connect<span style="color: #d0730f;">(</span>os.path.expanduser<span style="color: #64aa0f;">(</span>ORG_ROAM_DB_PATH<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-    main<span style="color: #d0730f;">()</span>
+<span style="font-weight: bold;">if</span> <span style="font-weight: bold;">__name__</span> == <span style="font-style: italic;">"__main__"</span>:
+    <span style="font-weight: bold; font-style: italic;">db</span> = sqlite3.connect(os.path.expanduser(ORG_ROAM_DB_PATH))
+    main()
 </pre>
 </div>
 <p>
 assuming the <code>panflute</code> python package is installed globally, and that this snippet is placed in the file <code>roam_links.py</code>, our exporting shell command becomes:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">sed <span style="color: #f06a3f;">'s/#+name:/#+attr_html: :id/'</span> infile.org |<span style="color: #f06a3f;">\</span>
-    pandoc --from org<span style="color: #f06a3f;">\</span>
-           --to html5<span style="color: #f06a3f;">\</span>
-           --standalone<span style="color: #f06a3f;">\</span>
-           --include-in-header=header.html<span style="color: #f06a3f;">\</span>
-           --output outfile.html<span style="color: #f06a3f;">\</span>
-           --css style.css<span style="color: #f06a3f;">\</span>
-           --bibliography=mybibfile.bib --biblatex --citeproc<span style="color: #f06a3f;">\</span>
-           --lua-filter tex.lua<span style="color: #f06a3f;">\</span>
-           --lua-filter internal_links.lua<span style="color: #f06a3f;">\</span>
+<pre class="src src-sh">sed <span style="font-style: italic;">'s/#+name:/#+attr_html: :id/'</span> infile.org |<span style="font-style: italic;">\</span>
+    pandoc --from org<span style="font-style: italic;">\</span>
+           --to html5<span style="font-style: italic;">\</span>
+           --standalone<span style="font-style: italic;">\</span>
+           --include-in-header=header.html<span style="font-style: italic;">\</span>
+           --output outfile.html<span style="font-style: italic;">\</span>
+           --css style.css<span style="font-style: italic;">\</span>
+           --bibliography=mybibfile.bib --biblatex --citeproc<span style="font-style: italic;">\</span>
+           --lua-filter tex.lua<span style="font-style: italic;">\</span>
+           --lua-filter internal_links.lua<span style="font-style: italic;">\</span>
            --filter roam_links.py
 </pre>
 </div>

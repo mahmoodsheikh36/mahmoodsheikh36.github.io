@@ -28,231 +28,231 @@
 <p>
 some math utilities for common lisp
 </p>
-<div id="outline-container-org4158a6e" class="outline-2">
-<h2 id="org4158a6e">essential functions</h2>
-<div class="outline-text-2" id="text-org4158a6e">
+<div id="outline-container-orgc021036" class="outline-2">
+<h2 id="orgc021036">essential functions</h2>
+<div class="outline-text-2" id="text-orgc021036">
 <div class="org-src-container">
-<pre class="src src-lisp" id="orge2d236b"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">sigmoid</span> <span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>&lt; x -70<span style="color: #3dbbb0;">)</span> 0<span style="color: #ef656a;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">to avoid float overflow</span>
-        <span style="color: #ef656a;">(</span>t <span style="color: #3dbbb0;">(</span>/ 1 <span style="color: #df8f6f;">(</span>1+ <span style="color: #379cf6;">(</span>exp <span style="color: #ff7a7f;">(</span>- x<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp" id="org5f01105">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sigmoid</span> (x)
+  (<span style="font-weight: bold;">cond</span> ((&lt; x -70) 0) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">to avoid float overflow</span>
+        (t (/ 1 (1+ (exp (- x)))))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">sigmoid-derivative</span> <span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>* <span style="color: #ef656a;">(</span>sigmoid x<span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>- 1 <span style="color: #3dbbb0;">(</span>sigmoid x<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sigmoid-derivative</span> (x)
+  (* (sigmoid x) (- 1 (sigmoid x))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">relu</span> <span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>max x 0<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">relu</span> (x)
+  (max x 0))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">relu-derivative</span> <span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"derivative of relu is undefined at x=0, but here we return 0 for x=0 too"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #ef656a;">(</span>&gt; x 0<span style="color: #ef656a;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">relu-derivative</span> (x)
+  <span style="font-style: italic;">"derivative of relu is undefined at x=0, but here we return 0 for x=0 too"</span>
+  (<span style="font-weight: bold;">if</span> (&gt; x 0)
       1
-      0<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+      0))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd625750" class="outline-2">
-<h2 id="orgd625750">vectors</h2>
-<div class="outline-text-2" id="text-orgd625750">
-<div class="math-block note" data-blocktype="note" id="org51ca32a">
+<div id="outline-container-org2a551eb" class="outline-2">
+<h2 id="org2a551eb">vectors</h2>
+<div class="outline-text-2" id="text-org2a551eb">
+<div class="math-block note" data-blocktype="note" id="org6f071ed">
 <p>
 these functions work, but some use lists and some do redundant operations, they need efficiency improvement
 </p>
 
 </div>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orged45753"><span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">this might need efficiency improvement, not sure</span>
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">vector-add</span> <span style="color: #64aa0f;">(</span>vec1 <span style="color: #2fa526;">&amp;rest</span> more-vecs<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"apply vector addition to two collections"</span>
-  <span style="color: #64aa0f;">(</span>apply #'map <span style="color: #ef656a;">(</span>append <span style="color: #3dbbb0;">(</span>list 'vector #'+<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>append <span style="color: #df8f6f;">(</span>list vec1<span style="color: #df8f6f;">)</span> more-vecs<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp" id="orge813026"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">this might need efficiency improvement, not sure</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vector-add</span> (vec1 <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> more-vecs)
+  <span style="font-style: italic;">"apply vector addition to two collections"</span>
+  (apply #'map (append (list 'vector #'+) (append (list vec1) more-vecs))))
 
-<span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">this definitely needs efficiency improvement, we can just subtract instead of negating vectors then adding them</span>
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">vector-sub</span> <span style="color: #64aa0f;">(</span>vec1 <span style="color: #2fa526;">&amp;rest</span> more-vecs<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"substract each vector in more-vecs from vec1"</span>
-  <span style="color: #64aa0f;">(</span>apply #'vector-add
-         <span style="color: #ef656a;">(</span>append <span style="color: #3dbbb0;">(</span>list vec1<span style="color: #3dbbb0;">)</span>
-                 <span style="color: #3dbbb0;">(</span>map 'list
-                      <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #379cf6;">(</span>vec2<span style="color: #379cf6;">)</span>
-                        <span style="color: #379cf6;">(</span>map 'vector #'- vec2<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-                      more-vecs<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">this definitely needs efficiency improvement, we can just subtract instead of negating vectors then adding them</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vector-sub</span> (vec1 <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> more-vecs)
+  <span style="font-style: italic;">"substract each vector in more-vecs from vec1"</span>
+  (apply #'vector-add
+         (append (list vec1)
+                 (map 'list
+                      (<span style="font-weight: bold;">lambda</span> (vec2)
+                        (map 'vector #'- vec2))
+                      more-vecs))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">vector-dot</span> <span style="color: #64aa0f;">(</span>vec1 vec2<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"dot product"</span>
-  <span style="color: #64aa0f;">(</span>reduce #'+ <span style="color: #ef656a;">(</span>map 'vector #'* vec1 vec2<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vector-dot</span> (vec1 vec2)
+  <span style="font-style: italic;">"dot product"</span>
+  (reduce #'+ (map 'vector #'* vec1 vec2)))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">vector-mul</span> <span style="color: #64aa0f;">(</span>vec1 scalar<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"multiply vectors elements by scalar"</span>
-  <span style="color: #64aa0f;">(</span>map 'vector <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #3dbbb0;">(</span>num<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>* num scalar<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> vec1<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vector-mul</span> (vec1 scalar)
+  <span style="font-style: italic;">"multiply vectors elements by scalar"</span>
+  (map 'vector (<span style="font-weight: bold;">lambda</span> (num) (* num scalar)) vec1))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">vector-sum</span> <span style="color: #64aa0f;">(</span>vec1 <span style="color: #2fa526;">&amp;rest</span> more-vecs<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"sum of vectors elements"</span>
-  <span style="color: #64aa0f;">(</span>reduce #'+ <span style="color: #ef656a;">(</span>map
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vector-sum</span> (vec1 <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> more-vecs)
+  <span style="font-style: italic;">"sum of vectors elements"</span>
+  (reduce #'+ (map
                'vector
-               <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #df8f6f;">(</span>vec2<span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>reduce #'+ vec2<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-               <span style="color: #3dbbb0;">(</span>append <span style="color: #df8f6f;">(</span>list vec1<span style="color: #df8f6f;">)</span> more-vecs<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+               (<span style="font-weight: bold;">lambda</span> (vec2) (reduce #'+ vec2))
+               (append (list vec1) more-vecs))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">vector-elements-prod</span> <span style="color: #64aa0f;">(</span>vec<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>reduce #'* vec<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vector-elements-prod</span> (vec)
+  (reduce #'* vec))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org5b1768a" class="outline-2">
-<h2 id="org5b1768a">matrices</h2>
-<div class="outline-text-2" id="text-org5b1768a">
+<div id="outline-container-orgc089d3f" class="outline-2">
+<h2 id="orgc089d3f">matrices</h2>
+<div class="outline-text-2" id="text-orgc089d3f">
 <p>
 im using arrays for matrices, which use different functions than vectors/lists
 matrix multiplication:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org26b28a7"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">matrix-mul</span> <span style="color: #64aa0f;">(</span>arr1 arr2<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"multiply 2 matrices, arr1*arr2"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>arr1-rows <span style="color: #df8f6f;">(</span>array-rows arr1<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-         <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">(arr1-cols (car (cdr arr1-dim))) ;; no need</span>
-         <span style="color: #3dbbb0;">(</span>arr2-rows <span style="color: #df8f6f;">(</span>array-rows arr2<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-         <span style="color: #3dbbb0;">(</span>arr2-cols <span style="color: #df8f6f;">(</span>array-cols arr2<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-         <span style="color: #3dbbb0;">(</span>out-arr <span style="color: #df8f6f;">(</span>make-array <span style="color: #379cf6;">(</span>list arr1-rows arr2-cols<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for arr1-row from 0 below arr1-rows
-          do <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for arr2-col from 0 below arr2-cols
-                   do <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>sum 0<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                        <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below arr2-rows
-                              do <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #2fa526;">(</span><span style="color: #c48702;">(</span>cell1 <span style="color: #d0730f;">(</span>aref arr1 arr1-row i<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span>
-                                        <span style="color: #c48702;">(</span>cell2 <span style="color: #d0730f;">(</span>aref arr2 i arr2-col<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-                                   <span style="color: #2fa526;">(</span>incf sum <span style="color: #c48702;">(</span>* cell1 cell2<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                        <span style="color: #379cf6;">(</span>setf <span style="color: #ff7a7f;">(</span>aref out-arr arr1-row arr2-col<span style="color: #ff7a7f;">)</span> sum<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    out-arr<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp" id="org0e0da48">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">matrix-mul</span> (arr1 arr2)
+  <span style="font-style: italic;">"multiply 2 matrices, arr1*arr2"</span>
+  (<span style="font-weight: bold;">let*</span> ((arr1-rows (array-rows arr1))
+         <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(arr1-cols (car (cdr arr1-dim))) ;; no need</span>
+         (arr2-rows (array-rows arr2))
+         (arr2-cols (array-cols arr2))
+         (out-arr (make-array (list arr1-rows arr2-cols))))
+    (<span style="font-weight: bold;">loop</span> for arr1-row from 0 below arr1-rows
+          do (<span style="font-weight: bold;">loop</span> for arr2-col from 0 below arr2-cols
+                   do (<span style="font-weight: bold;">let</span> ((sum 0))
+                        (<span style="font-weight: bold;">loop</span> for i from 0 below arr2-rows
+                              do (<span style="font-weight: bold;">let*</span> ((cell1 (aref arr1 arr1-row i))
+                                        (cell2 (aref arr2 i arr2-col)))
+                                   (incf sum (* cell1 cell2))))
+                        (setf (aref out-arr arr1-row arr2-col) sum))))
+    out-arr))
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgdef85c8"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">tensor-convolution-size</span> <span style="color: #64aa0f;">(</span>img-dims ker-dims<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"return the expected size of the convolution img*ker"</span>
-  <span style="color: #64aa0f;">(</span>mapcar <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #3dbbb0;">(</span>img-d ker-d<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>- img-d <span style="color: #df8f6f;">(</span>1- ker-d<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+<pre class="src src-lisp" id="orgfe278b5">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">tensor-convolution-size</span> (img-dims ker-dims)
+  <span style="font-style: italic;">"return the expected size of the convolution img*ker"</span>
+  (mapcar (<span style="font-weight: bold;">lambda</span> (img-d ker-d) (- img-d (1- ker-d)))
           img-dims
-          ker-dims<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+          ker-dims))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">tensor-convolution</span> <span style="color: #64aa0f;">(</span>img ker<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"convolve two tensors of any ranks/dimensions</span>
-<span style="color: #5f9f6f; font-style: italic;">example usage: (tensor-convolution #(1 2 3 4 5) #(6 7))"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>ker-dims <span style="color: #df8f6f;">(</span>array-dimensions ker<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>img-dims <span style="color: #df8f6f;">(</span>array-dimensions img<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">need to make ker-dims,out-dims same rank/order as img-dims</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> while <span style="color: #3dbbb0;">(</span>&lt; <span style="color: #df8f6f;">(</span>length ker-dims<span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>length img-dims<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-          do <span style="color: #3dbbb0;">(</span>push 1 ker-dims<span style="color: #3dbbb0;">)</span>
-             <span style="color: #3dbbb0;">(</span>setf ker <span style="color: #df8f6f;">(</span>make-array ker-dims <span style="color: #ff7a7f; font-weight: bold;">:displaced-to</span> ker<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>out <span style="color: #379cf6;">(</span>make-array <span style="color: #ff7a7f;">(</span>tensor-convolution-size img-dims ker-dims<span style="color: #ff7a7f;">)</span>
-                           <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> 0<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-      <span style="color: #3dbbb0;">(</span>tensor-convolution-util img ker out nil nil <span style="color: #df8f6f;">(</span>array-dimensions out<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-      out<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">tensor-convolution</span> (img ker)
+  <span style="font-style: italic;">"convolve two tensors of any ranks/dimensions</span>
+<span style="font-style: italic;">example usage: (tensor-convolution #(1 2 3 4 5) #(6 7))"</span>
+  (<span style="font-weight: bold;">let</span> ((ker-dims (array-dimensions ker))
+        (img-dims (array-dimensions img)))
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">need to make ker-dims,out-dims same rank/order as img-dims</span>
+    (<span style="font-weight: bold;">loop</span> while (&lt; (length ker-dims) (length img-dims))
+          do (push 1 ker-dims)
+             (setf ker (make-array ker-dims <span style="font-weight: bold;">:displaced-to</span> ker)))
+    (<span style="font-weight: bold;">let</span> ((out (make-array (tensor-convolution-size img-dims ker-dims)
+                           <span style="font-weight: bold;">:initial-element</span> 0)))
+      (tensor-convolution-util img ker out nil nil (array-dimensions out))
+      out)))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">tensor-convolution-util</span> <span style="color: #64aa0f;">(</span>img ker out
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">tensor-convolution-util</span> (img ker out
                                 img-indicies out-indicies
-                                out-dims<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"this util function for tensor-convolution assumes img,ker,out are all of the same rank/order"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> out-dims
-      <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">iterate through each cell in the output tensor</span>
-      <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for out-i from 0 below <span style="color: #3dbbb0;">(</span>car out-dims<span style="color: #3dbbb0;">)</span>
-            <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">iterate through each kernel-sized block in the input tensor</span>
-            <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">(length img-indicies) gives us the index of the dimension we're at</span>
-            do <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for img-i from out-i below <span style="color: #df8f6f;">(</span>+ out-i
-                                                   <span style="color: #379cf6;">(</span>array-dimension
+                                out-dims)
+  <span style="font-style: italic;">"this util function for tensor-convolution assumes img,ker,out are all of the same rank/order"</span>
+  (<span style="font-weight: bold;">if</span> out-dims
+      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">iterate through each cell in the output tensor</span>
+      (<span style="font-weight: bold;">loop</span> for out-i from 0 below (car out-dims)
+            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">iterate through each kernel-sized block in the input tensor</span>
+            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(length img-indicies) gives us the index of the dimension we're at</span>
+            do (<span style="font-weight: bold;">loop</span> for img-i from out-i below (+ out-i
+                                                   (array-dimension
                                                     ker
-                                                    <span style="color: #ff7a7f;">(</span>length img-indicies<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-                     do <span style="color: #df8f6f;">(</span>tensor-convolution-util
+                                                    (length img-indicies)))
+                     do (tensor-convolution-util
                          img
                          ker
                          out
-                         <span style="color: #379cf6;">(</span>append img-indicies <span style="color: #ff7a7f;">(</span>list img-i<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                         <span style="color: #379cf6;">(</span>append out-indicies <span style="color: #ff7a7f;">(</span>list out-i<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                         <span style="color: #379cf6;">(</span>cdr out-dims<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-      <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>img-cell <span style="color: #379cf6;">(</span>apply #'aref <span style="color: #ff7a7f;">(</span>cons img img-indicies<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-             <span style="color: #df8f6f;">(</span>flipped-kernel-indicies <span style="color: #379cf6;">(</span>mapcar #'-
-                                              <span style="color: #ff7a7f;">(</span>mapcar #'1- <span style="color: #2fa526;">(</span>array-dimensions ker<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
-                                              <span style="color: #ff7a7f;">(</span>mapcar #'- img-indicies out-indicies<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-             <span style="color: #df8f6f;">(</span>ker-cell <span style="color: #379cf6;">(</span>apply #'aref <span style="color: #ff7a7f;">(</span>cons ker flipped-kernel-indicies<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>incf <span style="color: #df8f6f;">(</span>apply #'aref <span style="color: #379cf6;">(</span>cons out out-indicies<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>* img-cell ker-cell<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+                         (append img-indicies (list img-i))
+                         (append out-indicies (list out-i))
+                         (cdr out-dims))))
+      (<span style="font-weight: bold;">let*</span> ((img-cell (apply #'aref (cons img img-indicies)))
+             (flipped-kernel-indicies (mapcar #'-
+                                              (mapcar #'1- (array-dimensions ker))
+                                              (mapcar #'- img-indicies out-indicies)))
+             (ker-cell (apply #'aref (cons ker flipped-kernel-indicies))))
+        (incf (apply #'aref (cons out out-indicies)) (* img-cell ker-cell)))))
 </pre>
 </div>
 </div>
-<div id="outline-container-org64fe8d6" class="outline-3">
-<h3 id="org64fe8d6">matrix multiplication implementation comparison between lists and arrays</h3>
-<div class="outline-text-3" id="text-org64fe8d6">
+<div id="outline-container-org2fa8a19" class="outline-3">
+<h3 id="org2fa8a19">matrix multiplication implementation comparison between lists and arrays</h3>
+<div class="outline-text-3" id="text-org2fa8a19">
 <p>
 with lists:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>time
- <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">progn</span>
-   <span style="color: #ef656a;">(</span>matrix-multiplication
-    <span style="color: #3dbbb0;">(</span>make-list 200 <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> <span style="color: #df8f6f;">(</span>make-list 300 <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> 10<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">200x300</span>
-    <span style="color: #3dbbb0;">(</span>make-list 300 <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> <span style="color: #df8f6f;">(</span>make-list 200 <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> 20<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">300x200</span>
-   10<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">to prevent repl from printing</span>
-<span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">Evaluation took:</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">4.010 seconds of real time</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">4.007356 seconds of total run time (4.007356 user, 0.000000 system)</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">99.93% CPU</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">10,006,237,672 processor cycles</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">1,625,600 bytes consed</span>
+<pre class="src src-lisp">(time
+ (<span style="font-weight: bold;">progn</span>
+   (matrix-multiplication
+    (make-list 200 <span style="font-weight: bold;">:initial-element</span> (make-list 300 <span style="font-weight: bold;">:initial-element</span> 10)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">200x300</span>
+    (make-list 300 <span style="font-weight: bold;">:initial-element</span> (make-list 200 <span style="font-weight: bold;">:initial-element</span> 20))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">300x200</span>
+   10)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">to prevent repl from printing</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Evaluation took:</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">4.010 seconds of real time</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">4.007356 seconds of total run time (4.007356 user, 0.000000 system)</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">99.93% CPU</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">10,006,237,672 processor cycles</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">1,625,600 bytes consed</span>
 
-<span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">10 (4 bits, #xA, #o12, #b1010)</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">10 (4 bits, #xA, #o12, #b1010)</span>
 </pre>
 </div>
 <p>
 with arrays:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>time
- <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">progn</span>
-   <span style="color: #ef656a;">(</span>matrix-mul
-    <span style="color: #3dbbb0;">(</span>make-array '<span style="color: #df8f6f;">(</span>350 200<span style="color: #df8f6f;">)</span> <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> 10<span style="color: #3dbbb0;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">200x300</span>
-    <span style="color: #3dbbb0;">(</span>make-array '<span style="color: #df8f6f;">(</span>200 300<span style="color: #df8f6f;">)</span> <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> 20<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>  <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">300x200</span>
-   10<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>  <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">to prevent repl from printing</span>
-<span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">Evaluation took:</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">0.156 seconds of real time</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">0.154420 seconds of total run time (0.154420 user, 0.000000 system)</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">98.72% CPU</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">385,821,252 processor cycles</span>
-<span style="color: #cf9f7f; font-style: italic;">;;   </span><span style="color: #cf9f7f; font-style: italic;">1,280,048 bytes consed</span>
+<pre class="src src-lisp">(time
+ (<span style="font-weight: bold;">progn</span>
+   (matrix-mul
+    (make-array '(350 200) <span style="font-weight: bold;">:initial-element</span> 10) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">200x300</span>
+    (make-array '(200 300) <span style="font-weight: bold;">:initial-element</span> 20))  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">300x200</span>
+   10))  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">to prevent repl from printing</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Evaluation took:</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">0.156 seconds of real time</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">0.154420 seconds of total run time (0.154420 user, 0.000000 system)</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">98.72% CPU</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">385,821,252 processor cycles</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">1,280,048 bytes consed</span>
 
-<span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">10 (4 bits, #xA, #o12, #b1010)</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">10 (4 bits, #xA, #o12, #b1010)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org61ec8ad" class="outline-3">
-<h3 id="org61ec8ad">2d transformation matrices</h3>
-<div class="outline-text-3" id="text-org61ec8ad">
+<div id="outline-container-org6ac9042" class="outline-3">
+<h3 id="org6ac9042">2d transformation matrices</h3>
+<div class="outline-text-3" id="text-org6ac9042">
 <p>
 linearly mapping a grid to another:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgff05e0f"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">map-grid-matrix</span> <span style="color: #64aa0f;">(</span>src-x-range dest-x-range src-y-range dest-y-range<span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>src-x-min <span style="color: #df8f6f;">(</span>elt src-x-range 0<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>dest-x-min <span style="color: #df8f6f;">(</span>elt dest-x-range 0<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>src-y-min <span style="color: #df8f6f;">(</span>elt src-y-range 0<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>dest-y-min <span style="color: #df8f6f;">(</span>elt dest-y-range 0<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>src-x-max <span style="color: #df8f6f;">(</span>elt src-x-range 1<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>dest-x-max <span style="color: #df8f6f;">(</span>elt dest-x-range 1<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>src-y-max <span style="color: #df8f6f;">(</span>elt src-y-range 1<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
-        <span style="color: #3dbbb0;">(</span>dest-y-max <span style="color: #df8f6f;">(</span>elt dest-y-range 1<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-    <span style="color: #ef656a;">(</span>make-array
-     '<span style="color: #3dbbb0;">(</span>3 3<span style="color: #3dbbb0;">)</span>
-     <span style="color: #ff7a7f; font-weight: bold;">:initial-contents</span>
-     `<span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>,<span style="color: #379cf6;">(</span>/ <span style="color: #ff7a7f;">(</span>- dest-x-max dest-x-min<span style="color: #ff7a7f;">)</span> <span style="color: #ff7a7f;">(</span>- src-x-max src-x-min<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span> 0 ,<span style="color: #379cf6;">(</span>/ <span style="color: #ff7a7f;">(</span>+ <span style="color: #2fa526;">(</span>* <span style="color: #c48702;">(</span>- src-x-min<span style="color: #c48702;">)</span> dest-x-max<span style="color: #2fa526;">)</span> <span style="color: #2fa526;">(</span>* dest-x-min src-x-max<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span> <span style="color: #ff7a7f;">(</span>- src-x-max src-x-min<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-       <span style="color: #df8f6f;">(</span>0 ,<span style="color: #379cf6;">(</span>/ <span style="color: #ff7a7f;">(</span>- dest-y-max dest-y-min<span style="color: #ff7a7f;">)</span> <span style="color: #ff7a7f;">(</span>- src-y-max src-y-min<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span> ,<span style="color: #379cf6;">(</span>/ <span style="color: #ff7a7f;">(</span>+ <span style="color: #2fa526;">(</span>* <span style="color: #c48702;">(</span>- src-y-min<span style="color: #c48702;">)</span> dest-y-max<span style="color: #2fa526;">)</span> <span style="color: #2fa526;">(</span>* dest-y-min src-y-max<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span> <span style="color: #ff7a7f;">(</span>- src-y-max src-y-min<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-       <span style="color: #df8f6f;">(</span>0 0 1<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">map-grid</span> <span style="color: #64aa0f;">(</span>mat src-x-range dest-x-range src-y-range dest-y-range<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"apply the grid mapping matrix and return a new matrix"</span>
-  <span style="color: #64aa0f;">(</span>matrix-mul
-   <span style="color: #ef656a;">(</span>map-grid-matrix src-x-range dest-x-range src-y-range dest-y-range<span style="color: #ef656a;">)</span>
-   mat<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp" id="org5eaa142">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-grid-matrix</span> (src-x-range dest-x-range src-y-range dest-y-range)
+  (<span style="font-weight: bold;">let</span> ((src-x-min (elt src-x-range 0))
+        (dest-x-min (elt dest-x-range 0))
+        (src-y-min (elt src-y-range 0))
+        (dest-y-min (elt dest-y-range 0))
+        (src-x-max (elt src-x-range 1))
+        (dest-x-max (elt dest-x-range 1))
+        (src-y-max (elt src-y-range 1))
+        (dest-y-max (elt dest-y-range 1)))
+    (make-array
+     '(3 3)
+     <span style="font-weight: bold;">:initial-contents</span>
+     `((,(/ (- dest-x-max dest-x-min) (- src-x-max src-x-min)) 0 ,(/ (+ (* (- src-x-min) dest-x-max) (* dest-x-min src-x-max)) (- src-x-max src-x-min)))
+       (0 ,(/ (- dest-y-max dest-y-min) (- src-y-max src-y-min)) ,(/ (+ (* (- src-y-min) dest-y-max) (* dest-y-min src-y-max)) (- src-y-max src-y-min)))
+       (0 0 1)))))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-grid</span> (mat src-x-range dest-x-range src-y-range dest-y-range)
+  <span style="font-style: italic;">"apply the grid mapping matrix and return a new matrix"</span>
+  (matrix-mul
+   (map-grid-matrix src-x-range dest-x-range src-y-range dest-y-range)
+   mat))
 </pre>
 </div>
 <p>
 example usage:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>matrix-mul <span style="color: #64aa0f;">(</span>map-grid-matrix '<span style="color: #ef656a;">(</span>-1 1<span style="color: #ef656a;">)</span> '<span style="color: #ef656a;">(</span>0 10<span style="color: #ef656a;">)</span> '<span style="color: #ef656a;">(</span>0 1<span style="color: #ef656a;">)</span> '<span style="color: #ef656a;">(</span>0 -10<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span> #2A<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>0.5<span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>0.5<span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>1<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(matrix-mul (map-grid-matrix '(-1 1) '(0 10) '(0 1) '(0 -10)) #2A((0.5) (0.5) (1)))
 </pre>
 </div>
 
@@ -262,116 +262,116 @@ example usage:
 </div>
 </div>
 </div>
-<div id="outline-container-org96673bb" class="outline-2">
-<h2 id="org96673bb"><a href="/linearly_mapping_an_interval_onto_another.html">linearly mapping discrete range onto another</a></h2>
-<div class="outline-text-2" id="text-org96673bb">
+<div id="outline-container-org9f29e4f" class="outline-2">
+<h2 id="org9f29e4f"><a href="/linearly_mapping_an_interval_onto_another.html">linearly mapping discrete range onto another</a></h2>
+<div class="outline-text-2" id="text-org9f29e4f">
 <div class="org-src-container">
-<pre class="src src-lisp" id="org9287222"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">map-num</span> <span style="color: #64aa0f;">(</span>num src-min src-max dest-min dest-max<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
-  <span style="color: #64aa0f;">(</span>/ <span style="color: #ef656a;">(</span>- <span style="color: #3dbbb0;">(</span>+ <span style="color: #df8f6f;">(</span>* <span style="color: #379cf6;">(</span>- num src-min<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>- dest-max dest-min<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span> <span style="color: #df8f6f;">(</span>* dest-min src-max<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>* dest-min src-min<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>- src-max src-min<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp" id="orga6202cb">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-num</span> (num src-min src-max dest-min dest-max)
+  <span style="font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
+  (/ (- (+ (* (- num src-min) (- dest-max dest-min)) (* dest-min src-max)) (* dest-min src-min)) (- src-max src-min)))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org50a8ad4" class="outline-2">
-<h2 id="org50a8ad4">sets</h2>
-<div class="outline-text-2" id="text-org50a8ad4">
+<div id="outline-container-org303bfa0" class="outline-2">
+<h2 id="org303bfa0">sets</h2>
+<div class="outline-text-2" id="text-org303bfa0">
 <p>
 a good resource <a href="https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html">https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html</a>
 the builtin <code>set-difference</code> sometimes reverses the lists it returns for some reason and its bothersome, e.g.:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>set-difference '<span style="color: #64aa0f;">(</span>K P N A D<span style="color: #64aa0f;">)</span> '<span style="color: #64aa0f;">(</span>K P<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;">; =&gt; (D A N)</span>
+<pre class="src src-lisp">(set-difference '(K P N A D) '(K P)) <span style="font-weight: bold; font-style: italic;">; =&gt; (D A N)</span>
 </pre>
 </div>
 <p>
 so i had to use my own:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgbde3dbf"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">set-diff</span> <span style="color: #64aa0f;">(</span>l1 l2 <span style="color: #2fa526;">&amp;key</span> <span style="color: #ef656a;">(</span>acc '<span style="color: #3dbbb0;">()</span><span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>test #'eql<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">cond</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>null l1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>nreverse acc<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-        <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>null l2<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>nreverse <span style="color: #df8f6f;">(</span>append <span style="color: #379cf6;">(</span>reverse l1<span style="color: #379cf6;">)</span> acc<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-        <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>member <span style="color: #df8f6f;">(</span>car l1<span style="color: #df8f6f;">)</span> l2 <span style="color: #ff7a7f; font-weight: bold;">:test</span> test<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>set-diff <span style="color: #df8f6f;">(</span>cdr l1<span style="color: #df8f6f;">)</span> l2 <span style="color: #ff7a7f; font-weight: bold;">:acc</span> acc <span style="color: #ff7a7f; font-weight: bold;">:test</span> test<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-        <span style="color: #ef656a;">(</span>t <span style="color: #3dbbb0;">(</span>set-diff <span style="color: #df8f6f;">(</span>cdr l1<span style="color: #df8f6f;">)</span> l2 <span style="color: #ff7a7f; font-weight: bold;">:acc</span> <span style="color: #df8f6f;">(</span>cons <span style="color: #379cf6;">(</span>car l1<span style="color: #379cf6;">)</span> acc<span style="color: #df8f6f;">)</span> <span style="color: #ff7a7f; font-weight: bold;">:test</span> test<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp" id="orgb172ba6">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-diff</span> (l1 l2 <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (acc '()) (test #'eql))
+  (<span style="font-weight: bold;">cond</span> ((null l1) (nreverse acc))
+        ((null l2) (nreverse (append (reverse l1) acc)))
+        ((member (car l1) l2 <span style="font-weight: bold;">:test</span> test) (set-diff (cdr l1) l2 <span style="font-weight: bold;">:acc</span> acc <span style="font-weight: bold;">:test</span> test))
+        (t (set-diff (cdr l1) l2 <span style="font-weight: bold;">:acc</span> (cons (car l1) acc) <span style="font-weight: bold;">:test</span> test))))
 </pre>
 </div>
 <p>
 example:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span>set-diff '<span style="color: #64aa0f;">(</span>K P N A D<span style="color: #64aa0f;">)</span> '<span style="color: #64aa0f;">(</span>K P<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;">; =&gt; (N A D)</span>
+<pre class="src src-lisp">(set-diff '(K P N A D) '(K P)) <span style="font-weight: bold; font-style: italic;">; =&gt; (N A D)</span>
 </pre>
 </div>
 <p>
 a function to check whether a list is a subset of another, with the <code>test</code> being <code>:equal</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">subset?</span> <span style="color: #64aa0f;">(</span>list1 list2<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"check if improper subset with test `</span><span style="color: #64aa0f; font-style: italic;">equal</span><span style="color: #5f9f6f; font-style: italic;">', shorthand for `</span><span style="color: #64aa0f; font-style: italic;">subsetp</span><span style="color: #5f9f6f; font-style: italic;">'</span>
-<span style="color: #5f9f6f; font-style: italic;">consider the difference:</span>
-<span style="color: #5f9f6f; font-style: italic;">CL-USER&gt; (subsetp '((1) (2)) '((1) (2)))</span>
-<span style="color: #5f9f6f; font-style: italic;">NIL</span>
-<span style="color: #5f9f6f; font-style: italic;">CL-USER&gt; (subset? '((1) (2)) '((1) (2)))</span>
-<span style="color: #5f9f6f; font-style: italic;">T"</span>
-  <span style="color: #64aa0f;">(</span>subsetp list1 list2 <span style="color: #ff7a7f; font-weight: bold;">:test</span> #'equal<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">subset?</span> (list1 list2)
+  <span style="font-style: italic;">"check if improper subset with test `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">equal</span><span style="font-style: italic;">', shorthand for `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">subsetp</span><span style="font-style: italic;">'</span>
+<span style="font-style: italic;">consider the difference:</span>
+<span style="font-style: italic;">CL-USER&gt; (subsetp '((1) (2)) '((1) (2)))</span>
+<span style="font-style: italic;">NIL</span>
+<span style="font-style: italic;">CL-USER&gt; (subset? '((1) (2)) '((1) (2)))</span>
+<span style="font-style: italic;">T"</span>
+  (subsetp list1 list2 <span style="font-weight: bold;">:test</span> #'equal))
 </pre>
 </div>
 <p>
 check for set equality:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">set-equal?</span> <span style="color: #64aa0f;">(</span>list1 list2<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"the 'mathematical' way of doing it, lol, could've used `</span><span style="color: #64aa0f; font-style: italic;">set-exclusive-or</span><span style="color: #5f9f6f; font-style: italic;">'"</span>
-  <span style="color: #64aa0f;">(</span>and <span style="color: #ef656a;">(</span>subset? list1 list2<span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>subset? list2 list1<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-equal?</span> (list1 list2)
+  <span style="font-style: italic;">"the 'mathematical' way of doing it, lol, could've used `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">set-exclusive-or</span><span style="font-style: italic;">'"</span>
+  (and (subset? list1 list2) (subset? list2 list1)))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgcc9ad76" class="outline-2">
-<h2 id="orgcc9ad76">combinatorics</h2>
-<div class="outline-text-2" id="text-orgcc9ad76">
+<div id="outline-container-orgcb9da87" class="outline-2">
+<h2 id="orgcb9da87">combinatorics</h2>
+<div class="outline-text-2" id="text-orgcb9da87">
 <p>
 generating variations:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">variations</span> <span style="color: #64aa0f;">(</span>seq <span style="color: #2fa526;">&amp;optional</span> <span style="color: #ef656a;">(</span>len <span style="color: #3dbbb0;">(</span>length seq<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"get all variations of a sequence, order matters, repetition isnt allowed"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #ef656a;">(</span>equal len 1<span style="color: #ef656a;">)</span>
-      <span style="color: #ef656a;">(</span>seq-singletons seq<span style="color: #ef656a;">)</span>
-      <span style="color: #ef656a;">(</span>apply
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">variations</span> (seq <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (len (length seq)))
+  <span style="font-style: italic;">"get all variations of a sequence, order matters, repetition isnt allowed"</span>
+  (<span style="font-weight: bold;">if</span> (equal len 1)
+      (seq-singletons seq)
+      (apply
        #'append
-       <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below <span style="color: #df8f6f;">(</span>length seq<span style="color: #df8f6f;">)</span>
-             collect <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #379cf6;">(</span><span style="color: #ff7a7f;">(</span>subvariations <span style="color: #2fa526;">(</span>variations <span style="color: #c48702;">(</span>remove-nth seq i<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>1- len<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
-                       <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for variation in subvariations
-                             collect <span style="color: #ff7a7f;">(</span>concatenate-type-aware
-                                      <span style="color: #2fa526;">(</span>list <span style="color: #c48702;">(</span>subseq seq i <span style="color: #d0730f;">(</span>1+ i<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span> variation<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">variations-upto-length</span> <span style="color: #64aa0f;">(</span>seq <span style="color: #2fa526;">&amp;optional</span> <span style="color: #ef656a;">(</span>len <span style="color: #3dbbb0;">(</span>length seq<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #64aa0f;">(</span>apply #'append
-         <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 1 upto len
-               collect <span style="color: #3dbbb0;">(</span>variations seq i<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+       (<span style="font-weight: bold;">loop</span> for i from 0 below (length seq)
+             collect (<span style="font-weight: bold;">let</span> ((subvariations (variations (remove-nth seq i) (1- len))))
+                       (<span style="font-weight: bold;">loop</span> for variation in subvariations
+                             collect (concatenate-type-aware
+                                      (list (subseq seq i (1+ i)) variation))))))))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">variations-upto-length</span> (seq <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (len (length seq)))
+  (apply #'append
+         (<span style="font-weight: bold;">loop</span> for i from 1 upto len
+               collect (variations seq i))))
 </pre>
 </div>
 <p>
 generating variations with repetition:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">variations-with-repetition</span> <span style="color: #64aa0f;">(</span>seq <span style="color: #2fa526;">&amp;optional</span> <span style="color: #ef656a;">(</span>len <span style="color: #3dbbb0;">(</span>length seq<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"generate all variations of the sequence `</span><span style="color: #64aa0f; font-style: italic;">seq</span><span style="color: #5f9f6f; font-style: italic;">' of length `</span><span style="color: #64aa0f; font-style: italic;">len</span><span style="color: #5f9f6f; font-style: italic;">', such that repetition is allowed, returns a list of sequences of length (length(seq)+1)^len"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>singletons <span style="color: #df8f6f;">(</span>map 'list <span style="color: #379cf6;">(</span>seq-type seq<span style="color: #379cf6;">)</span> seq<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">construct a singleton (one element sequences) from every element</span>
-    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #3dbbb0;">(</span>equal len 1<span style="color: #3dbbb0;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">variations-with-repetition</span> (seq <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (len (length seq)))
+  <span style="font-style: italic;">"generate all variations of the sequence `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">seq</span><span style="font-style: italic;">' of length `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">len</span><span style="font-style: italic;">', such that repetition is allowed, returns a list of sequences of length (length(seq)+1)^len"</span>
+  (<span style="font-weight: bold;">let</span> ((singletons (map 'list (seq-type seq) seq))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">construct a singleton (one element sequences) from every element</span>
+    (<span style="font-weight: bold;">if</span> (equal len 1)
         singletons
-        <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>variations <span style="color: #ff7a7f;">(</span>variations-with-repetition seq <span style="color: #2fa526;">(</span>1- len<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-          <span style="color: #df8f6f;">(</span>concatenate-type-aware 
-           <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for variation in variations
-                 collect <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for singleton in singletons
-                               collect <span style="color: #2fa526;">(</span>concatenate-type-aware
-                                        <span style="color: #c48702;">(</span>list singleton variation<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+        (<span style="font-weight: bold;">let</span> ((variations (variations-with-repetition seq (1- len))))
+          (concatenate-type-aware 
+           (<span style="font-weight: bold;">loop</span> for variation in variations
+                 collect (<span style="font-weight: bold;">loop</span> for singleton in singletons
+                               collect (concatenate-type-aware
+                                        (list singleton variation)))))))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">variations-with-repetition-upto-length</span> <span style="color: #64aa0f;">(</span>seq len<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"generate all variations of the sequence `</span><span style="color: #64aa0f; font-style: italic;">seq</span><span style="color: #5f9f6f; font-style: italic;">' of lengths 1 to `</span><span style="color: #64aa0f; font-style: italic;">len</span><span style="color: #5f9f6f; font-style: italic;">', such that repetition is allowed, returns a list of sequences"</span>
-  <span style="color: #64aa0f;">(</span>concatenate-type-aware 
-   <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 1 upto len
-         collect <span style="color: #3dbbb0;">(</span>variations-with-repetition seq i<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">variations-with-repetition-upto-length</span> (seq len)
+  <span style="font-style: italic;">"generate all variations of the sequence `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">seq</span><span style="font-style: italic;">' of lengths 1 to `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">len</span><span style="font-style: italic;">', such that repetition is allowed, returns a list of sequences"</span>
+  (concatenate-type-aware 
+   (<span style="font-weight: bold;">loop</span> for i from 1 upto len
+         collect (variations-with-repetition seq i))))
 </pre>
 </div>
 <p>
@@ -381,32 +381,32 @@ assume the sequence "ashey" and the length 3, the base case for recursion would 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">combinations</span> <span style="color: #64aa0f;">(</span>seq len<span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"generate all combinations of the sequence `</span><span style="color: #64aa0f; font-style: italic;">seq</span><span style="color: #5f9f6f; font-style: italic;">' of length `</span><span style="color: #64aa0f; font-style: italic;">len</span><span style="color: #5f9f6f; font-style: italic;">', such that repetition is allowed and order doesnt matter, returns a list of sequences of length binom{length(seq)}{len}"</span>
-  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #ef656a;">(</span>&gt;= len <span style="color: #3dbbb0;">(</span>length seq<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
-      <span style="color: #ef656a;">(</span>list seq<span style="color: #ef656a;">)</span>
-      <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #3dbbb0;">(</span>equal len 1<span style="color: #3dbbb0;">)</span>
-          <span style="color: #3dbbb0;">(</span>seq-singletons seq<span style="color: #3dbbb0;">)</span>
-          <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #df8f6f;">(</span>equal len 2<span style="color: #df8f6f;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">is this "base case" necessary?</span>
-              <span style="color: #df8f6f;">(</span>concatenate-type-aware
-               <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below <span style="color: #ff7a7f;">(</span>length seq<span style="color: #ff7a7f;">)</span>
-                     collect <span style="color: #ff7a7f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for j from <span style="color: #2fa526;">(</span>1+ i<span style="color: #2fa526;">)</span> below <span style="color: #2fa526;">(</span>length seq<span style="color: #2fa526;">)</span>
-                                   collect <span style="color: #2fa526;">(</span>concatenate-type-aware
-                                            <span style="color: #c48702;">(</span>list <span style="color: #d0730f;">(</span>subseq seq i <span style="color: #64aa0f;">(</span>1+ i<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-                                                  <span style="color: #d0730f;">(</span>subseq seq j <span style="color: #64aa0f;">(</span>1+ j<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
-              <span style="color: #df8f6f;">(</span>concatenate-type-aware
-               <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 upto <span style="color: #ff7a7f;">(</span>- <span style="color: #2fa526;">(</span>length seq<span style="color: #2fa526;">)</span> len<span style="color: #ff7a7f;">)</span>
-                     collect <span style="color: #ff7a7f;">(</span>map 'list
-                                  <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #c48702;">(</span>subcombination<span style="color: #c48702;">)</span>
-                                    <span style="color: #c48702;">(</span>concatenate-type-aware
-                                     <span style="color: #d0730f;">(</span>list <span style="color: #64aa0f;">(</span>subseq seq i <span style="color: #ef656a;">(</span>1+ i<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span> subcombination<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
-                                  <span style="color: #2fa526;">(</span>combinations <span style="color: #c48702;">(</span>subseq seq <span style="color: #d0730f;">(</span>1+ i<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>1- len<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">combinations</span> (seq len)
+  <span style="font-style: italic;">"generate all combinations of the sequence `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">seq</span><span style="font-style: italic;">' of length `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">len</span><span style="font-style: italic;">', such that repetition is allowed and order doesnt matter, returns a list of sequences of length binom{length(seq)}{len}"</span>
+  (<span style="font-weight: bold;">if</span> (&gt;= len (length seq))
+      (list seq)
+      (<span style="font-weight: bold;">if</span> (equal len 1)
+          (seq-singletons seq)
+          (<span style="font-weight: bold;">if</span> (equal len 2) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">is this "base case" necessary?</span>
+              (concatenate-type-aware
+               (<span style="font-weight: bold;">loop</span> for i from 0 below (length seq)
+                     collect (<span style="font-weight: bold;">loop</span> for j from (1+ i) below (length seq)
+                                   collect (concatenate-type-aware
+                                            (list (subseq seq i (1+ i))
+                                                  (subseq seq j (1+ j)))))))
+              (concatenate-type-aware
+               (<span style="font-weight: bold;">loop</span> for i from 0 upto (- (length seq) len)
+                     collect (map 'list
+                                  (<span style="font-weight: bold;">lambda</span> (subcombination)
+                                    (concatenate-type-aware
+                                     (list (subseq seq i (1+ i)) subcombination)))
+                                  (combinations (subseq seq (1+ i)) (1- len)))))))))
 
-<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">combinations-upto-length</span> <span style="color: #64aa0f;">(</span>seq <span style="color: #2fa526;">&amp;optional</span> <span style="color: #ef656a;">(</span>max-len <span style="color: #3dbbb0;">(</span>length seq<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
-  <span style="color: #5f9f6f; font-style: italic;">"generate all combinations of the sequence `</span><span style="color: #64aa0f; font-style: italic;">seq</span><span style="color: #5f9f6f; font-style: italic;">' of lengths 1 to `</span><span style="color: #64aa0f; font-style: italic;">max-len</span><span style="color: #5f9f6f; font-style: italic;">', such that repetition is allowed and order doesnt matter, returns a list of sequences"</span>
-  <span style="color: #64aa0f;">(</span>concatenate-type-aware
-   <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 1 upto max-len
-         collect <span style="color: #3dbbb0;">(</span>combinations seq i<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">combinations-upto-length</span> (seq <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (max-len (length seq)))
+  <span style="font-style: italic;">"generate all combinations of the sequence `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">seq</span><span style="font-style: italic;">' of lengths 1 to `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">max-len</span><span style="font-style: italic;">', such that repetition is allowed and order doesnt matter, returns a list of sequences"</span>
+  (concatenate-type-aware
+   (<span style="font-weight: bold;">loop</span> for i from 1 upto max-len
+         collect (combinations seq i))))
 </pre>
 </div>
 </div>
