@@ -31,20 +31,20 @@
 <li>pytorch</li>
 </ul>
 
-<div class="math-block note" data-blocktype="note" id="org02a2959">
+<div class="math-block note" data-blocktype="note" id="org0a44f5d">
 <p>
 some information was quoted from <a href="https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/">this great article</a> (the code was rewritten in pytorch and alot of things differ though!).
 </p>
 
 </div>
-<div id="outline-container-org53673bf" class="outline-2">
-<h2 id="org53673bf">essential packages</h2>
-<div class="outline-text-2" id="text-org53673bf">
+<div id="outline-container-org57b1ffe" class="outline-2">
+<h2 id="org57b1ffe">essential packages</h2>
+<div class="outline-text-2" id="text-org57b1ffe">
 <p>
 we need to import some essential packages:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org228154d"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-activate-venv()&gt;&gt;</span>
+<pre class="src src-python" id="orgcf8e8b0"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-activate-venv()&gt;&gt;</span>
 <span style="font-weight: bold;">import</span> matplotlib.pyplot <span style="font-weight: bold;">as</span> plt
 <span style="font-weight: bold;">import</span> torch
 <span style="font-weight: bold;">import</span> torch.nn <span style="font-weight: bold;">as</span> nn
@@ -61,19 +61,19 @@ here, if the machine we're using has a cuda-supported gpu available, we use that
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org87c59fd"><span style="font-weight: bold; font-style: italic;">device</span> = torch.device(<span style="font-style: italic;">"cuda:0"</span> <span style="font-weight: bold;">if</span> torch.cuda.is_available() <span style="font-weight: bold;">else</span> <span style="font-style: italic;">"cpu"</span>)
+<pre class="src src-python" id="org9ecb2ff"><span style="font-weight: bold; font-style: italic;">device</span> = torch.device(<span style="font-style: italic;">"cuda:0"</span> <span style="font-weight: bold;">if</span> torch.cuda.is_available() <span style="font-weight: bold;">else</span> <span style="font-style: italic;">"cpu"</span>)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc310949" class="outline-2">
-<h2 id="orgc310949">load the data</h2>
-<div class="outline-text-2" id="text-orgc310949">
+<div id="outline-container-org09f59bc" class="outline-2">
+<h2 id="org09f59bc">load the data</h2>
+<div class="outline-text-2" id="text-org09f59bc">
 <p>
 we start by loading the mnist dataset (the 28x28 images of hand-written digits), we use the <code>torchvision</code> package from <code>pypi</code> which provides various datasets for machine learning
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org1a82fd3"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-essential-imports()&gt;&gt;</span>
+<pre class="src src-python" id="org290a99a"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-essential-imports()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-pytorch-init()&gt;&gt;</span>
 <span style="font-weight: bold;">import</span> torchvision.datasets
 <span style="font-weight: bold;">import</span> os.path
@@ -107,7 +107,7 @@ label: 7
 the function <code>gen_images_img</code> below is used to easily display a number of images in a grid layout:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org0749bf7"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">generate an image of images and write it to a file</span>
+<pre class="src src-python" id="org82cd1df"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">generate an image of images and write it to a file</span>
 <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">gen_images_img</span>(imgs, out_file, suptitle=<span style="font-weight: bold; text-decoration: underline;">None</span>):
     <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">make sure images has a size that is divisible by 10</span>
     <span style="font-weight: bold; font-style: italic;">n_cols</span> = 10
@@ -136,15 +136,15 @@ gen_images_img(train_x[:30].cpu().reshape((-1, 28, 28)), f)
 </div>
 
 
-<div id="org49c951b" class="figure">
+<div id="org8170737" class="figure">
 <p><img src="/zuBb2Oa.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc6121e6" class="outline-2">
-<h2 id="orgc6121e6">discriminator</h2>
-<div class="outline-text-2" id="text-orgc6121e6">
+<div id="outline-container-orgb498aa0" class="outline-2">
+<h2 id="orgb498aa0">discriminator</h2>
+<div class="outline-text-2" id="text-orgb498aa0">
 <p>
 the discriminator model must take a sample image from our dataset as input and output a classification, a prediction as to whether the sample is real or fake. or perhaps the likelihood of the sample being real, which means the discriminator does binary classification.
 </p>
@@ -154,7 +154,7 @@ pytorch makes defining neural nets easy by inheriting from <code>nn.Module</code
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org3832b73"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-essential-imports()&gt;&gt;</span>
+<pre class="src src-python" id="org596d20e"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-essential-imports()&gt;&gt;</span>
 <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Discriminator</span>(nn.Module):
     <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>):
         <span style="font-weight: bold;">super</span>(Discriminator, <span style="font-weight: bold;">self</span>).__init__()
@@ -204,13 +204,13 @@ Discriminator(
 compare the output above to the <code>torch-summary</code> package from <code>pypi</code> which provides the summary function in a similar fashion to the <code>keras</code> library:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org4c83785"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-discriminator()&gt;&gt;</span>
+<pre class="src src-python" id="org900b0e7"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-discriminator()&gt;&gt;</span>
 <span style="font-weight: bold;">from</span> torchsummary <span style="font-weight: bold;">import</span> summary
 summary(Discriminator().cuda(), (1, 28, 28))
 </pre>
 </div>
 
-<pre class="example" id="orgf537a1b">
+<pre class="example" id="org53e5534">
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -262,7 +262,7 @@ we could start training this model with real examples with a class label of one 
 we prepare the inputs and the desired outputs (x's and y's) of the network and copy them to the device that is used for training (could be gpu or cpu depending on the machine)
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgd0c0b7e"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-load-dataset()&gt;&gt;</span>
+<pre class="src src-python" id="orgfc56bfa"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-load-dataset()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">copy the data from the mnist dataset for further manipulation</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">.detach().clone() is the recommended way of cloning a tensor with pytorch</span>
 <span style="font-weight: bold; font-style: italic;">train_x</span> = train_dataset.data.detach().clone().to(device)
@@ -270,10 +270,10 @@ we prepare the inputs and the desired outputs (x's and y's) of the network and c
 </pre>
 </div>
 <p>
-as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the interval <img src="ltx/677a1641c38.svg" alt="\([0,1]\)" style="height: 0.9137em; vertical-align: -0.2021em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions:
+as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the interval <img src="ltx/677a1641c38.svg" alt="\([0,1]\)" style="height: 0.9813em; vertical-align: -0.2814em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org7b4500a"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-make-training-tensors()&gt;&gt;</span>
+<pre class="src src-python" id="org684e7bc"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-make-training-tensors()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">here, None means insert a new dimension, : means keep the original dimension, so we're adding a new dimension at position 2 (the old dimension of index 2 gets shifted into index 3) and preserving the ones at 0,1</span>
 <span style="font-weight: bold; font-style: italic;">train_x</span> = train_x[:, <span style="font-weight: bold; text-decoration: underline;">None</span>, :, :]
 <span style="font-weight: bold; font-style: italic;">train_x</span> = train_x / 255.0
@@ -287,9 +287,9 @@ before: torch.Size([60000, 28, 28])
 after: torch.Size([60000, 1, 28, 28])
 </pre>
 </div>
-<div id="outline-container-orgef26181" class="outline-3">
-<h3 id="orgef26181">training the discriminator</h3>
-<div class="outline-text-3" id="text-orgef26181">
+<div id="outline-container-orgd6fc980" class="outline-3">
+<h3 id="orgd6fc980">training the discriminator</h3>
+<div class="outline-text-3" id="text-orgd6fc980">
 <p>
 we could systematically enumerate all samples in the training dataset, and that is a good approach, but good training via stochastic gradient descent requires that the training dataset be shuffled prior to each epoch. a simpler approach is to select random samples of images from the training dataset.
 </p>
@@ -299,7 +299,7 @@ the <code>generate_real_samples_for_discriminator()</code> function below takes 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgef4a5da"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_real_samples_for_discriminator</span>(dataset, n_samples):
+<pre class="src src-python" id="org096d7b6"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_real_samples_for_discriminator</span>(dataset, n_samples):
     <span style="font-weight: bold; font-style: italic;">random_indicies</span> = torch.randint(dataset.shape[0], (n_samples,))
     <span style="font-weight: bold; font-style: italic;">x</span> = dataset[random_indicies]
     <span style="font-weight: bold; font-style: italic;">y</span> = torch.ones((n_samples, 1))
@@ -315,7 +315,7 @@ the <code>generate_fake_samples_for_discriminator()</code> function below implem
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org59a39fd"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_fake_samples_for_discriminator</span>(n_samples):
+<pre class="src src-python" id="orgd92fcfb"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_fake_samples_for_discriminator</span>(n_samples):
     <span style="font-weight: bold; font-style: italic;">x</span> = torch.randn((n_samples, 1, 28, 28))
     <span style="font-weight: bold; font-style: italic;">y</span> = torch.zeros((n_samples, 1))
     <span style="font-weight: bold;">return</span> x, y
@@ -338,7 +338,7 @@ we update the discriminator separately for real and fake examples so that we can
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org218ae34"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-normalize-training-tensors()&gt;&gt;</span>
+<pre class="src src-python" id="orgab50e29"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-normalize-training-tensors()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-real-samples()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-fake-samples-for-discriminator()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-discriminator()&gt;&gt;</span>
@@ -415,7 +415,7 @@ f
 </div>
 
 
-<div id="org9c68283" class="figure">
+<div id="orga493565" class="figure">
 <p><img src="/ar1T72O.svg" />
 </p>
 </div>
@@ -426,9 +426,9 @@ as we can see, the loss gradually declines which means the discriminator (theore
 </div>
 </div>
 </div>
-<div id="outline-container-org2d04924" class="outline-2">
-<h2 id="org2d04924">generator</h2>
-<div class="outline-text-2" id="text-org2d04924">
+<div id="outline-container-org02380e5" class="outline-2">
+<h2 id="org02380e5">generator</h2>
+<div class="outline-text-2" id="text-org02380e5">
 <p>
 the generator model is responsible for creating new, fake but plausible images of handwritten digits. it does so by taking a point from the latent space as input and outputting a tensor representing a grayscale image.
 </p>
@@ -471,7 +471,7 @@ the output layer of the model is a <code>Conv2d</code> with one filter and a ker
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org4ef42ba"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Generator</span>(nn.Module):
+<pre class="src src-python" id="orgf632002"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Generator</span>(nn.Module):
     <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>, latent_size):
         <span style="font-weight: bold;">super</span>(Generator, <span style="font-weight: bold;">self</span>).__init__()
         <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">linear1</span> = nn.Linear(latent_size, 128 * 7 * 7)
@@ -513,7 +513,7 @@ summary(Generator(100).to(device), (1, 100)) <span style="font-weight: bold; fon
 </pre>
 </div>
 
-<pre class="example" id="org96a602e">
+<pre class="example" id="org871a776">
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -538,7 +538,7 @@ the input to the generator needs to be vectors generated from the latent space. 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org56cfd6b"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_latent_points</span>(latent_size, n_points):
+<pre class="src src-python" id="org047181a"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_latent_points</span>(latent_size, n_points):
   <span style="font-weight: bold;">return</span> torch.randn((n_points, latent_size))
 </pre>
 </div>
@@ -547,7 +547,7 @@ next, we can use the generated points as input to the generator model to generat
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org27b8909"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generate-latent-points()&gt;&gt;</span>
+<pre class="src src-python" id="org934b80f"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generate-latent-points()&gt;&gt;</span>
 <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_fake_samples_with_generator</span>(generator, n_samples):
     <span style="font-weight: bold; font-style: italic;">generator_in</span> = generate_latent_points(generator.latent_size, n_samples)
     <span style="font-weight: bold; font-style: italic;">generator_out</span> = generator(generator_in)
@@ -571,14 +571,14 @@ gen_images_img(X.reshape((-1, 28, 28)), f)
 </div>
 
 
-<div id="orgf2de81c" class="figure">
+<div id="orgdac8274" class="figure">
 <p><img src="/dUD33Ha.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgbca59c6" class="outline-3">
-<h3 id="orgbca59c6">training the generator</h3>
-<div class="outline-text-3" id="text-orgbca59c6">
+<div id="outline-container-orgf7a641a" class="outline-3">
+<h3 id="orgf7a641a">training the generator</h3>
+<div class="outline-text-3" id="text-orgf7a641a">
 <p>
 to train the generator, we need to attach it to the discriminator in a sequential manner, such that the output of the generator would be forwarded to the discriminator for classification, the discriminator would determine whether the data generated by the generator passes as a real image. this is why the training of disciminator beforehand to classify real data from fake ones is cruical, otherwise the generator wouldnt learn (this is one approach, another is described later).
 </p>
@@ -592,7 +592,7 @@ so the next step is constructing the full generational model by composing the ge
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgce6cee7"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">GAN</span>(nn.Module):
+<pre class="src src-python" id="org826160c"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">GAN</span>(nn.Module):
     <span style="font-style: italic;">"""generative adversarial network model"""</span>
     <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>, generator, discriminator):
         <span style="font-weight: bold;">super</span>(GAN, <span style="font-weight: bold;">self</span>).__init__()
@@ -610,7 +610,7 @@ its that simple, a sequential composition of the two models.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orge043e5f"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">train_generator</span>(gan, n_iters=100, batch_size=256):
+<pre class="src src-python" id="org40d78ab"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">train_generator</span>(gan, n_iters=100, batch_size=256):
     <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">use the stochastic gradient descent optimizer with a learning rate of 0.0002</span>
     <span style="font-weight: bold; font-style: italic;">optimizer</span> = torch.optim.SGD(gan.generator.parameters(), lr=0.0002)
     <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">our loss function, the Binary Cross Entropy function</span>
@@ -644,7 +644,7 @@ its that simple, a sequential composition of the two models.
 an example usage:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgf5fa07b"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-discriminator()&gt;&gt;</span>
+<pre class="src src-python" id="org9922295"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-discriminator()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generate-latent-points()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generator()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gan()&gt;&gt;</span>
@@ -664,7 +664,7 @@ f
 </div>
 
 
-<div id="org21fe4fc" class="figure">
+<div id="orgfac52d0" class="figure">
 <p><img src="/YMD1rgW.png" />
 </p>
 </div>
@@ -694,7 +694,7 @@ the following method, <code>train_gan</code>, implements this approach, and on e
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgf05b912"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">train_gan</span>(gan, dataset, epochs=10, batch_size=256):
+<pre class="src src-python" id="org8d3e417"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">train_gan</span>(gan, dataset, epochs=10, batch_size=256):
     <span style="font-weight: bold; font-style: italic;">loss_fn</span> = nn.BCELoss()
     <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">why does using SGD slow down training?</span>
     <span style="font-weight: bold; font-style: italic;">generator_optimizer</span> = torch.optim.Adam(gan.generator.parameters(), lr=0.0002)
@@ -755,7 +755,7 @@ the following method, <code>train_gan</code>, implements this approach, and on e
 i did a test run of 10 epochs:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org9d5cee0"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-discriminator()&gt;&gt;</span>
+<pre class="src src-python" id="org638ca44"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-discriminator()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generate-latent-points()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generator()&gt;&gt;</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gan()&gt;&gt;</span>
@@ -817,9 +817,9 @@ but the results are interesting, even after the first epoch, we can see that the
 </div>
 </div>
 </div>
-<div id="outline-container-org3c00c9a" class="outline-2">
-<h2 id="org3c00c9a">performance evaluation</h2>
-<div class="outline-text-2" id="text-org3c00c9a">
+<div id="outline-container-orgb2041b5" class="outline-2">
+<h2 id="orgb2041b5">performance evaluation</h2>
+<div class="outline-text-2" id="text-orgb2041b5">
 <p>
 generally, there are no objective ways to evaluate the performance of a GAN model. we cannot calculate this objective error score for generated images. it might be possible in the case of MNIST images because the images are so well constrained, but in general, it is not possible (yet).
 </p>
@@ -829,9 +829,9 @@ instead, images must be subjectively evaluated for quality by a human agent. thi
 </p>
 </div>
 </div>
-<div id="outline-container-org2d12d1f" class="outline-2">
-<h2 id="org2d12d1f">latent output space visualization</h2>
-<div class="outline-text-2" id="text-org2d12d1f">
+<div id="outline-container-orga8313a2" class="outline-2">
+<h2 id="orga8313a2">latent output space visualization</h2>
+<div class="outline-text-2" id="text-orga8313a2">
 <p>
 while we cant visualize dimensions higher than 3d, and while computer screens are 2d, we can still try to explore higher dimensions by "navigating" them and projecting the results. by navigation i mean choosing an axis and "hovering" over its possible values while holding the other variables constant, to see how the changes to the variable that corresponds to the axis we chose affect the space we project.
 </p>
