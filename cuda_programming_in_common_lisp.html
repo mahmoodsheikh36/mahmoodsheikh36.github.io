@@ -33,9 +33,9 @@ load it using quicklisp:
 <pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-cuda</span>)
 </pre>
 </div>
-<div id="outline-container-orgba9a704" class="outline-2">
-<h2 id="orgba9a704">arch linux setup</h2>
-<div class="outline-text-2" id="text-orgba9a704">
+<div id="outline-container-org90a2be2" class="outline-2">
+<h2 id="org90a2be2">arch linux setup</h2>
+<div class="outline-text-2" id="text-org90a2be2">
 <p>
 i had to install <code>cuda</code> for the <code>nvcc</code> compiler and more, and <code>nvidia</code> for the gpu driver
 at first you may have to use <code>/opt/cuda/bin/nvcc</code> until you reboot or extend your $PATH
@@ -52,13 +52,13 @@ if it still doesnt use <code>nvidia</code> you need to update your while system 
 </p>
 </div>
 </div>
-<div id="outline-container-orgf323a6f" class="outline-2">
-<h2 id="orgf323a6f">essential concepts</h2>
-<div class="outline-text-2" id="text-orgf323a6f">
+<div id="outline-container-orgc8bb7c0" class="outline-2">
+<h2 id="orgc8bb7c0">essential concepts</h2>
+<div class="outline-text-2" id="text-orgc8bb7c0">
 </div>
-<div id="outline-container-orgc7fae73" class="outline-3">
-<h3 id="orgc7fae73">threads</h3>
-<div class="outline-text-3" id="text-orgc7fae73">
+<div id="outline-container-orgd5ca331" class="outline-3">
+<h3 id="orgd5ca331">threads</h3>
+<div class="outline-text-3" id="text-orgd5ca331">
 <p>
 mostly from <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>
 i also read the examples from the cl-cuda's source code
@@ -87,9 +87,9 @@ for efficient cooperation, the shared memory is expected to be a low-latency mem
 </p>
 </div>
 </div>
-<div id="outline-container-org35b893c" class="outline-3">
-<h3 id="org35b893c">memory</h3>
-<div class="outline-text-3" id="text-org35b893c">
+<div id="outline-container-orgacce46a" class="outline-3">
+<h3 id="orgacce46a">memory</h3>
+<div class="outline-text-3" id="text-orgacce46a">
 <p>
 CUDA threads may access data from multiple memory spaces during their execution. each thread has private <b>local memory</b>. each thread block has <b>shared memory</b> visible to all threads of the block and with the same lifetime as the block. thread blocks in a thread block cluster can perform read, write, and atomics operations on each other’s shared memory. all threads have access to the same <b>global memory</b>.
 </p>
@@ -115,9 +115,9 @@ unified memory provides managed memory to bridge the host and device memory spac
 </p>
 </div>
 </div>
-<div id="outline-container-org135b762" class="outline-3">
-<h3 id="org135b762">device memory</h3>
-<div class="outline-text-3" id="text-org135b762">
+<div id="outline-container-org241007e" class="outline-3">
+<h3 id="org241007e">device memory</h3>
+<div class="outline-text-3" id="text-org241007e">
 <p>
 the CUDA programming model assumes a system composed of a host and a device, each with their own separate memory. kernels operate out of device memory, so the runtime provides functions to allocate, deallocate, and copy device memory, as well as transfer data between host memory and device memory.
 </p>
@@ -136,22 +136,22 @@ CUDA arrays are opaque memory layouts optimized for texture fetching.
 </div>
 </div>
 </div>
-<div id="outline-container-orge05246d" class="outline-2">
-<h2 id="orge05246d">code</h2>
-<div class="outline-text-2" id="text-orge05246d">
+<div id="outline-container-org8ca2a3a" class="outline-2">
+<h2 id="org8ca2a3a">code</h2>
+<div class="outline-text-2" id="text-org8ca2a3a">
 <p>
 see <a href="/connect_to_remote_common_lisp_repl_with_sly_slime.html">connect to remote common lisp repl with sly/slime</a> for connecting to a remote common lisp repl with emacs
 </p>
-<div class="math-block note" data-before="note" data-after="" id="org33fe1dd">
+<div class="math-block note" data-before="note" data-after="" id="org8ac6a66">
 <p>
 notice that when working cl-cuda the data that we're passing to the gpu is gonna be duplicated (because its a binding from cl to C and uses whats called foreign memory), i never considered how bad that is, atleast in this case, as mostly when doing gpu calculations we're ofcourse passing lots of data and then copying it back, and the maximum amount of memory that i can use is already cut in half, if i have 16gb of memory i already know i cant use more than 8gb of that, thats pretty horrible (assuming i have a gpu with ~16gb memory), i can have my way around this, e.g. free memory from sbcl as it gets copied to C, but that'd be much more complexity than i wanna have to deal with
 </p>
 
 </div>
 </div>
-<div id="outline-container-org6011222" class="outline-3">
-<h3 id="org6011222">cuda vector addition</h3>
-<div class="outline-text-3" id="text-org6011222">
+<div id="outline-container-org46d700d" class="outline-3">
+<h3 id="org46d700d">cuda vector addition</h3>
+<div class="outline-text-3" id="text-org46d700d">
 <p>
 we start with the vectorAdd example, a simple example in C, stolen from <a href="https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu">https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu</a> and modified to reduce boilerplate code.
 </p>
@@ -260,13 +260,13 @@ similar same code but in cl:
 </div>
 </div>
 </div>
-<div id="outline-container-org8b2e3b4" class="outline-3">
-<h3 id="org8b2e3b4">cuda matrix multiplication</h3>
-<div class="outline-text-3" id="text-org8b2e3b4">
+<div id="outline-container-org7d372db" class="outline-3">
+<h3 id="org7d372db">cuda matrix multiplication</h3>
+<div class="outline-text-3" id="text-org7d372db">
 <p>
 mostly taken from <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html</a> and <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>
 before implementing matrix multiplication for the <b>gpu</b> we need to consider some things
-the product of two matrices <img src="ltx/2e901615724.svg" alt="\(A_{M \times K},B_{K \times N}\)" style="height: 0.9866em; vertical-align: -0.3171em; display: inline-block" class="org-latex org-latex-inline" /> results in a matrix <img src="ltx/217be9046a8.svg" alt="\(C_{M \times N}\)" style="height: 0.9896em; vertical-align: -0.3171em; display: inline-block" class="org-latex org-latex-inline" /> which contains <img src="ltx/4c6dae6d910.svg" alt="\(M \cdot N\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> values, each of which is a dot product of K-element vectors. thus a total of <img src="ltx/9f538b6459a.svg" alt="\(M \cdot N \cdot K\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> fused multiply-adds are needed to compute the product. each FMA is 2 operations, a (scalar) multiplication and an addition, so a total of <img src="ltx/8969987a77e.svg" alt="\(2 \cdot M \cdot N \cdot K\)" style="height: 0.7138em; vertical-align: -0.0531em; display: inline-block" class="org-latex org-latex-inline" /> flops are required, if we were to consider gemm, the parameters <img src="ltx/019f23f1ade.svg" alt="\(\alpha,\beta\)" style="height: 0.9020em; vertical-align: -0.2530em; display: inline-block" class="org-latex org-latex-inline" /> would also play a role in the number of flops required, but the effect these scalars have can be negligable for sufficiently large matrices.
+the product of two matrices <img src="ltx/7bfaa93f10a.svg" alt="\(A_{M \times K},B_{K \times N}\)" style="height: 1.1568em; vertical-align: -0.3467em; display: inline-block" class="org-latex org-latex-inline" /> results in a matrix <img src="ltx/12cd4179641.svg" alt="\(C_{M \times N}\)" style="height: 1.1568em; vertical-align: -0.3467em; display: inline-block" class="org-latex org-latex-inline" /> which contains <img src="ltx/aa99bb3e3b6.svg" alt="\(M \cdot N\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> values, each of which is a dot product of K-element vectors. thus a total of <img src="ltx/0a4381989ac.svg" alt="\(M \cdot N \cdot K\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> fused multiply-adds are needed to compute the product. each FMA is 2 operations, a (scalar) multiplication and an addition, so a total of <img src="ltx/6443b310d51.svg" alt="\(2 \cdot M \cdot N \cdot K\)" style="height: 0.9221em; vertical-align: -0.1120em; display: inline-block" class="org-latex org-latex-inline" /> flops are required, if we were to consider gemm, the parameters <img src="ltx/3c7d77d7b98.svg" alt="\(\alpha,\beta\)" style="height: 0.9263em; vertical-align: -0.2773em; display: inline-block" class="org-latex org-latex-inline" /> would also play a role in the number of flops required, but the effect these scalars have can be negligable for sufficiently large matrices.
 </p>
 
 <p>

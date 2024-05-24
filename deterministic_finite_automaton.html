@@ -26,96 +26,96 @@
 </div>
 <div id="content" class="content">
 <div class="math-block definition" data-before="definition: finite automaton" data-after="(taken from Michael Sipser, 2012 definition 1.5)
-" id="org4240d02">
+" id="org95b8e59">
 <p>
-a <i>finite automaton</i> is a 5-tuple <img src="ltx/cea83431714.svg" alt="\((Q,\Sigma,\delta,q_0,F)\)" style="height: 0.9833em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" />, where
+a <i>finite automaton</i> is a 5-tuple <img src="ltx/204abc9db9e.svg" alt="\((Q,\Sigma,\delta,q_0,F)\)" style="height: 1.4868em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />, where
 </p>
 <ol class="org-ol">
-<li><img src="ltx/786a45d9f74.svg" alt="\(Q\)" style="height: 0.8490em; vertical-align: -0.1805em; display: inline-block" class="org-latex org-latex-inline" /> is a finite set called the <i>states</i>,</li>
-<li><img src="ltx/cf3447384c5.svg" alt="\(\Sigma\)" style="height: 0.7138em; vertical-align: -0.0511em; display: inline-block" class="org-latex org-latex-inline" /> is a finite set called the alphabet,</li>
-<li><img src="ltx/5aefab213fd.svg" alt="\(\delta: Q \times \Sigma \to Q\)" style="height: 0.8490em; vertical-align: -0.1805em; display: inline-block" class="org-latex org-latex-inline" /> is the <i>transition function</i>,</li>
-<li><img src="ltx/d7948f6b3bb.svg" alt="\(q_0 \in Q\)" style="height: 0.9637em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> is the <i>start state</i>, and</li>
-<li><img src="ltx/c4131b3c787.svg" alt="\(F \subseteq Q\)" style="height: 0.8912em; vertical-align: -0.2226em; display: inline-block" class="org-latex org-latex-inline" /> is the <i>set of accept states</i>.</li>
+<li><img src="ltx/5de8f0ebe9f.svg" alt="\(Q\)" style="height: 1.2145em; vertical-align: -0.4044em; display: inline-block" class="org-latex org-latex-inline" /> is a finite set called the <i>states</i>,</li>
+<li><img src="ltx/8dfe7a0ecda.svg" alt="\(\Sigma\)" style="height: 0.7138em; vertical-align: -0.0511em; display: inline-block" class="org-latex org-latex-inline" /> is a finite set called the alphabet,</li>
+<li><img src="ltx/537fd0feff4.svg" alt="\(\delta: Q \times \Sigma \to Q\)" style="height: 1.2145em; vertical-align: -0.4044em; display: inline-block" class="org-latex org-latex-inline" /> is the <i>transition function</i>,</li>
+<li><img src="ltx/f319bf45671.svg" alt="\(q_0 \in Q\)" style="height: 1.4868em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> is the <i>start state</i>, and</li>
+<li><img src="ltx/1084a7e4aef.svg" alt="\(F \subseteq Q\)" style="height: 1.2145em; vertical-align: -0.4044em; display: inline-block" class="org-latex org-latex-inline" /> is the <i>set of accept states</i>.</li>
 </ol>
 
 </div>
 <div class="math-block definition" data-before="definition: automaton configuration" data-after="(Mark K. Goldberg, ????)
-" id="org42e943f">
+" id="orgcaa3c53">
 <p>
-a <i>configuration</i> of a finite automaton <img src="ltx/00564a0220a.svg" alt="\((Q, \Sigma, \delta, q_0, F)\)" style="height: 0.9833em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> is an element of <img src="ltx/16a506845ac.svg" alt="\(Q \times \Sigma^*\)" style="height: 0.9206em; vertical-align: -0.1805em; display: inline-block" class="org-latex org-latex-inline" />. the <i>current configuration</i> of an automaton is a pair
-<img src="ltx/ec169855e37.svg" alt="\[ \{\text{the current state}\} \times \{\text{the unread part of the tape}\}. \]" style="height: 1.5252em; display: block" class="org-latex org-latex-block" />
+a <i>configuration</i> of a finite automaton <img src="ltx/690f651af52.svg" alt="\((Q, \Sigma, \delta, q_0, F)\)" style="height: 1.4868em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> is an element of <img src="ltx/427cf96d271.svg" alt="\(Q \times \Sigma^*\)" style="height: 1.2145em; vertical-align: -0.4044em; display: inline-block" class="org-latex org-latex-inline" />. the <i>current configuration</i> of an automaton is a pair
+<img src="ltx/9e337fd5720.svg" alt="\[ \{\text{the current state}\} \times \{\text{the unread part of the tape}\}. \]" style="height: 1.6161em; display: block" class="org-latex org-latex-block" />
 </p>
 
 </div>
 <div class="math-block notation" data-before="notation: denoting transitions between configurations" data-after="(Dr. Noa Lewenstein, ????)
-" id="org6c9cce2">
+" id="org6437437">
 <p>
-given a DFA <img src="ltx/f72c34a6b48.svg" alt="\(M=(Q, \Sigma, \delta, q_0, F)\)" style="height: 0.9833em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" />,
-for configurations <img src="ltx/44e44334372.svg" alt="\((q',w),(q,\sigma w)\)" style="height: 1.1080em; vertical-align: -0.2746em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/f709ce62f19.svg" alt="\(\sigma \in \Sigma,w \in \Sigma^*\)" style="height: 0.9000em; vertical-align: -0.1599em; display: inline-block" class="org-latex org-latex-inline" />, we write <img src="ltx/8208757ea4a.svg" alt="\((q,\sigma w)\sststile{M}{} (q',w)\)" style="height: 1.3284em; vertical-align: -0.4070em; display: inline-block" class="org-latex org-latex-inline" /> iff <img src="ltx/3430bab3fae.svg" alt="\(\delta(q,\sigma)=q'\)" style="height: 1.1080em; vertical-align: -0.2746em; display: inline-block" class="org-latex org-latex-inline" />.
+given a DFA <img src="ltx/8c3ce068c86.svg" alt="\(M=(Q, \Sigma, \delta, q_0, F)\)" style="height: 1.4868em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />,
+for configurations <img src="ltx/473e731e1eb.svg" alt="\((q',w),(q,\sigma w)\)" style="height: 1.2638em; vertical-align: -0.4304em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/d25c4fb71a0.svg" alt="\(\sigma \in \Sigma,w \in \Sigma^*\)" style="height: 1.0174em; vertical-align: -0.2773em; display: inline-block" class="org-latex org-latex-inline" />, we write <img src="ltx/e67e0227cd7.svg" alt="\((q,\sigma w)\sststile{M}{} (q',w)\)" style="height: 1.4706em; vertical-align: -0.5234em; display: inline-block" class="org-latex org-latex-inline" /> iff <img src="ltx/d697c629515.svg" alt="\(\delta(q,\sigma)=q'\)" style="height: 1.2638em; vertical-align: -0.4304em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-for configurations <img src="ltx/e3473389aef.svg" alt="\((q',w),(q,uw)\)" style="height: 1.1080em; vertical-align: -0.2746em; display: inline-block" class="org-latex org-latex-inline" />, where <img src="ltx/2894afde4be.svg" alt="\(q,q' \in Q\)" style="height: 1.0913em; vertical-align: -0.2579em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/6e5a0b6f08b.svg" alt="\(u,w \in \Sigma^*\)" style="height: 0.9000em; vertical-align: -0.1599em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/e3749173239.svg" alt="\(u=\sigma_1\sigma_2\dots \sigma_n,n \geq 0\)" style="height: 0.9725em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> we write <img src="ltx/4e2d8c4302c.svg" alt="\((q,uw) \sststile{M}{*} (q',w)\)" style="height: 1.3284em; vertical-align: -0.4070em; display: inline-block" class="org-latex org-latex-inline" /> iff there exist <img src="ltx/2dc646314f4.svg" alt="\(q=q_0,q_1,\dots,q_n=q'\)" style="height: 1.1285em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> where <img src="ltx/43e3d411bee.svg" alt="\(q_i \in Q,0 \le i \le n\)" style="height: 0.9921em; vertical-align: -0.3148em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/8bd3ed5a205.svg" alt="\(\delta(q_{i-1},\sigma_i)=q_i,1 \le i \le n\)" style="height: 1.0029em; vertical-align: -0.3148em; display: inline-block" class="org-latex org-latex-inline" />.
+for configurations <img src="ltx/9b5c5f2f78e.svg" alt="\((q',w),(q,uw)\)" style="height: 1.2638em; vertical-align: -0.4304em; display: inline-block" class="org-latex org-latex-inline" />, where <img src="ltx/f3803bb9911.svg" alt="\(q,q' \in Q\)" style="height: 1.2638em; vertical-align: -0.4304em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/5882d09fda0.svg" alt="\(u,w \in \Sigma^*\)" style="height: 1.0174em; vertical-align: -0.2773em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/721ea378e40.svg" alt="\(u=\sigma_1\sigma_2\dots \sigma_n,n \geq 0\)" style="height: 1.0189em; vertical-align: -0.3415em; display: inline-block" class="org-latex org-latex-inline" /> we write <img src="ltx/30970b84c65.svg" alt="\((q,uw) \sststile{M}{*} (q',w)\)" style="height: 1.4706em; vertical-align: -0.5234em; display: inline-block" class="org-latex org-latex-inline" /> iff there exist <img src="ltx/63e50f2e274.svg" alt="\(q=q_0,q_1,\dots,q_n=q'\)" style="height: 1.5100em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> where <img src="ltx/6237bfb28ca.svg" alt="\(q_i \in Q,0 \le i \le n\)" style="height: 1.4365em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/562c7452590.svg" alt="\(\delta(q_{i-1},\sigma_i)=q_i,1 \le i \le n\)" style="height: 1.4731em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-if <img src="ltx/a5733aa5d07.svg" alt="\(n=0\)" style="height: 0.7197em; vertical-align: -0.0541em; display: inline-block" class="org-latex org-latex-inline" /> then <img src="ltx/36c88355b6e.svg" alt="\((q,w)\sststile{M}{*}(q',w)\)" style="height: 1.3284em; vertical-align: -0.4070em; display: inline-block" class="org-latex org-latex-inline" /> iff <img src="ltx/7cedc82c888.svg" alt="\(q=q'\)" style="height: 1.0913em; vertical-align: -0.2579em; display: inline-block" class="org-latex org-latex-inline" />.
+if <img src="ltx/c65cad045c7.svg" alt="\(n=0\)" style="height: 0.7047em; vertical-align: -0.1120em; display: inline-block" class="org-latex org-latex-inline" /> then <img src="ltx/34e4957353e.svg" alt="\((q,w)\sststile{M}{*}(q',w)\)" style="height: 1.4706em; vertical-align: -0.5234em; display: inline-block" class="org-latex org-latex-inline" /> iff <img src="ltx/3242bfd8c07.svg" alt="\(q=q'\)" style="height: 1.2638em; vertical-align: -0.4304em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 </div>
 <div class="math-block definition" data-before="definition: acceptance for DFA" data-after="(Dr. Noa Lewenstein, ????)
-" id="org93a1272">
+" id="orgd12d214">
 <p>
-a DFA <img src="ltx/f72c34a6b48.svg" alt="\(M=(Q, \Sigma, \delta, q_0, F)\)" style="height: 0.9833em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> <i>accepts</i> a string <img src="ltx/9d7a6dc1b06.svg" alt="\(w \in \Sigma^*\)" style="height: 0.8530em; vertical-align: -0.1129em; display: inline-block" class="org-latex org-latex-inline" /> if <img src="ltx/aeb88ad4682.svg" alt="\((q_0,w)\sststile{M}{*}(q,\varepsilon)\)" style="height: 1.3284em; vertical-align: -0.4070em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="ltx/cc30dc6d680.svg" alt="\(q \in F\)" style="height: 0.9186em; vertical-align: -0.2579em; display: inline-block" class="org-latex org-latex-inline" />.
+a DFA <img src="ltx/8c3ce068c86.svg" alt="\(M=(Q, \Sigma, \delta, q_0, F)\)" style="height: 1.4868em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> <i>accepts</i> a string <img src="ltx/70ce0c79668.svg" alt="\(w \in \Sigma^*\)" style="height: 0.8530em; vertical-align: -0.1129em; display: inline-block" class="org-latex org-latex-inline" /> if <img src="ltx/38e8ac740a7.svg" alt="\((q_0,w)\sststile{M}{*}(q,\varepsilon)\)" style="height: 1.6238em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="ltx/bb81ada034b.svg" alt="\(q \in F\)" style="height: 1.2405em; vertical-align: -0.4304em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 </div>
 <div class="math-block definition" data-before="definition: language recognition" data-after="(Dr. Noa Lewenstein, ????)
-" id="org448eb2e">
+" id="org93370f1">
 <p>
-given a DFA <img src="ltx/f72c34a6b48.svg" alt="\(M=(Q, \Sigma, \delta, q_0, F)\)" style="height: 0.9833em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" />, we denote by <img src="ltx/a9b900bf90d.svg" alt="\(L(M)\)" style="height: 0.9627em; vertical-align: -0.2746em; display: inline-block" class="org-latex org-latex-inline" /> the language of all words that <img src="ltx/ac5c1e800f4.svg" alt="\(M\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> accepts:
+given a DFA <img src="ltx/8c3ce068c86.svg" alt="\(M=(Q, \Sigma, \delta, q_0, F)\)" style="height: 1.4868em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />, we denote by <img src="ltx/50d14db2d04.svg" alt="\(L(M)\)" style="height: 1.1747em; vertical-align: -0.3646em; display: inline-block" class="org-latex org-latex-inline" /> the language of all words that <img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> accepts:
 </p>
 
 <div class="equation-container">
 <span class="equation">
-<img src="ltx/bcd5950233e.svg" alt="\begin{equation}
+<img src="ltx/74de6878694.svg" alt="\begin{equation}
   L(M) \defeq \{w \mid M \text{ accepts } w\} \defeq \{w \mid (s,w) \sststile{M}{*}(q,\varepsilon),q \in F\},
 \end{equation}
-" style="height: 1.6321em; vertical-align: -0.4070em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 2.2712em; vertical-align: -0.5234em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 <p>
-we say <img src="ltx/ac5c1e800f4.svg" alt="\(M\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> <i>recognizes</i> the language <img src="ltx/a9b900bf90d.svg" alt="\(L(M)\)" style="height: 0.9627em; vertical-align: -0.2746em; display: inline-block" class="org-latex org-latex-inline" />. and call <img src="ltx/a9b900bf90d.svg" alt="\(L(M)\)" style="height: 0.9627em; vertical-align: -0.2746em; display: inline-block" class="org-latex org-latex-inline" /> a regular language.
+we say <img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> <i>recognizes</i> the language <img src="ltx/50d14db2d04.svg" alt="\(L(M)\)" style="height: 1.1747em; vertical-align: -0.3646em; display: inline-block" class="org-latex org-latex-inline" />. and call <img src="ltx/50d14db2d04.svg" alt="\(L(M)\)" style="height: 1.1747em; vertical-align: -0.3646em; display: inline-block" class="org-latex org-latex-inline" /> a regular language.
 </p>
 
 </div>
-<div class="dummy" id="orga19c6dc">
+<div class="dummy" id="orga79bc3a">
 <p>
-let <img src="ltx/316f692eea6.svg" alt="\(M=(Q,\Sigma,\delta,q_0,F)\)" style="height: 0.9833em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> be a finite automaton and let <img src="ltx/a3a92ac6cb2.svg" alt="\(w=w_1w_2 \cdots w_n\)" style="height: 0.7412em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> be a string where each <img src="ltx/ffd7b44684a.svg" alt="\(w_i\)" style="height: 0.7608em; vertical-align: -0.3148em; display: inline-block" class="org-latex org-latex-inline" /> is a member of the alphabet <img src="ltx/cf3447384c5.svg" alt="\(\Sigma\)" style="height: 0.7138em; vertical-align: -0.0511em; display: inline-block" class="org-latex org-latex-inline" />, then <img src="ltx/ac5c1e800f4.svg" alt="\(M\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> <i>accepts</i> <img src="ltx/1aea30b26a7.svg" alt="\(w\)" style="height: 0.4953em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> if a sequence of states <img src="ltx/a2dc77da12f.svg" alt="\(r_0,r_1,\dots,r_n\)" style="height: 0.7412em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> in <img src="ltx/786a45d9f74.svg" alt="\(Q\)" style="height: 0.8490em; vertical-align: -0.1805em; display: inline-block" class="org-latex org-latex-inline" /> exists with three conditions:
+let <img src="ltx/8742d1ddfaa.svg" alt="\(M=(Q,\Sigma,\delta,q_0,F)\)" style="height: 1.4868em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> be a finite automaton and let <img src="ltx/7bbd98fbb90.svg" alt="\(w=w_1w_2 \cdots w_n\)" style="height: 0.9342em; vertical-align: -0.3415em; display: inline-block" class="org-latex org-latex-inline" /> be a string where each <img src="ltx/c070c85d17d.svg" alt="\(w_i\)" style="height: 0.7864em; vertical-align: -0.3208em; display: inline-block" class="org-latex org-latex-inline" /> is a member of the alphabet <img src="ltx/8dfe7a0ecda.svg" alt="\(\Sigma\)" style="height: 0.7138em; vertical-align: -0.0511em; display: inline-block" class="org-latex org-latex-inline" />, then <img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> <i>accepts</i> <img src="ltx/6d25bafb8fb.svg" alt="\(w\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> if a sequence of states <img src="ltx/4d76b9f8e23.svg" alt="\(r_0,r_1,\dots,r_n\)" style="height: 0.8071em; vertical-align: -0.3415em; display: inline-block" class="org-latex org-latex-inline" /> in <img src="ltx/5de8f0ebe9f.svg" alt="\(Q\)" style="height: 1.2145em; vertical-align: -0.4044em; display: inline-block" class="org-latex org-latex-inline" /> exists with three conditions:
 </p>
 <ol class="org-ol">
-<li><img src="ltx/f15d9f2a050.svg" alt="\(r_0=q_0\)" style="height: 0.7422em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" />,</li>
-<li><img src="ltx/207ee9a22f4.svg" alt="\(\delta(r_i,w_{i+1})=r_{i+1}\)" style="height: 1.0539em; vertical-align: -0.3657em; display: inline-block" class="org-latex org-latex-inline" />, for <img src="ltx/f070413bab0.svg" alt="\(i=0,\dots,n-1\)" style="height: 0.8255em; vertical-align: -0.1599em; display: inline-block" class="org-latex org-latex-inline" />, and</li>
-<li><img src="ltx/239bc781fd1.svg" alt="\(r_n \in F\)" style="height: 0.9559em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" />.</li>
+<li><img src="ltx/776f58d4262.svg" alt="\(r_0=q_0\)" style="height: 1.2694em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />,</li>
+<li><img src="ltx/c3a6c9c2c17.svg" alt="\(\delta(r_i,w_{i+1})=r_{i+1}\)" style="height: 1.2010em; vertical-align: -0.3909em; display: inline-block" class="org-latex org-latex-inline" />, for <img src="ltx/80f6692802c.svg" alt="\(i=0,\dots,n-1\)" style="height: 1.0874em; vertical-align: -0.2773em; display: inline-block" class="org-latex org-latex-inline" />, and</li>
+<li><img src="ltx/8c604a19759.svg" alt="\(r_n \in F\)" style="height: 1.1014em; vertical-align: -0.2912em; display: inline-block" class="org-latex org-latex-inline" />.</li>
 </ol>
 
 <p>
-condition 1 says that the machine starts in the start state. condition 2 says that the machine goes from state to state according to the transition function. condition 3 says that the machine accepts its input if it ends up in an accept state. we say that <img src="ltx/ac5c1e800f4.svg" alt="\(M\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> <i>recognizes language</i> <img src="ltx/683dde0b47f.svg" alt="\(A\)" style="height: 0.7187em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> if <img src="ltx/e1ba721dce9.svg" alt="\(A=\{w \mid M \text{ accepts } w\}\)" style="height: 1.0078em; vertical-align: -0.3001em; display: inline-block" class="org-latex org-latex-inline" />.
+condition 1 says that the machine starts in the start state. condition 2 says that the machine goes from state to state according to the transition function. condition 3 says that the machine accepts its input if it ends up in an accept state. we say that <img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> <i>recognizes language</i> <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> if <img src="ltx/250c6250c74.svg" alt="\(A=\{w \mid M \text{ accepts } w\}\)" style="height: 1.2010em; vertical-align: -0.3909em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 </div>
-<div class="math-block note" data-before="note" data-after="(taken from Michael Sipser, 2012 chapter 1.1 designing finite automata) 
-" id="org17b7c4f">
+<div class="math-block note" data-before="note" data-after="(Michael Sipser, 2012 chapter 1.1 designing finite automata) 
+" id="orgb362f6b">
 <p>
 describes how to build automatons in detail.
 </p>
 
 </div>
-<div class="math-block my_example" data-before="example" data-after="" id="org0474de9">
+<div class="math-block my_example" data-before="example" data-after="" id="orgcc4eeff">
 
 <div class="equation-container">
 <span class="equation">
-<img src="ltx/2d6ae21a6b0.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
+<img src="ltx/57dd0adbbdc.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state, initial] (q_0) {\(q_0\)};
   \node[state, right of=q_0] (q_1) {\(q_1\)};
   \node[state, right of=q_1] (q_2) {\(q_2\)};
@@ -129,19 +129,19 @@ describes how to build automatons in detail.
             (q_3) edge [loop below] node {\(a,b\)} (q_3)          % from q3 to itself
             ;
 \end{tikzpicture}
-" style="height: 8.0892em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 9.2793em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 <p>
-a string input starts at <img src="ltx/82289271f3c.svg" alt="\(q_0\)" style="height: 0.7422em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" />, if we detect an <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, we move forward to the state <img src="ltx/9732cea7412.svg" alt="\(q_1\)" style="height: 0.7383em; vertical-align: -0.2912em; display: inline-block" class="org-latex org-latex-inline" /> which represents a progress of 1 in detecting 3 occurrences of <img src="ltx/6b479821bdf.svg" alt="\(b\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, if the next character is in <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, our progress would be cancelled and we go back to <img src="ltx/82289271f3c.svg" alt="\(q_0\)" style="height: 0.7422em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" />, otherwise we move to <img src="ltx/b74c89e64fd.svg" alt="\(q_2\)" style="height: 0.7414em; vertical-align: -0.2944em; display: inline-block" class="org-latex org-latex-inline" />, if we detect a <img src="ltx/6b479821bdf.svg" alt="\(b\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" /> we move to the accept state and stay there since we've achieved our goal of detecting 3 <img src="ltx/6b479821bdf.svg" alt="\(b\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />'s, otherwise we "cancel our progress" and go back to <img src="ltx/82289271f3c.svg" alt="\(q_0\)" style="height: 0.7422em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" />.
+a string input starts at <img src="ltx/b2c66ff4478.svg" alt="\(q_0\)" style="height: 1.0991em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />, if we detect an <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we move forward to the state <img src="ltx/814731c3692.svg" alt="\(q_1\)" style="height: 1.0855em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /> which represents a progress of 1 in detecting 3 occurrences of <img src="ltx/dd6c980994c.svg" alt="\(b\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, if the next character is in <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, our progress would be cancelled and we go back to <img src="ltx/b2c66ff4478.svg" alt="\(q_0\)" style="height: 1.0991em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />, otherwise we move to <img src="ltx/19a5ae179a0.svg" alt="\(q_2\)" style="height: 1.0991em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />, if we detect a <img src="ltx/dd6c980994c.svg" alt="\(b\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> we move to the accept state and stay there since we've achieved our goal of detecting 3 <img src="ltx/dd6c980994c.svg" alt="\(b\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />'s, otherwise we "cancel our progress" and go back to <img src="ltx/b2c66ff4478.svg" alt="\(q_0\)" style="height: 1.0991em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 </div>
-<div class="math-block my_example" data-before="example" data-after="" id="org7325940">
+<div class="math-block my_example" data-before="example" data-after="" id="orgd27e144">
 
 <div class="equation-container">
 <span class="equation">
-<img src="ltx/84a753dfb22.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
+<img src="ltx/a3a5f99e7f2.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
   \node[state, initial] (q_0) {\(q_0\)};
   \node[state, right of=q_0, initial] (q_1) {\(q_1\)};
   \node[state, right of=q_1, accepting] (q_2) {\(q_2\)};
@@ -156,7 +156,7 @@ a string input starts at <img src="ltx/82289271f3c.svg" alt="\(q_0\)" style="hei
             (q_3) edge [bend left=40] node [below left] {\(b\)} (q_0)
             ;
 \end{tikzpicture}
-" style="height: 9.2640em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 10.3261em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 <p>
@@ -168,15 +168,15 @@ here is my line of reasoning for this problem:
 the possible states for this problem are
 </p>
 <ol class="org-ol">
-<li>string length is 1, so the DFA shouldnt accept, that is the state <img src="ltx/9732cea7412.svg" alt="\(q_1\)" style="height: 0.7383em; vertical-align: -0.2912em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>second-to-last seen symbol was <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, and the current symbol is <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, we should accept</li>
-<li>second-to-last seen symbol was <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, and the current symbol is <img src="ltx/6b479821bdf.svg" alt="\(b\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, we should accept</li>
-<li>second-to-last seen symbol was <img src="ltx/6b479821bdf.svg" alt="\(b\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, and the current symbol is <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, we shouldnt accept</li>
-<li>second-to-last seen symbol was <img src="ltx/6b479821bdf.svg" alt="\(b\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, and the current symbol is <img src="ltx/6b479821bdf.svg" alt="\(b\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, we shouldnt accept</li>
+<li>string length is 1, so the DFA shouldnt accept, that is the state <img src="ltx/814731c3692.svg" alt="\(q_1\)" style="height: 1.0855em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>second-to-last seen symbol was <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the current symbol is <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we should accept</li>
+<li>second-to-last seen symbol was <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the current symbol is <img src="ltx/dd6c980994c.svg" alt="\(b\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we should accept</li>
+<li>second-to-last seen symbol was <img src="ltx/dd6c980994c.svg" alt="\(b\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the current symbol is <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we shouldnt accept</li>
+<li>second-to-last seen symbol was <img src="ltx/dd6c980994c.svg" alt="\(b\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and the current symbol is <img src="ltx/dd6c980994c.svg" alt="\(b\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we shouldnt accept</li>
 </ol>
 <p>
-states 4 and 5 cannot be unified into a single non-accepting state that says "last symbol wasnt <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />" because if we're currently at a state that says "last symbol wasnt <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />", we cant know what the character is, we just know that before it there wasnt an <img src="ltx/dabde720ac9.svg" alt="\(a\)" style="height: 0.5002em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, and so we wouldnt know where to move from there, this might not make much sense for the reader as its merely someone else's thoughts put into few words, so perhaps it helps to consider an automaton that unifies those states into one, how would it behave for the input string <img src="ltx/125101f553c.svg" alt="\(abba\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />?
-states 2 and 3 also cant be unified into a single accepting state, because the automaton needs to be able to tell the difference between those states to decide whether it should accept the sequence <img src="ltx/0403a1e962b.svg" alt="\(aba\)" style="height: 0.6962em; vertical-align: -0.0580em; display: inline-block" class="org-latex org-latex-inline" />, for example.
+states 4 and 5 cannot be unified into a single non-accepting state that says "last symbol wasnt <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />" because if we're currently at a state that says "last symbol wasnt <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />", we cant know what the character is, we just know that before it there wasnt an <img src="ltx/297afac0098.svg" alt="\(a\)" style="height: 0.5148em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and so we wouldnt know where to move from there, this might not make much sense for the reader as its merely someone else's thoughts put into few words, so perhaps it helps to consider an automaton that unifies those states into one, how would it behave for the input string <img src="ltx/be6814215aa.svg" alt="\(abba\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />?
+states 2 and 3 also cant be unified into a single accepting state, because the automaton needs to be able to tell the difference between those states to decide whether it should accept the sequence <img src="ltx/988dffefdd1.svg" alt="\(aba\)" style="height: 0.8593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, for example.
 </p>
 
 <p>
@@ -184,10 +184,33 @@ this hints that we need a total of 4 states (2 accepting, 2 non-accepting) besid
 </p>
 
 </div>
-<div class="math-block my_example" data-before="example" data-after="" id="orgfe7894a">
-<p>
-fig-automata-homework1-1
-</p>
+<div class="math-block my_example" data-before="example" data-after="" id="orgf21533c">
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/ed2b2c13522.svg" alt="\begin{tikzpicture}[initial text=, &amp;gt;={Stealth[round]}, node distance=2cm]
+  \node[state, initial] (q_0) {\(q_0\)};
+  \node[state, above right of=q_0] (q_1) {\(q_1\)};
+  \node[state, right of=q_1, accepting] (q_2) {\(q_2\)};
+  \node[state, below right of=q_0] (q_4) {\(q_4\)};
+  \node[state, right of=q_4, accepting] (q_5) {\(q_5\)};
+  \node[state, right of=q_5] (q_3) {\(q_3\)};
+  \path[-&amp;gt;] (q_0) edge node [above] {\(b\)} (q_1)
+            (q_1) edge node [above] {\(b\)} (q_2)
+            (q_0) edge node [below left] {\(a\)} (q_4)
+            (q_4) edge node [above] {\(b\)} (q_5)
+            (q_4) edge [bend right] node [below left] {\(a\)} (q_3)
+            (q_3) edge [loop below] node {\(a,b\)} (q_3)
+            (q_5) edge node [above] {\(a\)} (q_3)
+            (q_5) edge [bend right=45] node [above] {\(b\)} (q_4)
+            (q_1) edge node [above right] {\(a\)} (q_3)
+            (q_2) edge node [above right] {\(a\)} (q_3)
+            (q_2) edge [bend right=45] node [above] {\(b\)} (q_1)
+            ;
+\end{tikzpicture}
+" style="height: 16.3032em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
 
 </div>
 </div>
