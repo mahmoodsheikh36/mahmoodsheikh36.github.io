@@ -29,9 +29,9 @@
 <p>
 logic programming in common lisp
 </p>
-<div id="outline-container-org7211672" class="outline-2">
-<h2 id="org7211672">logical statements</h2>
-<div class="outline-text-2" id="text-org7211672">
+<div id="outline-container-org3061e99" class="outline-2">
+<h2 id="org3061e99">logical statements</h2>
+<div class="outline-text-2" id="text-org3061e99">
 <p>
 we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical statements, e.g. given the following knowledge base of horn clauses:
 </p>
@@ -81,7 +81,7 @@ so a knowledge base is just a (nested) list of propositions.
 </p>
 
 <p>
-what about predicates? e.g. statements like <img src="ltx/526e0a9cc4e.svg" alt="\(Human(John)\)" style="height: 0.9627em; vertical-align: -0.2746em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use <code>'(Human John)</code>, so instead of <b>infix notation</b>, we use lisp's infamous <b>prefix notation</b>, we dont need to worry about <code>(Human John)</code> sharing the same form as <code>(and x1 x2)</code>, as <code>and</code> can be considered just a boolean function like <code>Human</code>, after all. any expression that is in the form <code>(whatever x1 x2 ... xn)</code> would imply that <code>whatever</code> is meant to be treated as a boolean function.
+what about predicates? e.g. statements like <img src="ltx/526e0a9cc4e.svg" alt="\(Human(John)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use <code>'(Human John)</code>, so instead of <b>infix notation</b>, we use lisp's infamous <b>prefix notation</b>, we dont need to worry about <code>(Human John)</code> sharing the same form as <code>(and x1 x2)</code>, as <code>and</code> can be considered just a boolean function like <code>Human</code>, after all. any expression that is in the form <code>(whatever x1 x2 ... xn)</code> would imply that <code>whatever</code> is meant to be treated as a boolean function.
 </p>
 
 <p>
@@ -107,7 +107,7 @@ in our previous example, this doesnt make much difference as we were dealing wit
 
 
 <p>
-how about substitutions? how do we represent for example the substitution <img src="ltx/295812a0b94.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0450em; vertical-align: -0.3001em; display: inline-block" class="org-latex org-latex-inline" />, we just use an association list:
+how about substitutions? how do we represent for example the substitution <img src="ltx/295812a0b94.svg" alt="\(\{x/val,y/val2\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we just use an association list:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((sub nil)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">sub is the substitution</span>
@@ -122,9 +122,9 @@ how about substitutions? how do we represent for example the substitution <img s
 </pre>
 </div>
 </div>
-<div id="outline-container-org8d360b2" class="outline-2">
-<h2 id="org8d360b2">early inference engines</h2>
-<div class="outline-text-2" id="text-org8d360b2">
+<div id="outline-container-org3842694" class="outline-2">
+<h2 id="org3842694">early inference engines</h2>
+<div class="outline-text-2" id="text-org3842694">
 <p>
 imma start off with the unification algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the <b>occur check</b> and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates
 </p>
@@ -455,7 +455,7 @@ v13/{(SELLS ?X ?Y ?Z)} -&amp;gt; v12/{(CRIMINAL ?X)},
 v14/{(WEAPON ?Y)} -&amp;gt; v12/{(CRIMINAL ?X)},
 v15/{(AMERICAN ?X)} -&amp;gt; v12/{(CRIMINAL ?X)},
 };\end{tikzpicture}
-" style="height: 4.5196em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 4.5200em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
@@ -560,7 +560,7 @@ v7/{(MISSILE M1)} -&amp;gt; v4/{(WEAPON M1)},
 v8/{(OWNS NONO M1)} -&amp;gt; v3/{(SELLS WEST M1 NONO)},
 v7/{(MISSILE M1)} -&amp;gt; v3/{(SELLS WEST M1 NONO)},
 };\end{tikzpicture}
-" style="height: 12.9447em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 12.9459em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
