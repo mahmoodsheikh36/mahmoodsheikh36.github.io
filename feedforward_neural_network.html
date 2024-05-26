@@ -26,7 +26,7 @@
 </div><h1 class="main-title">feedforward neural network</h1><span class="desc"></span>
 </div>
 <div id="content" class="content">
-<div class="math-block note" data-before="note" data-after="" id="org4a86e3d">
+<div class="math-block note" data-before="note" data-after="" id="org9946740">
 <p>
 feedforward neural networks is a wider term than discussed here, whats discussed here really is a specific type we call a <b>simple multilayer perceptron</b>, but this serves as an introductory to other types of more complex networks
 </p>
@@ -40,7 +40,7 @@ a <b>feedforward network</b> has connections only in one direction. each node co
 a unit calculates the weighted sum of the inputs from predecessor nodes and then applies a nonlinear function to produce its output. let <img src="ltx/247e7a07e54.svg" alt="\(a_j\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> denote the output of unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and let <img src="ltx/31cd2f77ee9.svg" alt="\(w_{i,j}\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> be the weight attached to the link from unit <img src="ltx/75143dbad26.svg" alt="\(i\)" style="height: 0.7447em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> to unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />; then we have
 </p>
 
-<div id="orgf6e4fa2" class="equation-container">
+<div id="org97229dc" class="equation-container">
 <span class="equation">
 <img src="ltx/4514c322795.svg" alt="\begin{equation}
   a_j = g_j\left(\sum_{i} w_{i,j}a_i\right) = g_j(in_j)
@@ -55,7 +55,7 @@ where <img src="ltx/56b7a93f44a.svg" alt="\(g_j\)" style="height: 0.8007em; vert
 <p>
 each unit has an extra input from a dummy unit 0 that is fixed to +1 and a weight <img src="ltx/8e17d16fb29.svg" alt="\(w_{0,j}\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> for that input. this allows the total weighted input <img src="ltx/47070025619.svg" alt="\(in_j\)" style="height: 1.0251em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> to unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to be nonzero even when the outputs of the preceding layer are all zero. with this convention, we can write the preceding equation in vector form:
 <img src="ltx/077e7c1791c.svg" alt="\[ a_j = g_j(\brm{w}^T\brm{x}) \]" style="height: 1.5548em; display: block" class="org-latex org-latex-block" />
-where <img src="ltx/4bd4a020a05.svg" alt="\(\brm{w}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the vector of weights leading into unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (including <img src="ltx/8e17d16fb29.svg" alt="\(w_{0,j}\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" />) and <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the vector of inputs to unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (including the +1)
+where <img src="ltx/4bd4a020a05.svg" alt="\(\brm{w}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the vector of weights leading into unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (including <img src="ltx/8e17d16fb29.svg" alt="\(w_{0,j}\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" />) and <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="display: inline-block" class="org-latex org-latex-inline" /> is the vector of inputs to unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (including the +1)
 training a neural network consists of modifying the network’s parameters so as to minimize the loss function on the training set. in principle, any kind of optimization algorithm could be used. in practice, modern neural networks are almost always trained with some variant of stochastic gradient descent.
 </p>
 
@@ -86,7 +86,7 @@ assuming the squared cost function (which we would usually denote by <img src="l
 after the first application of the derivative chain rule to the cost function with respect to the weight that connects an arbitrary unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> in the last hidden layer to an arbitrary unit <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in the output layer we get:
 <img src="ltx/1e1e5ae0f13.svg" alt="\[ \frac{\partial L}{\partial w^q_{jk}} = -2(y-\hat y) \frac{\partial {g^q(in_k^q)}}{\partial w^q_{jk}} \]" style="height: 2.7417em; display: block" class="org-latex org-latex-block" />
 </p>
-<div class="math-block note" data-before="note" data-after="" id="org17a9310">
+<div class="math-block note" data-before="note" data-after="" id="orgafe8968">
 <p>
 a weight that is between a layer <img src="ltx/7cb9a67d444.svg" alt="\(l-1\)" style="height: 0.8606em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is denoted by <img src="ltx/aa60d56955d.svg" alt="\(w^l_x\)" style="height: 1.1727em; vertical-align: -0.2915em; display: inline-block" class="org-latex org-latex-inline" /> and not <img src="ltx/d30ecf9e6cc.svg" alt="\(w^{l-1}_x\)" style="height: 1.1727em; vertical-align: -0.2915em; display: inline-block" class="org-latex org-latex-inline" /> because it actually belongs to the <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />th layer, even if it comes out of the <img src="ltx/7cb9a67d444.svg" alt="\(l-1\)" style="height: 0.8606em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />th layer, this means that weights with a superscript of 1, e.g. <img src="ltx/c1b24fe5052.svg" alt="\(w^1_x\)" style="height: 1.1384em; vertical-align: -0.2915em; display: inline-block" class="org-latex org-latex-inline" /> arent defined, because the first layer (input layer) has no weights.
 </p>
@@ -98,7 +98,7 @@ applying the chain rule again we get:
 we apply the chain rule again to get the final gradient formula for <img src="ltx/ef11d0c2754.svg" alt="\(w^q_{jk}\)" style="height: 1.2937em; vertical-align: -0.4782em; display: inline-block" class="org-latex org-latex-inline" />:
 </p>
 
-<div id="orge85464e" class="equation-container">
+<div id="org88279dc" class="equation-container">
 <span class="equation">
 <img src="ltx/ccb9f37928a.svg" alt="\begin{equation}
   \frac{\partial L}{\partial w^q_{jk}} = \underbrace{-2(y-\hat y){g^q}'(in_k^q)}_{\text{perceived error, } \Delta_k^q} a_j^{q-1}
@@ -118,7 +118,7 @@ where <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertic
 and in general form, the perceived error for an arbitrary unit <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in an arbitrary hidden layer <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, is defined as:
 </p>
 
-<div id="org5fb2a62" class="equation-container">
+<div id="orga1033b8" class="equation-container">
 <span class="equation">
 <img src="ltx/187679bd297.svg" alt="\begin{equation}
   \Delta_k^l = \Delta_c^{l+1}w^{l+1}_{kc}{g^l}'(in_k^l) 
@@ -140,17 +140,17 @@ the back-propagation process passes messages back along each link in the network
 overall, the process of learning the weights of the network is usually one that exhibits diminishing returns. we run until it is no longer practical to decrease the test error by running longer. usually this does not mean we have reached a global or even a local minimum of the loss function. instead, it means we would have to make an impractically large number of very small steps to continue reducing the cost, or that additional steps would only cause overfitting, or that estimates of the gradient are too inaccurate to make further progress.
 </p>
 
-<div class="math-block my_example" data-before="example" data-after="" id="orge4fe696">
+<div class="math-block my_example" data-before="example" data-after="" id="org5e5a644">
 <p>
 citation: (Peter Norvig, Stuart J. Russell, 2020)
 consider the following network
 </p>
 <p>
 <img src="/network-graph.png" />
-coupling multiple units together into a network creates a complex function that is a composition of the algebraic expressions represented by the individual units. for example, the network above represents a function <img src="ltx/cb8ac078bbf.svg" alt="\(h_{\brm{w}}(\brm{x})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, parameterized by weights <img src="ltx/4bd4a020a05.svg" alt="\(\brm{w}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, that maps a two-element input vector <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> to a scalar output value <img src="ltx/3fd78054249.svg" alt="\(\hat y\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. the internal structure of the function mirrors the structure of the network. for example we can write an expression for the output <img src="ltx/3fd78054249.svg" alt="\(\hat y\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> as follows:
+coupling multiple units together into a network creates a complex function that is a composition of the algebraic expressions represented by the individual units. for example, the network above represents a function <img src="ltx/cb8ac078bbf.svg" alt="\(h_{\brm{w}}(\brm{x})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, parameterized by weights <img src="ltx/4bd4a020a05.svg" alt="\(\brm{w}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, that maps a two-element input vector <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="display: inline-block" class="org-latex org-latex-inline" /> to a scalar output value <img src="ltx/3fd78054249.svg" alt="\(\hat y\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. the internal structure of the function mirrors the structure of the network. for example we can write an expression for the output <img src="ltx/3fd78054249.svg" alt="\(\hat y\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> as follows:
 </p>
 
-<div id="org2bc6822" class="equation-container">
+<div id="org5fd4ec5" class="equation-container">
 <span class="equation">
 <img src="ltx/6c67c667ded.svg" alt="\begin{align*}
   \hat y &amp;amp;= g_5(in_5) = g_5(w_{0,5} + w_{3,5}a_3 + w_{4,5}a_4)\\
@@ -214,131 +214,85 @@ another important characteristic of these gradient expressions is that they have
 </p>
 
 </div>
-
-<p>
-images do not quite fit into the category of factored data; although an RGB image of size <img src="ltx/a328fc177b5.svg" alt="\(X \times Y\)" style="height: 0.8497em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> pixels can be thought of as <img src="ltx/a686ef4daf0.svg" alt="\(3XY\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> integer-valued attributes (typically with values in the range <img src="ltx/b36529dace0.svg" alt="\(\{0,\dots,255\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />), this would ignore the fact that the RGB triplets belong to the same pixel in the image and the fact that pixel adjacency really matters. of course, we can map adjacent pixels onto adjacent input nodes in the network, but the meaning of adjacency is completely lost if the internal layers of the network are fully connected. in practice, networks used with image data have array-like internal structures that aim to reflect the semantics of adjacency.
-</p>
-
-<p>
-categorical attributes with more than two values are usually encoded using the so-called <b>one-hot encoding</b>. an attribute with <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> possible values is represented by <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> separate input bits. for any given value, the corresponding input bit is set to 1 and all the others are set to 0. this generally works better than mapping the values to integers.
-</p>
-
-<p>
-on the output side of the network, the problem of encoding the raw data values into actual values <img src="ltx/a7cff3c9f2b.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> for the output nodes of the graph is much the same as the input encoding problem. for example, if the network is trying to predict a variable named weather, which has values {sun,rain,cloud,snow}, we would use a one-hot encoding with four bits.
-</p>
-
-<p>
-so much for the data values <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7130em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. what about the prediction <img src="ltx/dc3363aeae8.svg" alt="\(\hat  y\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />? ideally, it would exactly match the desired value <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7130em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. and the loss would be zero, and we'd be done. in practice, this seldom happens&#x2013;especially before we have started the process of adjusting the weights. thus, we need to think about what an incorrect output value means, and how to measure the loss. in deriving the gradients, we began with the squared-error loss function. this keeps the algebra simple, but it is not the only possibility. in fact, for most deep learning applications, it is more common to interpret the output values <img src="ltx/3fd78054249.svg" alt="\(\hat y\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> as probabilities and to use the negative log likelihood as the loss function.
-</p>
-
-<p>
-maximum likelihood learning finds the value of <img src="ltx/4bd4a020a05.svg" alt="\(\brm{w}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> that maximizes the probability of the observed data. and because the log function is monotonic, this is equivalent to maximizing the log likelihood of the data, which is equivalent in turn to minimizing a loss function defined as the negative log likelihood. (taking logs turns products of probabilities into sums, which are more amenable for taking derivatives.) in other words, we are looking for <img src="ltx/08ea7aedfc6.svg" alt="\(\brm{w}^*\)" style="height: 0.7732em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> that minimizes the sum of negative log probabilities of the <img src="ltx/fec97b9cff2.svg" alt="\(N\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> examples:
-</p>
-<p>
-<img src="ltx/c5f1cc2afcb.svg" alt="\[ \brm{w}^* = \argmin_w - \sum_{j=1}^{N} \log P_{\brm{w}}(\brm{y}_j|\brm{x}_j) \]" style="height: 3.3758em; display: block" class="org-latex org-latex-block" />
-in the deep learning literature, it is common to talk about minimizing the cross-entropy. we typically use the definition of cross-entropy with <img src="ltx/a663d1358cc.svg" alt="\(P\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> being the true distribution over training examples, <img src="ltx/df34cca98c5.svg" alt="\(P^*(\brm{x},\brm{y})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/5de8f0ebe9f.svg" alt="\(Q\)" style="height: 0.9586em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> being the predictive hypothesis <img src="ltx/1460f48c27a.svg" alt="\(P_{\brm{w}}(\brm{y} \mid \brm{x})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />. minimizing the cross-entropy <img src="ltx/a5dd5be3839.svg" alt="\(H(P^*(\brm{x},\brm{y}), P_{\brm{w}}(\brm{y} \mid \brm{x}))\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> by adjusting <img src="ltx/4bd4a020a05.svg" alt="\(\brm{w}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> makes the hypothesis agree as closely as possible with the true distribution. in reality, we cannot minimize this cross-entropy because we do not have access to the true data distribution <img src="ltx/df34cca98c5.svg" alt="\(P^*(\brm{x},\brm{y})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />; but we do have access to samples from <img src="ltx/df34cca98c5.svg" alt="\(P^*(\brm{x},\brm{y})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, so the sum over the actual data in <a href="/feedforward_neural_network.html">this equation</a> approximates the expectation in the equation of cross-entropy.
-</p>
-
-<p>
-to minimize the negative log likelihood (or the cross-entropy), we need to be able to interpret the output of the network as a probability. for example, if the network has one output unit with a sigmoid activation function and is learning a boolean classification, we can interpret the output value directly as the probability that the example belongs to the positive class. thus, for boolean classification problems, we commonly use a sigmoid output layer.
-</p>
-
-<p>
-multiclass classification problems are very common in machine learning. for example, classifiers used for object recognition often need to recognize thousands of distinct categories of objects. natural language models that try to predict the next word in a sentence may have to choose among tens of thousands of possible words. for this kind of prediction, we need the network to output a categorical distribution&#x2013;that is, if there are <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> possible answers, we need <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> output nodes that represent probabilities summing to 1.
-</p>
-
-<p>
-To achieve this, we use a softmax layer, which outputs a vector of <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> values given a vector of input values <img src="ltx/ced6faebad8.svg" alt="\(\brm{in}=(in_1,\dots,in_d)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />. The kth element of that output vector is given by
-<img src="ltx/68d3cd40c0b.svg" alt="\[ \mathrm{softmax}(\brm{in})_k = \frac{e^{in_k}}{\sum_{k'=1}^{d} e^{in_{k'}}} \]" style="height: 2.8242em; display: block" class="org-latex org-latex-block" />
-for a regression problem, where the target value <img src="ltx/a7cff3c9f2b.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is continuous, it is common to use a linear output layer&#x2013;in other words, <img src="ltx/48a3a75260a.svg" alt="\(\hat y_j=in_j\)" style="height: 1.0539em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" />, without any activation function <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />.
-</p>
-
-<p>
-many other output layers are possible.
-</p>
-
-<p>
-#+end_comment
-</p>
-<div id="outline-container-orgb84f7dc" class="outline-2">
-<h2 id="orgb84f7dc">initial common lisp implementation</h2>
-<div class="outline-text-2" id="text-orgb84f7dc">
+<div id="outline-container-org2043112" class="outline-2">
+<h2 id="org2043112">initial common lisp implementation</h2>
+<div class="outline-text-2" id="text-org2043112">
 <p>
 this code uses common lisp (aswell as code/functions from the actual link itself, click it for those)
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">neural network class</span>
-(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">network</span> ()
-  ((weights <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:weights</span> <span style="font-weight: bold;">:initform</span> nil <span style="font-weight: bold;">:accessor</span> network-weights)
-   (input-layer-size <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:input-layer-size</span> <span style="font-weight: bold;">:accessor</span> network-input-layer-size)
-   (output-layer-size <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:output-layer-size</span> <span style="font-weight: bold;">:accessor</span> network-output-layer-size)
-   (hidden-layer-sizes <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:hidden-layer-sizes</span> <span style="font-weight: bold;">:accessor</span> network-hidden-layer-sizes)
-   (learning-rate <span style="font-weight: bold;">:initform</span> 0.0005 <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:learning-rate</span> <span style="font-weight: bold;">:accessor</span> network-learning-rate)))
+<pre class="src src-lisp"><span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">neural network class</span>
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defclass</span> <span style="color: #2fa526;">network</span> <span style="color: #64aa0f;">()</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>weights <span style="color: #ff7a7f; font-weight: bold;">:initarg</span> <span style="color: #ff7a7f; font-weight: bold;">:weights</span> <span style="color: #ff7a7f; font-weight: bold;">:initform</span> nil <span style="color: #ff7a7f; font-weight: bold;">:accessor</span> network-weights<span style="color: #ef656a;">)</span>
+   <span style="color: #ef656a;">(</span>input-layer-size <span style="color: #ff7a7f; font-weight: bold;">:initarg</span> <span style="color: #ff7a7f; font-weight: bold;">:input-layer-size</span> <span style="color: #ff7a7f; font-weight: bold;">:accessor</span> network-input-layer-size<span style="color: #ef656a;">)</span>
+   <span style="color: #ef656a;">(</span>output-layer-size <span style="color: #ff7a7f; font-weight: bold;">:initarg</span> <span style="color: #ff7a7f; font-weight: bold;">:output-layer-size</span> <span style="color: #ff7a7f; font-weight: bold;">:accessor</span> network-output-layer-size<span style="color: #ef656a;">)</span>
+   <span style="color: #ef656a;">(</span>hidden-layer-sizes <span style="color: #ff7a7f; font-weight: bold;">:initarg</span> <span style="color: #ff7a7f; font-weight: bold;">:hidden-layer-sizes</span> <span style="color: #ff7a7f; font-weight: bold;">:accessor</span> network-hidden-layer-sizes<span style="color: #ef656a;">)</span>
+   <span style="color: #ef656a;">(</span>learning-rate <span style="color: #ff7a7f; font-weight: bold;">:initform</span> 0.0005 <span style="color: #ff7a7f; font-weight: bold;">:initarg</span> <span style="color: #ff7a7f; font-weight: bold;">:learning-rate</span> <span style="color: #ff7a7f; font-weight: bold;">:accessor</span> network-learning-rate<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 
-(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-feedforward</span> ((nw network) x)
-  <span style="font-style: italic;">"pass the vector x into the network, x is treated as the input layer, the activations of the entire network are returned"</span>
-  (<span style="font-weight: bold;">let</span> ((previous-layer-activations x)
-        (network-activations (list x))
-        (network-unsquashed-activations (list x)))
-    (<span style="font-weight: bold;">loop</span> for weights-index from 0 below (length (network-weights nw))
-          do (<span style="font-weight: bold;">let*</span> ((weights (elt (network-weights nw) weights-index))
-                    (layer-activations (list-&gt;vector (make-list (length (elt weights 0)) <span style="font-weight: bold;">:initial-element</span> 0))))
-               (<span style="font-weight: bold;">loop</span> for i from 0 below (length previous-layer-activations)
-                     do (<span style="font-weight: bold;">let</span> ((previous-unit-activation (elt previous-layer-activations i))
-                              (previous-unit-weights (elt weights i)))
-                          (setf
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">network-feedforward</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>nw network<span style="color: #ef656a;">)</span> x<span style="color: #64aa0f;">)</span>
+  <span style="color: #5f9f6f; font-style: italic;">"pass the vector x into the network, x is treated as the input layer, the activations of the entire network are returned"</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>previous-layer-activations x<span style="color: #3dbbb0;">)</span>
+        <span style="color: #3dbbb0;">(</span>network-activations <span style="color: #df8f6f;">(</span>list x<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
+        <span style="color: #3dbbb0;">(</span>network-unsquashed-activations <span style="color: #df8f6f;">(</span>list x<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for weights-index from 0 below <span style="color: #3dbbb0;">(</span>length <span style="color: #df8f6f;">(</span>network-weights nw<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
+          do <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>weights <span style="color: #ff7a7f;">(</span>elt <span style="color: #2fa526;">(</span>network-weights nw<span style="color: #2fa526;">)</span> weights-index<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                    <span style="color: #379cf6;">(</span>layer-activations <span style="color: #ff7a7f;">(</span>list-&gt;vector <span style="color: #2fa526;">(</span>make-list <span style="color: #c48702;">(</span>length <span style="color: #d0730f;">(</span>elt weights 0<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span> <span style="color: #ff7a7f; font-weight: bold;">:initial-element</span> 0<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below <span style="color: #379cf6;">(</span>length previous-layer-activations<span style="color: #379cf6;">)</span>
+                     do <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>previous-unit-activation <span style="color: #c48702;">(</span>elt previous-layer-activations i<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
+                              <span style="color: #2fa526;">(</span>previous-unit-weights <span style="color: #c48702;">(</span>elt weights i<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
+                          <span style="color: #ff7a7f;">(</span>setf
                            layer-activations
-                           (map
+                           <span style="color: #2fa526;">(</span>map
                             'list
-                            (<span style="font-weight: bold;">lambda</span> (weight activation)
-                              (+ activation (* previous-unit-activation weight)))
-                            previous-unit-weights layer-activations))))
-               (setf previous-layer-activations (map 'list #'sigmoid layer-activations))
-               (setf network-activations
-                     (append network-activations
-                             (list previous-layer-activations)))
-               (setf network-unsquashed-activations
-                     (append network-unsquashed-activations
-                             (list layer-activations)))))
-    (values (list-&gt;vector network-activations) (list-&gt;vector network-unsquashed-activations))))
+                            <span style="color: #c48702;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #d0730f;">(</span>weight activation<span style="color: #d0730f;">)</span>
+                              <span style="color: #d0730f;">(</span>+ activation <span style="color: #64aa0f;">(</span>* previous-unit-activation weight<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span>
+                            previous-unit-weights layer-activations<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span>setf previous-layer-activations <span style="color: #379cf6;">(</span>map 'list #'sigmoid layer-activations<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span>setf network-activations
+                     <span style="color: #379cf6;">(</span>append network-activations
+                             <span style="color: #ff7a7f;">(</span>list previous-layer-activations<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span>setf network-unsquashed-activations
+                     <span style="color: #379cf6;">(</span>append network-unsquashed-activations
+                             <span style="color: #ff7a7f;">(</span>list layer-activations<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+    <span style="color: #ef656a;">(</span>values <span style="color: #3dbbb0;">(</span>list-&gt;vector network-activations<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>list-&gt;vector network-unsquashed-activations<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 
-(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-generate-weights</span> ((nw network))
-  <span style="font-style: italic;">"generate random weights based on the sizes of the layers"</span>
-  (setf
-   (network-weights nw)
-   (<span style="font-weight: bold;">loop</span> for i from 0 below (1+ (length (network-hidden-layer-sizes nw)))
-         collect (<span style="font-weight: bold;">let*</span> ((layer-sizes (append
-                                      (list (network-input-layer-size nw))
-                                      (network-hidden-layer-sizes nw)
-                                      (list (network-output-layer-size nw))))
-                        (layer-size (elt layer-sizes i))
-                        (next-layer-size (elt layer-sizes (1+ i))))
-                   (<span style="font-weight: bold;">loop</span> for j from 0 below layer-size
-                         collect (<span style="font-weight: bold;">loop</span> for k from 0 below next-layer-size
-                                       collect (generate-random-weight))))))
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">convert weights from nested lists to nested vector for fast access</span>
-  (setf (network-weights nw) (list-&gt;vector (network-weights nw))))
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">network-generate-weights</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>nw network<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+  <span style="color: #5f9f6f; font-style: italic;">"generate random weights based on the sizes of the layers"</span>
+  <span style="color: #64aa0f;">(</span>setf
+   <span style="color: #ef656a;">(</span>network-weights nw<span style="color: #ef656a;">)</span>
+   <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below <span style="color: #3dbbb0;">(</span>1+ <span style="color: #df8f6f;">(</span>length <span style="color: #379cf6;">(</span>network-hidden-layer-sizes nw<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
+         collect <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>layer-sizes <span style="color: #ff7a7f;">(</span>append
+                                      <span style="color: #2fa526;">(</span>list <span style="color: #c48702;">(</span>network-input-layer-size nw<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
+                                      <span style="color: #2fa526;">(</span>network-hidden-layer-sizes nw<span style="color: #2fa526;">)</span>
+                                      <span style="color: #2fa526;">(</span>list <span style="color: #c48702;">(</span>network-output-layer-size nw<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                        <span style="color: #379cf6;">(</span>layer-size <span style="color: #ff7a7f;">(</span>elt layer-sizes i<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                        <span style="color: #379cf6;">(</span>next-layer-size <span style="color: #ff7a7f;">(</span>elt layer-sizes <span style="color: #2fa526;">(</span>1+ i<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+                   <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for j from 0 below layer-size
+                         collect <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for k from 0 below next-layer-size
+                                       collect <span style="color: #ff7a7f;">(</span>generate-random-weight<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+  <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">convert weights from nested lists to nested vector for fast access</span>
+  <span style="color: #64aa0f;">(</span>setf <span style="color: #ef656a;">(</span>network-weights nw<span style="color: #ef656a;">)</span> <span style="color: #ef656a;">(</span>list-&gt;vector <span style="color: #3dbbb0;">(</span>network-weights nw<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 
-(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">print-object</span> ((nw network) stream)
-  (print-unreadable-object (nw stream <span style="font-weight: bold;">:type</span> t)
-    (format stream <span style="font-style: italic;">"total weights: ~a"</span>
-            (reduce
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">print-object</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>nw network<span style="color: #ef656a;">)</span> stream<span style="color: #64aa0f;">)</span>
+  <span style="color: #64aa0f;">(</span>print-unreadable-object <span style="color: #ef656a;">(</span>nw stream <span style="color: #ff7a7f; font-weight: bold;">:type</span> t<span style="color: #ef656a;">)</span>
+    <span style="color: #ef656a;">(</span>format stream <span style="color: #f06a3f;">"total weights: ~a"</span>
+            <span style="color: #3dbbb0;">(</span>reduce
              #'*
-             (append (list (network-input-layer-size nw) (network-output-layer-size nw))
-                     (network-hidden-layer-sizes nw))))))
+             <span style="color: #df8f6f;">(</span>append <span style="color: #379cf6;">(</span>list <span style="color: #ff7a7f;">(</span>network-input-layer-size nw<span style="color: #ff7a7f;">)</span> <span style="color: #ff7a7f;">(</span>network-output-layer-size nw<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                     <span style="color: #379cf6;">(</span>network-hidden-layer-sizes nw<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">generate-random-weight</span> ()
-  (/ (- (random 2000) 1000) 1000))
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">generate-random-weight</span> <span style="color: #64aa0f;">()</span>
+  <span style="color: #64aa0f;">(</span>/ <span style="color: #ef656a;">(</span>- <span style="color: #3dbbb0;">(</span>random 2000<span style="color: #3dbbb0;">)</span> 1000<span style="color: #ef656a;">)</span> 1000<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">make-network</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;key</span> input-layer-size hidden-layer-sizes output-layer-size
-                       learning-rate)
-  (<span style="font-weight: bold;">let</span> ((nw (make-instance 'network
-                           <span style="font-weight: bold;">:input-layer-size</span> input-layer-size
-                           <span style="font-weight: bold;">:hidden-layer-sizes</span> hidden-layer-sizes
-                           <span style="font-weight: bold;">:output-layer-size</span> output-layer-size
-                           <span style="font-weight: bold;">:learning-rate</span> learning-rate)))
-    (network-generate-weights nw)
-    nw))
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">make-network</span> <span style="color: #64aa0f;">(</span><span style="color: #2fa526;">&amp;key</span> input-layer-size hidden-layer-sizes output-layer-size
+                       learning-rate<span style="color: #64aa0f;">)</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>nw <span style="color: #df8f6f;">(</span>make-instance 'network
+                           <span style="color: #ff7a7f; font-weight: bold;">:input-layer-size</span> input-layer-size
+                           <span style="color: #ff7a7f; font-weight: bold;">:hidden-layer-sizes</span> hidden-layer-sizes
+                           <span style="color: #ff7a7f; font-weight: bold;">:output-layer-size</span> output-layer-size
+                           <span style="color: #ff7a7f; font-weight: bold;">:learning-rate</span> learning-rate<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+    <span style="color: #ef656a;">(</span>network-generate-weights nw<span style="color: #ef656a;">)</span>
+    nw<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 </pre>
 </div>
 <p>
@@ -351,87 +305,87 @@ say we did use recursion, and on each recurrence we hopped backwards into the pr
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-train</span> ((nw network) xs ys)
-  <span style="font-style: italic;">"train on the given data, xs is a list of vectors, each vector is treated as an input layer to the network, and ys is a list of vectors, each vector representing the output layer corresponding to the vector in xs thats at the same index"</span>
-  (<span style="font-weight: bold;">loop</span> for i from 0 below (length xs)
-        do (<span style="font-weight: bold;">let*</span>
-               ((x (elt xs i))
-                (y (elt ys i))
-                (layer-index (1+ (length (network-hidden-layer-sizes nw)))))
-             (<span style="font-weight: bold;">multiple-value-bind</span> (activations unsquashed-activations)
-                 (network-feedforward nw x)
-               (<span style="font-weight: bold;">loop</span>
+<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">network-train</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>nw network<span style="color: #ef656a;">)</span> xs ys<span style="color: #64aa0f;">)</span>
+  <span style="color: #5f9f6f; font-style: italic;">"train on the given data, xs is a list of vectors, each vector is treated as an input layer to the network, and ys is a list of vectors, each vector representing the output layer corresponding to the vector in xs thats at the same index"</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below <span style="color: #ef656a;">(</span>length xs<span style="color: #ef656a;">)</span>
+        do <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">let*</span>
+               <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>x <span style="color: #379cf6;">(</span>elt xs i<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+                <span style="color: #df8f6f;">(</span>y <span style="color: #379cf6;">(</span>elt ys i<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+                <span style="color: #df8f6f;">(</span>layer-index <span style="color: #379cf6;">(</span>1+ <span style="color: #ff7a7f;">(</span>length <span style="color: #2fa526;">(</span>network-hidden-layer-sizes nw<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
+             <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">multiple-value-bind</span> <span style="color: #df8f6f;">(</span>activations unsquashed-activations<span style="color: #df8f6f;">)</span>
+                 <span style="color: #df8f6f;">(</span>network-feedforward nw x<span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span>
                  for unit-index
                  from 0
-                   below (network-output-layer-size nw)
-                 do (network-back-propagate
+                   below <span style="color: #379cf6;">(</span>network-output-layer-size nw<span style="color: #379cf6;">)</span>
+                 do <span style="color: #379cf6;">(</span>network-back-propagate
                      nw
                      layer-index
                      unit-index
-                     (* 2 (- (elt (elt activations layer-index) unit-index)
-                             (elt y unit-index)))
+                     <span style="color: #ff7a7f;">(</span>* 2 <span style="color: #2fa526;">(</span>- <span style="color: #c48702;">(</span>elt <span style="color: #d0730f;">(</span>elt activations layer-index<span style="color: #d0730f;">)</span> unit-index<span style="color: #c48702;">)</span>
+                             <span style="color: #c48702;">(</span>elt y unit-index<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
                      activations
-                     unsquashed-activations))))))
+                     unsquashed-activations<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 
-(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-back-propagate</span> ((nw network) layer-index unit-index gradient activations unsquashed-activations)
-  <span style="font-style: italic;">"backpropagate the error through the network, each layers gradients depend on those of the layer succeeding it in the network"</span>
-  (<span style="font-weight: bold;">let*</span>
-      ((predecessor-layer-weights (elt (network-weights nw) (1- layer-index)))
-       (weights-into-unit
-         (map
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">network-back-propagate</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>nw network<span style="color: #ef656a;">)</span> layer-index unit-index gradient activations unsquashed-activations<span style="color: #64aa0f;">)</span>
+  <span style="color: #5f9f6f; font-style: italic;">"backpropagate the error through the network, each layers gradients depend on those of the layer succeeding it in the network"</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span>
+      <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>predecessor-layer-weights <span style="color: #df8f6f;">(</span>elt <span style="color: #379cf6;">(</span>network-weights nw<span style="color: #379cf6;">)</span> <span style="color: #379cf6;">(</span>1- layer-index<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
+       <span style="color: #3dbbb0;">(</span>weights-into-unit
+         <span style="color: #df8f6f;">(</span>map
           'vector
-          (<span style="font-weight: bold;">lambda</span> (predecessor-unit-weights)
-            (elt predecessor-unit-weights unit-index))
-          predecessor-layer-weights))
-       (unit-activation (elt (elt activations layer-index) unit-index))
-       (unit-input (elt (elt unsquashed-activations layer-index) unit-index)))
-    (<span style="font-weight: bold;">loop</span> for predecessor-unit-index from 0 below (length predecessor-layer-weights)
-          do (<span style="font-weight: bold;">let*</span>
-                 ((weight (elt weights-into-unit predecessor-unit-index))
-                  (predecessor-unit-activation
-                    (elt (elt activations (1- layer-index))
-                         predecessor-unit-index))
-                  (gradient-to-back-propagate
-                    (* gradient
-                       (sigmoid-derivative unit-input)
-                       weight))
-                  (actual-gradient (* gradient
-                                      (sigmoid-derivative unit-input)
-                                      predecessor-unit-activation))
-                  (weight-change (* (network-learning-rate nw)
-                                    actual-gradient)))
-               (<span style="font-weight: bold;">if</span> (&gt; layer-index 1)
-                   (network-back-propagate
+          <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #ff7a7f;">(</span>predecessor-unit-weights<span style="color: #ff7a7f;">)</span>
+            <span style="color: #ff7a7f;">(</span>elt predecessor-unit-weights unit-index<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+          predecessor-layer-weights<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
+       <span style="color: #3dbbb0;">(</span>unit-activation <span style="color: #df8f6f;">(</span>elt <span style="color: #379cf6;">(</span>elt activations layer-index<span style="color: #379cf6;">)</span> unit-index<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span>
+       <span style="color: #3dbbb0;">(</span>unit-input <span style="color: #df8f6f;">(</span>elt <span style="color: #379cf6;">(</span>elt unsquashed-activations layer-index<span style="color: #379cf6;">)</span> unit-index<span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for predecessor-unit-index from 0 below <span style="color: #3dbbb0;">(</span>length predecessor-layer-weights<span style="color: #3dbbb0;">)</span>
+          do <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let*</span>
+                 <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>weight <span style="color: #ff7a7f;">(</span>elt weights-into-unit predecessor-unit-index<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                  <span style="color: #379cf6;">(</span>predecessor-unit-activation
+                    <span style="color: #ff7a7f;">(</span>elt <span style="color: #2fa526;">(</span>elt activations <span style="color: #c48702;">(</span>1- layer-index<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
+                         predecessor-unit-index<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                  <span style="color: #379cf6;">(</span>gradient-to-back-propagate
+                    <span style="color: #ff7a7f;">(</span>* gradient
+                       <span style="color: #2fa526;">(</span>sigmoid-derivative unit-input<span style="color: #2fa526;">)</span>
+                       weight<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                  <span style="color: #379cf6;">(</span>actual-gradient <span style="color: #ff7a7f;">(</span>* gradient
+                                      <span style="color: #2fa526;">(</span>sigmoid-derivative unit-input<span style="color: #2fa526;">)</span>
+                                      predecessor-unit-activation<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                  <span style="color: #379cf6;">(</span>weight-change <span style="color: #ff7a7f;">(</span>* <span style="color: #2fa526;">(</span>network-learning-rate nw<span style="color: #2fa526;">)</span>
+                                    actual-gradient<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #379cf6;">(</span>&gt; layer-index 1<span style="color: #379cf6;">)</span>
+                   <span style="color: #379cf6;">(</span>network-back-propagate
                     nw
-                    (1- layer-index)
+                    <span style="color: #ff7a7f;">(</span>1- layer-index<span style="color: #ff7a7f;">)</span>
                     predecessor-unit-index
                     gradient-to-back-propagate
                     activations
-                    unsquashed-activations))
-               (setf
-                (elt (elt (elt (network-weights nw) (1- layer-index))
-                          predecessor-unit-index)
-                     unit-index)
-                (- weight weight-change))))))
+                    unsquashed-activations<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span>setf
+                <span style="color: #379cf6;">(</span>elt <span style="color: #ff7a7f;">(</span>elt <span style="color: #2fa526;">(</span>elt <span style="color: #c48702;">(</span>network-weights nw<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>1- layer-index<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
+                          predecessor-unit-index<span style="color: #ff7a7f;">)</span>
+                     unit-index<span style="color: #379cf6;">)</span>
+                <span style="color: #379cf6;">(</span>- weight weight-change<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 </pre>
 </div>
 <p>
 lets try training on some simple data
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">nw</span> (make-network
-                  <span style="font-weight: bold;">:input-layer-size</span> 3
-                  <span style="font-weight: bold;">:hidden-layer-sizes</span> '(2)
-                  <span style="font-weight: bold;">:output-layer-size</span> 1
-                  <span style="font-weight: bold;">:learning-rate</span> 0.01))
-(<span style="font-weight: bold;">loop</span> for i from 0 below 10000
-      do (network-train nw '((0 0 1) (1 1 1) (1 0 1) (0 1 1)) '((0) (1) (1) (0))))
-(<span style="font-weight: bold;">multiple-value-bind</span> (activations unsquashed-activations)
-    (network-feedforward nw '(1 1 0))
-  (print activations))
-(<span style="font-weight: bold;">multiple-value-bind</span> (activations unsquashed-activations)
-    (network-feedforward nw '(0 1 0))
-  (print activations))
+<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defparameter</span> <span style="color: #6fafff;">nw</span> <span style="color: #64aa0f;">(</span>make-network
+                  <span style="color: #ff7a7f; font-weight: bold;">:input-layer-size</span> 3
+                  <span style="color: #ff7a7f; font-weight: bold;">:hidden-layer-sizes</span> '<span style="color: #ef656a;">(</span>2<span style="color: #ef656a;">)</span>
+                  <span style="color: #ff7a7f; font-weight: bold;">:output-layer-size</span> 1
+                  <span style="color: #ff7a7f; font-weight: bold;">:learning-rate</span> 0.01<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below 10000
+      do <span style="color: #64aa0f;">(</span>network-train nw '<span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>0 0 1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>1 1 1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>1 0 1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>0 1 1<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span> '<span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>0<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>0<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">multiple-value-bind</span> <span style="color: #64aa0f;">(</span>activations unsquashed-activations<span style="color: #64aa0f;">)</span>
+    <span style="color: #64aa0f;">(</span>network-feedforward nw '<span style="color: #ef656a;">(</span>1 1 0<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+  <span style="color: #64aa0f;">(</span>print activations<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">multiple-value-bind</span> <span style="color: #64aa0f;">(</span>activations unsquashed-activations<span style="color: #64aa0f;">)</span>
+    <span style="color: #64aa0f;">(</span>network-feedforward nw '<span style="color: #ef656a;">(</span>0 1 0<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+  <span style="color: #64aa0f;">(</span>print activations<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 </pre>
 </div>
 
@@ -447,72 +401,72 @@ it predicts correctly that the first number is the output number
 using this code, i was getting 125k weight updates in 0.01 seconds (only 1 thread, no gpu), which i think is as far as i can get in terms of efficiency without some more advanced matrix algorithms, i tried python and got 1m (simple addition) operations in 0.04 seconds:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">~ &#955; time python -c <span style="font-style: italic;">'</span>
-<span style="font-style: italic;">i=1</span>
-<span style="font-style: italic;">for i in range(999999):</span>
-<span style="font-style: italic;">  i = i + 1</span>
-<span style="font-style: italic;">print(i)'</span>
+<pre class="src src-bash">~ &#955; time python -c <span style="color: #f06a3f;">'</span>
+<span style="color: #f06a3f;">i=1</span>
+<span style="color: #f06a3f;">for i in range(999999):</span>
+<span style="color: #f06a3f;">  i = i + 1</span>
+<span style="color: #f06a3f;">print(i)'</span>
 999999
-python -c <span style="font-style: italic;">' i=1; for i in range(999999):   i = i + 1; print(i)'</span>  0.04s user 0.00s system 98% cpu 0.045 total
+python -c <span style="color: #f06a3f;">' i=1; for i in range(999999):   i = i + 1; print(i)'</span>  0.04s user 0.00s system 98% cpu 0.045 total
 </pre>
 </div>
 <p>
 we need  a method to keep to keep track of loss, aswell as visual feedback would be nice, see common lisp graphics which ill be also using here
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-test</span> ((nw network) xs ys)
-  <span style="font-style: italic;">"test the given data (collection of vectors for input/output layers), return the total loss"</span>
-  (<span style="font-weight: bold;">let</span> ((loss 0))
-    (<span style="font-weight: bold;">loop</span> for i from 0 below (length xs)
-          do (<span style="font-weight: bold;">let*</span>
-                 ((x (elt xs i))
-                  (y (elt ys i)))
-               (<span style="font-weight: bold;">multiple-value-bind</span> (activations unsquashed-activations)
-                   (network-feedforward nw x)
-                 (<span style="font-weight: bold;">let*</span> ((output-layer (elt activations (1- (length activations))))
-                        (example-loss (expt (vector-sum (vector-sub y output-layer)) 2)))
-                   (incf loss example-loss)))))
-    loss))
+<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defmethod</span> <span style="color: #3dbbb0;">network-test</span> <span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>nw network<span style="color: #ef656a;">)</span> xs ys<span style="color: #64aa0f;">)</span>
+  <span style="color: #5f9f6f; font-style: italic;">"test the given data (collection of vectors for input/output layers), return the total loss"</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>loss 0<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below <span style="color: #3dbbb0;">(</span>length xs<span style="color: #3dbbb0;">)</span>
+          do <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let*</span>
+                 <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>x <span style="color: #ff7a7f;">(</span>elt xs i<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                  <span style="color: #379cf6;">(</span>y <span style="color: #ff7a7f;">(</span>elt ys i<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">multiple-value-bind</span> <span style="color: #379cf6;">(</span>activations unsquashed-activations<span style="color: #379cf6;">)</span>
+                   <span style="color: #379cf6;">(</span>network-feedforward nw x<span style="color: #379cf6;">)</span>
+                 <span style="color: #379cf6;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #ff7a7f;">(</span><span style="color: #2fa526;">(</span>output-layer <span style="color: #c48702;">(</span>elt activations <span style="color: #d0730f;">(</span>1- <span style="color: #64aa0f;">(</span>length activations<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
+                        <span style="color: #2fa526;">(</span>example-loss <span style="color: #c48702;">(</span>expt <span style="color: #d0730f;">(</span>vector-sum <span style="color: #64aa0f;">(</span>vector-sub y output-layer<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> 2<span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span>
+                   <span style="color: #ff7a7f;">(</span>incf loss example-loss<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+    loss<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 </pre>
 </div>
 <p>
 we can use this function to plot the loss function after each epoch:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">feedforward-network-first-test</span> ()
-  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*train-in*</span> '((0 0 1) (1 1 1) (1 0 1) (0 1 1)))
-  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*train-out*</span> '((0) (1) (1) (0)))
-  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*win*</span> (make-instance 'window <span style="font-weight: bold;">:width</span> 800 <span style="font-weight: bold;">:height</span> 800))
-  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*nw*</span> (make-network
-                      <span style="font-weight: bold;">:input-layer-size</span> 3
-                      <span style="font-weight: bold;">:hidden-layer-sizes</span> '(2)
-                      <span style="font-weight: bold;">:output-layer-size</span> 1
-                      <span style="font-weight: bold;">:learning-rate</span> 0.01))
-  (<span style="font-weight: bold;">let*</span> ((loss-history '())
-         (epochs 10000)
-         (axis (make-axis
-                <span style="font-weight: bold;">:min-x</span> (/ (- epochs) 10)
-                <span style="font-weight: bold;">:max-x</span> epochs
-                <span style="font-weight: bold;">:min-y</span> -0.1
-                <span style="font-weight: bold;">:pos</span> (make-point-2d <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> 0)
-                <span style="font-weight: bold;">:width</span> (window-width *win*)
-                <span style="font-weight: bold;">:height</span> (window-height *win*))))
-    (<span style="font-weight: bold;">loop</span> for i from 0 below epochs
-          do (network-train *nw* *train-in* *train-out*)
-             (<span style="font-weight: bold;">let</span> ((loss (network-test *nw* *train-in* *train-out*)))
-               (setf loss-history (append loss-history (list loss)))
-               (<span style="font-weight: bold;">if</span> (&gt; loss (axis-max-y axis))
-                   (setf (axis-max-y axis) (* loss 1.1)))))
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(setf (axis-min-y axis) (* loss 0.1)))))</span>
-    (<span style="font-weight: bold;">let*</span> ((loss-plot (make-discrete-plot
-                       <span style="font-weight: bold;">:points</span> (map
+<pre class="src src-lisp"><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">defun</span> <span style="color: #3dbbb0;">feedforward-network-first-test</span> <span style="color: #64aa0f;">()</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">defparameter</span> <span style="color: #6fafff;">*train-in*</span> '<span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>0 0 1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>1 1 1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>1 0 1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>0 1 1<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">defparameter</span> <span style="color: #6fafff;">*train-out*</span> '<span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>0<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>1<span style="color: #3dbbb0;">)</span> <span style="color: #3dbbb0;">(</span>0<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">defparameter</span> <span style="color: #6fafff;">*win*</span> <span style="color: #ef656a;">(</span>make-instance 'window <span style="color: #ff7a7f; font-weight: bold;">:width</span> 800 <span style="color: #ff7a7f; font-weight: bold;">:height</span> 800<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">defparameter</span> <span style="color: #6fafff;">*nw*</span> <span style="color: #ef656a;">(</span>make-network
+                      <span style="color: #ff7a7f; font-weight: bold;">:input-layer-size</span> 3
+                      <span style="color: #ff7a7f; font-weight: bold;">:hidden-layer-sizes</span> '<span style="color: #3dbbb0;">(</span>2<span style="color: #3dbbb0;">)</span>
+                      <span style="color: #ff7a7f; font-weight: bold;">:output-layer-size</span> 1
+                      <span style="color: #ff7a7f; font-weight: bold;">:learning-rate</span> 0.01<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>
+  <span style="color: #64aa0f;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>loss-history '<span style="color: #df8f6f;">()</span><span style="color: #3dbbb0;">)</span>
+         <span style="color: #3dbbb0;">(</span>epochs 10000<span style="color: #3dbbb0;">)</span>
+         <span style="color: #3dbbb0;">(</span>axis <span style="color: #df8f6f;">(</span>make-axis
+                <span style="color: #ff7a7f; font-weight: bold;">:min-x</span> <span style="color: #379cf6;">(</span>/ <span style="color: #ff7a7f;">(</span>- epochs<span style="color: #ff7a7f;">)</span> 10<span style="color: #379cf6;">)</span>
+                <span style="color: #ff7a7f; font-weight: bold;">:max-x</span> epochs
+                <span style="color: #ff7a7f; font-weight: bold;">:min-y</span> -0.1
+                <span style="color: #ff7a7f; font-weight: bold;">:pos</span> <span style="color: #379cf6;">(</span>make-point-2d <span style="color: #ff7a7f; font-weight: bold;">:x</span> 0 <span style="color: #ff7a7f; font-weight: bold;">:y</span> 0<span style="color: #379cf6;">)</span>
+                <span style="color: #ff7a7f; font-weight: bold;">:width</span> <span style="color: #379cf6;">(</span>window-width *win*<span style="color: #379cf6;">)</span>
+                <span style="color: #ff7a7f; font-weight: bold;">:height</span> <span style="color: #379cf6;">(</span>window-height *win*<span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below epochs
+          do <span style="color: #3dbbb0;">(</span>network-train *nw* *train-in* *train-out*<span style="color: #3dbbb0;">)</span>
+             <span style="color: #3dbbb0;">(</span><span style="color: #c48702; font-weight: bold;">let</span> <span style="color: #df8f6f;">(</span><span style="color: #379cf6;">(</span>loss <span style="color: #ff7a7f;">(</span>network-test *nw* *train-in* *train-out*<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span>setf loss-history <span style="color: #379cf6;">(</span>append loss-history <span style="color: #ff7a7f;">(</span>list loss<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span>
+               <span style="color: #df8f6f;">(</span><span style="color: #c48702; font-weight: bold;">if</span> <span style="color: #379cf6;">(</span>&gt; loss <span style="color: #ff7a7f;">(</span>axis-max-y axis<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span>
+                   <span style="color: #379cf6;">(</span>setf <span style="color: #ff7a7f;">(</span>axis-max-y axis<span style="color: #ff7a7f;">)</span> <span style="color: #ff7a7f;">(</span>* loss 1.1<span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>
+    <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">(setf (axis-min-y axis) (* loss 0.1)))))</span>
+    <span style="color: #ef656a;">(</span><span style="color: #c48702; font-weight: bold;">let*</span> <span style="color: #3dbbb0;">(</span><span style="color: #df8f6f;">(</span>loss-plot <span style="color: #379cf6;">(</span>make-discrete-plot
+                       <span style="color: #ff7a7f; font-weight: bold;">:points</span> <span style="color: #ff7a7f;">(</span>map
                                 'vector
-                                (<span style="font-weight: bold;">lambda</span> (loss epoch) (make-point-2d <span style="font-weight: bold;">:x</span> epoch <span style="font-weight: bold;">:y</span> (elt loss-history epoch)))
+                                <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">lambda</span> <span style="color: #c48702;">(</span>loss epoch<span style="color: #c48702;">)</span> <span style="color: #c48702;">(</span>make-point-2d <span style="color: #ff7a7f; font-weight: bold;">:x</span> epoch <span style="color: #ff7a7f; font-weight: bold;">:y</span> <span style="color: #d0730f;">(</span>elt loss-history epoch<span style="color: #d0730f;">)</span><span style="color: #c48702;">)</span><span style="color: #2fa526;">)</span>
                                 loss-history
-                                (<span style="font-weight: bold;">loop</span> for i from 0 below epochs by 100 collect i))))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">by 100 to reduce number of points to plot</span>
-      (axis-add-renderable axis loss-plot)
-      (window-add-renderable *win* axis)
-      (window-run *win*))))
+                                <span style="color: #2fa526;">(</span><span style="color: #c48702; font-weight: bold;">loop</span> for i from 0 below epochs by 100 collect i<span style="color: #2fa526;">)</span><span style="color: #ff7a7f;">)</span><span style="color: #379cf6;">)</span><span style="color: #df8f6f;">)</span><span style="color: #3dbbb0;">)</span> <span style="color: #cf9f7f; font-style: italic;">;; </span><span style="color: #cf9f7f; font-style: italic;">by 100 to reduce number of points to plot</span>
+      <span style="color: #3dbbb0;">(</span>axis-add-renderable axis loss-plot<span style="color: #3dbbb0;">)</span>
+      <span style="color: #3dbbb0;">(</span>window-add-renderable *win* axis<span style="color: #3dbbb0;">)</span>
+      <span style="color: #3dbbb0;">(</span>window-run *win*<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
 </pre>
 </div>
 <p>
@@ -520,9 +474,9 @@ although notice that here we're testing the network on the same data we trained 
 </p>
 </div>
 </div>
-<div id="outline-container-org0c5f16f" class="outline-2">
-<h2 id="org0c5f16f">making use of gpu</h2>
-<div class="outline-text-2" id="text-org0c5f16f">
+<div id="outline-container-org0d0c8c6" class="outline-2">
+<h2 id="org0d0c8c6">making use of gpu</h2>
+<div class="outline-text-2" id="text-org0d0c8c6">
 <p>
 before implementing this i started experimenting with <a href="/cuda_programming_in_common_lisp.html">cuda in common lisp</a>, one unfortunate thing is that <code>cl-cuda</code> doesnt allow using arbitrary data types like you would have in <code>C</code> with structs, we're gonna have to live with arrays of floats on the gpu
 at first i was gonna implement the most straightforward approach, which is to run every backpropagation/feedforward operation by a single gpu thread, so that if we have 256 gpu threads, we'd be doing 256 backpropagation operations in parallel whereas on the cpu (with a single thread) we'd be doing only 1, i thought this would definitely work, until i actually thought about it and then realized, how the hell can this be a thread-safe process? each thread is modifying every weight in the network and many threads are running at once, it would be a nightmare to actually use such an approach, and a miracle if it even works as intended, so i had to think of something else, something thread-safe.</p>
