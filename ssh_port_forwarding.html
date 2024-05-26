@@ -54,14 +54,14 @@ the connection can be opened using the command
 <p>
 note that <code>localuser</code> would be the user of <code>local2</code> (not the remote machine) that you want ssh to use.
 </p>
-<div id="outline-container-orgd805fab" class="outline-2">
-<h2 id="orgd805fab">connection refused</h2>
-<div class="outline-text-2" id="text-orgd805fab">
-<div class="dummy" id="org2950024">
+<div id="outline-container-org7e458d2" class="outline-2">
+<h2 id="org7e458d2">connection refused</h2>
+<div class="outline-text-2" id="text-org7e458d2">
+<div class="dummy" id="org9677f7c">
 <p>
 by default tunnel endpoints only listen on 127.0.0.1, so they can't be accessed from other machines. to change this you may need to add this to <code>/etc/ssh/sshd_config</code> on the server:
 </p>
-<div class="literal" id="org79d6ede">
+<div class="literal" id="org95f650c">
 <p>
 GatewayPorts clientspecified
 </p>
@@ -74,13 +74,13 @@ this is also the reason we use the address <code>*:5000:*:22</code>, the star is
 </p>
 </div>
 </div>
-<div id="outline-container-orgdbdb4eb" class="outline-2">
-<h2 id="orgdbdb4eb">using ipv6</h2>
-<div class="outline-text-2" id="text-orgdbdb4eb">
+<div id="outline-container-org8208e07" class="outline-2">
+<h2 id="org8208e07">using ipv6</h2>
+<div class="outline-text-2" id="text-org8208e07">
 <p>
 if you're using ipv6 you need to make sure its enabled on all machines. <code>vim /etc/sysctl.conf</code> and make sure you have the following:
 </p>
-<div class="literal" id="org1562b44">
+<div class="literal" id="org699a8a2">
 <p>
 net.ipv6.conf.default.disable_ipv6 = 0
 net.ipv6.conf.all.disable_ipv6 = 0
@@ -100,11 +100,11 @@ so, for example, the reverse tunnel ssh command becomes:
 </div>
 </div>
 </div>
-<div id="outline-container-org5b9107d" class="outline-2">
-<h2 id="org5b9107d">systemd service</h2>
-<div class="outline-text-2" id="text-org5b9107d">
+<div id="outline-container-org8350f4d" class="outline-2">
+<h2 id="org8350f4d">systemd service</h2>
+<div class="outline-text-2" id="text-org8350f4d">
 <p>
-an example systemd service that i use to automatically open ssh tunnels for a machine:
+an example systemd service that i use to automatically open an ssh tunnel for a linux server:
 </p>
 <div class="org-src-container">
 <pre class="src src-text">[Unit]
