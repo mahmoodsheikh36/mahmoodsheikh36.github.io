@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood" />
+<meta name="generator" content="Org Mode" />
+<title>ssh port forwarding</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/archive.html'>archive</a>
+  <a href='/about.html'>about</a>
+</div><h1 class="main-title">ssh port forwarding</h1>
+</div>
+<div id="content" class="content">
+<p>
+to connect to a device behind a private unreachable router you can use <i>remote ssh port forwarding</i> or <i>remote ssh tunneling</i> (notice that <i>remote</i> ssh tunneling is different from <i>local</i> ssh tunneling).
+</p>
+
+<p>
+example:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ssh -i path/to/key -R <span style="font-style: italic;">'*:5000:*:22'</span> user@remote -N -g
+</pre>
+</div>
+<p>
+so say you have 3 machines, <code>local1</code>, <code>local2</code> and <code>remote</code>. when this command is run from <code>local2</code>, it binds to the port 5000 on the machine <code>remote</code> and forwards the traffic to that port to port 22 of <code>local2</code>. this allows you to ssh into <code>local2</code> through the remote machine from <code>local1</code>, now if you take <code>local1</code> into any other network, not necessarily the network <code>local2</code> is on, you can still connect to <code>local1</code> through <code>remote</code>.
+</p>
+
+<p>
+basically, this can be used as an alternative to other port forwarding methods when you want to gain access to a machine behind a private network like a home or office network.
+</p>
+
+<p>
+the connection can be opened using the command
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ssh -i path/to/key localuser@remote -p 5000
+</pre>
+</div>
+<p>
+note that <code>localuser</code> would be the user of <code>local2</code> (not the remote machine) that you want ssh to use.
+</p>
+<div id="outline-container-orgc639ac0" class="outline-2">
+<h2 id="orgc639ac0">connection refused</h2>
+<div class="outline-text-2" id="text-orgc639ac0">
+<div class="dummy" id="org18742e3">
+<p>
+by default tunnel endpoints only listen on 127.0.0.1, so they can't be accessed from other machines. to change this you may need to add this to <code>/etc/ssh/sshd_config</code> on the server:
+</p>
+<div class="literal" id="orgf50e737">
+<p>
+GatewayPorts clientspecified
+</p>
+
+</div>
+
+</div>
+<p>
+this is also the reason we use the address '<b>:5000:</b>:22', the star is used to listen on all interfaces, including <code>0.0.0.0</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-org4adcc0a" class="outline-2">
+<h2 id="org4adcc0a">using ipv6</h2>
+<div class="outline-text-2" id="text-org4adcc0a">
+<p>
+if you're using ipv6 you need to make sure its enabled on all machines. <code>vim /etc/sysctl.conf</code> and make sure you have the following:
+</p>
+<div class="literal" id="org1156f35">
+<p>
+net.ipv6.conf.default.disable_ipv6 = 0
+net.ipv6.conf.all.disable_ipv6 = 0
+</p>
+
+</div>
+<p>
+the ipv6 equivalent for <code>localhost</code> is <code>::1</code>.
+</p>
+
+<p>
+so, for example, the reverse tunnel ssh command becomes:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ssh -i yourkey -R <span style="font-style: italic;">'*:5000:*:22'</span> -6 user@remote:etc:etc::1 -N -g
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org35167f8" class="outline-2">
+<h2 id="org35167f8">systemd service</h2>
+<div class="outline-text-2" id="text-org35167f8">
+<p>
+an example systemd service that i use to automatically open ssh tunnels for a machine:
+</p>
+<div class="org-src-container">
+<pre class="src src-text">[Unit]
+After=network.target network-online.target
+Description=ssh tunnel
+Wants=network-online.target
+
+[Service]
+ExecStart=ssh -i my/key/path -R '*:5000:*:22' -6 root@my:server:ipv6::1 -NTg -o ServerAliveInterval=60
+Restart=on-failure
+RestartSec=5s
+User=mahmooz
+
+[Install]
+WantedBy=multi-user.target
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

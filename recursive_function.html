@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood" />
+<meta name="generator" content="Org Mode" />
+<title>recursive function</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/archive.html'>archive</a>
+  <a href='/about.html'>about</a>
+</div><h1 class="main-title">recursive function</h1>
+</div>
+<div id="content" class="content">
+<p>
+the term "recursive function" in computability seems to be used loosely and defined differently by different books, but the general consensus seems to be that <i>mu-recursive functions</i> (in reference to kleene's mu-operator)-operator), aliased <i>partial recursive functions</i> are defined as the complete class of recursive functions which is proved to represent the class of algorithmically computable functions (functions that can be computed by a machine) and the primitive recursive functions are a subset of that class restricted to total functions. the term <i>recursive function</i> usually seems to refer to the more general class of computable functions (the former).
+</p>
+
+<div class="dummy" id="org947c485">
+<p>
+suppose <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is some fixed number and
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/bbcf29c62fd.svg" alt="\begin{align*}
+  h(0)&amp;amp;=k,\\
+  h(t+1)&amp;amp;=g(t,h(t)),
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+where <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is some given def-total-func of two variables. then <img src="ltx/b78a6bcff3a.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is said to be obtained from <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> by primitive recursion, or simply recursion.
+</p>
+
+</div>
+<div class="dummy" id="orge8c534e">
+<div class="math-block definition" data-before="definition: mu-recursive functions" data-after="(taken from Dexter C. Kozen, 1997 lecture 36 the (mu)-recursive functions)
+" id="org3d5eaea">
+<p>
+godel defined a collection of number-theoretic functions <img src="ltx/e64a3d8d1b4.svg" alt="\(\mathbb{N}^k \to \mathbb{N}\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> that, according to his intuition, represented all the computable functions. his definition was as follows:
+</p>
+<ol class="org-ol">
+<li><i>successor</i>. the function <img src="ltx/2e593ca367a.svg" alt="\(\brm{s}:\mathbb{N} \to \mathbb{N}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> given by <img src="ltx/06df933d94d.svg" alt="\(\brm{s}(x)=x+1\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is computable.</li>
+
+<li><i>zero</i>. the function <img src="ltx/cc59648f268.svg" alt="\(\brm{z}: \mathbb{N}^0 \to \mathbb{N}\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> given by <img src="ltx/14aae2e38b4.svg" alt="\(\brm{z}(\,)=0\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is computable.</li>
+
+<li><i>projections</i>. the functions <img src="ltx/4a79cc0e2e4.svg" alt="\(\pi^n_k: \mathbb{N}^n \to \mathbb{N}\)" style="height: 1.0510em; vertical-align: -0.3267em; display: inline-block" class="org-latex org-latex-inline" /> given by <img src="ltx/4ef6e7f19c7.svg" alt="\(\pi^n_k(x_1,\dots,x_n)=x_k\)" style="height: 1.1109em; vertical-align: -0.3267em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/0ee805a654d.svg" alt="\(1 \le k \le n\)" style="height: 0.9122em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" />, are computable.</li>
+
+<li><i>composition</i>. if <img src="ltx/4e7e2f6249f.svg" alt="\(f: \mathbb{N}^k \to \mathbb{N}\)" style="height: 1.1209em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/c90a867d745.svg" alt="\(g_1,\dots,g_k: \mathbb{N}^k \to \mathbb{N}\)" style="height: 1.1209em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> are computable, then so is the function <img src="ltx/3697d153d75.svg" alt="\(f \circ (g_1,\dots,g_k): \mathbb{N}^k \to \mathbb{N}\)" style="height: 1.1754em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> that on input <img src="ltx/21e0611cb6c.svg" alt="\(\overline{x}=x_1,\dots,x_n\)" style="height: 0.9069em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> gives
+<img src="ltx/f20a94dfd85.svg" alt="\[ f(g_1(\overline{x}),\dots,g_k(\overline{x})). \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" /></li>
+<li><p>
+primitive recursion: if <img src="ltx/f96be39594a.svg" alt="\(h_i: \mathbb{N}^{n-1} \to \mathbb{N}\)" style="height: 1.0431em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/a5efff23b3a.svg" alt="\(g_i: \mathbb{N}^{n+k} \to \mathbb{N}\)" style="height: 1.1209em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> are computable, <img src="ltx/17c1f00eaa7.svg" alt="\(1 \le i \le k\)" style="height: 0.9122em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" />, then so are the functions <img src="ltx/23959fa2fc1.svg" alt="\(f_i: \mathbb{N^n} \to \mathbb{N}, 1 \le i \le k\)" style="height: 1.0715em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, defined by mutual induction as follows:
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/c6b4be4ef33.svg" alt="   \begin{align*}
+     f_i(0,\overline{x}) &amp;amp;\defeq h_i(\overline{x}),\\
+     f_i(x+1,\overline{x}) &amp;amp;\defeq g_i(x,\overline{x},f_1(x,\overline{x}),\dots,f_k(x,\overline{x})),
+   \end{align*}
+" style="height: 3.5223em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+where <img src="ltx/18f3a920148.svg" alt="\(\overline{x}=x_2,\dots,x_n\)" style="height: 0.9069em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />.
+</p></li>
+<li><i>unbounded minimization</i>. if <img src="ltx/27b1a364632.svg" alt="\(g: \mathbb{N}^{n+1} \to \mathbb{N}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is computable, then so is the function <img src="ltx/45bbd7d48bd.svg" alt="\(f: \mathbb{N}^n \to \mathbb{N}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> that on input <img src="ltx/21e0611cb6c.svg" alt="\(\overline{x}=x_1,\dots,x_n\)" style="height: 0.9069em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> gives the least <img src="ltx/a7cff3c9f2b.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/383655ae97e.svg" alt="\(g(z,\overline{x})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is defined for all <img src="ltx/87472a49b4f.svg" alt="\(x \le y\)" style="height: 0.9122em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/edc8e839180.svg" alt="\(g(y,\overline{x})=0\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> if such a <img src="ltx/a7cff3c9f2b.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> exists and is undefined otherwise. we denote this by
+<img src="ltx/c6f98abaa31.svg" alt="\[ f(\overline{x})=\mu y.(g(y,\overline{x})=0). \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" /></li>
+</ol>
+<p>
+the functions defined by 1 through 6 are called the <i><img src="ltx/37f6ea1be81.svg" alt="\(\mu\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />-recursive functions</i>. the functions defined by 1 through 5 only are called the <i>primitive recursive functions</i>.
+</p>
+
+</div>
+<div class="dummy2" id="org93ca320">
+<ul class="org-ul">
+<li>the constant functions <img src="ltx/8f45f9cd4e2.svg" alt="\(\operatorname{const}_n(\ )=n\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> are primitive recursive:
+<img src="ltx/f9b8e5efc04.svg" alt="\[ \operatorname{const}_n \defeq \underbrace{\brm{s} \circ \cdots \circ \brm{s}}_{n} \circ \brm{z}. \]" style="height: 2.5843em; display: block" class="org-latex org-latex-block" /></li>
+<li><p>
+addition is primitive recursive, since we can define
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/3c8024b4dbe.svg" alt="  \begin{align*}\label{eq-primitive-recursive-func-1}
+    \operatorname{add}(0,y) &amp;amp;\defeq y,\\
+    \operatorname{add}(x+1,y) &amp;amp;\defeq \brm{s}(\operatorname{add}(x,y)).
+  \end{align*}
+" style="height: 3.5223em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div></li>
+<li><p>
+this is a bona fide definition by primitive recursion: in rule blk-recursive-func-schema-5, take <img src="ltx/ae2da8cc272.svg" alt="\(k=1,n=2,h=\pi_1^1\)" style="height: 1.1393em; vertical-align: -0.2924em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/fe461c157c4.svg" alt="\(g=s \circ \pi_3^3\)" style="height: 1.1393em; vertical-align: -0.2924em; display: inline-block" class="org-latex org-latex-inline" />. then
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/fa2e9f1ee03.svg" alt="  \begin{align*}
+    \operatorname{add}(0,y) &amp;amp;= h(y) = y,\\
+    \operatorname{add}(x+1,y) &amp;amp;= g(x,y,\operatorname{add}(x,y)) = \brm{s}(\operatorname{add}(x,y)).
+  \end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div></li>
+<li><p>
+multiplication is primitive recursive, since
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/a03c2546a77.svg" alt="  \begin{align*}
+    \operatorname{mult}(0,y) &amp;amp;\defeq 0,\\
+    \operatorname{mult}(x+1,y) &amp;amp;\defeq \operatorname{add}(y,\operatorname{mult}(x,y)).
+  \end{align*}
+" style="height: 3.5223em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div></li>
+</ul>
+<p>
+note how we used the function <img src="ltx/a4b20f4c27c.svg" alt="\(\operatorname{add}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> defined previously. we are allowed to build up primitive recursive functions inductively in this way.
+</p>
+
+<ul class="org-ul">
+<li><p>
+exponentiation is primitive recursive, since
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/e648cedf1d0.svg" alt="  \begin{align*}
+    \operatorname{exp}(x,0) &amp;amp;\defeq 1,\\
+    \operatorname{exp}(x,y+1) &amp;amp;\defeq \operatorname{mult}(x,\operatorname{exp}(x,y)).
+  \end{align*}
+" style="height: 3.5223em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div></li>
+<li><p>
+the predecessor function
+<img src="ltx/46e61b47c0a.svg" alt="\[ x \dotminus 1 = \begin{cases} x-1 &amp;amp; \textif x &amp;gt; 0\\ 0 &amp;amp; \textif x=0 \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+is primitive recursive
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/dd3c22d5430.svg" alt="  \begin{align*}
+    0 \dotminus 1 \defeq 0,\\
+    (x+1) \dotminus 1 \defeq x.
+  \end{align*}
+" style="height: 3.5223em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div></li>
+<li>proper subtraction:
+<img src="ltx/65e17ab8603.svg" alt="\[ x \dotminus y = \begin{cases} x-y &amp;amp; \textif x \geq y,\\ 0 &amp;amp; \textif x&amp;lt;y \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+is primitive recursive, and can be defined from predecessor in exactly the same way that addition is defined from successor.</li>
+<li><p>
+the sign function is primitive recursive:
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/6dc34b458d5.svg" alt="  \begin{align*}
+    \operatorname{sign}(x) &amp;amp;\defeq 1 \dotminus (1 \dotminus x)\\
+    &amp;amp;= \begin{cases} 1 &amp;amp; \textif x &amp;gt; 0\\ 0 &amp;amp; \textif x=0 \end{cases}
+  \end{align*}
+" style="height: 4.9592em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div></li>
+<li><p>
+the relations <img src="ltx/ee0be52ea92.svg" alt="\(&amp;lt;,\le,&amp;gt;,\geq,=\)" style="height: 0.9122em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/032b828f32d.svg" alt="\(\neq\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, considered as (0,1)-valued functions, are all primitive recursive; for example,
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/7e9fbff1d84.svg" alt="  \begin{align*}
+    \operatorname{compare}_{\le}(x,y) &amp;amp;\defeq 1 \dotminus \operatorname{sign}(x \dotminus y),\\
+    &amp;amp;= \begin{cases} 1 &amp;amp; \textif x \le y\\ 0 &amp;amp; \textif x &amp;gt; y. \end{cases}
+  \end{align*}
+" style="height: 4.9732em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div></li>
+<li>functions can be defined by cases. for example,
+<img src="ltx/f5c6952a578.svg" alt="\[ g(x,y) = \begin{cases} x+1 &amp;amp; \textif 2^x &amp;lt; y,\\ x &amp;amp; \textif 2^x \geq y \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+is primitive recursive:
+<img src="ltx/0ced153db9b.svg" alt="\[ g(x,y) \defeq \operatorname{compare}_&amp;lt;(2^x,y) \cdot (x+1) + \operatorname{compare}_\geq(2^x,y) \cdot x. \]" style="height: 1.6412em; display: block" class="org-latex org-latex-block" /></li>
+<li><p>
+inverses of certain functions can be defined. for example, <img src="ltx/c701e9c01ac.svg" alt="\(\ceil*{\log_2 y}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive: <img src="ltx/e68f88274fa.svg" alt="\(\ceil*{\log_2 y}=f(y,y)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, where
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/490c6ce9328.svg" alt="  \begin{align*}
+    f(0,y) &amp;amp;\defeq 0,\\
+    f(x+1,y) &amp;amp;\defeq g(f(x,y),y),
+  \end{align*}
+" style="height: 3.5223em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+and <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is from the previous example. the function <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> just continues to add 1 to its first argument <img src="ltx/42c32b034ca.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> until the condition <img src="ltx/39c506e35ac.svg" alt="\(2^x \geq y\)" style="height: 0.9399em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is satisfied. this must happen for some <img src="ltx/87472a49b4f.svg" alt="\(x \le y\)" style="height: 0.9122em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. inverses of other common functions, such as square root, can be defined similarly.
+</p></li>
+</ul>
+<p>
+observe that all primitive recursive functions are total, whereas a <img src="ltx/37f6ea1be81.svg" alt="\(\mu\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />-recursive function may not be. there exist total computable functions that are not primitive recursive; one example is Ackermann's function:
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/c60197f6ba3.svg" alt="  \begin{align*}
+    A(0,y) &amp;amp;\defeq y+1,\\
+    A(x+1,0) &amp;amp;\defeq A(x,1),\\
+    A(x+1,y+1) &amp;amp;\defeq A(x,A(x+1,y)).
+  \end{align*}
+" style="height: 5.4174em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+
+</div>
+<p>
+more primitive recursive functions include:
+</p>
+<ul class="org-ul">
+<li><img src="ltx/f4f4b63433d.svg" alt="\(\abs{x_1-x_2}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li><img src="ltx/aad554d4c21.svg" alt="\(f(x)=x!\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li><img src="ltx/cffbb41e530.svg" alt="\(g(a,b)=a^b\)" style="height: 1.1754em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li><img src="ltx/777a1190c51.svg" alt="\(x_1 \bmod x_2\)" style="height: 0.9205em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" /></li>
+</ul>
+
+</div>
+<div class="dummy" id="org1936e03">
+<p>
+the name "recursive" comes from definition by recursion where a new function <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is defined by specifying each new value <img src="ltx/011d68e7aab.svg" alt="\(f(x+1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> in terms of previous values <img src="ltx/831cc5a8abf.svg" alt="\(f(0),f(1),\dots,f(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and previously defined functions. for example, <img src="ltx/f9cb02f36f5.svg" alt="\(f(0)=1\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/ad1beb1df7a.svg" alt="\(f(x+1)=(x+1)f(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> defines <img src="ltx/16784b8ce77.svg" alt="\(x!\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in terms of multiplication. the primitive recursive functions constitute a very large class of computable functions containing almost all functions on <img src="ltx/1f4a4c4b602.svg" alt="\(\omega\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> commonly found in mathematics.
+</p>
+
+<div class="math-block definition" data-before="definition: class of primitive recursive functions" data-after="(copied from Robert I. Soare, 1987 chapter 2 formal definitions of computable functions definition 2.1)
+" id="orgad77a05">
+<p>
+the class of <i>primitive recursive functions</i> is the smallest class <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of functions closed under the following schemata.
+</p>
+
+<ol class="org-ol">
+<li><a id="org56209e7">blk-recursive-func-schema-1</a>the <i>successor function</i>, <img src="ltx/de0a54e322f.svg" alt="\(\lambda x[x+1]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, is in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />.</li>
+
+<li><a id="org4f4c16e">blk-recursive-func-schema-2</a>the <i>constant functions</i>, <img src="ltx/8a8286d3978.svg" alt="\(\lambda x_1 \dots x_n[m]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, are in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/fbbe27dd174.svg" alt="\(0 \le n,m\)" style="height: 0.9122em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />.</li>
+
+<li><a id="orga13ecd8">blk-recursive-func-schema-3</a>the <i>identity functions</i> (also called projections), <img src="ltx/c7f418d115c.svg" alt="\(\lambda x_1 \dots x_n[x_i]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, are in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/480f7c013e5.svg" alt="\(1 \le n, 1 \le i \le n\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />.</li>
+
+<li><a id="org88ae163">blk-recursive-func-schema-4</a>(composition) if <img src="ltx/9537e744cbe.svg" alt="\(g_1,g_2,\dots,g_n\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/fd770b3683b.svg" alt="\(h \in \mathcal{C}\)" style="height: 0.8172em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />, then
+<img src="ltx/763a4103619.svg" alt="\[ f(x_1,\dots,x_n) = h(g_1(x_1,\dots,x_n),\dots,g_m(x_1,\dots,x_n)) \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+is in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> where <img src="ltx/889f9de077e.svg" alt="\(g_1,\dots,g_m\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> are functions of <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> variables and <img src="ltx/b78a6bcff3a.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is a function of <img src="ltx/b35660571c9.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> variables.</li>
+<li><p>
+<a id="orgbae75aa">blk-recursive-func-schema-5</a>(primitive recursion) if <img src="ltx/96f85fbc9ba.svg" alt="\(g,h \in \mathcal{C}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/81f2a68882d.svg" alt="\(n \geq 1\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /> then <img src="ltx/60b59541e3b.svg" alt="\(f \in \mathcal{C}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> where
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/decc10851d5.svg" alt="   \begin{gather*}
+     f(0,x_2,\dots,x_n)=g(x_2,\dots,x_n)\\
+     f(x_1+1,x_2,\dots,x_n)=h(x_1,f(x_1,x_2,\dots,x_n),x_2,\dots,x_n)
+   \end{gather*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+assuming <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/b78a6bcff3a.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are functions of <img src="ltx/4e8878854b9.svg" alt="\(n-1\)" style="height: 0.7972em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/f35f58dd9c3.svg" alt="\(n+1\)" style="height: 0.7968em; vertical-align: -0.1305em; display: inline-block" class="org-latex org-latex-inline" /> variables respectively. (in case <img src="ltx/d71722e1907.svg" alt="\(n=1\)" style="height: 0.7155em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, a 0-ary function is a constant function which is in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> by schema 2.
+</p></li>
+</ol>
+
+</div>
+<p>
+hence, a function is primitive recursive just if there is a <i>derivation</i>, namely a sequence <img src="ltx/703582840f7.svg" alt="\(f_1,f_2,\dots,f_k=f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> such that each <img src="ltx/d8e7c2ec18c.svg" alt="\(f_i,i \le k\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, is either an initial function (i.e., is obtained by schemata blk-recursive-func-schema-1, blk-recursive-func-schema-2, or blk-recursive-func-schema-3), or <img src="ltx/22406198b67.svg" alt="\(f_i\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is obtained from <img src="ltx/162e77e4438.svg" alt="\(\set{f_j \given j &amp;lt; i}\)" style="height: 1.2744em; vertical-align: -0.3922em; display: inline-block" class="org-latex org-latex-inline" />, by an application of blk-recursive-func-schema-4 or blk-recursive-func-schema-5. <a href="/lambda_calculus.html">exa-lambda-calc-1</a>.
+</p>
+
+<div class="math-block definition" data-before="definition: class of partial recursive functions" data-after="(copied from Robert I. Soare, 1987 chapter 2 formal definitions of computable functions definition 2.2)
+" id="org126436d">
+<p>
+the class of <i>partial recursive functions</i> is the least class obtained by closing under blk-recursive-func-schema-1 through 5 for the primitive recursive functions and the following schema 6. a <i>total recursive function</i> (abbreviated recursive function) is a partial function which is total.
+</p>
+
+<ol class="org-ol">
+<li><p>
+(unbounded search) if <img src="ltx/58308e36ba2.svg" alt="\(\theta(x_1,\dots,x_n,y)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is a partial recursive function of <img src="ltx/f35f58dd9c3.svg" alt="\(n+1\)" style="height: 0.7968em; vertical-align: -0.1305em; display: inline-block" class="org-latex org-latex-inline" /> variables, and
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/4e03ef07b05.svg" alt="   \begin{align*}
+     \psi(x_1,\dots,x_n)=\mu y[\theta(x_1,\dots,x_n)\downarrow=0 \ \&amp;amp;\ (\forall z \le y)[\theta(x_1,\dots,x_n,z) \downarrow]] 
+   \end{align*}
+" style="height: 1.6272em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+then <img src="ltx/11547742944.svg" alt="\(\psi\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is a partial recursive function of <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> variables. (here, <img src="ltx/37f6ea1be81.svg" alt="\(\mu\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is the unbounded search operator)
+</p></li>
+</ol>
+
+</div>
+
+</div>
+<div class="math-block note" data-before="note" data-after="" id="org82c988b">
+<p>
+the definition <a href="/recursive_function.html">def-recursive-function-soare</a> is the same as <a href="/recursive_function.html">def-mu-recursive-functions</a>.
+</p>
+
+</div>
+<div class="dummy" id="orgb6f204a">
+<p>
+the term <i>recursion</i> refers to a function <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> defined by induction. we first define <img src="ltx/46f72e3fc80.svg" alt="\(f(0)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and hen define <img src="ltx/011d68e7aab.svg" alt="\(f(x+1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> in terms of previously defined functions using as inputs <img src="ltx/42c32b034ca.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/df84604e42e.svg" alt="\(f(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />. for example, the factorial function <img src="ltx/aad554d4c21.svg" alt="\(f(x)=x!\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is defined by the recursion schemes
+<img src="ltx/36eaa933e01.svg" alt="\[ f(0)=1 \quad \textand \quad f(x+1) = (x+1) \cdot f(x) \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+where we assume that multiplication has been previously defined.
+</p>
+
+<p>
+up until the early 1930s, the term "recursive function" meant what we now call a <i>primitive recursive function</i> to distinguish it from the Herbrand-Gödel <i>general recursive function</i>. in 1931 Gödel used primitive recursive functions in the proof of his famous incompleteness theorem and called them simply by the German term "rekursiv." the main property of recursion is the primitive recursion scheme (def-primitive-recursive-schema-5) below, which yields an inductive definition of <img src="ltx/fbfb56925b8.svg" alt="\(f(n+1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> using the preceding value <img src="ltx/208785cbc00.svg" alt="\(f(n)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and previously defined functions <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/b78a6bcff3a.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. [Kleene 1952] put the primitive recursive functions in the following succinct form which has become standard.
+</p>
+
+<div class="math-block definition" data-before="definition: primitive recursive function" data-after="(taken from robert i. soare, 2016 definition 17.2.1)
+" id="orgb078f85">
+<p>
+the class of <i>primitive recursive functions</i> is he least class <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of functions closed under the following schemes (1)-(5).
+</p>
+
+<ol class="org-ol">
+<li>the <i>successor function</i> <img src="ltx/1efbe749c50.svg" alt="\(f(x)=(x+1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />.</li>
+
+<li>the <i>constant functions</i> <img src="ltx/9632d170f52.svg" alt="\(f(x_1,\dots,x_n)=m\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> are in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/1e7f66f1720.svg" alt="\(0 \le m,n\)" style="height: 0.9122em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />.</li>
+
+<li>the <i>identity functions</i> <img src="ltx/c580a8100e9.svg" alt="\(f(x_1,x_2,\dots,x_n)=x_i\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/f27db650bd3.svg" alt="\(1 \le i \le n\)" style="height: 0.8780em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" />, are in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />.</li>
+
+<li>(composition) if <img src="ltx/e25b469e342.svg" alt="\(g_1,g_2,\dots,g_m,h \in \mathcal{C}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, then
+<img src="ltx/40b17ff6cf5.svg" alt="\[ f(\overline{x})=h(g_1(\overline{x}),\dots,g_m(\overline{x})) \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+is in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, where <img src="ltx/889f9de077e.svg" alt="\(g_1,\dots,g_m\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> are functions of <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> variables, <img src="ltx/e3b288ef8a8.svg" alt="\(\overline{x}=(x_1,\dots,x_n)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/b78a6bcff3a.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is a function of <img src="ltx/b35660571c9.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> variables.</li>
+<li><p>
+<a id="orgf06d9e4">def-primitive-recursive-schema-5</a>(primitive recursion) if <img src="ltx/96f85fbc9ba.svg" alt="\(g,h \in \mathcal{C}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/81f2a68882d.svg" alt="\(n \geq 1\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" />, then <img src="ltx/60b59541e3b.svg" alt="\(f \in \mathcal{C}\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> where
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/5fc95a9f9f0.svg" alt="   \begin{gather*}
+     f(0,\overline{x})=g(\overline{x})\\
+     f(x_1+1,\overline{x})=h(x_1,f(x_1,\overline{x}),\overline{x})
+   \end{gather*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+where <img src="ltx/4519f792adf.svg" alt="\(\overline{x}=(x_2,\dots,x_n)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, the <img src="ltx/4e8878854b9.svg" alt="\(n-1\)" style="height: 0.7972em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> variables treated as parameters, assuming <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/b78a6bcff3a.svg" alt="\(h\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are functions of <img src="ltx/4e8878854b9.svg" alt="\(n-1\)" style="height: 0.7972em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/f35f58dd9c3.svg" alt="\(n+1\)" style="height: 0.7968em; vertical-align: -0.1305em; display: inline-block" class="org-latex org-latex-inline" /> variables, respectively. and <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is a function of <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> variables. (in case <img src="ltx/d71722e1907.svg" alt="\(n=1\)" style="height: 0.7155em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, a 0-ary function is a constant function which is in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> by scheme 2).
+</p></li>
+</ol>
+
+</div>
+<p>
+[kleene 1952] showed that all the usual functions on <img src="ltx/1f4a4c4b602.svg" alt="\(\omega\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are primitive recursive, including <img src="ltx/5588c98f5c9.svg" alt="\(x \cdot y,x^y,x!\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and limited subtraction <img src="ltx/dcb34194d36.svg" alt="\(x \operatorname{monus} y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />,
+<img src="ltx/a2589596854.svg" alt="\[ x \dotminus y \defeq \begin{cases} x-y &amp;amp; \textif x \geq y\\ 0 &amp;amp; \textif x&amp;lt;y. \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+</p>
+<div class="math-block definition" data-before="definition: mu-recursive functions" data-after="(taken from robert i. soare, 2016 definition 17.2.4)
+" id="orgfce73ec">
+<p>
+the class <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of <i><img src="ltx/f8471e7b922.svg" alt="\(mu\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />-recursive (partial) functions</i> is the least class obtained by closing under schemes (1)-(5) for the primitive recursive functions and the following scheme (6).
+</p>
+
+<ol class="org-ol">
+<li>(unbounded search) if <img src="ltx/9d90327b0ce.svg" alt="\(\theta(\overline{x},y) \in \mathcal{C}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is a partial function, and
+<img src="ltx/ef67ab77025.svg" alt="\[ \psi(\overline{x})=(\mu y)[\theta(\overline{x},y)\downarrow=1 \smallspace\&amp;amp;\smallspace (\forall z&amp;lt;y)[\theta(\overline{x},z)\downarrow \neq 1]], \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+then <img src="ltx/11547742944.svg" alt="\(\psi\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is in <img src="ltx/8cb773ce0e0.svg" alt="\(\mathcal{C}\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. (here <img src="ltx/f74e630e1e8.svg" alt="\(\psi(\overline{x})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> diverges if there is no such <img src="ltx/a7cff3c9f2b.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. hence, <img src="ltx/11547742944.svg" alt="\(\psi\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> may be nontotal.)</li>
+</ol>
+
+</div>
+
+</div>
+<div class="math-block lemma" data-before="lemma" data-after="" id="orgc5dbc2e">
+<p>
+the constant function <img src="ltx/cc176a4d3bc.svg" alt="\(C_i^n(\overline{x}): \mathbb{N}^n \to \mathbb{N} = i\)" style="height: 1.0885em; vertical-align: -0.3043em; display: inline-block" class="org-latex org-latex-inline" /> for all <img src="ltx/dfd3d7a0021.svg" alt="\(i \le n,\smallspace i,n \in \mathbb{N}\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive.
+</p>
+
+</div>
+<div class="proof" id="orgec7bf56">
+<p>
+this may be true by definition when considering <a href="/recursive_function.html">def-primitive-recursive</a>, but not when considering the axioms of <a href="/recursive_function.html">def-mu-recursive-functions</a>.
+</p>
+
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/bf275665aeb.svg" alt="\begin{align*}
+  C_0^0 &amp;amp;\defeq 0\\
+  C_{i+1}^0 &amp;amp;\defeq \brm{s}(C_i^0)\\
+  C_i^{n+1} &amp;amp;\defeq C^n_i\\
+  C_i^{n+1}(\overline{x}) &amp;amp;\defeq \pi_i(C^n_i)
+\end{align*}
+" style="height: 7.3125em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+we can gain intuition by looking at it in the form of a matrix of functions, in which all items in the same column are equal and each column corresponds to the successor of the value corresponding to the column on its left:
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/08b364c618f.svg" alt="\begin{tikzpicture}
+  \matrix(A) [matrix of math nodes] {
+    C_0^0 &amp;amp; C_1^0 &amp;amp; \cdots &amp;amp; C^0_i\\
+    C_1^0 &amp;amp; C_1^1 &amp;amp; \ddots\\
+    \vdots &amp;amp; \ddots &amp;amp; \ddots\\
+    C_n^0 &amp;amp; &amp;amp; &amp;amp; C_i^n\\
+    \verteq &amp;amp; \verteq &amp;amp; \cdots &amp;amp; \verteq\\
+    0 &amp;amp; 1 &amp;amp; \cdots &amp;amp; i\\
+  };
+  \draw[decorate, decoration={calligraphic brace, amplitude=7pt}, thick] (A-1-4.north east) -- (A-4-4.south east) node[right, midway, xshift=10pt]{functions};
+  \draw[decorate, decoration={calligraphic brace, amplitude=3pt}, thick] (A-6-4.north east) -- (A-6-4.south east) node[right, midway, xshift=10pt]{constants};
+\end{tikzpicture}
+" style="height: 11.5437em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+
+</div>
+<div class="dummy" id="org2602a9f">
+<p>
+if we write <img src="ltx/35a8f55c324.svg" alt="\(f(x,y)=x+y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we have the recursion equations
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/be14fe921b0.svg" alt="\begin{align*}
+  f(x,0) &amp;amp;= x,\\
+  f(x,y+1) &amp;amp;= f(x,y)+1.
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+we can rewrite these equations as
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/aa0704f29f6.svg" alt="\begin{align*}
+  f(x,0) &amp;amp;= \pi_1^1(x),\\
+  f(x,y+1) &amp;amp;= g(y,f(x,y),x).
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+where <img src="ltx/9a4d310ccb6.svg" alt="\(g(x_1,x_2,x_3)=s(\pi_2^3(x_1,x_2,x_3))\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> the functions <img src="ltx/b2966194ee1.svg" alt="\(\pi_1^1(x),\pi_2^3(x_1,x_2,x_3)\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/5da74704b82.svg" alt="\(s(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> are primitive recursive functions; in fact they are initial functions. also, <img src="ltx/2f287c42cb9.svg" alt="\(g(x_1,x_2,x_3)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is a primitive recursive function, since it is obtained by composition of primitive recursive functions. thus, the preceding is a valid application of the operation of recursion to primitive recursive functions. hence <img src="ltx/35a8f55c324.svg" alt="\(f(x,y)=x+y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive.
+</p>
+
+</div>
+<div class="dummy" id="org80ed92b">
+<p>
+the recursion equations for <img src="ltx/1e92451005b.svg" alt="\(h(x,y)=x \cdot y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> are
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/0571bfc9308.svg" alt="\begin{align*}
+  h(x,0)&amp;amp;=0,\\
+  h(x,y+1)&amp;amp;=h(x,y)+x.
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+this can be rewritten
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/1c01e5a179c.svg" alt="\begin{align*}
+  h(x,0) &amp;amp;= n(x)\\
+  h(x,y+1) &amp;amp;= g(y,h(x,y),x).
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+here, <img src="ltx/e175bb35204.svg" alt="\(n(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is the zero function.
+</p>
+
+<p>
+<img src="ltx/502835f85b4.svg" alt="\[ g(x_1,x_2,x_3)=f(\pi_2^3(x_1,x_2,x_3),\pi_3^3(x_1,x_2,x_3)), \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+<img src="ltx/6405fc6b9ce.svg" alt="\(f(x_1,x_2)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is <img src="ltx/5a6c2269801.svg" alt="\(x_1+x_2\)" style="height: 0.8167em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/fdd429c2a0c.svg" alt="\(\pi_2^3(x_1,x_2,x_3),\pi_3^3(x_1,x_2,x_3)\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> are projection functions. notice that the functions <img src="ltx/317e835558f.svg" alt="\(n(x),\pi_2^3(x_1,x_2,x_3)\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/bba05a74745.svg" alt="\(\pi_3^3(x_1,x_2,x_3)\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> are all primitive recursive functions, since they are all initial functions. <img src="ltx/03238e83b95.svg" alt="\(f(x_1,x_2)=x_1+x_2\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is also primitive recursive, so <img src="ltx/2f287c42cb9.svg" alt="\(g(x_1,x_2,x_3)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is a primitive recursive function since it is obtained from primitive recursive functions by composition. finally, we conclude that
+<img src="ltx/e24763529d8.svg" alt="\[ h(x,y)=x \cdot y \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+is primitive recursive.
+</p>
+
+</div>
+<div class="dummy" id="org95d948d">
+<p>
+for <img src="ltx/16784b8ce77.svg" alt="\(x!\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, the recursion operations are
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/674dc402e8d.svg" alt="\begin{align*}
+  0! &amp;amp;= 1,\\
+  (x+1)! &amp;amp;= x! \cdot s(x).
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+more precisely, <img src="ltx/80a1720d8ef.svg" alt="\(x!=h(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, where
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/e3fb0b4d03e.svg" alt="\begin{align*}
+  h(0) &amp;amp;= 1,\\
+  h(t+1) &amp;amp;= g(t,h(t)).
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+and
+<img src="ltx/cdd772b9467.svg" alt="\[ g(x_1,x_2)=s(x_1) \cdot x_2. \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+finally, <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive because
+<img src="ltx/437903f745d.svg" alt="\[ g(x_1,x_2)=s(\pi_1^2(x_1,x_2)) \cdot \pi_2^2(x_1,x_2) \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+and multiplication is already known to be primitive recursive.
+</p>
+
+</div>
+<div class="dummy" id="orgbce8b40">
+<p>
+for <img src="ltx/cfc30db6cdd.svg" alt="\(x^y\)" style="height: 0.7494em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, the recursion equations are
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/8b7b8924ffd.svg" alt="\begin{align*}
+  x^0 &amp;amp;= 1,\\
+  x^{y-1} &amp;amp;= x^y \cdot x.
+\end{align*}
+" style="height: 3.2187em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+note that these equations assign the value 1 to the "indeterminate" <img src="ltx/75122dd7fbc.svg" alt="\(0^0\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />.
+</p>
+
+</div>
+<div class="dummy" id="orgfd00006">
+<p>
+the predecessor function <img src="ltx/862fa828857.svg" alt="\(p(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is defined as follows:
+<img src="ltx/f89958c8342.svg" alt="\[ p(x)=\begin{cases} x-1 &amp;amp; \textif x \neq 0\\ 0 &amp;amp; \textif x = 0 \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />.
+the recursion equations for <img src="ltx/862fa828857.svg" alt="\(p(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> are simply
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/694ec65066c.svg" alt="\begin{align*}
+  p(0) &amp;amp;= 0,\\
+  p(t+1) &amp;amp;= t.
+\end{align*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+<p>
+hence, <img src="ltx/862fa828857.svg" alt="\(p(x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive.
+</p>
+
+</div>
+<div class="dummy" id="orgc260366">
+<p>
+the function <img src="ltx/f2af3a6a40a.svg" alt="\(x \dotminus y\)" style="height: 0.8152em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is defined as follows:
+<img src="ltx/27f31490146.svg" alt="\[ x \dotminus y = \begin{cases} x-y &amp;amp; \textif x \geq y\\ 0 &amp;amp; \textif x&amp;lt;y. \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+this function should not be confused with the function <img src="ltx/47dad848cc1.svg" alt="\(x-y\)" style="height: 0.8606em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, which is undefined if <img src="ltx/8265d83769a.svg" alt="\(x&amp;lt;y\)" style="height: 0.8172em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. in particular, <img src="ltx/f2af3a6a40a.svg" alt="\(x \dotminus y\)" style="height: 0.8152em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is total, while <img src="ltx/47dad848cc1.svg" alt="\(x-y\)" style="height: 0.8606em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is not.
+</p>
+
+<p>
+we show that <img src="ltx/f2af3a6a40a.svg" alt="\(x \dotminus y\)" style="height: 0.8152em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive by displaying the recursion equations:
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<img src="ltx/58c28c17571.svg" alt="\begin{gather*}
+  x \dotminus 0 = x,\\
+  x \dotminus (t+1)=p(x \dotminus t).
+\end{gather*}
+" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
+</span>
+</div>
+
+</div>
+<div class="dummy" id="org844eefa">
+<p>
+the function <img src="ltx/9aa41e55e82.svg" alt="\(\abs{x-y}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is defined as the absolute value of the difference between <img src="ltx/42c32b034ca.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/a7cff3c9f2b.svg" alt="\(y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. it can be expressed simply as
+<img src="ltx/90d045c50e3.svg" alt="\[ \abs{x-y}=(x\dotminus y)+(y \dotminus x) \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+and thus is primitive recursive.
+</p>
+
+</div>
+<div class="dummy" id="org51709a3">
+<p>
+<img src="ltx/7da622ffc6a.svg" alt="\(\floor*{x/y}\)" style="height: 1.2744em; vertical-align: -0.3922em; display: inline-block" class="org-latex org-latex-inline" /> is the "integer part" of the quotient <img src="ltx/605bd9d37f6.svg" alt="\(x/y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />. for example, <img src="ltx/43a674ee007.svg" alt="\(\floor*{7/2}=3\)" style="height: 1.2744em; vertical-align: -0.3922em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/c8381c9184d.svg" alt="\(\floor*{2/3}=0\)" style="height: 1.2744em; vertical-align: -0.3922em; display: inline-block" class="org-latex org-latex-inline" />. the equation
+<img src="ltx/3093fde0e13.svg" alt="\[ \floor*{x/y}=\min_{t \le x}[(t+1) \cdot y &amp;gt; x] \]" style="height: 2.1332em; display: block" class="org-latex org-latex-block" />
+shows that <img src="ltx/7da622ffc6a.svg" alt="\(\floor*{x/y}\)" style="height: 1.2744em; vertical-align: -0.3922em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive. note that according to this equation, we are taking <img src="ltx/a4d9d0dab1c.svg" alt="\(\floor*{x/0}=0\)" style="height: 1.2744em; vertical-align: -0.3922em; display: inline-block" class="org-latex org-latex-inline" />.
+</p>
+
+</div>
+<div class="math-block proposition" data-before="proposition" data-after="" id="orgad768af">
+<p>
+the function <img src="ltx/6f7023d3b79.svg" alt="\(f(x)=\floor*{\sqrt{x}}\)" style="height: 1.2744em; vertical-align: -0.3922em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive
+</p>
+
+</div>
+<div class="proof" id="org5775414">
+<p>
+consider the function
+<img src="ltx/b407b93f518.svg" alt="\[ g(x,x) = \begin{cases} \min \set{\zstroke \given \zstroke \in x \land (\zstroke^2&amp;gt;x)}\\ x &amp;amp; \text{if the set is empty} \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+<img src="ltx/a7d7ac4489d.svg" alt="\(g(x,x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is recursive primitive by the-bounded-min and so <img src="ltx/33489efac68.svg" alt="\(g(x,x)-1\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive aswell. and by def-prim-recurs-def-by-cases the function
+<img src="ltx/796348878ad.svg" alt="\[ f(x)=\begin{cases} 0 &amp;amp; x=1\\ g(x,x)=1 &amp;amp; x \neq 1 \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+is primitive recursive too.
+</p>
+
+</div>
+<div class="math-block proposition" data-before="proposition" data-after="" id="org318a8c9">
+<p>
+the function
+<img src="ltx/0d29f2fd535.svg" alt="\[ f(x)=\begin{cases} \floor*{\log_2(x)} &amp;amp; x&amp;gt;0\\ 0 &amp;amp; x=0 \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+is primitive recursive.
+</p>
+
+</div>
+<div class="proof" id="org005a10d">
+<p>
+consider the function
+<img src="ltx/f5d0200c646.svg" alt="\[ g(x,x) = \begin{cases} \min \set{\zstroke \given \zstroke \in x \land (2^\zstroke&amp;gt;x)}\\ x &amp;amp; \text{if the set is empty} \end{cases} \]" style="height: 3.1364em; display: block" class="org-latex org-latex-block" />
+<img src="ltx/a7d7ac4489d.svg" alt="\(g(x,x)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is recursive primitive because the relation <img src="ltx/fe69b75e369.svg" alt="\(2^\zstroke &amp;gt; x\)" style="height: 0.7538em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> is.
+</p>
+
+</div>
+<div class="math-block proposition" data-before="proposition" data-after="" id="org6f2ec1d">
+<p>
+the function <img src="ltx/f8527c20555.svg" alt="\(f(x,y)=[x \circ y]\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> that generalizes the example <img src="ltx/97b503803d9.svg" alt="\(f(3,4)=11100\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> because 3 is 11 in binary form, and 100 is 4 in binary, which gives 11100 in binary which is the binary representation of the decimal 28.
+</p>
+
+</div>
+<div class="proof" id="orgc02cfbc">
+<p>
+let <img src="ltx/b6917dab61e.svg" alt="\(\abs{x}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> denote the length of digits in the binary representation of <img src="ltx/42c32b034ca.svg" alt="\(x\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. we have
+<img src="ltx/407f3896d4a.svg" alt="\[ f(x,y)=[x \circ y]=x \cdot 2^{|y|}+y. \]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+we have <img src="ltx/23ce921b6e7.svg" alt="\(\log_2(x)+1=\abs{x}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive, and exponentiality is primitive recursive as well as addition and multiplication and so <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive by composition.
+</p>
+
+</div>
+<div class="math-block proposition" data-before="proposition" data-after="" id="orgbe56de3">
+<p>
+the function giving the fibonacci sequence, i.e. <img src="ltx/b2ee27a92f8.svg" alt="\(f(n)=1,1,2,3,5,8,\dots\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, is primitive recursive.
+</p>
+
+</div>
+<div class="proof" id="org7502688">
+<p>
+let <img src="ltx/bc4290f9991.svg" alt="\(g(n)=\godelnum{f(n),f(n+1)}\)" style="height: 1.2744em; vertical-align: -0.3922em; display: inline-block" class="org-latex org-latex-inline" />, if we show that <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is primitive recursive then we can simply define <img src="ltx/7c797d7ac03.svg" alt="\(f(n)=l(g(n))\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />.
+</p>
+
+<p>
+<img src="ltx/ed19a4d3351.svg" alt="\[ g(n+1)=\godelnum{f(n+1),f(n+2)}=\godelnum{f(n+1),f(n+1)+f(n)}=\godelnum{r(g(n)),r(g(n)+l(g(n)))} \]" style="height: 1.6174em; display: block" class="org-latex org-latex-block" />
+because we were able to define <img src="ltx/ebcb7a54d06.svg" alt="\(g(n+1)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> in terms of <img src="ltx/3f90b679354.svg" alt="\(g(n)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and other p.r. functions we know <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> is p.r.
+</p>
+
+</div>
+</div>
+</body>
+</html>

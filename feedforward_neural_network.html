@@ -26,7 +26,7 @@
 </div><h1 class="main-title">feedforward neural network</h1><span class="desc"></span>
 </div>
 <div id="content" class="content">
-<div class="math-block note" data-before="note" data-after="" id="orgde25f18">
+<div class="math-block note" data-before="note" data-after="" id="org4a86e3d">
 <p>
 feedforward neural networks is a wider term than discussed here, whats discussed here really is a specific type we call a <b>simple multilayer perceptron</b>, but this serves as an introductory to other types of more complex networks
 </p>
@@ -40,7 +40,7 @@ a <b>feedforward network</b> has connections only in one direction. each node co
 a unit calculates the weighted sum of the inputs from predecessor nodes and then applies a nonlinear function to produce its output. let <img src="ltx/247e7a07e54.svg" alt="\(a_j\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> denote the output of unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and let <img src="ltx/31cd2f77ee9.svg" alt="\(w_{i,j}\)" style="height: 0.8007em; vertical-align: -0.3296em; display: inline-block" class="org-latex org-latex-inline" /> be the weight attached to the link from unit <img src="ltx/75143dbad26.svg" alt="\(i\)" style="height: 0.7447em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> to unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />; then we have
 </p>
 
-<div id="org5dd0e59" class="equation-container">
+<div id="orgf6e4fa2" class="equation-container">
 <span class="equation">
 <img src="ltx/4514c322795.svg" alt="\begin{equation}
   a_j = g_j\left(\sum_{i} w_{i,j}a_i\right) = g_j(in_j)
@@ -86,7 +86,7 @@ assuming the squared cost function (which we would usually denote by <img src="l
 after the first application of the derivative chain rule to the cost function with respect to the weight that connects an arbitrary unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> in the last hidden layer to an arbitrary unit <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in the output layer we get:
 <img src="ltx/1e1e5ae0f13.svg" alt="\[ \frac{\partial L}{\partial w^q_{jk}} = -2(y-\hat y) \frac{\partial {g^q(in_k^q)}}{\partial w^q_{jk}} \]" style="height: 2.7417em; display: block" class="org-latex org-latex-block" />
 </p>
-<div class="math-block note" data-before="note" data-after="" id="orgfe03a25">
+<div class="math-block note" data-before="note" data-after="" id="org17a9310">
 <p>
 a weight that is between a layer <img src="ltx/7cb9a67d444.svg" alt="\(l-1\)" style="height: 0.8606em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is denoted by <img src="ltx/aa60d56955d.svg" alt="\(w^l_x\)" style="height: 1.1727em; vertical-align: -0.2915em; display: inline-block" class="org-latex org-latex-inline" /> and not <img src="ltx/d30ecf9e6cc.svg" alt="\(w^{l-1}_x\)" style="height: 1.1727em; vertical-align: -0.2915em; display: inline-block" class="org-latex org-latex-inline" /> because it actually belongs to the <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />th layer, even if it comes out of the <img src="ltx/7cb9a67d444.svg" alt="\(l-1\)" style="height: 0.8606em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />th layer, this means that weights with a superscript of 1, e.g. <img src="ltx/c1b24fe5052.svg" alt="\(w^1_x\)" style="height: 1.1384em; vertical-align: -0.2915em; display: inline-block" class="org-latex org-latex-inline" /> arent defined, because the first layer (input layer) has no weights.
 </p>
@@ -98,7 +98,7 @@ applying the chain rule again we get:
 we apply the chain rule again to get the final gradient formula for <img src="ltx/ef11d0c2754.svg" alt="\(w^q_{jk}\)" style="height: 1.2937em; vertical-align: -0.4782em; display: inline-block" class="org-latex org-latex-inline" />:
 </p>
 
-<div id="orga0fe5a1" class="equation-container">
+<div id="orge85464e" class="equation-container">
 <span class="equation">
 <img src="ltx/ccb9f37928a.svg" alt="\begin{equation}
   \frac{\partial L}{\partial w^q_{jk}} = \underbrace{-2(y-\hat y){g^q}'(in_k^q)}_{\text{perceived error, } \Delta_k^q} a_j^{q-1}
@@ -118,7 +118,7 @@ where <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertic
 and in general form, the perceived error for an arbitrary unit <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in an arbitrary hidden layer <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, is defined as:
 </p>
 
-<div id="orgab8699f" class="equation-container">
+<div id="org5fb2a62" class="equation-container">
 <span class="equation">
 <img src="ltx/187679bd297.svg" alt="\begin{equation}
   \Delta_k^l = \Delta_c^{l+1}w^{l+1}_{kc}{g^l}'(in_k^l) 
@@ -140,7 +140,7 @@ the back-propagation process passes messages back along each link in the network
 overall, the process of learning the weights of the network is usually one that exhibits diminishing returns. we run until it is no longer practical to decrease the test error by running longer. usually this does not mean we have reached a global or even a local minimum of the loss function. instead, it means we would have to make an impractically large number of very small steps to continue reducing the cost, or that additional steps would only cause overfitting, or that estimates of the gradient are too inaccurate to make further progress.
 </p>
 
-<div class="math-block my_example" data-before="example" data-after="" id="orgfb3e256">
+<div class="math-block my_example" data-before="example" data-after="" id="orge4fe696">
 <p>
 citation: (Peter Norvig, Stuart J. Russell, 2020)
 consider the following network
@@ -150,7 +150,7 @@ consider the following network
 coupling multiple units together into a network creates a complex function that is a composition of the algebraic expressions represented by the individual units. for example, the network above represents a function <img src="ltx/cb8ac078bbf.svg" alt="\(h_{\brm{w}}(\brm{x})\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, parameterized by weights <img src="ltx/4bd4a020a05.svg" alt="\(\brm{w}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, that maps a two-element input vector <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.5224em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> to a scalar output value <img src="ltx/3fd78054249.svg" alt="\(\hat y\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />. the internal structure of the function mirrors the structure of the network. for example we can write an expression for the output <img src="ltx/3fd78054249.svg" alt="\(\hat y\)" style="height: 0.9640em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> as follows:
 </p>
 
-<div id="orge063963" class="equation-container">
+<div id="org2bc6822" class="equation-container">
 <span class="equation">
 <img src="ltx/6c67c667ded.svg" alt="\begin{align*}
   \hat y &amp;amp;= g_5(in_5) = g_5(w_{0,5} + w_{3,5}a_3 + w_{4,5}a_4)\\
@@ -260,9 +260,9 @@ many other output layers are possible.
 <p>
 #+end_comment
 </p>
-<div id="outline-container-org51575ba" class="outline-2">
-<h2 id="org51575ba">initial common lisp implementation</h2>
-<div class="outline-text-2" id="text-org51575ba">
+<div id="outline-container-orgb84f7dc" class="outline-2">
+<h2 id="orgb84f7dc">initial common lisp implementation</h2>
+<div class="outline-text-2" id="text-orgb84f7dc">
 <p>
 this code uses common lisp (aswell as code/functions from the actual link itself, click it for those)
 </p>
@@ -520,9 +520,9 @@ although notice that here we're testing the network on the same data we trained 
 </p>
 </div>
 </div>
-<div id="outline-container-org4903e2c" class="outline-2">
-<h2 id="org4903e2c">making use of gpu</h2>
-<div class="outline-text-2" id="text-org4903e2c">
+<div id="outline-container-org0c5f16f" class="outline-2">
+<h2 id="org0c5f16f">making use of gpu</h2>
+<div class="outline-text-2" id="text-org0c5f16f">
 <p>
 before implementing this i started experimenting with <a href="/cuda_programming_in_common_lisp.html">cuda in common lisp</a>, one unfortunate thing is that <code>cl-cuda</code> doesnt allow using arbitrary data types like you would have in <code>C</code> with structs, we're gonna have to live with arrays of floats on the gpu
 at first i was gonna implement the most straightforward approach, which is to run every backpropagation/feedforward operation by a single gpu thread, so that if we have 256 gpu threads, we'd be doing 256 backpropagation operations in parallel whereas on the cpu (with a single thread) we'd be doing only 1, i thought this would definitely work, until i actually thought about it and then realized, how the hell can this be a thread-safe process? each thread is modifying every weight in the network and many threads are running at once, it would be a nightmare to actually use such an approach, and a miracle if it even works as intended, so i had to think of something else, something thread-safe.</p>

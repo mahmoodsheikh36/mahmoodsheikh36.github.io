@@ -25,9 +25,9 @@
 </div><h1 class="main-title">convolutional neural network</h1>
 </div>
 <div id="content" class="content">
-<div id="outline-container-orgc8e5bee" class="outline-2">
-<h2 id="orgc8e5bee">citations</h2>
-<div class="outline-text-2" id="text-orgc8e5bee">
+<div id="outline-container-org790d7b3" class="outline-2">
+<h2 id="org790d7b3">citations</h2>
+<div class="outline-text-2" id="text-org790d7b3">
 <ul class="org-ul">
 <li>(Peter Norvig, Stuart J. Russell, 2020)</li>
 <li>(Jianxin Wu, 2017)</li>
@@ -38,9 +38,9 @@ and countless other resources that helped me form a good understanding of the to
 </p>
 </div>
 </div>
-<div id="outline-container-org0f80243" class="outline-2">
-<h2 id="org0f80243">motivation</h2>
-<div class="outline-text-2" id="text-org0f80243">
+<div id="outline-container-org8b77b24" class="outline-2">
+<h2 id="org8b77b24">motivation</h2>
+<div class="outline-text-2" id="text-org8b77b24">
 <p>
 an image cannot be thought of as a simple vector of input pixel values, primarily because <b>adjacency of pixels in an image matters</b>. simple <a href="/feedforward_neural_network.html">multilayer perceptrons</a> arent suited for images because adjacent neurons in the same layer arent really connected or affected by each other, which isnt the case in images.
 </p>
@@ -66,9 +66,9 @@ usually an image is stored in memory as a 2d array (or matrix), each cell contai
 </p>
 </div>
 </div>
-<div id="outline-container-org9c69833" class="outline-2">
-<h2 id="org9c69833">convolutional layers</h2>
-<div class="outline-text-2" id="text-org9c69833">
+<div id="outline-container-orgc7d6690" class="outline-2">
+<h2 id="orgc7d6690">convolutional layers</h2>
+<div class="outline-text-2" id="text-orgc7d6690">
 <p>
 a convolutional neural network is one that contains spatially local connections, at least in the early layers which we call <b>convolutional layers</b>, and has patterns of weights that are replicated across the units in each layer. a pattern of weights that is replicated across multiple local regions is called a <b>kernel</b> which is applied with a convolution.
 </p>
@@ -77,7 +77,7 @@ a convolutional neural network is one that contains spatially local connections,
 in practice, multiple kernels are learned at each convolutional layer, suppose the input to the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />-th layer is an order 3 tensor with size <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 1.0121em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />, a kernel would also be an order 3 tensor with size <img src="ltx/0e6e198c0e1.svg" alt="\(D^\ell \times H \times W\)" style="height: 1.0121em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/169d537050d.svg" alt="\(W\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/e99a3f90215.svg" alt="\(H\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are the dimensions of the kernel and they differ from <img src="ltx/220e6004dca.svg" alt="\(W^\ell,H^\ell\)" style="height: 1.1209em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, but the depth of both the image and tensor should be equal for the result of the convolution to be of lower dimensionality), assuming <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> kernels are used (in other words, <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> feature maps), the tensor of kernels (or weights) would be an order 4 tensor in <img src="ltx/4dd6e861b5b.svg" alt="\(\mathbb{R}^{K \times D^\ell \times H \times W}\)" style="height: 1.0900em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, assuming a stride of 1, the output <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7130em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> would be a tensor of the third order and of size <img src="ltx/82dfc6dcbfb.svg" alt="\(K \times (H^\ell-(H-1)) \times (W^\ell-(W-1)))\)" style="height: 1.1754em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> which is composed of <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> feature maps.
 </p>
 
-<div class="math-block note" data-before="note" data-after="" id="orgbf7dd01">
+<div class="math-block note" data-before="note" data-after="" id="org764a9e0">
 <p>
 its important to maintain the order of dimensions as depth X height X width, because thats the order i use everywhere
 </p>
@@ -89,9 +89,9 @@ at the first layer, the image is stored as a tensor of order 3 of <b>depth</b> <
 </p>
 </div>
 </div>
-<div id="outline-container-orgba8c02b" class="outline-2">
-<h2 id="orgba8c02b">pooling layers and downsampling</h2>
-<div class="outline-text-2" id="text-orgba8c02b">
+<div id="outline-container-org1593c6c" class="outline-2">
+<h2 id="org1593c6c">pooling layers and downsampling</h2>
+<div class="outline-text-2" id="text-org1593c6c">
 <p>
 a pooling layer in a neural network summarizes a set of adjacent units from the preceding pooling layer with a single value. pooling works just like a convolution layer, with a kernel size l and stride <img src="ltx/ac4e24460be.svg" alt="\(s\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, but the operation that is applied is fixed rather than learned.
 </p>
@@ -163,17 +163,17 @@ translating these conditions into equations, we get
 </div>
 </div>
 </div>
-<div id="outline-container-org7dac05b" class="outline-2">
-<h2 id="org7dac05b">flatten layer</h2>
-<div class="outline-text-2" id="text-org7dac05b">
+<div id="outline-container-org14861ae" class="outline-2">
+<h2 id="org14861ae">flatten layer</h2>
+<div class="outline-text-2" id="text-org14861ae">
 <p>
 a layer that takes a tensor and vectorizes or <b>flattens</b> it, turning it into a 1d vector, it doesnt need any parameters.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd7db08e" class="outline-2">
-<h2 id="orgd7db08e">fully connected convolutional layers</h2>
-<div class="outline-text-2" id="text-orgd7db08e">
+<div id="outline-container-org679702d" class="outline-2">
+<h2 id="org679702d">fully connected convolutional layers</h2>
+<div class="outline-text-2" id="text-org679702d">
 <p>
 suppose the input of a layer <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> has size <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 1.0121em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />. if we use convolution kernels whose size is <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 1.0121em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />, then <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> such kernels form an order 4 tensor in <img src="ltx/6ab215f1073.svg" alt="\(K^\ell \times D^\ell \times H^\ell \times W^\ell\)" style="height: 1.0121em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />. the output would be <img src="ltx/980737144ff.svg" alt="\(\brm{y} \in \mathbb{R}^{K^\ell}\)" style="height: 1.2806em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, which is why these layers are sometimes used as flatten layers.
 </p>
@@ -195,9 +195,9 @@ notice that here <img src="ltx/dcfe5a80c1a.svg" alt="\(K^{\ell-1}\)" style="heig
 </p>
 </div>
 </div>
-<div id="outline-container-orgb83e7c5" class="outline-2">
-<h2 id="orgb83e7c5">full example</h2>
-<div class="outline-text-2" id="text-orgb83e7c5">
+<div id="outline-container-org5fbceaf" class="outline-2">
+<h2 id="org5fbceaf">full example</h2>
+<div class="outline-text-2" id="text-org5fbceaf">
 <p>
 consider the following network:
 <img src="/net.png" />
@@ -244,7 +244,7 @@ in words, we iterate through each block of size <img src="ltx/5cba2853bd4.svg" a
 <p>
 where <img src="ltx/3cab1abf345.svg" alt="\(1 \le i \le 8,1 \le j \le 8,1 \le k \le 12\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, output is of dimensions <img src="ltx/96920831c17.svg" alt="\(12 \times 8 \times 8\)" style="height: 0.7972em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />, we use <img src="ltx/4f913c4fb75.svg" alt="\(z+1\)" style="height: 0.7968em; vertical-align: -0.1305em; display: inline-block" class="org-latex org-latex-inline" /> for the depth of the image because in truth what we're finding is <img src="ltx/98d3352e959.svg" alt="\(\hat Y_K^\ell[1,i,j]\)" style="height: 1.2911em; vertical-align: -0.3191em; display: inline-block" class="org-latex org-latex-inline" /> which is equal to <img src="ltx/986b9fe7d0f.svg" alt="\(\hat Y_k^\ell[i,j]\)" style="height: 1.2987em; vertical-align: -0.3267em; display: inline-block" class="org-latex org-latex-inline" /> but we omit an index of <img src="ltx/5bfbda57fb1.svg" alt="\(1\)" style="height: 0.7155em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because its "implied" when its to the left
 </p>
-<div class="math-block note" data-before="note" data-after="" id="org48b4389">
+<div class="math-block note" data-before="note" data-after="" id="orgc0f0586">
 <p>
 we use <img src="ltx/8936b949f78.svg" alt="\(z\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> as the index to <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because originally it would've been some variable index, but the result of the convolution is a tensor of order 2 (because the operands of the convolution have the same depth), but originally its meant ot be of order 3 (operands are of order 3), so we are "redimensioning" the result implicitly, if we were to use a variable, e.g. <img src="ltx/4ee248e100b.svg" alt="\(\hat Y^\ell_k[r,i,j]\)" style="height: 1.2987em; vertical-align: -0.3267em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/828c235cd1e.svg" alt="\(r\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> would turn out to equal just 0, because substituting <img src="ltx/23b40e22b21.svg" alt="\(r&amp;gt;0\)" style="height: 0.7538em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> would result in an "overflow" in the summation, as when <img src="ltx/a0091b77739.svg" alt="\(z=D_k^\ell-1\)" style="height: 1.2079em; vertical-align: -0.3267em; display: inline-block" class="org-latex org-latex-inline" />, we get <img src="ltx/bca86947e15.svg" alt="\(I^\ell[z+r,y+i,x+j]=\vec{v}[D_K^\ell,y+i,x+j]\)" style="height: 1.2003em; vertical-align: -0.3191em; display: inline-block" class="org-latex org-latex-inline" />, which isnt defined (max index is <img src="ltx/89f07241c68.svg" alt="\(D_K^\ell-1\)" style="height: 1.2003em; vertical-align: -0.3191em; display: inline-block" class="org-latex org-latex-inline" /> not <img src="ltx/bb617fcc118.svg" alt="\(D_K^\ell\)" style="height: 1.2003em; vertical-align: -0.3191em; display: inline-block" class="org-latex org-latex-inline" />), therefore <img src="ltx/cda7f808f4b.svg" alt="\(Y_k^\ell[1,i,j]\)" style="height: 1.2079em; vertical-align: -0.3267em; display: inline-block" class="org-latex org-latex-inline" /> isnt defined and <img src="ltx/96ec14e3bd4.svg" alt="\(r=0\)" style="height: 0.7155em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> in all cases, so we might aswell just write 0 or not consider it at all since adding 0 wouldnt affect a number.
 </p>
@@ -259,7 +259,7 @@ here the size of the kernels is <img src="ltx/b8f75ffadf8.svg" alt="\(2 \times 2
 the output is of size <img src="ltx/6f3be01f5c7.svg" alt="\(12 \times 4 \times 4 = 192\)" style="height: 0.7972em; vertical-align: -0.1309em; display: inline-block" class="org-latex org-latex-inline" />
 <b>feedforwarding for fully connected layer <img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></b>:
 </p>
-<div class="math-block note" data-before="note" data-after="" id="orgc0dffd3">
+<div class="math-block note" data-before="note" data-after="" id="org07e1049">
 <p>
 in the image, the output layer and the last fully connected layer are treated as separate layers, this makes little sense because that way the fully connected layers would have no parameters, here we treat them as a single fully connected layer
 </p>
@@ -364,7 +364,7 @@ recall that this layer downscaled the input given to it during feedforwarding fr
 <b>backpropagation through convolutional layer <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></b>:
 </p>
 
-<div id="orga4af9e9" class="equation-container">
+<div id="orgead9253" class="equation-container">
 <span class="equation">
 <img src="ltx/2570ebdc984.svg" alt="\begin{align*}
   \Delta K^\ell_k[r,u,v] &amp;amp;= \frac{\partial L}{\partial K_k^\ell[r,u,v]}\\
@@ -401,7 +401,7 @@ now for the bias:
 now we find the deltas at <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/b03b10592cf.svg" alt="\(\hat Y^{\ell-1}\)" style="height: 1.0212em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, because thats what the next layer in backpropagation, <img src="ltx/433fad91a66.svg" alt="\(\ell=3\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, needs
 </p>
 
-<div id="org9734d24" class="equation-container">
+<div id="orge124f0e" class="equation-container">
 <span class="equation">
 <img src="ltx/0e816086b4b.svg" alt="\begin{align}
   \Delta I^\ell[r,u,v] &amp;amp;= \frac{\partial L}{\partial I^\ell[r,u,v]}\\
@@ -416,7 +416,7 @@ now we find the deltas at <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style=
 <p>
 such that <img src="ltx/40c9b32b4d3.svg" alt="\(0 \le r &amp;lt; D_I^\ell, 0 \le u &amp;lt; H_I^\ell, 0 \le v &amp;lt; W_I^\ell\)" style="height: 1.2003em; vertical-align: -0.3191em; display: inline-block" class="org-latex org-latex-inline" />. here, <img src="ltx/28a60749fb9.svg" alt="\(\Delta I^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are the deltas that need to be passed onto the next layer <img src="ltx/433fad91a66.svg" alt="\(\ell=3\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </p>
-<div class="math-block note" data-before="note" data-after="" id="orgc5398d7">
+<div class="math-block note" data-before="note" data-after="" id="orgdfae336">
 <p>
 its important to notice how in <a href="/convolutional_neural_network.html">eq-convnet-1</a> the indicies <img src="ltx/0a5175bb9ea.svg" alt="\(r,u,v\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, which are indexing <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are each subtracted from the dimensions of the kernels and then the indicies <img src="ltx/c3e1fabbfba.svg" alt="\(0,i,j\)" style="height: 0.9353em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which are indexing <img src="ltx/0d3ca1204ce.svg" alt="\(S^\ell_k\)" style="height: 1.2079em; vertical-align: -0.3267em; display: inline-block" class="org-latex org-latex-inline" /> are added element-wise aswell, this is important as its a property that is later exploited in the code for backpropagation
 i should also note that the process of backpropagation in a convolutional layer, just like the feedforwarding process, resembles that of a convolutional one, i have yet to find out how to show that this follows from these math formulas
@@ -426,13 +426,13 @@ furthermore, here the expression <a href="/convolutional_neural_network.html">eq
 </div>
 </div>
 </div>
-<div id="outline-container-org8c68c35" class="outline-2">
-<h2 id="org8c68c35">architecture</h2>
-<div class="outline-text-2" id="text-org8c68c35">
+<div id="outline-container-org6cba2fc" class="outline-2">
+<h2 id="org6cba2fc">architecture</h2>
+<div class="outline-text-2" id="text-org6cba2fc">
 </div>
-<div id="outline-container-orgad57dc7" class="outline-3">
-<h3 id="orgad57dc7">LeNet-5</h3>
-<div class="outline-text-3" id="text-orgad57dc7">
+<div id="outline-container-org0ed0c23" class="outline-3">
+<h3 id="org0ed0c23">LeNet-5</h3>
+<div class="outline-text-3" id="text-org0ed0c23">
 <p>
 the <b>lenet-5</b> one of the earliest and most basic CNN architecture.
 </p>
@@ -454,25 +454,25 @@ the final seventh layer will be a softmax output layer with <img src="ltx/8beccc
 </p>
 
 
-<div id="orgb237c78" class="figure">
+<div id="org0b9fdf4" class="figure">
 <p><img src="/lenet5.png" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org2e43c3c" class="outline-2">
-<h2 id="org2e43c3c">common lisp implementation</h2>
-<div class="outline-text-2" id="text-org2e43c3c">
+<div id="outline-container-orgff0feca" class="outline-2">
+<h2 id="orgff0feca">common lisp implementation</h2>
+<div class="outline-text-2" id="text-orgff0feca">
 </div>
-<div id="outline-container-orgff897fd" class="outline-3">
-<h3 id="orgff897fd">an abstract structure for networks</h3>
-<div class="outline-text-3" id="text-orgff897fd">
+<div id="outline-container-org5a8e20b" class="outline-3">
+<h3 id="org5a8e20b">an abstract structure for networks</h3>
+<div class="outline-text-3" id="text-org5a8e20b">
 <p>
 after having studied cnn's, i realied i need a more flexible data structure for networks than what i had in <a href="/feedforward_neural_network.html">simple feedforward networks</a>, because with simple perceptrons i only used one type of layer, with cnn's we need to be able to build networks with arbitrary layers, so i dropped my previous progress and started over:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org399dbe3">(<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">feedforward</span> (layer x)
+<pre class="src src-lisp" id="org926053e">(<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">feedforward</span> (layer x)
   (<span style="font-weight: bold;">:documentation</span> <span style="font-style: italic;">"feed-forward, return activations to pass to next layer"</span>))
 
 (<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">propbackward</span> (layer layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
@@ -514,13 +514,13 @@ after having studied cnn's, i realied i need a more flexible data structure for 
 </div>
 </div>
 </div>
-<div id="outline-container-org4c53fad" class="outline-3">
-<h3 id="org4c53fad">convolutional layer</h3>
-<div class="outline-text-3" id="text-org4c53fad">
+<div id="outline-container-org7d9ef78" class="outline-3">
+<h3 id="org7d9ef78">convolutional layer</h3>
+<div class="outline-text-3" id="text-org7d9ef78">
 <p>
 we use the relu by default to reduce the risk of a vanishing gradient
 </p>
-<div class="math-block note" data-before="note" data-after="" id="org529f98a">
+<div class="math-block note" data-before="note" data-after="" id="org7302886">
 <p>
 i should note that later on, during the writing of <code>propbackward</code> for convolutional layers, i realized that i needed some more data from <code>feedforward</code> than im currently returning, so <code>feedforward</code> functions needed some slight modifications which also meant i needed to rewrite the <code>network-feedforward</code> function
 i needed more data like the unactivated output tensor of a layer, not just the final output of the layer, and the input to the layer
@@ -540,7 +540,7 @@ i also went through the source code of <a href="https://github.com/tensorflow/te
 time to implement different types of layers, starting with convolutional layer:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org3c74f69">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">convolutional-layer</span> (layer)
+<pre class="src src-lisp" id="org8f94acc">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">convolutional-layer</span> (layer)
   ()
   (<span style="font-weight: bold;">:documentation</span> <span style="font-style: italic;">"a layer that arbitrary dimensions for its weights tensor, and convolves it with an arbitrary input tensor (convolution layer of arbitrary dimensions), the weights tensor should be 1 order higher that the input tensor, e.g. if the input tensor is a 3d tensor (image with feature maps), the shape of the weights tensor should be of 4 dimensions (4d tensor), the output tensor of the layer would be of the same order as the input tensor"</span>))
 
@@ -631,14 +631,14 @@ time to implement different types of layers, starting with convolutional layer:
 </div>
 </div>
 </div>
-<div id="outline-container-org8fb4f0d" class="outline-3">
-<h3 id="org8fb4f0d">pooling layer</h3>
-<div class="outline-text-3" id="text-org8fb4f0d">
+<div id="outline-container-org223259a" class="outline-3">
+<h3 id="org223259a">pooling layer</h3>
+<div class="outline-text-3" id="text-org223259a">
 <p>
 pooling layer:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgb743920">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">pooling-layer</span> (layer)
+<pre class="src src-lisp" id="org6ce67e9">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">pooling-layer</span> (layer)
   ((rows <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:rows</span> <span style="font-weight: bold;">:accessor</span> pooling-layer-rows)
    (cols <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:cols</span> <span style="font-weight: bold;">:accessor</span> pooling-layer-cols)
    (pooling-function <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:pooling-function</span> <span style="font-weight: bold;">:accessor</span> pooling-layer-function)
@@ -686,14 +686,14 @@ pooling layer:
 </div>
 </div>
 </div>
-<div id="outline-container-orga9ded98" class="outline-3">
-<h3 id="orga9ded98">flatten layer</h3>
-<div class="outline-text-3" id="text-orga9ded98">
+<div id="outline-container-orgc2ec384" class="outline-3">
+<h3 id="orgc2ec384">flatten layer</h3>
+<div class="outline-text-3" id="text-orgc2ec384">
 <p>
 a flatten layer, which is used to reduce dimensionality to 1d (to vectorize the input tensor), and doesnt have any parameters:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org76575a0">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">flatten-layer</span> (layer) ())
+<pre class="src src-lisp" id="orgceaa565">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">flatten-layer</span> (layer) ())
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">make-flatten-layer</span> () (make-instance 'flatten-layer))
 
@@ -703,14 +703,14 @@ a flatten layer, which is used to reduce dimensionality to 1d (to vectorize the 
 </div>
 </div>
 </div>
-<div id="outline-container-org9328d07" class="outline-3">
-<h3 id="org9328d07">dense layer</h3>
-<div class="outline-text-3" id="text-org9328d07">
+<div id="outline-container-orgdebff5c" class="outline-3">
+<h3 id="orgdebff5c">dense layer</h3>
+<div class="outline-text-3" id="text-orgdebff5c">
 <p>
 a dense layer, or a fully connected layer:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orga6b0b82">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">dense-layer</span> (convolutional-layer) ())
+<pre class="src src-lisp" id="orgf668c2c">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">dense-layer</span> (convolutional-layer) ())
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">make-dense-layer</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;key</span> num-units prev-layer-num-units
                            activation-function activation-function-derivative
@@ -733,9 +733,9 @@ a dense layer, or a fully connected layer:
 </div>
 </div>
 </div>
-<div id="outline-container-orgaf82c61" class="outline-3">
-<h3 id="orgaf82c61">test code</h3>
-<div class="outline-text-3" id="text-orgaf82c61">
+<div id="outline-container-org0cff49b" class="outline-3">
+<h3 id="org0cff49b">test code</h3>
+<div class="outline-text-3" id="text-org0cff49b">
 <p>
 feedforwarding test in convolutional layers, with an (randomly generated) input image of depth 3 (3 channels), width 6 and height 6 (in the code columns and rows, respectively), like in <a href="/convolutional_neural_network.html">fig-convlayer</a>:
 </p>
@@ -830,7 +830,7 @@ now that we have implemented the necessary layers, we can start building convolu
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp" id="org0714e4d">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*lenet5*</span>
+<pre class="src src-lisp" id="org7614f5f">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*lenet5*</span>
   (make-network
    <span style="font-weight: bold;">:layers</span> (list
             (make-3d-convolutional-layer-from-dims
@@ -875,9 +875,9 @@ we got 10 values out, as expected (the size of the output layer is 10)
 </p>
 </div>
 </div>
-<div id="outline-container-org64266a1" class="outline-3">
-<h3 id="org64266a1">convolutional layer backprop</h3>
-<div class="outline-text-3" id="text-org64266a1">
+<div id="outline-container-orgb72c369" class="outline-3">
+<h3 id="orgb72c369">convolutional layer backprop</h3>
+<div class="outline-text-3" id="text-orgb72c369">
 <p>
 its time to implement backpropagation!
 a table of the variables in the code and their counterparts in the math formulas:
@@ -945,7 +945,7 @@ a table of the variables in the code and their counterparts in the math formulas
 </tbody>
 </table>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org8e9c166">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">propbackward</span> ((l convolutional-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
+<pre class="src src-lisp" id="org04bc61f">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">propbackward</span> ((l convolutional-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
   <span style="font-style: italic;">"compute the gradients of the layer, propped-deltas is a tensor of the errors or 'deltas' at the output nodes which is propagated back from the succeeding layer in the network, layer-x is the input image tensor that was passed to the layer during feedforwarding, layer-y is the output of the layers' feedforwarding (activation of nodes), the assumption here is that the last dimensions of weight,image tensors are equal so that the image tensor keeps its rank/order, notice that (for now) this function assumes the equality of the order of input and output tensors"</span>
   (<span style="font-weight: bold;">with-slots</span> (weights biases
                activation-function-derivative
@@ -1120,7 +1120,7 @@ a table of the variables in the code and their counterparts in the math formulas
 now we need to write the propbackward function for networks so we can conduct simple propbackward tests before continuing
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org1eee69c">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-propbackward</span> ((n network) network-x network-y feedforward-out)
+<pre class="src src-lisp" id="orgbb03933">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-propbackward</span> ((n network) network-x network-y feedforward-out)
   <span style="font-style: italic;">"feedforward-out is the result of the network-feedforward function, its a list of cons' of out and unactivated-out, network-x and network-y should be the input and the desired output to the network, respectively"</span>
   (<span style="font-weight: bold;">with-slots</span> (layers learning-rate) n
     (<span style="font-weight: bold;">let*</span> ((output-layer (car (car feedforward-out)))
@@ -1146,14 +1146,14 @@ i had to go back and edit the definition of the <code>pooling-layer</code> class
 </p>
 </div>
 </div>
-<div id="outline-container-org92bdb3b" class="outline-3">
-<h3 id="org92bdb3b">pooling layer backprop</h3>
-<div class="outline-text-3" id="text-org92bdb3b">
+<div id="outline-container-orgcc1df28" class="outline-3">
+<h3 id="orgcc1df28">pooling layer backprop</h3>
+<div class="outline-text-3" id="text-orgcc1df28">
 <p>
 backprop for pooling layer:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgcbda2f7">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">propbackward</span> ((l pooling-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
+<pre class="src src-lisp" id="orgecc7612">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">propbackward</span> ((l pooling-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
   <span style="font-style: italic;">"a pooling layer doesnt care about layer-y,layer-y-unactivated or learning-rate, it just needs to upscale the deltas and pass them on"</span>
   (<span style="font-weight: bold;">with-slots</span> (unpooling-function rows cols) l
     (<span style="font-weight: bold;">let</span> ((deltas (make-array (array-dimensions layer-x))))
@@ -1197,23 +1197,23 @@ backprop for pooling layer:
 </div>
 </div>
 </div>
-<div id="outline-container-org2efd9ad" class="outline-3">
-<h3 id="org2efd9ad">flatten layer backprop</h3>
-<div class="outline-text-3" id="text-org2efd9ad">
+<div id="outline-container-org7740148" class="outline-3">
+<h3 id="org7740148">flatten layer backprop</h3>
+<div class="outline-text-3" id="text-org7740148">
 <p>
 backprop for flatten layers is probably the simplest, we only need to reshape the deltas and pass them on:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org9c1d7e1">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">propbackward</span> ((l flatten-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
+<pre class="src src-lisp" id="org10ab6da">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">propbackward</span> ((l flatten-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
   <span style="font-style: italic;">"a pooling layer doesnt care about layer-y-unactivated,propped-deltas or learning-rate"</span>
   (make-array (array-dimensions layer-x) <span style="font-weight: bold;">:displaced-to</span> propped-deltas))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org9b0039a" class="outline-3">
-<h3 id="org9b0039a">test code</h3>
-<div class="outline-text-3" id="text-org9b0039a">
+<div id="outline-container-org44b39d4" class="outline-3">
+<h3 id="org44b39d4">test code</h3>
+<div class="outline-text-3" id="text-org44b39d4">
 <p>
 time for a simple propbackward test:
 </p>
@@ -1255,14 +1255,14 @@ although there are some things that can be improved (i think im doing unnecessar
 </p>
 </div>
 </div>
-<div id="outline-container-org34a20b7" class="outline-3">
-<h3 id="org34a20b7">printing/formatting networks</h3>
-<div class="outline-text-3" id="text-org34a20b7">
+<div id="outline-container-org75453b4" class="outline-3">
+<h3 id="org75453b4">printing/formatting networks</h3>
+<div class="outline-text-3" id="text-org75453b4">
 <p>
 it would help to be able to inspect a network and see for example how many parameters it has so we implement a <code>print-object</code> function:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgfb5353d">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">print-object</span> ((n network) stream)
+<pre class="src src-lisp" id="org20d0153">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">print-object</span> ((n network) stream)
   (print-unreadable-object (n stream <span style="font-weight: bold;">:type</span> t <span style="font-weight: bold;">:identity</span> t)
     (<span style="font-weight: bold;">let</span> ((total-weights 0))
       (<span style="font-weight: bold;">loop</span> for layer in (network-layers n) do
@@ -1308,14 +1308,14 @@ total network weights: 61470&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-org3f96815" class="outline-3">
-<h3 id="org3f96815">full pass propagation and training</h3>
-<div class="outline-text-3" id="text-org3f96815">
+<div id="outline-container-orgc7b56fd" class="outline-3">
+<h3 id="orgc7b56fd">full pass propagation and training</h3>
+<div class="outline-text-3" id="text-orgc7b56fd">
 <p>
 now we need a function that takes a set of examples and trains a network
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgbf0c717">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-full-pass</span> ((nw network) x y)
+<pre class="src src-lisp" id="org5b45fb5">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-full-pass</span> ((nw network) x y)
   <span style="font-style: italic;">"do a full pass in the network, feedforward and propbackward (backpropagation)"</span>
   (network-propbackward nw x y (network-feedforward nw x)))
 
@@ -1330,9 +1330,9 @@ now we need a function that takes a set of examples and trains a network
 </div>
 </div>
 </div>
-<div id="outline-container-orgbdbeaeb" class="outline-3">
-<h3 id="orgbdbeaeb">test code</h3>
-<div class="outline-text-3" id="text-orgbdbeaeb">
+<div id="outline-container-orgfba9e8a" class="outline-3">
+<h3 id="orgfba9e8a">test code</h3>
+<div class="outline-text-3" id="text-orgfba9e8a">
 <p>
 lets try a simple example:
 </p>
@@ -1390,10 +1390,10 @@ i gave training on mnist with cnn a shot and tackled the issue of a vanishing gr
 </p>
 </div>
 </div>
-<div id="outline-container-orgf109448" class="outline-3">
-<h3 id="orgf109448">backprop optimization</h3>
-<div class="outline-text-3" id="text-orgf109448">
-<div class="any" id="org5adb7a1">
+<div id="outline-container-orgdaf1996" class="outline-3">
+<h3 id="orgdaf1996">backprop optimization</h3>
+<div class="outline-text-3" id="text-orgdaf1996">
+<div class="any" id="org89df3a3">
 <p>
 if we reconsider the equations <a href="/convolutional_neural_network.html">eq-convnet-weight-delta</a>, we'll find that we're doing alot of redundant work, as mentioned in <a href="/convolutional_neural_network.html">not-convnet-I-indicies</a>, there are indicies we're iterating over that we have to ignore, so we could cut them out of the loop which will tremendously reduce the number of iterations
 lets reconsider the equation:
@@ -1401,7 +1401,7 @@ lets reconsider the equation:
 basically, here we're finding the derivative of the loss function with respect to a single weight in <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> indexed by <img src="ltx/9fbf6037f0b.svg" alt="\(k,r,u,v\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, using the all the errors from each output pixel in <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 1.0212em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, indexed by <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, now we for a single weight with indicies <img src="ltx/9fbf6037f0b.svg" alt="\(k,r,u,v\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> dont need to iterate with <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> through the number of layers as we only need to consider the feature map that the weight affects, as each kernel with its weights only affect a single feature map in the output, here, that map is <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> which we consider a fixed constant when we're dealing with a single weight (which is why i preferred to write <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> as a subscript), other pixels in feature maps other than <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> arent affected by our weight and using the errors at those pixels wouldnt affect the gradient's value (they add 0). (there are still some pixels that we can drop depending on the place of the weight in the kernel, and the kernel's stride, but i dont think that can give us a noticable improvement in performance)
 the real bottleneck for training is currently computing <img src="ltx/3811082461b.svg" alt="\(\Delta I\)" style="height: 0.8000em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for convolutional layers, which is what we need to work on, lets reconsider the following equation
 <img src="ltx/7cd4ddff2d7.svg" alt="\[ \Delta I^\ell[r,u,v] = \sum_{k=1}^{D_I^{\ell+1}} \sum_{i=1}^{H_I^{\ell+1}} \sum_{j=1}^{W_I^{\ell+1}} \frac{\partial L}{\partial \hat Y_k^\ell[i,j]}\frac{\partial \hat Y_k^\ell[i,j]}{\partial I^\ell[r,u,v]} \]" style="height: 3.7337em; display: block" class="org-latex org-latex-block" />
-here, we're considering the derivative of every pixel in the output image with respect to the entry in <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1754em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> that we wanna find, but in truth, each pixel in <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> only affects <img src="ltx/10e043de759.svg" alt="\(t^\ell \times H_K^\ell \times W_K^\ell\)" style="height: 1.2003em; vertical-align: -0.3191em; display: inline-block" class="org-latex org-latex-inline" /> output pixels <b>at most</b> (this is basically the size of the weight tensor <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />), intuitively, one may be able to imagine this to see each kernel sliding over the input <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, in this process each pixel gets multiplied by a subset of the sliding kernel, depending on whether it is close to the edge of the image and on the sliding stride, each time the image slides in some direction, our input pixel gets multiplied by a new weight, until the kernel slides away and isnt "hovering" over our pixel anymore, this process is illustrated in <a href="#org38f7acb">3</a>
+here, we're considering the derivative of every pixel in the output image with respect to the entry in <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1754em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> that we wanna find, but in truth, each pixel in <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> only affects <img src="ltx/10e043de759.svg" alt="\(t^\ell \times H_K^\ell \times W_K^\ell\)" style="height: 1.2003em; vertical-align: -0.3191em; display: inline-block" class="org-latex org-latex-inline" /> output pixels <b>at most</b> (this is basically the size of the weight tensor <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />), intuitively, one may be able to imagine this to see each kernel sliding over the input <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9304em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, in this process each pixel gets multiplied by a subset of the sliding kernel, depending on whether it is close to the edge of the image and on the sliding stride, each time the image slides in some direction, our input pixel gets multiplied by a new weight, until the kernel slides away and isnt "hovering" over our pixel anymore, this process is illustrated in <a href="#orgdd43436">3</a>
 </p>
 <p>
 <a href="/sliding.gif">/home/mahmooz/brain/notes/data/d0/bddd39-2180-4e8d-895b-f64bcb6472ea/sliding.gif</a>
@@ -1421,7 +1421,7 @@ combining all of those ideas we get the formula:
 we substitute this in <a href="/convolutional_neural_network.html">eq-convnet-I-delta-1</a> in place of the previous version, and redo the differentation process:
 </p>
 
-<div id="org47ff6cd" class="equation-container">
+<div id="org21fc944" class="equation-container">
 <span class="equation">
 <img src="ltx/5a4fcccdfef.svg" alt="\begin{align}
   \Delta I^\ell[r,u,v] &amp;amp;= \frac{\partial L}{\partial I^\ell[r,u,v]}\\
@@ -1446,9 +1446,9 @@ after coming up with this, i had to go back and edit the backpropagation functio
 </div>
 </div>
 </div>
-<div id="outline-container-orga188cad" class="outline-3">
-<h3 id="orga188cad">distributed training</h3>
-<div class="outline-text-3" id="text-orga188cad">
+<div id="outline-container-org0a7cea7" class="outline-3">
+<h3 id="org0a7cea7">distributed training</h3>
+<div class="outline-text-3" id="text-org0a7cea7">
 <p>
 perhaps distributed training would help, so i decided to work on a simple multithreaded solution before going for a gpu solution
 here implement distributed training by data parallelism with the help of lparallel, two packages are needed, <code>lparallel</code> and <code>serapeum</code>, both installable from quicklisp
@@ -1459,7 +1459,7 @@ here implement distributed training by data parallelism with the help of lparall
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgb9d51b0">(<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">copy</span> (obj)
+<pre class="src src-lisp" id="orgad37dfd">(<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">copy</span> (obj)
   (<span style="font-weight: bold;">:documentation</span> <span style="font-style: italic;">"make a copy of an object"</span>))
 
 (<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">copy</span> ((nw network))
@@ -1581,14 +1581,14 @@ although cpu multithreading can speed up training, a gpu is still alot faster in
 </p>
 </div>
 </div>
-<div id="outline-container-orge0bf42d" class="outline-3">
-<h3 id="orge0bf42d">analyzing accuracy and loss</h3>
-<div class="outline-text-3" id="text-orge0bf42d">
+<div id="outline-container-org77c4ef0" class="outline-3">
+<h3 id="org77c4ef0">analyzing accuracy and loss</h3>
+<div class="outline-text-3" id="text-org77c4ef0">
 <p>
 we also need a function to get the total error of the network:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org0941e2a">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-test</span> ((nw network) samples)
+<pre class="src src-lisp" id="org43ea215">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-test</span> ((nw network) samples)
   (<span style="font-weight: bold;">let</span> ((loss 0))
     (<span style="font-weight: bold;">loop</span> for sample in samples do
       (<span style="font-weight: bold;">let</span> ((x (car sample))
@@ -1603,20 +1603,20 @@ we also need a function to get the total error of the network:
 </div>
 </div>
 </div>
-<div id="outline-container-orgc7e7456" class="outline-3">
-<h3 id="orgc7e7456">saving parameters to disk</h3>
-<div class="outline-text-3" id="text-orgc7e7456">
+<div id="outline-container-org79ff51f" class="outline-3">
+<h3 id="org79ff51f">saving parameters to disk</h3>
+<div class="outline-text-3" id="text-org79ff51f">
 <p>
 we may also want to save the weights of a network to a file for later reloading:
 </p>
-<div class="math-block note" data-before="note" data-after="" id="org4081d5c">
+<div class="math-block note" data-before="note" data-after="" id="orgde2c05c">
 <p>
 TODO: currently this doesnt save biases, needs to be fixed
 </p>
 
 </div>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orge6ec690">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">network-save-weights</span> (nw filepath)
+<pre class="src src-lisp" id="orgc7eeef6">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">network-save-weights</span> (nw filepath)
   <span style="font-style: italic;">"save the weight tensors of the layers of the network nw to file specified by filepath"</span>
   (<span style="font-weight: bold;">let</span> ((weight-tensors-list))
     (<span style="font-weight: bold;">with-open-file</span> (stream filepath

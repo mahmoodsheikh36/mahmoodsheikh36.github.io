@@ -28,11 +28,11 @@
 <p>
 a collection of utility functions for common lisp.
 </p>
-<div id="outline-container-orga015ec4" class="outline-2">
-<h2 id="orga015ec4">arrays</h2>
-<div class="outline-text-2" id="text-orga015ec4">
+<div id="outline-container-orged8be0f" class="outline-2">
+<h2 id="orged8be0f">arrays</h2>
+<div class="outline-text-2" id="text-orged8be0f">
 <div class="org-src-container">
-<pre class="src src-lisp" id="org48852c2"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defun array-width (2d-array)</span>
+<pre class="src src-lisp" id="org1eb8a7f"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defun array-width (2d-array)</span>
 <span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">(car (cdr (array-dimensions 2d-array))))</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defun array-height (2d-array)</span>
 <span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">(car (array-dimensions 2d-array)))</span>
@@ -53,7 +53,7 @@ a collection of utility functions for common lisp.
 turn multidimensional (nested) list into array:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orge47608a">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-dimensions</span> (list)
+<pre class="src src-lisp" id="org6eb4ee8">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-dimensions</span> (list)
   (<span style="font-weight: bold;">if</span> (and (eq (type-of list) 'cons) (eq (type-of (car list)) 'cons))
       (append (list (length list)) (list-dimensions (car list)))
       (list (length list))))
@@ -66,7 +66,7 @@ turn multidimensional (nested) list into array:
 turn multidimensional array into a list:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org326be6a">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-&gt;list</span> (array)
+<pre class="src src-lisp" id="org622e4dd">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-&gt;list</span> (array)
   (<span style="font-weight: bold;">let*</span> ((dimensions (array-dimensions array))
          (depth      (1- (length dimensions)))
          (indices    (make-list (1+ depth) <span style="font-weight: bold;">:initial-element</span> 0)))
@@ -83,7 +83,7 @@ turn multidimensional array into a list:
 to generate an array with random elements of arbitrary dimensions:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org1bdc85e">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-float</span> (min max)
+<pre class="src src-lisp" id="org8592420">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-float</span> (min max)
   (+ min (* (random 1.0) (- max min))))
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-list</span> (dims <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (min -1) (max 1))
   (<span style="font-weight: bold;">let*</span> ((dim (car dims)))
@@ -106,7 +106,7 @@ the following utility functions are similar to <code>map</code> but for arrays:
 we sometimes may wanna iterate through a multidimensional array and do an action on each of its indicies, the following utility functions helps do that easily, without nesting loops, although notice that this function iterates through every cell in the array, so it may not be what you want (efficiency wise) if you only want to apply something to only a portion of the array
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org22d697a">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-map</span> (fn <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> arrays)
+<pre class="src src-lisp" id="org89b9739">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-map</span> (fn <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> arrays)
   <span style="font-style: italic;">"apply fn to elements of arrays. return a new array with the results"</span>
   (apply #'array-map-into
          (append (list fn (make-array (array-dimensions (car arrays))))
@@ -133,7 +133,7 @@ we sometimes may wanna iterate through a multidimensional array and do an action
 a utility function to copy a subarray of an array
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org1b6e00d">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">subarray</span> (a offsets dims)
+<pre class="src src-lisp" id="org6dd8b87">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">subarray</span> (a offsets dims)
   <span style="font-style: italic;">"copy a subarray of a given array</span>
 <span style="font-style: italic;">example usage:</span>
 <span style="font-style: italic;">(subarray #2A((0.70462835 0.7893367 0.3833828)</span>
@@ -173,7 +173,7 @@ a utility function to copy a subarray of an array
 a utility that copies the n-th element of an array, which is an array itself:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org7061926">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-array-nth</span> (arr idx)
+<pre class="src src-lisp" id="org4579033">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-array-nth</span> (arr idx)
   <span style="font-style: italic;">"return a copy of the nth subarray of an array"</span>
   (<span style="font-weight: bold;">let*</span> ((new-dims (cdr (array-dimensions arr)))
          (offsets (append (list idx) (make-list (length new-dims) <span style="font-weight: bold;">:initial-element</span> 0))))
@@ -193,7 +193,7 @@ a utility that copies the n-th element of an array, which is an array itself:
 a utility function to copy a subarray into an array
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgbff0178">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-into-array</span> (a b <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (offsets (make-list (length (array-dimensions a)) <span style="font-weight: bold;">:initial-element</span> 0)))
+<pre class="src src-lisp" id="orgdd290cb">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-into-array</span> (a b <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (offsets (make-list (length (array-dimensions a)) <span style="font-weight: bold;">:initial-element</span> 0)))
   <span style="font-style: italic;">"copy an (possibly smaller) array (b) into another array (a)"</span>
   (copy-into-array-util a b nil nil offsets (array-dimensions a) (array-dimensions b))
   a)
@@ -228,7 +228,7 @@ a utility function to copy a subarray into an array
 a utility function to copy an array into anothers highest dimension
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgada4f98">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-array-nth</span> (arr other-arr idx)
+<pre class="src src-lisp" id="org6deeeaf">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-array-nth</span> (arr other-arr idx)
   <span style="font-style: italic;">"example usage: (set-array-nth (make-array '(4 4 4)) (random-tensor '(4 4)) 1)"</span>
   (copy-into-array
    arr
@@ -240,7 +240,7 @@ a utility function to copy an array into anothers highest dimension
 vectorizing an array (turning it into a 1d vector) is pretty simple:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org5d4c79c">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vectorize-array</span> (arr)
+<pre class="src src-lisp" id="org3be57da">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vectorize-array</span> (arr)
   <span style="font-style: italic;">"turn an array into a 1d vector"</span>
   (make-array (list (array-total-size arr)) <span style="font-weight: bold;">:displaced-to</span> arr))
 </pre>
@@ -249,7 +249,7 @@ vectorizing an array (turning it into a 1d vector) is pretty simple:
 a function that refers the row-major index of a cell of an array (shamelessly stolen from <a href="https://groups.google.com/g/comp.lang.lisp/c/CM3MQkyOTHk?pli=1">https://groups.google.com/g/comp.lang.lisp/c/CM3MQkyOTHk?pli=1</a>):
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org256c5ec">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-index-row-major</span> (array rmi)
+<pre class="src src-lisp" id="org7db060d">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-index-row-major</span> (array rmi)
   <span style="font-style: italic;">"basically the inverse of array-row-major-index, example:</span>
 <span style="font-style: italic;">(defvar *a* (make-array '(7 4 9 5)))</span>
 <span style="font-style: italic;">(array-row-major-index *a* 3 2 8 1) =&gt; 671</span>
@@ -278,7 +278,7 @@ a function that refers the row-major index of a cell of an array (shamelessly st
 a function to simply copy/clone an array/tensor:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgb2abbb6">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-array</span> (arr)
+<pre class="src src-lisp" id="org20165ff">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-array</span> (arr)
   (<span style="font-weight: bold;">let</span> ((new-arr (make-array (array-dimensions arr))))
     (copy-into-array new-arr arr)))
 </pre>
@@ -287,21 +287,21 @@ a function to simply copy/clone an array/tensor:
 reducing an array with a function:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgc40899c">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">reduce-array</span> (arr fn)
+<pre class="src src-lisp" id="org0714858">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">reduce-array</span> (arr fn)
   (apply #'reduce
          (list fn (make-array (array-total-size arr) <span style="font-weight: bold;">:displaced-to</span> arr))))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge18a0b4" class="outline-2">
-<h2 id="orge18a0b4">sequences</h2>
-<div class="outline-text-2" id="text-orge18a0b4">
+<div id="outline-container-org76d5139" class="outline-2">
+<h2 id="org76d5139">sequences</h2>
+<div class="outline-text-2" id="text-org76d5139">
 <p>
 a function to get the last element in a list (or any sequence):
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org52cc946">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">last-elt</span> (seq)
+<pre class="src src-lisp" id="org28d11bb">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">last-elt</span> (seq)
   <span style="font-style: italic;">"example usage: CL-USER&gt; (last-elt (vector 1 2 3)) =&gt; 3"</span>
   (elt seq (1- (length seq))))
 </pre>
@@ -327,7 +327,7 @@ converting nested lists to nested vectors:
 or this shorter one:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org3ed14a0">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-&gt;vector</span> (list)
+<pre class="src src-lisp" id="orgb50fe00">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-&gt;vector</span> (list)
   (<span style="font-weight: bold;">if</span> (atom list) list
       (map 'vector #'list-&gt;vector list)))
 </pre>
@@ -385,11 +385,11 @@ split a sequence into singleton sequences (of the same type as the original sequ
 </div>
 </div>
 </div>
-<div id="outline-container-orga97872b" class="outline-2">
-<h2 id="orga97872b">argmin and argmax</h2>
-<div class="outline-text-2" id="text-orga97872b">
+<div id="outline-container-orgdd9a970" class="outline-2">
+<h2 id="orgdd9a970">argmin and argmax</h2>
+<div class="outline-text-2" id="text-orgdd9a970">
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgac3c75f">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">argmax</span> (s <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (key #'identity))
+<pre class="src src-lisp" id="org739e8cf">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">argmax</span> (s <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (key #'identity))
   <span style="font-style: italic;">"returns value,index of element in sequence s that maximizes the key function"</span>
   (<span style="font-weight: bold;">when</span> s
     (<span style="font-weight: bold;">let*</span> ((m (reduce #'max s <span style="font-weight: bold;">:key</span> key))
@@ -406,14 +406,14 @@ split a sequence into singleton sequences (of the same type as the original sequ
 </div>
 </div>
 </div>
-<div id="outline-container-org0f15c30" class="outline-2">
-<h2 id="org0f15c30">open url in browser</h2>
-<div class="outline-text-2" id="text-org0f15c30">
+<div id="outline-container-org3264be2" class="outline-2">
+<h2 id="org3264be2">open url in browser</h2>
+<div class="outline-text-2" id="text-org3264be2">
 <p>
 open a url by its default browser/app on macos/windows/linux
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org1c535fe"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">from https://github.com/eudoxia0/trivial-open-browser/blob/master/src/trivial-open-browser.lisp</span>
+<pre class="src src-lisp" id="orgdb54037"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">from https://github.com/eudoxia0/trivial-open-browser/blob/master/src/trivial-open-browser.lisp</span>
 
 (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">+format-string+</span>
               #+(or win32 mswindows windows)
