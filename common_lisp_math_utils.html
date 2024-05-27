@@ -28,11 +28,11 @@
 <p>
 some math utilities for common lisp
 </p>
-<div id="outline-container-orgbf2d930" class="outline-2">
-<h2 id="orgbf2d930">essential functions</h2>
-<div class="outline-text-2" id="text-orgbf2d930">
+<div id="outline-container-org9600dc9" class="outline-2">
+<h2 id="org9600dc9">essential functions</h2>
+<div class="outline-text-2" id="text-org9600dc9">
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgcff2a51">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sigmoid</span> (x)
+<pre class="src src-lisp" id="orgd22eef5">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sigmoid</span> (x)
   (<span style="font-weight: bold;">cond</span> ((&lt; x -70) 0) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">to avoid float overflow</span>
         (t (/ 1 (1+ (exp (- x)))))))
 
@@ -51,17 +51,17 @@ some math utilities for common lisp
 </div>
 </div>
 </div>
-<div id="outline-container-orgbf50815" class="outline-2">
-<h2 id="orgbf50815">vectors</h2>
-<div class="outline-text-2" id="text-orgbf50815">
-<div class="math-block note" data-before="note" data-after="" id="org731d1ee">
+<div id="outline-container-org5595c6f" class="outline-2">
+<h2 id="org5595c6f">vectors</h2>
+<div class="outline-text-2" id="text-org5595c6f">
+<div class="math-block note" data-before="note" data-after="" id="org1644dee">
 <p>
 these functions work, but some use lists and some do redundant operations, they need efficiency improvement
 </p>
 
 </div>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org6e2bfa3"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">this might need efficiency improvement, not sure</span>
+<pre class="src src-lisp" id="org69d44af"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">this might need efficiency improvement, not sure</span>
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vector-add</span> (vec1 <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> more-vecs)
   <span style="font-style: italic;">"apply vector addition to two collections"</span>
   (apply #'map (append (list 'vector #'+) (append (list vec1) more-vecs))))
@@ -97,15 +97,15 @@ these functions work, but some use lists and some do redundant operations, they 
 </div>
 </div>
 </div>
-<div id="outline-container-org353f830" class="outline-2">
-<h2 id="org353f830">matrices</h2>
-<div class="outline-text-2" id="text-org353f830">
+<div id="outline-container-org8e84da2" class="outline-2">
+<h2 id="org8e84da2">matrices</h2>
+<div class="outline-text-2" id="text-org8e84da2">
 <p>
 im using arrays for matrices, which use different functions than vectors/lists
 matrix multiplication:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org0410068">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">matrix-mul</span> (arr1 arr2)
+<pre class="src src-lisp" id="orga8d1eb4">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">matrix-mul</span> (arr1 arr2)
   <span style="font-style: italic;">"multiply 2 matrices, arr1*arr2"</span>
   (<span style="font-weight: bold;">let*</span> ((arr1-rows (array-rows arr1))
          <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(arr1-cols (car (cdr arr1-dim))) ;; no need</span>
@@ -125,7 +125,7 @@ matrix multiplication:
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp" id="org5813712">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">tensor-convolution-size</span> (img-dims ker-dims)
+<pre class="src src-lisp" id="org250bc50">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">tensor-convolution-size</span> (img-dims ker-dims)
   <span style="font-style: italic;">"return the expected size of the convolution img*ker"</span>
   (mapcar (<span style="font-weight: bold;">lambda</span> (img-d ker-d) (- img-d (1- ker-d)))
           img-dims
@@ -174,9 +174,9 @@ matrix multiplication:
 </pre>
 </div>
 </div>
-<div id="outline-container-org9843dd5" class="outline-3">
-<h3 id="org9843dd5">matrix multiplication implementation comparison between lists and arrays</h3>
-<div class="outline-text-3" id="text-org9843dd5">
+<div id="outline-container-orgf1a5417" class="outline-3">
+<h3 id="orgf1a5417">matrix multiplication implementation comparison between lists and arrays</h3>
+<div class="outline-text-3" id="text-orgf1a5417">
 <p>
 with lists:
 </p>
@@ -219,14 +219,14 @@ with arrays:
 </div>
 </div>
 </div>
-<div id="outline-container-orge05f168" class="outline-3">
-<h3 id="orge05f168">2d transformation matrices</h3>
-<div class="outline-text-3" id="text-orge05f168">
+<div id="outline-container-orgff84b41" class="outline-3">
+<h3 id="orgff84b41">2d transformation matrices</h3>
+<div class="outline-text-3" id="text-orgff84b41">
 <p>
 linearly mapping a grid to another:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="org5de92a7">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-grid-matrix</span> (src-x-range dest-x-range src-y-range dest-y-range)
+<pre class="src src-lisp" id="orgc9c7e25">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-grid-matrix</span> (src-x-range dest-x-range src-y-range dest-y-range)
   (<span style="font-weight: bold;">let</span> ((src-x-min (elt src-x-range 0))
         (dest-x-min (elt dest-x-range 0))
         (src-y-min (elt src-y-range 0))
@@ -262,20 +262,20 @@ example usage:
 </div>
 </div>
 </div>
-<div id="outline-container-org614a26a" class="outline-2">
-<h2 id="org614a26a"><a href="/linearly_mapping_an_interval_onto_another.html">linearly mapping discrete range onto another</a></h2>
-<div class="outline-text-2" id="text-org614a26a">
+<div id="outline-container-org6e9529f" class="outline-2">
+<h2 id="org6e9529f"><a href="/linearly_mapping_an_interval_onto_another.html">linearly mapping discrete range onto another</a></h2>
+<div class="outline-text-2" id="text-org6e9529f">
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgda463a1">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-num</span> (num src-min src-max dest-min dest-max)
+<pre class="src src-lisp" id="orgf1d0092">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-num</span> (num src-min src-max dest-min dest-max)
   <span style="font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
   (/ (- (+ (* (- num src-min) (- dest-max dest-min)) (* dest-min src-max)) (* dest-min src-min)) (- src-max src-min)))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org5f7aa51" class="outline-2">
-<h2 id="org5f7aa51">sets</h2>
-<div class="outline-text-2" id="text-org5f7aa51">
+<div id="outline-container-org2823e61" class="outline-2">
+<h2 id="org2823e61">sets</h2>
+<div class="outline-text-2" id="text-org2823e61">
 <p>
 a good resource <a href="https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html">https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html</a>
 the builtin <code>set-difference</code> sometimes reverses the lists it returns for some reason and its bothersome, e.g.:
@@ -288,7 +288,7 @@ the builtin <code>set-difference</code> sometimes reverses the lists it returns 
 so i had to use my own:
 </p>
 <div class="org-src-container">
-<pre class="src src-lisp" id="orgac0eef8">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-diff</span> (l1 l2 <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (acc '()) (test #'eql))
+<pre class="src src-lisp" id="org9b97e0d">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-diff</span> (l1 l2 <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (acc '()) (test #'eql))
   (<span style="font-weight: bold;">cond</span> ((null l1) (nreverse acc))
         ((null l2) (nreverse (append (reverse l1) acc)))
         ((member (car l1) l2 <span style="font-weight: bold;">:test</span> test) (set-diff (cdr l1) l2 <span style="font-weight: bold;">:acc</span> acc <span style="font-weight: bold;">:test</span> test))
@@ -327,9 +327,9 @@ check for set equality:
 </div>
 </div>
 </div>
-<div id="outline-container-org75410c1" class="outline-2">
-<h2 id="org75410c1">combinatorics</h2>
-<div class="outline-text-2" id="text-org75410c1">
+<div id="outline-container-org8a2f184" class="outline-2">
+<h2 id="org8a2f184">combinatorics</h2>
+<div class="outline-text-2" id="text-org8a2f184">
 <p>
 generating variations:
 </p>

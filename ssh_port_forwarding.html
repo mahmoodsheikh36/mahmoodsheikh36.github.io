@@ -33,7 +33,7 @@ to connect to a device behind a private unreachable router you can use <i>remote
 example:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">ssh -i path/to/key -R <span style="color: #f06a3f;">'*:5000:*:22'</span> user@remote -N -g
+<pre class="src src-sh">ssh -i path/to/key -R <span style="font-style: italic;">'*:5000:*:22'</span> user@remote -N -g
 </pre>
 </div>
 <p>
@@ -54,14 +54,14 @@ a connection to the tunnel can be opened using the command
 <p>
 note that <code>localuser</code> would be the user of <code>local2</code> (not the remote machine) that you want ssh to use.
 </p>
-<div id="outline-container-org83cb802" class="outline-2">
-<h2 id="org83cb802">connection refused</h2>
-<div class="outline-text-2" id="text-org83cb802">
-<div class="dummy" id="org7f0a01d">
+<div id="outline-container-org1c3f49c" class="outline-2">
+<h2 id="org1c3f49c">connection refused</h2>
+<div class="outline-text-2" id="text-org1c3f49c">
+<div class="dummy" id="orgb521cb9">
 <p>
 by default tunnel endpoints only listen on 127.0.0.1, so they can't be accessed from other machines. to change this you may need to add this to <code>/etc/ssh/sshd_config</code> on the server:
 </p>
-<div class="literal" id="org68da777">
+<div class="literal" id="org45ac7ee">
 <p>
 GatewayPorts clientspecified
 </p>
@@ -74,9 +74,9 @@ this is also the reason we use the address <code>*:5000:*:22</code>, the star is
 </p>
 </div>
 </div>
-<div id="outline-container-org1b90929" class="outline-2">
-<h2 id="org1b90929">using ipv6</h2>
-<div class="outline-text-2" id="text-org1b90929">
+<div id="outline-container-org9143996" class="outline-2">
+<h2 id="org9143996">using ipv6</h2>
+<div class="outline-text-2" id="text-org9143996">
 <p>
 if you're using ipv6 you need to make sure its enabled on all machines. <code>vim /etc/sysctl.conf</code> and make sure you have the following:
 </p>
@@ -89,14 +89,14 @@ net.ipv6.conf.all.disable_ipv6 = 0
 the ipv6 equivalent for <code>localhost</code> is <code>::1</code>. so, for example, the reverse tunnel ssh command becomes:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh">ssh -i yourkey -R <span style="color: #f06a3f;">'*:5000:*:22'</span> -6 user@remote:etc:etc::1 -N -g
+<pre class="src src-sh">ssh -i yourkey -R <span style="font-style: italic;">'*:5000:*:22'</span> -6 user@remote:etc:etc::1 -N -g
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd7ad5d7" class="outline-2">
-<h2 id="orgd7ad5d7">systemd service</h2>
-<div class="outline-text-2" id="text-orgd7ad5d7">
+<div id="outline-container-org0ebffcd" class="outline-2">
+<h2 id="org0ebffcd">systemd service</h2>
+<div class="outline-text-2" id="text-org0ebffcd">
 <p>
 an example systemd service that i use to automatically open an ssh tunnel for a linux server:
 </p>
