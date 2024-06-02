@@ -26,16 +26,19 @@
 </div>
 <div id="content" class="content">
 <p>
-using <code>cl-cuda</code>
+using <code>cl-cuda</code>.
+</p>
+
+<p>
 load it using quicklisp:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-cuda</span>)
 </pre>
 </div>
-<div id="outline-container-orge5eed82" class="outline-2">
-<h2 id="orge5eed82">arch linux setup</h2>
-<div class="outline-text-2" id="text-orge5eed82">
+<div id="outline-container-org97ff817" class="outline-2">
+<h2 id="org97ff817">arch linux setup</h2>
+<div class="outline-text-2" id="text-org97ff817">
 <p>
 i had to install <code>cuda</code> for the <code>nvcc</code> compiler and more, and <code>nvidia</code> for the gpu driver, at first you may have to use <code>/opt/cuda/bin/nvcc</code> until you reboot or extend your $PATH.
 </p>
@@ -53,13 +56,13 @@ if you have installed the <code>nvidia</code> package and your os still uses <co
 </p>
 </div>
 </div>
-<div id="outline-container-org39b8aef" class="outline-2">
-<h2 id="org39b8aef">essential concepts</h2>
-<div class="outline-text-2" id="text-org39b8aef">
+<div id="outline-container-org94a107b" class="outline-2">
+<h2 id="org94a107b">essential concepts</h2>
+<div class="outline-text-2" id="text-org94a107b">
 </div>
-<div id="outline-container-orgeed24bb" class="outline-3">
-<h3 id="orgeed24bb">threads</h3>
-<div class="outline-text-3" id="text-orgeed24bb">
+<div id="outline-container-org7f3eadc" class="outline-3">
+<h3 id="org7f3eadc">threads</h3>
+<div class="outline-text-3" id="text-org7f3eadc">
 <p>
 mostly from <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.
 </p>
@@ -97,9 +100,9 @@ for efficient cooperation, the shared memory is expected to be a low-latency mem
 </p>
 </div>
 </div>
-<div id="outline-container-org005b329" class="outline-3">
-<h3 id="org005b329">memory</h3>
-<div class="outline-text-3" id="text-org005b329">
+<div id="outline-container-orge762fa0" class="outline-3">
+<h3 id="orge762fa0">memory</h3>
+<div class="outline-text-3" id="text-orge762fa0">
 <p>
 CUDA threads may access data from multiple memory spaces during their execution. each thread has private <b>local memory</b>. each thread block has <b>shared memory</b> visible to all threads of the block and with the same lifetime as the block. thread blocks in a thread block cluster can perform read, write, and atomics operations on each other’s shared memory. all threads have access to the same <b>global memory</b>.
 </p>
@@ -125,9 +128,9 @@ unified memory provides managed memory to bridge the host and device memory spac
 </p>
 </div>
 </div>
-<div id="outline-container-org10011d9" class="outline-3">
-<h3 id="org10011d9">device memory</h3>
-<div class="outline-text-3" id="text-org10011d9">
+<div id="outline-container-org34161d4" class="outline-3">
+<h3 id="org34161d4">device memory</h3>
+<div class="outline-text-3" id="text-org34161d4">
 <p>
 the CUDA programming model assumes a system composed of a host and a device, each with their own separate memory. kernels operate out of device memory, so the runtime provides functions to allocate, deallocate, and copy device memory, as well as transfer data between host memory and device memory.
 </p>
@@ -146,31 +149,37 @@ CUDA arrays are opaque memory layouts optimized for texture fetching.
 </div>
 </div>
 </div>
-<div id="outline-container-orgedacc7a" class="outline-2">
-<h2 id="orgedacc7a">code</h2>
-<div class="outline-text-2" id="text-orgedacc7a">
+<div id="outline-container-org24a81d2" class="outline-2">
+<h2 id="org24a81d2">code</h2>
+<div class="outline-text-2" id="text-org24a81d2">
 <p>
 see <a href="/connect_to_remote_common_lisp_repl_with_sly_slime.html">connect to remote common lisp repl with sly/slime</a> for connecting to a remote common lisp repl with emacs.
 </p>
 
-<div class="math-block note" data-before="note" data-after="" id="org317039a">
+<div class="math-block note" data-before="note" data-after="" id="org72b7e60">
 <p>
 notice that when working cl-cuda the data that we're passing to the gpu is gonna be duplicated (because its a binding from cl to C and uses whats called foreign memory), i never considered how bad that is, atleast in this case, as mostly when doing gpu calculations we're ofcourse passing lots of data and then copying it back, and the maximum amount of memory that i can use is already cut in half, if i have 16gb of memory i already know i cant use more than 8gb of that, thats pretty horrible (assuming i have a gpu with ~16gb memory), i can have my way around this, e.g. free memory from sbcl as it gets copied to C, but that'd be much more complexity than i wanna have to deal with
 </p>
 
 </div>
 </div>
-<div id="outline-container-org898cfc1" class="outline-3">
-<h3 id="org898cfc1">cuda vector addition</h3>
-<div class="outline-text-3" id="text-org898cfc1">
+<div id="outline-container-orgfb64b20" class="outline-3">
+<h3 id="orgfb64b20">cuda vector addition</h3>
+<div class="outline-text-3" id="text-orgfb64b20">
 <p>
 we start with the vectorAdd example, a simple example in C, stolen from <a href="https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu">https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu</a> and modified to reduce boilerplate code.
 </p>
 
 <p>
-the syntax for calling a kernel in c++ is <code>vector&lt;&lt;&lt; blocks per grid, threads per block &gt;&gt;&gt;(arg1,arg2,...)</code>
-consider the following program which does vector addition
-place this code in a file with a <code>.cu</code> extension (only .cu works)
+the syntax for calling a kernel in c++ is <code>vector&lt;&lt;&lt; blocks per grid, threads per block &gt;&gt;&gt;(arg1,arg2,...)</code>.
+</p>
+
+<p>
+consider the following program which does vector addition.
+</p>
+
+<p>
+place this code in a file with a <code>.cu</code> extension (only .cu works):
 </p>
 <div class="org-src-container">
 <pre class="src src-C"><span style="font-weight: bold;">#include</span> <span style="font-style: italic;">&lt;</span><span style="font-style: italic;">stdio.h</span><span style="font-style: italic;">&gt;</span>
@@ -274,9 +283,9 @@ similar same code but in cl:
 </div>
 </div>
 </div>
-<div id="outline-container-orge4926c3" class="outline-3">
-<h3 id="orge4926c3">cuda matrix multiplication</h3>
-<div class="outline-text-3" id="text-orge4926c3">
+<div id="outline-container-org75cc0d1" class="outline-3">
+<h3 id="org75cc0d1">cuda matrix multiplication</h3>
+<div class="outline-text-3" id="text-org75cc0d1">
 <p>
 mostly taken from <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html</a> and <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.
 </p>
@@ -522,11 +531,12 @@ __global__ <span style="font-weight: bold; text-decoration: underline;">void</sp
 some points to consider before implementating in lisp:
 </p>
 <ol class="org-ol">
-<li>we cant pass structs like in C, unfortunately, we can only allocate linear memory of basic types</li>
-<li>for matrices on cpu, i used cl's arrays, for matrices on gpu, im gonna use just C pointers, like in the C example</li>
-<li>common lisp implementation will be more complete (i cba doing the same for C), e.g. no assumptions on matrix sizes</li>
-<li>loops in kernels can only be done using the <code>do</code> statement</li>
+<li>we cant pass structs like in C, unfortunately, we can only allocate linear memory of basic types,</li>
+<li>for matrices on cpu, i used cl's arrays, for matrices on gpu, im gonna use just C pointers, like in the C example,</li>
+<li>common lisp implementation will be more complete (i cba doing the same for C), e.g. no assumptions on matrix sizes,</li>
+<li>loops in kernels can only be done using the <code>do</code> statement.</li>
 </ol>
+
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-init</span> (data n)
   (<span style="font-weight: bold;">dotimes</span> (i n)
