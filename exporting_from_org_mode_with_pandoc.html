@@ -25,17 +25,17 @@
 </div><h1 class="main-title">exporting from org mode with pandoc</h1>
 </div>
 <div id="content" class="content">
-<div id="outline-container-org0b65083" class="outline-2">
-<h2 id="org0b65083">motivation</h2>
-<div class="outline-text-2" id="text-org0b65083">
+<div id="outline-container-org4a9b614" class="outline-2">
+<h2 id="org4a9b614">motivation</h2>
+<div class="outline-text-2" id="text-org4a9b614">
 <p>
 the need for an emacs-independent exporting of notes arose from the fact that i was using org version 9.7-pre in which exporting functionality is basically broken.
 </p>
 </div>
 </div>
-<div id="outline-container-org8002792" class="outline-2">
-<h2 id="org8002792">pandoc</h2>
-<div class="outline-text-2" id="text-org8002792">
+<div id="outline-container-orgbf71e1c" class="outline-2">
+<h2 id="orgbf71e1c">pandoc</h2>
+<div class="outline-text-2" id="text-orgbf71e1c">
 <p>
 because i didnt want to reinvent the wheel, i landed on using pandoc, it has a huge community and i trust it to maintain org-mode parsability in the long run. there are some missing features in pandoc exporting which is why im writing this.
 </p>
@@ -49,9 +49,9 @@ a starting point would be the following command:
 </div>
 </div>
 </div>
-<div id="outline-container-orgc0eb41e" class="outline-2">
-<h2 id="orgc0eb41e">custom css</h2>
-<div class="outline-text-2" id="text-orgc0eb41e">
+<div id="outline-container-org9d7bab7" class="outline-2">
+<h2 id="org9d7bab7">custom css</h2>
+<div class="outline-text-2" id="text-org9d7bab7">
 <p>
 if you have a css file that you'd like included, use the <code>--css</code> argument
 </p>
@@ -64,9 +64,9 @@ if you have a css file that you'd like included, use the <code>--css</code> argu
 </div>
 </div>
 </div>
-<div id="outline-container-orgec5131a" class="outline-2">
-<h2 id="orgec5131a">custom html preamble/postamble</h2>
-<div class="outline-text-2" id="text-orgec5131a">
+<div id="outline-container-org50f43c7" class="outline-2">
+<h2 id="org50f43c7">custom html preamble/postamble</h2>
+<div class="outline-text-2" id="text-org50f43c7">
 <p>
 or more generally, if you have an html file you'd like included in the header, use the <code>--include-in-header</code> argument
 </p>
@@ -80,9 +80,9 @@ or more generally, if you have an html file you'd like included in the header, u
 </div>
 </div>
 </div>
-<div id="outline-container-org5d27046" class="outline-2">
-<h2 id="org5d27046">bibliography</h2>
-<div class="outline-text-2" id="text-org5d27046">
+<div id="outline-container-org97499c9" class="outline-2">
+<h2 id="org97499c9">bibliography</h2>
+<div class="outline-text-2" id="text-org97499c9">
 <p>
 if you have a bibliography file you want pandoc to use to handle citations, you can make use of the <code>--bibliography</code>, <code>--biblatex</code>, <code>--citeproc</code> arguments
 </p>
@@ -97,9 +97,9 @@ if you have a bibliography file you want pandoc to use to handle citations, you 
 </div>
 </div>
 </div>
-<div id="outline-container-org1dd3fb2" class="outline-2">
-<h2 id="org1dd3fb2">latex rendering</h2>
-<div class="outline-text-2" id="text-org1dd3fb2">
+<div id="outline-container-orgf06d714" class="outline-2">
+<h2 id="orgf06d714">latex rendering</h2>
+<div class="outline-text-2" id="text-orgf06d714">
 <p>
 pandoc supports multiple ways of handling latex snippets, it can use <code>mathjax</code> with the <code>--mathjax</code> argument, a better option for full latex support is rendering them with <code>dvisvgm</code>, using this lua filter that makes use of pandoc's filter api, which is a modified version of <a href="https://github.com/oltolm/pandoc-latex-math">https://github.com/oltolm/pandoc-latex-math</a>
 </p>
@@ -253,16 +253,16 @@ assuming this script is written in a file <code>tex.lua</code>, to use this filt
 </div>
 </div>
 </div>
-<div id="outline-container-org397734f" class="outline-2">
-<h2 id="org397734f">internal links</h2>
-<div class="outline-text-2" id="text-org397734f">
+<div id="outline-container-orgba69bac" class="outline-2">
+<h2 id="orgba69bac">internal links</h2>
+<div class="outline-text-2" id="text-orgba69bac">
 <p>
 consider the following org mode snippet:
 </p>
 <div class="org-src-container">
 <pre class="src src-org"><span style="font-weight: bold; font-style: italic;">#+name: my-def</span>
 <span style="font-weight: bold; font-style: italic;">#+begin_definition</span>
-we define a set <img src="../../../../tmp/org-persist-lFK2dF/7f/e9bd05-8bb4-4d17-b2d4-c7c82ae98e72-5000f633e01c357d721e88f59c999542.svg" alt="\(A\)" /> to be any unordered collection of objects
+we define a set <img src="../../../../tmp/org-persist-SyySjO/00/f5bb3e-2ba6-4fb6-8c20-eb3cbfe42837-0849cca03034a0c25a4ad7b6cc06df0b.svg" alt="\(A\)" /> to be any unordered collection of objects
 <span style="font-weight: bold; font-style: italic;">#+end_definition</span>
 
 by <span style="text-decoration: underline;"><a href="my-def">this definition</a></span>, the object {1,2,3} is a set.
@@ -280,7 +280,7 @@ after some messing around, i found that pandoc does handle the <code>attr_html</
 <div class="org-src-container">
 <pre class="src src-org"><span style="font-weight: bold; font-style: italic;">#+attr_html: :id my-def</span>
 <span style="font-weight: bold; font-style: italic;">#+begin_definition</span>
-we define a set <img src="../../../../tmp/org-persist-lFK2dF/7f/e9bd05-8bb4-4d17-b2d4-c7c82ae98e72-5000f633e01c357d721e88f59c999542.svg" alt="\(A\)" /> to be any unordered collection of objects
+we define a set <img src="../../../../tmp/org-persist-SyySjO/00/f5bb3e-2ba6-4fb6-8c20-eb3cbfe42837-0849cca03034a0c25a4ad7b6cc06df0b.svg" alt="\(A\)" /> to be any unordered collection of objects
 <span style="font-weight: bold; font-style: italic;">#+end_definition</span>
 
 by <span style="text-decoration: underline;"><a href="my-def">this definition</a></span>, the object {1,2,3} is a set.
@@ -334,9 +334,9 @@ assuming this code is placed in the file <code>internal_links.lua</code>, our sh
 </div>
 </div>
 </div>
-<div id="outline-container-orgec7b7be" class="outline-2">
-<h2 id="orgec7b7be">org-roam links</h2>
-<div class="outline-text-2" id="text-orgec7b7be">
+<div id="outline-container-orgd665641" class="outline-2">
+<h2 id="orgd665641">org-roam links</h2>
+<div class="outline-text-2" id="text-orgd665641">
 <p>
 pandoc on its own has no context of org-roam links, but org-roam stores everything it needs to operate in <code>~/.emacs.d/org-roam.db</code>, this file is automatically updated if the option <code>org-roam-db-autosync-mode</code> is set to <code>t</code>, this way other programs can be used to query information from org-roam without needing to visit the org files themselves.
 </p>
