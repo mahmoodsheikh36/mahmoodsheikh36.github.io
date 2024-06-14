@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="author" content="mahmood" />
+<meta name="author" content="mahmood sheikh" />
 <meta name="description" content="a rigorous treatment of the multivariate linear regression algorithm" />
 <meta name="generator" content="Org Mode" />
 <title>linear regression</title><!-- lambda icon, frail attempt -->
@@ -27,9 +27,9 @@
 </div>
 <div id="content" class="content">
 <div class="math-block problem" data-before="problem: linear regression" data-after="(Christopher M. Bishop, 2006 section 3.1 linear basis function models)
-" id="orgbfc40fc">
+" id="orgc04a67f">
 <p>
-given a training data set comprising <img src="ltx/fec97b9cff2.svg" alt="\(N\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> observations <img src="ltx/f3ffb83277d.svg" alt="\(\mathcal{D}=\{\brm{x}_n \in \mathbb{R}^A\}\)" style="height: 1.2111em; vertical-align: -0.3001em; display: inline-block" class="org-latex org-latex-inline" />, where <img src="ltx/91f379055dc.svg" alt="\(n=1,\dots,N\)" style="height: 0.8196em; vertical-align: -0.1599em; display: inline-block" class="org-latex org-latex-inline" />, together with corresponding target values <img src="ltx/f55d72f8b7e.svg" alt="\(\{\brm{y}_n \in \mathbb{R}^K\}\)" style="height: 1.2032em; vertical-align: -0.3001em; display: inline-block" class="org-latex org-latex-inline" />, the goal is to predict the value of <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7011em; vertical-align: -0.2628em; display: inline-block" class="org-latex org-latex-inline" /> for a new value of <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.4874em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> with a <i>predictive hypothesis</i> function <img src="ltx/5fb1e9d3cd0.svg" alt="\(\brm{h}\)" style="height: 0.6913em; vertical-align: -0.0531em; display: inline-block" class="org-latex org-latex-inline" />:
+given a training data set comprising <img src="ltx/fec97b9cff2.svg" alt="\(N\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> observations <img src="ltx/f3ffb83277d.svg" alt="\(\mathcal{D}=\{\brm{x}_n \in \mathbb{R}^A\}\)" style="height: 1.0631em; vertical-align: -0.2099em; display: inline-block" class="org-latex org-latex-inline" />, where <img src="ltx/91f379055dc.svg" alt="\(n=1,\dots,N\)" style="height: 0.8922em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, together with corresponding target values <img src="ltx/f55d72f8b7e.svg" alt="\(\{\brm{y}_n \in \mathbb{R}^K\}\)" style="height: 1.1427em; vertical-align: -0.2895em; display: inline-block" class="org-latex org-latex-inline" />, the goal is to predict the value of <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7569em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> for a new value of <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.5560em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> with a <i>predictive hypothesis</i> function <img src="ltx/5fb1e9d3cd0.svg" alt="\(\brm{h}\)" style="height: 0.7545em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />:
 </p>
 
 <div class="equation-container">
@@ -37,11 +37,11 @@ given a training data set comprising <img src="ltx/fec97b9cff2.svg" alt="\(N\)" 
 <img src="ltx/3f81aed0caa.svg" alt="\begin{equation}\label{eq-linear-regression-1}
   \brm{h_W}(\brm{x}): \mathbb{R}^A \to \mathbb{R}^K = \brm{Wx} \quad \brm{W} \in \mathbb{R}^{K \times A}.
 \end{equation}
-" style="height: 1.5164em; vertical-align: -0.2912em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 1.5194em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 <p>
-but to make our hypothesis applicable to more function spaces we extend this linear function with a set of <img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> fixed, non-linear basis functions
+but to make our hypothesis applicable to more function spaces we extend this linear function with a set of <img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> fixed, non-linear basis functions
 </p>
 
 <div class="equation-container">
@@ -49,11 +49,11 @@ but to make our hypothesis applicable to more function spaces we extend this lin
 <img src="ltx/63e5abd3c86.svg" alt="\begin{equation}\label{eq-linear-regression-2}
   \brm{\Phi}(\brm{x}): \mathbb{R}^A \to \mathbb{R}^M = \pmqty{\Phi_0(\brm{x})\\ \Phi_1(\brm{x})\\ \vdots\\ \Phi_{M-1}(\brm{x})} \quad (\forall 0 \le m &amp;lt; M)(\Phi_m: \mathbb{R}^A \to \mathbb{R}),
 \end{equation}
-" style="height: 5.0866em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 5.5917em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 <p>
-such that <img src="ltx/f38b33d5691.svg" alt="\(\Phi_0(\brm{x})=1\)" style="height: 0.9833em; vertical-align: -0.2952em; display: inline-block" class="org-latex org-latex-inline" /> for the bias parameter, such that
+such that <img src="ltx/f38b33d5691.svg" alt="\(\Phi_0(\brm{x})=1\)" style="height: 0.9279em; vertical-align: -0.2231em; display: inline-block" class="org-latex org-latex-inline" /> for the bias parameter, such that
 </p>
 
 <div class="equation-container">
@@ -61,24 +61,24 @@ such that <img src="ltx/f38b33d5691.svg" alt="\(\Phi_0(\brm{x})=1\)" style="heig
 <img src="ltx/bcef10ade1e.svg" alt="\begin{equation}
   \brm{h_W}(\brm{x}): \mathbb{R}^A \to \mathbb{R}^K = \brm{W\Phi}(\brm{x})) \quad \brm{W} \in \mathbb{R}^{K \times M}.
 \end{equation}
-" style="height: 1.5164em; vertical-align: -0.2912em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 1.5194em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 <p>
-this gets rid of the restrictions we would be imposing by using linear functions of <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.4874em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, this is however still a linear function of <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> which eases analysis.
+this gets rid of the restrictions we would be imposing by using linear functions of <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.5560em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, this is however still a linear function of <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7677em; vertical-align: -0.0624em; display: inline-block" class="org-latex org-latex-inline" /> which eases analysis.
 </p>
 
 <p>
-here, <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the weight matrix which we hope would represent a linear transformation that transforms a vector of input features <img src="ltx/2f0e2d479bf.svg" alt="\(\brm{x} \in \mathbb{R}^A\)" style="height: 1.0239em; vertical-align: -0.1129em; display: inline-block" class="org-latex org-latex-inline" /> into an output vector <img src="ltx/37476c61ff8.svg" alt="\(\brm{y} \in \mathbb{R}^K\)" style="height: 1.1660em; vertical-align: -0.2628em; display: inline-block" class="org-latex org-latex-inline" />.
+here, <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7677em; vertical-align: -0.0624em; display: inline-block" class="org-latex org-latex-inline" /> is the weight matrix which we hope would represent a linear transformation that transforms a vector of input features <img src="ltx/2f0e2d479bf.svg" alt="\(\brm{x} \in \mathbb{R}^A\)" style="height: 0.9063em; vertical-align: -0.0531em; display: inline-block" class="org-latex org-latex-inline" /> into an output vector <img src="ltx/37476c61ff8.svg" alt="\(\brm{y} \in \mathbb{R}^K\)" style="height: 1.1033em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 </div>
 <p>
-we start with a random point in <img src="ltx/920b8927b6b.svg" alt="\(\mathbb{R}^{K \times M}\)" style="height: 0.9523em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and use an optimization algorithm to arrive at a good enough approximation of a hypothetical target function <img src="ltx/4cfc2df0a0d.svg" alt="\(\brm{f}\)" style="height: 0.7001em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> from which we assume the observations <img src="ltx/0f37e8458c2.svg" alt="\(\{\brm{x}_j\}\)" style="height: 1.1668em; vertical-align: -0.4590em; display: inline-block" class="org-latex org-latex-inline" /> were drawn, "good enough" being defined by some criterion or loss function.
+we start with a random point in <img src="ltx/920b8927b6b.svg" alt="\(\mathbb{R}^{K \times M}\)" style="height: 0.9063em; vertical-align: -0.0531em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7677em; vertical-align: -0.0624em; display: inline-block" class="org-latex org-latex-inline" />, and use an optimization algorithm to arrive at a good enough approximation of a hypothetical target function <img src="ltx/4cfc2df0a0d.svg" alt="\(\brm{f}\)" style="height: 0.7706em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> from which we assume the observations <img src="ltx/0f37e8458c2.svg" alt="\(\{\brm{x}_j\}\)" style="height: 1.0580em; vertical-align: -0.3375em; display: inline-block" class="org-latex org-latex-inline" /> were drawn, "good enough" being defined by some criterion or loss function.
 </p>
 
 <p>
-here we consider the traditional gradient descent as the optimization method. the observations may potentially be divided into batches, but that doesnt matter in theory. our goal is to converge on a good enough <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7089em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> by going in the direction opposite to that of the gradient of the loss function, because by doing so we could get closer to a local minima point (i.e. "sliding downhill") so a <i>training step</i> would consist of:
+here we consider the traditional gradient descent as the optimization method. the observations may potentially be divided into batches, but that doesnt matter in theory. our goal is to converge on a good enough <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7677em; vertical-align: -0.0624em; display: inline-block" class="org-latex org-latex-inline" /> by going in the direction opposite to that of the gradient of the loss function, because by doing so we could get closer to a local minima point (i.e. "sliding downhill") so a <i>training step</i> would consist of:
 </p>
 
 <div class="equation-container">
@@ -86,15 +86,15 @@ here we consider the traditional gradient descent as the optimization method. th
 <img src="ltx/5111f59a855.svg" alt="\begin{equation}
   \brm{W} \gets \brm{W}-\eta\vec{\nabla}_{\brm{W}}L(\brm{h_W}(\brm{x}), \brm{y}),
 \end{equation}
-" style="height: 1.5164em; vertical-align: -0.2912em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 1.5194em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 <p>
-where <img src="ltx/4257eeb78bb.svg" alt="\(L\)" style="height: 0.7109em; vertical-align: -0.0511em; display: inline-block" class="org-latex org-latex-inline" /> is the loss function and <img src="ltx/c8bdd98c924.svg" alt="\(\eta\)" style="height: 0.6668em; vertical-align: -0.2236em; display: inline-block" class="org-latex org-latex-inline" /> is the learning rate.
+where <img src="ltx/4257eeb78bb.svg" alt="\(L\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the loss function and <img src="ltx/c8bdd98c924.svg" alt="\(\eta\)" style="height: 0.7334em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> is the learning rate.
 </p>
 
 <p>
-the optimal weight matrix <img src="ltx/9b54e7cb081.svg" alt="\(\brm{\hat W}\)" style="height: 0.9078em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> would be the one to minimize this loss for a given batch (set of observations):
+the optimal weight matrix <img src="ltx/9b54e7cb081.svg" alt="\(\brm{\hat W}\)" style="height: 1.0093em; vertical-align: -0.0624em; display: inline-block" class="org-latex org-latex-inline" /> would be the one to minimize this loss for a given batch (set of observations):
 </p>
 
 <div class="equation-container">
@@ -102,7 +102,7 @@ the optimal weight matrix <img src="ltx/9b54e7cb081.svg" alt="\(\brm{\hat W}\)" 
 <img src="ltx/fc4c64fd68b.svg" alt="\begin{equation}
   \brm{\hat W} = \argmin_{\brm{W}} L(\brm{h_W}(\brm{x}), \brm{y}).
 \end{equation}
-" style="height: 1.5164em; vertical-align: -0.2912em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 2.2177em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 </div>

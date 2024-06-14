@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="author" content="mahmood" />
+<meta name="author" content="mahmood sheikh" />
 <meta name="generator" content="Org Mode" />
 <title>common lisp math utils</title><!-- lambda icon, frail attempt -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
@@ -28,9 +28,9 @@
 <p>
 some math utilities for common lisp
 </p>
-<div id="outline-container-org052e3a3" class="outline-2">
-<h2 id="org052e3a3">essential functions</h2>
-<div class="outline-text-2" id="text-org052e3a3">
+<div id="outline-container-orgf6c5194" class="outline-2">
+<h2 id="orgf6c5194">essential functions</h2>
+<div class="outline-text-2" id="text-orgf6c5194">
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-math-functions">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sigmoid</span> (x)
   (<span style="font-weight: bold;">cond</span> ((&lt; x -70) 0) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">to avoid float overflow</span>
@@ -51,10 +51,10 @@ some math utilities for common lisp
 </div>
 </div>
 </div>
-<div id="outline-container-orgbb14749" class="outline-2">
-<h2 id="orgbb14749">vectors</h2>
-<div class="outline-text-2" id="text-orgbb14749">
-<div class="math-block note" data-before="note" data-after="" id="org7fec698">
+<div id="outline-container-org4ea33e3" class="outline-2">
+<h2 id="org4ea33e3">vectors</h2>
+<div class="outline-text-2" id="text-org4ea33e3">
+<div class="math-block note" data-before="note" data-after="" id="org05efcba">
 <p>
 these functions work, but some use lists and some do redundant operations, they need efficiency improvement
 </p>
@@ -97,9 +97,9 @@ these functions work, but some use lists and some do redundant operations, they 
 </div>
 </div>
 </div>
-<div id="outline-container-org2c12c98" class="outline-2">
-<h2 id="org2c12c98">matrices</h2>
-<div class="outline-text-2" id="text-org2c12c98">
+<div id="outline-container-orgb035fa7" class="outline-2">
+<h2 id="orgb035fa7">matrices</h2>
+<div class="outline-text-2" id="text-orgb035fa7">
 <p>
 im using arrays for matrices, which use different functions than vectors/lists
 matrix multiplication:
@@ -174,9 +174,9 @@ matrix multiplication:
 </pre>
 </div>
 </div>
-<div id="outline-container-org40f0f2e" class="outline-3">
-<h3 id="org40f0f2e">matrix multiplication implementation comparison between lists and arrays</h3>
-<div class="outline-text-3" id="text-org40f0f2e">
+<div id="outline-container-org5050018" class="outline-3">
+<h3 id="org5050018">matrix multiplication implementation comparison between lists and arrays</h3>
+<div class="outline-text-3" id="text-org5050018">
 <p>
 with lists:
 </p>
@@ -219,9 +219,9 @@ with arrays:
 </div>
 </div>
 </div>
-<div id="outline-container-orgc1cb109" class="outline-3">
-<h3 id="orgc1cb109">2d transformation matrices</h3>
-<div class="outline-text-3" id="text-orgc1cb109">
+<div id="outline-container-org35ba1e7" class="outline-3">
+<h3 id="org35ba1e7">2d transformation matrices</h3>
+<div class="outline-text-3" id="text-org35ba1e7">
 <p>
 linearly mapping a grid to another:
 </p>
@@ -262,9 +262,9 @@ example usage:
 </div>
 </div>
 </div>
-<div id="outline-container-org31d3936" class="outline-2">
-<h2 id="org31d3936"><a href="/linearly_mapping_an_interval_onto_another.html#20230608T174403">linearly mapping discrete range onto another</a></h2>
-<div class="outline-text-2" id="text-org31d3936">
+<div id="outline-container-org175b664" class="outline-2">
+<h2 id="org175b664"><a href="/linearly_mapping_an_interval_onto_another.html#20230608T174403">linearly mapping discrete range onto another</a></h2>
+<div class="outline-text-2" id="text-org175b664">
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-map-num">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-num</span> (num src-min src-max dest-min dest-max)
   <span style="font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
@@ -273,9 +273,9 @@ example usage:
 </div>
 </div>
 </div>
-<div id="outline-container-org78ede89" class="outline-2">
-<h2 id="org78ede89">sets</h2>
-<div class="outline-text-2" id="text-org78ede89">
+<div id="outline-container-org627122a" class="outline-2">
+<h2 id="org627122a">sets</h2>
+<div class="outline-text-2" id="text-org627122a">
 <p>
 a good resource <a href="https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html">https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html</a>
 the builtin <code>set-difference</code> sometimes reverses the lists it returns for some reason and its bothersome, e.g.:
@@ -327,9 +327,9 @@ check for set equality:
 </div>
 </div>
 </div>
-<div id="outline-container-org5b932bc" class="outline-2">
-<h2 id="org5b932bc">combinatorics</h2>
-<div class="outline-text-2" id="text-org5b932bc">
+<div id="outline-container-org0a2fb0c" class="outline-2">
+<h2 id="org0a2fb0c">combinatorics</h2>
+<div class="outline-text-2" id="text-org0a2fb0c">
 <p>
 generating variations:
 </p>
