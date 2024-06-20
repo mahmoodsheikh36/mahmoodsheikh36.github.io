@@ -22,23 +22,23 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
-</div><h1 class="main-title">connect to remote common lisp repl with sly/slime</h1>
+</div>
 </div>
 <div id="content" class="content">
 <p>
-assuming <code>sbcl</code> is installed on the destination server and the one to be used
+assuming <code>sbcl</code> is installed on the destination server and the one to be used<br />
 </p>
 <ul class="org-ul">
-<li>start by installing quicklisp on the server</li>
-<li>start the sbcl repl</li>
-<li>install slynk/swank for sly/slime, respectively, <code>(ql:quickload :slynk)</code></li>
-<li>start the server with <code>(slynk:create-server)</code>, the default port is 4005</li>
-<li>create an ssh tunnel from local machine to remote machine using <code>ssh -L4005:localhost:4005 &lt;remote-machine-address&gt;</code></li>
-<li>connect from the local emacs instance to the remote common lisp swank instance using <code>M-x sly-connect</code>, with the destination being the server and the port being 4005</li>
+<li>start by installing quicklisp on the server<br /></li>
+<li>start the sbcl repl<br /></li>
+<li>install slynk/swank for sly/slime, respectively, <code>(ql:quickload :slynk)</code><br /></li>
+<li>start the server with <code>(slynk:create-server)</code>, the default port is 4005<br /></li>
+<li>create an ssh tunnel from local machine to remote machine using <code>ssh -L4005:localhost:4005 &lt;remote-machine-address&gt;</code><br /></li>
+<li>connect from the local emacs instance to the remote common lisp swank instance using <code>M-x sly-connect</code>, with the destination being the server and the port being 4005<br /></li>
 </ul>
 <p>
-note that direct remote connections to swank/slynk arent possible (by default) so we have to use an ssh tunnel (see <a href="https://comp.lang.lisp.narkive.com/ze9FYwCl/how-to-connect-with-slime-to-remote-sbcl">https://comp.lang.lisp.narkive.com/ze9FYwCl/how-to-connect-with-slime-to-remote-sbcl</a>)
-a one-liner to start the slynk server:
+note that direct remote connections to swank/slynk arent possible (by default) so we have to use an ssh tunnel (see <a href="https://comp.lang.lisp.narkive.com/ze9FYwCl/how-to-connect-with-slime-to-remote-sbcl">https://comp.lang.lisp.narkive.com/ze9FYwCl/how-to-connect-with-slime-to-remote-sbcl</a>)<br />
+a one-liner to start the slynk server:<br />
 </p>
 
 <div class="org-src-container">

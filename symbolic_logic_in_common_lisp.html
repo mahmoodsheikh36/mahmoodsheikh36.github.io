@@ -23,17 +23,17 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
-</div><h1 class="main-title">symbolic logic in common lisp</h1><span class="desc">using the symbolic capabilities of lisp to write inference engines and more</span>
+</div>
 </div>
 <div id="content" class="content">
 <p>
-logic programming in common lisp
+logic programming in common lisp<br />
 </p>
-<div id="outline-container-org09b9006" class="outline-2">
-<h2 id="org09b9006">logical statements</h2>
-<div class="outline-text-2" id="text-org09b9006">
+<div id="outline-container-orga619349" class="outline-2">
+<h2 id="orga619349">logical statements</h2>
+<div class="outline-text-2" id="text-orga619349">
 <p>
-we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical statements, e.g. given the following knowledge base of horn clauses:
+we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical statements, e.g. given the following knowledge base of horn clauses:<br />
 </p>
 
 <div class="equation-container">
@@ -51,7 +51,7 @@ we make use of the symbolic capabilities of lisp, we use quoting and symbols to 
 </span>
 </div>
 <p>
-in lisp we could write it as:
+in lisp we could write it as:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*kb*</span>
@@ -73,23 +73,23 @@ in lisp we could write it as:
 
 
 <p>
-the choice of the symbols <code>implies, and</code> could vary, but essentially we should write code that deals properly with these symbols based on their names. other symbols we may use are <code>or, iff</code>.
+the choice of the symbols <code>implies, and</code> could vary, but essentially we should write code that deals properly with these symbols based on their names. other symbols we may use are <code>or, iff</code>.<br />
 </p>
 
 <p>
-so a knowledge base is just a (nested) list of propositions.
+so a knowledge base is just a (nested) list of propositions.<br />
 </p>
 
 <p>
-what about predicates? e.g. statements like <img src="ltx/526e0a9cc4e.svg" alt="\(Human(John)\)" style="height: 0.9338em; vertical-align: -0.2231em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use <code>'(Human John)</code>, so instead of <b>infix notation</b>, we use lisp's infamous <b>prefix notation</b>, we dont need to worry about <code>(Human John)</code> sharing the same form as <code>(and x1 x2)</code>, as <code>and</code> can be considered just a boolean function like <code>Human</code>, after all. any expression that is in the form <code>(whatever x1 x2 ... xn)</code> would imply that <code>whatever</code> is meant to be treated as a boolean function.
+what about predicates? e.g. statements like <img src="ltx/526e0a9cc4e.svg" alt="\(Human(John)\)" style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use <code>'(Human John)</code>, so instead of <b>infix notation</b>, we use lisp's infamous <b>prefix notation</b>, we dont need to worry about <code>(Human John)</code> sharing the same form as <code>(and x1 x2)</code>, as <code>and</code> can be considered just a boolean function like <code>Human</code>, after all. any expression that is in the form <code>(whatever x1 x2 ... xn)</code> would imply that <code>whatever</code> is meant to be treated as a boolean function.<br />
 </p>
 
 <p>
-first obstacle we may face is the issue of distinguishing a variable from a constant symbol, how can we tell whether a symbol represents a variable or a constant (an immutable object)? after all both are just symbols (in our implementation), for example consider <code>person</code> vs <code>John</code>, inherently, <code>person</code> is a variable that applies to everyone and <code>John</code> is a constant that only describes one person (in a simplified context where John refers to a friend, for example). a simple solution to this problem would be to use special syntax for variables, like <code>?x</code>, here, <code>?x</code> would mean we're dealing with a variable, and a symbol without a question mark prefix, for example <code>x</code>, is recognized as a constant.
+first obstacle we may face is the issue of distinguishing a variable from a constant symbol, how can we tell whether a symbol represents a variable or a constant (an immutable object)? after all both are just symbols (in our implementation), for example consider <code>person</code> vs <code>John</code>, inherently, <code>person</code> is a variable that applies to everyone and <code>John</code> is a constant that only describes one person (in a simplified context where John refers to a friend, for example). a simple solution to this problem would be to use special syntax for variables, like <code>?x</code>, here, <code>?x</code> would mean we're dealing with a variable, and a symbol without a question mark prefix, for example <code>x</code>, is recognized as a constant.<br />
 </p>
 
 <p>
-in our previous example, this doesnt make much difference as we were dealing with constants only, consider this example which demonstrates how we apply the idea of prefixing variables with a question mark:
+in our previous example, this doesnt make much difference as we were dealing with constants only, consider this example which demonstrates how we apply the idea of prefixing variables with a question mark:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*kb*</span>
@@ -107,7 +107,7 @@ in our previous example, this doesnt make much difference as we were dealing wit
 
 
 <p>
-how about substitutions? how do we represent for example the substitution <img src="ltx/295812a0b94.svg" alt="\(\{x/val,y/val2\}\)" style="height: 0.9715em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" />, we just use an association list:
+how about substitutions? how do we represent for example the substitution <img src="ltx/295812a0b94.svg" alt="\(\{x/val,y/val2\}\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, we just use an association list:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((sub nil)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">sub is the substitution</span>
@@ -122,11 +122,11 @@ how about substitutions? how do we represent for example the substitution <img s
 </pre>
 </div>
 </div>
-<div id="outline-container-org6a60118" class="outline-2">
-<h2 id="org6a60118">early inference engines</h2>
-<div class="outline-text-2" id="text-org6a60118">
+<div id="outline-container-org17945ec" class="outline-2">
+<h2 id="org17945ec">early inference engines</h2>
+<div class="outline-text-2" id="text-org17945ec">
 <p>
-imma start off with the unification algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the <b>occur check</b> and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates
+imma start off with the unification algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the <b>occur check</b> and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">variable?</span> (x)
@@ -173,7 +173,7 @@ imma start off with the unification algorithm, this one differs a bit from the p
 </pre>
 </div>
 <p>
-a test:
+a test:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(unify '(person john) '(person ?x))
@@ -186,7 +186,7 @@ a test:
 
 
 <p>
-next up, we need to implement forward chaining and backward chaining which take in a knowledge base of statements which are definite clauses and do algorithmic inference, this code makes use of <a href="/common_lisp_math_utils.html#20230503T204107">common lisp math utils</a>
+next up, we need to implement forward chaining and backward chaining which take in a knowledge base of statements which are definite clauses and do algorithmic inference, this code makes use of <a href="/common_lisp_math_utils.html#20230503T204107">common lisp math utils</a><br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">find-variables-in-statement</span> (statement)
@@ -322,7 +322,7 @@ next up, we need to implement forward chaining and backward chaining which take 
 </pre>
 </div>
 <p>
-example usage:
+example usage:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-test-1</span> ()
@@ -345,7 +345,7 @@ example usage:
 </pre>
 </div>
 <p>
-some functions (that do their best) to "unpack" a knowledge base by unpacking conjunctions and implications into multiple smaller statements that are easier to deal with (there isnt much we can do when the precedent of an implication is a logical connective)
+some functions (that do their best) to "unpack" a knowledge base by unpacking conjunctions and implications into multiple smaller statements that are easier to deal with (there isnt much we can do when the precedent of an implication is a logical connective)<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">unpack-implication</span> (implication)
@@ -375,7 +375,7 @@ some functions (that do their best) to "unpack" a knowledge base by unpacking co
 </pre>
 </div>
 <p>
-a function to generate a graph from a knowledge base, see <a href="/working_with_graphs_in_common_lisp.html#20230813T012934">common lisp graphs</a>:
+a function to generate a graph from a knowledge base, see <a href="/working_with_graphs_in_common_lisp.html#20230813T012934">common lisp graphs</a>:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">generate-graph-from-knowledge-base</span> (kb)
@@ -396,7 +396,7 @@ a function to generate a graph from a knowledge base, see <a href="/working_with
 </pre>
 </div>
 <p>
-example usage:
+example usage:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-test-2</span> ()
@@ -455,12 +455,12 @@ v13/{(SELLS ?X ?Y ?Z)} -&amp;gt; v12/{(CRIMINAL ?X)},
 v14/{(WEAPON ?Y)} -&amp;gt; v12/{(CRIMINAL ?X)},
 v15/{(AMERICAN ?X)} -&amp;gt; v12/{(CRIMINAL ?X)},
 };\end{tikzpicture}
-" style="height: 4.5200em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 4.3759em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
 <p>
-functions to generate a graph from the forward chaining process (see <a href="/working_with_graphs_in_common_lisp.html#20230813T012934">common lisp graphs</a>):
+functions to generate a graph from the forward chaining process (see <a href="/working_with_graphs_in_common_lisp.html#20230813T012934">common lisp graphs</a>):<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-generate-inference-graph</span> (inference-alist-list)
@@ -522,7 +522,7 @@ functions to generate a graph from the forward chaining process (see <a href="/w
 </pre>
 </div>
 <p>
-example usage:
+example usage:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-test-3</span> ()
@@ -560,12 +560,12 @@ v7/{(MISSILE M1)} -&amp;gt; v4/{(WEAPON M1)},
 v8/{(OWNS NONO M1)} -&amp;gt; v3/{(SELLS WEST M1 NONO)},
 v7/{(MISSILE M1)} -&amp;gt; v3/{(SELLS WEST M1 NONO)},
 };\end{tikzpicture}
-" style="height: 12.9459em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 12.5137em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
 <p>
-the backward chaining algorithm (we dont implement it as a generator here):
+the backward chaining algorithm (we dont implement it as a generator here):<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">backward-chaining</span> (knowledge-base query)

@@ -22,63 +22,63 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
-</div><h1 class="main-title">ssh port forwarding</h1>
+</div>
 </div>
 <div id="content" class="content">
 <p>
-to connect to a device behind a private unreachable router you can use <i>remote ssh port forwarding</i> or <i>remote ssh tunneling</i> (notice that <i>remote</i> ssh tunneling is different from <i>local</i> ssh tunneling).
+to connect to a device behind a private unreachable router you can use <i>remote ssh port forwarding</i> or <i>remote ssh tunneling</i> (notice that <i>remote</i> ssh tunneling is different from <i>local</i> ssh tunneling).<br />
 </p>
 
 <p>
-example:
+example:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-sh">ssh -i path/to/key -R <span style="font-style: italic;">'*:5000:*:22'</span> user@remote -N -g
 </pre>
 </div>
 <p>
-so say you have 3 machines, <code>"local1"</code>, <code>"local2"</code> and <code>"remote1"</code>. when this command is run from <code>local2</code>, it binds to the port 5000 on the machine <code>remote1</code> and forwards the traffic to that port to port 22 of <code>local2</code>. this allows you to ssh into <code>local2</code> through the remote machine from <code>local1</code>, now if you take <code>local1</code> into any other network, not necessarily the network <code>local2</code> is on, you can still connect to <code>local2</code> from <code>local1</code> through <code>remote1</code>.
+so say you have 3 machines, <code>"local1"</code>, <code>"local2"</code> and <code>"remote1"</code>. when this command is run from <code>local2</code>, it binds to the port 5000 on the machine <code>remote1</code> and forwards the traffic to that port to port 22 of <code>local2</code>. this allows you to ssh into <code>local2</code> through the remote machine from <code>local1</code>, now if you take <code>local1</code> into any other network, not necessarily the network <code>local2</code> is on, you can still connect to <code>local2</code> from <code>local1</code> through <code>remote1</code>.<br />
 </p>
 
 <p>
-basically, this can be used as an alternative to other port forwarding methods when you want to gain access to a machine behind a private network like a home or office network.
+basically, this can be used as an alternative to other port forwarding methods when you want to gain access to a machine behind a private network like a home or office network.<br />
 </p>
 
 <p>
-a connection to the tunnel can be opened using the command
+a connection to the tunnel can be opened using the command<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-sh">ssh -i path/to/key localuser@remote1 -p 5000
 </pre>
 </div>
 <p>
-note that <code>localuser</code> would be the user of <code>local2</code> (not the remote machine) that you want ssh to use.
+note that <code>localuser</code> would be the user of <code>local2</code> (not the remote machine) that you want ssh to use.<br />
 </p>
-<div id="outline-container-org3bc8f5e" class="outline-2">
-<h2 id="org3bc8f5e">connection refused</h2>
-<div class="outline-text-2" id="text-org3bc8f5e">
-<div class="dummy" id="orgc81bfb2">
+<div id="outline-container-org49d3ea3" class="outline-2">
+<h2 id="org49d3ea3">connection refused</h2>
+<div class="outline-text-2" id="text-org49d3ea3">
+<div class="dummy" id="org078c6b2">
 <p>
-by default tunnel endpoints only listen on 127.0.0.1, so they can't be accessed from other machines. to change this you may need to add this to <code>/etc/ssh/sshd_config</code> on the server:
+by default tunnel endpoints only listen on 127.0.0.1, so they can't be accessed from other machines. to change this you may need to add this to <code>/etc/ssh/sshd_config</code> on the server:<br />
 </p>
-<div class="literal" id="org5803c5b">
+<div class="literal" id="org18978b5">
 <p>
-GatewayPorts clientspecified
+GatewayPorts clientspecified<br />
 </p>
 
 </div>
 
 </div>
 <p>
-this is also the reason we use the address <code>*:5000:*:22</code>, the star is used to listen on all interfaces, like <code>0.0.0.0</code>.
+this is also the reason we use the address <code>*:5000:*:22</code>, the star is used to listen on all interfaces, like <code>0.0.0.0</code>.<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org23fc465" class="outline-2">
-<h2 id="org23fc465">using ipv6</h2>
-<div class="outline-text-2" id="text-org23fc465">
+<div id="outline-container-org22ca5af" class="outline-2">
+<h2 id="org22ca5af">using ipv6</h2>
+<div class="outline-text-2" id="text-org22ca5af">
 <p>
-if you're using ipv6 you need to make sure its enabled on all machines. <code>vim /etc/sysctl.conf</code> and make sure you have the following:
+if you're using ipv6 you need to make sure its enabled on all machines. <code>vim /etc/sysctl.conf</code> and make sure you have the following:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-text">net.ipv6.conf.default.disable_ipv6 = 0
@@ -86,7 +86,7 @@ net.ipv6.conf.all.disable_ipv6 = 0
 </pre>
 </div>
 <p>
-the ipv6 equivalent for <code>localhost</code> is <code>::1</code>. so, for example, the reverse tunnel ssh command becomes:
+the ipv6 equivalent for <code>localhost</code> is <code>::1</code>. so, for example, the reverse tunnel ssh command becomes:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-sh">ssh -i yourkey -R <span style="font-style: italic;">'*:5000:*:22'</span> -6 user@remote1:etc:etc::1 -N -g
@@ -94,11 +94,11 @@ the ipv6 equivalent for <code>localhost</code> is <code>::1</code>. so, for exam
 </div>
 </div>
 </div>
-<div id="outline-container-orge1591c8" class="outline-2">
-<h2 id="orge1591c8">systemd service</h2>
-<div class="outline-text-2" id="text-orge1591c8">
+<div id="outline-container-orged4aed6" class="outline-2">
+<h2 id="orged4aed6">systemd service</h2>
+<div class="outline-text-2" id="text-orged4aed6">
 <p>
-an example systemd service that i use to automatically open an ssh tunnel for a linux server:
+an example systemd service that i use to automatically open an ssh tunnel for a linux server:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-text">[Unit]

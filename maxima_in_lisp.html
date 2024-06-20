@@ -23,38 +23,38 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
-</div><h1 class="main-title">maxima in lisp</h1><span class="desc">how to use maxima code in common lisp</span>
+</div>
 </div>
 <div id="content" class="content">
-<div class="math-block note" data-before="note" data-after="" id="org39dfe06">
+<div class="math-block note" data-before="note" data-after="" id="org61dd1d1">
 <p>
-i ended up giving up on using maxima as a visualization/symbolic math computation library for lisp, it wasnt made with this usecase in mind i guess, and so its an utter nightmare to lisp with it
+i ended up giving up on using maxima as a visualization/symbolic math computation library for lisp, it wasnt made with this usecase in mind i guess, and so its an utter nightmare to lisp with it<br />
 </p>
 
 </div>
 <p>
-maxima is written in lisp and so it can be used as a modified/extended lisp runtime
+maxima is written in lisp and so it can be used as a modified/extended lisp runtime<br />
 </p>
-<div id="outline-container-org2ff594e" class="outline-2">
-<h2 id="org2ff594e">how to</h2>
-<div class="outline-text-2" id="text-org2ff594e">
+<div id="outline-container-org32fd60b" class="outline-2">
+<h2 id="org32fd60b">how to</h2>
+<div class="outline-text-2" id="text-org32fd60b">
 <p>
-to start the lisp runtime use the command:
+to start the lisp runtime use the command:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">rmaxima -r <span style="font-style: italic;">'to_lisp();'</span>
 </pre>
 </div>
 <p>
-can also run this in emacs' slime/sly with <code>(sly "rmaxima -r to_lisp();")</code>
-alternatively, we can clone maxima's source code to the subdirectory <code>local-projects</code> of the quicklisp installation directory (usually <code>~/quicklisp</code> unless you've modified it), follow the instructions at <a href="https://sourceforge.net/p/maxima/code/ci/master/tree/INSTALL.lisp#l66">https://sourceforge.net/p/maxima/code/ci/master/tree/INSTALL.lisp#l66</a> to compile maxima and you'll be able to load it as a library:
+can also run this in emacs' slime/sly with <code>(sly "rmaxima -r to_lisp();")</code><br />
+alternatively, we can clone maxima's source code to the subdirectory <code>local-projects</code> of the quicklisp installation directory (usually <code>~/quicklisp</code> unless you've modified it), follow the instructions at <a href="https://sourceforge.net/p/maxima/code/ci/master/tree/INSTALL.lisp#l66">https://sourceforge.net/p/maxima/code/ci/master/tree/INSTALL.lisp#l66</a> to compile maxima and you'll be able to load it as a library:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(ql:quickload <span style="font-style: italic;">"maxima"</span>)
 </pre>
 </div>
 <p>
-but then you gotta prefix functions with <code>maxima::</code>, e.g.
+but then you gotta prefix functions with <code>maxima::</code>, e.g.<br />
 </p>
 
 <div class="org-src-container">
@@ -71,22 +71,22 @@ but then you gotta prefix functions with <code>maxima::</code>, e.g.
 
 
 <p>
-unless you enter the library itself then you dont need the prefix:
+unless you enter the library itself then you dont need the prefix:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">in-package</span> <span style="font-weight: bold;">:maxima</span>)
 </pre>
 </div>
 <p>
-loading maxima as a library works most of the time, but it causes some problems, for example we cant use <code>draw</code> when maxima is loaded as a library, thats why using <code>rmaxima</code> is better
+loading maxima as a library works most of the time, but it causes some problems, for example we cant use <code>draw</code> when maxima is loaded as a library, thats why using <code>rmaxima</code> is better<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orga67f67d" class="outline-2">
-<h2 id="orga67f67d">misc</h2>
-<div class="outline-text-2" id="text-orga67f67d">
+<div id="outline-container-orgad90619" class="outline-2">
+<h2 id="orgad90619">misc</h2>
+<div class="outline-text-2" id="text-orgad90619">
 <p>
-to write an expression in infix syntax we do:
+to write an expression in infix syntax we do:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(print #$10/13$)
@@ -100,7 +100,7 @@ to write an expression in infix syntax we do:
 
 
 <p>
-to display math using ascii art we use the function <code>displa</code> (short for <b>display</b>)
+to display math using ascii art we use the function <code>displa</code> (short for <b>display</b>)<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(maxima::displa #$10/13$)
@@ -114,11 +114,11 @@ to display math using ascii art we use the function <code>displa</code> (short f
 </pre>
 </div>
 </div>
-<div id="outline-container-orgd69f2b3" class="outline-2">
-<h2 id="orgd69f2b3">maxima expression to lisp expression</h2>
-<div class="outline-text-2" id="text-orgd69f2b3">
+<div id="outline-container-org49c1311" class="outline-2">
+<h2 id="org49c1311">maxima expression to lisp expression</h2>
+<div class="outline-text-2" id="text-org49c1311">
 <p>
-this function helps turn maxima expressions into their corresponding lisp expression
+this function helps turn maxima expressions into their corresponding lisp expression<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">lisp-form</span> (macsyma-string)
@@ -127,7 +127,7 @@ this function helps turn maxima expressions into their corresponding lisp expres
 </div>
 
 <p>
-example:
+example:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(print (lisp-form <span style="font-style: italic;">"diff(sin(x),x)"</span>))
@@ -141,7 +141,7 @@ example:
 
 
 <p>
-some expressions will return symbols instead of functions so they cannot be run directly, e.g.
+some expressions will return symbols instead of functions so they cannot be run directly, e.g.<br />
 </p>
 
 <div class="org-src-container">
@@ -156,7 +156,7 @@ some expressions will return symbols instead of functions so they cannot be run 
 
 
 <p>
-so to evaluate these expressions we can use <code>meval*</code>:
+so to evaluate these expressions we can use <code>meval*</code>:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(print (lisp-form <span style="font-style: italic;">"sin(10d0)"</span>))
@@ -174,16 +174,16 @@ so to evaluate these expressions we can use <code>meval*</code>:
 
 
 <p>
-although functions like <code>$sin</code> do exist and can be used instead of symbols like <code>%sin</code>
-taken from <a href="https://github.com/livelisp/livewlisp/blob/main/maxima-tutorial.txt">https://github.com/livelisp/livewlisp/blob/main/maxima-tutorial.txt</a>
+although functions like <code>$sin</code> do exist and can be used instead of symbols like <code>%sin</code><br />
+taken from <a href="https://github.com/livelisp/livewlisp/blob/main/maxima-tutorial.txt">https://github.com/livelisp/livewlisp/blob/main/maxima-tutorial.txt</a><br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgc914f71" class="outline-2">
-<h2 id="orgc914f71">integration</h2>
-<div class="outline-text-2" id="text-orgc914f71">
+<div id="outline-container-orgab33651" class="outline-2">
+<h2 id="orgab33651">integration</h2>
+<div class="outline-text-2" id="text-orgab33651">
 <p>
-the main function for integration is <code>$integrate</code> (or <code>sinint</code>)
+the main function for integration is <code>$integrate</code> (or <code>sinint</code>)<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(maxima::displa (maxima::$integrate #$2/(3*x^2)$ 'x))
@@ -208,11 +208,11 @@ sin(x)
 </pre>
 </div>
 </div>
-<div id="outline-container-org463a083" class="outline-2">
-<h2 id="org463a083">lists</h2>
-<div class="outline-text-2" id="text-org463a083">
+<div id="outline-container-org3ab9285" class="outline-2">
+<h2 id="org3ab9285">lists</h2>
+<div class="outline-text-2" id="text-org3ab9285">
 <p>
-i havent a better approach yet
+i havent a better approach yet<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(maxima::displa (maxima::meval* `((maxima::mlist) 2 3 5)))
@@ -225,7 +225,7 @@ i havent a better approach yet
 
 
 <p>
-lisp list to maxima list:
+lisp list to maxima list:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-&gt;mlist</span> (list)
@@ -238,7 +238,7 @@ lisp list to maxima list:
 </pre>
 </div>
 <p>
-example:
+example:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(print (list-&gt;mlist '(1 2 3)))
@@ -253,18 +253,18 @@ example:
 </pre>
 </div>
 </div>
-<div id="outline-container-orga7d6e8a" class="outline-2">
-<h2 id="orga7d6e8a">plotting</h2>
-<div class="outline-text-2" id="text-orga7d6e8a">
+<div id="outline-container-org10b9316" class="outline-2">
+<h2 id="org10b9316">plotting</h2>
+<div class="outline-text-2" id="text-org10b9316">
 <p>
-we need to initialize some variables (like <code>*maxima-tempdir*</code>) to be able to plot, this can be done automatically using <code>initialize-runtime-globals</code>
+we need to initialize some variables (like <code>*maxima-tempdir*</code>) to be able to plot, this can be done automatically using <code>initialize-runtime-globals</code><br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(maxima::initialize-runtime-globals)
 </pre>
 </div>
 <p>
-to plot a set of points (discrete plot) using <code>gnuplot</code>
+to plot a set of points (discrete plot) using <code>gnuplot</code><br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(maxima::$plot2d
@@ -274,7 +274,7 @@ to plot a set of points (discrete plot) using <code>gnuplot</code>
 </pre>
 </div>
 <p>
-this can be (somewhat) simplified using our function <code>list-&gt;mlist</code> (see above)
+this can be (somewhat) simplified using our function <code>list-&gt;mlist</code> (see above)<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(maxima::$plot2d
@@ -286,7 +286,7 @@ this can be (somewhat) simplified using our function <code>list-&gt;mlist</code>
 </pre>
 </div>
 <p>
-we can draw multiple plots (this only works when running lisp using <code>maxima</code>, see the <b>how to</b> section):
+we can draw multiple plots (this only works when running lisp using <code>maxima</code>, see the <b>how to</b> section):<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((scene1 '((MAXIMA::$GR2D)
@@ -304,7 +304,7 @@ we can draw multiple plots (this only works when running lisp using <code>maxima
 </pre>
 </div>
 <p>
-we implement some abstraction over this to make it less explicit:
+we implement some abstraction over this to make it less explicit:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">plot-points</span> (x-values y-values)

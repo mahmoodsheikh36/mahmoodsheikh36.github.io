@@ -22,80 +22,111 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
-</div><h1 class="main-title">computably enumerable set</h1>
+</div>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org0d02785">
+<div class="dummy" id="org26d44df">
 <p>
-the definitions <a href="/computably_enumerable_set.html#def-comp-enum">def-comp-enum</a> and <a href="/computably_enumerable_set.html#def-recur-enum">def-recur-enum</a> below define an enumerable set to be the domain of some recursive function, but <a href="/computably_enumerable_set.html#def-recur-enum-rogers">roger's</a> defines it to be the range of some recursive function.
+the definitions <a href="/computably_enumerable_set.html#def-comp-enum">def-comp-enum</a> and <a href="/computably_enumerable_set.html#def-recur-enum">def-recur-enum</a> below define an enumerable set to be the domain of some recursive function, but <a href="/computably_enumerable_set.html#def-recur-enum-rogers">roger's</a> defines it to be the range of some recursive function.<br />
 </p>
 
-<div class="math-block definition" data-before="definition: computably enumerable set" data-after="(taken from robert i. soare, 2016 definition 1.6.2)
-" id="org0e8582e">
+<div class="math-block definition" data-before="definition: computably enumerable set" data-after="(taken from robert i. soare, 2016 definition 1.6.2)\\
+" id="orga7db759">
 <ul class="org-ul">
-<li>a set <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is <i>computably enumerable (c.e.)</i> if <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the domain of some partial computable function.</li>
+<li>a set <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is <i>computably enumerable (c.e.)</i> if <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the domain of some partial computable function.<br /></li>
 
-<li>let the <img src="ltx/de040c9ae36.svg" alt="\(e\)" style="height: 0.5389em; vertical-align: -0.0565em; display: inline-block" class="org-latex org-latex-inline" />th c.e. set be denoted by
-<img src="ltx/336d2b9d4aa.svg" alt="\[ W_e \defeq \dom(\numedcfunc_e)=\set{x \given \converges{\numedcfunc_e(x)}}. \]" style="height: 1.7345em; display: block" class="org-latex org-latex-block" /></li>
+<li>let the <img src="ltx/de040c9ae36.svg" alt="\(e\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th c.e. set be denoted by<br />
+<img src="ltx/336d2b9d4aa.svg" alt="\[ W_e \defeq \dom(\numedcfunc_e)=\set{x \given \converges{\numedcfunc_e(x)}}. \]" style="height: 1.9045em; display: block" class="org-latex org-latex-block" /><br /></li>
 </ul>
 
 </div>
 <p>
-note that any computable set is c.e. since if <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is computable, then <img src="ltx/83084c1b93d.svg" alt="\(A=\dom(\psi)\)" style="height: 0.9691em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" />, where <img src="ltx/85187c305bc.svg" alt="\(\psi(x)=1\)" style="height: 0.9559em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> if the characteristic function <img src="ltx/171d5548777.svg" alt="\(\mathcal{X}_A(x)=1\)" style="height: 0.9436em; vertical-align: -0.2231em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/fa4443b4a50.svg" alt="\(\psi(x)\uparrow\)" style="height: 0.9715em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> otherwise.
+note that any computable set is c.e. since if <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is computable, then <img src="ltx/83084c1b93d.svg" alt="\(A=\dom(\psi)\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, where <img src="ltx/85187c305bc.svg" alt="\(\psi(x)=1\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> if the characteristic function <img src="ltx/171d5548777.svg" alt="\(\mathcal{X}_A(x)=1\)" style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/fa4443b4a50.svg" alt="\(\psi(x)\uparrow\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> otherwise.<br />
 </p>
 
 </div>
-<div class="math-block definition" data-before="definition: recursively enumerable" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 recursively enumerable sets)
-" id="orgc09bb04">
+<div class="math-block definition" data-before="definition: recursively enumerable" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 recursively enumerable sets)\\
+" id="org4a174bd">
 <p>
-the set <img src="ltx/424979ab215.svg" alt="\(B \subseteq \nnumset\)" style="height: 0.8010em; vertical-align: -0.1050em; display: inline-block" class="org-latex org-latex-inline" /> is called <i>recursively enumerable</i> if there is a partially computable function <img src="ltx/35e97937108.svg" alt="\(g(x)\)" style="height: 0.9559em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> such that
-<img src="ltx/9516ac986a4.svg" alt="\[ B = \set{x \in \nnumset \given \converges{g(x)}}. \]" style="height: 1.7345em; display: block" class="org-latex org-latex-block" />
+the set <img src="ltx/424979ab215.svg" alt="\(B \subseteq \nnumset\)" style="height: 0.8025em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" /> is called <i>recursively enumerable</i> if there is a partially computable function <img src="ltx/35e97937108.svg" alt="\(g(x)\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> such that<br />
+<img src="ltx/9516ac986a4.svg" alt="\[ B = \set{x \in \nnumset \given \converges{g(x)}}. \]" style="height: 1.9045em; display: block" class="org-latex org-latex-block" /><br />
 </p>
 
 </div>
-<div class="math-block definition" data-before="definition: recursively enumerable set" data-after="(taken from Hartley Rogers, 1987 chapter 5 recursive and recursively enumerable sets)
-" id="org2df7d25">
+<div class="math-block definition" data-before="definition: recursively enumerable set" data-after="(taken from Hartley Rogers, 1987 chapter 5 recursive and recursively enumerable sets)\\
+" id="org1f05143">
 <p>
-<img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is <i>recursively enumerable</i> if either <img src="ltx/bf3359ab9c1.svg" alt="\(A=\emptyset\)" style="height: 0.7942em; vertical-align: -0.0737em; display: inline-block" class="org-latex org-latex-inline" /> or there exists a recursive <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9617em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/90bafc36197.svg" alt="\(A=\range f\)" style="height: 0.9730em; vertical-align: -0.2623em; display: inline-block" class="org-latex org-latex-inline" />.
+<img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is <i>recursively enumerable</i> if either <img src="ltx/bf3359ab9c1.svg" alt="\(A=\emptyset\)" style="height: 0.7873em; vertical-align: -0.0766em; display: inline-block" class="org-latex org-latex-inline" /> or there exists a recursive <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/90bafc36197.svg" alt="\(A=\range f\)" style="height: 0.9735em; vertical-align: -0.2628em; display: inline-block" class="org-latex org-latex-inline" />.<br />
 </p>
 
 </div>
-<div class="math-block theorem" data-before="theorem" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 a universal program theorem 4.9)
-" id="orgc0882e8">
+<div class="math-block theorem" data-before="theorem" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 a universal program theorem 4.9)\\
+" id="org72f9202">
 <p>
-let <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> be a nonempty set. then there is a <a href="/recursive_function.html#def-primitive-recursive">primitive recursive function</a> <img src="ltx/f5270a1a441.svg" alt="\(f(u)\)" style="height: 0.9617em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/eb354041394.svg" alt="\(S=\set{f(n) \given n \in \nnumset}=\set{f(0),f(1),f(2),\dots}\)" style="height: 1.3273em; vertical-align: -0.4118em; display: inline-block" class="org-latex org-latex-inline" />. that is, <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> is the range of <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9617em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" />.
+let <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> be a nonempty set. then there is a <a href="/recursive_function.html#def-primitive-recursive">primitive recursive function</a> <img src="ltx/f5270a1a441.svg" alt="\(f(u)\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/eb354041394.svg" alt="\(S=\set{f(n) \given n \in \nnumset}=\set{f(0),f(1),f(2),\dots}\)" style="height: 1.3018em; vertical-align: -0.3990em; display: inline-block" class="org-latex org-latex-inline" />. that is, <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> is the range of <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />.<br />
 </p>
 
 </div>
-<div class="math-block theorem" data-before="theorem" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 a universal program theorem 4.10)
-" id="org54c05e6">
+<div class="math-block theorem" data-before="theorem" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 a universal program theorem 4.10)\\
+" id="org1879336">
 <p>
-let <img src="ltx/df84604e42e.svg" alt="\(f(x)\)" style="height: 0.9617em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> be a partially computable function and let <img src="ltx/42fb9f89801.svg" alt="\(S=\set{f(x) \given \converges{f(x)}}\)" style="height: 1.5223em; vertical-align: -0.5093em; display: inline-block" class="org-latex org-latex-inline" />. (that is, <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> is the range of <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9617em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" />.) then <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> is r.e.
+let <img src="ltx/df84604e42e.svg" alt="\(f(x)\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> be a partially computable function and let <img src="ltx/42fb9f89801.svg" alt="\(S=\set{f(x) \given \converges{f(x)}}\)" style="height: 1.8624em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />. (that is, <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> is the range of <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />.) then <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> is r.e.<br />
 </p>
 
 </div>
-<div class="math-block theorem" data-before="theorem" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 a universal program theorem 4.11)
-" id="org842b667">
+<div class="math-block theorem" data-before="theorem" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 a universal program theorem 4.11)\\
+" id="org05dc5d5">
 <p>
-suppose that <img src="ltx/d3539a29368.svg" alt="\(S \neq \emptyset\)" style="height: 0.8206em; vertical-align: -0.1001em; display: inline-block" class="org-latex org-latex-inline" />. then the following statements are all equivalent
+suppose that <img src="ltx/d3539a29368.svg" alt="\(S \neq \emptyset\)" style="height: 0.8108em; vertical-align: -0.1001em; display: inline-block" class="org-latex org-latex-inline" />. then the following statements are all equivalent<br />
 </p>
 <ol class="org-ol">
-<li><img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> is r.e.;</li>
-<li><img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> is the range of a <a href="/recursive_function.html#def-mu-recursive-functions">primitive recursive function</a>;</li>
-<li><img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> is the range of a <a href="/recursive_function.html#20240309T114541">recursive function</a>;</li>
-<li><img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> is the range of a <a href="/recursive_function.html#def-recursive-function-soare">partial recursive function</a>.</li>
+<li><img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> is r.e.;<br /></li>
+<li><img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> is the range of a <a href="/recursive_function.html#def-mu-recursive-functions">primitive recursive function</a>;<br /></li>
+<li><img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> is the range of a <a href="/recursive_function.html#20240309T114541">recursive function</a>;<br /></li>
+<li><img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> is the range of a def-recursive-function-soare.<br /></li>
 </ol>
 
 </div>
-<div class="dummy" id="org943f4ea">
+<div class="dummy" id="org74efa8e">
+<div class="math-block theorem" data-before="theorem" data-after="(taken from robert i. soare, 2016 theorem 1.6.4)\\
+" id="org5e007f5">
 <p>
-by quantifier contraction theorem, the projection of a c.e. relation is c.e.
+<img src="ltx/ccdf14eb2b0.svg" alt="\(\compK\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is <a href="/computably_enumerable_set.html#def-comp-enum">c.e.</a>.<br />
 </p>
 
 </div>
-<div class="dummy" id="orgc0b5c02">
+<div class="proof" id="org508e480">
 <p>
-the following sets and relations are c.e.
+<img src="ltx/ccdf14eb2b0.svg" alt="\(\compK\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the domain of the following p.c. function:<br />
+<img src="ltx/ac8a0d475e8.svg" alt="\[ \numedcfunc(x) = \begin{cases} x &amp;amp; \textif \numedcfunc_x(x) \\ \text{undefined} &amp;amp; \text{otherwise} \end{cases}. \]" style="height: 3.1442em; display: block" class="org-latex org-latex-block" /><br />
+</p>
+
+</div>
+
+</div>
+<div class="math-block theorem" data-before="theorem" data-after="(taken from robert i. soare, 2016 theorem 1.6.5)\\
+" id="org0373b2b">
+<p>
+<img src="ltx/ccdf14eb2b0.svg" alt="\(\compK\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is not computable.<br />
+</p>
+
+</div>
+<div class="math-block notation" data-before="notation" data-after="(taken from robert i. soare, 2016 definition 1.6.3)\\
+" id="orga5f0fd1">
+<p>
+let <img src="ltx/cdb4a6cce61.svg" alt="\(\compK \defeq \set{x \given \converges{\numedcfunc_x(x)}} = \set{x \given x \in \compW_x}\)" style="height: 1.8894em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+</p>
+
+</div>
+<div class="dummy" id="orgf94f82b">
+<p>
+by quantifier contraction theorem, the projection of a c.e. relation is c.e.<br />
+</p>
+
+</div>
+<div class="dummy" id="orgf8d165a">
+<p>
+the following sets and relations are c.e.<br />
 </p>
 
 
@@ -108,53 +139,53 @@ the following sets and relations are c.e.
   \range(\varphi_e)=\set{y \given (\exists s)(\exists x)[\varphi_{e,s}(x)=y]},\\
   \graph(\varphi_e)=\set{(x,y) \given (\exists s)[\varphi_{e,s}(x)=y]}.
 \end{gather*}
-" style="height: 8.9982em; vertical-align: -0.5093em; display: inline-block" class="org-latex org-latex-inline" />
+" style="height: 8.0207em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
 
 </div>
-<div class="math-block theorem" data-before="theorem: union theorem" data-after="(taken from robert i. soare, 2016 theorem 2.1.11)
-" id="org524a6b5">
+<div class="math-block theorem" data-before="theorem: union theorem" data-after="(taken from robert i. soare, 2016 theorem 2.1.11)\\
+" id="org9f0ad06">
 <p>
-the c.e. sets are closed under union and intersection uniformly, i.e., there are computable functions <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9617em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7334em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/8941a570e45.svg" alt="\(W_{f(x,y)}=W_x \cup W_y\)" style="height: 1.0271em; vertical-align: -0.3375em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/3afc1e13283.svg" alt="\(W_{g(x,y)}=W_x \cap W_y\)" style="height: 1.0271em; vertical-align: -0.3375em; display: inline-block" class="org-latex org-latex-inline" />.
+the c.e. sets are closed under union and intersection uniformly, i.e., there are computable functions <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7261em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/8941a570e45.svg" alt="\(W_{f(x,y)}=W_x \cup W_y\)" style="height: 1.0494em; vertical-align: -0.3598em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/3afc1e13283.svg" alt="\(W_{g(x,y)}=W_x \cap W_y\)" style="height: 1.0494em; vertical-align: -0.3598em; display: inline-block" class="org-latex org-latex-inline" />.<br />
 </p>
 
 </div>
-<div class="math-block theorem" data-before="theorem: complementation theorem" data-after="(taken from robert i. soare, 2016 theorem 2.1.14)
-" id="org4e861e9">
+<div class="math-block theorem" data-before="theorem: complementation theorem" data-after="(taken from robert i. soare, 2016 theorem 2.1.14)\\
+" id="org5d15d9e">
 <p>
-a set <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is computable iff both <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/a4d64e1e2c9.svg" alt="\(\scomp{A}\)" style="height: 1.0132em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are c.e., i.e. iff <img src="ltx/c65dbedcd65.svg" alt="\(A \in \Delta_1\)" style="height: 0.9142em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" />.
+a set <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is computable iff both <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/a4d64e1e2c9.svg" alt="\(\scomp{A}\)" style="height: 1.0343em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are c.e., i.e. iff <img src="ltx/c65dbedcd65.svg" alt="\(A \in \Delta_1\)" style="height: 0.9078em; vertical-align: -0.1962em; display: inline-block" class="org-latex org-latex-inline" />.<br />
 </p>
 
 <p>
-, (also in Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 recursively enumerable sets theorem 4.4)
-</p>
-
-</div>
-<div class="math-block theorem" data-before="theorem: graph theorem" data-after="(taken from robert i. soare, 2016 theorem 2.1.9)
-" id="org1e6e36f">
-<p>
-a partial function <img src="ltx/052120a2aa8.svg" alt="\(\cfunc\)" style="height: 0.9147em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> is partial computable iff its graph is computably enumerable.
+, (also in Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 recursively enumerable sets theorem 4.4)<br />
 </p>
 
 </div>
-<div class="math-block theorem" data-before="theorem" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 theorem 4.9)
-" id="orgc1ed3bd">
+<div class="math-block theorem" data-before="theorem: graph theorem" data-after="(taken from robert i. soare, 2016 theorem 2.1.9)\\
+" id="orgec4309f">
 <p>
-let <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> be a nonempty r.e. set. then there is a <a href="/recursive_function.html#def-primitive-recursive">primitive recursive function</a> <img src="ltx/f5270a1a441.svg" alt="\(f(u)\)" style="height: 0.9617em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/eb354041394.svg" alt="\(S=\set{f(n) \given n \in \nnumset}=\set{f(0),f(1),f(2),\dots}\)" style="height: 1.3273em; vertical-align: -0.4118em; display: inline-block" class="org-latex org-latex-inline" />. that is, <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7550em; vertical-align: -0.0654em; display: inline-block" class="org-latex org-latex-inline" /> is the range of <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9617em; vertical-align: -0.2511em; display: inline-block" class="org-latex org-latex-inline" />.
+a partial function <img src="ltx/052120a2aa8.svg" alt="\(\cfunc\)" style="height: 0.9225em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> is partial computable iff its graph is computably enumerable.<br />
 </p>
 
 </div>
-<div class="math-block theorem" data-before="theorem: recursive implies recursively enumerable" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 a universal program theorem 4.3)
-" id="orgd7830a5">
+<div class="math-block theorem" data-before="theorem" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 theorem 4.9)\\
+" id="orge924ace">
 <p>
-if <img src="ltx/ba45a4475b9.svg" alt="\(B\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is a recursive set, then <img src="ltx/ba45a4475b9.svg" alt="\(B\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is r.e.
+let <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> be a nonempty r.e. set. then there is a <a href="/recursive_function.html#def-primitive-recursive">primitive recursive function</a> <img src="ltx/f5270a1a441.svg" alt="\(f(u)\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> such that <img src="ltx/eb354041394.svg" alt="\(S=\set{f(n) \given n \in \nnumset}=\set{f(0),f(1),f(2),\dots}\)" style="height: 1.3018em; vertical-align: -0.3990em; display: inline-block" class="org-latex org-latex-inline" />. that is, <img src="ltx/386ddc6ac9e.svg" alt="\(S\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> is the range of <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />.<br />
 </p>
 
 </div>
-<div class="math-block problem" data-before="problem" data-after="" id="org4c32815">
+<div class="math-block theorem" data-before="theorem: recursive implies recursively enumerable" data-after="(taken from Martin Davis, Ron Sigal, Elaine J. Weyuker, 1994 chapter 4.4 a universal program theorem 4.3)\\
+" id="org3691aa2">
 <p>
-is the set of all recursively enumerable sets <img src="ltx/239dfe80966.svg" alt="\(\compRE\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> computably enumerable itself?
+if <img src="ltx/ba45a4475b9.svg" alt="\(B\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is a recursive set, then <img src="ltx/ba45a4475b9.svg" alt="\(B\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is r.e.<br />
+</p>
+
+</div>
+<div class="math-block problem" data-before="problem" data-after="" id="org351ade4">
+<p>
+is the set of all recursively enumerable sets <img src="ltx/239dfe80966.svg" alt="\(\compRE\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> computably enumerable itself?<br />
 </p>
 
 </div>

@@ -22,25 +22,25 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
-</div><h1 class="main-title">dictionary in emacs</h1>
+</div>
 </div>
 <div id="content" class="content">
 <p>
-emacs can lookup words in dictionaries, the simplest usage is through the function <code>dictionary-search</code> and confirming with <code>y</code> when emacs asks you whether to use <code>dict.org</code> (the website), i have this bound as a key:
+emacs can lookup words in dictionaries, the simplest usage is through the function <code>dictionary-search</code> and confirming with <code>y</code> when emacs asks you whether to use <code>dict.org</code> (the website), i have this bound as a key:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(general-define-key <span style="font-weight: bold;">:states</span> '(normal motion) <span style="font-weight: bold;">:keymaps</span> 'override <span style="font-style: italic;">"SPC s a"</span> 'dictionary-search)
 </pre>
 </div>
 <p>
-you can also force it to use <code>dict.org</code> without confirmation:
+you can also force it to use <code>dict.org</code> without confirmation:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> dictionary-server <span style="font-style: italic;">"dict.org"</span>)
 </pre>
 </div>
 <p>
-or if you want to run a local dictionary server, on arch linux you'd need:
+or if you want to run a local dictionary server, on arch linux you'd need:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">sudo pacman -S dictd
