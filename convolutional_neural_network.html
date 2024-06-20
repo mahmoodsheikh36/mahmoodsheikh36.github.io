@@ -25,92 +25,92 @@
 </div>
 </div>
 <div id="content" class="content">
-<div id="outline-container-orgef604db" class="outline-2">
-<h2 id="orgef604db">citations</h2>
-<div class="outline-text-2" id="text-orgef604db">
+<div id="outline-container-org6187f7e" class="outline-2">
+<h2 id="org6187f7e">citations</h2>
+<div class="outline-text-2" id="text-org6187f7e">
 <ul class="org-ul">
-<li>(Peter Norvig, Stuart J. Russell, 2020)<br /></li>
-<li>(Jianxin Wu, 2017)<br /></li>
-<li>(Zhifei Zhang, 2016)<br /></li>
+<li>(Peter Norvig, Stuart J. Russell, 2020)</li>
+<li>(Jianxin Wu, 2017)</li>
+<li>(Zhifei Zhang, 2016)</li>
 </ul>
 <p>
-and countless other resources that helped me form a good understanding of the topics related to conv networks<br />
+and countless other resources that helped me form a good understanding of the topics related to conv networks
 </p>
 </div>
 </div>
-<div id="outline-container-org9c7c016" class="outline-2">
-<h2 id="org9c7c016">motivation</h2>
-<div class="outline-text-2" id="text-org9c7c016">
+<div id="outline-container-org73df2a3" class="outline-2">
+<h2 id="org73df2a3">motivation</h2>
+<div class="outline-text-2" id="text-org73df2a3">
 <p>
-an image cannot be thought of as a simple vector of input pixel values, primarily because <b>adjacency of pixels in an image matters</b>. simple <a href="/feedforward_neural_network.html#20230502T235623">multilayer perceptrons</a> arent suited for images because adjacent neurons in the same layer arent really connected or affected by each other, which isnt the case in images.<br />
+an image cannot be thought of as a simple vector of input pixel values, primarily because <b>adjacency of pixels in an image matters</b>. simple <a href="/feedforward_neural_network.html#20230502T235623">multilayer perceptrons</a> arent suited for images because adjacent neurons in the same layer arent really connected or affected by each other, which isnt the case in images.
 </p>
 
 <p>
-consider an input image with <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> pixels, if the input and the first hidden layer are fully connected, that means we'd have <img src="ltx/4de58bfc8cf.svg" alt="\(n^2\)" style="height: 0.9468em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> weights; for a typical RGB image, thats 9 trillion weights, which is an unreasonable amount of parameters, all the more reason we need to ditch multilayer perceptrons.<br />
+consider an input image with <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> pixels, if the input and the first hidden layer are fully connected, that means we'd have <img src="ltx/4de58bfc8cf.svg" alt="\(n^2\)" style="height: 0.9468em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> weights; for a typical RGB image, thats 9 trillion weights, which is an unreasonable amount of parameters, all the more reason we need to ditch multilayer perceptrons.
 </p>
 
 <p>
-these considerations suggest that we should construct the first hidden layer so that <b>each hidden unit receives input from only a small, local region of the image</b>. this kills two birds with one stone. first, it respects adjacency, at least locally. second, it cuts down the number of weights.<br />
+these considerations suggest that we should construct the first hidden layer so that <b>each hidden unit receives input from only a small, local region of the image</b>. this kills two birds with one stone. first, it respects adjacency, at least locally. second, it cuts down the number of weights.
 </p>
 
 <p>
-so far, so good. but we are missing another important property of images: roughly speaking, anything that is detectable in one small, local region of the image&#x2013;perhaps an eye or a blade of grass&#x2013;would look the same if it appeared in another small, local region of the image. in other words, we expect image data to exhibit approximate <b>spatial invariance</b>, at least at small to moderate scales. we don’t necessarily expect the top halves of photos to look like bottom halves, so there is a scale beyond which spatial invariance no longer holds.<br />
+so far, so good. but we are missing another important property of images: roughly speaking, anything that is detectable in one small, local region of the image&#x2013;perhaps an eye or a blade of grass&#x2013;would look the same if it appeared in another small, local region of the image. in other words, we expect image data to exhibit approximate <b>spatial invariance</b>, at least at small to moderate scales. we don’t necessarily expect the top halves of photos to look like bottom halves, so there is a scale beyond which spatial invariance no longer holds.
 </p>
 
 <p>
-local spatial invariance can be achieved by constraining the <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> weights connecting a local region to a unit in the hidden layer to be the same for each hidden unit. (that is, for hidden units <img src="ltx/75143dbad26.svg" alt="\(i\)" style="height: 0.7290em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9225em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, the weights <img src="ltx/583008d9dea.svg" alt="\(w_{1,j},\dots,w_{l,j}\)" style="height: 0.8199em; vertical-align: -0.3464em; display: inline-block" class="org-latex org-latex-inline" /> are the same as <img src="ltx/583008d9dea.svg" alt="\(w_{1,j},\dots,w_{l,j}\)" style="height: 0.8199em; vertical-align: -0.3464em; display: inline-block" class="org-latex org-latex-inline" />) this makes the hidden units into <b>feature detectors</b> that detect the same feature wherever it appear in the image. typically, we want the first hidden layer to detect many kinds of features, not just one; so for each local image region we might have <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> hidden units with <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> distinct sets of weights. this means that there are <img src="ltx/6ab9d9438e1.svg" alt="\(dl\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> weights in all&#x2013;a number that is not only far smaller than <img src="ltx/4de58bfc8cf.svg" alt="\(n^2\)" style="height: 0.9468em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, but is actually independent of <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, the image size. thus, by injecting some prior knowledge&#x2013;namely, knowledge of adjacency and spatial invariance&#x2013;we can develop models that have far fewer parameters and can learn much more quickly.<br />
+local spatial invariance can be achieved by constraining the <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> weights connecting a local region to a unit in the hidden layer to be the same for each hidden unit. (that is, for hidden units <img src="ltx/75143dbad26.svg" alt="\(i\)" style="height: 0.7290em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9225em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, the weights <img src="ltx/583008d9dea.svg" alt="\(w_{1,j},\dots,w_{l,j}\)" style="height: 0.8199em; vertical-align: -0.3464em; display: inline-block" class="org-latex org-latex-inline" /> are the same as <img src="ltx/583008d9dea.svg" alt="\(w_{1,j},\dots,w_{l,j}\)" style="height: 0.8199em; vertical-align: -0.3464em; display: inline-block" class="org-latex org-latex-inline" />) this makes the hidden units into <b>feature detectors</b> that detect the same feature wherever it appear in the image. typically, we want the first hidden layer to detect many kinds of features, not just one; so for each local image region we might have <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> hidden units with <img src="ltx/26d988bdf33.svg" alt="\(d\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> distinct sets of weights. this means that there are <img src="ltx/6ab9d9438e1.svg" alt="\(dl\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> weights in all&#x2013;a number that is not only far smaller than <img src="ltx/4de58bfc8cf.svg" alt="\(n^2\)" style="height: 0.9468em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, but is actually independent of <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, the image size. thus, by injecting some prior knowledge&#x2013;namely, knowledge of adjacency and spatial invariance&#x2013;we can develop models that have far fewer parameters and can learn much more quickly.
 </p>
 
 <p>
-usually an image is stored in memory as a 2d array (or matrix), each cell containing 3 different values for RGB (red,green,blue), which forms a 3 dimensional array or a tensor of order 3, which means the network needs to accept tensors as inputs.<br />
+usually an image is stored in memory as a 2d array (or matrix), each cell containing 3 different values for RGB (red,green,blue), which forms a 3 dimensional array or a tensor of order 3, which means the network needs to accept tensors as inputs.
 </p>
 </div>
 </div>
-<div id="outline-container-orga2dbb7b" class="outline-2">
-<h2 id="orga2dbb7b">convolutional layers</h2>
-<div class="outline-text-2" id="text-orga2dbb7b">
+<div id="outline-container-org03eaadc" class="outline-2">
+<h2 id="org03eaadc">convolutional layers</h2>
+<div class="outline-text-2" id="text-org03eaadc">
 <p>
-a convolutional neural network is one that contains spatially local connections, at least in the early layers which we call <b>convolutional layers</b>, and has patterns of weights that are replicated across the units in each layer. a pattern of weights that is replicated across multiple local regions is called a <b>kernel</b> which is applied with a convolution.<br />
+a convolutional neural network is one that contains spatially local connections, at least in the early layers which we call <b>convolutional layers</b>, and has patterns of weights that are replicated across the units in each layer. a pattern of weights that is replicated across multiple local regions is called a <b>kernel</b> which is applied with a convolution.
 </p>
 
 <p>
-in practice, multiple kernels are learned at each convolutional layer, suppose the input to the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-th layer is an order 3 tensor with size <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, a kernel would also be an order 3 tensor with size <img src="ltx/0e6e198c0e1.svg" alt="\(D^\ell \times H \times W\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/169d537050d.svg" alt="\(W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/e99a3f90215.svg" alt="\(H\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are the dimensions of the kernel and they differ from <img src="ltx/220e6004dca.svg" alt="\(W^\ell,H^\ell\)" style="height: 1.0752em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, but the depth of both the image and tensor should be equal for the result of the convolution to be of lower dimensionality), assuming <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> kernels are used (in other words, <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> feature maps), the tensor of kernels (or weights) would be an order 4 tensor in <img src="ltx/4dd6e861b5b.svg" alt="\(\mathbb{R}^{K \times D^\ell \times H \times W}\)" style="height: 1.0830em; vertical-align: -0.0546em; display: inline-block" class="org-latex org-latex-inline" />, assuming a stride of 1, the output <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> would be a tensor of the third order and of size <img src="ltx/82dfc6dcbfb.svg" alt="\(K \times (H^\ell-(H-1)) \times (W^\ell-(W-1)))\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> which is composed of <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> feature maps.<br />
+in practice, multiple kernels are learned at each convolutional layer, suppose the input to the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-th layer is an order 3 tensor with size <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, a kernel would also be an order 3 tensor with size <img src="ltx/0e6e198c0e1.svg" alt="\(D^\ell \times H \times W\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/169d537050d.svg" alt="\(W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/e99a3f90215.svg" alt="\(H\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are the dimensions of the kernel and they differ from <img src="ltx/220e6004dca.svg" alt="\(W^\ell,H^\ell\)" style="height: 1.0752em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, but the depth of both the image and tensor should be equal for the result of the convolution to be of lower dimensionality), assuming <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> kernels are used (in other words, <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> feature maps), the tensor of kernels (or weights) would be an order 4 tensor in <img src="ltx/4dd6e861b5b.svg" alt="\(\mathbb{R}^{K \times D^\ell \times H \times W}\)" style="height: 1.0830em; vertical-align: -0.0546em; display: inline-block" class="org-latex org-latex-inline" />, assuming a stride of 1, the output <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> would be a tensor of the third order and of size <img src="ltx/82dfc6dcbfb.svg" alt="\(K \times (H^\ell-(H-1)) \times (W^\ell-(W-1)))\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> which is composed of <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> feature maps.
 </p>
 
-<div class="math-block note" data-before="note" data-after="" id="org8f60b5e">
+<div class="math-block note" data-before="note" data-after="" id="org00b4861">
 <p>
-its important to maintain the order of dimensions as <img src="ltx/5397f5a96a8.svg" alt="\(D \times H \times W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> (depth by height by width), because thats the order i use everywhere.<br />
+its important to maintain the order of dimensions as <img src="ltx/5397f5a96a8.svg" alt="\(D \times H \times W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> (depth by height by width), because thats the order i use everywhere.
 </p>
 
 </div>
 <p>
-<img src="/conv_depth-1.webp" /><br />
-at the first layer, the image is stored as a tensor of order 3 of <b>depth</b> <img src="ltx/7ff5d26162a.svg" alt="\(D^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, each layer of this tensor is basically a matrix we call a <b>feature map</b> or <b>channel</b>, so at each layer, the image is stored as nested layers of feature maps, it might be easier to take the input to the first layer as an example, which can be thought of as a set of 3 feature maps of RGB values.<br />
+<img src="/conv_depth-1.webp" />
+at the first layer, the image is stored as a tensor of order 3 of <b>depth</b> <img src="ltx/7ff5d26162a.svg" alt="\(D^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, each layer of this tensor is basically a matrix we call a <b>feature map</b> or <b>channel</b>, so at each layer, the image is stored as nested layers of feature maps, it might be easier to take the input to the first layer as an example, which can be thought of as a set of 3 feature maps of RGB values.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc156b90" class="outline-2">
-<h2 id="orgc156b90">pooling layers and downsampling</h2>
-<div class="outline-text-2" id="text-orgc156b90">
+<div id="outline-container-orgdac02e7" class="outline-2">
+<h2 id="orgdac02e7">pooling layers and downsampling</h2>
+<div class="outline-text-2" id="text-orgdac02e7">
 <p>
-a pooling layer in a neural network summarizes a set of adjacent units from the preceding pooling layer with a single value. pooling works just like a convolution layer, with a kernel size l and stride <img src="ltx/ac4e24460be.svg" alt="\(s\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, but the operation that is applied is fixed rather than learned.<br />
+a pooling layer in a neural network summarizes a set of adjacent units from the preceding pooling layer with a single value. pooling works just like a convolution layer, with a kernel size l and stride <img src="ltx/ac4e24460be.svg" alt="\(s\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, but the operation that is applied is fixed rather than learned.
 </p>
 
 <p>
-typically, no activation function is associated with the pooling layer. there are two common forms of pooling:<br />
+typically, no activation function is associated with the pooling layer. there are two common forms of pooling:
 </p>
 <ul class="org-ul">
-<li><b>average-pooling</b> computes the average value of its <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> inputs. this is identical to concvolution with a uniform kernel vector <img src="ltx/293c36d0929.svg" alt="\(k=[1/l,\dots,1/l]\)" style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" />. if we set <img src="ltx/421b0e71c3e.svg" alt="\(l=s\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, the effect is to coarsen the resolution of the image&#x2013;to downsample it&#x2013;by a factor of <img src="ltx/ac4e24460be.svg" alt="\(s\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />. an object that occupied, say, <img src="ltx/5684d6908aa.svg" alt="\(10s\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> pixels, would now occupy only 10 pixels after pooling. the same learned classifier that would be able to recognize the object at a size of 10 pixels in the original image would now be able to recognize that object in the pooled image, even if it was too big to recognize in the original image. in other words, average-pooling facilitates <b>multiscale recognition</b>. it also reduces the number of weights required in subsequent layers, leading to lower computational cost and possibly faster learning.<br /></li>
+<li><b>average-pooling</b> computes the average value of its <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> inputs. this is identical to concvolution with a uniform kernel vector <img src="ltx/293c36d0929.svg" alt="\(k=[1/l,\dots,1/l]\)" style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" />. if we set <img src="ltx/421b0e71c3e.svg" alt="\(l=s\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, the effect is to coarsen the resolution of the image&#x2013;to downsample it&#x2013;by a factor of <img src="ltx/ac4e24460be.svg" alt="\(s\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />. an object that occupied, say, <img src="ltx/5684d6908aa.svg" alt="\(10s\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> pixels, would now occupy only 10 pixels after pooling. the same learned classifier that would be able to recognize the object at a size of 10 pixels in the original image would now be able to recognize that object in the pooled image, even if it was too big to recognize in the original image. in other words, average-pooling facilitates <b>multiscale recognition</b>. it also reduces the number of weights required in subsequent layers, leading to lower computational cost and possibly faster learning.</li>
 
-<li><b>max-pooling</b> computes the maximum value of its <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> inputs. it can also be used purely for downsampling, but it has a somewhat different semantics. suppose we applied max-pooling to a layer with the values [5,9,4]: the result would be a 9, indicating that somewhere in the input image there is a darker dot that is detected by the kernel. in other words, max-pooling acts as a kind of logical disjunction, saying that a feature exists somewhere in the unit's receptive field.<br /></li>
+<li><b>max-pooling</b> computes the maximum value of its <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> inputs. it can also be used purely for downsampling, but it has a somewhat different semantics. suppose we applied max-pooling to a layer with the values [5,9,4]: the result would be a 9, indicating that somewhere in the input image there is a darker dot that is detected by the kernel. in other words, max-pooling acts as a kind of logical disjunction, saying that a feature exists somewhere in the unit's receptive field.</li>
 </ul>
 
 <p>
-if the goal is to classify the image into one of <img src="ltx/36077074f59.svg" alt="\(c\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> categories, then the final layer of the network will be a softmax with <img src="ltx/36077074f59.svg" alt="\(c\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> output units. the early layers of the CNN are image-sized, so somewhere in between there must be significant reductions in layer size. convolution layers and pooling layers with stride larger than 1 all serve to reduce the layer size. it's also possible to reduce the layer size simply by having a fully connected layer with fewer units than the preceding layer. CNNs often have one or two such layers preceding the final softmax layer.<br />
+if the goal is to classify the image into one of <img src="ltx/36077074f59.svg" alt="\(c\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> categories, then the final layer of the network will be a softmax with <img src="ltx/36077074f59.svg" alt="\(c\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> output units. the early layers of the CNN are image-sized, so somewhere in between there must be significant reductions in layer size. convolution layers and pooling layers with stride larger than 1 all serve to reduce the layer size. it's also possible to reduce the layer size simply by having a fully connected layer with fewer units than the preceding layer. CNNs often have one or two such layers preceding the final softmax layer.
 </p>
 
 <p>
-let <img src="ltx/fafaf0584e8.svg" alt="\(\brm{x}^\ell \in \mathbb{R}^{H^\ell \times W^\ell \times D^\ell}\)" style="height: 1.0830em; vertical-align: -0.0546em; display: inline-block" class="org-latex org-latex-inline" /> be the input to the <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-th pooling layer, the pooling operation requires no parameters (the matrix of weights is nulled), hence parameter learning is not needed for this layer, let the spatial extent (dimensions) of the pooling be <img src="ltx/18f34684067.svg" alt="\(H \times W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, assume that <img src="ltx/e99a3f90215.svg" alt="\(H\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> divides <img src="ltx/a3cecdc9ebd.svg" alt="\(H^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/169d537050d.svg" alt="\(W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> divides <img src="ltx/bcd024e35fa.svg" alt="\(W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, the output of pooling (<img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> or equivalently <img src="ltx/1032dd73639.svg" alt="\(\brm{x}^{\ell+1}\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />) will be an order 3 tensor of size <img src="ltx/4e3d223ad9f.svg" alt="\(H^{\ell+1} \times W^{\ell+1} \times D^{\ell+1}\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, with<br />
+let <img src="ltx/fafaf0584e8.svg" alt="\(\brm{x}^\ell \in \mathbb{R}^{H^\ell \times W^\ell \times D^\ell}\)" style="height: 1.0830em; vertical-align: -0.0546em; display: inline-block" class="org-latex org-latex-inline" /> be the input to the <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-th pooling layer, the pooling operation requires no parameters (the matrix of weights is nulled), hence parameter learning is not needed for this layer, let the spatial extent (dimensions) of the pooling be <img src="ltx/18f34684067.svg" alt="\(H \times W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, assume that <img src="ltx/e99a3f90215.svg" alt="\(H\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> divides <img src="ltx/a3cecdc9ebd.svg" alt="\(H^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/169d537050d.svg" alt="\(W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> divides <img src="ltx/bcd024e35fa.svg" alt="\(W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, the output of pooling (<img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> or equivalently <img src="ltx/1032dd73639.svg" alt="\(\brm{x}^{\ell+1}\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />) will be an order 3 tensor of size <img src="ltx/4e3d223ad9f.svg" alt="\(H^{\ell+1} \times W^{\ell+1} \times D^{\ell+1}\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, with
 </p>
 
 <div class="equation-container">
@@ -122,7 +122,7 @@ let <img src="ltx/fafaf0584e8.svg" alt="\(\brm{x}^\ell \in \mathbb{R}^{H^\ell \t
 </span>
 </div>
 <p>
-a pooling layer operates upon <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> channel by channel independently. within each channel, the matrix with <img src="ltx/7c7aa8ab38f.svg" alt="\(H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> elements are divided into <img src="ltx/84dc115d8f3.svg" alt="\(H^{\ell+1}\times W^{\ell+1}\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> nonoverlapping subregions, each subregion being <img src="ltx/18f34684067.svg" alt="\(H \times W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> in size. the pooling operator then maps a subregion into a single number.<br />
+a pooling layer operates upon <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> channel by channel independently. within each channel, the matrix with <img src="ltx/7c7aa8ab38f.svg" alt="\(H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> elements are divided into <img src="ltx/84dc115d8f3.svg" alt="\(H^{\ell+1}\times W^{\ell+1}\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> nonoverlapping subregions, each subregion being <img src="ltx/18f34684067.svg" alt="\(H \times W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> in size. the pooling operator then maps a subregion into a single number.
 </p>
 
 
@@ -136,20 +136,20 @@ a pooling layer operates upon <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell
 </span>
 </div>
 <p>
-where <img src="ltx/2e82644e862.svg" alt="\(0 \le i^{\ell+1}&amp;lt;H^{\ell+1},0 \le j^{\ell+1}&amp;lt;W^{\ell+1}\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/3de65954226.svg" alt="\(0 \le d&amp;lt;D^{\ell+1}=D^\ell\)" style="height: 0.9845em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+where <img src="ltx/2e82644e862.svg" alt="\(0 \le i^{\ell+1}&amp;lt;H^{\ell+1},0 \le j^{\ell+1}&amp;lt;W^{\ell+1}\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, and <img src="ltx/3de65954226.svg" alt="\(0 \le d&amp;lt;D^{\ell+1}=D^\ell\)" style="height: 0.9845em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-since pooling layers have no weights they arent directly connected to their preceding layer, so during backpropagation, we cant directly tell what subregion of the previous layer each pixel in <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> corresponds to, but we can reverse the pooling operation to "decode" the values from <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> back to <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. assuming a max-pooling layer, we need a triplet <img src="ltx/a56bb50c82d.svg" alt="\((i^\ell,j^\ell,d^\ell)\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> to pinpoint one element in the input <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and another triplet <img src="ltx/b1d80b8b29e.svg" alt="\((i^{\ell+1},j^{\ell+1},d^{\ell+1})\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> to locate one element in <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />. assuming a max-pooling layer (process is the same for average-pooling), the pooling output <img src="ltx/f1409aa1926.svg" alt="\(y_{i^{\ell+1},j^{\ell+1},d^{\ell+1}}\)" style="height: 0.8978em; vertical-align: -0.4242em; display: inline-block" class="org-latex org-latex-inline" /> comes from <img src="ltx/acbd752ef74.svg" alt="\(x^\ell_{i^\ell,j^\ell,d^\ell}\)" style="height: 1.5270em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />, iff the following conditions are met:<br />
+since pooling layers have no weights they arent directly connected to their preceding layer, so during backpropagation, we cant directly tell what subregion of the previous layer each pixel in <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> corresponds to, but we can reverse the pooling operation to "decode" the values from <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> back to <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. assuming a max-pooling layer, we need a triplet <img src="ltx/a56bb50c82d.svg" alt="\((i^\ell,j^\ell,d^\ell)\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> to pinpoint one element in the input <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and another triplet <img src="ltx/b1d80b8b29e.svg" alt="\((i^{\ell+1},j^{\ell+1},d^{\ell+1})\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> to locate one element in <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />. assuming a max-pooling layer (process is the same for average-pooling), the pooling output <img src="ltx/f1409aa1926.svg" alt="\(y_{i^{\ell+1},j^{\ell+1},d^{\ell+1}}\)" style="height: 0.8978em; vertical-align: -0.4242em; display: inline-block" class="org-latex org-latex-inline" /> comes from <img src="ltx/acbd752ef74.svg" alt="\(x^\ell_{i^\ell,j^\ell,d^\ell}\)" style="height: 1.5270em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline" />, iff the following conditions are met:
 </p>
 <ul class="org-ul">
-<li>they are in the same channel,<br /></li>
-<li>the <img src="ltx/4c137bddf31.svg" alt="\((i^\ell,j^\ell)\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />-th spatial entry belongs to the <img src="ltx/e11e8921c96.svg" alt="\((i^{\ell+1},j^{\ell+1})\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />-th subregion,<br /></li>
-<li>the <img src="ltx/4c137bddf31.svg" alt="\((i^\ell,j^\ell)\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />-th spatial entry is the largest one in that subregion.<br /></li>
+<li>they are in the same channel,</li>
+<li>the <img src="ltx/4c137bddf31.svg" alt="\((i^\ell,j^\ell)\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />-th spatial entry belongs to the <img src="ltx/e11e8921c96.svg" alt="\((i^{\ell+1},j^{\ell+1})\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />-th subregion,</li>
+<li>the <img src="ltx/4c137bddf31.svg" alt="\((i^\ell,j^\ell)\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />-th spatial entry is the largest one in that subregion.</li>
 </ul>
 
 <p>
-translating these conditions into equations, we get:<br />
+translating these conditions into equations, we get:
 </p>
 
 <div class="equation-container">
@@ -164,55 +164,55 @@ translating these conditions into equations, we get:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org11cd0fa" class="outline-2">
-<h2 id="org11cd0fa">flatten layer</h2>
-<div class="outline-text-2" id="text-org11cd0fa">
+<div id="outline-container-orgb6d33a8" class="outline-2">
+<h2 id="orgb6d33a8">flatten layer</h2>
+<div class="outline-text-2" id="text-orgb6d33a8">
 <p>
-a layer that takes a tensor and vectorizes or <b>flattens</b> it, turning it into a 1d vector, it doesnt need any parameters.<br />
+a layer that takes a tensor and vectorizes or <b>flattens</b> it, turning it into a 1d vector, it doesnt need any parameters.
 </p>
 </div>
 </div>
-<div id="outline-container-orgae866db" class="outline-2">
-<h2 id="orgae866db">fully connected convolutional layers</h2>
-<div class="outline-text-2" id="text-orgae866db">
+<div id="outline-container-org74fcc41" class="outline-2">
+<h2 id="org74fcc41">fully connected convolutional layers</h2>
+<div class="outline-text-2" id="text-org74fcc41">
 <p>
-suppose the input of a layer <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> has size <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />. if we use convolution kernels whose size is <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, then <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> such kernels form an order 4 tensor in <img src="ltx/6ab215f1073.svg" alt="\(K^\ell \times D^\ell \times H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />. the output would be <img src="ltx/980737144ff.svg" alt="\(\brm{y} \in \mathbb{R}^{K^\ell}\)" style="height: 1.2785em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />, which is why these layers are sometimes used as flatten layers.<br />
+suppose the input of a layer <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> has size <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />. if we use convolution kernels whose size is <img src="ltx/0a8dc4fd435.svg" alt="\(D^\ell \times H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, then <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> such kernels form an order 4 tensor in <img src="ltx/6ab215f1073.svg" alt="\(K^\ell \times D^\ell \times H^\ell \times W^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />. the output would be <img src="ltx/980737144ff.svg" alt="\(\brm{y} \in \mathbb{R}^{K^\ell}\)" style="height: 1.2785em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />, which is why these layers are sometimes used as flatten layers.
 </p>
 
 <p>
-it is obvious that to compute any element in <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />, we need to use all elements in the input <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. hence, this layer is a fully connected layer, but can be implemented as a convolution layer. hence, we do not need to derive learning rules for a fully connected layer separately.<br />
+it is obvious that to compute any element in <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />, we need to use all elements in the input <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />. hence, this layer is a fully connected layer, but can be implemented as a convolution layer. hence, we do not need to derive learning rules for a fully connected layer separately.
 </p>
 
 <p>
-if the data has already been flattened in a preceding layer, then the input size would be <img src="ltx/c162792d8b3.svg" alt="\(\brm{x}^\ell \in \mathbb{R}^{K^{\ell-1}}\)" style="height: 1.0830em; vertical-align: -0.0546em; display: inline-block" class="org-latex org-latex-inline" />, we use <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> kernels of size <img src="ltx/dcfe5a80c1a.svg" alt="\(K^{\ell-1}\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, which form a 2d matrix we can call <img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/8fb5d98d5d2.svg" alt="\(K^\ell \times K^{\ell-1}\)" style="height: 0.9414em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" />. the convolution <img src="ltx/0a07dd4989f.svg" alt="\(M * \brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, is exactly the same as the matrix multiplication <img src="ltx/e1484f98ee6.svg" alt="\(M_{K \times K^{\ell-1}} \times {{\brm{x}^\ell}^{T}}_{K^{\ell-1} \times 1}\)" style="height: 1.3561em; vertical-align: -0.2769em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> multiplied by the transpose of the vector <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />), which results in a matrix of size <img src="ltx/563add95724.svg" alt="\(K \times 1\)" style="height: 0.7643em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" />, again meaning <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> is just a vector of size <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/980737144ff.svg" alt="\(\brm{y} \in \mathbb{R}^{K^\ell}\)" style="height: 1.2785em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+if the data has already been flattened in a preceding layer, then the input size would be <img src="ltx/c162792d8b3.svg" alt="\(\brm{x}^\ell \in \mathbb{R}^{K^{\ell-1}}\)" style="height: 1.0830em; vertical-align: -0.0546em; display: inline-block" class="org-latex org-latex-inline" />, we use <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> kernels of size <img src="ltx/dcfe5a80c1a.svg" alt="\(K^{\ell-1}\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, which form a 2d matrix we can call <img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/8fb5d98d5d2.svg" alt="\(K^\ell \times K^{\ell-1}\)" style="height: 0.9414em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" />. the convolution <img src="ltx/0a07dd4989f.svg" alt="\(M * \brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, is exactly the same as the matrix multiplication <img src="ltx/e1484f98ee6.svg" alt="\(M_{K \times K^{\ell-1}} \times {{\brm{x}^\ell}^{T}}_{K^{\ell-1} \times 1}\)" style="height: 1.3561em; vertical-align: -0.2769em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/034f93bb15c.svg" alt="\(M\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> multiplied by the transpose of the vector <img src="ltx/2b6767ffe58.svg" alt="\(\brm{x}^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />), which results in a matrix of size <img src="ltx/563add95724.svg" alt="\(K \times 1\)" style="height: 0.7643em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" />, again meaning <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> is just a vector of size <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/980737144ff.svg" alt="\(\brm{y} \in \mathbb{R}^{K^\ell}\)" style="height: 1.2785em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-because the convolution operation in this layer is equal to a matrix multiplication, the fully connected layers here behave in the same manner as in simple <a href="/feedforward_neural_network.html#20230502T235623">multilayer perceptron</a>s.<br />
+because the convolution operation in this layer is equal to a matrix multiplication, the fully connected layers here behave in the same manner as in simple <a href="/feedforward_neural_network.html#20230502T235623">multilayer perceptron</a>s.
 </p>
 
 <p>
-notice that here <img src="ltx/dcfe5a80c1a.svg" alt="\(K^{\ell-1}\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> also equals the number of units in the <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-th layer.<br />
+notice that here <img src="ltx/dcfe5a80c1a.svg" alt="\(K^{\ell-1}\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> also equals the number of units in the <img src="ltx/47601606065.svg" alt="\(l\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-th layer.
 </p>
 </div>
 </div>
-<div id="outline-container-orga150d00" class="outline-2">
-<h2 id="orga150d00">full example</h2>
-<div class="outline-text-2" id="text-orga150d00">
+<div id="outline-container-org9bffd2c" class="outline-2">
+<h2 id="org9bffd2c">full example</h2>
+<div class="outline-text-2" id="text-org9bffd2c">
 <p>
-consider the following network:<br />
-<img src="/net.png" /><br />
-let <img src="ltx/b073672666f.svg" alt="\(K^\ell_k\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> denote the <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th kernel of the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer whose dimensions are denoted by <img src="ltx/c237ff988e6.svg" alt="\(D_K^\ell \times H_K^\ell \times W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> (depth,height and width of the kernel tensor, respectively, although depth is irrelevant here), where <img src="ltx/4efba86feef.svg" alt="\(1 \le k \le t^\ell\)" style="height: 0.9845em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" />, such that <img src="ltx/67128169bb2.svg" alt="\(t^\ell\)" style="height: 0.9468em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> is the number of kernels in the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer, let <img src="ltx/a3499ad44f6.svg" alt="\(B^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> denote the tensor of weights of layer <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, let <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> denote the input to the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer, let <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> denote the output of the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer, let <img src="ltx/812facdf96a.svg" alt="\(S^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> denote the output before the activation function. (im using a different notation than in the image but it should be obvious which is which.)<br />
-the parameters are:<br />
+consider the following network:
+<img src="/net.png" />
+let <img src="ltx/b073672666f.svg" alt="\(K^\ell_k\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> denote the <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th kernel of the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer whose dimensions are denoted by <img src="ltx/c237ff988e6.svg" alt="\(D_K^\ell \times H_K^\ell \times W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> (depth,height and width of the kernel tensor, respectively, although depth is irrelevant here), where <img src="ltx/4efba86feef.svg" alt="\(1 \le k \le t^\ell\)" style="height: 0.9845em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" />, such that <img src="ltx/67128169bb2.svg" alt="\(t^\ell\)" style="height: 0.9468em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> is the number of kernels in the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer, let <img src="ltx/a3499ad44f6.svg" alt="\(B^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> denote the tensor of weights of layer <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, let <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> denote the input to the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer, let <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> denote the output of the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer, let <img src="ltx/812facdf96a.svg" alt="\(S^\ell\)" style="height: 0.9551em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> denote the output before the activation function. (im using a different notation than in the image but it should be obvious which is which.)
+the parameters are:
 </p>
 <ul class="org-ul">
-<li><img src="ltx/038c33d9d0e.svg" alt="\(C1\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9b18bab86c2.svg" alt="\(\ell=2\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/81ec8cf1136.svg" alt="\(K_k^2\)" style="height: 1.2890em; vertical-align: -0.4012em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/ec7845f3663.svg" alt="\(5 \times 5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/983b3cfad69.svg" alt="\(B^2\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of size 6, <img src="ltx/7a00b05c236.svg" alt="\(1 \le k \le 6\)" style="height: 0.8206em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" />,<br /></li>
-<li><img src="ltx/c6401ff7b8d.svg" alt="\(C2\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/835d37ab954.svg" alt="\(K_i^4\)" style="height: 1.2593em; vertical-align: -0.3715em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/eced4e149b9.svg" alt="\(6 \times 5 \times 5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/ebcc324e96b.svg" alt="\(B^4\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of size 2, <img src="ltx/bffbc300641.svg" alt="\(1 \le k \le 12\)" style="height: 0.8074em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" /> (size of the kernel is different from in the original figure),<br /></li>
-<li><img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/169d537050d.svg" alt="\(W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/68855ca2715.svg" alt="\(10 \times 192\)" style="height: 0.7814em; vertical-align: -0.0707em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/7dcba71cebd.svg" alt="\(B^6\)" style="height: 0.9467em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/1d67c55a9fc.svg" alt="\(10 \times 1\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />.<br /></li>
+<li><img src="ltx/038c33d9d0e.svg" alt="\(C1\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9b18bab86c2.svg" alt="\(\ell=2\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/81ec8cf1136.svg" alt="\(K_k^2\)" style="height: 1.2890em; vertical-align: -0.4012em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/ec7845f3663.svg" alt="\(5 \times 5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/983b3cfad69.svg" alt="\(B^2\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of size 6, <img src="ltx/7a00b05c236.svg" alt="\(1 \le k \le 6\)" style="height: 0.8206em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" />,</li>
+<li><img src="ltx/c6401ff7b8d.svg" alt="\(C2\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/835d37ab954.svg" alt="\(K_i^4\)" style="height: 1.2593em; vertical-align: -0.3715em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/eced4e149b9.svg" alt="\(6 \times 5 \times 5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/ebcc324e96b.svg" alt="\(B^4\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of size 2, <img src="ltx/bffbc300641.svg" alt="\(1 \le k \le 12\)" style="height: 0.8074em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" /> (size of the kernel is different from in the original figure),</li>
+<li><img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/169d537050d.svg" alt="\(W\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/68855ca2715.svg" alt="\(10 \times 192\)" style="height: 0.7814em; vertical-align: -0.0707em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/7dcba71cebd.svg" alt="\(B^6\)" style="height: 0.9467em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> of size <img src="ltx/1d67c55a9fc.svg" alt="\(10 \times 1\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />.</li>
 </ul>
 
 <p>
-<b>feedforwarding for convolutional layer <img src="ltx/038c33d9d0e.svg" alt="\(C1\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9b18bab86c2.svg" alt="\(\ell=2\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
+<b>feedforwarding for convolutional layer <img src="ltx/038c33d9d0e.svg" alt="\(C1\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9b18bab86c2.svg" alt="\(\ell=2\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /></b>:
 </p>
 
 <div class="equation-container">
@@ -225,21 +225,21 @@ the parameters are:<br />
 </span>
 </div>
 <p>
-where <img src="ltx/9b18bab86c2.svg" alt="\(\ell=2\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> (i think its better to keep general notation than write 2 explicitly), <img src="ltx/7a00b05c236.svg" alt="\(1 \le k \le 6\)" style="height: 0.8206em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/dcae3363226.svg" alt="\(1 \le y \le H_I^\ell-H_K^\ell+1,1 \le x \le W_I^\ell-W_K^\ell+1\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, taken from this convolution example.<br />
+where <img src="ltx/9b18bab86c2.svg" alt="\(\ell=2\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> (i think its better to keep general notation than write 2 explicitly), <img src="ltx/7a00b05c236.svg" alt="\(1 \le k \le 6\)" style="height: 0.8206em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/dcae3363226.svg" alt="\(1 \le y \le H_I^\ell-H_K^\ell+1,1 \le x \le W_I^\ell-W_K^\ell+1\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, taken from this convolution example.
 </p>
 
 <p>
-here <img src="ltx/be9b477522b.svg" alt="\(H_I^\ell-H_K^\ell+1=24,W_I^\ell-W_K^\ell+1=24\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, the dimensions of the output <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are <img src="ltx/cf462443df7.svg" alt="\(6 \times 24 \times 24\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+here <img src="ltx/be9b477522b.svg" alt="\(H_I^\ell-H_K^\ell+1=24,W_I^\ell-W_K^\ell+1=24\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, the dimensions of the output <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are <img src="ltx/cf462443df7.svg" alt="\(6 \times 24 \times 24\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-<b>feedforwarding for average pooling layer <img src="ltx/006f6dfedc5.svg" alt="\(S1\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/433fad91a66.svg" alt="\(\ell=3\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
-<img src="ltx/38647a16d5f.svg" alt="\[ \hat Y^\ell_k[i,j] = \frac{1}{W_K^\ell H_K^\ell}\sum_{x=iW_K^\ell}^{(i+1)W_K^\ell}\sum_{y=jH_K^\ell}^{(j+1)H_K^\ell} I_k^\ell[x,y] \]" style="height: 3.9279em; display: block" class="org-latex org-latex-block" /><br />
-in words, we iterate through each block of size <img src="ltx/5cba2853bd4.svg" alt="\(W_K^\ell H_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> (in each kernel) and pool it into a single pixel, here the size of the pooling kernels is <img src="ltx/b8f75ffadf8.svg" alt="\(2 \times 2\)" style="height: 0.7643em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" /> and the result is of dimensions <img src="ltx/5ab1e99e5d5.svg" alt="\(6 \times 12 \times 12\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+<b>feedforwarding for average pooling layer <img src="ltx/006f6dfedc5.svg" alt="\(S1\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/433fad91a66.svg" alt="\(\ell=3\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:
+<img src="ltx/38647a16d5f.svg" alt="\[ \hat Y^\ell_k[i,j] = \frac{1}{W_K^\ell H_K^\ell}\sum_{x=iW_K^\ell}^{(i+1)W_K^\ell}\sum_{y=jH_K^\ell}^{(j+1)H_K^\ell} I_k^\ell[x,y] \]" style="height: 3.9279em; display: block" class="org-latex org-latex-block" />
+in words, we iterate through each block of size <img src="ltx/5cba2853bd4.svg" alt="\(W_K^\ell H_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> (in each kernel) and pool it into a single pixel, here the size of the pooling kernels is <img src="ltx/b8f75ffadf8.svg" alt="\(2 \times 2\)" style="height: 0.7643em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" /> and the result is of dimensions <img src="ltx/5ab1e99e5d5.svg" alt="\(6 \times 12 \times 12\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-<b>feedforwarding for convolutional layer <img src="ltx/c6401ff7b8d.svg" alt="\(C2\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
+<b>feedforwarding for convolutional layer <img src="ltx/c6401ff7b8d.svg" alt="\(C2\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /></b>:
 </p>
 
 <div class="equation-container">
@@ -252,33 +252,33 @@ in words, we iterate through each block of size <img src="ltx/5cba2853bd4.svg" a
 </span>
 </div>
 <p>
-where <img src="ltx/3cab1abf345.svg" alt="\(1 \le i \le 8,1 \le j \le 8,1 \le k \le 12\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, output is of dimensions <img src="ltx/96920831c17.svg" alt="\(12 \times 8 \times 8\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />, we use <img src="ltx/4f913c4fb75.svg" alt="\(z+1\)" style="height: 0.8392em; vertical-align: -0.1286em; display: inline-block" class="org-latex org-latex-inline" /> for the depth of the image because in truth what we're finding is <img src="ltx/98d3352e959.svg" alt="\(\hat Y_K^\ell[1,i,j]\)" style="height: 1.2960em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> which is equal to <img src="ltx/986b9fe7d0f.svg" alt="\(\hat Y_k^\ell[i,j]\)" style="height: 1.3167em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> but we omit an index of <img src="ltx/5bfbda57fb1.svg" alt="\(1\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because its "implied" when its to the left.<br />
+where <img src="ltx/3cab1abf345.svg" alt="\(1 \le i \le 8,1 \le j \le 8,1 \le k \le 12\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, output is of dimensions <img src="ltx/96920831c17.svg" alt="\(12 \times 8 \times 8\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />, we use <img src="ltx/4f913c4fb75.svg" alt="\(z+1\)" style="height: 0.8392em; vertical-align: -0.1286em; display: inline-block" class="org-latex org-latex-inline" /> for the depth of the image because in truth what we're finding is <img src="ltx/98d3352e959.svg" alt="\(\hat Y_K^\ell[1,i,j]\)" style="height: 1.2960em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> which is equal to <img src="ltx/986b9fe7d0f.svg" alt="\(\hat Y_k^\ell[i,j]\)" style="height: 1.3167em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> but we omit an index of <img src="ltx/5bfbda57fb1.svg" alt="\(1\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because its "implied" when its to the left.
 </p>
 
 <div class="math-block note" data-before="note" data-after="" id="not-convnet-I-drop-index">
 <p>
-we use <img src="ltx/8936b949f78.svg" alt="\(z\)" style="height: 0.6021em; vertical-align: -0.1286em; display: inline-block" class="org-latex org-latex-inline" /> as the index to <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because originally it would've been some variable index, but the result of the convolution is a tensor of order 2 (because the operands of the convolution have the same depth), but originally its meant ot be of order 3 (operands are of order 3), so we are "redimensioning" the result implicitly, if we were to use a variable, e.g. <img src="ltx/4ee248e100b.svg" alt="\(\hat Y^\ell_k[r,i,j]\)" style="height: 1.3167em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/828c235cd1e.svg" alt="\(r\)" style="height: 0.5227em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> would turn out to equal just 0, because substituting <img src="ltx/23b40e22b21.svg" alt="\(r&amp;gt;0\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> would result in an "overflow" in the summation, as when <img src="ltx/a0091b77739.svg" alt="\(z=D_k^\ell-1\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" />, we get <img src="ltx/bca86947e15.svg" alt="\(I^\ell[z+r,y+i,x+j]=\vec{v}[D_K^\ell,y+i,x+j]\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, which isnt defined (max index is <img src="ltx/89f07241c68.svg" alt="\(D_K^\ell-1\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> not <img src="ltx/bb617fcc118.svg" alt="\(D_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />), therefore <img src="ltx/cda7f808f4b.svg" alt="\(Y_k^\ell[1,i,j]\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> isnt defined and <img src="ltx/96ec14e3bd4.svg" alt="\(r=0\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> in all cases, so we might aswell just write 0 or not consider it at all since adding 0 wouldnt affect a number.<br />
+we use <img src="ltx/8936b949f78.svg" alt="\(z\)" style="height: 0.6021em; vertical-align: -0.1286em; display: inline-block" class="org-latex org-latex-inline" /> as the index to <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because originally it would've been some variable index, but the result of the convolution is a tensor of order 2 (because the operands of the convolution have the same depth), but originally its meant ot be of order 3 (operands are of order 3), so we are "redimensioning" the result implicitly, if we were to use a variable, e.g. <img src="ltx/4ee248e100b.svg" alt="\(\hat Y^\ell_k[r,i,j]\)" style="height: 1.3167em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" />, <img src="ltx/828c235cd1e.svg" alt="\(r\)" style="height: 0.5227em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> would turn out to equal just 0, because substituting <img src="ltx/23b40e22b21.svg" alt="\(r&amp;gt;0\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> would result in an "overflow" in the summation, as when <img src="ltx/a0091b77739.svg" alt="\(z=D_k^\ell-1\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" />, we get <img src="ltx/bca86947e15.svg" alt="\(I^\ell[z+r,y+i,x+j]=\vec{v}[D_K^\ell,y+i,x+j]\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, which isnt defined (max index is <img src="ltx/89f07241c68.svg" alt="\(D_K^\ell-1\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> not <img src="ltx/bb617fcc118.svg" alt="\(D_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />), therefore <img src="ltx/cda7f808f4b.svg" alt="\(Y_k^\ell[1,i,j]\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> isnt defined and <img src="ltx/96ec14e3bd4.svg" alt="\(r=0\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> in all cases, so we might aswell just write 0 or not consider it at all since adding 0 wouldnt affect a number.
 </p>
 
 </div>
 <p>
-<b>feedforwarding for average pooling layer <img src="ltx/5a288c45447.svg" alt="\(S2\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/8aa0a364c64.svg" alt="\(\ell=5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
-<img src="ltx/38647a16d5f.svg" alt="\[ \hat Y^\ell_k[i,j] = \frac{1}{W_K^\ell H_K^\ell}\sum_{x=iW_K^\ell}^{(i+1)W_K^\ell}\sum_{y=jH_K^\ell}^{(j+1)H_K^\ell} I_k^\ell[x,y] \]" style="height: 3.9279em; display: block" class="org-latex org-latex-block" /><br />
-here the size of the kernels is <img src="ltx/b8f75ffadf8.svg" alt="\(2 \times 2\)" style="height: 0.7643em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" /> aswell, the output is of dimensions <img src="ltx/4e53a900de6.svg" alt="\(12 \times 4 \times 4\)" style="height: 0.7643em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+<b>feedforwarding for average pooling layer <img src="ltx/5a288c45447.svg" alt="\(S2\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/8aa0a364c64.svg" alt="\(\ell=5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:
+<img src="ltx/38647a16d5f.svg" alt="\[ \hat Y^\ell_k[i,j] = \frac{1}{W_K^\ell H_K^\ell}\sum_{x=iW_K^\ell}^{(i+1)W_K^\ell}\sum_{y=jH_K^\ell}^{(j+1)H_K^\ell} I_k^\ell[x,y] \]" style="height: 3.9279em; display: block" class="org-latex org-latex-block" />
+here the size of the kernels is <img src="ltx/b8f75ffadf8.svg" alt="\(2 \times 2\)" style="height: 0.7643em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" /> aswell, the output is of dimensions <img src="ltx/4e53a900de6.svg" alt="\(12 \times 4 \times 4\)" style="height: 0.7643em; vertical-align: -0.0536em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-<b>vectorization before fully connected layer <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b> (may have its own layer):<br />
-<img src="ltx/c94067837de.svg" alt="\[ \vec{v} = (I^\ell[0,0,0], I^\ell[0,0,1], \dots, I^\ell[0,0,W_I^\ell], I^\ell[0,1,0], I^\ell[0,1,1], \dots, I^\ell[D_I^\ell,H_I^\ell,W_I^\ell])^\intercal \]" style="height: 1.5620em; display: block" class="org-latex org-latex-block" /><br />
-the output is of size <img src="ltx/6f3be01f5c7.svg" alt="\(12 \times 4 \times 4 = 192\)" style="height: 0.7814em; vertical-align: -0.0707em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+<b>vectorization before fully connected layer <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b> (may have its own layer):
+<img src="ltx/c94067837de.svg" alt="\[ \vec{v} = (I^\ell[0,0,0], I^\ell[0,0,1], \dots, I^\ell[0,0,W_I^\ell], I^\ell[0,1,0], I^\ell[0,1,1], \dots, I^\ell[D_I^\ell,H_I^\ell,W_I^\ell])^\intercal \]" style="height: 1.5620em; display: block" class="org-latex org-latex-block" />
+the output is of size <img src="ltx/6f3be01f5c7.svg" alt="\(12 \times 4 \times 4 = 192\)" style="height: 0.7814em; vertical-align: -0.0707em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-<b>feedforwarding for fully connected layer <img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
+<b>feedforwarding for fully connected layer <img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:
 </p>
-<div class="math-block note" data-before="note" data-after="" id="org814a053">
+<div class="math-block note" data-before="note" data-after="" id="org47d28d9">
 <p>
-in the image, the output layer and the last fully connected layer are treated as separate layers, this makes little sense because that way the fully connected layers would have no parameters, here we treat them as a single fully connected layer.<br />
+in the image, the output layer and the last fully connected layer are treated as separate layers, this makes little sense because that way the fully connected layers would have no parameters, here we treat them as a single fully connected layer.
 </p>
 
 </div>
@@ -293,11 +293,11 @@ in the image, the output layer and the last fully connected layer are treated as
 </span>
 </div>
 <p>
-see <a href="/convolutional_neural_network.html#not-convnet-I-drop-index">not-convnet-I-drop-index</a> as to why i wrote <img src="ltx/537f11ab0b5.svg" alt="\(x+1\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+see <a href="/convolutional_neural_network.html#not-convnet-I-drop-index">not-convnet-I-drop-index</a> as to why i wrote <img src="ltx/537f11ab0b5.svg" alt="\(x+1\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-let <img src="ltx/0f34001b910.svg" alt="\(flip(A)\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> denote the flipping of a matrix <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> over both axes so that the indicies may be reversed, i.e. <img src="ltx/ba174e06b04.svg" alt="\(flip(A[i,j])=A[-i,-j]\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> (a negative index implies an index that is subtracted from the size of the dimension along with the value 1). we can show that this layer resembles the usual fully connected layer from simple multilayer perceptrons by turning the convolution into matrix multiplication:<br />
+let <img src="ltx/0f34001b910.svg" alt="\(flip(A)\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> denote the flipping of a matrix <img src="ltx/948ea5ce847.svg" alt="\(A\)" style="height: 0.7599em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> over both axes so that the indicies may be reversed, i.e. <img src="ltx/ba174e06b04.svg" alt="\(flip(A[i,j])=A[-i,-j]\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> (a negative index implies an index that is subtracted from the size of the dimension along with the value 1). we can show that this layer resembles the usual fully connected layer from simple multilayer perceptrons by turning the convolution into matrix multiplication:
 </p>
 
 <div class="equation-container">
@@ -312,16 +312,16 @@ let <img src="ltx/0f34001b910.svg" alt="\(flip(A)\)" style="height: 0.9951em; ve
 </span>
 </div>
 <p>
-where <img src="ltx/8d0678d7172.svg" alt="\(1 \le k &amp;lt; 10\)" style="height: 0.8074em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" /> (layer contains 10 fully connected kernels), the output is of size 10, here <img src="ltx/e6f017ef33b.svg" alt="\(W_I^\ell=192\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> and the size of each kernel is <img src="ltx/f476faa4ee6.svg" alt="\(192\)" style="height: 0.7814em; vertical-align: -0.0707em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/5dea3cd467b.svg" alt="\(W_K^\ell=192,H_K^\ell=1,D_K^\ell=1\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />).<br />
+where <img src="ltx/8d0678d7172.svg" alt="\(1 \le k &amp;lt; 10\)" style="height: 0.8074em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" /> (layer contains 10 fully connected kernels), the output is of size 10, here <img src="ltx/e6f017ef33b.svg" alt="\(W_I^\ell=192\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> and the size of each kernel is <img src="ltx/f476faa4ee6.svg" alt="\(192\)" style="height: 0.7814em; vertical-align: -0.0707em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/5dea3cd467b.svg" alt="\(W_K^\ell=192,H_K^\ell=1,D_K^\ell=1\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />).
 </p>
 
 <p>
-in vector notation, we write (notice that <img src="ltx/d34e0d460b9.svg" alt="\(flip(K^\ell)\vec{v}\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> results in a vector):<br />
-<img src="ltx/0f75e95be38.svg" alt="\[ \hat Y^\ell = \phi(flip(K^\ell)\vec{v}+B^\ell) \]" style="height: 1.4777em; display: block" class="org-latex org-latex-block" /><br />
-at this point we'd have arrived at the output layer and the output of the neural network would be <img src="ltx/6b5b0400ca9.svg" alt="\(\hat Y^6\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or simply <img src="ltx/3e5a3aab091.svg" alt="\(\hat Y\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (the output of the last fully connected layer which itself is the output layer), assuming the quadratic loss function, and assuming the desired output is <img src="ltx/3521a172cfa.svg" alt="\(\vec{y}\)" style="height: 1.0436em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, the loss function would be defined as:<br />
-<img src="ltx/be96930d9d7.svg" alt="\[ L = \frac{1}{2}||\hat Y-\vec{y}||^2 = \frac{1}{2}\sum_{i=1}^{10} (\hat Y[i]-\vec{y}[i])^2 \]" style="height: 3.2250em; display: block" class="org-latex org-latex-block" /><br />
-now we can begin to backpropagate the error, <img src="ltx/2a3a43ce29b.svg" alt="\(\Delta\)" style="height: 0.7608em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> followed by an object denotes the error at that specific object or point:<br />
-<b>backpropagation for fully connected layer <img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
+in vector notation, we write (notice that <img src="ltx/d34e0d460b9.svg" alt="\(flip(K^\ell)\vec{v}\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> results in a vector):
+<img src="ltx/0f75e95be38.svg" alt="\[ \hat Y^\ell = \phi(flip(K^\ell)\vec{v}+B^\ell) \]" style="height: 1.4777em; display: block" class="org-latex org-latex-block" />
+at this point we'd have arrived at the output layer and the output of the neural network would be <img src="ltx/6b5b0400ca9.svg" alt="\(\hat Y^6\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or simply <img src="ltx/3e5a3aab091.svg" alt="\(\hat Y\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (the output of the last fully connected layer which itself is the output layer), assuming the quadratic loss function, and assuming the desired output is <img src="ltx/3521a172cfa.svg" alt="\(\vec{y}\)" style="height: 1.0436em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, the loss function would be defined as:
+<img src="ltx/be96930d9d7.svg" alt="\[ L = \frac{1}{2}||\hat Y-\vec{y}||^2 = \frac{1}{2}\sum_{i=1}^{10} (\hat Y[i]-\vec{y}[i])^2 \]" style="height: 3.2250em; display: block" class="org-latex org-latex-block" />
+now we can begin to backpropagate the error, <img src="ltx/2a3a43ce29b.svg" alt="\(\Delta\)" style="height: 0.7608em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> followed by an object denotes the error at that specific object or point:
+<b>backpropagation for fully connected layer <img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/9a1f8cab6c0.svg" alt="\(\ell=6\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:
 </p>
 
 <div class="equation-container">
@@ -337,11 +337,11 @@ now we can begin to backpropagate the error, <img src="ltx/2a3a43ce29b.svg" alt=
 </span>
 </div>
 <p>
-where <img src="ltx/5c3cc6a3570.svg" alt="\(1 \le i &amp;lt; W_K^\ell, 1 \le k &amp;lt; t^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, here <img src="ltx/35cb3ce00d8.svg" alt="\(W_K^\ell=120,t^\ell=10\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, notice that <img src="ltx/cce4d084236.svg" alt="\(\vec{v}[k]=\phi(S^\ell[k])\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+where <img src="ltx/5c3cc6a3570.svg" alt="\(1 \le i &amp;lt; W_K^\ell, 1 \le k &amp;lt; t^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, here <img src="ltx/35cb3ce00d8.svg" alt="\(W_K^\ell=120,t^\ell=10\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, notice that <img src="ltx/cce4d084236.svg" alt="\(\vec{v}[k]=\phi(S^\ell[k])\)" style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-let <img src="ltx/08a0c748cd5.svg" alt="\(\Delta S^\ell[k]=(\hat Y^\ell[k]-\vec{y}[k])\phi'(S[k])\)" style="height: 1.1626em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, whose size would be 10, then:<br />
+let <img src="ltx/08a0c748cd5.svg" alt="\(\Delta S^\ell[k]=(\hat Y^\ell[k]-\vec{y}[k])\phi'(S[k])\)" style="height: 1.1626em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, whose size would be 10, then:
 </p>
 
 <div class="equation-container">
@@ -356,16 +356,16 @@ let <img src="ltx/08a0c748cd5.svg" alt="\(\Delta S^\ell[k]=(\hat Y^\ell[k]-\vec{
 </span>
 </div>
 <p>
-we arrived at an equation in matrix notation which is convenient (<img src="ltx/2773c784c21.svg" alt="\(\vec{v}\)" style="height: 0.8584em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> was a column vector initially).<br />
+we arrived at an equation in matrix notation which is convenient (<img src="ltx/2773c784c21.svg" alt="\(\vec{v}\)" style="height: 0.8584em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> was a column vector initially).
 </p>
 
 <p>
-<b>backpropagation through flatten layer before <img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
-recall that during feedforwarding, the flatten layer turned the tensor of feature maps which is of the third order into a single vector, the deltas defined by the layer during backpropagation is a vector aswell, which we need to turn them into a tensor of the third order that resembles the delta at each entry in the tensor of the feature maps.<br />
+<b>backpropagation through flatten layer before <img src="ltx/7b6c29215a8.svg" alt="\(FC\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /></b>:
+recall that during feedforwarding, the flatten layer turned the tensor of feature maps which is of the third order into a single vector, the deltas defined by the layer during backpropagation is a vector aswell, which we need to turn them into a tensor of the third order that resembles the delta at each entry in the tensor of the feature maps.
 </p>
 
 <p>
-first we find the delta at each entry in the vector:<br />
+first we find the delta at each entry in the vector:
 </p>
 
 <div class="equation-container">
@@ -384,28 +384,28 @@ first we find the delta at each entry in the vector:<br />
 </span>
 </div>
 <p>
-notice that <img src="ltx/e6f017ef33b.svg" alt="\(W_I^\ell=192\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+notice that <img src="ltx/e6f017ef33b.svg" alt="\(W_I^\ell=192\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-we have <img src="ltx/28b580164f5.svg" alt="\(0 \le j &amp;lt; 192\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> because 192 is the total size of the tensor received from <img src="ltx/8aa0a364c64.svg" alt="\(\ell=5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> during feedforwarding.<br />
+we have <img src="ltx/28b580164f5.svg" alt="\(0 \le j &amp;lt; 192\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> because 192 is the total size of the tensor received from <img src="ltx/8aa0a364c64.svg" alt="\(\ell=5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /> during feedforwarding.
 </p>
 
 <p>
-now the vector of deltas <img src="ltx/062823e74db.svg" alt="\(\Delta \vec{v}\)" style="height: 0.8584em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> needs to be reshaped into a tensor of the third order so that we may then send it to the next layer in the process, <img src="ltx/8aa0a364c64.svg" alt="\(\ell=5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />, which is a pooling layer.<br />
+now the vector of deltas <img src="ltx/062823e74db.svg" alt="\(\Delta \vec{v}\)" style="height: 0.8584em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> needs to be reshaped into a tensor of the third order so that we may then send it to the next layer in the process, <img src="ltx/8aa0a364c64.svg" alt="\(\ell=5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />, which is a pooling layer.
 </p>
 
 <p>
-the reshaping should be the exact inverse of the row-major vectorization we did during feedforwarding:<br />
-<img src="ltx/85988f6ae99.svg" alt="\[ \Delta I^{\ell}\left[\floor*{(i+1)/D_I^\ell H_I^\ell W_I^\ell},\floor*{((i+1)\bmod D_I^\ell H_I^\ell W_I^\ell)/H_I^\ell W_I^\ell},(i+1) \bmod H_I^\ell W_I^\ell\right] = \Delta\vec{v}[i] \]" style="height: 2.5685em; display: block" class="org-latex org-latex-block" /><br />
-such that <img src="ltx/c390c692576.svg" alt="\(0 \le i &amp;lt; W_I^\ell H_I^\ell D_I^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, here <img src="ltx/230afab02fe.svg" alt="\(W_I^\ell H_I^\ell D_I^\ell=192\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, note that <img src="ltx/7e15187c5a8.svg" alt="\(\Delta\hat Y^{\ell-1}=\Delta I^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+the reshaping should be the exact inverse of the row-major vectorization we did during feedforwarding:
+<img src="ltx/85988f6ae99.svg" alt="\[ \Delta I^{\ell}\left[\floor*{(i+1)/D_I^\ell H_I^\ell W_I^\ell},\floor*{((i+1)\bmod D_I^\ell H_I^\ell W_I^\ell)/H_I^\ell W_I^\ell},(i+1) \bmod H_I^\ell W_I^\ell\right] = \Delta\vec{v}[i] \]" style="height: 2.5685em; display: block" class="org-latex org-latex-block" />
+such that <img src="ltx/c390c692576.svg" alt="\(0 \le i &amp;lt; W_I^\ell H_I^\ell D_I^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, here <img src="ltx/230afab02fe.svg" alt="\(W_I^\ell H_I^\ell D_I^\ell=192\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, note that <img src="ltx/7e15187c5a8.svg" alt="\(\Delta\hat Y^{\ell-1}=\Delta I^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-<b>backpropagation through average pooling layer <img src="ltx/8aa0a364c64.svg" alt="\(\ell=5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
-recall that this layer downscaled the input given to it during feedforwarding from its preceding layer <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, so during backpropagation, when it responds to the next layer which is the one it got the initial message from during feedforwarding it needs to scale its message back up to the dimensions of the input it got from that layer, that "message" would be the deltas:<br />
-<img src="ltx/b91cab48cb0.svg" alt="\[ \Delta \hat Y^{\ell-1}[k,i,j] = \frac{1}{H_K^\ell W_K^\ell}\Delta \hat Y^\ell\left[k,\ceil*{(i+1)/H_K^\ell},\ceil*{(j+1)/W_K^\ell}\right] \quad 0 \le i &amp;lt; H_I^\ell,0 \le j &amp;lt; W_I^\ell,0 \le k &amp;lt; t^\ell \]" style="height: 2.7498em; display: block" class="org-latex org-latex-block" /><br />
-<b>backpropagation through convolutional layer <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /></b>:<br />
+<b>backpropagation through average pooling layer <img src="ltx/8aa0a364c64.svg" alt="\(\ell=5\)" style="height: 0.7868em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" /></b>:
+recall that this layer downscaled the input given to it during feedforwarding from its preceding layer <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, so during backpropagation, when it responds to the next layer which is the one it got the initial message from during feedforwarding it needs to scale its message back up to the dimensions of the input it got from that layer, that "message" would be the deltas:
+<img src="ltx/b91cab48cb0.svg" alt="\[ \Delta \hat Y^{\ell-1}[k,i,j] = \frac{1}{H_K^\ell W_K^\ell}\Delta \hat Y^\ell\left[k,\ceil*{(i+1)/H_K^\ell},\ceil*{(j+1)/W_K^\ell}\right] \quad 0 \le i &amp;lt; H_I^\ell,0 \le j &amp;lt; W_I^\ell,0 \le k &amp;lt; t^\ell \]" style="height: 2.7498em; display: block" class="org-latex org-latex-block" />
+<b>backpropagation through convolutional layer <img src="ltx/b4236f99a1b.svg" alt="\(\ell=4\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /></b>:
 </p>
 
 <div id="eq-convnet-weight-delta" class="equation-container">
@@ -420,19 +420,19 @@ recall that this layer downscaled the input given to it during feedforwarding fr
 </span>
 </div>
 <p>
-where <img src="ltx/13fcfeef6f8.svg" alt="\(0 \le k &amp;lt; t^\ell,0 \le r &amp;lt; D_K^\ell,0 \le u &amp;lt; H_K^\ell,0 \le v &amp;lt; W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+where <img src="ltx/13fcfeef6f8.svg" alt="\(0 \le k &amp;lt; t^\ell,0 \le r &amp;lt; D_K^\ell,0 \le u &amp;lt; H_K^\ell,0 \le v &amp;lt; W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-see <a href="/convolutional_neural_network.html#not-convnet-I-indicies">not-convnet-I-indicies</a> about the indicies of <img src="ltx/85e0fef3463.svg" alt="\(I\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (the note talks about the indicies of <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> but the same fact applies to <img src="ltx/85e0fef3463.svg" alt="\(I\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> here).<br />
+see <a href="/convolutional_neural_network.html#not-convnet-I-indicies">not-convnet-I-indicies</a> about the indicies of <img src="ltx/85e0fef3463.svg" alt="\(I\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (the note talks about the indicies of <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> but the same fact applies to <img src="ltx/85e0fef3463.svg" alt="\(I\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> here).
 </p>
 
 <p>
-let <img src="ltx/0bced0a5490.svg" alt="\(\Delta S_{k}^\ell\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> be the error after (after in terms of backpropagation, before in terms of feedforwarding) the activation function:<br />
-<img src="ltx/5873a37d41f.svg" alt="\[ \Delta S_k^\ell[i,j] = \Delta \hat Y_k^\ell[i,j]\phi'(S_k^\ell[i,j]) \]" style="height: 1.5828em; display: block" class="org-latex org-latex-block" /><br />
-then:<br />
-<img src="ltx/f530f1818d2.svg" alt="\[ \Delta K^\ell_k[r,u,v] = \sum_{i=0}^{H_I^{\ell+1}-1} \sum_{j=0}^{W_I^{\ell+1}-1} \Delta S_k^\ell[i,j]I^\ell[D_K^\ell-r-1,H_K^\ell-u-1+i,W_K^\ell-v-1+j] \]" style="height: 3.6804em; display: block" class="org-latex org-latex-block" /><br />
-now for the bias:<br />
+let <img src="ltx/0bced0a5490.svg" alt="\(\Delta S_{k}^\ell\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> be the error after (after in terms of backpropagation, before in terms of feedforwarding) the activation function:
+<img src="ltx/5873a37d41f.svg" alt="\[ \Delta S_k^\ell[i,j] = \Delta \hat Y_k^\ell[i,j]\phi'(S_k^\ell[i,j]) \]" style="height: 1.5828em; display: block" class="org-latex org-latex-block" />
+then:
+<img src="ltx/f530f1818d2.svg" alt="\[ \Delta K^\ell_k[r,u,v] = \sum_{i=0}^{H_I^{\ell+1}-1} \sum_{j=0}^{W_I^{\ell+1}-1} \Delta S_k^\ell[i,j]I^\ell[D_K^\ell-r-1,H_K^\ell-u-1+i,W_K^\ell-v-1+j] \]" style="height: 3.6804em; display: block" class="org-latex org-latex-block" />
+now for the bias:
 </p>
 
 <div class="equation-container">
@@ -448,7 +448,7 @@ now for the bias:<br />
 </span>
 </div>
 <p>
-now we find the deltas at <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/b03b10592cf.svg" alt="\(\hat Y^{\ell-1}\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, because thats what the next layer in backpropagation, <img src="ltx/433fad91a66.svg" alt="\(\ell=3\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />, needs.<br />
+now we find the deltas at <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="ltx/b03b10592cf.svg" alt="\(\hat Y^{\ell-1}\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, because thats what the next layer in backpropagation, <img src="ltx/433fad91a66.svg" alt="\(\ell=3\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />, needs.
 </p>
 
 
@@ -465,69 +465,69 @@ now we find the deltas at <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style=
 </span>
 </div>
 <p>
-such that <img src="ltx/40c9b32b4d3.svg" alt="\(0 \le r &amp;lt; D_I^\ell, 0 \le u &amp;lt; H_I^\ell, 0 \le v &amp;lt; W_I^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />. here, <img src="ltx/28a60749fb9.svg" alt="\(\Delta I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are the deltas that need to be passed onto the next layer <img src="ltx/433fad91a66.svg" alt="\(\ell=3\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+such that <img src="ltx/40c9b32b4d3.svg" alt="\(0 \le r &amp;lt; D_I^\ell, 0 \le u &amp;lt; H_I^\ell, 0 \le v &amp;lt; W_I^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />. here, <img src="ltx/28a60749fb9.svg" alt="\(\Delta I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are the deltas that need to be passed onto the next layer <img src="ltx/433fad91a66.svg" alt="\(\ell=3\)" style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <div class="math-block note" data-before="note" data-after="" id="not-convnet-I-indicies">
 <p>
-its important to notice how in eq-convnet-1 the indicies <img src="ltx/0a5175bb9ea.svg" alt="\(r,u,v\)" style="height: 0.6609em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, which are indexing <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are each subtracted from the dimensions of the kernels and then the indicies <img src="ltx/c3e1fabbfba.svg" alt="\(0,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> which are indexing <img src="ltx/0d3ca1204ce.svg" alt="\(S^\ell_k\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> are added element-wise aswell, this is important as its a property that is later exploited in the code for backpropagation.<br />
+its important to notice how in <a href="/convolutional_neural_network.html#eq-convnet-1">eq-convnet-1</a> the indicies <img src="ltx/0a5175bb9ea.svg" alt="\(r,u,v\)" style="height: 0.6609em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, which are indexing <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are each subtracted from the dimensions of the kernels and then the indicies <img src="ltx/c3e1fabbfba.svg" alt="\(0,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> which are indexing <img src="ltx/0d3ca1204ce.svg" alt="\(S^\ell_k\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" /> are added element-wise aswell, this is important as its a property that is later exploited in the code for backpropagation.
 </p>
 
 <p>
-i should also note that the process of backpropagation in a convolutional layer, just like the feedforwarding process, resembles that of a convolutional one, i have yet to find out how to show that this follows from these math formulas.<br />
+i should also note that the process of backpropagation in a convolutional layer, just like the feedforwarding process, resembles that of a convolutional one, i have yet to find out how to show that this follows from these math formulas.
 </p>
 
 <p>
-furthermore, here the expression eq-convnet-1 would be correct only when the indicies of <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are in the correct range, so not less than 0 and not bigger than the size of the dimension theyre in, i think this happens because a single <img src="ltx/841e037f94b.svg" alt="\(\Delta I[,,,]\)" style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> doesnt affect all entries in the output but we're differentiating with respect to all entries in the output, perhaps in the future i'll improve upon these formulas.<br />
+furthermore, here the expression <a href="/convolutional_neural_network.html#eq-convnet-1">eq-convnet-1</a> would be correct only when the indicies of <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are in the correct range, so not less than 0 and not bigger than the size of the dimension theyre in, i think this happens because a single <img src="ltx/841e037f94b.svg" alt="\(\Delta I[,,,]\)" style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> doesnt affect all entries in the output but we're differentiating with respect to all entries in the output, perhaps in the future i'll improve upon these formulas.
 </p>
 
 </div>
 </div>
 </div>
-<div id="outline-container-org91075cd" class="outline-2">
-<h2 id="org91075cd">architecture</h2>
-<div class="outline-text-2" id="text-org91075cd">
+<div id="outline-container-org332963e" class="outline-2">
+<h2 id="org332963e">architecture</h2>
+<div class="outline-text-2" id="text-org332963e">
 </div>
-<div id="outline-container-org541a105" class="outline-3">
-<h3 id="org541a105">LeNet-5</h3>
-<div class="outline-text-3" id="text-org541a105">
+<div id="outline-container-orgd21be7c" class="outline-3">
+<h3 id="orgd21be7c">LeNet-5</h3>
+<div class="outline-text-3" id="text-orgd21be7c">
 <p>
-the <b>lenet-5</b> one of the earliest and most basic CNN architecture.<br />
-</p>
-
-<p>
-it consists of 7 layers. the first layer consists of an input image with dimensions of 32x32. it is convolved with 6 filters of size 5x5 resulting in dimension of 28x28x6. the second layer is a pooling operation with a filter of size 2×2 and stride of 2. hence the resulting image dimension will be 14x14x6.<br />
+the <b>lenet-5</b> one of the earliest and most basic CNN architecture.
 </p>
 
 <p>
-similarly, the third layer also involves in a convolution operation with 16 filters of size 5x5 followed by a fourth pooling layer with similar filter size of 2x2 and stride of 2. thus, the resulting image dimension will be reduced to 5x5x16.<br />
+it consists of 7 layers. the first layer consists of an input image with dimensions of 32x32. it is convolved with 6 filters of size 5x5 resulting in dimension of 28x28x6. the second layer is a pooling operation with a filter of size 2×2 and stride of 2. hence the resulting image dimension will be 14x14x6.
 </p>
 
 <p>
-once the image dimension is reduced, the fifth layer is a fully connected convolutional layer with 120 filters each of size 5×5. in this layer, each of the 120 units in this layer will be connected to the 400 (5x5x16) units from the previous layers. the sixth layer is also a fully connected layer with 84 units.<br />
+similarly, the third layer also involves in a convolution operation with 16 filters of size 5x5 followed by a fourth pooling layer with similar filter size of 2x2 and stride of 2. thus, the resulting image dimension will be reduced to 5x5x16.
 </p>
 
 <p>
-the final seventh layer will be a softmax output layer with <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> possible classes depending upon the number of classes in the dataset.<br />
+once the image dimension is reduced, the fifth layer is a fully connected convolutional layer with 120 filters each of size 5×5. in this layer, each of the 120 units in this layer will be connected to the 400 (5x5x16) units from the previous layers. the sixth layer is also a fully connected layer with 84 units.
 </p>
 
-
-<div id="org290e49b" class="figure">
-<p><img src="/lenet5.png" /><br />
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-org83947db" class="outline-2">
-<h2 id="org83947db">common lisp implementation</h2>
-<div class="outline-text-2" id="text-org83947db">
-</div>
-<div id="outline-container-org3542c47" class="outline-3">
-<h3 id="org3542c47">an abstract structure for networks</h3>
-<div class="outline-text-3" id="text-org3542c47">
 <p>
-after having studied cnn's, i realied i need a more flexible data structure for networks than what i had in <a href="/feedforward_neural_network.html#20230502T235623">simple feedforward networks</a>, because with simple perceptrons i only used one type of layer, with cnn's we need to be able to build networks with arbitrary layers, so i dropped my previous progress and started over:<br />
+the final seventh layer will be a softmax output layer with <img src="ltx/8beccc902ab.svg" alt="\(n\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> possible classes depending upon the number of classes in the dataset.
+</p>
+
+
+<div id="org3eba7fd" class="figure">
+<p><img src="/lenet5.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org73e2816" class="outline-2">
+<h2 id="org73e2816">common lisp implementation</h2>
+<div class="outline-text-2" id="text-org73e2816">
+</div>
+<div id="outline-container-orgd50944a" class="outline-3">
+<h3 id="orgd50944a">an abstract structure for networks</h3>
+<div class="outline-text-3" id="text-orgd50944a">
+<p>
+after having studied cnn's, i realied i need a more flexible data structure for networks than what i had in <a href="/feedforward_neural_network.html#20230502T235623">simple feedforward networks</a>, because with simple perceptrons i only used one type of layer, with cnn's we need to be able to build networks with arbitrary layers, so i dropped my previous progress and started over:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-network">(<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">feedforward</span> (layer x)
@@ -572,37 +572,37 @@ after having studied cnn's, i realied i need a more flexible data structure for 
 </div>
 </div>
 </div>
-<div id="outline-container-orgeb78413" class="outline-3">
-<h3 id="orgeb78413">convolutional layer</h3>
-<div class="outline-text-3" id="text-orgeb78413">
+<div id="outline-container-org5044cc0" class="outline-3">
+<h3 id="org5044cc0">convolutional layer</h3>
+<div class="outline-text-3" id="text-org5044cc0">
 <p>
-we use the relu by default to reduce the risk of a vanishing gradient.<br />
+we use the relu by default to reduce the risk of a vanishing gradient.
 </p>
 
-<div class="math-block note" data-before="note" data-after="" id="orgb92912b">
+<div class="math-block note" data-before="note" data-after="" id="org4f80268">
 <p>
-i should note that later on, during the writing of <code>propbackward</code> for convolutional layers, i realized that i needed some more data from <code>feedforward</code> than im currently returning, so <code>feedforward</code> functions needed some slight modifications which also meant i needed to rewrite the <code>network-feedforward</code> function.<br />
-</p>
-
-<p>
-i needed more data like the unactivated output tensor of a layer, not just the final output of the layer, and the input to the layer.<br />
+i should note that later on, during the writing of <code>propbackward</code> for convolutional layers, i realized that i needed some more data from <code>feedforward</code> than im currently returning, so <code>feedforward</code> functions needed some slight modifications which also meant i needed to rewrite the <code>network-feedforward</code> function.
 </p>
 
 <p>
-it also happened to me during the previous implementation in <a href="/feedforward_neural_network.html#20230502T235623">feedforward neural network</a>, but it seems i didnt learn from my first encounter with that brickwall, lol.<br />
+i needed more data like the unactivated output tensor of a layer, not just the final output of the layer, and the input to the layer.
+</p>
+
+<p>
+it also happened to me during the previous implementation in <a href="/feedforward_neural_network.html#20230502T235623">feedforward neural network</a>, but it seems i didnt learn from my first encounter with that brickwall, lol.
 </p>
 
 </div>
 <p>
-but which weights should a <code>layer</code> object store? the weights that go into it, i.e. the layers that come out of the previous layer and land on <i>this</i> layer? or should it store the weights that are represented by the connections that come out of it and reach for the next layer in the network? at first it seemed the latter made more sense, but thats not the case, lets reconsider the equation for a neuron's activation <a href="/feedforward_neural_network.html#eq-neuron">eq-neuron</a>, a neurons value is determined by the weights that go into it from the previous layer, not the weights going out of it into the next one, and since a layer is composed of units, and each unit depends on the weights coming into it, it already makes sense that we store the weights that go into the layer in its object, not the weights coming out of it, plus, if we were to use the second approach a layer would have to store the activation function of the next layer not the activation function of itself, which makes no sense.<br />
+but which weights should a <code>layer</code> object store? the weights that go into it, i.e. the layers that come out of the previous layer and land on <i>this</i> layer? or should it store the weights that are represented by the connections that come out of it and reach for the next layer in the network? at first it seemed the latter made more sense, but thats not the case, lets reconsider the equation for a neuron's activation <a href="/feedforward_neural_network.html#eq-neuron">eq-neuron</a>, a neurons value is determined by the weights that go into it from the previous layer, not the weights going out of it into the next one, and since a layer is composed of units, and each unit depends on the weights coming into it, it already makes sense that we store the weights that go into the layer in its object, not the weights coming out of it, plus, if we were to use the second approach a layer would have to store the activation function of the next layer not the activation function of itself, which makes no sense.
 </p>
 
 <p>
-i also went through the source code of <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/keras/engine/base_layer.py">tensorflow</a> and it seems this is what they're doing aswell. this will be the assumption in my code.<br />
+i also went through the source code of <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/keras/engine/base_layer.py">tensorflow</a> and it seems this is what they're doing aswell. this will be the assumption in my code.
 </p>
 
 <p>
-time to implement different types of layers, starting with convolutional layer:<br />
+time to implement different types of layers, starting with convolutional layer:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-convolutional-layer">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">convolutional-layer</span> (layer)
@@ -696,11 +696,11 @@ time to implement different types of layers, starting with convolutional layer:<
 </div>
 </div>
 </div>
-<div id="outline-container-org16e76d3" class="outline-3">
-<h3 id="org16e76d3">pooling layer</h3>
-<div class="outline-text-3" id="text-org16e76d3">
+<div id="outline-container-org1404592" class="outline-3">
+<h3 id="org1404592">pooling layer</h3>
+<div class="outline-text-3" id="text-org1404592">
 <p>
-pooling layer:<br />
+pooling layer:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-pooling-layer">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">pooling-layer</span> (layer)
@@ -751,11 +751,11 @@ pooling layer:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org835761b" class="outline-3">
-<h3 id="org835761b">flatten layer</h3>
-<div class="outline-text-3" id="text-org835761b">
+<div id="outline-container-org7058c65" class="outline-3">
+<h3 id="org7058c65">flatten layer</h3>
+<div class="outline-text-3" id="text-org7058c65">
 <p>
-a flatten layer, which is used to reduce dimensionality to 1d (to vectorize the input tensor), and doesnt have any parameters:<br />
+a flatten layer, which is used to reduce dimensionality to 1d (to vectorize the input tensor), and doesnt have any parameters:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-flatten-layer">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">flatten-layer</span> (layer) ())
@@ -768,11 +768,11 @@ a flatten layer, which is used to reduce dimensionality to 1d (to vectorize the 
 </div>
 </div>
 </div>
-<div id="outline-container-org684612d" class="outline-3">
-<h3 id="org684612d">dense layer</h3>
-<div class="outline-text-3" id="text-org684612d">
+<div id="outline-container-orgb87cfd0" class="outline-3">
+<h3 id="orgb87cfd0">dense layer</h3>
+<div class="outline-text-3" id="text-orgb87cfd0">
 <p>
-a dense layer, or a fully connected layer:<br />
+a dense layer, or a fully connected layer:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-dense-layer">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">dense-layer</span> (convolutional-layer) ())
@@ -798,11 +798,11 @@ a dense layer, or a fully connected layer:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org652db9c" class="outline-3">
-<h3 id="org652db9c">test code</h3>
-<div class="outline-text-3" id="text-org652db9c">
+<div id="outline-container-orgad00407" class="outline-3">
+<h3 id="orgad00407">test code</h3>
+<div class="outline-text-3" id="text-orgad00407">
 <p>
-feedforwarding test in convolutional layers, with an (randomly generated) input image of depth 3 (3 channels), width 6 and height 6 (in the code columns and rows, respectively), like in <a href="/convolutional_neural_network.html#fig-convlayer">fig-convlayer</a>:<br />
+feedforwarding test in convolutional layers, with an (randomly generated) input image of depth 3 (3 channels), width 6 and height 6 (in the code columns and rows, respectively), like in <a href="/convolutional_neural_network.html#fig-convlayer">fig-convlayer</a>:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((l (make-convolutional-layer <span style="font-weight: bold;">:dims</span> '(5 3 4 3)
@@ -832,11 +832,11 @@ feedforwarding test in convolutional layers, with an (randomly generated) input 
 
 
 <p>
-the code outputs a tensor of size 2x4x4, as expected and as seen in the figure.<br />
+the code outputs a tensor of size 2x4x4, as expected and as seen in the figure.
 </p>
 
 <p>
-feedforwarding test in pooling layers:<br />
+feedforwarding test in pooling layers:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((l (make-pooling-layer <span style="font-weight: bold;">:rows</span> 16 <span style="font-weight: bold;">:cols</span> 16)))
@@ -852,7 +852,7 @@ feedforwarding test in pooling layers:<br />
 
 
 <p>
-feedforwarding test in dense layers:<br />
+feedforwarding test in dense layers:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((l (make-dense-layer <span style="font-weight: bold;">:num-units</span> 20 <span style="font-weight: bold;">:prev-layer-num-units</span> 30
@@ -875,7 +875,7 @@ feedforwarding test in dense layers:<br />
 
 
 <p>
-feedforwarding test in flatten layers:<br />
+feedforwarding test in flatten layers:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(feedforward (make-flatten-layer) (random-tensor '(2 3 3)))
@@ -891,7 +891,7 @@ feedforwarding test in flatten layers:<br />
 
 
 <p>
-now that we have implemented the necessary layers, we can start building convolutional networks, we start with <a href="/convolutional_neural_network.html#20230520T175032">LeNet-5</a>:<br />
+now that we have implemented the necessary layers, we can start building convolutional networks, we start with <a href="/convolutional_neural_network.html#20230520T175032">LeNet-5</a>:
 </p>
 
 <div class="org-src-container">
@@ -921,7 +921,7 @@ now that we have implemented the necessary layers, we can start building convolu
 </pre>
 </div>
 <p>
-we can perform a simple feedforwarding test with a randomly permuted "image":<br />
+we can perform a simple feedforwarding test with a randomly permuted "image":
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(car (network-feedforward *lenet5* (random-tensor '(1 32 32))))
@@ -936,16 +936,16 @@ we can perform a simple feedforwarding test with a randomly permuted "image":<br
 
 
 <p>
-we got 10 values out, as expected (the size of the output layer is 10)<br />
+we got 10 values out, as expected (the size of the output layer is 10)
 </p>
 </div>
 </div>
-<div id="outline-container-org5e4bf42" class="outline-3">
-<h3 id="org5e4bf42">convolutional layer backprop</h3>
-<div class="outline-text-3" id="text-org5e4bf42">
+<div id="outline-container-orgac6e25b" class="outline-3">
+<h3 id="orgac6e25b">convolutional layer backprop</h3>
+<div class="outline-text-3" id="text-orgac6e25b">
 <p>
-its time to implement backpropagation!<br />
-a table of the variables in the code and their counterparts in the math formulas:<br />
+its time to implement backpropagation!
+a table of the variables in the code and their counterparts in the math formulas:
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1182,7 +1182,7 @@ a table of the variables in the code and their counterparts in the math formulas
 </pre>
 </div>
 <p>
-now we need to write the propbackward function for networks so we can conduct simple propbackward tests before continuing<br />
+now we need to write the propbackward function for networks so we can conduct simple propbackward tests before continuing
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-network-backprop">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-propbackward</span> ((n network) network-x network-y feedforward-out)
@@ -1205,23 +1205,23 @@ now we need to write the propbackward function for networks so we can conduct si
 </pre>
 </div>
 <p>
-before implementing backpropagation for the pooling layer we need to think about how each type of pooling layer should handle the backpropagatted gradients, if we consider the average pooling layer, all pixels in a "pooled portion" of the image have an equal effect on the loss function, but in a max pooling layer, only the pixel with the maximum value has an effect and the rest of the pixels have no effect whatsoever because they dont affect the values of the pixels in succeeding layers.<br />
+before implementing backpropagation for the pooling layer we need to think about how each type of pooling layer should handle the backpropagatted gradients, if we consider the average pooling layer, all pixels in a "pooled portion" of the image have an equal effect on the loss function, but in a max pooling layer, only the pixel with the maximum value has an effect and the rest of the pixels have no effect whatsoever because they dont affect the values of the pixels in succeeding layers.
 </p>
 
 <p>
-since i already had different functions for pooling, <code>average-pooling-function</code> and <code>max-pooling-function</code>, i decided to implement the concept of "unpooling function", which take a slice of the input image, one that corresponds to a pixel in the output of the layer and was reduced into that pixel during feedforward, it also takes the gradient at that pixel and splits it into a 2d layer of "subgradients" that corresponds to the slice of the image, for example in the "average unpooling function" <code>average-unpooling-function</code>, the gradient of the pixel in the output is divided equally to a grid of <img src="ltx/3e7c70e1258.svg" alt="\(H_K^\ell \times W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> which is then added to the tensor of deltas at the same position the 2d grid of pixels have in the input image tensor, this tensor of deltas is to be forwarded later to the next layer during backprop.<br />
+since i already had different functions for pooling, <code>average-pooling-function</code> and <code>max-pooling-function</code>, i decided to implement the concept of "unpooling function", which take a slice of the input image, one that corresponds to a pixel in the output of the layer and was reduced into that pixel during feedforward, it also takes the gradient at that pixel and splits it into a 2d layer of "subgradients" that corresponds to the slice of the image, for example in the "average unpooling function" <code>average-unpooling-function</code>, the gradient of the pixel in the output is divided equally to a grid of <img src="ltx/3e7c70e1258.svg" alt="\(H_K^\ell \times W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> which is then added to the tensor of deltas at the same position the 2d grid of pixels have in the input image tensor, this tensor of deltas is to be forwarded later to the next layer during backprop.
 </p>
 
 <p>
-i had to go back and edit the definition of the <code>pooling-layer</code> class to include the new <code>unpooling-function</code> slot and the function <code>make-pooling-layer</code> to provide a default unpooling function aswell.<br />
+i had to go back and edit the definition of the <code>pooling-layer</code> class to include the new <code>unpooling-function</code> slot and the function <code>make-pooling-layer</code> to provide a default unpooling function aswell.
 </p>
 </div>
 </div>
-<div id="outline-container-orgba279ed" class="outline-3">
-<h3 id="orgba279ed">pooling layer backprop</h3>
-<div class="outline-text-3" id="text-orgba279ed">
+<div id="outline-container-orgdec9ff8" class="outline-3">
+<h3 id="orgdec9ff8">pooling layer backprop</h3>
+<div class="outline-text-3" id="text-orgdec9ff8">
 <p>
-backprop for pooling layer:<br />
+backprop for pooling layer:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-pooling-layer-backprop">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">propbackward</span> ((l pooling-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
@@ -1268,11 +1268,11 @@ backprop for pooling layer:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgaffe277" class="outline-3">
-<h3 id="orgaffe277">flatten layer backprop</h3>
-<div class="outline-text-3" id="text-orgaffe277">
+<div id="outline-container-org300ea5b" class="outline-3">
+<h3 id="org300ea5b">flatten layer backprop</h3>
+<div class="outline-text-3" id="text-org300ea5b">
 <p>
-backprop for flatten layers is probably the simplest, we only need to reshape the deltas and pass them on:<br />
+backprop for flatten layers is probably the simplest, we only need to reshape the deltas and pass them on:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-flatten-layer-backprop">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">propbackward</span> ((l flatten-layer) layer-x layer-y layer-y-unactivated propped-deltas learning-rate)
@@ -1282,11 +1282,11 @@ backprop for flatten layers is probably the simplest, we only need to reshape th
 </div>
 </div>
 </div>
-<div id="outline-container-org572de69" class="outline-3">
-<h3 id="org572de69">test code</h3>
-<div class="outline-text-3" id="text-org572de69">
+<div id="outline-container-org4ee6fde" class="outline-3">
+<h3 id="org4ee6fde">test code</h3>
+<div class="outline-text-3" id="text-org4ee6fde">
 <p>
-time for a simple propbackward test:<br />
+time for a simple propbackward test:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">lenet-test-1</span> ()
@@ -1298,7 +1298,7 @@ time for a simple propbackward test:<br />
 </pre>
 </div>
 <p>
-while this worked, it was really slow:<br />
+while this worked, it was really slow:
 </p>
 <pre class="example">
 Evaluation took:
@@ -1311,8 +1311,8 @@ Evaluation took:
 </pre>
 
 <p>
-3 seconds for a single feedforward,backprop pass is pretty horrible for a relatively small network<br />
-i used sbcl's <a href="http://www.lichteblau.com/sbcl/doc/manual/sbcl/Statistical-Profiler.html">sb-prof</a> for more insight:<br />
+3 seconds for a single feedforward,backprop pass is pretty horrible for a relatively small network
+i used sbcl's <a href="http://www.lichteblau.com/sbcl/doc/manual/sbcl/Statistical-Profiler.html">sb-prof</a> for more insight:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">require</span> <span style="font-weight: bold; text-decoration: underline;">:sb-sprof</span>)
@@ -1321,16 +1321,16 @@ i used sbcl's <a href="http://www.lichteblau.com/sbcl/doc/manual/sbcl/Statistica
 </pre>
 </div>
 <p>
-but that didnt help much, as expected most of the time was taken by the backprop functions<br />
-although there are some things that can be improved (i think im doing unnecessary memory duplication with arrays) to make the single-threaded code run faster, i just decided it was time to take a multithreaded approach (perhaps even train on the gpu in the future with <a href="/cuda_programming_in_common_lisp.html#20230614T171231">cl-cuda</a>)<br />
+but that didnt help much, as expected most of the time was taken by the backprop functions
+although there are some things that can be improved (i think im doing unnecessary memory duplication with arrays) to make the single-threaded code run faster, i just decided it was time to take a multithreaded approach (perhaps even train on the gpu in the future with <a href="/cuda_programming_in_common_lisp.html#20230614T171231">cl-cuda</a>)
 </p>
 </div>
 </div>
-<div id="outline-container-org09f76c2" class="outline-3">
-<h3 id="org09f76c2">printing/formatting networks</h3>
-<div class="outline-text-3" id="text-org09f76c2">
+<div id="outline-container-orgcf0ebcf" class="outline-3">
+<h3 id="orgcf0ebcf">printing/formatting networks</h3>
+<div class="outline-text-3" id="text-orgcf0ebcf">
 <p>
-it would help to be able to inspect a network and see for example how many parameters it has so we implement a <code>print-object</code> function:<br />
+it would help to be able to inspect a network and see for example how many parameters it has so we implement a <code>print-object</code> function:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-network-print">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">print-object</span> ((n network) stream)
@@ -1361,7 +1361,7 @@ it would help to be able to inspect a network and see for example how many param
 </pre>
 </div>
 <p>
-example usage:<br />
+example usage:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">CL-USER&gt; *lenet5*
@@ -1379,11 +1379,11 @@ total network weights: 61470&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-orge9af179" class="outline-3">
-<h3 id="orge9af179">full pass propagation and training</h3>
-<div class="outline-text-3" id="text-orge9af179">
+<div id="outline-container-orgb636e41" class="outline-3">
+<h3 id="orgb636e41">full pass propagation and training</h3>
+<div class="outline-text-3" id="text-orgb636e41">
 <p>
-now we need a function that takes a set of examples and trains a network<br />
+now we need a function that takes a set of examples and trains a network
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-network-train">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-full-pass</span> ((nw network) x y)
@@ -1401,11 +1401,11 @@ now we need a function that takes a set of examples and trains a network<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgcd5ec70" class="outline-3">
-<h3 id="orgcd5ec70">test code</h3>
-<div class="outline-text-3" id="text-orgcd5ec70">
+<div id="outline-container-org803b375" class="outline-3">
+<h3 id="org803b375">test code</h3>
+<div class="outline-text-3" id="text-org803b375">
 <p>
-lets try a simple example:<br />
+lets try a simple example:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">cnn-test-1</span> ()
@@ -1436,7 +1436,7 @@ lets try a simple example:<br />
 </pre>
 </div>
 <p>
-test run:<br />
+test run:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(cnn-test-1)
@@ -1456,53 +1456,53 @@ this should equal 0: #(0.014254526557710118)
 
 
 <p>
-yes this the farthest thing from perfect, but the data isnt either, we'll see how it performs on real-world data later.<br />
+yes this the farthest thing from perfect, but the data isnt either, we'll see how it performs on real-world data later.
 </p>
 
 <p>
-i gave training on mnist with cnn a shot and tackled the issue of a vanishing gradient while at it, but again, it was really slow, we must tackle the issue of speed/efficiency.<br />
+i gave training on mnist with cnn a shot and tackled the issue of a vanishing gradient while at it, but again, it was really slow, we must tackle the issue of speed/efficiency.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3f71e0" class="outline-3">
-<h3 id="orgc3f71e0">backprop optimization</h3>
-<div class="outline-text-3" id="text-orgc3f71e0">
+<div id="outline-container-org4d9da2b" class="outline-3">
+<h3 id="org4d9da2b">backprop optimization</h3>
+<div class="outline-text-3" id="text-org4d9da2b">
 <div class="any" id="any:optimization1">
 <p>
-if we reconsider the equations <a href="/convolutional_neural_network.html#eq-convnet-weight-delta">eq-convnet-weight-delta</a>, we'll find that we're doing alot of redundant work, as mentioned in <a href="/convolutional_neural_network.html#not-convnet-I-indicies">not-convnet-I-indicies</a>, there are indicies we're iterating over that we have to ignore, so we could cut them out of the loop which will tremendously reduce the number of iterations.<br />
+if we reconsider the equations <a href="/convolutional_neural_network.html#eq-convnet-weight-delta">eq-convnet-weight-delta</a>, we'll find that we're doing alot of redundant work, as mentioned in <a href="/convolutional_neural_network.html#not-convnet-I-indicies">not-convnet-I-indicies</a>, there are indicies we're iterating over that we have to ignore, so we could cut them out of the loop which will tremendously reduce the number of iterations.
 </p>
 
 <p>
-lets reconsider the equation:<br />
-<img src="ltx/86c1cea7022.svg" alt="\[ \Delta K^\ell_k[r,u,v] = \sum_{i=1}^{H_I^{\ell+1}} \sum_{j=1}^{W_I^{\ell+1}} \frac{\partial L}{\partial \hat Y_k^\ell[i,j]}\frac{\partial \hat Y_k^\ell[i,j]}{\partial K_k^\ell[r,u,v]} \]" style="height: 3.6804em; display: block" class="org-latex org-latex-block" /><br />
-basically, here we're finding the derivative of the loss function with respect to a single weight in <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> indexed by <img src="ltx/9fbf6037f0b.svg" alt="\(k,r,u,v\)" style="height: 0.8980em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, using the all the errors from each output pixel in <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, indexed by <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, now we for a single weight with indicies <img src="ltx/9fbf6037f0b.svg" alt="\(k,r,u,v\)" style="height: 0.8980em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" /> dont need to iterate with <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> through the number of layers as we only need to consider the feature map that the weight affects, as each kernel with its weights only affect a single feature map in the output, here, that map is <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> which we consider a fixed constant when we're dealing with a single weight (which is why i preferred to write <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> as a subscript), other pixels in feature maps other than <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> arent affected by our weight and using the errors at those pixels wouldnt affect the gradient's value (they add 0). (there are still some pixels that we can drop depending on the place of the weight in the kernel, and the kernel's stride, but i dont think that can give us a noticable improvement in performance).<br />
+lets reconsider the equation:
+<img src="ltx/86c1cea7022.svg" alt="\[ \Delta K^\ell_k[r,u,v] = \sum_{i=1}^{H_I^{\ell+1}} \sum_{j=1}^{W_I^{\ell+1}} \frac{\partial L}{\partial \hat Y_k^\ell[i,j]}\frac{\partial \hat Y_k^\ell[i,j]}{\partial K_k^\ell[r,u,v]} \]" style="height: 3.6804em; display: block" class="org-latex org-latex-block" />
+basically, here we're finding the derivative of the loss function with respect to a single weight in <img src="ltx/44c1fc6aaed.svg" alt="\(K\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> indexed by <img src="ltx/9fbf6037f0b.svg" alt="\(k,r,u,v\)" style="height: 0.8980em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, using the all the errors from each output pixel in <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, indexed by <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, now we for a single weight with indicies <img src="ltx/9fbf6037f0b.svg" alt="\(k,r,u,v\)" style="height: 0.8980em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" /> dont need to iterate with <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> through the number of layers as we only need to consider the feature map that the weight affects, as each kernel with its weights only affect a single feature map in the output, here, that map is <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> which we consider a fixed constant when we're dealing with a single weight (which is why i preferred to write <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> as a subscript), other pixels in feature maps other than <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> arent affected by our weight and using the errors at those pixels wouldnt affect the gradient's value (they add 0). (there are still some pixels that we can drop depending on the place of the weight in the kernel, and the kernel's stride, but i dont think that can give us a noticable improvement in performance).
 </p>
 
 <p>
-the real bottleneck for training is currently computing <img src="ltx/3811082461b.svg" alt="\(\Delta I\)" style="height: 0.7608em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for convolutional layers, which is what we need to work on, lets reconsider the following equation:<br />
-<img src="ltx/7cd4ddff2d7.svg" alt="\[ \Delta I^\ell[r,u,v] = \sum_{k=1}^{D_I^{\ell+1}} \sum_{i=1}^{H_I^{\ell+1}} \sum_{j=1}^{W_I^{\ell+1}} \frac{\partial L}{\partial \hat Y_k^\ell[i,j]}\frac{\partial \hat Y_k^\ell[i,j]}{\partial I^\ell[r,u,v]} \]" style="height: 3.6804em; display: block" class="org-latex org-latex-block" /><br />
-here, we're considering the derivative of every pixel in the output image with respect to the entry in <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> that we wanna find, but in truth, each pixel in <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> only affects <img src="ltx/10e043de759.svg" alt="\(t^\ell \times H_K^\ell \times W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> output pixels <b>at most</b> (this is basically the size of the weight tensor <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />), intuitively, one may be able to imagine this to see each kernel sliding over the input <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, in this process each pixel gets multiplied by a subset of the sliding kernel, depending on whether it is close to the edge of the image and on the sliding stride, each time the image slides in some direction, our input pixel gets multiplied by a new weight, until the kernel slides away and isnt "hovering" over our pixel anymore, this process is illustrated in <a href="#fig:sliding_kernel">3</a>.<br />
+the real bottleneck for training is currently computing <img src="ltx/3811082461b.svg" alt="\(\Delta I\)" style="height: 0.7608em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for convolutional layers, which is what we need to work on, lets reconsider the following equation:
+<img src="ltx/7cd4ddff2d7.svg" alt="\[ \Delta I^\ell[r,u,v] = \sum_{k=1}^{D_I^{\ell+1}} \sum_{i=1}^{H_I^{\ell+1}} \sum_{j=1}^{W_I^{\ell+1}} \frac{\partial L}{\partial \hat Y_k^\ell[i,j]}\frac{\partial \hat Y_k^\ell[i,j]}{\partial I^\ell[r,u,v]} \]" style="height: 3.6804em; display: block" class="org-latex org-latex-block" />
+here, we're considering the derivative of every pixel in the output image with respect to the entry in <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> that we wanna find, but in truth, each pixel in <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> only affects <img src="ltx/10e043de759.svg" alt="\(t^\ell \times H_K^\ell \times W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> output pixels <b>at most</b> (this is basically the size of the weight tensor <img src="ltx/6a4bb5ddfe9.svg" alt="\(K^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />), intuitively, one may be able to imagine this to see each kernel sliding over the input <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, in this process each pixel gets multiplied by a subset of the sliding kernel, depending on whether it is close to the edge of the image and on the sliding stride, each time the image slides in some direction, our input pixel gets multiplied by a new weight, until the kernel slides away and isnt "hovering" over our pixel anymore, this process is illustrated in <a href="#fig:sliding_kernel">3</a>.
 </p>
 
 <p>
-<a href="/sliding.gif">/home/mahmooz/brain/notes/data/d0/bddd39-2180-4e8d-895b-f64bcb6472ea/sliding.gif</a><br />
-this can also be seen in the formula for the output pixels:<br />
-<img src="ltx/85681548ee7.svg" alt="\[ \hat Y_k^\ell[i,j] = \phi\left(\sum_{z=0}^{D_K^\ell-1}\sum_{y=0}^{H_K^\ell-1}\sum_{x=0}^{W_K^\ell-1}I^\ell[z,y+i,x+j]K^\ell_k[D_K^\ell-z-1,H_K^\ell-y-1,W_K^\ell-x-1]+B^\ell[k]\right) \]" style="height: 4.2026em; display: block" class="org-latex org-latex-block" /><br />
-for each combination of the indicies <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, we iterate through a block in <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (and in <img src="ltx/91a7ed31c79.svg" alt="\(K_k^\ell\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" />) of size <img src="ltx/4aca3e26d5a.svg" alt="\(D_K^\ell \times W_K^\ell \times H_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, but the size of <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is <img src="ltx/56bce745f25.svg" alt="\(D_I^\ell \times H_I^\ell \times W_I^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, and the latter is usually a much greater number, so not in every combination does the arbitrary entry <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> play a role in setting the value of <img src="ltx/daa0d2ba897.svg" alt="\(\hat Y^\ell_k[i,j]\)" style="height: 1.3167em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" />, to see how many times exactly is <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> is used we build the equations <img src="ltx/8528a74adbc.svg" alt="\(r=z,u=y+i,v=x+j\)" style="height: 0.9225em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> from the indicies in the formula, and solve for <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, the values we get for <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> are the indicies of the pixels which <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> "relates to".<br />
+<a href="/sliding.gif">/home/mahmooz/brain/notes/data/d0/bddd39-2180-4e8d-895b-f64bcb6472ea/sliding.gif</a>
+this can also be seen in the formula for the output pixels:
+<img src="ltx/85681548ee7.svg" alt="\[ \hat Y_k^\ell[i,j] = \phi\left(\sum_{z=0}^{D_K^\ell-1}\sum_{y=0}^{H_K^\ell-1}\sum_{x=0}^{W_K^\ell-1}I^\ell[z,y+i,x+j]K^\ell_k[D_K^\ell-z-1,H_K^\ell-y-1,W_K^\ell-x-1]+B^\ell[k]\right) \]" style="height: 4.2026em; display: block" class="org-latex org-latex-block" />
+for each combination of the indicies <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, we iterate through a block in <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (and in <img src="ltx/91a7ed31c79.svg" alt="\(K_k^\ell\)" style="height: 1.2944em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" />) of size <img src="ltx/4aca3e26d5a.svg" alt="\(D_K^\ell \times W_K^\ell \times H_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, but the size of <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is <img src="ltx/56bce745f25.svg" alt="\(D_I^\ell \times H_I^\ell \times W_I^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, and the latter is usually a much greater number, so not in every combination does the arbitrary entry <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> play a role in setting the value of <img src="ltx/daa0d2ba897.svg" alt="\(\hat Y^\ell_k[i,j]\)" style="height: 1.3167em; vertical-align: -0.4066em; display: inline-block" class="org-latex org-latex-inline" />, to see how many times exactly is <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> is used we build the equations <img src="ltx/8528a74adbc.svg" alt="\(r=z,u=y+i,v=x+j\)" style="height: 0.9225em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> from the indicies in the formula, and solve for <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, the values we get for <img src="ltx/c51c49f3b06.svg" alt="\(k,i,j\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> are the indicies of the pixels which <img src="ltx/f1ad0b44e94.svg" alt="\(I^\ell[r,u,v]\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> "relates to".
 </p>
 
 <p>
-we get <img src="ltx/4053f2c11ab.svg" alt="\(k=k,i=u-y,j=v-x\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, now we know that <img src="ltx/ca38494a298.svg" alt="\((k,i,j) \in \mathbb{R}^{t^\ell \times (H^\ell_I-(H_K^\ell-1)) \times (W^\ell_I-(W_K^\ell-1)))}\)" style="height: 1.2904em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, because thats the size of the output tensor <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and we know <img src="ltx/15355d88698.svg" alt="\((r,u,v) \in \mathbb{R}^{D_I^\ell \times H_I^\ell \times W_I^\ell}\)" style="height: 1.2796em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" />.<br />
+we get <img src="ltx/4053f2c11ab.svg" alt="\(k=k,i=u-y,j=v-x\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, now we know that <img src="ltx/ca38494a298.svg" alt="\((k,i,j) \in \mathbb{R}^{t^\ell \times (H^\ell_I-(H_K^\ell-1)) \times (W^\ell_I-(W_K^\ell-1)))}\)" style="height: 1.2904em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, because thats the size of the output tensor <img src="ltx/e1ae96c0111.svg" alt="\(\hat Y^\ell\)" style="height: 0.9593em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, and we know <img src="ltx/15355d88698.svg" alt="\((r,u,v) \in \mathbb{R}^{D_I^\ell \times H_I^\ell \times W_I^\ell}\)" style="height: 1.2796em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" />.
 </p>
 
 <p>
-what the equations <img src="ltx/4053f2c11ab.svg" alt="\(k=k,i=u-y,j=v-x\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> basically tell us is that, since <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9225em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> only depends on the value of <img src="ltx/e3d7c14b1bd.svg" alt="\(v\)" style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, which we have, and on <img src="ltx/42c32b034ca.svg" alt="\(x\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, which we need to iterate for, as <img src="ltx/c9d4e9f8db5.svg" alt="\(0 \le x &amp;lt; W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> we only need to do <img src="ltx/2341beea9ce.svg" alt="\(W_K^\ell \times t^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> for it (we have to iterate for <img src="ltx/2a70aeb99a2.svg" alt="\(1 \le k &amp;lt; t^\ell\)" style="height: 0.9845em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" /> as its a free variable and doesnt depend on others), combining that with <img src="ltx/75143dbad26.svg" alt="\(i\)" style="height: 0.7290em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, which depends on the then-constant <img src="ltx/3f16e241304.svg" alt="\(u\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/0a5175bb9ea.svg" alt="\(r,u,v\)" style="height: 0.6609em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" /> arent constants, but in this context they are, thats the assumption here) and <img src="ltx/a7cff3c9f2b.svg" alt="\(y\)" style="height: 0.7261em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> which varies as <img src="ltx/7a403a73148.svg" alt="\(0 \le y &amp;lt; H_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, in total this gives us <img src="ltx/e46e09b7b9d.svg" alt="\(t^\ell \times W_K^\ell \times H_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> iterations for a single arbitrary entry in <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, which is definitely (alot) less (and also independent of the size of the input) than <img src="ltx/503301e2202.svg" alt="\(t^\ell \times (H^\ell_I-(H_K^\ell-1)) \times (W^\ell_I-(W_K^\ell-1)))\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> which is the number of iterations we were doing before.<br />
+what the equations <img src="ltx/4053f2c11ab.svg" alt="\(k=k,i=u-y,j=v-x\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> basically tell us is that, since <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9225em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> only depends on the value of <img src="ltx/e3d7c14b1bd.svg" alt="\(v\)" style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" />, which we have, and on <img src="ltx/42c32b034ca.svg" alt="\(x\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, which we need to iterate for, as <img src="ltx/c9d4e9f8db5.svg" alt="\(0 \le x &amp;lt; W_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> we only need to do <img src="ltx/2341beea9ce.svg" alt="\(W_K^\ell \times t^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> for it (we have to iterate for <img src="ltx/2a70aeb99a2.svg" alt="\(1 \le k &amp;lt; t^\ell\)" style="height: 0.9845em; vertical-align: -0.0967em; display: inline-block" class="org-latex org-latex-inline" /> as its a free variable and doesnt depend on others), combining that with <img src="ltx/75143dbad26.svg" alt="\(i\)" style="height: 0.7290em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />, which depends on the then-constant <img src="ltx/3f16e241304.svg" alt="\(u\)" style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> (<img src="ltx/0a5175bb9ea.svg" alt="\(r,u,v\)" style="height: 0.6609em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" /> arent constants, but in this context they are, thats the assumption here) and <img src="ltx/a7cff3c9f2b.svg" alt="\(y\)" style="height: 0.7261em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> which varies as <img src="ltx/7a403a73148.svg" alt="\(0 \le y &amp;lt; H_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" />, in total this gives us <img src="ltx/e46e09b7b9d.svg" alt="\(t^\ell \times W_K^\ell \times H_K^\ell\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> iterations for a single arbitrary entry in <img src="ltx/92b63a097c9.svg" alt="\(I^\ell\)" style="height: 0.9370em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, which is definitely (alot) less (and also independent of the size of the input) than <img src="ltx/503301e2202.svg" alt="\(t^\ell \times (H^\ell_I-(H_K^\ell-1)) \times (W^\ell_I-(W_K^\ell-1)))\)" style="height: 1.2737em; vertical-align: -0.3858em; display: inline-block" class="org-latex org-latex-inline" /> which is the number of iterations we were doing before.
 </p>
 
 <p>
-combining all of those ideas we get the formula:<br />
-<img src="ltx/720a7cfc8d2.svg" alt="\[ \Delta I^\ell[r,u,v] = \sum_{k=0}^{t^\ell-1} \sum_{y=0}^{H_K^\ell-1} \sum_{x=0}^{W_K^\ell-1} \frac{\partial L}{\partial \hat Y^\ell[k,u-y,v-x]}\frac{\partial \hat Y_k^\ell[k,u-y,v-x]}{\partial I^\ell[r,u,v]} \]" style="height: 3.6804em; display: block" class="org-latex org-latex-block" /><br />
-we substitute this in <a href="/convolutional_neural_network.html#eq-convnet-I-delta-1">eq-convnet-I-delta-1</a> in place of the previous version, and redo the differentation process:<br />
+combining all of those ideas we get the formula:
+<img src="ltx/720a7cfc8d2.svg" alt="\[ \Delta I^\ell[r,u,v] = \sum_{k=0}^{t^\ell-1} \sum_{y=0}^{H_K^\ell-1} \sum_{x=0}^{W_K^\ell-1} \frac{\partial L}{\partial \hat Y^\ell[k,u-y,v-x]}\frac{\partial \hat Y_k^\ell[k,u-y,v-x]}{\partial I^\ell[r,u,v]} \]" style="height: 3.6804em; display: block" class="org-latex org-latex-block" />
+we substitute this in <a href="/convolutional_neural_network.html#eq-convnet-I-delta-1">eq-convnet-I-delta-1</a> in place of the previous version, and redo the differentation process:
 </p>
 
 <div id="eq:x_delta" class="equation-container">
@@ -1520,25 +1520,25 @@ we substitute this in <a href="/convolutional_neural_network.html#eq-convnet-I-d
 </span>
 </div>
 <p>
-we can better the formulas for all deltas even further but thats for the future, maybe.<br />
+we can better the formulas for all deltas even further but thats for the future, maybe.
 </p>
 
 <p>
-after coming up with this, i had to go back and edit the backpropagation function for convolutional layer to use the new formula instead of the old one.<br />
+after coming up with this, i had to go back and edit the backpropagation function for convolutional layer to use the new formula instead of the old one.
 </p>
 
 </div>
 </div>
 </div>
-<div id="outline-container-orgcc6a624" class="outline-3">
-<h3 id="orgcc6a624">distributed training</h3>
-<div class="outline-text-3" id="text-orgcc6a624">
+<div id="outline-container-org581501b" class="outline-3">
+<h3 id="org581501b">distributed training</h3>
+<div class="outline-text-3" id="text-org581501b">
 <p>
-perhaps distributed training would help, so i decided to work on a simple multithreaded solution before going for a gpu solution.<br />
+perhaps distributed training would help, so i decided to work on a simple multithreaded solution before going for a gpu solution.
 </p>
 
 <p>
-here implement distributed training by data parallelism with the help of lparallel, two packages are needed, <code>lparallel</code> and <code>serapeum</code>, both installable from quicklisp.<br />
+here implement distributed training by data parallelism with the help of lparallel, two packages are needed, <code>lparallel</code> and <code>serapeum</code>, both installable from quicklisp.
 </p>
 
 <div class="org-src-container">
@@ -1664,19 +1664,19 @@ here implement distributed training by data parallelism with the help of lparall
 </pre>
 </div>
 <p>
-it seems that the <code>kill-tasks</code> function from the <code>lparallel</code> library doesnt work, so i had to implement my own way of terminating the threads and the training process using <code>*lparallel-training*</code>, so when we wanna stop training we set it to <code>nil</code>, using perhaps <code>slime-interactive-eval</code> if using slime.<br />
+it seems that the <code>kill-tasks</code> function from the <code>lparallel</code> library doesnt work, so i had to implement my own way of terminating the threads and the training process using <code>*lparallel-training*</code>, so when we wanna stop training we set it to <code>nil</code>, using perhaps <code>slime-interactive-eval</code> if using slime.
 </p>
 
 <p>
-although cpu multithreading can speed up training, a gpu is still alot faster in cases like this.<br />
+although cpu multithreading can speed up training, a gpu is still alot faster in cases like this.
 </p>
 </div>
 </div>
-<div id="outline-container-org899e412" class="outline-3">
-<h3 id="org899e412">analyzing accuracy and loss</h3>
-<div class="outline-text-3" id="text-org899e412">
+<div id="outline-container-org896f2e6" class="outline-3">
+<h3 id="org896f2e6">analyzing accuracy and loss</h3>
+<div class="outline-text-3" id="text-org896f2e6">
 <p>
-we also need a function to get the total error of the network:<br />
+we also need a function to get the total error of the network:
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp" id="src-network-test">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">network-test</span> ((nw network) samples)
@@ -1694,15 +1694,15 @@ we also need a function to get the total error of the network:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org895e2f9" class="outline-3">
-<h3 id="org895e2f9">saving parameters to disk</h3>
-<div class="outline-text-3" id="text-org895e2f9">
+<div id="outline-container-orgffb3fd9" class="outline-3">
+<h3 id="orgffb3fd9">saving parameters to disk</h3>
+<div class="outline-text-3" id="text-orgffb3fd9">
 <p>
-we may also want to save the weights of a network to a file for later reloading:<br />
+we may also want to save the weights of a network to a file for later reloading:
 </p>
-<div class="math-block note" data-before="note" data-after="" id="org9f1dd23">
+<div class="math-block note" data-before="note" data-after="" id="org553f244">
 <p>
-TODO: currently this doesnt save biases, needs to be fixed<br />
+TODO: currently this doesnt save biases, needs to be fixed
 </p>
 
 </div>
