@@ -22,7 +22,7 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
-</div>
+</div><h1 class="main-title">cuda programming in common lisp</h1>
 </div>
 <div id="content" class="content">
 <p>
@@ -36,9 +36,9 @@ load it using quicklisp:
 <pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-cuda</span>)
 </pre>
 </div>
-<div id="outline-container-org85fe1f5" class="outline-2">
-<h2 id="org85fe1f5">arch linux setup</h2>
-<div class="outline-text-2" id="text-org85fe1f5">
+<div id="outline-container-org76d01f1" class="outline-2">
+<h2 id="org76d01f1">arch linux setup</h2>
+<div class="outline-text-2" id="text-org76d01f1">
 <p>
 i had to install <code>cuda</code> for the <code>nvcc</code> compiler and more, and <code>nvidia</code> for the gpu driver, at first you may have to use <code>/opt/cuda/bin/nvcc</code> until you reboot or extend your $PATH.
 </p>
@@ -56,13 +56,13 @@ if you have installed the <code>nvidia</code> package and your os still uses <co
 </p>
 </div>
 </div>
-<div id="outline-container-orgbd8c6d6" class="outline-2">
-<h2 id="orgbd8c6d6">essential concepts</h2>
-<div class="outline-text-2" id="text-orgbd8c6d6">
+<div id="outline-container-org5aa9bc8" class="outline-2">
+<h2 id="org5aa9bc8">essential concepts</h2>
+<div class="outline-text-2" id="text-org5aa9bc8">
 </div>
-<div id="outline-container-org5b7167d" class="outline-3">
-<h3 id="org5b7167d">threads</h3>
-<div class="outline-text-3" id="text-org5b7167d">
+<div id="outline-container-orgabc924f" class="outline-3">
+<h3 id="orgabc924f">threads</h3>
+<div class="outline-text-3" id="text-orgabc924f">
 <p>
 mostly from <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.
 </p>
@@ -100,9 +100,9 @@ for efficient cooperation, the shared memory is expected to be a low-latency mem
 </p>
 </div>
 </div>
-<div id="outline-container-org57a4c96" class="outline-3">
-<h3 id="org57a4c96">memory</h3>
-<div class="outline-text-3" id="text-org57a4c96">
+<div id="outline-container-org4ec6e69" class="outline-3">
+<h3 id="org4ec6e69">memory</h3>
+<div class="outline-text-3" id="text-org4ec6e69">
 <p>
 CUDA threads may access data from multiple memory spaces during their execution. each thread has private <b>local memory</b>. each thread block has <b>shared memory</b> visible to all threads of the block and with the same lifetime as the block. thread blocks in a thread block cluster can perform read, write, and atomics operations on each other’s shared memory. all threads have access to the same <b>global memory</b>.
 </p>
@@ -128,9 +128,9 @@ unified memory provides managed memory to bridge the host and device memory spac
 </p>
 </div>
 </div>
-<div id="outline-container-orga28952b" class="outline-3">
-<h3 id="orga28952b">device memory</h3>
-<div class="outline-text-3" id="text-orga28952b">
+<div id="outline-container-org0e97067" class="outline-3">
+<h3 id="org0e97067">device memory</h3>
+<div class="outline-text-3" id="text-org0e97067">
 <p>
 the CUDA programming model assumes a system composed of a host and a device, each with their own separate memory. kernels operate out of device memory, so the runtime provides functions to allocate, deallocate, and copy device memory, as well as transfer data between host memory and device memory.
 </p>
@@ -149,23 +149,23 @@ CUDA arrays are opaque memory layouts optimized for texture fetching.
 </div>
 </div>
 </div>
-<div id="outline-container-org321f5cb" class="outline-2">
-<h2 id="org321f5cb">code</h2>
-<div class="outline-text-2" id="text-org321f5cb">
+<div id="outline-container-orgdf6b74a" class="outline-2">
+<h2 id="orgdf6b74a">code</h2>
+<div class="outline-text-2" id="text-orgdf6b74a">
 <p>
 see <a href="/connect_to_remote_common_lisp_repl_with_sly_slime.html#20230614T172149">connect to remote common lisp repl with sly/slime</a> for connecting to a remote common lisp repl with emacs.
 </p>
 
-<div class="math-block note" data-before="note" data-after="" id="org85c6f42">
+<div class="math-block note" data-before="note" data-after="" id="org6c1d4f8">
 <p>
 notice that when working cl-cuda the data that we're passing to the gpu is gonna be duplicated (because its a binding from cl to C and uses whats called foreign memory), i never considered how bad that is, atleast in this case, as mostly when doing gpu calculations we're ofcourse passing lots of data and then copying it back, and the maximum amount of memory that i can use is already cut in half, if i have 16gb of memory i already know i cant use more than 8gb of that, thats pretty horrible (assuming i have a gpu with ~16gb memory), i can have my way around this, e.g. free memory from sbcl as it gets copied to C, but that'd be much more complexity than i wanna have to deal with
 </p>
 
 </div>
 </div>
-<div id="outline-container-org854efdd" class="outline-3">
-<h3 id="org854efdd">cuda vector addition</h3>
-<div class="outline-text-3" id="text-org854efdd">
+<div id="outline-container-orga16e1f2" class="outline-3">
+<h3 id="orga16e1f2">cuda vector addition</h3>
+<div class="outline-text-3" id="text-orga16e1f2">
 <p>
 we start with the vectorAdd example, a simple example in C, stolen from <a href="https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu">https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu</a> and modified to reduce boilerplate code.
 </p>
@@ -283,9 +283,9 @@ similar same code but in cl:
 </div>
 </div>
 </div>
-<div id="outline-container-orgbc512b5" class="outline-3">
-<h3 id="orgbc512b5">cuda matrix multiplication</h3>
-<div class="outline-text-3" id="text-orgbc512b5">
+<div id="outline-container-org9b5d887" class="outline-3">
+<h3 id="org9b5d887">cuda matrix multiplication</h3>
+<div class="outline-text-3" id="text-org9b5d887">
 <p>
 mostly taken from <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html</a> and <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.
 </p>
