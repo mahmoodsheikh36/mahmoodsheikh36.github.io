@@ -26,49 +26,49 @@
 </div><h1 class="main-title">gpg</h1><span class="desc">encrypting files with gpg</span>
 </div>
 <div id="content" class="content">
-<div id="outline-container-orgad9e95c" class="outline-2">
-<h2 id="orgad9e95c">encrypt file with password</h2>
-<div class="outline-text-2" id="text-orgad9e95c">
+<div id="outline-container-org8e685c4" class="outline-2">
+<h2 id="org8e685c4">encrypt file with password</h2>
+<div class="outline-text-2" id="text-org8e685c4">
 <div class="org-src-container">
 <pre class="src src-bash">gpg -o &lt;output-file&gt; -c &lt;file-to-encrypt&gt;
 </pre>
 </div>
 <p>
-the argument <code>-o</code> takes the path to the output file (the encrypted one) and the flag <code>-c</code> tells <code>gpg</code> that we want to encrypt, you will be prompted to enter a password
+the argument <code>-o</code> takes the path to the output file (the encrypted one) and the flag <code>-c</code> tells <code>gpg</code> that we want to encrypt, you will be prompted to enter a password<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orge807e87" class="outline-2">
-<h2 id="orge807e87">decrypt file with password</h2>
-<div class="outline-text-2" id="text-orge807e87">
+<div id="outline-container-orgf893db2" class="outline-2">
+<h2 id="orgf893db2">decrypt file with password</h2>
+<div class="outline-text-2" id="text-orgf893db2">
 <div class="org-src-container">
 <pre class="src src-bash">gpg -o &lt;output-file&gt; -d &lt;file-to-decrypt&gt;
 </pre>
 </div>
 <p>
-the argument <code>-o</code> takes the path to the output file (the decrypted one) and the flag <code>-d</code> tells <code>gpg</code> that we want to decrypt
+the argument <code>-o</code> takes the path to the output file (the decrypted one) and the flag <code>-d</code> tells <code>gpg</code> that we want to decrypt<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgfffd974" class="outline-2">
-<h2 id="orgfffd974">encrypt directory with password</h2>
-<div class="outline-text-2" id="text-orgfffd974">
+<div id="outline-container-org6e91871" class="outline-2">
+<h2 id="org6e91871">encrypt directory with password</h2>
+<div class="outline-text-2" id="text-org6e91871">
 <p>
-to encrypt a directory, we simply compress it into a file:
+to encrypt a directory, we simply compress it into a file:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">tar -cvf archive.tar &lt;directory&gt;
 </pre>
 </div>
 <p>
-for faster compression but bigger file size:
+for faster compression but bigger file size:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">tar --use-compress-program=<span style="font-style: italic;">"pigz -k -9 "</span> -cf archive.tar &lt;directory-to-compress&gt;
 </pre>
 </div>
 <p>
-and then encrypt that file
+and then encrypt that file<br />
 </p>
 </div>
 </div>
