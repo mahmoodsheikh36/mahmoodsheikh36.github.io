@@ -24,13 +24,13 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
-</div>
-<div id="darkModeToggle" onclick="toggleDarkMode()">
-  &#9680; <!-- Circle with left half black -->
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
 </div><h1 class="main-title">maxima in lisp</h1><span class="desc">how to use maxima code in common lisp</span>
 </div>
 <div id="content" class="content">
-<div class="math-block note" data-before="note" data-after="" id="org8c0c279">
+<div class="math-block note" data-before="note" data-after="" id="org0e662ec">
 <p>
 i ended up giving up on using maxima as a visualization/symbolic math computation library for lisp, it wasnt made with this usecase in mind i guess, and so its an utter nightmare to lisp with it<br />
 </p>
@@ -39,9 +39,9 @@ i ended up giving up on using maxima as a visualization/symbolic math computatio
 <p>
 maxima is written in lisp and so it can be used as a modified/extended lisp runtime<br />
 </p>
-<div id="outline-container-org1362ef1" class="outline-2">
-<h2 id="org1362ef1">how to</h2>
-<div class="outline-text-2" id="text-org1362ef1">
+<div id="outline-container-org58caaab" class="outline-2">
+<h2 id="org58caaab">how to</h2>
+<div class="outline-text-2" id="text-org58caaab">
 <p>
 to start the lisp runtime use the command:<br />
 </p>
@@ -86,9 +86,9 @@ loading maxima as a library works most of the time, but it causes some problems,
 </p>
 </div>
 </div>
-<div id="outline-container-org6eed6ca" class="outline-2">
-<h2 id="org6eed6ca">misc</h2>
-<div class="outline-text-2" id="text-org6eed6ca">
+<div id="outline-container-org841c120" class="outline-2">
+<h2 id="org841c120">misc</h2>
+<div class="outline-text-2" id="text-org841c120">
 <p>
 to write an expression in infix syntax we do:<br />
 </p>
@@ -118,9 +118,9 @@ to display math using ascii art we use the function <code>displa</code> (short f
 </pre>
 </div>
 </div>
-<div id="outline-container-org1fbce8e" class="outline-2">
-<h2 id="org1fbce8e">maxima expression to lisp expression</h2>
-<div class="outline-text-2" id="text-org1fbce8e">
+<div id="outline-container-orgf7f357e" class="outline-2">
+<h2 id="orgf7f357e">maxima expression to lisp expression</h2>
+<div class="outline-text-2" id="text-orgf7f357e">
 <p>
 this function helps turn maxima expressions into their corresponding lisp expression<br />
 </p>
@@ -183,9 +183,9 @@ taken from <a href="https://github.com/livelisp/livewlisp/blob/main/maxima-tutor
 </p>
 </div>
 </div>
-<div id="outline-container-org174b46b" class="outline-2">
-<h2 id="org174b46b">integration</h2>
-<div class="outline-text-2" id="text-org174b46b">
+<div id="outline-container-org4deadce" class="outline-2">
+<h2 id="org4deadce">integration</h2>
+<div class="outline-text-2" id="text-org4deadce">
 <p>
 the main function for integration is <code>$integrate</code> (or <code>sinint</code>)<br />
 </p>
@@ -212,9 +212,9 @@ sin(x)
 </pre>
 </div>
 </div>
-<div id="outline-container-org029afaf" class="outline-2">
-<h2 id="org029afaf">lists</h2>
-<div class="outline-text-2" id="text-org029afaf">
+<div id="outline-container-org918f6fa" class="outline-2">
+<h2 id="org918f6fa">lists</h2>
+<div class="outline-text-2" id="text-org918f6fa">
 <p>
 i havent a better approach yet<br />
 </p>
@@ -257,9 +257,9 @@ example:<br />
 </pre>
 </div>
 </div>
-<div id="outline-container-orge59cb00" class="outline-2">
-<h2 id="orge59cb00">plotting</h2>
-<div class="outline-text-2" id="text-orge59cb00">
+<div id="outline-container-org4bd1606" class="outline-2">
+<h2 id="org4bd1606">plotting</h2>
+<div class="outline-text-2" id="text-org4bd1606">
 <p>
 we need to initialize some variables (like <code>*maxima-tempdir*</code>) to be able to plot, this can be done automatically using <code>initialize-runtime-globals</code><br />
 </p>
