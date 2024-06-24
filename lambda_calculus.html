@@ -12,8 +12,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
 <!-- not-so-awesome awesome font -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -22,10 +23,13 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
+</div>
+<div id="darkModeToggle" onclick="toggleDarkMode()">
+  &#9680; <!-- Circle with left half black -->
 </div><h1 class="main-title">lambda calculus</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="orgcaa16c2">
+<div class="dummy" id="org01a4cad">
 <p>
 the <i><img src="ltx/e54d35934ff.svg" alt="\(\lambda\)" style="height: 0.7486em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-calculus</i> consists of a set of objects called <img src="ltx/e54d35934ff.svg" alt="\(\lambda\)" style="height: 0.7486em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-terms and some rules for manipulating them. it was originally designed to capture formally the notions of functional abstraction and functional application and their interaction.<br />
 </p>
@@ -133,7 +137,7 @@ the function <img src="ltx/03238e83b95.svg" alt="\(f(x_1,x_2)=x_1+x_2\)" style="
 " style="height: 8.9772em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
-<div class="math-block note" data-before="note" data-after="" id="org358d50b">
+<div class="math-block note" data-before="note" data-after="" id="orgf8746f8">
 <p>
 is this derivation doing redundant work?<br />
 </p>

@@ -12,8 +12,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
 <!-- not-so-awesome awesome font -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -22,6 +23,9 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
+</div>
+<div id="darkModeToggle" onclick="toggleDarkMode()">
+  &#9680; <!-- Circle with left half black -->
 </div><h1 class="main-title">cuda programming in common lisp</h1>
 </div>
 <div id="content" class="content">
@@ -36,9 +40,9 @@ load it using quicklisp:<br />
 <pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-cuda</span>)
 </pre>
 </div>
-<div id="outline-container-org9fb1083" class="outline-2">
-<h2 id="org9fb1083">arch linux setup</h2>
-<div class="outline-text-2" id="text-org9fb1083">
+<div id="outline-container-org2a4f588" class="outline-2">
+<h2 id="org2a4f588">arch linux setup</h2>
+<div class="outline-text-2" id="text-org2a4f588">
 <p>
 i had to install <code>cuda</code> for the <code>nvcc</code> compiler and more, and <code>nvidia</code> for the gpu driver, at first you may have to use <code>/opt/cuda/bin/nvcc</code> until you reboot or extend your $PATH.<br />
 </p>
@@ -56,13 +60,13 @@ if you have installed the <code>nvidia</code> package and your os still uses <co
 </p>
 </div>
 </div>
-<div id="outline-container-org3efc0c2" class="outline-2">
-<h2 id="org3efc0c2">essential concepts</h2>
-<div class="outline-text-2" id="text-org3efc0c2">
+<div id="outline-container-orgc28d2c8" class="outline-2">
+<h2 id="orgc28d2c8">essential concepts</h2>
+<div class="outline-text-2" id="text-orgc28d2c8">
 </div>
-<div id="outline-container-orgbb1933c" class="outline-3">
-<h3 id="orgbb1933c">threads</h3>
-<div class="outline-text-3" id="text-orgbb1933c">
+<div id="outline-container-org7094e16" class="outline-3">
+<h3 id="org7094e16">threads</h3>
+<div class="outline-text-3" id="text-org7094e16">
 <p>
 mostly from <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
 </p>
@@ -100,9 +104,9 @@ for efficient cooperation, the shared memory is expected to be a low-latency mem
 </p>
 </div>
 </div>
-<div id="outline-container-orgcf06ddc" class="outline-3">
-<h3 id="orgcf06ddc">memory</h3>
-<div class="outline-text-3" id="text-orgcf06ddc">
+<div id="outline-container-org26fa598" class="outline-3">
+<h3 id="org26fa598">memory</h3>
+<div class="outline-text-3" id="text-org26fa598">
 <p>
 CUDA threads may access data from multiple memory spaces during their execution. each thread has private <b>local memory</b>. each thread block has <b>shared memory</b> visible to all threads of the block and with the same lifetime as the block. thread blocks in a thread block cluster can perform read, write, and atomics operations on each other’s shared memory. all threads have access to the same <b>global memory</b>.<br />
 </p>
@@ -128,9 +132,9 @@ unified memory provides managed memory to bridge the host and device memory spac
 </p>
 </div>
 </div>
-<div id="outline-container-orgb5cf66c" class="outline-3">
-<h3 id="orgb5cf66c">device memory</h3>
-<div class="outline-text-3" id="text-orgb5cf66c">
+<div id="outline-container-org131b44c" class="outline-3">
+<h3 id="org131b44c">device memory</h3>
+<div class="outline-text-3" id="text-org131b44c">
 <p>
 the CUDA programming model assumes a system composed of a host and a device, each with their own separate memory. kernels operate out of device memory, so the runtime provides functions to allocate, deallocate, and copy device memory, as well as transfer data between host memory and device memory.<br />
 </p>
@@ -149,23 +153,23 @@ CUDA arrays are opaque memory layouts optimized for texture fetching.<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org32341f2" class="outline-2">
-<h2 id="org32341f2">code</h2>
-<div class="outline-text-2" id="text-org32341f2">
+<div id="outline-container-orgb65975e" class="outline-2">
+<h2 id="orgb65975e">code</h2>
+<div class="outline-text-2" id="text-orgb65975e">
 <p>
 see <a href="/connect_to_remote_common_lisp_repl_with_sly_slime.html#1686752509">connect to remote common lisp repl with sly/slime</a> for connecting to a remote common lisp repl with emacs.<br />
 </p>
 
-<div class="math-block note" data-before="note" data-after="" id="org0ebfca3">
+<div class="math-block note" data-before="note" data-after="" id="org8cf3438">
 <p>
 notice that when working cl-cuda the data that we're passing to the gpu is gonna be duplicated (because its a binding from cl to C and uses whats called foreign memory), i never considered how bad that is, atleast in this case, as mostly when doing gpu calculations we're ofcourse passing lots of data and then copying it back, and the maximum amount of memory that i can use is already cut in half, if i have 16gb of memory i already know i cant use more than 8gb of that, thats pretty horrible (assuming i have a gpu with ~16gb memory), i can have my way around this, e.g. free memory from sbcl as it gets copied to C, but that'd be much more complexity than i wanna have to deal with<br />
 </p>
 
 </div>
 </div>
-<div id="outline-container-org980e666" class="outline-3">
-<h3 id="org980e666">cuda vector addition</h3>
-<div class="outline-text-3" id="text-org980e666">
+<div id="outline-container-orgcc322eb" class="outline-3">
+<h3 id="orgcc322eb">cuda vector addition</h3>
+<div class="outline-text-3" id="text-orgcc322eb">
 <p>
 we start with the vectorAdd example, a simple example in C, stolen from <a href="https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu">https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu</a> and modified to reduce boilerplate code.<br />
 </p>
@@ -283,9 +287,9 @@ similar same code but in cl:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org3b26456" class="outline-3">
-<h3 id="org3b26456">cuda matrix multiplication</h3>
-<div class="outline-text-3" id="text-org3b26456">
+<div id="outline-container-orgfd8ae07" class="outline-3">
+<h3 id="orgfd8ae07">cuda matrix multiplication</h3>
+<div class="outline-text-3" id="text-orgfd8ae07">
 <p>
 mostly taken from <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html</a> and <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
 </p>

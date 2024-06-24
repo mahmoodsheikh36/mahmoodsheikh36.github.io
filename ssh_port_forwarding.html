@@ -12,8 +12,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
 <!-- not-so-awesome awesome font -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -22,6 +23,9 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
+</div>
+<div id="darkModeToggle" onclick="toggleDarkMode()">
+  &#9680; <!-- Circle with left half black -->
 </div><h1 class="main-title">ssh port forwarding</h1>
 </div>
 <div id="content" class="content">
@@ -54,14 +58,14 @@ a connection to the tunnel can be opened using the command<br />
 <p>
 note that <code>localuser</code> would be the user of <code>local2</code> (not the remote machine) that you want ssh to use.<br />
 </p>
-<div id="outline-container-org87be0d9" class="outline-2">
-<h2 id="org87be0d9">connection refused</h2>
-<div class="outline-text-2" id="text-org87be0d9">
-<div class="dummy" id="org05424fd">
+<div id="outline-container-org2381cf6" class="outline-2">
+<h2 id="org2381cf6">connection refused</h2>
+<div class="outline-text-2" id="text-org2381cf6">
+<div class="dummy" id="orge2a466e">
 <p>
 by default tunnel endpoints only listen on 127.0.0.1, so they can't be accessed from other machines. to change this you may need to add this to <code>/etc/ssh/sshd_config</code> on the server:<br />
 </p>
-<div class="literal" id="org070bb9f">
+<div class="literal" id="orgf6e6bd5">
 <p>
 GatewayPorts clientspecified<br />
 </p>
@@ -74,9 +78,9 @@ this is also the reason we use the address <code>*:5000:*:22</code>, the star is
 </p>
 </div>
 </div>
-<div id="outline-container-org7f6f874" class="outline-2">
-<h2 id="org7f6f874">using ipv6</h2>
-<div class="outline-text-2" id="text-org7f6f874">
+<div id="outline-container-orgbc8ed30" class="outline-2">
+<h2 id="orgbc8ed30">using ipv6</h2>
+<div class="outline-text-2" id="text-orgbc8ed30">
 <p>
 if you're using ipv6 you need to make sure its enabled on all machines. <code>vim /etc/sysctl.conf</code> and make sure you have the following:<br />
 </p>
@@ -94,9 +98,9 @@ the ipv6 equivalent for <code>localhost</code> is <code>::1</code>. so, for exam
 </div>
 </div>
 </div>
-<div id="outline-container-org775bfcd" class="outline-2">
-<h2 id="org775bfcd">systemd service</h2>
-<div class="outline-text-2" id="text-org775bfcd">
+<div id="outline-container-org0a0c352" class="outline-2">
+<h2 id="org0a0c352">systemd service</h2>
+<div class="outline-text-2" id="text-org0a0c352">
 <p>
 an example systemd service that i use to automatically open an ssh tunnel for a linux server:<br />
 </p>

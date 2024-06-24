@@ -13,8 +13,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
 <!-- not-so-awesome awesome font -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -23,10 +24,13 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
+</div>
+<div id="darkModeToggle" onclick="toggleDarkMode()">
+  &#9680; <!-- Circle with left half black -->
 </div><h1 class="main-title">maxima in lisp</h1><span class="desc">how to use maxima code in common lisp</span>
 </div>
 <div id="content" class="content">
-<div class="math-block note" data-before="note" data-after="" id="org6aa5285">
+<div class="math-block note" data-before="note" data-after="" id="org8c0c279">
 <p>
 i ended up giving up on using maxima as a visualization/symbolic math computation library for lisp, it wasnt made with this usecase in mind i guess, and so its an utter nightmare to lisp with it<br />
 </p>
@@ -35,9 +39,9 @@ i ended up giving up on using maxima as a visualization/symbolic math computatio
 <p>
 maxima is written in lisp and so it can be used as a modified/extended lisp runtime<br />
 </p>
-<div id="outline-container-org07fa326" class="outline-2">
-<h2 id="org07fa326">how to</h2>
-<div class="outline-text-2" id="text-org07fa326">
+<div id="outline-container-org1362ef1" class="outline-2">
+<h2 id="org1362ef1">how to</h2>
+<div class="outline-text-2" id="text-org1362ef1">
 <p>
 to start the lisp runtime use the command:<br />
 </p>
@@ -82,9 +86,9 @@ loading maxima as a library works most of the time, but it causes some problems,
 </p>
 </div>
 </div>
-<div id="outline-container-orge347b31" class="outline-2">
-<h2 id="orge347b31">misc</h2>
-<div class="outline-text-2" id="text-orge347b31">
+<div id="outline-container-org6eed6ca" class="outline-2">
+<h2 id="org6eed6ca">misc</h2>
+<div class="outline-text-2" id="text-org6eed6ca">
 <p>
 to write an expression in infix syntax we do:<br />
 </p>
@@ -114,9 +118,9 @@ to display math using ascii art we use the function <code>displa</code> (short f
 </pre>
 </div>
 </div>
-<div id="outline-container-org95d7414" class="outline-2">
-<h2 id="org95d7414">maxima expression to lisp expression</h2>
-<div class="outline-text-2" id="text-org95d7414">
+<div id="outline-container-org1fbce8e" class="outline-2">
+<h2 id="org1fbce8e">maxima expression to lisp expression</h2>
+<div class="outline-text-2" id="text-org1fbce8e">
 <p>
 this function helps turn maxima expressions into their corresponding lisp expression<br />
 </p>
@@ -179,9 +183,9 @@ taken from <a href="https://github.com/livelisp/livewlisp/blob/main/maxima-tutor
 </p>
 </div>
 </div>
-<div id="outline-container-org64c4b78" class="outline-2">
-<h2 id="org64c4b78">integration</h2>
-<div class="outline-text-2" id="text-org64c4b78">
+<div id="outline-container-org174b46b" class="outline-2">
+<h2 id="org174b46b">integration</h2>
+<div class="outline-text-2" id="text-org174b46b">
 <p>
 the main function for integration is <code>$integrate</code> (or <code>sinint</code>)<br />
 </p>
@@ -208,9 +212,9 @@ sin(x)
 </pre>
 </div>
 </div>
-<div id="outline-container-org33b998c" class="outline-2">
-<h2 id="org33b998c">lists</h2>
-<div class="outline-text-2" id="text-org33b998c">
+<div id="outline-container-org029afaf" class="outline-2">
+<h2 id="org029afaf">lists</h2>
+<div class="outline-text-2" id="text-org029afaf">
 <p>
 i havent a better approach yet<br />
 </p>
@@ -253,9 +257,9 @@ example:<br />
 </pre>
 </div>
 </div>
-<div id="outline-container-org020a360" class="outline-2">
-<h2 id="org020a360">plotting</h2>
-<div class="outline-text-2" id="text-org020a360">
+<div id="outline-container-orge59cb00" class="outline-2">
+<h2 id="orge59cb00">plotting</h2>
+<div class="outline-text-2" id="text-orge59cb00">
 <p>
 we need to initialize some variables (like <code>*maxima-tempdir*</code>) to be able to plot, this can be done automatically using <code>initialize-runtime-globals</code><br />
 </p>

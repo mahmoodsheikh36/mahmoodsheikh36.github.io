@@ -13,8 +13,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
 <!-- not-so-awesome awesome font -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -23,12 +24,15 @@
   <a href='/blog.html'>blog</a>
   <a href='/archive.html'>archive</a>
   <a href='/about.html'>about</a>
+</div>
+<div id="darkModeToggle" onclick="toggleDarkMode()">
+  &#9680; <!-- Circle with left half black -->
 </div><h1 class="main-title">gpg</h1><span class="desc">encrypting files with gpg</span>
 </div>
 <div id="content" class="content">
-<div id="outline-container-org8e685c4" class="outline-2">
-<h2 id="org8e685c4">encrypt file with password</h2>
-<div class="outline-text-2" id="text-org8e685c4">
+<div id="outline-container-org1d421e0" class="outline-2">
+<h2 id="org1d421e0">encrypt file with password</h2>
+<div class="outline-text-2" id="text-org1d421e0">
 <div class="org-src-container">
 <pre class="src src-bash">gpg -o &lt;output-file&gt; -c &lt;file-to-encrypt&gt;
 </pre>
@@ -38,9 +42,9 @@ the argument <code>-o</code> takes the path to the output file (the encrypted on
 </p>
 </div>
 </div>
-<div id="outline-container-orgf893db2" class="outline-2">
-<h2 id="orgf893db2">decrypt file with password</h2>
-<div class="outline-text-2" id="text-orgf893db2">
+<div id="outline-container-org57d9625" class="outline-2">
+<h2 id="org57d9625">decrypt file with password</h2>
+<div class="outline-text-2" id="text-org57d9625">
 <div class="org-src-container">
 <pre class="src src-bash">gpg -o &lt;output-file&gt; -d &lt;file-to-decrypt&gt;
 </pre>
@@ -50,9 +54,9 @@ the argument <code>-o</code> takes the path to the output file (the decrypted on
 </p>
 </div>
 </div>
-<div id="outline-container-org6e91871" class="outline-2">
-<h2 id="org6e91871">encrypt directory with password</h2>
-<div class="outline-text-2" id="text-org6e91871">
+<div id="outline-container-org95e6b3f" class="outline-2">
+<h2 id="org95e6b3f">encrypt directory with password</h2>
+<div class="outline-text-2" id="text-org95e6b3f">
 <p>
 to encrypt a directory, we simply compress it into a file:<br />
 </p>
