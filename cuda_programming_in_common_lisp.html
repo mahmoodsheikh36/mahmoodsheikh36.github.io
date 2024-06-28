@@ -40,9 +40,9 @@ load it using quicklisp:<br />
 <pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-cuda</span>)
 </pre>
 </div>
-<div id="outline-container-org5fbd59b" class="outline-2">
-<h2 id="org5fbd59b">arch linux setup</h2>
-<div class="outline-text-2" id="text-org5fbd59b">
+<div id="outline-container-orgc0f5955" class="outline-2">
+<h2 id="orgc0f5955">arch linux setup</h2>
+<div class="outline-text-2" id="text-orgc0f5955">
 <p>
 i had to install <code>cuda</code> for the <code>nvcc</code> compiler and more, and <code>nvidia</code> for the gpu driver, at first you may have to use <code>/opt/cuda/bin/nvcc</code> until you reboot or extend your $PATH.<br />
 </p>
@@ -60,13 +60,13 @@ if you have installed the <code>nvidia</code> package and your os still uses <co
 </p>
 </div>
 </div>
-<div id="outline-container-org9f7783d" class="outline-2">
-<h2 id="org9f7783d">essential concepts</h2>
-<div class="outline-text-2" id="text-org9f7783d">
+<div id="outline-container-orgba1e695" class="outline-2">
+<h2 id="orgba1e695">essential concepts</h2>
+<div class="outline-text-2" id="text-orgba1e695">
 </div>
-<div id="outline-container-org4501b8f" class="outline-3">
-<h3 id="org4501b8f">threads</h3>
-<div class="outline-text-3" id="text-org4501b8f">
+<div id="outline-container-org1f2c270" class="outline-3">
+<h3 id="org1f2c270">threads</h3>
+<div class="outline-text-3" id="text-org1f2c270">
 <p>
 mostly from <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
 </p>
@@ -104,9 +104,9 @@ for efficient cooperation, the shared memory is expected to be a low-latency mem
 </p>
 </div>
 </div>
-<div id="outline-container-orgdbcd629" class="outline-3">
-<h3 id="orgdbcd629">memory</h3>
-<div class="outline-text-3" id="text-orgdbcd629">
+<div id="outline-container-org375f1e4" class="outline-3">
+<h3 id="org375f1e4">memory</h3>
+<div class="outline-text-3" id="text-org375f1e4">
 <p>
 CUDA threads may access data from multiple memory spaces during their execution. each thread has private <b>local memory</b>. each thread block has <b>shared memory</b> visible to all threads of the block and with the same lifetime as the block. thread blocks in a thread block cluster can perform read, write, and atomics operations on each other’s shared memory. all threads have access to the same <b>global memory</b>.<br />
 </p>
@@ -132,9 +132,9 @@ unified memory provides managed memory to bridge the host and device memory spac
 </p>
 </div>
 </div>
-<div id="outline-container-org57e8546" class="outline-3">
-<h3 id="org57e8546">device memory</h3>
-<div class="outline-text-3" id="text-org57e8546">
+<div id="outline-container-orge76430d" class="outline-3">
+<h3 id="orge76430d">device memory</h3>
+<div class="outline-text-3" id="text-orge76430d">
 <p>
 the CUDA programming model assumes a system composed of a host and a device, each with their own separate memory. kernels operate out of device memory, so the runtime provides functions to allocate, deallocate, and copy device memory, as well as transfer data between host memory and device memory.<br />
 </p>
@@ -153,23 +153,23 @@ CUDA arrays are opaque memory layouts optimized for texture fetching.<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org2c6d203" class="outline-2">
-<h2 id="org2c6d203">code</h2>
-<div class="outline-text-2" id="text-org2c6d203">
+<div id="outline-container-orgfdd64cb" class="outline-2">
+<h2 id="orgfdd64cb">code</h2>
+<div class="outline-text-2" id="text-orgfdd64cb">
 <p>
 see <a href="/connect_to_remote_common_lisp_repl_with_sly_slime.html#1686752509">connect to remote common lisp repl with sly/slime</a> for connecting to a remote common lisp repl with emacs.<br />
 </p>
 
-<div class="math-block note" data-before="note" data-after="" id="orgd7f7619">
+<div class="math-block note note" data-before="note" data-after="" id="orgc7c005d">
 <p>
 notice that when working cl-cuda the data that we're passing to the gpu is gonna be duplicated (because its a binding from cl to C and uses whats called foreign memory), i never considered how bad that is, atleast in this case, as mostly when doing gpu calculations we're ofcourse passing lots of data and then copying it back, and the maximum amount of memory that i can use is already cut in half, if i have 16gb of memory i already know i cant use more than 8gb of that, thats pretty horrible (assuming i have a gpu with ~16gb memory), i can have my way around this, e.g. free memory from sbcl as it gets copied to C, but that'd be much more complexity than i wanna have to deal with<br />
 </p>
 
 </div>
 </div>
-<div id="outline-container-orgc0145ff" class="outline-3">
-<h3 id="orgc0145ff">cuda vector addition</h3>
-<div class="outline-text-3" id="text-orgc0145ff">
+<div id="outline-container-orgde8cc2a" class="outline-3">
+<h3 id="orgde8cc2a">cuda vector addition</h3>
+<div class="outline-text-3" id="text-orgde8cc2a">
 <p>
 we start with the vectorAdd example, a simple example in C, stolen from <a href="https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu">https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu</a> and modified to reduce boilerplate code.<br />
 </p>
@@ -287,9 +287,9 @@ similar same code but in cl:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgb93148a" class="outline-3">
-<h3 id="orgb93148a">cuda matrix multiplication</h3>
-<div class="outline-text-3" id="text-orgb93148a">
+<div id="outline-container-orga570e83" class="outline-3">
+<h3 id="orga570e83">cuda matrix multiplication</h3>
+<div class="outline-text-3" id="text-orga570e83">
 <p>
 mostly taken from <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html</a> and <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
 </p>
