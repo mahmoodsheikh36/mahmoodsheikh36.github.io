@@ -30,7 +30,7 @@
 </div><h1 class="main-title">feedforward neural network</h1><span class="desc">studying and building neural networks from scratch</span>
 </div>
 <div id="content" class="content">
-<div class="math-block note note" data-before="note" data-after="" id="org9bde85b">
+<div class="math-block note note" data-before="note" data-after="" id="orgb8f4667">
 <p>
 feedforward neural networks is a wider term than discussed here, whats discussed here really is a specific type we call a <b>simple multilayer perceptron</b>, but this serves as an introductory to other types of more complex networks.<br />
 </p>
@@ -93,7 +93,7 @@ assuming the squared cost function (which we would usually denote by <img src="l
 after the first application of the derivative chain rule to the cost function with respect to the weight that connects an arbitrary unit <img src="ltx/aa9bde7bf3f.svg" alt="\(j\)" style="height: 0.9225em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> in the last hidden layer to an arbitrary unit <img src="ltx/ed3307c755a.svg" alt="\(k\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> in the output layer we get:<br />
 <img src="ltx/1e1e5ae0f13.svg" alt="\[ \frac{\partial L}{\partial w^q_{jk}} = -2(y-\hat y) \frac{\partial {g^q(in_k^q)}}{\partial w^q_{jk}} \]" style="height: 3.0474em; display: block" class="org-latex org-latex-block" /><br />
 </p>
-<div class="math-block note note" data-before="note" data-after="" id="org5517631">
+<div class="math-block note note" data-before="note" data-after="" id="org3e0f831">
 <p>
 a weight that is between a layer <img src="ltx/d0c77dc96a9.svg" alt="\(\ell-1\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> is denoted by <img src="ltx/8eed8957716.svg" alt="\(w^\ell_x\)" style="height: 1.1844em; vertical-align: -0.2966em; display: inline-block" class="org-latex org-latex-inline" /> and not <img src="ltx/d30ecf9e6cc.svg" alt="\(w^{l-1}_x\)" style="height: 1.1844em; vertical-align: -0.2966em; display: inline-block" class="org-latex org-latex-inline" /> because it actually belongs to the <img src="ltx/78dc41e798b.svg" alt="\(\ell\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer, even if it comes out of the <img src="ltx/d0c77dc96a9.svg" alt="\(\ell-1\)" style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />th layer, this means that weights with a superscript of 1, e.g. <img src="ltx/c1b24fe5052.svg" alt="\(w^1_x\)" style="height: 1.1844em; vertical-align: -0.2966em; display: inline-block" class="org-latex org-latex-inline" /> arent defined, because the first layer (input layer) has no weights.<br />
 </p>
@@ -224,9 +224,9 @@ another important characteristic of these gradient expressions is that they have
 </p>
 
 </div>
-<div id="outline-container-orge9445df" class="outline-2">
-<h2 id="orge9445df">initial common lisp implementation</h2>
-<div class="outline-text-2" id="text-orge9445df">
+<div id="outline-container-orgf9b68d0" class="outline-2">
+<h2 id="orgf9b68d0">initial common lisp implementation</h2>
+<div class="outline-text-2" id="text-orgf9b68d0">
 <p>
 this code uses common lisp (aswell as code/functions from the actual link itself, click it for those).<br />
 </p>
@@ -492,9 +492,9 @@ although notice that here we're testing the network on the same data we trained 
 </p>
 </div>
 </div>
-<div id="outline-container-org9ea8440" class="outline-2">
-<h2 id="org9ea8440">making use of gpu</h2>
-<div class="outline-text-2" id="text-org9ea8440">
+<div id="outline-container-orgdd70609" class="outline-2">
+<h2 id="orgdd70609">making use of gpu</h2>
+<div class="outline-text-2" id="text-orgdd70609">
 <p>
 before implementing this i started experimenting with <a href="/cuda_programming_in_common_lisp.html#1686751951">cuda in common lisp</a>, one unfortunate thing is that <code>cl-cuda</code> doesnt allow using arbitrary data types like you would have in <code>C</code> with structs, we're gonna have to live with arrays of floats on the gpu.<br />
 </p>
