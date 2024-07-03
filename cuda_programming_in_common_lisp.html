@@ -33,18 +33,18 @@
 using <code>cl-cuda</code>.<br />
 load it using quicklisp:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-cuda</span>)
 </pre>
 </div>
-<div id="outline-container-org9b0fedb" class="outline-2">
-<h2 id="org9b0fedb">arch linux setup</h2>
-<div class="outline-text-2" id="text-org9b0fedb">
+<div id="outline-container-orgeacb8c9" class="outline-2">
+<h2 id="orgeacb8c9">arch linux setup</h2>
+<div class="outline-text-2" id="text-orgeacb8c9">
 <p>
 i had to install <code>cuda</code> for the <code>nvcc</code> compiler and more, and <code>nvidia</code> for the gpu driver, at first you may have to use <code>/opt/cuda/bin/nvcc</code> until you reboot or extend your $PATH.<br />
 to check which nvidia driver is in use run:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="sh">
 <pre class="src src-sh">lspci -k | grep -A 2 -E <span style="font-style: italic;">"(VGA|3D)"</span>
 </pre>
 </div>
@@ -54,13 +54,13 @@ if you have installed the <code>nvidia</code> package and your os still uses <co
 </p>
 </div>
 </div>
-<div id="outline-container-orgd82b9b5" class="outline-2">
-<h2 id="orgd82b9b5">essential concepts</h2>
-<div class="outline-text-2" id="text-orgd82b9b5">
+<div id="outline-container-org8da5583" class="outline-2">
+<h2 id="org8da5583">essential concepts</h2>
+<div class="outline-text-2" id="text-org8da5583">
 </div>
-<div id="outline-container-org0c444d6" class="outline-3">
-<h3 id="org0c444d6">threads</h3>
-<div class="outline-text-3" id="text-org0c444d6">
+<div id="outline-container-org18ce355" class="outline-3">
+<h3 id="org18ce355">threads</h3>
+<div class="outline-text-3" id="text-org18ce355">
 <p>
 mostly from <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
 i also read the examples from the cl-cuda's source code.<br />
@@ -74,9 +74,9 @@ for efficient cooperation, the shared memory is expected to be a low-latency mem
 </p>
 </div>
 </div>
-<div id="outline-container-org21d7a5c" class="outline-3">
-<h3 id="org21d7a5c">memory</h3>
-<div class="outline-text-3" id="text-org21d7a5c">
+<div id="outline-container-org7e7b130" class="outline-3">
+<h3 id="org7e7b130">memory</h3>
+<div class="outline-text-3" id="text-org7e7b130">
 <p>
 CUDA threads may access data from multiple memory spaces during their execution. each thread has private <b>local memory</b>. each thread block has <b>shared memory</b> visible to all threads of the block and with the same lifetime as the block. thread blocks in a thread block cluster can perform read, write, and atomics operations on each other’s shared memory. all threads have access to the same <b>global memory</b>.<br />
 there are also two additional read-only memory spaces accessible by all threads: the constant and texture memory spaces. the global, constant, and texture memory spaces are optimized for different memory usages. texture memory also offers different addressing modes, as well as data filtering, for some specific data formats.<br />
@@ -87,9 +87,9 @@ unified memory provides managed memory to bridge the host and device memory spac
 </p>
 </div>
 </div>
-<div id="outline-container-orgd716d53" class="outline-3">
-<h3 id="orgd716d53">device memory</h3>
-<div class="outline-text-3" id="text-orgd716d53">
+<div id="outline-container-orga71edcc" class="outline-3">
+<h3 id="orga71edcc">device memory</h3>
+<div class="outline-text-3" id="text-orga71edcc">
 <p>
 the CUDA programming model assumes a system composed of a host and a device, each with their own separate memory. kernels operate out of device memory, so the runtime provides functions to allocate, deallocate, and copy device memory, as well as transfer data between host memory and device memory.<br />
 device memory can be allocated either as linear memory or as <b>CUDA arrays</b>.<br />
@@ -99,29 +99,29 @@ CUDA arrays are opaque memory layouts optimized for texture fetching.<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org7316742" class="outline-2">
-<h2 id="org7316742">code</h2>
-<div class="outline-text-2" id="text-org7316742">
+<div id="outline-container-org9e105a9" class="outline-2">
+<h2 id="org9e105a9">code</h2>
+<div class="outline-text-2" id="text-org9e105a9">
 <p>
 see <a href="/connect_to_remote_common_lisp_repl_with_sly_slime.html#1686752509">connect to remote common lisp repl with sly/slime</a> for connecting to a remote common lisp repl with emacs.<br />
 </p>
-<div class="math-block note note" data-before="note" data-after="" id="org44c012b">
+<div class="math-block note note" data-before="note" data-after="" id="orgc6bb46e">
 <p>
 notice that when working cl-cuda the data that we're passing to the gpu is gonna be duplicated (because its a binding from cl to C and uses whats called foreign memory), i never considered how bad that is, atleast in this case, as mostly when doing gpu calculations we're ofcourse passing lots of data and then copying it back, and the maximum amount of memory that i can use is already cut in half, if i have 16gb of memory i already know i cant use more than 8gb of that, thats pretty horrible (assuming i have a gpu with ~16gb memory), i can have my way around this, e.g. free memory from sbcl as it gets copied to C, but that'd be much more complexity than i wanna have to deal with<br />
 </p>
 
 </div>
 </div>
-<div id="outline-container-org980c5e1" class="outline-3">
-<h3 id="org980c5e1">cuda vector addition</h3>
-<div class="outline-text-3" id="text-org980c5e1">
+<div id="outline-container-org864ddf2" class="outline-3">
+<h3 id="org864ddf2">cuda vector addition</h3>
+<div class="outline-text-3" id="text-org864ddf2">
 <p>
 we start with the vectorAdd example, a simple example in C, stolen from <a href="https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu">https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu</a> and modified to reduce boilerplate code.<br />
 the syntax for calling a kernel in c++ is <code>vector&lt;&lt;&lt; blocks per grid, threads per block &gt;&gt;&gt;(arg1,arg2,...)</code>.<br />
 consider the following program which does vector addition.<br />
 place this code in a file with a <code>.cu</code> extension (only .cu works):<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="C">
 <pre class="src src-C"><span style="font-weight: bold;">#include</span> <span style="font-style: italic;">&lt;</span><span style="font-style: italic;">stdio.h</span><span style="font-style: italic;">&gt;</span>
 
 __global__ <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">vector_add</span>(<span style="font-weight: bold; text-decoration: underline;">float</span> *<span style="font-weight: bold; font-style: italic;">c</span>, <span style="font-weight: bold; text-decoration: underline;">float</span> *<span style="font-weight: bold; font-style: italic;">a</span>, <span style="font-weight: bold; text-decoration: underline;">float</span> *<span style="font-weight: bold; font-style: italic;">b</span>, <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">n</span>) {
@@ -186,7 +186,7 @@ __global__ <span style="font-weight: bold; text-decoration: underline;">void</sp
 compile with <code>nvcc &lt;name&gt;.cu -o vector_add</code> and run with <code>./vector_add</code>.<br />
 similar same code but in cl:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-init</span> (data n)
   (<span style="font-weight: bold;">dotimes</span> (i n)
     (setf (cl-cuda:memory-block-aref data i) (random 1.0))))
@@ -220,9 +220,9 @@ similar same code but in cl:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org29a0e9b" class="outline-3">
-<h3 id="org29a0e9b">cuda matrix multiplication</h3>
-<div class="outline-text-3" id="text-org29a0e9b">
+<div id="outline-container-orge8be42a" class="outline-3">
+<h3 id="orge8be42a">cuda matrix multiplication</h3>
+<div class="outline-text-3" id="text-orge8be42a">
 <p>
 mostly taken from <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html</a> and <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
 before implementing matrix multiplication for the <b>gpu</b> we need to consider some things.<br />
@@ -230,7 +230,7 @@ the product of two matrices <img src="ltx/7bfaa93f10a.svg" alt="\(A_{M \times K}
 in the example of vector addition, we used <b>global memory</b> (using <code>cudaMalloc</code> in C and <code>with-memory-block</code> in CL), which is (very) slow compared to <b>shared memory</b> which is allocated per <b>thread block</b>. we also did one <b>floating point operation</b> per memory access, so with as many flops as we have you can already see how slow we are going. to speed this up we're gonna use shared memory so that threads in a thread block can collaborate in computing a submatrix of the output matrix and to reduce calls to global memory.<br />
 first, an implementation without shared memory:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="C">
 <pre class="src src-C"><span style="font-weight: bold;">#include</span> <span style="font-style: italic;">&lt;</span><span style="font-style: italic;">stdio.h</span><span style="font-style: italic;">&gt;</span>
 <span style="font-weight: bold;">#include</span> <span style="font-style: italic;">&lt;</span><span style="font-style: italic;">stdlib.h</span><span style="font-style: italic;">&gt;</span>
 
@@ -324,7 +324,7 @@ to divide the work with shared memory we load submatrices into each thread block
 the threads cooperate in loading from memory the values of the input matrices to minimize access to global memory, different thread blocks load different portions of the input matrices, the portions they load are exactly the part of the matrices needed to find the values of the submatrix of C they operate on.<br />
 the best way to understand this is to read the code:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="C">
 <pre class="src src-C"><span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">matrices are stored in row-major order:</span>
 <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">M(row, col) = *(M.elements + row * M.stride + col)</span>
 <span style="font-weight: bold;">typedef</span> <span style="font-weight: bold;">struct</span> {
@@ -455,7 +455,7 @@ some points to consider before implementating in lisp:<br />
 <li>common lisp implementation will be more complete (i cba doing the same for C), e.g. no assumptions on matrix sizes,<br /></li>
 <li>loops in kernels can only be done using the <code>do</code> statement.<br /></li>
 </ol>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-init</span> (data n)
   (<span style="font-weight: bold;">dotimes</span> (i n)
     (setf (cl-cuda:memory-block-aref data i) (random 1.0))))
@@ -532,7 +532,7 @@ some points to consider before implementating in lisp:<br />
 <p>
 that took some effort, i had to hard-code the block size because as it compiles to C the variable isnt defined as a constant which it has to be because i'd get this error if i were to replace the number 16 with the variable <code>block-size</code>:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="C">
 <pre class="src src-C">nvcc exits with <span style="font-weight: bold; text-decoration: underline;">code</span>: 1
 /tmp/cl-cuda.EjtQeE.cu(60): error: expression must have a constant value
                         <span style="font-weight: bold;">__attribute__</span>((shared)) <span style="font-weight: bold; text-decoration: underline;">float</span> <span style="font-weight: bold; font-style: italic;">arr1_sub</span>[block_size][block_size];
@@ -542,7 +542,7 @@ that took some effort, i had to hard-code the block size because as it compiles 
 kernels are very limtied in terms of functionality, not everything can be used in kernels, almost everything is translated to C.<br />
 now a small benchmark to test this against my previous cpu solution:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">example-cuda-matrix-mul</span> ()
   (<span style="font-weight: bold;">let</span> ((size (expt 16 3)))
     (<span style="font-weight: bold;">let</span> ((mat1 (make-array (list size size) <span style="font-weight: bold;">:initial-element</span> 10))

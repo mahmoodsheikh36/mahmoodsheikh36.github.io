@@ -33,9 +33,9 @@
 <p>
 logic programming in common lisp<br />
 </p>
-<div id="outline-container-org345cf59" class="outline-2">
-<h2 id="org345cf59">logical statements</h2>
-<div class="outline-text-2" id="text-org345cf59">
+<div id="outline-container-org55bfbf7" class="outline-2">
+<h2 id="org55bfbf7">logical statements</h2>
+<div class="outline-text-2" id="text-org55bfbf7">
 <p>
 we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical statements, e.g. given the following knowledge base of horn clauses:<br />
 </p>
@@ -57,7 +57,7 @@ we make use of the symbolic capabilities of lisp, we use quoting and symbols to 
 <p>
 in lisp we could write it as:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*kb*</span>
   '((implies p q)
     (implies (and l m) p)
@@ -83,7 +83,7 @@ what about predicates? e.g. statements like <img src="ltx/526e0a9cc4e.svg" alt="
 first obstacle we may face is the issue of distinguishing a variable from a constant symbol, how can we tell whether a symbol represents a variable or a constant (an immutable object)? after all both are just symbols (in our implementation), for example consider <code>person</code> vs <code>John</code>, inherently, <code>person</code> is a variable that applies to everyone and <code>John</code> is a constant that only describes one person (in a simplified context where John refers to a friend, for example). a simple solution to this problem would be to use special syntax for variables, like <code>?x</code>, here, <code>?x</code> would mean we're dealing with a variable, and a symbol without a question mark prefix, for example <code>x</code>, is recognized as a constant.<br />
 in our previous example, this doesnt make much difference as we were dealing with constants only, consider this example which demonstrates how we apply the idea of prefixing variables with a question mark:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*kb*</span>
   '((person john) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">person(john)</span>
     (implies (person ?x) (human ?x)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">person(x) =&gt; human(x)</span>
@@ -101,7 +101,7 @@ in our previous example, this doesnt make much difference as we were dealing wit
 <p>
 how about substitutions? how do we represent for example the substitution <img src="ltx/295812a0b94.svg" alt="\(\{x/val,y/val2\}\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />, we just use an association list:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((sub nil)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">sub is the substitution</span>
   (push (cons '?x 'val1) sub) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">add pair using push</span>
   (push (cons '?y 'val2) sub)
@@ -114,13 +114,13 @@ how about substitutions? how do we represent for example the substitution <img s
 </pre>
 </div>
 </div>
-<div id="outline-container-org25680f6" class="outline-2">
-<h2 id="org25680f6">early inference engines</h2>
-<div class="outline-text-2" id="text-org25680f6">
+<div id="outline-container-org2ea1d06" class="outline-2">
+<h2 id="org2ea1d06">early inference engines</h2>
+<div class="outline-text-2" id="text-org2ea1d06">
 <p>
 imma start off with the unification algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the <b>occur check</b> and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">variable?</span> (x)
   <span style="font-style: italic;">"return whether an expression is a variable"</span>
   (<span style="font-weight: bold;">if</span> (atom x)
@@ -167,7 +167,7 @@ imma start off with the unification algorithm, this one differs a bit from the p
 <p>
 a test:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(unify '(person john) '(person ?x))
 </pre>
 </div>
@@ -180,7 +180,7 @@ a test:<br />
 <p>
 next up, we need to implement forward chaining and backward chaining which take in a knowledge base of statements which are definite clauses and do algorithmic inference, this code makes use of <a href="/common_lisp_math_utils.html#1683135667">common lisp math utils</a><br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">find-variables-in-statement</span> (statement)
   <span style="font-style: italic;">"find the variables in the list `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">statement</span><span style="font-style: italic;">' (variables are symbols that start with '?')"</span>
   (<span style="font-weight: bold;">let</span> ((vars))
@@ -316,7 +316,7 @@ next up, we need to implement forward chaining and backward chaining which take 
 <p>
 example usage:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-test-1</span> ()
   (setf *forward-chaining-test-1-kb*
         '((implies (and (american ?x) (weapon ?y) (sells ?x ?y ?z) (hostile ?z)) (criminal ?x))
@@ -339,7 +339,7 @@ example usage:<br />
 <p>
 some functions (that do their best) to "unpack" a knowledge base by unpacking conjunctions and implications into multiple smaller statements that are easier to deal with (there isnt much we can do when the precedent of an implication is a logical connective)<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">unpack-implication</span> (implication)
   (<span style="font-weight: bold;">multiple-value-bind</span> (antecedent consequent)
       (parse-implication implication)
@@ -369,7 +369,7 @@ some functions (that do their best) to "unpack" a knowledge base by unpacking co
 <p>
 a function to generate a graph from a knowledge base, see <a href="/working_with_graphs_in_common_lisp.html#1691879374">common lisp graphs</a>:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">generate-graph-from-knowledge-base</span> (kb)
   <span style="font-style: italic;">"generate and-or graph (not really, cant tell OR from AND) for a knowledge base"</span>
   (<span style="font-weight: bold;">let</span> ((g (make-graph)))
@@ -390,7 +390,7 @@ a function to generate a graph from a knowledge base, see <a href="/working_with
 <p>
 example usage:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-test-2</span> ()
   (<span style="font-weight: bold;">let</span> ((kb (copy-tree '((implies (and (american ?x) (weapon ?y) (sells ?x ?y ?z) (hostile ?z)) (criminal ?x))
                          (implies (and (missile ?x) (owns nono ?x)) (sells west ?x nono))
@@ -424,7 +424,7 @@ example usage:<br />
        <span style="font-weight: bold;">:directed</span> t))))
 </pre>
 </div>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(forward-chaining-test-2)
 </pre>
 </div>
@@ -454,7 +454,7 @@ v15/{(AMERICAN ?X)} -&amp;gt; v12/{(CRIMINAL ?X)},
 <p>
 functions to generate a graph from the forward chaining process (see <a href="/working_with_graphs_in_common_lisp.html#1691879374">common lisp graphs</a>):<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-generate-inference-graph</span> (inference-alist-list)
   <span style="font-style: italic;">"generate and-or graph (not really, cant tell OR from AND) for a knowledge base"</span>
   (<span style="font-weight: bold;">let</span> ((g (make-graph)))
@@ -475,7 +475,7 @@ functions to generate a graph from the forward chaining process (see <a href="/w
     g))
 </pre>
 </div>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-generate-tikz-graph</span> (inference-alist-list)
   (<span style="font-weight: bold;">let*</span> ((g (forward-chaining-generate-inference-graph inference-alist-list))
          (vertex-idx 0) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">to number vertices (gotta do it for proper drawing of the graph), each vertex gets a unique number)</span>
@@ -516,7 +516,7 @@ functions to generate a graph from the forward chaining process (see <a href="/w
 <p>
 example usage:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">forward-chaining-test-3</span> ()
   (<span style="font-weight: bold;">let</span> ((kb (copy-tree
              '((implies (and (american ?x) (weapon ?y) (sells ?x ?y ?z) (hostile ?z)) (criminal ?x))
@@ -533,7 +533,7 @@ example usage:<br />
       (forward-chaining-generate-tikz-graph inference-alist-list))))
 </pre>
 </div>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(forward-chaining-test-3)
 </pre>
 </div>
@@ -559,7 +559,7 @@ v7/{(MISSILE M1)} -&amp;gt; v3/{(SELLS WEST M1 NONO)},
 <p>
 the backward chaining algorithm (we dont implement it as a generator here):<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">backward-chaining</span> (knowledge-base query)
   <span style="font-style: italic;">"apply backward chaining, find all proofs for `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">query</span><span style="font-style: italic;">'"</span>
   (backward-chaining-or knowledge-base query nil))

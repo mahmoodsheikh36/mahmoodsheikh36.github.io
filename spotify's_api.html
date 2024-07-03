@@ -30,9 +30,9 @@
 </div><h1 class="main-title">spotify's api</h1><span class="desc">writing code for spotify's web api</span>
 </div>
 <div id="content" class="content">
-<div id="outline-container-orgd72cf7d" class="outline-2">
-<h2 id="orgd72cf7d">getting an access token for the api</h2>
-<div class="outline-text-2" id="text-orgd72cf7d">
+<div id="outline-container-org7881dd4" class="outline-2">
+<h2 id="org7881dd4">getting an access token for the api</h2>
+<div class="outline-text-2" id="text-org7881dd4">
 <ol class="org-ol">
 <li>head over to <a href="https://developer.spotify.com/dashboard">spotify's developer dashboard</a><br /></li>
 <li>click the <code>Create app</code> button<br /></li>
@@ -43,15 +43,15 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org18bde81" class="outline-2">
-<h2 id="org18bde81">api authorization</h2>
-<div class="outline-text-2" id="text-org18bde81">
+<div id="outline-container-org0b776e2" class="outline-2">
+<h2 id="org0b776e2">api authorization</h2>
+<div class="outline-text-2" id="text-org0b776e2">
 <p>
 first, we need to gain access "keys" (so we can make requests to various api backends/routes), and because we need to read private data of the user, we need to use <a href="https://developer.spotify.com/documentation/web-api/tutorials/code-flow">Authorization Code Flow</a><br />
 so first step is getting an <code>auth code</code> which we can then use to fetch a <code>refresh token</code> which in turn we can use to fetch an <code>access token</code> with which we can make make requests to almost any of spotify's api backends<br />
 to get an auth token we need to generate a url for the user (us) to visit in the browser:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">import</span> urllib.parse
 
 <span style="font-weight: bold; font-style: italic;">params</span> = {<span style="font-style: italic;">'client_id'</span>: CLIENT_ID,
@@ -71,14 +71,14 @@ https://accounts.spotify.com/authorize?client_id=e934fee88c884e9ea1e4ad8a37bae1d
 <p>
 but before opening the url in the browser, to be able to grab the auth code after making the request, we need a local http server running, to which spotify will pass the auth code:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="sh">
 <pre class="src src-sh">python -m http.server 5555
 </pre>
 </div>
 <p>
 with the webpage open and the local http server running, when you complete authentication with your spotify account you should see the auth code in your webserver's terminal output and in your browser aswell, it will be something like the following:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="text">
 <pre class="src src-text">Serving HTTP on 0.0.0.0 port 5555 (http://0.0.0.0:5555/) ...
 ^[127.0.0.1 - - [09/Oct/2023 17:36:17] "GET /?code=AQCg0RZ0C8NXzy0n3JpngvNrzx8Fs-vY2BpPn6sZlufBkeUgESfzoaoiiymlsaTtz0dQ6T8OxpNKNNztpAZ-E_0ZjA7TzLG8gTxza27GYSmHswxCHwZM3AA_n7onaCUBWscD_nVII1jPfHadvfUe_FfLt3UGup8DHCfo5lMnBQEtIVNWKBfyuVmDZQX2TFhPrwC8pmp_JzOmLYnjXxxFRmwyv2VQZ4rtTjN0hpVoa91-1azmtdXWQw6gMXOe1T4SsGS9mXNZmwGUo-JJNRjH7K0FkfHfbytHM5sV3UI07IZpnI1yBFkMGqQIkeyNiX8UZNKwc3kaw-WjQZh8NBZXMo48U0XfLxybxE0R_k9IVlf2PUInBmy39kMGHWoFpJT8cJpayooR0pYw_gl4ubH_DBRVwGhuX14pF2CzgFmwlT4sXh5TN-4yPFpcP8sSnpwsN07eQimOMPliT2nzf3RPZ14hXtccAC9jxJ-m-ZwvcFlWiuZPLZf_G6TCeGdz_1Md HTTP/1.1" 200 -
 127.0.0.1 - - [09/Oct/2023 17:36:17] code 404, message File not found
@@ -89,7 +89,7 @@ with the webpage open and the local http server running, when you complete authe
 the desired code is after <code>code=</code><br />
 we're gonna need some libraries:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">import</span> requests
 <span style="font-weight: bold;">import</span> base64
 </pre>
@@ -97,7 +97,7 @@ we're gonna need some libraries:<br />
 <p>
 now that we have the auth code we need to grab a refresh token<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fetch_refresh_token</span>():
     <span style="font-weight: bold; font-style: italic;">auth</span> = <span style="font-style: italic;">'Basic '</span> + base64.b64encode(f<span style="font-style: italic;">'</span>{CLIENT_ID}<span style="font-style: italic;">:</span>{CLIENT_SECRET}<span style="font-style: italic;">'</span>.encode()).decode()
     <span style="font-weight: bold; font-style: italic;">r</span> = requests.post(<span style="font-style: italic;">"https://accounts.spotify.com/api/token"</span>,
@@ -109,7 +109,7 @@ now that we have the auth code we need to grab a refresh token<br />
     <span style="font-weight: bold;">return</span> r.json()[<span style="font-style: italic;">'refresh_token'</span>]
 </pre>
 </div>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold; font-style: italic;">refresh_token</span> = fetch_refresh_token()
 refresh_token
 </pre>
@@ -123,7 +123,7 @@ AQAi4IB-FWWHGM20nQ5UkCfqLzupzkhXAdhQ_Z6MQ9SPRavN_vgUw8h91Zm9kJSuY9QXCLA_3GbE4L0P
 <p>
 even though the refresh token api route also returns an access token, such tokens are only valid for one hour, so we need to write a function to fetch a "refreshed" access token for when it expires:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fetch_access_token</span>(refresh_token):
     <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">spotify requires base64 encoding in this form</span>
     <span style="font-weight: bold; font-style: italic;">auth</span> = <span style="font-style: italic;">'Basic '</span> + base64.b64encode(f<span style="font-style: italic;">'</span>{CLIENT_ID}<span style="font-style: italic;">:</span>{CLIENT_SECRET}<span style="font-style: italic;">'</span>.encode()).decode()
@@ -135,7 +135,7 @@ even though the refresh token api route also returns an access token, such token
     <span style="font-weight: bold;">return</span> r.json()[<span style="font-style: italic;">'access_token'</span>]
 </pre>
 </div>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold; font-style: italic;">access_token</span> = fetch_access_token(REFRESH_TOKEN)
 access_token
 </pre>
@@ -146,13 +146,13 @@ BQDLhfDBmXx-rTS378MgNs4DjCG6Fm2I8v7F6yFpI8tw4SqX6O4XJv-lV6vTMAdVHOGTo59aDInXWXz6
 </pre>
 </div>
 </div>
-<div id="outline-container-org5ac6d60" class="outline-2">
-<h2 id="org5ac6d60">api requests</h2>
-<div class="outline-text-2" id="text-org5ac6d60">
+<div id="outline-container-org0259dd0" class="outline-2">
+<h2 id="org0259dd0">api requests</h2>
+<div class="outline-text-2" id="text-org0259dd0">
 <p>
 with this access token we can now make requests to other routes of spotifys web api, e.g. to the <a href="https://developer.spotify.com/documentation/web-api/reference/search">/search route</a>:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">search</span>(query, access_token, object_type=<span style="font-style: italic;">'album'</span>):
     <span style="font-weight: bold; font-style: italic;">auth</span> = f<span style="font-style: italic;">'Bearer </span>{access_token}<span style="font-style: italic;">'</span>
     <span style="font-weight: bold; font-style: italic;">r</span> = requests.get(<span style="font-style: italic;">'https://api.spotify.com/v1/search'</span>,
@@ -162,7 +162,7 @@ with this access token we can now make requests to other routes of spotifys web 
     <span style="font-weight: bold;">return</span> r.json()
 </pre>
 </div>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">import</span> pprint
 <span style="font-weight: bold; font-style: italic;">search_results</span> = search(<span style="font-style: italic;">'hymn to the immortal wind'</span>, access_token)
 pprint.pprint([(album[<span style="font-style: italic;">'name'</span>],album[<span style="font-style: italic;">'artists'</span>][0][<span style="font-style: italic;">'name'</span>]) <span style="font-weight: bold;">for</span> album <span style="font-weight: bold;">in</span> search_results[<span style="font-style: italic;">'albums'</span>][<span style="font-style: italic;">'items'</span>][:5]])
@@ -181,7 +181,7 @@ pprint.pprint([(album[<span style="font-style: italic;">'name'</span>],album[<sp
 <p>
 this function fetches your entire spotify library into an array of tracks:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">import</span> time
 
 <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">fetch_library</span>(access_token, tracks=[], url=<span style="font-style: italic;">"https://api.spotify.com/v1/me/tracks?limit=50"</span>):
@@ -209,7 +209,7 @@ this function fetches your entire spotify library into an array of tracks:<br />
 <p>
 example usage:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">import</span> json
 
 <span style="font-weight: bold; font-style: italic;">track_list</span> = fetch_library(access_token)
@@ -219,14 +219,14 @@ example usage:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org9963818" class="outline-2">
-<h2 id="org9963818">downloading with spotdl</h2>
-<div class="outline-text-2" id="text-org9963818">
+<div id="outline-container-org68fea9e" class="outline-2">
+<h2 id="org68fea9e">downloading with spotdl</h2>
+<div class="outline-text-2" id="text-org68fea9e">
 <p>
 now that we have our beloved tracks library in <code>tracks.json</code> we can use a tool like <code>spotdl</code> to download our music for offline listening (independently from spotify)<br />
 this script downloads all tracks using the metadata in <code>tracks.json</code>:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">import</span> json
 <span style="font-weight: bold;">import</span> os
 <span style="font-weight: bold;">from</span> multiprocessing <span style="font-weight: bold;">import</span> Pool
@@ -256,7 +256,7 @@ download_all(track_list)
 <p>
 a similar script but to download the albums along with the tracks:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="python">
 <pre class="src src-python"><span style="font-weight: bold;">import</span> json
 <span style="font-weight: bold;">import</span> os
 <span style="font-weight: bold;">from</span> multiprocessing <span style="font-weight: bold;">import</span> Pool

@@ -32,16 +32,16 @@
 <p>
 working with graphs in common lisp<br />
 </p>
-<div id="outline-container-orgeead448" class="outline-2">
-<h2 id="orgeead448">my initial approach</h2>
-<div class="outline-text-2" id="text-orgeead448">
+<div id="outline-container-org2eccba0" class="outline-2">
+<h2 id="org2eccba0">my initial approach</h2>
+<div class="outline-text-2" id="text-org2eccba0">
 <p>
 for simplicity ill represent a graph as a list of cons's, if we are dealing with a weighted graph, we use the second item in the cons as a cons with the first item being the node and the second being the weight<br />
 i implemented the helper functions <code>node-weight</code> and <code>node</code> for this purpose<br />
 an edge is written/stored in the format <code>'(&lt;src&gt; . (&lt;dest&gt; . &lt;weight&gt;))</code> or simply <code>'(&lt;src&gt; . &lt;dest&gt;)</code> if it has no weight<br />
 but what about a directed graph? maybe thats to worry about later (maybe just this structure but use <code>'(node1 . node2)</code> and <code>'(node2 . node1)</code> for bidirectional edges and pass an argument to functions that specifies whether graphs are directed so they have to respect the order of the cons)<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">edge-weight</span> (e)
   <span style="font-style: italic;">"get the weight of an edge"</span>
   (<span style="font-weight: bold;">let</span> ((dest-cons (cdr e)))
@@ -63,7 +63,7 @@ but what about a directed graph? maybe thats to worry about later (maybe just th
 <p>
 example:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((mygraph #((0 . a) (a . 2) (1 . (3 . 4)) (3 . |b|))))
   (map nil
        (<span style="font-weight: bold;">lambda</span> (mycons)
@@ -83,7 +83,7 @@ A -&gt; 2
 <p>
 a function to produce the tikz for a graph to be drawn using <a href="https://tikz.dev/tikz-graphs">https://tikz.dev/tikz-graphs</a> with force-based algorithms (<a href="https://tikz.dev/gd-force">https://tikz.dev/gd-force</a>)<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">generate-graph-tikz</span> (g)
   (format t <span style="font-style: italic;">"\\tikz\\graph[spring layout] {~%"</span>)
   (map nil
@@ -96,7 +96,7 @@ a function to produce the tikz for a graph to be drawn using <a href="https://ti
 <p>
 example usage:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(generate-graph-tikz #((0 1) (1 2) (1 3) (0 5))) 
 </pre>
 </div>
@@ -115,14 +115,14 @@ example usage:<br />
 this could be placed in a tex file like so:<br />
 and compiled to <code>dvi</code> with<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="bash">
 <pre class="src src-bash">lualatex --output-format=dvi &lt;yourfile&gt;.tex
 </pre>
 </div>
 <p>
 a <code>yourfile.dvi</code> will be generated, use <code>dvisvgm</code> to convert that to an <code>svg</code>:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="bash">
 <pre class="src src-bash">dvisvgm yourfile
 </pre>
 </div>
@@ -130,7 +130,7 @@ a <code>yourfile.dvi</code> will be generated, use <code>dvisvgm</code> to conve
 this will generate an svg image<br />
 an implementation of A* algorithm:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">a-star</span> (graph src dest heuristic-function)
   <span style="font-style: italic;">"a (naive?) implementation of A* search algorithm, solely written to avoid doing homework manually"</span>
   (a-star-helper graph src nil dest 0 heuristic-function))
@@ -192,16 +192,16 @@ an implementation of A* algorithm:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org60d16f1" class="outline-2">
-<h2 id="org60d16f1">adjacency list implementation</h2>
-<div class="outline-text-2" id="text-org60d16f1">
+<div id="outline-container-org64d73e3" class="outline-2">
+<h2 id="org64d73e3">adjacency list implementation</h2>
+<div class="outline-text-2" id="text-org64d73e3">
 <p>
 an adjancy list is list of linked lists, where each linked list stores a vertex and its outgoing edges, this makes representing directed graphs simple, so i decided to rewrite my code and to this approach<br />
 a vertex stores a list of edges, an "edge" stores the destination vertex and the weight (if the graph is directed we can tell which direction an edge because its source and destination vertex are determined already in the structure, so its direction must be from the source to the destination), here, an edge need not store its source vertex because the source vertex links to it already, if a function expects to receive a list of edges, not an adjacency list, then perhaps a list could be used in the form <code>'(source dest weight)</code>.<br />
 whether a graph is directed or not is not implemented (currently) in code logic, it depends on the programmers intentions with the graph, this code only provides the necessary abstraction, perhaps a type <code>graph</code> can be implemented to store a boolean of whether the graph is directed or not, or each edge would store a boolean to denote whether its actually directed from the source to the destination or not<br />
 implementation of basic functions:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">edge-dest</span> (e)
   (car e))
 
@@ -216,7 +216,7 @@ implementation of basic functions:<br />
 <p>
 perhaps we should make a graph class to provide a more "abstract interface":<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">graph</span> ()
   ((adjacency-list
     <span style="font-weight: bold;">:initform</span> nil
@@ -231,7 +231,7 @@ perhaps we should make a graph class to provide a more "abstract interface":<br 
 <p>
 example construction of a graph:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">print-object</span> ((gr graph) stream)
   (print-unreadable-object (gr stream <span style="font-weight: bold;">:type</span> t)
     (format t <span style="font-style: italic;">"source-&gt;destination,weight~%"</span>)
@@ -251,7 +251,7 @@ example construction of a graph:<br />
 <p>
 example usage:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">or equivalently, #((0 (a . 5) (3 . 9)) (a (2 . nil)) (1 (3 . 4)) (3 (|b| . 5)))</span>
 (<span style="font-weight: bold;">let*</span> ((adjacency-list '((0 . ((a . 5) (3 . 9))) (a . ((2 . nil)))
                          (1 . ((3 . 4))) (3 . ((|b| . 5)))))
@@ -274,7 +274,7 @@ A -&gt; 2, 0
 <p>
 generating graph diagrams with tikz:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">graph-generate-tikz</span> ((g graph) <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (node-distance 50)
                                             (format-function #'identity)
                                             (should-print t)
@@ -326,7 +326,7 @@ generating graph diagrams with tikz:<br />
 <p>
 example usage:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((mygraph (make-graph <span style="font-weight: bold;">:adjacency-list</span>
                            '((1 . ((3 . 2)))
                              (3 . ((b . 9)))
@@ -359,7 +359,7 @@ B -- [&quot;1&quot;] J,
 <p>
 a function to get all edges that are indicent to a specific vertex:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">graph-vertex-neighbors</span> ((g graph) vertex)
   (<span style="font-weight: bold;">with-slots</span> (adjacency-list) g
     (<span style="font-weight: bold;">let</span> ((neighbors nil))
@@ -378,7 +378,7 @@ a function to get all edges that are indicent to a specific vertex:<br />
 <p>
 some simple utility functions for graphs:<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">graph-add-edge</span> ((g graph) src dest <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (weight nil))
   (<span style="font-weight: bold;">let</span> ((vertex-list (assoc src (graph-adjacency-list g)))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">the list that stores the edges for the source vertex `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">src</span><span style="font-weight: bold; font-style: italic;">'</span>
     (<span style="font-weight: bold;">if</span> vertex-list

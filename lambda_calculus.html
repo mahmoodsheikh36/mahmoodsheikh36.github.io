@@ -29,7 +29,7 @@
 </div><h1 class="main-title">lambda calculus</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org316eb3b">
+<div class="dummy" id="orgf83e383">
 <p>
 the <i><img src="ltx/e54d35934ff.svg" alt="\(\lambda\)" style="height: 0.7486em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-calculus</i> consists of a set of objects called <img src="ltx/e54d35934ff.svg" alt="\(\lambda\)" style="height: 0.7486em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-terms and some rules for manipulating them. it was originally designed to capture formally the notions of functional abstraction and functional application and their interaction.<br />
 the <img src="ltx/e54d35934ff.svg" alt="\(\lambda\)" style="height: 0.7486em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-calculus has had a profound impact on computing. one can see the basic principles of the <img src="ltx/e54d35934ff.svg" alt="\(\lambda\)" style="height: 0.7486em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" />-calculus at work in the functional programming language lisp and its more modern offspring SCHEME and DYLAN.<br />
@@ -40,14 +40,14 @@ might be used to denote the successor function on natural numbers. to apply this
 <img src="ltx/a32cab17a98.svg" alt="\[ (\lambda x.(x + 1))7 \to 7 + 1 = 8. \]" style="height: 1.4669em; display: block" class="org-latex org-latex-block" /><br />
 in the programming language DYLAN, one would write<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="dylan">
 <pre class="src src-dylan">(method (x) (+ x 1))
 </pre>
 </div>
 <p>
 for the same thing. the keyword <code>method</code> is really <img src="ltx/e54d35934ff.svg" alt="\(\lambda\)" style="height: 0.7486em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline" /> in disguise. if you typed<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="dylan">
 <pre class="src src-dylan">((method (x) (+ x 1)) 7)
 </pre>
 </div>
@@ -69,7 +69,7 @@ denotes the composition of the functions <img src="ltx/11a5a5e1382.svg" alt="\(f
 <p>
 denotes the function that takes functions <img src="ltx/11a5a5e1382.svg" alt="\(f\)" style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="ltx/9c1ee738080.svg" alt="\(g\)" style="height: 0.7261em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> as input and gives back their composition <img src="ltx/7a5b75c4b99.svg" alt="\(\lambda x.f(gx)\)" style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" />. In DYLAN one would write<br />
 </p>
-<div class="org-src-container">
+<div class="org-src-container" data-language="dylan">
 <pre class="src src-dylan">(method (f)
   (method (g)
     (method (x) (f (g x)))))
@@ -117,7 +117,7 @@ the function <img src="ltx/03238e83b95.svg" alt="\(f(x_1,x_2)=x_1+x_2\)" style="
 " style="height: 8.9772em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
 </span>
 </div>
-<div class="math-block note note" data-before="note" data-after="" id="orgdaae578">
+<div class="math-block note note" data-before="note" data-after="" id="org6ba6461">
 <p>
 is this derivation doing redundant work?<br />
 </p>
