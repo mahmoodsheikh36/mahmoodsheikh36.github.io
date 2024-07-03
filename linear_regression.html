@@ -31,7 +31,7 @@
 </div>
 <div id="content" class="content">
 <div class="math-block problem problem" data-before="problem: linear regression" data-after="(Christopher M. Bishop, 2006 section 3.1 linear basis function models)\\
-" id="org7b39489">
+" id="orge19e489">
 <p>
 given a training data set comprising <img src="ltx/fec97b9cff2.svg" alt="\(N\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> observations <img src="ltx/f3ffb83277d.svg" alt="\(\mathcal{D}=\{\brm{x}_n \in \mathbb{R}^A\}\)" style="height: 1.1296em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" />, where <img src="ltx/91f379055dc.svg" alt="\(n=1,\dots,N\)" style="height: 0.8980em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline" />, together with corresponding target values <img src="ltx/f55d72f8b7e.svg" alt="\(\{\brm{y}_n \in \mathbb{R}^K\}\)" style="height: 1.1637em; vertical-align: -0.2912em; display: inline-block" class="org-latex org-latex-inline" />, the goal is to predict the value of <img src="ltx/7c4bbdedc1e.svg" alt="\(\brm{y}\)" style="height: 0.7579em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" /> for a new value of <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.5570em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> with a <i>predictive hypothesis</i> function <img src="ltx/5fb1e9d3cd0.svg" alt="\(\brm{h}\)" style="height: 0.7510em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />:<br />
 </p>
@@ -70,18 +70,12 @@ such that <img src="ltx/f38b33d5691.svg" alt="\(\Phi_0(\brm{x})=1\)" style="heig
 </div>
 <p>
 this gets rid of the restrictions we would be imposing by using linear functions of <img src="ltx/27d63a9e373.svg" alt="\(\brm{x}\)" style="height: 0.5570em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, this is however still a linear function of <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7657em; vertical-align: -0.0639em; display: inline-block" class="org-latex org-latex-inline" /> which eases analysis.<br />
-</p>
-
-<p>
 here, <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7657em; vertical-align: -0.0639em; display: inline-block" class="org-latex org-latex-inline" /> is the weight matrix which we hope would represent a linear transformation that transforms a vector of input features <img src="ltx/2f0e2d479bf.svg" alt="\(\brm{x} \in \mathbb{R}^A\)" style="height: 0.9424em; vertical-align: -0.0546em; display: inline-block" class="org-latex org-latex-inline" /> into an output vector <img src="ltx/37476c61ff8.svg" alt="\(\brm{y} \in \mathbb{R}^K\)" style="height: 1.1225em; vertical-align: -0.2501em; display: inline-block" class="org-latex org-latex-inline" />.<br />
 </p>
 
 </div>
 <p>
 we start with a random point in <img src="ltx/920b8927b6b.svg" alt="\(\mathbb{R}^{K \times M}\)" style="height: 0.9270em; vertical-align: -0.0546em; display: inline-block" class="org-latex org-latex-inline" /> for <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7657em; vertical-align: -0.0639em; display: inline-block" class="org-latex org-latex-inline" />, and use an optimization algorithm to arrive at a good enough approximation of a hypothetical target function <img src="ltx/4cfc2df0a0d.svg" alt="\(\brm{f}\)" style="height: 0.7653em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> from which we assume the observations <img src="ltx/0f37e8458c2.svg" alt="\(\{\brm{x}_j\}\)" style="height: 1.0889em; vertical-align: -0.3464em; display: inline-block" class="org-latex org-latex-inline" /> were drawn, "good enough" being defined by some criterion or loss function.<br />
-</p>
-
-<p>
 here we consider the traditional gradient descent as the optimization method. the observations may potentially be divided into batches, but that doesnt matter in theory. our goal is to converge on a good enough <img src="ltx/f9e0891dd3b.svg" alt="\(\brm{W}\)" style="height: 0.7657em; vertical-align: -0.0639em; display: inline-block" class="org-latex org-latex-inline" /> by going in the direction opposite to that of the gradient of the loss function, because by doing so we could get closer to a local minima point (i.e. "sliding downhill") so a <i>training step</i> would consist of:<br />
 </p>
 
@@ -95,9 +89,6 @@ here we consider the traditional gradient descent as the optimization method. th
 </div>
 <p>
 where <img src="ltx/4257eeb78bb.svg" alt="\(L\)" style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is the loss function and <img src="ltx/c8bdd98c924.svg" alt="\(\eta\)" style="height: 0.7261em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> is the learning rate.<br />
-</p>
-
-<p>
 the optimal weight matrix <img src="ltx/9b54e7cb081.svg" alt="\(\brm{\hat W}\)" style="height: 0.9951em; vertical-align: -0.0639em; display: inline-block" class="org-latex org-latex-inline" /> would be the one to minimize this loss for a given batch (set of observations):<br />
 </p>
 

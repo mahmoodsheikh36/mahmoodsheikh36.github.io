@@ -30,23 +30,22 @@
 </div><h1 class="main-title">spotify's api</h1><span class="desc">writing code for spotify's web api</span>
 </div>
 <div id="content" class="content">
-<div id="outline-container-org76ac9b0" class="outline-2">
-<h2 id="org76ac9b0">getting an access token for the api</h2>
-<div class="outline-text-2" id="text-org76ac9b0">
+<div id="outline-container-orgd72cf7d" class="outline-2">
+<h2 id="orgd72cf7d">getting an access token for the api</h2>
+<div class="outline-text-2" id="text-orgd72cf7d">
 <ol class="org-ol">
 <li>head over to <a href="https://developer.spotify.com/dashboard">spotify's developer dashboard</a><br /></li>
 <li>click the <code>Create app</code> button<br /></li>
 <li>enter all the necessary information: <code>App name</code>, <code>App description</code>, <code>Website</code>, etc..<br /></li>
-
 <li>for <code>Redirect URI</code> enter <code>http://localhost:5555</code><br /></li>
 <li>hit the terms of service agreement checkbox<br /></li>
 <li>click the <code>Settings</code> button, you will find your <code>Client ID</code> and you need to press <code>View client secret</code> to get your <code>Client secret</code>, save both of these as you'll need them<br /></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orga743bc3" class="outline-2">
-<h2 id="orga743bc3">api authorization</h2>
-<div class="outline-text-2" id="text-orga743bc3">
+<div id="outline-container-org18bde81" class="outline-2">
+<h2 id="org18bde81">api authorization</h2>
+<div class="outline-text-2" id="text-org18bde81">
 <p>
 first, we need to gain access "keys" (so we can make requests to various api backends/routes), and because we need to read private data of the user, we need to use <a href="https://developer.spotify.com/documentation/web-api/tutorials/code-flow">Authorization Code Flow</a><br />
 so first step is getting an <code>auth code</code> which we can then use to fetch a <code>refresh token</code> which in turn we can use to fetch an <code>access token</code> with which we can make make requests to almost any of spotify's api backends<br />
@@ -81,7 +80,6 @@ with the webpage open and the local http server running, when you complete authe
 </p>
 <div class="org-src-container">
 <pre class="src src-text">Serving HTTP on 0.0.0.0 port 5555 (http://0.0.0.0:5555/) ...
-
 ^[127.0.0.1 - - [09/Oct/2023 17:36:17] "GET /?code=AQCg0RZ0C8NXzy0n3JpngvNrzx8Fs-vY2BpPn6sZlufBkeUgESfzoaoiiymlsaTtz0dQ6T8OxpNKNNztpAZ-E_0ZjA7TzLG8gTxza27GYSmHswxCHwZM3AA_n7onaCUBWscD_nVII1jPfHadvfUe_FfLt3UGup8DHCfo5lMnBQEtIVNWKBfyuVmDZQX2TFhPrwC8pmp_JzOmLYnjXxxFRmwyv2VQZ4rtTjN0hpVoa91-1azmtdXWQw6gMXOe1T4SsGS9mXNZmwGUo-JJNRjH7K0FkfHfbytHM5sV3UI07IZpnI1yBFkMGqQIkeyNiX8UZNKwc3kaw-WjQZh8NBZXMo48U0XfLxybxE0R_k9IVlf2PUInBmy39kMGHWoFpJT8cJpayooR0pYw_gl4ubH_DBRVwGhuX14pF2CzgFmwlT4sXh5TN-4yPFpcP8sSnpwsN07eQimOMPliT2nzf3RPZ14hXtccAC9jxJ-m-ZwvcFlWiuZPLZf_G6TCeGdz_1Md HTTP/1.1" 200 -
 127.0.0.1 - - [09/Oct/2023 17:36:17] code 404, message File not found
 127.0.0.1 - - [09/Oct/2023 17:36:17] "GET /favicon.ico HTTP/1.1" 404 -
@@ -148,9 +146,9 @@ BQDLhfDBmXx-rTS378MgNs4DjCG6Fm2I8v7F6yFpI8tw4SqX6O4XJv-lV6vTMAdVHOGTo59aDInXWXz6
 </pre>
 </div>
 </div>
-<div id="outline-container-orga36d33f" class="outline-2">
-<h2 id="orga36d33f">api requests</h2>
-<div class="outline-text-2" id="text-orga36d33f">
+<div id="outline-container-org5ac6d60" class="outline-2">
+<h2 id="org5ac6d60">api requests</h2>
+<div class="outline-text-2" id="text-org5ac6d60">
 <p>
 with this access token we can now make requests to other routes of spotifys web api, e.g. to the <a href="https://developer.spotify.com/documentation/web-api/reference/search">/search route</a>:<br />
 </p>
@@ -221,9 +219,9 @@ example usage:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org02e9df1" class="outline-2">
-<h2 id="org02e9df1">downloading with spotdl</h2>
-<div class="outline-text-2" id="text-org02e9df1">
+<div id="outline-container-org9963818" class="outline-2">
+<h2 id="org9963818">downloading with spotdl</h2>
+<div class="outline-text-2" id="text-org9963818">
 <p>
 now that we have our beloved tracks library in <code>tracks.json</code> we can use a tool like <code>spotdl</code> to download our music for offline listening (independently from spotify)<br />
 this script downloads all tracks using the metadata in <code>tracks.json</code>:<br />

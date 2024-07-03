@@ -31,23 +31,17 @@
 <div id="content" class="content">
 <p>
 using <code>cl-cuda</code>.<br />
-</p>
-
-<p>
 load it using quicklisp:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-cuda</span>)
 </pre>
 </div>
-<div id="outline-container-org2fb71be" class="outline-2">
-<h2 id="org2fb71be">arch linux setup</h2>
-<div class="outline-text-2" id="text-org2fb71be">
+<div id="outline-container-org9b0fedb" class="outline-2">
+<h2 id="org9b0fedb">arch linux setup</h2>
+<div class="outline-text-2" id="text-org9b0fedb">
 <p>
 i had to install <code>cuda</code> for the <code>nvcc</code> compiler and more, and <code>nvidia</code> for the gpu driver, at first you may have to use <code>/opt/cuda/bin/nvcc</code> until you reboot or extend your $PATH.<br />
-</p>
-
-<p>
 to check which nvidia driver is in use run:<br />
 </p>
 <div class="org-src-container">
@@ -60,129 +54,71 @@ if you have installed the <code>nvidia</code> package and your os still uses <co
 </p>
 </div>
 </div>
-<div id="outline-container-org4214b8c" class="outline-2">
-<h2 id="org4214b8c">essential concepts</h2>
-<div class="outline-text-2" id="text-org4214b8c">
+<div id="outline-container-orgd82b9b5" class="outline-2">
+<h2 id="orgd82b9b5">essential concepts</h2>
+<div class="outline-text-2" id="text-orgd82b9b5">
 </div>
-<div id="outline-container-org66270eb" class="outline-3">
-<h3 id="org66270eb">threads</h3>
-<div class="outline-text-3" id="text-org66270eb">
+<div id="outline-container-org0c444d6" class="outline-3">
+<h3 id="org0c444d6">threads</h3>
+<div class="outline-text-3" id="text-org0c444d6">
 <p>
 mostly from <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
-</p>
-
-<p>
 i also read the examples from the cl-cuda's source code.<br />
-</p>
-
-<p>
 <b>kernels</b> are just functions that are run by different cuda threads in a <b>thread block</b>, a thread block is a group of threads each given an index, thread blocks can be nested up to 3 times, an index is a 3d vector with each value corresponding to the index in one of the dimensions x,y,z, there is a limit to the number of threads per block, which on current GPUs is 1024. the index of a thread is stored in the special variable <code>threadIdx</code>, the index of a block is stored in the special variable <code>blockIdx</code>, the dimensions of a block can be given by <code>blockDim</code>, all of these variables are 3d vectors and have <code>x,y,z</code> members.<br />
-</p>
-
-<p>
 a kernel can be executed by multiple equally-shaped thread blocks, so that the total number of threads is equal to the number of threads per block times the number of blocks.<br />
-</p>
-
-<p>
 blocks are organized into a one-dimensional, two-dimensional, or three-dimensional <b>grid of thread blocks</b>. the number of thread blocks in a grid is usually dictated by the size of the data being processed, which typically exceeds the number of processors in the system.<br />
-</p>
-
-<p>
 a thread block size of 16x16 (256 threads) is a common choice.<br />
-</p>
-
-<p>
 thread blocks are required to execute independently: it must be possible to execute them in any order, in parallel or in series. this independence requirement allows thread blocks to be scheduled in any order across any number of cores, enabling programmers to write code that scales with the number of cores.<br />
-</p>
-
-<p>
 threads within a block can cooperate by sharing data through some <b>shared memory</b> and by synchronizing their execution to coordinate memory accesses. more precisely, one can specify synchronization points in the kernel by calling the <code>__syncthreads()</code> intrinsic function; <code>__syncthreads()</code> acts as a barrier at which all threads in the block must wait before any is allowed to proceed. in addition to <code>__syncthreads()</code>, the cooperative groups api provides a rich set of thread-synchronization primitives.<br />
-</p>
-
-<p>
 for efficient cooperation, the shared memory is expected to be a low-latency memory near each processor core (much like an L1 cache) and <code>__syncthreads()</code> is expected to be lightweight.<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org7f1da0c" class="outline-3">
-<h3 id="org7f1da0c">memory</h3>
-<div class="outline-text-3" id="text-org7f1da0c">
+<div id="outline-container-org21d7a5c" class="outline-3">
+<h3 id="org21d7a5c">memory</h3>
+<div class="outline-text-3" id="text-org21d7a5c">
 <p>
 CUDA threads may access data from multiple memory spaces during their execution. each thread has private <b>local memory</b>. each thread block has <b>shared memory</b> visible to all threads of the block and with the same lifetime as the block. thread blocks in a thread block cluster can perform read, write, and atomics operations on each other’s shared memory. all threads have access to the same <b>global memory</b>.<br />
-</p>
-
-<p>
 there are also two additional read-only memory spaces accessible by all threads: the constant and texture memory spaces. the global, constant, and texture memory spaces are optimized for different memory usages. texture memory also offers different addressing modes, as well as data filtering, for some specific data formats.<br />
-</p>
-
-<p>
 the global, constant, and texture memory spaces are persistent across kernel launches by the same application.<br />
-</p>
-
-<p>
 <b>unified memory</b> provides <b>managed memory</b> to bridge the host and <b>device memory</b> spaces. managed memory is accessible from all CPUs and GPUs in the system as a single, coherent memory image with a common address space. this capability enables oversubscription of device memory and can greatly simplify the task of porting applications by eliminating the need to explicitly mirror data on host and device.<br />
-</p>
-
-<p>
 the CUDA programming model also assumes that both the host and the device maintain their own separate memory spaces in DRAM, referred to as host memory and device memory, respectively. therefore, a program manages the global, constant, and texture memory spaces visible to kernels through calls to the CUDA runtime. this includes device memory allocation and deallocation as well as data transfer between host and device memory.<br />
-</p>
-
-<p>
 unified memory provides managed memory to bridge the host and device memory spaces. managed memory is accessible from all CPUs and GPUs in the system as a single, coherent memory image with a common address space. this capability enables oversubscription of device memory and can greatly simplify the task of porting applications by eliminating the need to explicitly mirror data on host and device.<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgd3a3b45" class="outline-3">
-<h3 id="orgd3a3b45">device memory</h3>
-<div class="outline-text-3" id="text-orgd3a3b45">
+<div id="outline-container-orgd716d53" class="outline-3">
+<h3 id="orgd716d53">device memory</h3>
+<div class="outline-text-3" id="text-orgd716d53">
 <p>
 the CUDA programming model assumes a system composed of a host and a device, each with their own separate memory. kernels operate out of device memory, so the runtime provides functions to allocate, deallocate, and copy device memory, as well as transfer data between host memory and device memory.<br />
-</p>
-
-<p>
 device memory can be allocated either as linear memory or as <b>CUDA arrays</b>.<br />
-</p>
-
-<p>
 CUDA arrays are opaque memory layouts optimized for texture fetching.<br />
-</p>
-
-<p>
 <b>linear memory</b> is allocated in a single unified address space, which means that separately allocated entities can reference one another via pointers, for example, in a binary tree or linked list. the size of the address space depends on the host system (CPU) and the compute capability of the used GPU.<br />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org91abaa8" class="outline-2">
-<h2 id="org91abaa8">code</h2>
-<div class="outline-text-2" id="text-org91abaa8">
+<div id="outline-container-org7316742" class="outline-2">
+<h2 id="org7316742">code</h2>
+<div class="outline-text-2" id="text-org7316742">
 <p>
 see <a href="/connect_to_remote_common_lisp_repl_with_sly_slime.html#1686752509">connect to remote common lisp repl with sly/slime</a> for connecting to a remote common lisp repl with emacs.<br />
 </p>
-
-<div class="math-block note note" data-before="note" data-after="" id="org9b380d5">
+<div class="math-block note note" data-before="note" data-after="" id="org44c012b">
 <p>
 notice that when working cl-cuda the data that we're passing to the gpu is gonna be duplicated (because its a binding from cl to C and uses whats called foreign memory), i never considered how bad that is, atleast in this case, as mostly when doing gpu calculations we're ofcourse passing lots of data and then copying it back, and the maximum amount of memory that i can use is already cut in half, if i have 16gb of memory i already know i cant use more than 8gb of that, thats pretty horrible (assuming i have a gpu with ~16gb memory), i can have my way around this, e.g. free memory from sbcl as it gets copied to C, but that'd be much more complexity than i wanna have to deal with<br />
 </p>
 
 </div>
 </div>
-<div id="outline-container-org7027a06" class="outline-3">
-<h3 id="org7027a06">cuda vector addition</h3>
-<div class="outline-text-3" id="text-org7027a06">
+<div id="outline-container-org980c5e1" class="outline-3">
+<h3 id="org980c5e1">cuda vector addition</h3>
+<div class="outline-text-3" id="text-org980c5e1">
 <p>
 we start with the vectorAdd example, a simple example in C, stolen from <a href="https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu">https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu</a> and modified to reduce boilerplate code.<br />
-</p>
-
-<p>
 the syntax for calling a kernel in c++ is <code>vector&lt;&lt;&lt; blocks per grid, threads per block &gt;&gt;&gt;(arg1,arg2,...)</code>.<br />
-</p>
-
-<p>
 consider the following program which does vector addition.<br />
-</p>
-
-<p>
 place this code in a file with a <code>.cu</code> extension (only .cu works):<br />
 </p>
 <div class="org-src-container">
@@ -248,9 +184,6 @@ __global__ <span style="font-weight: bold; text-decoration: underline;">void</sp
 </div>
 <p>
 compile with <code>nvcc &lt;name&gt;.cu -o vector_add</code> and run with <code>./vector_add</code>.<br />
-</p>
-
-<p>
 similar same code but in cl:<br />
 </p>
 <div class="org-src-container">
@@ -287,26 +220,14 @@ similar same code but in cl:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org8c671e1" class="outline-3">
-<h3 id="org8c671e1">cuda matrix multiplication</h3>
-<div class="outline-text-3" id="text-org8c671e1">
+<div id="outline-container-org29a0e9b" class="outline-3">
+<h3 id="org29a0e9b">cuda matrix multiplication</h3>
+<div class="outline-text-3" id="text-org29a0e9b">
 <p>
 mostly taken from <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html</a> and <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
-</p>
-
-<p>
 before implementing matrix multiplication for the <b>gpu</b> we need to consider some things.<br />
-</p>
-
-<p>
 the product of two matrices <img src="ltx/7bfaa93f10a.svg" alt="\(A_{M \times K},B_{K \times N}\)" style="height: 0.9190em; vertical-align: -0.2083em; display: inline-block" class="org-latex org-latex-inline" /> results in a matrix <img src="ltx/12cd4179641.svg" alt="\(C_{M \times N}\)" style="height: 0.9190em; vertical-align: -0.2083em; display: inline-block" class="org-latex org-latex-inline" /> which contains <img src="ltx/aa99bb3e3b6.svg" alt="\(M \cdot N\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> values, each of which is a dot product of K-element vectors. thus a total of <img src="ltx/0a4381989ac.svg" alt="\(M \cdot N \cdot K\)" style="height: 0.7569em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> fused multiply-adds are needed to compute the product. each FMA is 2 operations, a (scalar) multiplication and an addition, so a total of <img src="ltx/6443b310d51.svg" alt="\(2 \cdot M \cdot N \cdot K\)" style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline" /> flops are required, if we were to consider gemm, the parameters <img src="ltx/3c7d77d7b98.svg" alt="\(\alpha,\beta\)" style="height: 0.9421em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline" /> would also play a role in the number of flops required, but the effect these scalars have can be negligable for sufficiently large matrices.<br />
-</p>
-
-<p>
 in the example of vector addition, we used <b>global memory</b> (using <code>cudaMalloc</code> in C and <code>with-memory-block</code> in CL), which is (very) slow compared to <b>shared memory</b> which is allocated per <b>thread block</b>. we also did one <b>floating point operation</b> per memory access, so with as many flops as we have you can already see how slow we are going. to speed this up we're gonna use shared memory so that threads in a thread block can collaborate in computing a submatrix of the output matrix and to reduce calls to global memory.<br />
-</p>
-
-<p>
 first, an implementation without shared memory:<br />
 </p>
 <div class="org-src-container">
@@ -399,14 +320,8 @@ __global__ <span style="font-weight: bold; text-decoration: underline;">void</sp
 </div>
 <p>
 to divide the work with shared memory we load submatrices into each thread block so that threads of each block can operate on the respective submatrix.<br />
-</p>
-
-<p>
 <img src="/matrix-multiplication-with-shared-memory.png" /><br />
 the threads cooperate in loading from memory the values of the input matrices to minimize access to global memory, different thread blocks load different portions of the input matrices, the portions they load are exactly the part of the matrices needed to find the values of the submatrix of C they operate on.<br />
-</p>
-
-<p>
 the best way to understand this is to read the code:<br />
 </p>
 <div class="org-src-container">
@@ -540,7 +455,6 @@ some points to consider before implementating in lisp:<br />
 <li>common lisp implementation will be more complete (i cba doing the same for C), e.g. no assumptions on matrix sizes,<br /></li>
 <li>loops in kernels can only be done using the <code>do</code> statement.<br /></li>
 </ol>
-
 <div class="org-src-container">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-init</span> (data n)
   (<span style="font-weight: bold;">dotimes</span> (i n)
@@ -626,9 +540,6 @@ that took some effort, i had to hard-code the block size because as it compiles 
 </div>
 <p>
 kernels are very limtied in terms of functionality, not everything can be used in kernels, almost everything is translated to C.<br />
-</p>
-
-<p>
 now a small benchmark to test this against my previous cpu solution:<br />
 </p>
 <div class="org-src-container">

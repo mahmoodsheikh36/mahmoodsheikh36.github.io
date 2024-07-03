@@ -33,9 +33,9 @@
 <p>
 logic programming in common lisp<br />
 </p>
-<div id="outline-container-org528555e" class="outline-2">
-<h2 id="org528555e">logical statements</h2>
-<div class="outline-text-2" id="text-org528555e">
+<div id="outline-container-org345cf59" class="outline-2">
+<h2 id="org345cf59">logical statements</h2>
+<div class="outline-text-2" id="text-org345cf59">
 <p>
 we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical statements, e.g. given the following knowledge base of horn clauses:<br />
 </p>
@@ -78,21 +78,9 @@ in lisp we could write it as:<br />
 
 <p>
 the choice of the symbols <code>implies, and</code> could vary, but essentially we should write code that deals properly with these symbols based on their names. other symbols we may use are <code>or, iff</code>.<br />
-</p>
-
-<p>
 so a knowledge base is just a (nested) list of propositions.<br />
-</p>
-
-<p>
 what about predicates? e.g. statements like <img src="ltx/526e0a9cc4e.svg" alt="\(Human(John)\)" style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" />?, that should be simple enough, we just use <code>'(Human John)</code>, so instead of <b>infix notation</b>, we use lisp's infamous <b>prefix notation</b>, we dont need to worry about <code>(Human John)</code> sharing the same form as <code>(and x1 x2)</code>, as <code>and</code> can be considered just a boolean function like <code>Human</code>, after all. any expression that is in the form <code>(whatever x1 x2 ... xn)</code> would imply that <code>whatever</code> is meant to be treated as a boolean function.<br />
-</p>
-
-<p>
 first obstacle we may face is the issue of distinguishing a variable from a constant symbol, how can we tell whether a symbol represents a variable or a constant (an immutable object)? after all both are just symbols (in our implementation), for example consider <code>person</code> vs <code>John</code>, inherently, <code>person</code> is a variable that applies to everyone and <code>John</code> is a constant that only describes one person (in a simplified context where John refers to a friend, for example). a simple solution to this problem would be to use special syntax for variables, like <code>?x</code>, here, <code>?x</code> would mean we're dealing with a variable, and a symbol without a question mark prefix, for example <code>x</code>, is recognized as a constant.<br />
-</p>
-
-<p>
 in our previous example, this doesnt make much difference as we were dealing with constants only, consider this example which demonstrates how we apply the idea of prefixing variables with a question mark:<br />
 </p>
 <div class="org-src-container">
@@ -126,9 +114,9 @@ how about substitutions? how do we represent for example the substitution <img s
 </pre>
 </div>
 </div>
-<div id="outline-container-orgb3d3bcd" class="outline-2">
-<h2 id="orgb3d3bcd">early inference engines</h2>
-<div class="outline-text-2" id="text-orgb3d3bcd">
+<div id="outline-container-org25680f6" class="outline-2">
+<h2 id="org25680f6">early inference engines</h2>
+<div class="outline-text-2" id="text-org25680f6">
 <p>
 imma start off with the unification algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the <b>occur check</b> and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates<br />
 </p>
