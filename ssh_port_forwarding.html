@@ -49,14 +49,14 @@ a connection to the tunnel can be opened using the command<br />
 <p>
 note that <code>localuser</code> would be the user of <code>local2</code> (not the remote machine) that you want ssh to use.<br />
 </p>
-<div id="outline-container-orgd937899" class="outline-2">
-<h2 id="orgd937899">connection refused</h2>
-<div class="outline-text-2" id="text-orgd937899">
-<div class="dummy" id="orga863943">
+<div id="outline-container-orga2ba00b" class="outline-2">
+<h2 id="orga2ba00b">connection refused</h2>
+<div class="outline-text-2" id="text-orga2ba00b">
+<div class="dummy" id="org5253ef5">
 <p>
 by default tunnel endpoints only listen on 127.0.0.1, so they can't be accessed from other machines. to change this you may need to add this to <code>/etc/ssh/sshd_config</code> on the server:<br />
 </p>
-<div class="literal" id="org80e1546">
+<div class="literal" id="org693075a">
 <p>
 GatewayPorts clientspecified<br />
 </p>
@@ -69,9 +69,9 @@ this is also the reason we use the address <code>*:5000:*:22</code>, the star is
 </p>
 </div>
 </div>
-<div id="outline-container-org6d538ff" class="outline-2">
-<h2 id="org6d538ff">using ipv6</h2>
-<div class="outline-text-2" id="text-org6d538ff">
+<div id="outline-container-org8db1417" class="outline-2">
+<h2 id="org8db1417">using ipv6</h2>
+<div class="outline-text-2" id="text-org8db1417">
 <p>
 if you're using ipv6 you need to make sure its enabled on all machines. <code>vim /etc/sysctl.conf</code> and make sure you have the following:<br />
 </p>
@@ -89,9 +89,9 @@ the ipv6 equivalent for <code>localhost</code> is <code>::1</code>. so, for exam
 </div>
 </div>
 </div>
-<div id="outline-container-org615c917" class="outline-2">
-<h2 id="org615c917">systemd service</h2>
-<div class="outline-text-2" id="text-org615c917">
+<div id="outline-container-orgd34f3a4" class="outline-2">
+<h2 id="orgd34f3a4">systemd service</h2>
+<div class="outline-text-2" id="text-orgd34f3a4">
 <p>
 an example systemd service that i use to automatically open an ssh tunnel for a linux server:<br />
 </p>
