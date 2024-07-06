@@ -32,9 +32,9 @@
 <p>
 working with graphs in common lisp<br />
 </p>
-<div id="outline-container-org907f75b" class="outline-2">
-<h2 id="org907f75b">my initial approach</h2>
-<div class="outline-text-2" id="text-org907f75b">
+<div id="outline-container-orgafdc616" class="outline-2">
+<h2 id="orgafdc616">my initial approach</h2>
+<div class="outline-text-2" id="text-orgafdc616">
 <p>
 for simplicity ill represent a graph as a list of cons's, if we are dealing with a weighted graph, we use the second item in the cons as a cons with the first item being the node and the second being the weight<br />
 i implemented the helper functions <code>node-weight</code> and <code>node</code> for this purpose<br />
@@ -192,9 +192,9 @@ an implementation of A* algorithm:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgc3d055a" class="outline-2">
-<h2 id="orgc3d055a">adjacency list implementation</h2>
-<div class="outline-text-2" id="text-orgc3d055a">
+<div id="outline-container-orgb650a69" class="outline-2">
+<h2 id="orgb650a69">adjacency list implementation</h2>
+<div class="outline-text-2" id="text-orgb650a69">
 <p>
 an adjancy list is list of linked lists, where each linked list stores a vertex and its outgoing edges, this makes representing directed graphs simple, so i decided to rewrite my code and to this approach<br />
 a vertex stores a list of edges, an "edge" stores the destination vertex and the weight (if the graph is directed we can tell which direction an edge because its source and destination vertex are determined already in the structure, so its direction must be from the source to the destination), here, an edge need not store its source vertex because the source vertex links to it already, if a function expects to receive a list of edges, not an adjacency list, then perhaps a list could be used in the form <code>'(source dest weight)</code>.<br />
