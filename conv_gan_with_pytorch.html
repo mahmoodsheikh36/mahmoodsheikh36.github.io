@@ -30,25 +30,25 @@
 </div><h1 class="main-title">conv gan with pytorch</h1><span class="desc">an example convolutional generative adversarial network written with pytorch</span>
 </div>
 <div id="content" class="content">
-<div class="math-block note note" data-before="note" data-after="" id="org0aae239">
+<div class="math-block note note" data-before="note" data-after="" id="org7eb08ae">
 <p>
 some information was quoted from <a href="https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/">this great article</a> (the code was rewritten in pytorch and alot of things differ though!).<br />
 </p>
 
 </div>
-<div id="outline-container-org9badf9c" class="outline-2">
-<h2 id="org9badf9c">essential packages</h2>
-<div class="outline-text-2" id="text-org9badf9c">
+<div id="outline-container-org8100722" class="outline-2">
+<h2 id="org8100722">essential packages</h2>
+<div class="outline-text-2" id="text-org8100722">
 <p>
 we need to import some essential packages:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-essential-imports"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-activate-venv()&gt;&gt;</span>
-<span style="color: #c48702; font-weight: bold;">import</span> matplotlib.pyplot <span style="color: #c48702; font-weight: bold;">as</span> plt
-<span style="color: #c48702; font-weight: bold;">import</span> torch
-<span style="color: #c48702; font-weight: bold;">import</span> torch.nn <span style="color: #c48702; font-weight: bold;">as</span> nn
-<span style="color: #c48702; font-weight: bold;">import</span> torch.nn.functional <span style="color: #c48702; font-weight: bold;">as</span> F
-torch.manual_seed<span style="color: #d0730f;">(</span>0<span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;"># for reproducibility</span>
+<pre class="src src-python" id="src-essential-imports"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-activate-venv()&gt;&gt;</span>
+<span style="font-weight: bold;">import</span> matplotlib.pyplot <span style="font-weight: bold;">as</span> plt
+<span style="font-weight: bold;">import</span> torch
+<span style="font-weight: bold;">import</span> torch.nn <span style="font-weight: bold;">as</span> nn
+<span style="font-weight: bold;">import</span> torch.nn.functional <span style="font-weight: bold;">as</span> F
+torch.manual_seed(0) <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">for reproducibility</span>
 </pre>
 </div>
 <p>
@@ -56,33 +56,33 @@ it's common <code>PyTorch</code> practice to initialize a variable, usually name
 here, if the machine we're using has a cuda-supported gpu available, we use that, otherwise we use the cpu, this variable stores our choice and is used later to pass data to the training device, if we're training on the cpu, there would be no point in copying the data from the cpu memory to another block of cpu memory, but it would still work.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-pytorch-init"><span style="color: #6fafff;">device</span> = torch.device<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">"cuda:0"</span> <span style="color: #c48702; font-weight: bold;">if</span> torch.cuda.is_available<span style="color: #64aa0f;">()</span> <span style="color: #c48702; font-weight: bold;">else</span> <span style="color: #f06a3f;">"cpu"</span><span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-pytorch-init"><span style="font-weight: bold; font-style: italic;">device</span> = torch.device(<span style="font-style: italic;">"cuda:0"</span> <span style="font-weight: bold;">if</span> torch.cuda.is_available() <span style="font-weight: bold;">else</span> <span style="font-style: italic;">"cpu"</span>)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org6b22dd6" class="outline-2">
-<h2 id="org6b22dd6">load the data</h2>
-<div class="outline-text-2" id="text-org6b22dd6">
+<div id="outline-container-org4936035" class="outline-2">
+<h2 id="org4936035">load the data</h2>
+<div class="outline-text-2" id="text-org4936035">
 <p>
 we start by loading the mnist dataset (the 28x28 images of hand-written digits), we use the <code>torchvision</code> package from <code>pypi</code> which provides various datasets for machine learning<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-load-dataset"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-essential-imports()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-pytorch-init()&gt;&gt;</span>
-<span style="color: #c48702; font-weight: bold;">import</span> torchvision.datasets
-<span style="color: #c48702; font-weight: bold;">import</span> os.path
-<span style="color: #cf9f7f; font-style: italic;"># download dataset to user's home directory and load it</span>
-<span style="color: #6fafff;">train_dataset</span> = torchvision.datasets.MNIST<span style="color: #d0730f;">(</span>root=os.path.expanduser<span style="color: #64aa0f;">(</span><span style="color: #f06a3f;">'~'</span><span style="color: #64aa0f;">)</span>, download=<span style="color: #64aa0f;">True</span>, train=<span style="color: #64aa0f;">True</span><span style="color: #d0730f;">)</span>
-<span style="color: #6fafff;">test_dataset</span> = torchvision.datasets.MNIST<span style="color: #d0730f;">(</span>root=os.path.expanduser<span style="color: #64aa0f;">(</span><span style="color: #f06a3f;">'~'</span><span style="color: #64aa0f;">)</span>, download=<span style="color: #64aa0f;">True</span>, train=<span style="color: #64aa0f;">False</span><span style="color: #d0730f;">)</span>
-<span style="color: #cf9f7f; font-style: italic;"># print some info</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'train dataset:'</span>, train_dataset<span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'train data shape:'</span>, train_dataset.data.shape<span style="color: #d0730f;">)</span>
-<span style="color: #cf9f7f; font-style: italic;"># show some info about the first image in the train dataset</span>
-<span style="color: #6fafff;">img</span>, <span style="color: #6fafff;">label</span> = test_dataset<span style="color: #d0730f;">[</span>0<span style="color: #d0730f;">]</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'img:'</span>, img<span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'img size:'</span>, img.size<span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'label:'</span>, label<span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-load-dataset"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-essential-imports()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-pytorch-init()&gt;&gt;</span>
+<span style="font-weight: bold;">import</span> torchvision.datasets
+<span style="font-weight: bold;">import</span> os.path
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">download dataset to user's home directory and load it</span>
+<span style="font-weight: bold; font-style: italic;">train_dataset</span> = torchvision.datasets.MNIST(root=os.path.expanduser(<span style="font-style: italic;">'~'</span>), download=<span style="font-weight: bold; text-decoration: underline;">True</span>, train=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+<span style="font-weight: bold; font-style: italic;">test_dataset</span> = torchvision.datasets.MNIST(root=os.path.expanduser(<span style="font-style: italic;">'~'</span>), download=<span style="font-weight: bold; text-decoration: underline;">True</span>, train=<span style="font-weight: bold; text-decoration: underline;">False</span>)
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">print some info</span>
+<span style="font-weight: bold;">print</span>(<span style="font-style: italic;">'train dataset:'</span>, train_dataset)
+<span style="font-weight: bold;">print</span>(<span style="font-style: italic;">'train data shape:'</span>, train_dataset.data.shape)
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">show some info about the first image in the train dataset</span>
+<span style="font-weight: bold; font-style: italic;">img</span>, <span style="font-weight: bold; font-style: italic;">label</span> = test_dataset[0]
+<span style="font-weight: bold;">print</span>(<span style="font-style: italic;">'img:'</span>, img)
+<span style="font-weight: bold;">print</span>(<span style="font-style: italic;">'img size:'</span>, img.size)
+<span style="font-weight: bold;">print</span>(<span style="font-style: italic;">'label:'</span>, label)
 </pre>
 </div>
 
@@ -102,36 +102,36 @@ label: 7
 the function <code>gen_images_img</code> below is used to easily display a number of images in a grid layout:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-gen-images-img"><span style="color: #cf9f7f; font-style: italic;"># generate an image of images and write it to a file</span>
-<span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">gen_images_img</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">imgs</span>, <span style="color: #6fafff;">out_file</span>, <span style="color: #6fafff;">suptitle</span>=<span style="color: #64aa0f;">None</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #cf9f7f; font-style: italic;"># make sure images has a size that is divisible by 10</span>
-    <span style="color: #6fafff;">n_cols</span> = 10
-    <span style="color: #6fafff;">n_rows</span> = imgs.shape<span style="color: #d0730f;">[</span>0<span style="color: #d0730f;">]</span> // n_cols
-    <span style="color: #6fafff;">num_imgs</span> = n_rows * n_cols
-    <span style="color: #6fafff;">imgs</span> = imgs<span style="color: #d0730f;">[</span>:num_imgs<span style="color: #d0730f;">]</span>
-    <span style="color: #6fafff;">fig</span> = plt.figure<span style="color: #d0730f;">(</span>figsize=<span style="color: #64aa0f;">(</span>n_cols, n_rows<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">i</span>, <span style="color: #6fafff;">img</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">enumerate</span><span style="color: #d0730f;">(</span>imgs<span style="color: #d0730f;">)</span>:
-        plt.subplot<span style="color: #d0730f;">(</span>n_rows, n_cols, 1 + i<span style="color: #d0730f;">)</span>
-        plt.axis<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'off'</span><span style="color: #d0730f;">)</span>
-        plt.imshow<span style="color: #d0730f;">(</span>img, cmap=<span style="color: #f06a3f;">'gray_r'</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">if</span> suptitle:
-        fig.suptitle<span style="color: #d0730f;">(</span>suptitle<span style="color: #d0730f;">)</span>
-    plt.savefig<span style="color: #d0730f;">(</span>out_file, transparent=<span style="color: #64aa0f;">True</span>, bbox_inches=<span style="color: #f06a3f;">'tight'</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> out_file
+<pre class="src src-python" id="src-gen-images-img"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">generate an image of images and write it to a file</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">gen_images_img</span>(imgs, out_file, suptitle=<span style="font-weight: bold; text-decoration: underline;">None</span>):
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">make sure images has a size that is divisible by 10</span>
+    <span style="font-weight: bold; font-style: italic;">n_cols</span> = 10
+    <span style="font-weight: bold; font-style: italic;">n_rows</span> = imgs.shape[0] // n_cols
+    <span style="font-weight: bold; font-style: italic;">num_imgs</span> = n_rows * n_cols
+    <span style="font-weight: bold; font-style: italic;">imgs</span> = imgs[:num_imgs]
+    <span style="font-weight: bold; font-style: italic;">fig</span> = plt.figure(figsize=(n_cols, n_rows))
+    <span style="font-weight: bold;">for</span> i, img <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(imgs):
+        plt.subplot(n_rows, n_cols, 1 + i)
+        plt.axis(<span style="font-style: italic;">'off'</span>)
+        plt.imshow(img, cmap=<span style="font-style: italic;">'gray_r'</span>)
+    <span style="font-weight: bold;">if</span> suptitle:
+        fig.suptitle(suptitle)
+    plt.savefig(out_file, transparent=<span style="font-weight: bold; text-decoration: underline;">True</span>, bbox_inches=<span style="font-style: italic;">'tight'</span>)
+    <span style="font-weight: bold;">return</span> out_file
 </pre>
 </div>
 <p>
 example usage of the function:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-load-dataset()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gen-images-img()&gt;&gt;</span>
-gen_images_img<span style="color: #d0730f;">(</span>train_x<span style="color: #64aa0f;">[</span>:30<span style="color: #64aa0f;">]</span>.cpu<span style="color: #64aa0f;">()</span>.reshape<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>-1, 28, 28<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>, f<span style="color: #d0730f;">)</span>
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-load-dataset()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-images-img()&gt;&gt;</span>
+gen_images_img(train_x[:30].cpu().reshape((-1, 28, 28)), f)
 </pre>
 </div>
 
 
-<div id="orgce69a6c" class="figure">
+<div id="org6b045de" class="figure">
 <p><img src="/zuBb2Oa.png" /><br />
 </p>
 </div>
@@ -139,43 +139,43 @@ gen_images_img<span style="color: #d0730f;">(</span>train_x<span style="color: #
 </div>
 <div id="outline-container-ID-cd467b6b-52b1-4cce-837b-3b7f44b9bef0" class="outline-2">
 <h2 id="ID-cd467b6b-52b1-4cce-837b-3b7f44b9bef0">discriminator</h2>
-<div class="outline-text-2" id="text-org56c4711">
+<div class="outline-text-2" id="text-org14165ae">
 <p>
 the discriminator model must take a sample image from our dataset as input and output a classification, a prediction as to whether the sample is real or fake. or perhaps the likelihood of the sample being real, which means the discriminator does binary classification.<br />
 pytorch makes defining neural nets easy by inheriting from <code>nn.Module</code>, here, since we're dealing with images, we use <a href="/convolutional_neural_network.html#1684594232">convolutional layer</a>s, in combinations with dropout layers which arent "mandatory" but they help improve results, the last layers are a <a href="/convolutional_neural_network.html#1684594232">flatten layer</a> and a linear layer, the output for a single image would be a float in the range 0-1.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-discriminator"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-essential-imports()&gt;&gt;</span>
-<span style="color: #c48702; font-weight: bold;">class</span> <span style="color: #2fa526;">Discriminator</span><span style="color: #d0730f;">(</span>nn.<span style="color: #2fa526;">Module</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">__init__</span><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span><span style="color: #d0730f;">)</span>:
-        <span style="color: #ff7a7f; font-weight: bold;">super</span><span style="color: #d0730f;">(</span>Discriminator, <span style="color: #c48702; font-weight: bold;">self</span><span style="color: #d0730f;">)</span>.__init__<span style="color: #d0730f;">()</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">conv1</span> = nn.Conv2d<span style="color: #d0730f;">(</span>1, 64, <span style="color: #64aa0f;">(</span>3, 3<span style="color: #64aa0f;">)</span>, stride=<span style="color: #64aa0f;">(</span>2, 2<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">dropout1</span> = nn.Dropout<span style="color: #d0730f;">(</span>0.4<span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">conv2</span> = nn.Conv2d<span style="color: #d0730f;">(</span>64, 64, <span style="color: #64aa0f;">(</span>3, 3<span style="color: #64aa0f;">)</span>, stride=<span style="color: #64aa0f;">(</span>2, 2<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">dropout2</span> = nn.Dropout<span style="color: #d0730f;">(</span>0.4<span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">flatten</span> = nn.Flatten<span style="color: #d0730f;">()</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">linear</span> = nn.Linear<span style="color: #d0730f;">(</span>2304, 1<span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-discriminator"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-essential-imports()&gt;&gt;</span>
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Discriminator</span>(nn.Module):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">super</span>(Discriminator, <span style="font-weight: bold;">self</span>).__init__()
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv1</span> = nn.Conv2d(1, 64, (3, 3), stride=(2, 2))
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">dropout1</span> = nn.Dropout(0.4)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv2</span> = nn.Conv2d(64, 64, (3, 3), stride=(2, 2))
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">dropout2</span> = nn.Dropout(0.4)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">flatten</span> = nn.Flatten()
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">linear</span> = nn.Linear(2304, 1)
 
-    <span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">forward</span><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span>, <span style="color: #6fafff;">x</span><span style="color: #d0730f;">)</span>:
-        <span style="color: #6fafff;">x</span> = F.relu<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span>.conv1<span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.dropout1<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">x</span> = F.relu<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span>.conv2<span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.dropout2<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.flatten<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">x</span> = F.sigmoid<span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span>.linear<span style="color: #64aa0f;">(</span>x<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">return</span> x
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">forward</span>(<span style="font-weight: bold;">self</span>, x):
+        <span style="font-weight: bold; font-style: italic;">x</span> = F.relu(<span style="font-weight: bold;">self</span>.conv1(x))
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.dropout1(x)
+        <span style="font-weight: bold; font-style: italic;">x</span> = F.relu(<span style="font-weight: bold;">self</span>.conv2(x))
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.dropout2(x)
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.flatten(x)
+        <span style="font-weight: bold; font-style: italic;">x</span> = F.sigmoid(<span style="font-weight: bold;">self</span>.linear(x))
+        <span style="font-weight: bold;">return</span> x
 
-    <span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">freeze</span><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span><span style="color: #d0730f;">)</span>:
-      <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">p</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #c48702; font-weight: bold;">self</span>.parameters<span style="color: #d0730f;">()</span>:
-          p.requires_grad_<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">False</span><span style="color: #d0730f;">)</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">freeze</span>(<span style="font-weight: bold;">self</span>):
+      <span style="font-weight: bold;">for</span> p <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.parameters():
+          p.requires_grad_(<span style="font-weight: bold; text-decoration: underline;">False</span>)
 </pre>
 </div>
 <p>
 because the module inherits from <code>nn.Module</code>, it already is printable and aware of its layers and parameters:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-discriminator()&gt;&gt;</span>
-Discriminator<span style="color: #d0730f;">()</span>
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-discriminator()&gt;&gt;</span>
+Discriminator()
 </pre>
 </div>
 
@@ -195,13 +195,13 @@ Discriminator(
 compare the output above to the <code>torch-summary</code> package from <code>pypi</code> which provides the summary function in a similar fashion to the <code>keras</code> library:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-discriminator-summary"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-discriminator()&gt;&gt;</span>
-<span style="color: #c48702; font-weight: bold;">from</span> torchsummary <span style="color: #c48702; font-weight: bold;">import</span> summary
-summary<span style="color: #d0730f;">(</span>Discriminator<span style="color: #64aa0f;">()</span>.cuda<span style="color: #64aa0f;">()</span>, <span style="color: #64aa0f;">(</span>1, 28, 28<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-discriminator-summary"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-discriminator()&gt;&gt;</span>
+<span style="font-weight: bold;">from</span> torchsummary <span style="font-weight: bold;">import</span> summary
+summary(Discriminator().cuda(), (1, 28, 28))
 </pre>
 </div>
 
-<pre class="example" id="orgc195448">
+<pre class="example" id="org48be791">
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -227,11 +227,11 @@ Estimated Total Size (MB): 0.37
 a simple feed-forwarding test with a random tensor:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-discriminator()&gt;&gt;</span>
-<span style="color: #6fafff;">disc</span> = Discriminator<span style="color: #d0730f;">()</span>
-<span style="color: #6fafff;">t</span> = disc<span style="color: #d0730f;">(</span>torch.randn<span style="color: #64aa0f;">(</span>1, 1, 28, 28<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span>t.shape<span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span>t<span style="color: #d0730f;">)</span>
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-discriminator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;">disc</span> = Discriminator()
+<span style="font-weight: bold; font-style: italic;">t</span> = disc(torch.randn(1, 1, 28, 28))
+<span style="font-weight: bold;">print</span>(t.shape)
+<span style="font-weight: bold;">print</span>(t)
 </pre>
 </div>
 
@@ -247,23 +247,42 @@ we could start training this model with real examples with a class label of one 
 we prepare the inputs and the desired outputs (x's and y's) of the network and copy them to the device that is used for training (could be gpu or cpu depending on the machine)<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-make-training-tensors"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-load-dataset()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># copy the data from the mnist dataset for further manipulation</span>
-<span style="color: #cf9f7f; font-style: italic;"># .detach().clone() is the recommended way of cloning a tensor with pytorch</span>
-<span style="color: #6fafff;">train_x</span> = train_dataset.data.detach<span style="color: #d0730f;">()</span>.clone<span style="color: #d0730f;">()</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-<span style="color: #6fafff;">train_y</span> = train_dataset.targets.detach<span style="color: #d0730f;">()</span>.clone<span style="color: #d0730f;">()</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-make-training-tensors"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-load-dataset()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">copy the data from the mnist dataset for further manipulation</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">.detach().clone() is the recommended way of cloning a tensor with pytorch</span>
+<span style="font-weight: bold; font-style: italic;">train_x</span> = train_dataset.data.detach().clone().to(device)
+<span style="font-weight: bold; font-style: italic;">train_y</span> = train_dataset.targets.detach().clone().to(device)
 </pre>
 </div>
 <p>
-as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the interval <img src="ltx/f6bf01adba0.svg" alt="\([0,1]\)" style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline" /> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions:<br />
+as the values in the original images range from 0 to 255 (for grayscale colors), we must normalize the data before training, we map those values onto the interval <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 23.352765 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g1-150' d='m1.942715-.059776c0-.826899-.577833-.956413-.806974-.956413c-.249066 0-.577833 .14944-.577833 .577833c0 .398506 .358655 .498132 .617684 .498132c.069738 0 .119552-.009963 .14944-.019925c.039851-.009963 .069738-.019925 .089664-.019925c.069738 0 .139477 .049813 .139477 .139477c0 .18929-.159402 .637609-.816936 1.05604l.089664 .18929c.298879-.099626 1.115816-.757161 1.115816-1.464508z'/>
+<path id='g2-48' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
+<path id='g2-49' d='m3.92528 0v-.14944c-.787049-.009963-.946451-.109589-.946451-.587796v-5.977584l-.079701-.019925l-1.793275 .9066v.139477c.119552-.049813 .229141-.089664 .268991-.109589c.179328-.069738 .348692-.109589 .448319-.109589c.209215 0 .298879 .14944 .298879 .468244v4.513076c0 .328767-.079701 .557908-.239103 .647572c-.14944 .089664-.288917 .119552-.707347 .129514v.14944h2.749689z'/>
+<path id='g0-187' d='m2.978829 1.673724h-.856787c-.328767 0-.488169-.169365-.488169-.518057v-7.511831c0-.308842 .129514-.438356 .448319-.438356h.896638v-.249066h-2.102117v8.966376h2.102117v-.249066z'/>
+<path id='g0-188' d='m.33873 1.673724v.249066h2.102117v-8.966376h-2.102117v.249066h.856787c.328767 0 .488169 .169365 .488169 .518057v7.511831c0 .308842-.139477 .438356-.448319 .438356h-.896638z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.597749' y='0' xlink:href='#g0-187'/>
+<use x='4.214177' y='0' xlink:href='#g2-48'/>
+<use x='9.195497' y='0' xlink:href='#g1-150'/>
+<use x='13.456131' y='0' xlink:href='#g2-49'/>
+<use x='18.437451' y='0' xlink:href='#g0-188'/>
+</g>
+</g>
+</svg> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-normalize-training-tensors"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-make-training-tensors()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># here, None means insert a new dimension, : means keep the original dimension, so we're adding a new dimension at position 2 (the old dimension of index 2 gets shifted into index 3) and preserving the ones at 0,1</span>
-<span style="color: #6fafff;">train_x</span> = train_x<span style="color: #d0730f;">[</span>:, <span style="color: #64aa0f;">None</span>, :, :<span style="color: #d0730f;">]</span>
-<span style="color: #6fafff;">train_x</span> = train_x / 255.0
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'before:'</span>, train_dataset.data.shape<span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'after:'</span>, train_x.shape<span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-normalize-training-tensors"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-make-training-tensors()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">here, None means insert a new dimension, : means keep the original dimension, so we're adding a new dimension at position 2 (the old dimension of index 2 gets shifted into index 3) and preserving the ones at 0,1</span>
+<span style="font-weight: bold; font-style: italic;">train_x</span> = train_x[:, <span style="font-weight: bold; text-decoration: underline;">None</span>, :, :]
+<span style="font-weight: bold; font-style: italic;">train_x</span> = train_x / 255.0
+<span style="font-weight: bold;">print</span>(<span style="font-style: italic;">'before:'</span>, train_dataset.data.shape)
+<span style="font-weight: bold;">print</span>(<span style="font-style: italic;">'after:'</span>, train_x.shape)
 </pre>
 </div>
 
@@ -272,19 +291,19 @@ before: torch.Size([60000, 28, 28])
 after: torch.Size([60000, 1, 28, 28])
 </pre>
 </div>
-<div id="outline-container-org2eca87b" class="outline-3">
-<h3 id="org2eca87b">training the discriminator</h3>
-<div class="outline-text-3" id="text-org2eca87b">
+<div id="outline-container-orgea99ee4" class="outline-3">
+<h3 id="orgea99ee4">training the discriminator</h3>
+<div class="outline-text-3" id="text-orgea99ee4">
 <p>
 we could systematically enumerate all samples in the training dataset, and that is a good approach, but good training via stochastic gradient descent requires that the training dataset be shuffled prior to each epoch. a simpler approach is to select random samples of images from the training dataset.<br />
 the <code>generate_real_samples_for_discriminator()</code> function below takes the training dataset as an argument and selects a random subset of images; it also returns class labels for the images, specifically a class label of 1, to indicate that the images are real.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-gen-real-samples"><span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">generate_real_samples_for_discriminator</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">dataset</span>, <span style="color: #6fafff;">n_samples</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #6fafff;">random_indicies</span> = torch.randint<span style="color: #d0730f;">(</span>dataset.shape<span style="color: #64aa0f;">[</span>0<span style="color: #64aa0f;">]</span>, <span style="color: #64aa0f;">(</span>n_samples,<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">x</span> = dataset<span style="color: #d0730f;">[</span>random_indicies<span style="color: #d0730f;">]</span>
-    <span style="color: #6fafff;">y</span> = torch.ones<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>n_samples, 1<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> x, y
+<pre class="src src-python" id="src-gen-real-samples"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_real_samples_for_discriminator</span>(dataset, n_samples):
+    <span style="font-weight: bold; font-style: italic;">random_indicies</span> = torch.randint(dataset.shape[0], (n_samples,))
+    <span style="font-weight: bold; font-style: italic;">x</span> = dataset[random_indicies]
+    <span style="font-weight: bold; font-style: italic;">y</span> = torch.ones((n_samples, 1))
+    <span style="font-weight: bold;">return</span> x, y
 </pre>
 </div>
 <p>
@@ -292,10 +311,10 @@ we also need a source of fake images. we can generate images comprised of random
 the <code>generate_fake_samples_for_discriminator()</code> function below implements this behavior and generates images of random pixel values and their associated class label of 0, for fake.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-gen-fake-samples-for-discriminator"><span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">generate_fake_samples_for_discriminator</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">n_samples</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #6fafff;">x</span> = torch.randn<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>n_samples, 1, 28, 28<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">y</span> = torch.zeros<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>n_samples, 1<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> x, y
+<pre class="src src-python" id="src-gen-fake-samples-for-discriminator"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_fake_samples_for_discriminator</span>(n_samples):
+    <span style="font-weight: bold; font-style: italic;">x</span> = torch.randn((n_samples, 1, 28, 28))
+    <span style="font-weight: bold; font-style: italic;">y</span> = torch.zeros((n_samples, 1))
+    <span style="font-weight: bold;">return</span> x, y
 </pre>
 </div>
 <p>
@@ -305,84 +324,84 @@ the <code>train_discriminator()</code> function implements this, using a batch s
 we update the discriminator separately for real and fake examples so that we can calculate the accuracy of the model on each sample prior to the update. this gives insight into how the discriminator model is performing over time. we also use the matplotlib library to plot the loss over time.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-train-discriminator"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-normalize-training-tensors()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gen-real-samples()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gen-fake-samples-for-discriminator()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-discriminator()&gt;&gt;</span>
-<span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">train_discriminator</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">model</span>, <span style="color: #6fafff;">dataset</span>, <span style="color: #6fafff;">n_iter</span>=100, <span style="color: #6fafff;">batch_size</span>=256<span style="color: #d0730f;">)</span>:
-    <span style="color: #6fafff;">half_batch</span> = <span style="color: #ff7a7f; font-weight: bold;">int</span><span style="color: #d0730f;">(</span>batch_size / 2<span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-train-discriminator"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-normalize-training-tensors()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-real-samples()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-fake-samples-for-discriminator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-discriminator()&gt;&gt;</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">train_discriminator</span>(model, dataset, n_iter=100, batch_size=256):
+    <span style="font-weight: bold; font-style: italic;">half_batch</span> = <span style="font-weight: bold;">int</span>(batch_size / 2)
 
-    <span style="color: #cf9f7f; font-style: italic;"># use the stochastic gradient descent optimizer</span>
-    <span style="color: #6fafff;">optimizer</span> = torch.optim.SGD<span style="color: #d0730f;">(</span>model.parameters<span style="color: #64aa0f;">()</span>, lr=0.002<span style="color: #d0730f;">)</span>
-    <span style="color: #cf9f7f; font-style: italic;"># use the squared error loss function</span>
-    <span style="color: #6fafff;">loss_fn</span> = nn.MSELoss<span style="color: #d0730f;">()</span>
-    <span style="color: #cf9f7f; font-style: italic;"># to store loss history</span>
-    <span style="color: #6fafff;">real_loss_hist</span> = <span style="color: #d0730f;">[]</span> <span style="color: #cf9f7f; font-style: italic;"># loss of classification of real images</span>
-    <span style="color: #6fafff;">fake_loss_hist</span> = <span style="color: #d0730f;">[]</span> <span style="color: #cf9f7f; font-style: italic;"># loss of classification of fake images</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">use the stochastic gradient descent optimizer</span>
+    <span style="font-weight: bold; font-style: italic;">optimizer</span> = torch.optim.SGD(model.parameters(), lr=0.002)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">use the squared error loss function</span>
+    <span style="font-weight: bold; font-style: italic;">loss_fn</span> = nn.MSELoss()
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">to store loss history</span>
+    <span style="font-weight: bold; font-style: italic;">real_loss_hist</span> = [] <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">loss of classification of real images</span>
+    <span style="font-weight: bold; font-style: italic;">fake_loss_hist</span> = [] <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">loss of classification of fake images</span>
 
-    <span style="color: #cf9f7f; font-style: italic;"># each iteration handles a batch, but each batch is basically half real half fake images, so kinda 2 batches</span>
-    <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">i</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">range</span><span style="color: #d0730f;">(</span>n_iter<span style="color: #d0730f;">)</span>:
-        <span style="color: #cf9f7f; font-style: italic;"># grab real samples</span>
-        <span style="color: #6fafff;">X_real</span>, <span style="color: #6fafff;">y_real</span> = generate_real_samples_for_discriminator<span style="color: #d0730f;">(</span>dataset, half_batch<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">X_real</span> = X_real.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">y_real</span> = y_real.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">each iteration handles a batch, but each batch is basically half real half fake images, so kinda 2 batches</span>
+    <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(n_iter):
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">grab real samples</span>
+        <span style="font-weight: bold; font-style: italic;">X_real</span>, <span style="font-weight: bold; font-style: italic;">y_real</span> = generate_real_samples_for_discriminator(dataset, half_batch)
+        <span style="font-weight: bold; font-style: italic;">X_real</span> = X_real.to(device)
+        <span style="font-weight: bold; font-style: italic;">y_real</span> = y_real.to(device)
 
-        <span style="color: #cf9f7f; font-style: italic;"># train on real samples</span>
-        <span style="color: #cf9f7f; font-style: italic;"># zero your gradients for every batch!</span>
-        optimizer.zero_grad<span style="color: #d0730f;">()</span>
-        <span style="color: #cf9f7f; font-style: italic;"># make predictions for this batch</span>
-        <span style="color: #6fafff;">outputs</span> = model<span style="color: #d0730f;">(</span>X_real<span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># compute the loss and its gradients</span>
-        <span style="color: #6fafff;">loss_real</span> = loss_fn<span style="color: #d0730f;">(</span>outputs, y_real<span style="color: #d0730f;">)</span>
-        loss_real.backward<span style="color: #d0730f;">()</span>
-        <span style="color: #cf9f7f; font-style: italic;"># adjust learning weights</span>
-        optimizer.step<span style="color: #d0730f;">()</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">train on real samples</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">zero your gradients for every batch!</span>
+        optimizer.zero_grad()
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">make predictions for this batch</span>
+        <span style="font-weight: bold; font-style: italic;">outputs</span> = model(X_real)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compute the loss and its gradients</span>
+        <span style="font-weight: bold; font-style: italic;">loss_real</span> = loss_fn(outputs, y_real)
+        loss_real.backward()
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">adjust learning weights</span>
+        optimizer.step()
 
-        <span style="color: #cf9f7f; font-style: italic;"># grab fake samples</span>
-        <span style="color: #6fafff;">X_fake</span>, <span style="color: #6fafff;">y_fake</span> = generate_fake_samples_for_discriminator<span style="color: #d0730f;">(</span>half_batch<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">X_fake</span> = X_fake.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">y_fake</span> = y_fake.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">grab fake samples</span>
+        <span style="font-weight: bold; font-style: italic;">X_fake</span>, <span style="font-weight: bold; font-style: italic;">y_fake</span> = generate_fake_samples_for_discriminator(half_batch)
+        <span style="font-weight: bold; font-style: italic;">X_fake</span> = X_fake.to(device)
+        <span style="font-weight: bold; font-style: italic;">y_fake</span> = y_fake.to(device)
 
-        <span style="color: #cf9f7f; font-style: italic;"># train on fake samples</span>
-        optimizer.zero_grad<span style="color: #d0730f;">()</span>
-        <span style="color: #cf9f7f; font-style: italic;"># make predictions for this batch</span>
-        <span style="color: #6fafff;">outputs</span> = model<span style="color: #d0730f;">(</span>X_fake<span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># compute the loss and its gradients</span>
-        <span style="color: #6fafff;">loss_fake</span> = loss_fn<span style="color: #d0730f;">(</span>outputs, y_fake<span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># compute the gradients (backpropagation)</span>
-        loss_fake.backward<span style="color: #d0730f;">()</span>
-        <span style="color: #cf9f7f; font-style: italic;"># adjust learning weights</span>
-        optimizer.step<span style="color: #d0730f;">()</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">train on fake samples</span>
+        optimizer.zero_grad()
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">make predictions for this batch</span>
+        <span style="font-weight: bold; font-style: italic;">outputs</span> = model(X_fake)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compute the loss and its gradients</span>
+        <span style="font-weight: bold; font-style: italic;">loss_fake</span> = loss_fn(outputs, y_fake)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compute the gradients (backpropagation)</span>
+        loss_fake.backward()
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">adjust learning weights</span>
+        optimizer.step()
 
-        <span style="color: #cf9f7f; font-style: italic;"># .numpy() to make tensors usable by matplotlib</span>
-        real_loss_hist.append<span style="color: #d0730f;">(</span>loss_real.item<span style="color: #64aa0f;">()</span><span style="color: #d0730f;">)</span>
-        fake_loss_hist.append<span style="color: #d0730f;">(</span>loss_fake.item<span style="color: #64aa0f;">()</span><span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># print(f'loss fake: {loss_fake}, loss real: {loss_real}')</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">.numpy() to make tensors usable by matplotlib</span>
+        real_loss_hist.append(loss_real.item())
+        fake_loss_hist.append(loss_fake.item())
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">print(f'loss fake: {loss_fake}, loss real: {loss_real}')</span>
 
-    <span style="color: #c48702; font-weight: bold;">return</span> real_loss_hist, fake_loss_hist
+    <span style="font-weight: bold;">return</span> real_loss_hist, fake_loss_hist
 </pre>
 </div>
 <p>
 an example run of the function:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-train-discriminator()&gt;&gt;</span>
-<span style="color: #6fafff;">model</span> = Discriminator<span style="color: #d0730f;">()</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-<span style="color: #6fafff;">real_loss_hist</span>, <span style="color: #6fafff;">fake_loss_hist</span> = train_discriminator<span style="color: #d0730f;">(</span>model, train_x, n_iter=500<span style="color: #d0730f;">)</span>
-plt.figure<span style="color: #d0730f;">()</span>
-plt.plot<span style="color: #d0730f;">(</span>real_loss_hist, label=<span style="color: #f06a3f;">'real images'</span><span style="color: #d0730f;">)</span>
-plt.plot<span style="color: #d0730f;">(</span>fake_loss_hist, label=<span style="color: #f06a3f;">'fake images'</span><span style="color: #d0730f;">)</span>
-plt.xlabel<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'iteration'</span><span style="color: #d0730f;">)</span>
-plt.ylabel<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'loss'</span><span style="color: #d0730f;">)</span>
-plt.title<span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'discriminator classification loss per batch/iteration'</span><span style="color: #d0730f;">)</span>
-plt.legend<span style="color: #d0730f;">()</span>
-plt.savefig<span style="color: #d0730f;">(</span>f, transparent=<span style="color: #64aa0f;">True</span><span style="color: #d0730f;">)</span>
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-discriminator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;">model</span> = Discriminator().to(device)
+<span style="font-weight: bold; font-style: italic;">real_loss_hist</span>, <span style="font-weight: bold; font-style: italic;">fake_loss_hist</span> = train_discriminator(model, train_x, n_iter=500)
+plt.figure()
+plt.plot(real_loss_hist, label=<span style="font-style: italic;">'real images'</span>)
+plt.plot(fake_loss_hist, label=<span style="font-style: italic;">'fake images'</span>)
+plt.xlabel(<span style="font-style: italic;">'iteration'</span>)
+plt.ylabel(<span style="font-style: italic;">'loss'</span>)
+plt.title(<span style="font-style: italic;">'discriminator classification loss per batch/iteration'</span>)
+plt.legend()
+plt.savefig(f, transparent=<span style="font-weight: bold; text-decoration: underline;">True</span>)
 f
 </pre>
 </div>
 
 
-<div id="org5715f94" class="figure">
+<div id="orga93a7aa" class="figure">
 <p><img src="/ar1T72O.svg" /><br />
 </p>
 </div>
@@ -393,9 +412,9 @@ as we can see, the loss gradually declines which means the discriminator (theore
 </div>
 </div>
 </div>
-<div id="outline-container-orgcd48542" class="outline-2">
-<h2 id="orgcd48542">generator</h2>
-<div class="outline-text-2" id="text-orgcd48542">
+<div id="outline-container-orgda2dc9f" class="outline-2">
+<h2 id="orgda2dc9f">generator</h2>
+<div class="outline-text-2" id="text-orgda2dc9f">
 <p>
 the generator model is responsible for creating new, fake but plausible images of handwritten digits. it does so by taking a point from the latent space as input and outputting a tensor representing a grayscale image.<br />
 the latent space is an arbitrarily defined finite vector space. it has no meaning, but by drawing points from this space and feeding them to the generator model during training, the generator model will assign meaning to the latent points and, in turn, to the latent space. at the end of training, the latent vector space would have an internal structure that is a compressed representation of the output space (the MNIST image dataset), that only the generator knows how to turn into plausible images that fool the discriminator.<br />
@@ -414,49 +433,49 @@ this pattern of upsampling can be repeated to arrive at our 28x28 output image.<
 the output layer of the model is a <code>Conv2d</code> with one filter and a kernel size of 7x7 and padding of size 1x1, designed to create a single feature map and preserve its dimensions at 28x28 pixels that represent our final grayscale image. a sigmoid activation is used to ensure output values are in the desired range of [0,1].<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-generator"><span style="color: #c48702; font-weight: bold;">class</span> <span style="color: #2fa526;">Generator</span><span style="color: #d0730f;">(</span>nn.<span style="color: #2fa526;">Module</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">__init__</span><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span>, <span style="color: #6fafff;">latent_size</span><span style="color: #d0730f;">)</span>:
-        <span style="color: #ff7a7f; font-weight: bold;">super</span><span style="color: #d0730f;">(</span>Generator, <span style="color: #c48702; font-weight: bold;">self</span><span style="color: #d0730f;">)</span>.__init__<span style="color: #d0730f;">()</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">linear1</span> = nn.Linear<span style="color: #d0730f;">(</span>latent_size, 128 * 7 * 7<span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">conv_tr_2d_1</span> = nn.ConvTranspose2d<span style="color: #d0730f;">(</span>128, 128, <span style="color: #64aa0f;">(</span>4,4<span style="color: #64aa0f;">)</span>, stride=<span style="color: #64aa0f;">(</span>2,2<span style="color: #64aa0f;">)</span>, padding=<span style="color: #64aa0f;">(</span>1,1<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">conv_tr_2d_2</span> = nn.ConvTranspose2d<span style="color: #d0730f;">(</span>128, 128, <span style="color: #64aa0f;">(</span>4,4<span style="color: #64aa0f;">)</span>, stride=<span style="color: #64aa0f;">(</span>2,2<span style="color: #64aa0f;">)</span>, padding=<span style="color: #64aa0f;">(</span>1,1<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">conv2d</span> = nn.Conv2d<span style="color: #d0730f;">(</span>128, 1, <span style="color: #64aa0f;">(</span>7,7<span style="color: #64aa0f;">)</span>, padding=<span style="color: #64aa0f;">(</span>3,3<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">latent_size</span> = latent_size
+<pre class="src src-python" id="src-generator"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Generator</span>(nn.Module):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>, latent_size):
+        <span style="font-weight: bold;">super</span>(Generator, <span style="font-weight: bold;">self</span>).__init__()
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">linear1</span> = nn.Linear(latent_size, 128 * 7 * 7)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv_tr_2d_1</span> = nn.ConvTranspose2d(128, 128, (4,4), stride=(2,2), padding=(1,1))
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv_tr_2d_2</span> = nn.ConvTranspose2d(128, 128, (4,4), stride=(2,2), padding=(1,1))
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv2d</span> = nn.Conv2d(128, 1, (7,7), padding=(3,3))
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">latent_size</span> = latent_size
 
-    <span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">forward</span><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span>, <span style="color: #6fafff;">x</span><span style="color: #d0730f;">)</span>:
-        <span style="color: #cf9f7f; font-style: italic;"># foundation for 128 images of size 7x7, so 128x7x7 images in total which resemble the features of the desired output image (which is an image of a digit 0-9)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># we need to pad the images properly..</span>
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.linear1<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># NOTE: why does uncommenting the following line, which results in the first layer having an activation function, mess up the whole model and cause it to diverge and spiral into chaos? i havent figured this out yet</span>
-        <span style="color: #cf9f7f; font-style: italic;"># x = F.leaky_relu(x)</span>
-        <span style="color: #6fafff;">x</span> = x.view<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>-1, 128, 7, 7<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">forward</span>(<span style="font-weight: bold;">self</span>, x):
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">foundation for 128 images of size 7x7, so 128x7x7 images in total which resemble the features of the desired output image (which is an image of a digit 0-9)</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">we need to pad the images properly..</span>
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.linear1(x)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">NOTE: why does uncommenting the following line, which results in the first layer having an activation function, mess up the whole model and cause it to diverge and spiral into chaos? i havent figured this out yet</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">x = F.leaky_relu(x)</span>
+        <span style="font-weight: bold; font-style: italic;">x</span> = x.view((-1, 128, 7, 7))
 
-        <span style="color: #cf9f7f; font-style: italic;"># upscale to 14x14</span>
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.conv_tr_2d_1<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">x</span> = F.leaky_relu<span style="color: #d0730f;">(</span>x, 0.2<span style="color: #d0730f;">)</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">upscale to 14x14</span>
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.conv_tr_2d_1(x)
+        <span style="font-weight: bold; font-style: italic;">x</span> = F.leaky_relu(x, 0.2)
 
-        <span style="color: #cf9f7f; font-style: italic;"># upscale to 28x28</span>
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.conv_tr_2d_2<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">x</span> = F.leaky_relu<span style="color: #d0730f;">(</span>x, 0.2<span style="color: #d0730f;">)</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">upscale to 28x28</span>
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.conv_tr_2d_2(x)
+        <span style="font-weight: bold; font-style: italic;">x</span> = F.leaky_relu(x, 0.2)
 
-        <span style="color: #cf9f7f; font-style: italic;"># final conv layer - output layer</span>
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.conv2d<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># was sigmoid, switched to tanh, NOTE: why does using sigmoid (yet again, see note above) to not converge?</span>
-        <span style="color: #6fafff;">x</span> = F.tanh<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;"># final output should be of size batch_sizex1x28x28</span>
-        <span style="color: #c48702; font-weight: bold;">return</span> x
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">final conv layer - output layer</span>
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.conv2d(x)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">was sigmoid, switched to tanh, NOTE: why does using sigmoid (yet again, see note above) to not converge?</span>
+        <span style="font-weight: bold; font-style: italic;">x</span> = F.tanh(x) <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">final output should be of size batch_sizex1x28x28</span>
+        <span style="font-weight: bold;">return</span> x
 </pre>
 </div>
 <p>
 printing a summary of the model:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-discriminator-summary()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-generator()&gt;&gt;</span>
-summary<span style="color: #d0730f;">(</span>Generator<span style="color: #64aa0f;">(</span>100<span style="color: #64aa0f;">)</span>.to<span style="color: #64aa0f;">(</span>device<span style="color: #64aa0f;">)</span>, <span style="color: #64aa0f;">(</span>1, 100<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;"># forwarding test of a randomly perturbed noise vector</span>
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-discriminator-summary()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generator()&gt;&gt;</span>
+summary(Generator(100).to(device), (1, 100)) <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">forwarding test of a randomly perturbed noise vector</span>
 </pre>
 </div>
 
-<pre class="example" id="org2a5b229">
+<pre class="example" id="org80e889b">
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -480,124 +499,124 @@ Estimated Total Size (MB): 5.45
 the input to the generator needs to be vectors generated from the latent space. the <code>generate_latent_points()</code> function below implements this and generates a batch with the desired number of points in the latent space that can be used as input to the generator model.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-generate-latent-points"><span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">generate_latent_points</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">latent_size</span>, <span style="color: #6fafff;">n_points</span><span style="color: #d0730f;">)</span>:
-  <span style="color: #c48702; font-weight: bold;">return</span> torch.randn<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>n_points, latent_size<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-generate-latent-points"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_latent_points</span>(latent_size, n_points):
+  <span style="font-weight: bold;">return</span> torch.randn((n_points, latent_size))
 </pre>
 </div>
 <p>
 next, we can use the generated points as input to the generator model to generate new samples. we write the function <code>generate_fake_samples_with_generator()</code> which takes the generator model as an argument and uses it to generate the desired number of samples by first calling the <code>generate_latent_points()</code> function to generate the required number of points in latent space as input to the model. typically this function would be useful after the generator has been trained.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-gen-fake-samples-with-generator"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-generate-latent-points()&gt;&gt;</span>
-<span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">generate_fake_samples_with_generator</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">generator</span>, <span style="color: #6fafff;">n_samples</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #6fafff;">generator_in</span> = generate_latent_points<span style="color: #d0730f;">(</span>generator.latent_size, n_samples<span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">generator_out</span> = generator<span style="color: #d0730f;">(</span>generator_in<span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">labels</span> = torch.zeros<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>n_samples, 0<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;"># label 0 for fake</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> generator_out, labels
+<pre class="src src-python" id="src-gen-fake-samples-with-generator"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generate-latent-points()&gt;&gt;</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_fake_samples_with_generator</span>(generator, n_samples):
+    <span style="font-weight: bold; font-style: italic;">generator_in</span> = generate_latent_points(generator.latent_size, n_samples)
+    <span style="font-weight: bold; font-style: italic;">generator_out</span> = generator(generator_in)
+    <span style="font-weight: bold; font-style: italic;">labels</span> = torch.zeros((n_samples, 0)) <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">label 0 for fake</span>
+    <span style="font-weight: bold;">return</span> generator_out, labels
 </pre>
 </div>
 <p>
 to show a few randomly perturbed images (the generator hasnt been trained yet):<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-generator()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gen-real-samples()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gen-fake-samples-with-generator()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gen-images-img()&gt;&gt;</span>
-<span style="color: #6fafff;">generator</span> = Generator<span style="color: #d0730f;">(</span>100<span style="color: #d0730f;">)</span>
-<span style="color: #6fafff;">n_samples</span> = 30
-<span style="color: #6fafff;">X</span>, <span style="color: #6fafff;">_</span> = generate_fake_samples_with_generator<span style="color: #d0730f;">(</span>generator, n_samples<span style="color: #d0730f;">)</span>
-gen_images_img<span style="color: #d0730f;">(</span>X.reshape<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>-1, 28, 28<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>, f<span style="color: #d0730f;">)</span>
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-real-samples()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-fake-samples-with-generator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-images-img()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;">generator</span> = Generator(100)
+<span style="font-weight: bold; font-style: italic;">n_samples</span> = 30
+<span style="font-weight: bold; font-style: italic;">X</span>, <span style="font-weight: bold; font-style: italic;">_</span> = generate_fake_samples_with_generator(generator, n_samples)
+gen_images_img(X.reshape((-1, 28, 28)), f)
 </pre>
 </div>
 
 
-<div id="org91ab9d8" class="figure">
+<div id="org4ed885c" class="figure">
 <p><img src="/dUD33Ha.png" /><br />
 </p>
 </div>
 </div>
-<div id="outline-container-org07791ac" class="outline-3">
-<h3 id="org07791ac">training the generator</h3>
-<div class="outline-text-3" id="text-org07791ac">
+<div id="outline-container-org7fafa7f" class="outline-3">
+<h3 id="org7fafa7f">training the generator</h3>
+<div class="outline-text-3" id="text-org7fafa7f">
 <p>
 to train the generator, we need to attach it to the discriminator in a sequential manner, such that the output of the generator would be forwarded to the discriminator for classification, the discriminator would determine whether the data generated by the generator passes as a real image. this is why the training of disciminator beforehand to classify real data from fake ones is cruical, otherwise the generator wouldnt learn (this is one approach, another is described later).<br />
 during the training of the generator, we may want to freeze the parameters of the discriminator, because we wouldnt want the discriminator training and overfitting on fake data.<br />
 so the next step is constructing the full generational model by composing the generator and discriminator into one model.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-gan"><span style="color: #c48702; font-weight: bold;">class</span> <span style="color: #2fa526;">GAN</span><span style="color: #d0730f;">(</span>nn.<span style="color: #2fa526;">Module</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #5f9f6f; font-style: italic;">"""generative adversarial network model"""</span>
-    <span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">__init__</span><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span>, <span style="color: #6fafff;">generator</span>, <span style="color: #6fafff;">discriminator</span><span style="color: #d0730f;">)</span>:
-        <span style="color: #ff7a7f; font-weight: bold;">super</span><span style="color: #d0730f;">(</span>GAN, <span style="color: #c48702; font-weight: bold;">self</span><span style="color: #d0730f;">)</span>.__init__<span style="color: #d0730f;">()</span>
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">discriminator</span> = discriminator
-        <span style="color: #c48702; font-weight: bold;">self</span>.<span style="color: #6fafff;">generator</span> = generator
+<pre class="src src-python" id="src-gan"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">GAN</span>(nn.Module):
+    <span style="font-style: italic;">"""generative adversarial network model"""</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>, generator, discriminator):
+        <span style="font-weight: bold;">super</span>(GAN, <span style="font-weight: bold;">self</span>).__init__()
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">discriminator</span> = discriminator
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">generator</span> = generator
 
-    <span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">forward</span><span style="color: #d0730f;">(</span><span style="color: #c48702; font-weight: bold;">self</span>, <span style="color: #6fafff;">x</span><span style="color: #d0730f;">)</span>:
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.generator<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">x</span> = <span style="color: #c48702; font-weight: bold;">self</span>.discriminator<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #c48702; font-weight: bold;">return</span> x
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">forward</span>(<span style="font-weight: bold;">self</span>, x):
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.generator(x)
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">self</span>.discriminator(x)
+        <span style="font-weight: bold;">return</span> x
 </pre>
 </div>
 <p>
 its that simple, a sequential composition of the two models.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-train-generator"><span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">train_generator</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">gan</span>, <span style="color: #6fafff;">n_iters</span>=100, <span style="color: #6fafff;">batch_size</span>=256<span style="color: #d0730f;">)</span>:
-    <span style="color: #cf9f7f; font-style: italic;"># use the stochastic gradient descent optimizer with a learning rate of 0.0002</span>
-    <span style="color: #6fafff;">optimizer</span> = torch.optim.SGD<span style="color: #d0730f;">(</span>gan.generator.parameters<span style="color: #64aa0f;">()</span>, lr=0.0002<span style="color: #d0730f;">)</span>
-    <span style="color: #cf9f7f; font-style: italic;"># our loss function, the Binary Cross Entropy function</span>
-    <span style="color: #6fafff;">loss_fn</span> = nn.BCELoss<span style="color: #d0730f;">()</span>
-    <span style="color: #cf9f7f; font-style: italic;"># tracking loss history</span>
-    <span style="color: #6fafff;">loss_hist</span> = <span style="color: #d0730f;">[]</span>
+<pre class="src src-python" id="src-train-generator"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">train_generator</span>(gan, n_iters=100, batch_size=256):
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">use the stochastic gradient descent optimizer with a learning rate of 0.0002</span>
+    <span style="font-weight: bold; font-style: italic;">optimizer</span> = torch.optim.SGD(gan.generator.parameters(), lr=0.0002)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">our loss function, the Binary Cross Entropy function</span>
+    <span style="font-weight: bold; font-style: italic;">loss_fn</span> = nn.BCELoss()
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">tracking loss history</span>
+    <span style="font-weight: bold; font-style: italic;">loss_hist</span> = []
 
-    <span style="color: #cf9f7f; font-style: italic;"># we train on one batch per iteration</span>
-    <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">i</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">range</span><span style="color: #d0730f;">(</span>n_iters<span style="color: #d0730f;">)</span>:
-        <span style="color: #6fafff;">x</span> = generate_latent_points<span style="color: #d0730f;">(</span>gan.generator.latent_size, batch_size<span style="color: #d0730f;">)</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># the desired outputs are 1, for 'real', since our goal is to adjust the weights and generate images which pass as 'real'</span>
-        <span style="color: #6fafff;">y</span> = torch.ones<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>batch_size, 1<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">we train on one batch per iteration</span>
+    <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(n_iters):
+        <span style="font-weight: bold; font-style: italic;">x</span> = generate_latent_points(gan.generator.latent_size, batch_size).to(device)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">the desired outputs are 1, for 'real', since our goal is to adjust the weights and generate images which pass as 'real'</span>
+        <span style="font-weight: bold; font-style: italic;">y</span> = torch.ones((batch_size, 1)).to(device)
 
-        <span style="color: #cf9f7f; font-style: italic;"># zero your gradients for every batch!</span>
-        optimizer.zero_grad<span style="color: #d0730f;">()</span>
-        <span style="color: #cf9f7f; font-style: italic;"># make predictions for this batch</span>
-        <span style="color: #6fafff;">out</span> = gan<span style="color: #d0730f;">(</span>x<span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># compute the loss and its gradients</span>
-        <span style="color: #6fafff;">loss</span> = loss_fn<span style="color: #d0730f;">(</span>out, y<span style="color: #d0730f;">)</span>
-        <span style="color: #cf9f7f; font-style: italic;"># compute the gradients</span>
-        loss.backward<span style="color: #d0730f;">()</span>
-        <span style="color: #cf9f7f; font-style: italic;"># adjust learning weights</span>
-        optimizer.step<span style="color: #d0730f;">()</span>
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">zero your gradients for every batch!</span>
+        optimizer.zero_grad()
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">make predictions for this batch</span>
+        <span style="font-weight: bold; font-style: italic;">out</span> = gan(x)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compute the loss and its gradients</span>
+        <span style="font-weight: bold; font-style: italic;">loss</span> = loss_fn(out, y)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compute the gradients</span>
+        loss.backward()
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">adjust learning weights</span>
+        optimizer.step()
 
-        loss_hist.append<span style="color: #d0730f;">(</span>loss.item<span style="color: #64aa0f;">()</span><span style="color: #d0730f;">)</span>
+        loss_hist.append(loss.item())
 
-    <span style="color: #c48702; font-weight: bold;">return</span> loss_hist
+    <span style="font-weight: bold;">return</span> loss_hist
 </pre>
 </div>
 <p>
 an example usage:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-train-generator-2"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-train-discriminator()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-generate-latent-points()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-generator()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gan()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-train-generator()&gt;&gt;</span>
-<span style="color: #6fafff;">latent_size</span> = 100
-<span style="color: #6fafff;">discriminator</span> = Discriminator<span style="color: #d0730f;">()</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-train_discriminator<span style="color: #d0730f;">(</span>discriminator, train_x, n_iter=1000<span style="color: #d0730f;">)</span>
-discriminator.freeze<span style="color: #d0730f;">()</span>
-<span style="color: #6fafff;">generator</span> = Generator<span style="color: #d0730f;">(</span>latent_size<span style="color: #d0730f;">)</span>
-<span style="color: #6fafff;">gan</span> = GAN<span style="color: #d0730f;">(</span>generator, discriminator<span style="color: #d0730f;">)</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-<span style="color: #6fafff;">loss_hist</span> = train_generator<span style="color: #d0730f;">(</span>gan, 500, 256<span style="color: #d0730f;">)</span> <span style="color: #cf9f7f; font-style: italic;"># increase 500 for better results</span>
-plt.figure<span style="color: #d0730f;">()</span>
-plt.plot<span style="color: #d0730f;">(</span>loss_hist<span style="color: #d0730f;">)</span>
-plt.savefig<span style="color: #d0730f;">(</span>f, transparent=<span style="color: #64aa0f;">True</span><span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-train-generator-2"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-discriminator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generate-latent-points()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gan()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-generator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;">latent_size</span> = 100
+<span style="font-weight: bold; font-style: italic;">discriminator</span> = Discriminator().to(device)
+train_discriminator(discriminator, train_x, n_iter=1000)
+discriminator.freeze()
+<span style="font-weight: bold; font-style: italic;">generator</span> = Generator(latent_size)
+<span style="font-weight: bold; font-style: italic;">gan</span> = GAN(generator, discriminator).to(device)
+<span style="font-weight: bold; font-style: italic;">loss_hist</span> = train_generator(gan, 500, 256) <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">increase 500 for better results</span>
+plt.figure()
+plt.plot(loss_hist)
+plt.savefig(f, transparent=<span style="font-weight: bold; text-decoration: underline;">True</span>)
 f
 </pre>
 </div>
 
 
-<div id="orga4f1a6f" class="figure">
+<div id="orgce1e5b3" class="figure">
 <p><img src="/YMD1rgW.png" /><br />
 </p>
 </div>
@@ -606,9 +625,9 @@ f
 in theory, this could work, in practice, i had trouble getting sensible results:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-train-generator-2()&gt;&gt;</span>
-<span style="color: #6fafff;">imgs</span> = generator<span style="color: #d0730f;">(</span>torch.randn<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>30,1,100<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>.to<span style="color: #64aa0f;">(</span>device<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>.detach<span style="color: #d0730f;">()</span>.cpu<span style="color: #d0730f;">()</span>
-gen_images_img<span style="color: #d0730f;">(</span>imgs.reshape<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>-1, 28, 28<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>, f<span style="color: #d0730f;">)</span>
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-generator-2()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;">imgs</span> = generator(torch.randn((30,1,100)).to(device)).detach().cpu()
+gen_images_img(imgs.reshape((-1, 28, 28)), f)
 f
 </pre>
 </div>
@@ -620,92 +639,92 @@ as we're only training the generator on random inputs, and the discriminator sta
 the following method, <code>train_gan</code>, implements this approach, and on each epoch (iteration through the entire dataset), it generates some samples for later evaluation (ofcourse a better approach would be to copy the model itself), for further appreciation and more insight into how the model's output changes over epochs.<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-train-gan"><span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">train_gan</span><span style="color: #d0730f;">(</span><span style="color: #6fafff;">gan</span>, <span style="color: #6fafff;">dataset</span>, <span style="color: #6fafff;">epochs</span>=10, <span style="color: #6fafff;">batch_size</span>=256<span style="color: #d0730f;">)</span>:
-    <span style="color: #6fafff;">loss_fn</span> = nn.BCELoss<span style="color: #d0730f;">()</span>
-    <span style="color: #cf9f7f; font-style: italic;"># why does using SGD slow down training?</span>
-    <span style="color: #6fafff;">generator_optimizer</span> = torch.optim.Adam<span style="color: #d0730f;">(</span>gan.generator.parameters<span style="color: #64aa0f;">()</span>, lr=0.0002<span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">discriminator_optimizer</span> = torch.optim.Adam<span style="color: #d0730f;">(</span>gan.discriminator.parameters<span style="color: #64aa0f;">()</span>, lr=0.0002<span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">batches_per_epoch</span> = <span style="color: #ff7a7f; font-weight: bold;">int</span><span style="color: #d0730f;">(</span>dataset.shape<span style="color: #64aa0f;">[</span>0<span style="color: #64aa0f;">]</span> // batch_size<span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">loss_hist</span> = <span style="color: #d0730f;">[]</span> <span style="color: #cf9f7f; font-style: italic;"># loss history per epoch</span>
-    <span style="color: #6fafff;">sample_sets</span> = <span style="color: #d0730f;">[]</span> <span style="color: #cf9f7f; font-style: italic;"># sets of samples for each epoch</span>
-    <span style="color: #cf9f7f; font-style: italic;"># the 50 points from the latent space to use for the image samples in sample_sets</span>
-    <span style="color: #6fafff;">sample_set_points</span> = torch.randn<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>50,gan.generator.latent_size<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">epoch</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">range</span><span style="color: #d0730f;">(</span>epochs<span style="color: #d0730f;">)</span>:
-        <span style="color: #6fafff;">loss</span> = 0
-        <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">batch_i</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">range</span><span style="color: #d0730f;">(</span>batches_per_epoch<span style="color: #d0730f;">)</span>:
-            <span style="color: #cf9f7f; font-style: italic;"># generate fake images</span>
-            <span style="color: #6fafff;">img_shape</span> = dataset.shape<span style="color: #d0730f;">[</span>1:<span style="color: #d0730f;">]</span>
-            <span style="color: #6fafff;">batch_latent_points</span> = torch.randn<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>batch_size,gan.generator.latent_size<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-train-gan"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">train_gan</span>(gan, dataset, epochs=10, batch_size=256):
+    <span style="font-weight: bold; font-style: italic;">loss_fn</span> = nn.BCELoss()
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">why does using SGD slow down training?</span>
+    <span style="font-weight: bold; font-style: italic;">generator_optimizer</span> = torch.optim.Adam(gan.generator.parameters(), lr=0.0002)
+    <span style="font-weight: bold; font-style: italic;">discriminator_optimizer</span> = torch.optim.Adam(gan.discriminator.parameters(), lr=0.0002)
+    <span style="font-weight: bold; font-style: italic;">batches_per_epoch</span> = <span style="font-weight: bold;">int</span>(dataset.shape[0] // batch_size)
+    <span style="font-weight: bold; font-style: italic;">loss_hist</span> = [] <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">loss history per epoch</span>
+    <span style="font-weight: bold; font-style: italic;">sample_sets</span> = [] <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sets of samples for each epoch</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">the 50 points from the latent space to use for the image samples in sample_sets</span>
+    <span style="font-weight: bold; font-style: italic;">sample_set_points</span> = torch.randn((50,gan.generator.latent_size)).to(device)
+    <span style="font-weight: bold;">for</span> epoch <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(epochs):
+        <span style="font-weight: bold; font-style: italic;">loss</span> = 0
+        <span style="font-weight: bold;">for</span> batch_i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(batches_per_epoch):
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">generate fake images</span>
+            <span style="font-weight: bold; font-style: italic;">img_shape</span> = dataset.shape[1:]
+            <span style="font-weight: bold; font-style: italic;">batch_latent_points</span> = torch.randn((batch_size,gan.generator.latent_size)).to(device)
 
-            <span style="color: #cf9f7f; font-style: italic;"># train generator</span>
-            <span style="color: #cf9f7f; font-style: italic;"># zero your gradients for every batch!</span>
-            generator_optimizer.zero_grad<span style="color: #d0730f;">()</span>
-            <span style="color: #cf9f7f; font-style: italic;"># make predictions for this batch</span>
-            <span style="color: #6fafff;">generator_out</span> = gan.generator<span style="color: #d0730f;">(</span>batch_latent_points<span style="color: #d0730f;">)</span>
-            <span style="color: #6fafff;">gan_out</span> = gan.discriminator<span style="color: #d0730f;">(</span>generator_out<span style="color: #d0730f;">)</span>
-            <span style="color: #cf9f7f; font-style: italic;"># compute the loss and its gradients</span>
-            <span style="color: #6fafff;">gan_loss</span> = loss_fn<span style="color: #d0730f;">(</span>gan_out, torch.ones<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>batch_size, 1<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>.to<span style="color: #64aa0f;">(</span>device<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-            gan_loss.backward<span style="color: #d0730f;">()</span>
-            <span style="color: #cf9f7f; font-style: italic;"># adjust learning weights</span>
-            generator_optimizer.step<span style="color: #d0730f;">()</span>
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">train generator</span>
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">zero your gradients for every batch!</span>
+            generator_optimizer.zero_grad()
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">make predictions for this batch</span>
+            <span style="font-weight: bold; font-style: italic;">generator_out</span> = gan.generator(batch_latent_points)
+            <span style="font-weight: bold; font-style: italic;">gan_out</span> = gan.discriminator(generator_out)
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compute the loss and its gradients</span>
+            <span style="font-weight: bold; font-style: italic;">gan_loss</span> = loss_fn(gan_out, torch.ones((batch_size, 1)).to(device))
+            gan_loss.backward()
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">adjust learning weights</span>
+            generator_optimizer.step()
 
-            <span style="color: #cf9f7f; font-style: italic;"># train discriminator on fake images</span>
-            <span style="color: #6fafff;">batch_fake_imgs</span> = generator_out.detach<span style="color: #d0730f;">()</span>
-            discriminator_optimizer.zero_grad<span style="color: #d0730f;">()</span>
-            <span style="color: #6fafff;">discriminator_out_fake</span> = gan.discriminator<span style="color: #d0730f;">(</span>batch_fake_imgs<span style="color: #d0730f;">)</span>
-            <span style="color: #6fafff;">discriminator_loss_fake</span> = loss_fn<span style="color: #d0730f;">(</span>discriminator_out_fake, torch.zeros<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>batch_size,1<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>.to<span style="color: #64aa0f;">(</span>device<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-            discriminator_loss_fake.backward<span style="color: #d0730f;">()</span>
-            discriminator_optimizer.step<span style="color: #d0730f;">()</span>
-            <span style="color: #cf9f7f; font-style: italic;"># train discriminator on real images</span>
-            <span style="color: #6fafff;">batch_real_imgs</span> = dataset<span style="color: #d0730f;">[</span>batch_i*batch_size:<span style="color: #64aa0f;">(</span>batch_i+1<span style="color: #64aa0f;">)</span>*batch_size<span style="color: #d0730f;">]</span>
-            discriminator_optimizer.zero_grad<span style="color: #d0730f;">()</span>
-            <span style="color: #6fafff;">discriminator_out_real</span> = gan.discriminator<span style="color: #d0730f;">(</span>batch_real_imgs<span style="color: #d0730f;">)</span>
-            <span style="color: #6fafff;">discriminator_loss_real</span> = loss_fn<span style="color: #d0730f;">(</span>discriminator_out_real, torch.ones<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>batch_size,1<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>.to<span style="color: #64aa0f;">(</span>device<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
-            <span style="color: #cf9f7f; font-style: italic;"># loss = (discriminator_loss_fake + discriminator_loss_real) / 2</span>
-            discriminator_loss_real.backward<span style="color: #d0730f;">()</span>
-            discriminator_optimizer.step<span style="color: #d0730f;">()</span>
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">train discriminator on fake images</span>
+            <span style="font-weight: bold; font-style: italic;">batch_fake_imgs</span> = generator_out.detach()
+            discriminator_optimizer.zero_grad()
+            <span style="font-weight: bold; font-style: italic;">discriminator_out_fake</span> = gan.discriminator(batch_fake_imgs)
+            <span style="font-weight: bold; font-style: italic;">discriminator_loss_fake</span> = loss_fn(discriminator_out_fake, torch.zeros((batch_size,1)).to(device))
+            discriminator_loss_fake.backward()
+            discriminator_optimizer.step()
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">train discriminator on real images</span>
+            <span style="font-weight: bold; font-style: italic;">batch_real_imgs</span> = dataset[batch_i*batch_size:(batch_i+1)*batch_size]
+            discriminator_optimizer.zero_grad()
+            <span style="font-weight: bold; font-style: italic;">discriminator_out_real</span> = gan.discriminator(batch_real_imgs)
+            <span style="font-weight: bold; font-style: italic;">discriminator_loss_real</span> = loss_fn(discriminator_out_real, torch.ones((batch_size,1)).to(device))
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">loss = (discriminator_loss_fake + discriminator_loss_real) / 2</span>
+            discriminator_loss_real.backward()
+            discriminator_optimizer.step()
 
-            <span style="color: #cf9f7f; font-style: italic;"># print batch summary</span>
-            <span style="color: #cf9f7f; font-style: italic;"># print(f'epoch {epoch}, batch {batch_i}, discriminator loss {discriminator_loss_fake.item()}, generator loss {gan_loss.item()}')</span>
-            <span style="color: #6fafff;">loss</span> += <span style="color: #d0730f;">(</span>discriminator_loss_fake.item<span style="color: #64aa0f;">()</span> +
-                     discriminator_loss_real.item<span style="color: #64aa0f;">()</span> +
-                     gan_loss.item<span style="color: #64aa0f;">()</span><span style="color: #d0730f;">)</span> / 3
-        <span style="color: #6fafff;">loss</span> /= batches_per_epoch <span style="color: #cf9f7f; font-style: italic;"># i dont think this is necessary as the loss is averaged over the batch by default (but it doesnt affect the model)</span>
-        loss_hist.append<span style="color: #d0730f;">(</span>loss<span style="color: #d0730f;">)</span>
-        <span style="color: #6fafff;">sample_set</span> = generator<span style="color: #d0730f;">(</span>sample_set_points<span style="color: #d0730f;">)</span>
-        sample_sets.append<span style="color: #d0730f;">(</span>sample_set.detach<span style="color: #64aa0f;">()</span>.cpu<span style="color: #64aa0f;">()</span>.clone<span style="color: #64aa0f;">()</span><span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">return</span> sample_sets, loss_hist
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">print batch summary</span>
+            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">print(f'epoch {epoch}, batch {batch_i}, discriminator loss {discriminator_loss_fake.item()}, generator loss {gan_loss.item()}')</span>
+            <span style="font-weight: bold; font-style: italic;">loss</span> += (discriminator_loss_fake.item() +
+                     discriminator_loss_real.item() +
+                     gan_loss.item()) / 3
+        <span style="font-weight: bold; font-style: italic;">loss</span> /= batches_per_epoch <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">i dont think this is necessary as the loss is averaged over the batch by default (but it doesnt affect the model)</span>
+        loss_hist.append(loss)
+        <span style="font-weight: bold; font-style: italic;">sample_set</span> = generator(sample_set_points)
+        sample_sets.append(sample_set.detach().cpu().clone())
+    <span style="font-weight: bold;">return</span> sample_sets, loss_hist
 </pre>
 </div>
 <p>
 i did a test run of 10 epochs:<br />
 </p>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-train-generator-3"><span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-train-discriminator()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-generate-latent-points()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-generator()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gan()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-train-gan()&gt;&gt;</span>
-<span style="color: #cf9f7f; font-style: italic;"># &lt;&lt;src-gen-images-img()&gt;&gt;</span>
-<span style="color: #c48702; font-weight: bold;">import</span> os.path
-<span style="color: #c48702; font-weight: bold;">import</span> time
-<span style="color: #6fafff;">start_time</span> = time.time<span style="color: #d0730f;">()</span>
-<span style="color: #6fafff;">discriminator</span> = Discriminator<span style="color: #d0730f;">()</span>
-<span style="color: #6fafff;">latent_size</span> = 40
-<span style="color: #6fafff;">epochs</span> = 100
-<span style="color: #6fafff;">generator</span> = Generator<span style="color: #d0730f;">(</span>latent_size<span style="color: #d0730f;">)</span>
-<span style="color: #6fafff;">gan</span> = GAN<span style="color: #d0730f;">(</span>generator, discriminator<span style="color: #d0730f;">)</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
-<span style="color: #6fafff;">sample_sets</span>, <span style="color: #6fafff;">loss_hist</span> = train_gan<span style="color: #d0730f;">(</span>gan, train_x, epochs<span style="color: #d0730f;">)</span>
-plt.figure<span style="color: #d0730f;">()</span>
-plt.plot<span style="color: #d0730f;">(</span>loss_hist<span style="color: #d0730f;">)</span>
-plt.savefig<span style="color: #d0730f;">(</span>f, transparent=<span style="color: #64aa0f;">True</span><span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span>f<span style="color: #f06a3f;">'[[</span>{f}<span style="color: #f06a3f;">]]'</span><span style="color: #d0730f;">)</span>
-<span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">i</span>, <span style="color: #6fafff;">collage</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">enumerate</span><span style="color: #d0730f;">(</span>sample_sets<span style="color: #d0730f;">)</span>:
-    <span style="color: #6fafff;">filename</span> = os.path.join<span style="color: #d0730f;">(</span>d, f<span style="color: #f06a3f;">'</span>{i}<span style="color: #f06a3f;">.png'</span><span style="color: #d0730f;">)</span>
-    gen_images_img<span style="color: #d0730f;">(</span>collage.view<span style="color: #64aa0f;">(</span><span style="color: #ef656a;">(</span>-1, 28, 28<span style="color: #ef656a;">)</span><span style="color: #64aa0f;">)</span>, filename<span style="color: #d0730f;">)</span>
-    <span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span>f<span style="color: #f06a3f;">'samples after epoch </span>{i+1}<span style="color: #f06a3f;">:'</span><span style="color: #d0730f;">)</span>
-    <span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span>f<span style="color: #f06a3f;">'[[</span>{filename}<span style="color: #f06a3f;">]]'</span><span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span>f<span style="color: #f06a3f;">'---time elapsed: </span>{time.time() - start_time}<span style="color: #f06a3f;"> seconds ---'</span><span style="color: #d0730f;">)</span>
+<pre class="src src-python" id="src-train-generator-3"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-discriminator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generate-latent-points()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-generator()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gan()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-train-gan()&gt;&gt;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&lt;&lt;src-gen-images-img()&gt;&gt;</span>
+<span style="font-weight: bold;">import</span> os.path
+<span style="font-weight: bold;">import</span> time
+<span style="font-weight: bold; font-style: italic;">start_time</span> = time.time()
+<span style="font-weight: bold; font-style: italic;">discriminator</span> = Discriminator()
+<span style="font-weight: bold; font-style: italic;">latent_size</span> = 40
+<span style="font-weight: bold; font-style: italic;">epochs</span> = 100
+<span style="font-weight: bold; font-style: italic;">generator</span> = Generator(latent_size)
+<span style="font-weight: bold; font-style: italic;">gan</span> = GAN(generator, discriminator).to(device)
+<span style="font-weight: bold; font-style: italic;">sample_sets</span>, <span style="font-weight: bold; font-style: italic;">loss_hist</span> = train_gan(gan, train_x, epochs)
+plt.figure()
+plt.plot(loss_hist)
+plt.savefig(f, transparent=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">'[[</span>{f}<span style="font-style: italic;">]]'</span>)
+<span style="font-weight: bold;">for</span> i, collage <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(sample_sets):
+    <span style="font-weight: bold; font-style: italic;">filename</span> = os.path.join(d, f<span style="font-style: italic;">'</span>{i}<span style="font-style: italic;">.png'</span>)
+    gen_images_img(collage.view((-1, 28, 28)), filename)
+    <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">'samples after epoch </span>{i+1}<span style="font-style: italic;">:'</span>)
+    <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">'[[</span>{filename}<span style="font-style: italic;">]]'</span>)
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">'---time elapsed: </span>{time.time() - start_time}<span style="font-style: italic;"> seconds ---'</span>)
 </pre>
 </div>
 
@@ -731,82 +750,82 @@ but the results are interesting, even after the first epoch, we can see that the
 </div>
 </div>
 </div>
-<div id="outline-container-org4d26ee5" class="outline-2">
-<h2 id="org4d26ee5">performance evaluation</h2>
-<div class="outline-text-2" id="text-org4d26ee5">
+<div id="outline-container-orge1c9a1f" class="outline-2">
+<h2 id="orge1c9a1f">performance evaluation</h2>
+<div class="outline-text-2" id="text-orge1c9a1f">
 <p>
 generally, there are no objective ways to evaluate the performance of a GAN model. we cannot calculate this objective error score for generated images. it might be possible in the case of MNIST images because the images are so well constrained, but in general, it is not possible (yet).<br />
 instead, images must be subjectively evaluated for quality by a human agent. this means that we cannot know when to stop training without looking at examples of generated images. in turn, the adversarial nature of the training process means that the generator is changing after every batch, meaning that once "good enough" images can be generated, the subjective quality of the images may then begin to vary, improve, or even degrade with subsequent updates.<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org4c8dc1b" class="outline-2">
-<h2 id="org4c8dc1b">latent output space visualization</h2>
-<div class="outline-text-2" id="text-org4c8dc1b">
+<div id="outline-container-org76e7f1e" class="outline-2">
+<h2 id="org76e7f1e">latent output space visualization</h2>
+<div class="outline-text-2" id="text-org76e7f1e">
 <p>
 while we cant visualize dimensions higher than 3d, and while computer screens are 2d, we can still try to explore higher dimensions by "navigating" them and projecting the results. by navigation i mean choosing an axis and "hovering" over its possible values while holding the other variables constant, to see how the changes to the variable that corresponds to the axis we chose affect the space we project.<br />
 </p>
 
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #c48702; font-weight: bold;">def</span> <span style="color: #3dbbb0;">generate_traces</span><span style="color: #d0730f;">()</span>:
-    <span style="color: #cf9f7f; font-style: italic;"># size of linspace to generate</span>
-    <span style="color: #6fafff;">num_points</span> = 50
-    <span style="color: #cf9f7f; font-style: italic;"># our point, we will manipulate the number at the first index</span>
-    <span style="color: #6fafff;">latent_point</span> = torch.randn<span style="color: #d0730f;">(</span><span style="color: #64aa0f;">(</span>latent_size,<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>.to<span style="color: #d0730f;">(</span>device<span style="color: #d0730f;">)</span>
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">generate_traces</span>():
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">size of linspace to generate</span>
+    <span style="font-weight: bold; font-style: italic;">num_points</span> = 50
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">our point, we will manipulate the number at the first index</span>
+    <span style="font-weight: bold; font-style: italic;">latent_point</span> = torch.randn((latent_size,)).to(device)
 
-    <span style="color: #6fafff;">all_latent_points</span> = latent_point.repeat<span style="color: #d0730f;">(</span>num_points, 1<span style="color: #d0730f;">)</span>
-    <span style="color: #6fafff;">lin</span> = torch.linspace<span style="color: #d0730f;">(</span>-1, 1, steps=num_points<span style="color: #d0730f;">)</span>
-    <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">i</span>, <span style="color: #6fafff;">point</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">enumerate</span><span style="color: #d0730f;">(</span>all_latent_points<span style="color: #d0730f;">)</span>:
-        <span style="color: #cf9f7f; font-style: italic;"># update the value only for half the axes</span>
-        <span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">j</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">range</span><span style="color: #d0730f;">(</span><span style="color: #ff7a7f; font-weight: bold;">len</span><span style="color: #64aa0f;">(</span>point<span style="color: #64aa0f;">)</span>//2<span style="color: #d0730f;">)</span>:
-            point<span style="color: #d0730f;">[</span>j<span style="color: #d0730f;">]</span> = lin<span style="color: #d0730f;">[</span>i<span style="color: #d0730f;">]</span>
+    <span style="font-weight: bold; font-style: italic;">all_latent_points</span> = latent_point.repeat(num_points, 1)
+    <span style="font-weight: bold; font-style: italic;">lin</span> = torch.linspace(-1, 1, steps=num_points)
+    <span style="font-weight: bold;">for</span> i, point <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(all_latent_points):
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">update the value only for half the axes</span>
+        <span style="font-weight: bold;">for</span> j <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(<span style="font-weight: bold;">len</span>(point)//2):
+            <span style="font-weight: bold; font-style: italic;">point</span>[j] = lin[i]
 
-    <span style="color: #c48702; font-weight: bold;">return</span> all_latent_points.detach<span style="color: #d0730f;">()</span>.cpu<span style="color: #d0730f;">()</span>, generator<span style="color: #d0730f;">(</span>all_latent_points<span style="color: #d0730f;">)</span>.detach<span style="color: #d0730f;">()</span>.cpu<span style="color: #d0730f;">()</span>
+    <span style="font-weight: bold;">return</span> all_latent_points.detach().cpu(), generator(all_latent_points).detach().cpu()
 
-<span style="color: #c48702; font-weight: bold;">import</span> plotly.graph_objects <span style="color: #c48702; font-weight: bold;">as</span> go
+<span style="font-weight: bold;">import</span> plotly.graph_objects <span style="font-weight: bold;">as</span> go
 
-<span style="color: #6fafff;">fig</span> = go.Figure<span style="color: #d0730f;">()</span>
+<span style="font-weight: bold; font-style: italic;">fig</span> = go.Figure()
 
-<span style="color: #6fafff;">xs</span>, <span style="color: #6fafff;">ys</span> = generate_traces<span style="color: #d0730f;">()</span>
+<span style="font-weight: bold; font-style: italic;">xs</span>, <span style="font-weight: bold; font-style: italic;">ys</span> = generate_traces()
 
-<span style="color: #cf9f7f; font-style: italic;"># add "traces", one for each slider step</span>
-<span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">i</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">range</span><span style="color: #d0730f;">(</span><span style="color: #ff7a7f; font-weight: bold;">len</span><span style="color: #64aa0f;">(</span>xs<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>:
-    fig.add_trace<span style="color: #d0730f;">(</span>go.Heatmap<span style="color: #64aa0f;">(</span>z=ys<span style="color: #ef656a;">[</span>i<span style="color: #ef656a;">]</span>.view<span style="color: #ef656a;">(</span><span style="color: #3dbbb0;">(</span>28, 28<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">)</span>.numpy<span style="color: #ef656a;">()</span>,
-                             colorscale=<span style="color: #f06a3f;">'gray'</span>,
-                             visible=<span style="color: #64aa0f;">False</span>,
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">add "traces", one for each slider step</span>
+<span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(<span style="font-weight: bold;">len</span>(xs)):
+    fig.add_trace(go.Heatmap(z=ys[i].view((28, 28)).numpy(),
+                             colorscale=<span style="font-style: italic;">'gray'</span>,
+                             visible=<span style="font-weight: bold; text-decoration: underline;">False</span>,
                              zmin=-1,
                              zmax=1,
-                             showscale=<span style="color: #64aa0f;">False</span><span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>
+                             showscale=<span style="font-weight: bold; text-decoration: underline;">False</span>))
 
-<span style="color: #cf9f7f; font-style: italic;"># make 10th trace visible</span>
-fig.data<span style="color: #d0730f;">[</span>10<span style="color: #d0730f;">]</span>.<span style="color: #6fafff;">visible</span> = <span style="color: #64aa0f;">True</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">make 10th trace visible</span>
+fig.data[10].<span style="font-weight: bold; font-style: italic;">visible</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
 
-<span style="color: #cf9f7f; font-style: italic;"># create and add slider</span>
-<span style="color: #6fafff;">steps</span> = <span style="color: #d0730f;">[]</span>
-<span style="color: #c48702; font-weight: bold;">for</span> <span style="color: #6fafff;">i</span> <span style="color: #c48702; font-weight: bold;">in</span> <span style="color: #ff7a7f; font-weight: bold;">range</span><span style="color: #d0730f;">(</span><span style="color: #ff7a7f; font-weight: bold;">len</span><span style="color: #64aa0f;">(</span>fig.data<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">)</span>:
-    <span style="color: #6fafff;">step</span> = <span style="color: #ff7a7f; font-weight: bold;">dict</span><span style="color: #d0730f;">(</span>
-        method=<span style="color: #f06a3f;">"update"</span>,
-        args=<span style="color: #64aa0f;">[</span><span style="color: #ef656a;">{</span><span style="color: #f06a3f;">"visible"</span>: <span style="color: #3dbbb0;">[</span><span style="color: #64aa0f;">False</span><span style="color: #3dbbb0;">]</span> * <span style="color: #ff7a7f; font-weight: bold;">len</span><span style="color: #3dbbb0;">(</span>fig.data<span style="color: #3dbbb0;">)</span><span style="color: #ef656a;">}</span><span style="color: #64aa0f;">]</span>,
-              <span style="color: #cf9f7f; font-style: italic;"># {"title": "slider switched to step: " + str(i)}],  # layout attribute</span>
-    <span style="color: #d0730f;">)</span>
-    step<span style="color: #d0730f;">[</span><span style="color: #f06a3f;">"args"</span><span style="color: #d0730f;">][</span>0<span style="color: #d0730f;">][</span><span style="color: #f06a3f;">"visible"</span><span style="color: #d0730f;">][</span>i<span style="color: #d0730f;">]</span> = <span style="color: #64aa0f;">True</span>  <span style="color: #cf9f7f; font-style: italic;"># toggle i'th trace to "visible"</span>
-    step<span style="color: #d0730f;">[</span><span style="color: #f06a3f;">'label'</span><span style="color: #d0730f;">]</span> = f<span style="color: #f06a3f;">'</span>{xs[i][0].item()}<span style="color: #f06a3f;">'</span> <span style="color: #cf9f7f; font-style: italic;"># the value for the first axis/var, which is the same for half of them</span>
-    steps.append<span style="color: #d0730f;">(</span>step<span style="color: #d0730f;">)</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">create and add slider</span>
+<span style="font-weight: bold; font-style: italic;">steps</span> = []
+<span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(<span style="font-weight: bold;">len</span>(fig.data)):
+    <span style="font-weight: bold; font-style: italic;">step</span> = <span style="font-weight: bold;">dict</span>(
+        method=<span style="font-style: italic;">"update"</span>,
+        args=[{<span style="font-style: italic;">"visible"</span>: [<span style="font-weight: bold; text-decoration: underline;">False</span>] * <span style="font-weight: bold;">len</span>(fig.data)}],
+              <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">{"title": "slider switched to step: " + str(i)}],  # layout attribute</span>
+    )
+    step[<span style="font-style: italic;">"args"</span>][0][<span style="font-style: italic;">"visible"</span>][i] = <span style="font-weight: bold; text-decoration: underline;">True</span>  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">toggle i'th trace to "visible"</span>
+    <span style="font-weight: bold; font-style: italic;">step</span>[<span style="font-style: italic;">'label'</span>] = f<span style="font-style: italic;">'</span>{xs[i][0].item()}<span style="font-style: italic;">'</span> <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">the value for the first axis/var, which is the same for half of them</span>
+    steps.append(step)
 
-<span style="color: #6fafff;">sliders</span> = <span style="color: #d0730f;">[</span><span style="color: #ff7a7f; font-weight: bold;">dict</span><span style="color: #64aa0f;">(</span>
+<span style="font-weight: bold; font-style: italic;">sliders</span> = [<span style="font-weight: bold;">dict</span>(
     active=10,
-    currentvalue=<span style="color: #ef656a;">{</span><span style="color: #f06a3f;">"prefix"</span>: <span style="color: #f06a3f;">"x: "</span><span style="color: #ef656a;">}</span>,
-    <span style="color: #cf9f7f; font-style: italic;"># pad={"t": 50},</span>
+    currentvalue={<span style="font-style: italic;">"prefix"</span>: <span style="font-style: italic;">"x: "</span>},
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">pad={"t": 50},</span>
     steps=steps
-<span style="color: #64aa0f;">)</span><span style="color: #d0730f;">]</span>
+)]
 
-fig.update_layout<span style="color: #d0730f;">(</span>
+fig.update_layout(
     sliders=sliders
-<span style="color: #d0730f;">)</span>
+)
 
-<span style="color: #cf9f7f; font-style: italic;"># fig.show() # you might want to uncomment this and comment the next ones</span>
-fig.write_html<span style="color: #d0730f;">(</span>f<span style="color: #d0730f;">)</span>
-<span style="color: #ff7a7f; font-weight: bold;">print</span><span style="color: #d0730f;">(</span><span style="color: #f06a3f;">'visit manually:'</span>, f<span style="color: #d0730f;">)</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">fig.show() # you might want to uncomment this and comment the next ones</span>
+fig.write_html(f)
+<span style="font-weight: bold;">print</span>(<span style="font-style: italic;">'visit manually:'</span>, f)
 </pre>
 </div>
 
