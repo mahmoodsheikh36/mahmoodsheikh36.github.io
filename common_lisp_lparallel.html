@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>common lisp lparallel</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">common lisp lparallel</h1>
+</div>
+<div id="content" class="content">
+<p>
+<a href="https://lparallel.org/">lparallel</a> is a multithreading library for common lisp, it is useful because the ANSI CL standard doesnt have multithreading<br />
+it is available via quicklisp:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:lparallel</span>)
+</pre>
+</div>
+<p>
+to get the number of cores we have to use the <code>serapeum</code> package:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:serapeum</span>)
+</pre>
+</div>
+<p>
+usage:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(serapeum:count-cpus)
+</pre>
+</div>
+
+<pre class="example">
+16
+</pre>
+
+
+<p>
+in the context of lparallel, a <b>kernel</b> is an abstract entity that schedules and executes tasks. the lparallel kernel API is meant to describe parallelism in a generic manner.<br />
+the implementation uses a group of worker threads. it is intended to be efficiency-wise comparable to (or faster than) similar hand-rolled solutions while also providing full condition handling and consistency checks. all higher-level constructs in lparallel are implemented on top of the kernel.<br />
+kernel-related operations are applied to the current kernel, stored in <b>kernel</b>. a kernel is typically created with<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(setf lparallel:*kernel* (lparallel:make-kernel &lt;N&gt;))
+</pre>
+</div>
+<p>
+where <code>N</code> is the number of <b>worker threads</b>, which ideally would be equal to the number of cores obtained using <code>(serapeum:count-cpus)</code>.<br />
+in most circumstances a kernel should exist for the lifetime of the Lisp process. multiple kernels are possible, and setting the current kernel is done in the expected manner by dynamically binding <b>kernel</b> (with <code>let</code>, for example).<br />
+a <b>task</b> is a function designator together with arguments to the function. to execute a task, (1) create a channel, (2) submit the task through the channel, and (3) receive the result from the channel.<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((channel (lparallel:make-channel)))
+  (lparallel:submit-task channel '+ 3 4)
+  (lparallel:receive-result channel))
+</pre>
+</div>
+
+<pre class="example">
+7
+</pre>
+
+
+<p>
+a <b>channel</b> is simply a means to communicate with the kernel<br />
+multiple tasks may be submitted on the same channel, though the results are not necessarily received in the order in which they were submitted. <code>receive-result</code> receives one result per call.<br />
+some examples:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((channel (lparallel:make-channel)))
+  (lparallel:submit-task channel '+ 3 4)
+  (lparallel:submit-task channel (<span style="font-weight: bold;">lambda</span> () (+ 5 6)))
+  (list (lparallel:receive-result channel)
+        (lparallel:receive-result channel)))
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">11</td>
+<td class="org-right">7</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((channel (lparallel:make-channel)))
+  (lparallel:submit-task channel #'sleep 1)
+  (lparallel:submit-task channel (<span style="font-weight: bold;">lambda</span> () (sleep 3) (+ 7 6)))
+  (lparallel:submit-task channel (<span style="font-weight: bold;">lambda</span> () (+ 4 6)))
+  (print (lparallel:receive-result channel))
+  (print (lparallel:receive-result channel))
+  (print (lparallel:receive-result channel)))
+</pre>
+</div>
+
+<pre class="example">
+
+10 
+NIL 
+13 
+</pre>
+
+
+<p>
+this would take full advantage of 3 cores if the kernel was created with 3+ workers (dont run it!):<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((channel (lparallel:make-channel)))
+  (lparallel:submit-task channel (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">loop</span>)))
+  (lparallel:submit-task channel (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">loop</span>)))
+  (lparallel:submit-task channel (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">loop</span>)))
+  (print (lparallel:receive-result channel)))
+</pre>
+</div>
+<p>
+note that a kernel will not be garbage collected until <code>end-kernel</code> is called.<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(lparallel:end-kernel)
+</pre>
+</div>
+<div id="outline-container-ID-95a2127a-cb65-45c6-9bce-ae62391d4b80" class="outline-2">
+<h2 id="ID-95a2127a-cb65-45c6-9bce-ae62391d4b80">plet</h2>
+<div class="outline-text-2" id="text-orgf7fd025">
+<p>
+plet might be the simplest construct that lparallel offers for asynchronous computation, consider the following example:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(lparallel:plet ((a (<span style="font-weight: bold;">progn</span> (sleep 1) 9)))
+  (print <span style="font-style: italic;">"this runs instantly"</span>)
+  (print a)) <span style="font-weight: bold; font-style: italic;">; =&gt; 9</span>
+</pre>
+</div>
+<p>
+once <code>my-slow-function</code> is done running, the returned value, 9, will be in <code>a</code> and the form <code>(print a)</code> would be executed, but until then, execution hangs on <code>(print a)</code>, notice that the first print statement is executed instantly because it doesnt depend on a variable (the variable <code>a</code>, in this case) that was defined using <code>plet</code>, which depends on a task to finish executing<br />
+although notice that, the whole sexp does pause and doesnt execute asynchronously, consider this example:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(lparallel:plet ((a (<span style="font-weight: bold;">progn</span> (sleep 1) 9)))
+  (format t <span style="font-style: italic;">"hi~%"</span>)
+  (format t <span style="font-style: italic;">"~A~%"</span> a))
+(format t <span style="font-style: italic;">"~A~%"</span> 10)
+</pre>
+</div>
+
+<pre class="example">
+hi
+9
+10
+</pre>
+
+<p>
+the next sexp after <code>plet</code> doesnt run until <code>plet</code> is done.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-ID-f40fb686-51d2-4106-89ad-7ed793fa3eab" class="outline-2">
+<h2 id="ID-f40fb686-51d2-4106-89ad-7ed793fa3eab">promise</h2>
+<div class="outline-text-2" id="text-org2df9261">
+<p>
+promises and futures are also useful<br />
+a <code>promise</code> is a "promise" that needs to be <code>fulfill</code>'ed, <code>fullfilledp</code> checks whether a promise has been fulfilled, <code>fulfill</code> turns a promise into a fulfilled one, and attachs the second argument as its return value, <code>force</code> returns the value returned by a promise<br />
+example:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((p (lparallel:promise)))
+  (lparallel:fulfilledp p) <span style="font-weight: bold; font-style: italic;">; =&gt; nil</span>
+  (lparallel:fulfill p 3)
+  (lparallel:fulfilledp p) <span style="font-weight: bold; font-style: italic;">; =&gt; t</span>
+  (lparallel:force p)) <span style="font-weight: bold; font-style: italic;">; =&gt; 3</span>
+</pre>
+</div>
+<p>
+a <code>future</code> is a <code>promise</code> which is fulfilled in parallel, it takes forms to execute asynchronously, <code>fulfilledp</code> is used to check whether a future is done executing the forms, and <code>force</code> is used to get the result of the execution, if the promise (the future) is not yet fulfilled (hasnt done executing), the call to <code>force</code> block execution until it is, example:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">let</span> ((f (lparallel:future (sleep 0.2) (+ 3 4))))
+  (lparallel:fulfilledp f) <span style="font-weight: bold; font-style: italic;">; =&gt; nil</span>
+  (sleep 0.4)
+  (lparallel:fulfilledp f) <span style="font-weight: bold; font-style: italic;">; =&gt; t</span>
+  (lparallel:force f)) <span style="font-weight: bold; font-style: italic;">; =&gt; 7</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

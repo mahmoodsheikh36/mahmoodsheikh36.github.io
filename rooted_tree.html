@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>rooted tree</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">rooted tree</h1>
+</div>
+<div id="content" class="content">
+<div class="math-block note note" data-before="note" data-after="" id="orgfb50f02">
+<p>
+i should just use the same nodes/definitions from tree (data structure)<br />
+</p>
+
+</div>
+<div class="math-block definition definition" data-before="definition" data-after="" id="orgdcc1b5f">
+<p>
+a <a href="/tree.html#1679584007">tree</a> in which there's a special <a href="/vertex.html#1678745786">vertex</a> that has been chosen to be the root<br />
+</p>
+
+</div>
+<div class="math-block definition definition" data-before="definition" data-after="" id="orgb0552fe">
+<p>
+in a <b>rooted tree</b>, the <b>parent</b> of a vertex <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg> is the <a href="/vertex.html#1678745786">vertex</a> connected to <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg> on the path to the <b>root</b>; every vertex has a unique parent except the root which has no parent. a <b>child</b> of a vertex <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg> is a vertex of which <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg> is the parent. an <b>ascendant</b> of a vertex <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg> is any vertex which is either the parent of v or is (recursively) the ascendant of the parent of <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg>. a <b>descendant</b> of a vertex <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg> is any vertex which is either the child of <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg> or is (recursively) the descendant of any of the children of <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg>. a sibling to a vertex <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg> is any other vertex on the tree which has the same parent as <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.951422 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-69' d='m4.244085-3.805729c0-.318804-.259029-.587796-.557908-.587796c-.229141 0-.368618 .129514-.368618 .33873c0 .159402 .059776 .278954 .239103 .438356c.129514 .119552 .179328 .199253 .179328 .298879c0 .468244-.647572 1.564134-1.364882 2.30137l-.308842 .318804c-.069738-1.344956-.119552-1.902864-.249066-2.560399c-.18929-1.075965-.209215-1.135741-.298879-1.135741c-.049813 0-.119552 .009963-.199253 .039851c-.318804 .069738-.657534 .139477-1.105853 .209215v.129514c.109589-.009963 .199253-.009963 .298879-.009963c.368618 0 .488169 .179328 .607721 .926526c.119552 .757161 .239103 2.211706 .239103 2.819427c0 .18929 0 .458281 .089664 .458281c.249066 0 1.145704-1.016189 2.191781-2.470735c.348692-.498132 .607721-1.135741 .607721-1.514321z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.079703' y='0' xlink:href='#g0-69'/>
+</g>
+</g>
+</svg>. a leaf is a vertex with no children. an internal vertex is a vertex that is not a leaf.<br />
+</p>
+
+</div>
+</div>
+</body>
+</html>

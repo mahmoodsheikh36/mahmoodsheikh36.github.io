@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>common lisp hunchentoot</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">common lisp hunchentoot</h1>
+</div>
+<div id="content" class="content">
+<p>
+for reference <a href="https://lispcookbook.github.io/cl-cookbook/web.html">https://lispcookbook.github.io/cl-cookbook/web.html</a><br />
+<code>hunchentoot</code> is a common lisp library for creating webservers<br />
+begin by loading the package using quicklisp:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:hunchentoot</span>)
+</pre>
+</div>
+<p>
+a simple example:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*acceptor*</span> (make-instance 'hunchentoot:easy-acceptor <span style="font-weight: bold;">:port</span> 4242))
+(setf (hunchentoot:acceptor-document-root *acceptor*) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">location of pages to server statically</span>
+      #p<span style="font-style: italic;">"path/to/www"</span>)
+(hunchentoot:start *acceptor*) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">run the server</span>
+</pre>
+</div>
+<p>
+to serve a dynamic file (one that is generated per-request) we define a handler:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(hunchentoot:define-easy-handler (say-yo <span style="font-weight: bold;">:uri</span> <span style="font-style: italic;">"/yo"</span>) (name)
+  (setf (hunchentoot:content-type*) <span style="font-style: italic;">"text/plain"</span>)
+  (format nil <span style="font-style: italic;">"Hey~@[ ~A~]!"</span> name))
+</pre>
+</div>
+<p>
+visit <a href="http://localhost:4242/yo?name=Alice">http://localhost:4242/yo?name=Alice</a>.<br />
+i needed the <a href="https://github.com/madnificent/jsown">jsown</a> to encode/decode json messages:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:jsown</span>)
+</pre>
+</div>
+<p>
+examples:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(print (jsown:parse <span style="font-style: italic;">"{\"foo\":\"bar\",\"baz\":100.25}"</span>))
+(print (jsown:val '(<span style="font-weight: bold;">:obj</span> (<span style="font-style: italic;">"foo"</span> . <span style="font-style: italic;">"bar"</span>) (<span style="font-style: italic;">"frolic"</span> . 100) (<span style="font-style: italic;">"fragrance"</span> . 1001/100)) <span style="font-style: italic;">"frolic"</span>))
+(print (jsown:new-js (<span style="font-style: italic;">"foo"</span> <span style="font-style: italic;">"bar"</span>) (<span style="font-style: italic;">"baz"</span> (+ 100 0.25))))
+(print (jsown:to-json
+        (jsown:new-js
+          (<span style="font-style: italic;">"items"</span> nil)
+          (<span style="font-style: italic;">"falseIsEmptyList"</span> <span style="font-weight: bold;">:f</span>)
+          (<span style="font-style: italic;">"success"</span> t))))
+(print (assoc <span style="font-style: italic;">"items"</span>
+              (cdr
+               (jsown:parse
+                (jsown:to-json
+                 (jsown:new-js
+                   (<span style="font-style: italic;">"items"</span> '(1 2 9 0))
+                   (<span style="font-style: italic;">"falseIsEmptyList"</span> <span style="font-weight: bold;">:f</span>)
+                   (<span style="font-style: italic;">"success"</span> t)))))
+              <span style="font-weight: bold;">:test</span> #'equal))
+</pre>
+</div>
+
+<pre class="example">
+(:OBJ ("foo" . "bar") ("baz" . 401/4)) 
+100 
+(:OBJ ("foo" . "bar") ("baz" . 100.25)) 
+"{\"items\":[],\"falseIsEmptyList\":false,\"success\":true}" 
+("items" 1 2 9 0) 
+</pre>
+</div>
+</body>
+</html>

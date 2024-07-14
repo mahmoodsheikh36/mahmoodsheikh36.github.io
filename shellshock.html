@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>shellshock</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">shellshock</h1>
+</div>
+<div id="content" class="content">
+<p>
+a vulnerability (<code>CVE-2014-6271</code>) in <code>bash</code> versions 1.14 through 4.3 of<br />
+the parent process can pass a function definition to a child shell via an environment variable<br />
+the bash in the child process converts the value of the environment variable to a function<br />
+so, it is supposed to parse the commands in the variable and not to execute them<br />
+due to a bug in bash parsing logic, it executes some of the commands in the variable<br />
+passing a bash function to a child process can be done with<br />
+</p>
+<div class="org-src-container" data-language="bash">
+<pre class="src src-bash"><span style="font-weight: bold;">export</span> -f &lt;function-name&gt;
+</pre>
+</div>
+<p>
+printing a function definition can be done with<br />
+</p>
+<div class="org-src-container" data-language="bash">
+<pre class="src src-bash"><span style="font-weight: bold;">declare</span> -f &lt;function-name&gt;
+</pre>
+</div>
+<p>
+exmaple usage:<br />
+</p>
+<div class="org-src-container" data-language="bash">
+<pre class="src src-bash"><span style="font-weight: bold;">sayHello</span>() { <span style="font-weight: bold;">echo</span> hello; }
+<span style="font-weight: bold;">export</span> -f sayHello
+<span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">$</span>
+bash -c <span style="font-style: italic;">'</span>
+<span style="font-style: italic;">echo $$</span>
+<span style="font-style: italic;">declare -f sayHello</span>
+<span style="font-style: italic;">sayHello</span>
+<span style="font-style: italic;">'</span>
+</pre>
+</div>
+
+<pre class="example">
+328061
+328062
+sayHello () 
+{ 
+    echo hello
+}
+hello
+</pre>
+
+
+<p>
+[BROKEN LINK: 1cd201b2-23ea-4286-a80b-37455d4e1987::ex:ex1]<br />
+the shellshock bug starts in <code>variables.c</code> file of the bash source code in the <code>initialize_shell_variables</code> function which calls <code>parse_and_execute</code></p>
+</div>
+</body>
+</html>

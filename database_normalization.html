@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>database normalization</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">database normalization</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="org4c884d7">
+<p>
+the normalization process, as first proposed by Codd (1972a), takes a relation schema through a series of tests to certify whether it satisfies a certain normal form. the process, which proceeds in a top-down fashion by evaluating each relation against the criteria for normal forms and decomposing relations as necessary, can thus be considered as relational design by analysis.<br />
+</p>
+
+</div>
+<div class="math-block my_example my_example" data-before="example" data-after="" id="org4b48cd7">
+<p>
+students can partake in multiple courses and a course can have multiple students taking it, we want to build a relation that contains the ratings of the students in the courses with the following condition: in each course in which a student partakes, they receive a single ordinal rating, for example a student gets assigned the first in class, and another gets assigned the second and so on.<br />
+consider the following relation which is proposed as the solution for the problem:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql">ratings(student_id, course_code, rating)
+</pre>
+</div>
+<p>
+the following questions arise:<br />
+</p>
+<ul class="org-ul">
+<li>what are the relations between the attributes?<br />
+<ul class="org-ul">
+<li>(student id <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> course code) -&gt; rating<br /></li>
+<li>(course code <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> rating) -&gt; student id<br /></li>
+</ul></li>
+<li>what is the key of the relation?<br />
+<ul class="org-ul">
+<li>(<span class="underline">student id, course code</span>, rating)<br /></li>
+<li>(student id, <span class="underline">course code, rating</span>)<br /></li>
+</ul></li>
+<li>is the relation of degree 3NF? BC/NF?<br />
+if we were to pick the key (<span class="underline">student id, course code</span>, rating), we'd get a relation that is 3NF, but not BCNF because its a dependency of a field in the key on another that isnt in the key.<br /></li>
+<li>do we need to modify or to divide the relation?<br />
+in order to abide by BC/NF rules, we add the relation (student id, <span class="underline">course code, rating</span>). this avoids duplicates and if we dont do this, we'd be able to add the same rating for different students of the same course.<br /></li>
+</ul>
+
+</div>
+<div class="math-block my_example my_example" data-before="example" data-after="" id="org0a35e6c">
+<p>
+given the relation (worker id, project code, language) such that<br />
+</p>
+<ul class="org-ul">
+<li>a worker can be in multiple projects,<br /></li>
+<li>a worker can be know multiple languages,<br /></li>
+<li>there is no relation between a worker the languages that theu know.<br /></li>
+</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">language</th>
+<th scope="col" class="org-right">project code</th>
+<th scope="col" class="org-right">worker id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">c++</td>
+<td class="org-right">101</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">java</td>
+<td class="org-right">101</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">chinese</td>
+<td class="org-right">101</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">c++</td>
+<td class="org-right">102</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">java</td>
+<td class="org-right">102</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">chinese</td>
+<td class="org-right">102</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table>
+<p>
+the key would be all 3 fields: (<span class="underline">worker id, project course, language</span>).<br />
+the following functional dependencies exist in the relation:<br />
+</p>
+<ul class="org-ul">
+<li>student id <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> project code<br /></li>
+<li>student id <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> language<br /></li>
+</ul>
+<p>
+the relation is in BC/NF (and hence 3NF and 2NF and 1NF) but not 4NF, the solution is to divide the relation into 2 relations, (<span class="underline">student id</span>, project id) and (<span class="underline">student id</span>, language).<br />
+</p>
+
+</div>
+<div class="math-block my_example my_example" data-before="example" data-after="" id="org50f0c25">
+<p>
+consider the following relation: car salesmen represent car companies and sell their products.<br />
+the following functional dependencies can be found:<br />
+</p>
+<ul class="org-ul">
+<li>company <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> salesman<br /></li>
+<li>product <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> salesman<br /></li>
+<li>product <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> company<br /></li>
+<li>product <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> company <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -5.217313 11.905945 5.717314' style="height: 0.5624em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-144' d='m8.986301-2.570361l-1.952677-2.032379l-.308842 .328767l1.185554 1.43462h-1.175592l-1.693649-1.763387l-.308842 .328767l1.185554 1.43462h-5.300125v.557908h5.300125l-1.185554 1.43462l.308842 .328767l1.673724-1.763387h1.195517l-1.185554 1.43462l.308842 .328767l1.952677-2.052304z'/>
+<path id='g0-145' d='m8.986301-2.281445v-.557908h-5.300125l1.185554-1.43462l-.308842-.328767l-1.673724 1.763387h-1.195517l1.185554-1.43462l-.308842-.328767l-1.952677 2.052304l1.952677 2.032379l.308842-.328767l-1.185554-1.43462h1.175592l1.693649 1.763387l.308842-.328767l-1.185554-1.43462h5.300125z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-145'/>
+<use x='1.301985' y='0' xlink:href='#g0-144'/>
+</g>
+</g>
+</svg> salesman (actual sales)<br /></li>
+</ul>
+<p>
+we define the following relations to resolve the relation into being in 5NF:<br />
+</p>
+<ul class="org-ul">
+<li>(salesman, company)<br /></li>
+<li>(salesman, product)<br /></li>
+<li>(product, company)<br /></li>
+<li>(product, company, salesman)<br /></li>
+</ul>
+
+</div>
+</div>
+</body>
+</html>

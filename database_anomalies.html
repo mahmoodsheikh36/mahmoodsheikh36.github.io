@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>database anomalies</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">database anomalies</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="org6b7a6b4">
+<p>
+storing natural joins of base relations leads to a problem referred to as <i>update anomalies</i>. these can be classified into <i>insertion anomalies</i>, <i>deletion anomalies</i>, and <i>modification anomalies</i>.<br />
+</p>
+<ul class="org-ul">
+<li><i>insertion anomalies</i>: insertion anomalies can be differentiated into two types, illustrated by the following examples based on the (in Ramez Elmasri, Shamkant B. Navathe, 2015 figure 14.3 EMP_DEPT) relation:<br />
+<ul class="org-ul">
+<li>to insert a new employee tuple into EMP_DEPT, we must include either the attribute values for the department that the employee works for, or NULLs (if the employee does not work for a department as yet). for example, to insert a new tuple for an employee who works in department number 5, we must enter all the attribute values of department 5 correctly so that they are con- sistent with the corresponding values for department 5 in other tuples in EMP_DEPT. in the design of (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 14.2), we do not have to worry about this consistency problem because we enter only the department number in the employee tuple; all other attribute values of department 5 are recorded only once in the database, as a single tuple in the DEPARTMENT relation.<br /></li>
+<li>it is difficult to insert a new department that has no employees as yet in the EMP_DEPT relation. the only way to do this is to place NULL values in the attributes for employee. this violates the entity integrity for EMP_DEPT because its primary key Ssn cannot be null. moreover, when the first employee is assigned to that department, we do not need this tuple with NULL values anymore. this problem does not occur in the design of (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 14.2) because a department is entered in the DEPARTMENT relation whether or not any employees work for it, and whenever an employee is assigned to that department, a corresponding tuple is inserted in EMPLOYEE.<br /></li>
+</ul></li>
+<li><i>deletion anomalies</i>: the problem of deletion anomalies is related to the second insertion anomaly situation just discussed. if we delete from EMP_DEPT an employee tuple that happens to represent the last employee working for a particular department, the information concerning that department is lost inadvertently from the database. this problem does not occur in the database of (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 14.2) because DEPARTMENT tuples are stored separately.<br /></li>
+<li><i>modification anomalies</i>: in EMP_DEPT, if we change the value of one of the attributes of a particular department&#x2013;say, the manager of department 5&#x2013;we must update the tuples of all employees who work in that department; otherwise, the database will become inconsistent. if we fail to update some tuples, the same department will be shown to have two different values for manager in different employee tuples, which would be wrong.<br /></li>
+</ul>
+<p>
+it is easy to see that these three anomalies are undesirable and cause difficulties to maintain consistency of data as well as require unnecessary updates that can be avoided; hence we state the informal design guidelines for relation schemas (second guideline).<br />
+</p>
+
+</div>
+</div>
+</body>
+</html>

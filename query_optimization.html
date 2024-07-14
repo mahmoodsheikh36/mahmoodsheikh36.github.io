@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>query optimization</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">query optimization</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="orge96be5b">
+<p>
+we use techniques that apply <a href="/heuristic.html#1691870705">heuristic</a> rules to modify the internal representation of a query&#x2013;which is usually in the form of a query tree or a query <a href="/graph.html#1678745451">graph</a> data structure&#x2013;to improve its expected performance. the scanner and parser of an sql query first generate a data structure that corresponds to an initial query representation, which is then optimized according to heuristic rules. this leads to an optimized query representation, which corresponds to the <i>query execution strategy</i>. following that, a <i>query execution plan</i> is generated to execute groups of operations based on the access paths available on the files involved in the query.<br />
+one of the main heuristic rules is to apply select and project operations before applying the join operation or other binary operations, because the size of the file resulting from a binary operation&#x2013;such as JOIN&#x2013;is usually a multiplicative function of the sizes of the input files. the SELECT and PROJECT operations reduce the size of a file and hence should be applied before a join or other binary operations.<br />
+the optimizer must include rules for equivalence among extended relational algebra expressions that can be applied to transform the initial tree into the final, optimized query tree. those are called <a href="/transformation_rules_for_relational_algebra_operations.html#1707901515">transformation rules for relational algebra operations</a>.<br />
+</p>
+<div class="math-block my_example my_example" data-before="example: example of transforming a query" data-after="" id="exa-query-optimization-1">
+<p>
+consider the following query <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 8.571601 9.567865' style="height: 0.9412em; vertical-align: -0.2305em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g6-38' d='m6.655044 .488169l-.14944-.109589c-.557908 .577833-.966376 .757161-1.683686 .757161c-.109589 0-.199253-.009963-.278954-.019925l-1.863014-.388543l-.14944-.009963c-.019925 .009963-.039851 .009963-.039851 .009963h-.249066l.537983-.56787c.747198-.049813 1.09589-.139477 1.633873-.428394c1.514321-.797011 2.550436-2.450809 2.550436-4.044832c0-1.344956-.956413-2.321295-2.281445-2.321295c-.757161 0-1.58406 .358655-2.351183 1.006227c-1.085928 .936488-1.733499 2.201743-1.733499 3.427148c0 .806974 .288917 1.474471 .806974 1.892902c.278954 .219178 .498132 .318804 .946451 .428394c-.9066 .797011-.996264 .876712-1.763387 1.414695l.099626 .14944c.37858-.209215 .747198-.308842 1.145704-.308842c.199253 0 .488169 .049813 .926526 .179328c.607721 .169365 1.135741 .259029 1.514321 .259029c.547945 0 1.235367-.259029 1.753425-.647572c.239103-.18929 .368618-.328767 .627646-.67746zm-.737235-5.270237c0 1.026152-.448319 2.450809-1.066002 3.377335c-.557908 .826899-1.185554 1.235367-1.932752 1.235367c-.816936 0-1.275218-.597758-1.275218-1.653798c0-.926526 .468244-2.371108 1.05604-3.237858c.557908-.846824 1.185554-1.24533 1.932752-1.24533c.797011 0 1.285181 .577833 1.285181 1.524284z'/>
+</defs>
+<g id='page91'>
+<g fill='currentColor'>
+<use x='-.099632' y='0' xlink:href='#g6-38'/>
+</g>
+</g>
+</svg> on the database in (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 5.5): find the last names of employees born after 1957 who work on a project named 'Aquarius'. this query can be specified in SQL as follows:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span> E.Lname
+<span style="font-weight: bold;">FROM</span>   EMPLOYEE E, WORKS_ON W, PROJECT P
+<span style="font-weight: bold;">WHERE</span>  P.Pname=<span style="font-style: italic;">'Aquarius'</span> <span style="font-weight: bold;">AND</span> P.Pnumber=W.Pno <span style="font-weight: bold;">AND</span> E.Essn=W.Ssn
+       <span style="font-weight: bold;">AND</span> E.Bdate &gt; <span style="font-style: italic;">'1957-12-31'</span>;
+</pre>
+</div>
+<p>
+the initial query tree for <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 8.571601 9.567865' style="height: 0.9412em; vertical-align: -0.2305em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g6-38' d='m6.655044 .488169l-.14944-.109589c-.557908 .577833-.966376 .757161-1.683686 .757161c-.109589 0-.199253-.009963-.278954-.019925l-1.863014-.388543l-.14944-.009963c-.019925 .009963-.039851 .009963-.039851 .009963h-.249066l.537983-.56787c.747198-.049813 1.09589-.139477 1.633873-.428394c1.514321-.797011 2.550436-2.450809 2.550436-4.044832c0-1.344956-.956413-2.321295-2.281445-2.321295c-.757161 0-1.58406 .358655-2.351183 1.006227c-1.085928 .936488-1.733499 2.201743-1.733499 3.427148c0 .806974 .288917 1.474471 .806974 1.892902c.278954 .219178 .498132 .318804 .946451 .428394c-.9066 .797011-.996264 .876712-1.763387 1.414695l.099626 .14944c.37858-.209215 .747198-.308842 1.145704-.308842c.199253 0 .488169 .049813 .926526 .179328c.607721 .169365 1.135741 .259029 1.514321 .259029c.547945 0 1.235367-.259029 1.753425-.647572c.239103-.18929 .368618-.328767 .627646-.67746zm-.737235-5.270237c0 1.026152-.448319 2.450809-1.066002 3.377335c-.557908 .826899-1.185554 1.235367-1.932752 1.235367c-.816936 0-1.275218-.597758-1.275218-1.653798c0-.926526 .468244-2.371108 1.05604-3.237858c.557908-.846824 1.185554-1.24533 1.932752-1.24533c.797011 0 1.285181 .577833 1.285181 1.524284z'/>
+</defs>
+<g id='page91'>
+<g fill='currentColor'>
+<use x='-.099632' y='0' xlink:href='#g6-38'/>
+</g>
+</g>
+</svg> is shown in (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 19.2(a)). executing this tree directly first creates a very large file containing the cartesian product of the entire EMPLOYEE, WORKS_ON, and PROJECT files. that is why the initial query tree is never executed, but is transformed into another equivalent tree that is efficient to execute. this particular query needs only one record from the PROJECT relation&#x2013;for the 'Aquarius' project&#x2013;and only the EMPLOYEE records for those whose date of birth is after '1957-12-31'. (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 19.2(b)) shows an improved query tree that first applies the SELECT operations to reduce the number of tuples that appear in the CARTESIAN PRODUCT.<br />
+a further improvement is achieved by switching the positions of the EMPLOYEE and PROJECT relations in the tree, as shown in (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 19.2(c)). this uses the information that Pnumber is a key attribute of the PROJECT relation, and hence the SELECT operation on the PROJECT relation will retrieve a single record only. we can further improve the query tree by replacing any CARTESIAN PRODUCT operation that is followed by a join condition as a selection with a JOIN operation, as shown in (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 19.2(d)). another improvement is to keep only the attributes needed by subsequent operations in the intermediate relations, by including PROJECT operations as early as possible in the query tree, as shown in (in Ramez Elmasri, Shamkant B. Navathe, 2015 Figure 19.2(e)). this reduces the attributes (columns) of the intermediate relations, whereas the SELECT operations reduce the number of tuples.<br />
+</p>
+
+</div>
+<div class="math-block dummy2 dummy2" data-before="dummy2: outline of a heuristic algebraic optimization algorithm" data-after="" id="org947848a">
+<p>
+we outline the steps of an algorithm that utilizes some of the transformation rules to transform an initial query tree into a final tree that is more efficient to execute (in most cases). the algorithm will lead to transformations similar to those discussed in our example in <a href="/query_optimization.html#exa-query-optimization-1">exa-query-optimization-1</a>. the steps of the algorithm are as follows:<br />
+</p>
+<ol class="org-ol">
+<li>using blk-rel-alg-trans-1, break up any SELECT operations with conjunctive conditions into a cascade of SELECT operations. this permits a greater degree of freedom in moving SELECT operations down different branches of the tree.<br /></li>
+<li>using rules blk-rel-alg-trans-2, 4, 6, and 10, 13, 14 concerning the commutativity of SELECT with other operations, move each SELECT operation as far down the query tree as is permitted by the attributes involved in the select condition. if the condition involves attributes from only one table, which means that it represents a selection condition, the operation is moved all the way to the leaf node that represents this table. if the condition involves attributes from two tables, which means that it represents a join condition, the condition is moved to a location down the tree after the two tables are combined.<br /></li>
+<li>using rules 5 and 9 concerning commutativity and associativity of binary operations, rearrange the leaf nodes of the tree using the following criteria. first, position the leaf node relations with the most restrictive SELECT operations so they are executed first in the query tree representation. the definition of most restrictive SELECT can mean either the ones that produce a relation with the fewest tuples or with the smallest absolute size. another possibility is to define the most restrictive SELECT as the one with the smallest selectivity; this is more practical because estimates of selectivities are often available in the DBMS catalog. second, make sure that the ordering of leaf nodes does not cause CARTESIAN PRODUCT operations; for example, if the two relations with the most restrictive SELECT do not have a direct join condition between them, it may be desirable to change the order of leaf nodes to avoid Cartesian products.<br /></li>
+<li>using rule 12, combine a CARTESIAN PRODUCT operation with a subsequent SELECT operation in the tree into a JOIN operation, if the condition represents a join condition.<br /></li>
+<li>using rules 3, 4, 7, and 11 concerning the cascading of PROJECT and the commuting of PROJECT with other operations, break down and move lists of projection attributes down the tree as far as possible by creating new PROJECT operations as needed. only those attributes needed in the query result and in subsequent operations in the query tree should be kept after each PROJECT operation.<br /></li>
+<li>identify subtrees that represent groups of operations that can be executed by a single algorithm.<br /></li>
+</ol>
+
+</div>
+<div class="math-block dummy2 dummy2" data-before="dummy2: summary of heuristics for algebraic optimization" data-after="" id="org8190631">
+<p>
+the main heuristic is to apply first the operations that reduce the size of intermediate results. this includes performing as early as possible SELECT operations to reduce the number of tuples and PROJECT operations to reduce the number of attributes&#x2013;by moving SELECT and PROJECT operations as far down the tree as possible. additionally, the SELECT and JOIN operations that are most restrictive&#x2013;that is, result in relations with the fewest tuples or with the smallest absolute size&#x2013;should be executed before other similar operations. the latter rule is accomplished through reordering the leaf nodes of the tree among themselves while avoiding Cartesian products, and adjusting the rest of the tree appropriately.<br />
+</p>
+
+</div>
+
+</div>
+<p>
+(refer to Ramez Elmasri, Shamkant B. Navathe, 2015 chapter 19.4 cost functions for select operation)<br />
+(refer to Ramez Elmasri, Shamkant B. Navathe, 2015 chapter 19.5 cost functions for join operation)</p>
+</div>
+</body>
+</html>

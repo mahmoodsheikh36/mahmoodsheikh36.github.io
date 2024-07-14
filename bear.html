@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>bear</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">bear</h1>
+</div>
+<div id="content" class="content">
+<p>
+from <a href="https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/">https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/</a><br />
+to understand your source code, <code>clangd</code> needs to know the compiler flags that are used to build the project. (this is just a fact of life in <code>c++</code>, source files are not self-contained).<br />
+by default, clangd will assume your code is built as clang <code>some_file.cc</code>, and you’ll probably get spurious errors about missing <code>#include</code> files, etc. there are a couple of ways to fix this. you may read about them in clangd installation or in <a href="https://sarcasm.github.io/notes/dev/compilation-database.html">https://sarcasm.github.io/notes/dev/compilation-database.html</a>.<br />
+in order to generate <code>compile_commands.json</code> for emacs itself i <code>bear</code> works fine:<br />
+</p>
+<div class="org-src-container" data-language="sh">
+<pre class="src src-sh">sudo pacman -S bear
+</pre>
+</div>
+<p>
+generate the <code>compile_commands.json</code> file with:<br />
+</p>
+<div class="org-src-container" data-language="sh">
+<pre class="src src-sh"><span style="font-weight: bold; font-style: italic;">CFLAGS</span>=<span style="font-style: italic;">"-ggdb3 -O0"</span> <span style="font-weight: bold; font-style: italic;">CXXFLAGS</span>=<span style="font-style: italic;">"-ggdb3 -O0"</span> <span style="font-weight: bold; font-style: italic;">LDFLAGS</span>=<span style="font-style: italic;">"-ggdb3"</span>
+bear -- ./configure
+bear -- make -j$(nproc)
+</pre>
+</div>
+</div>
+</body>
+</html>

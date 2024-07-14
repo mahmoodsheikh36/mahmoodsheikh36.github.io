@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>text normalization</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">text normalization</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="org01cdc09">
+<p>
+<i>normalizing text</i> means converting it to a more convenient, standard form. for example, most of what we are going to do with language relies on first separating out or tokenizing words from running text, the task of <i>tokenization</i>. english words are often separated from each other by whitespace, but whitespace is not always sufficient. <b>New York</b> and <b>rock 'n' roll</b> are sometimes treated as large words despite the fact that they contain spaces, while sometimes we'll need to separate <b>I'm</b> into the two words <b>I</b> and <b>am</b>. for processing tweets or texts we’ll need to tokenize emoticons like :) or hashtags like #nlproc. some languages, like Japanese, don't have spaces between words, so word tokenization becomes more difficult.<br />
+another part of text normalization is <i>lemmatization</i>, the task of determining that two words have the same root, despite their surface differences. for example, the words <b>sang</b>, <b>sung</b>, and <b>sings</b> are forms of the verb <b>sing</b>. the word sing is the common lemma of these words, and a lemmatizer maps from all of these to sing. lemmatization is essential for processing morphologically complex languages like Arabic. <i>stemming</i> refers to a simpler version of lemmatization in which we mainly just strip suffixes from the end of the word. text normalization also includes <i>sentence segmentation</i>: breaking up a text into individual sentences, using cues like periods or exclamation points.<br />
+finally, we'll need to compare words and other strings. we'll introduce a metric called edit distance that measures how similar two strings are based on the number of edits (insertions, deletions, substitutions) it takes to change one string into the other. edit distance is an algorithm with applications throughout language processing, from spelling correction to speech recognition to coreference resolution.<br />
+</p>
+
+</div>
+</div>
+</body>
+</html>
