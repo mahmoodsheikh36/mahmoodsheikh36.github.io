@@ -16,13 +16,15 @@
 <link rel="stylesheet" href="/main.css">
 <!-- for dark mode -->
 <script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
 <div class="navbar">
   <a href='/'>home</a>
   <a href='/blog.html'>blog</a>
-  <a href='/archive.html'>archive</a>
+  <a href='/search.html'>search</a>
   <a href='/about.html'>about</a>
   <div id="darkModeToggle" onclick="toggleDarkMode()">
     &#9680; <!-- Circle with left half black -->
@@ -30,15 +32,15 @@
 </div><h1 class="main-title">conv gan with pytorch</h1><span class="desc">an example convolutional generative adversarial network written with pytorch</span>
 </div>
 <div id="content" class="content">
-<div class="math-block note note" data-before="note" data-after="" id="org381d50d">
+<div class="math-block note note" data-before="note" data-after="" id="orged0b7be">
 <p>
 some information was quoted from <a href="https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/">this great article</a> (the code was rewritten in pytorch and alot of things differ though!).<br />
 </p>
 
 </div>
-<div id="outline-container-org9316002" class="outline-2">
-<h2 id="org9316002">essential packages</h2>
-<div class="outline-text-2" id="text-org9316002">
+<div id="outline-container-org22a27c8" class="outline-2">
+<h2 id="org22a27c8">essential packages</h2>
+<div class="outline-text-2" id="text-org22a27c8">
 <p>
 we need to import some essential packages:<br />
 </p>
@@ -61,9 +63,9 @@ here, if the machine we're using has a cuda-supported gpu available, we use that
 </div>
 </div>
 </div>
-<div id="outline-container-orgd343d9b" class="outline-2">
-<h2 id="orgd343d9b">load the data</h2>
-<div class="outline-text-2" id="text-orgd343d9b">
+<div id="outline-container-org9983720" class="outline-2">
+<h2 id="org9983720">load the data</h2>
+<div class="outline-text-2" id="text-org9983720">
 <p>
 we start by loading the mnist dataset (the 28x28 images of hand-written digits), we use the <code>torchvision</code> package from <code>pypi</code> which provides various datasets for machine learning<br />
 </p>
@@ -131,7 +133,7 @@ gen_images_img(train_x[:30].cpu().reshape((-1, 28, 28)), f)
 </div>
 
 
-<div id="org67558f9" class="figure">
+<div id="org818605a" class="figure">
 <p><img src="/zuBb2Oa.png" /><br />
 </p>
 </div>
@@ -139,7 +141,7 @@ gen_images_img(train_x[:30].cpu().reshape((-1, 28, 28)), f)
 </div>
 <div id="outline-container-ID-cd467b6b-52b1-4cce-837b-3b7f44b9bef0" class="outline-2">
 <h2 id="ID-cd467b6b-52b1-4cce-837b-3b7f44b9bef0">discriminator</h2>
-<div class="outline-text-2" id="text-org775ce48">
+<div class="outline-text-2" id="text-org7ac8b72">
 <p>
 the discriminator model must take a sample image from our dataset as input and output a classification, a prediction as to whether the sample is real or fake. or perhaps the likelihood of the sample being real, which means the discriminator does binary classification.<br />
 pytorch makes defining neural nets easy by inheriting from <code>nn.Module</code>, here, since we're dealing with images, we use <a href="/convolutional_neural_network.html#1684594232">convolutional layer</a>s, in combinations with dropout layers which arent "mandatory" but they help improve results, the last layers are a <a href="/convolutional_neural_network.html#1684594232">flatten layer</a> and a linear layer, the output for a single image would be a float in the range 0-1.<br />
@@ -201,7 +203,7 @@ summary(Discriminator().cuda(), (1, 28, 28))
 </pre>
 </div>
 
-<pre class="example" id="org4434ff8">
+<pre class="example" id="org7436c72">
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -259,19 +261,21 @@ as the values in the original images range from 0 to 255 (for grayscale colors),
 
 <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 23.352765 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
-<path id='g1-150' d='m1.942715-.059776c0-.826899-.577833-.956413-.806974-.956413c-.249066 0-.577833 .14944-.577833 .577833c0 .398506 .358655 .498132 .617684 .498132c.069738 0 .119552-.009963 .14944-.019925c.039851-.009963 .069738-.019925 .089664-.019925c.069738 0 .139477 .049813 .139477 .139477c0 .18929-.159402 .637609-.816936 1.05604l.089664 .18929c.298879-.099626 1.115816-.757161 1.115816-1.464508z'/>
-<path id='g2-48' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
-<path id='g2-49' d='m3.92528 0v-.14944c-.787049-.009963-.946451-.109589-.946451-.587796v-5.977584l-.079701-.019925l-1.793275 .9066v.139477c.119552-.049813 .229141-.089664 .268991-.109589c.179328-.069738 .348692-.109589 .448319-.109589c.209215 0 .298879 .14944 .298879 .468244v4.513076c0 .328767-.079701 .557908-.239103 .647572c-.14944 .089664-.288917 .119552-.707347 .129514v.14944h2.749689z'/>
-<path id='g0-187' d='m2.978829 1.673724h-.856787c-.328767 0-.488169-.169365-.488169-.518057v-7.511831c0-.308842 .129514-.438356 .448319-.438356h.896638v-.249066h-2.102117v8.966376h2.102117v-.249066z'/>
-<path id='g0-188' d='m.33873 1.673724v.249066h2.102117v-8.966376h-2.102117v.249066h.856787c.328767 0 .488169 .169365 .488169 .518057v7.511831c0 .308842-.139477 .438356-.448319 .438356h-.896638z'/>
+<path id='g2-150' d='m1.942715-.059776c0-.826899-.577833-.956413-.806974-.956413c-.249066 0-.577833 .14944-.577833 .577833c0 .398506 .358655 .498132 .617684 .498132c.069738 0 .119552-.009963 .14944-.019925c.039851-.009963 .069738-.019925 .089664-.019925c.069738 0 .139477 .049813 .139477 .139477c0 .18929-.159402 .637609-.816936 1.05604l.089664 .18929c.298879-.099626 1.115816-.757161 1.115816-1.464508z'/>
+<use id='g4-48' xlink:href='#g3-48' transform='scale(1.369862)'/>
+<use id='g4-49' xlink:href='#g3-49' transform='scale(1.369862)'/>
+<path id='g3-48' d='m3.46182-2.400001c0-1.49091-.661818-2.516365-1.614546-2.516365c-.4 0-.705455 .123636-.974546 .378182c-.421818 .407273-.698182 1.243637-.698182 2.094546c0 .792728 .24 1.643637 .581818 2.05091c.269091 .32 .64 .494546 1.061819 .494546c.370909 0 .683637-.123636 .945455-.378182c.421818-.4 .698182-1.243637 .698182-2.123637zm-.698182 .014545c0 1.520001-.32 2.298183-.945455 2.298183s-.945455-.778182-.945455-2.29091c0-1.541819 .327273-2.349092 .952728-2.349092c.610909 0 .938182 .821819 .938182 2.341819z'/>
+<path id='g3-49' d='m2.865456 0v-.109091c-.574546-.007273-.690909-.08-.690909-.429091v-4.363638l-.058182-.014545l-1.309091 .661818v.101818c.087273-.036364 .167273-.065455 .196364-.08c.130909-.050909 .254546-.08 .327273-.08c.152727 0 .218182 .109091 .218182 .341818v3.294547c0 .24-.058182 .407273-.174546 .472727c-.109091 .065455-.210909 .087273-.516364 .094545v.109091h2.007274z'/>
+<path id='g1-187' d='m2.978829 1.673724h-.856787c-.328767 0-.488169-.169365-.488169-.518057v-7.511831c0-.308842 .129514-.438356 .448319-.438356h.896638v-.249066h-2.102117v8.966376h2.102117v-.249066z'/>
+<path id='g1-188' d='m.33873 1.673724v.249066h2.102117v-8.966376h-2.102117v.249066h.856787c.328767 0 .488169 .169365 .488169 .518057v7.511831c0 .308842-.139477 .438356-.448319 .438356h-.896638z'/>
 </defs>
 <g id='page1'>
 <g fill='currentColor'>
-<use x='.597749' y='0' xlink:href='#g0-187'/>
-<use x='4.214177' y='0' xlink:href='#g2-48'/>
-<use x='9.195497' y='0' xlink:href='#g1-150'/>
-<use x='13.456131' y='0' xlink:href='#g2-49'/>
-<use x='18.437451' y='0' xlink:href='#g0-188'/>
+<use x='.597749' y='0' xlink:href='#g1-187'/>
+<use x='4.214177' y='0' xlink:href='#g4-48'/>
+<use x='9.195497' y='0' xlink:href='#g2-150'/>
+<use x='13.456131' y='0' xlink:href='#g4-49'/>
+<use x='18.437451' y='0' xlink:href='#g1-188'/>
 </g>
 </g>
 </svg> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions:<br />
@@ -291,9 +295,9 @@ before: torch.Size([60000, 28, 28])
 after: torch.Size([60000, 1, 28, 28])
 </pre>
 </div>
-<div id="outline-container-org0f86f6f" class="outline-3">
-<h3 id="org0f86f6f">training the discriminator</h3>
-<div class="outline-text-3" id="text-org0f86f6f">
+<div id="outline-container-org0f60bf7" class="outline-3">
+<h3 id="org0f60bf7">training the discriminator</h3>
+<div class="outline-text-3" id="text-org0f60bf7">
 <p>
 we could systematically enumerate all samples in the training dataset, and that is a good approach, but good training via stochastic gradient descent requires that the training dataset be shuffled prior to each epoch. a simpler approach is to select random samples of images from the training dataset.<br />
 the <code>generate_real_samples_for_discriminator()</code> function below takes the training dataset as an argument and selects a random subset of images; it also returns class labels for the images, specifically a class label of 1, to indicate that the images are real.<br />
@@ -401,7 +405,7 @@ f
 </div>
 
 
-<div id="org309c6a1" class="figure">
+<div id="org415cd6a" class="figure">
 <p><img src="/ar1T72O.svg" /><br />
 </p>
 </div>
@@ -412,11 +416,11 @@ as we can see, the loss gradually declines which means the discriminator (theore
 </div>
 </div>
 </div>
-<div id="outline-container-orgabbfdd6" class="outline-2">
-<h2 id="orgabbfdd6">generator</h2>
-<div class="outline-text-2" id="text-orgabbfdd6">
+<div id="outline-container-org8a15a05" class="outline-2">
+<h2 id="org8a15a05">generator</h2>
+<div class="outline-text-2" id="text-org8a15a05">
 <p>
-the generator model is responsible for creating new, fake but plausible images of handwritten digits. it does so by taking a point from the latent space as input and outputting a tensor representing a grayscale image.<br />
+the generator model is responsible for creating new, fake but plausible images of handwritten digits. it does so by taking a point from the <a href="/latent_space.html#1694044864">latent space</a> as input and outputting a tensor representing a grayscale image.<br />
 the latent space is an arbitrarily defined finite vector space. it has no meaning, but by drawing points from this space and feeding them to the generator model during training, the generator model will assign meaning to the latent points and, in turn, to the latent space. at the end of training, the latent vector space would have an internal structure that is a compressed representation of the output space (the MNIST image dataset), that only the generator knows how to turn into plausible images that fool the discriminator.<br />
 in our case, developing a generator model requires that we transform a vector from the latent space to a 2D array with 28x28 values that represent a grayscale image. there are a number of ways to achieve this but there is one approach that has proven effective in deep convolutional generative adversarial network. it involves two main elements:<br />
 </p>
@@ -475,7 +479,7 @@ summary(Generator(100).to(device), (1, 100)) <span style="font-weight: bold; fon
 </pre>
 </div>
 
-<pre class="example" id="org2137f90">
+<pre class="example" id="org1facb75">
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -531,14 +535,14 @@ gen_images_img(X.reshape((-1, 28, 28)), f)
 </div>
 
 
-<div id="org263a569" class="figure">
+<div id="orgfbb0fa6" class="figure">
 <p><img src="/dUD33Ha.png" /><br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgce83f88" class="outline-3">
-<h3 id="orgce83f88">training the generator</h3>
-<div class="outline-text-3" id="text-orgce83f88">
+<div id="outline-container-org409e408" class="outline-3">
+<h3 id="org409e408">training the generator</h3>
+<div class="outline-text-3" id="text-org409e408">
 <p>
 to train the generator, we need to attach it to the discriminator in a sequential manner, such that the output of the generator would be forwarded to the discriminator for classification, the discriminator would determine whether the data generated by the generator passes as a real image. this is why the training of disciminator beforehand to classify real data from fake ones is cruical, otherwise the generator wouldnt learn (this is one approach, another is described later).<br />
 during the training of the generator, we may want to freeze the parameters of the discriminator, because we wouldnt want the discriminator training and overfitting on fake data.<br />
@@ -616,7 +620,7 @@ f
 </div>
 
 
-<div id="orgc2a3cf9" class="figure">
+<div id="org5177c5a" class="figure">
 <p><img src="/YMD1rgW.png" /><br />
 </p>
 </div>
@@ -635,7 +639,7 @@ f
 <p>
 <img src="/3PW7kEK.png" /><br />
 after 5000 batches these were the results i got, which arent much, with further training i could've gotten better results, but i needed a better approach to get faster convergence.<br />
-as we're only training the generator on random inputs, and the discriminator stays frozen, only one competitor is making progress, whereas if the two were competing, as in a true zero-sum game, we'd get better results, because as the discriminator gets better, the generator would also need to get better in order to be able to fool its competitor, so a better approach would be to train both at the same time, and to train the discriminator on the outputs of the generator, which we label as fake, so that it'd get better at detecting the generator's attempts at fooling it, which in turn makes the generator get better at trying to fool the discriminator.<br />
+as we're only training the generator on random inputs, and the discriminator stays frozen, only one competitor is making progress, whereas if the two were competing, as in a true <a href="/zero-sum_game.html#1692231394">zero-sum game</a>, we'd get better results, because as the discriminator gets better, the generator would also need to get better in order to be able to fool its competitor, so a better approach would be to train both at the same time, and to train the discriminator on the outputs of the generator, which we label as fake, so that it'd get better at detecting the generator's attempts at fooling it, which in turn makes the generator get better at trying to fool the discriminator.<br />
 the following method, <code>train_gan</code>, implements this approach, and on each epoch (iteration through the entire dataset), it generates some samples for later evaluation (ofcourse a better approach would be to copy the model itself), for further appreciation and more insight into how the model's output changes over epochs.<br />
 </p>
 <div class="org-src-container" data-language="python">
@@ -750,18 +754,18 @@ but the results are interesting, even after the first epoch, we can see that the
 </div>
 </div>
 </div>
-<div id="outline-container-org015c8aa" class="outline-2">
-<h2 id="org015c8aa">performance evaluation</h2>
-<div class="outline-text-2" id="text-org015c8aa">
+<div id="outline-container-org332bb06" class="outline-2">
+<h2 id="org332bb06">performance evaluation</h2>
+<div class="outline-text-2" id="text-org332bb06">
 <p>
 generally, there are no objective ways to evaluate the performance of a GAN model. we cannot calculate this objective error score for generated images. it might be possible in the case of MNIST images because the images are so well constrained, but in general, it is not possible (yet).<br />
 instead, images must be subjectively evaluated for quality by a human agent. this means that we cannot know when to stop training without looking at examples of generated images. in turn, the adversarial nature of the training process means that the generator is changing after every batch, meaning that once "good enough" images can be generated, the subjective quality of the images may then begin to vary, improve, or even degrade with subsequent updates.<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org65df07e" class="outline-2">
-<h2 id="org65df07e">latent output space visualization</h2>
-<div class="outline-text-2" id="text-org65df07e">
+<div id="outline-container-orga75435f" class="outline-2">
+<h2 id="orga75435f">latent output space visualization</h2>
+<div class="outline-text-2" id="text-orga75435f">
 <p>
 while we cant visualize dimensions higher than 3d, and while computer screens are 2d, we can still try to explore higher dimensions by "navigating" them and projecting the results. by navigation i mean choosing an axis and "hovering" over its possible values while holding the other variables constant, to see how the changes to the variable that corresponds to the axis we chose affect the space we project.<br />
 </p>

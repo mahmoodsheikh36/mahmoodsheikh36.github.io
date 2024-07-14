@@ -7,6 +7,7 @@
   --primary-color: light-dark(#333, #888);
   --primary-background: light-dark(#fff8e8, #121212);
   --secondary-background: light-dark(#d1d9d9, #222223);
+  --highlight-color: rgb(217, 70, 91);
 }
 
 html, body {
@@ -155,4 +156,48 @@ a {
 .org-src-container::after {
     content: attr(data-language);
     right: 20px;
+}
+
+/* search page */
+.search-container {
+    width: fit-content;
+    margin: auto;
+}
+.search {
+    min-width: 300px;
+    height: 23px;
+}
+.search-results-container {
+    width: 90%;
+    margin: auto;
+}
+.search-result-container {
+    border-bottom: solid var(--highlight-color) 1px;
+}
+.search-result {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+/* plus button, https://codepen.io/LukeRFP/pen/XMbeRL */
+.plus-button:before {
+    color: var(--highlight-color);
+    cursor: pointer;
+    content: "+";
+    font-size: 30px;
+}
+.minus-button:before {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--highlight-color);
+    content: "-";
+}
+
+.separated-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 20px;
 }

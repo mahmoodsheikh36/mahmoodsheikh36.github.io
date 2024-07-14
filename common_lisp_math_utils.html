@@ -15,13 +15,15 @@
 <link rel="stylesheet" href="/main.css">
 <!-- for dark mode -->
 <script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
 <div class="navbar">
   <a href='/'>home</a>
   <a href='/blog.html'>blog</a>
-  <a href='/archive.html'>archive</a>
+  <a href='/search.html'>search</a>
   <a href='/about.html'>about</a>
   <div id="darkModeToggle" onclick="toggleDarkMode()">
     &#9680; <!-- Circle with left half black -->
@@ -32,9 +34,9 @@
 <p>
 some math utilities for common lisp<br />
 </p>
-<div id="outline-container-org83a9a68" class="outline-2">
-<h2 id="org83a9a68">essential functions</h2>
-<div class="outline-text-2" id="text-org83a9a68">
+<div id="outline-container-orgad37f2c" class="outline-2">
+<h2 id="orgad37f2c">essential functions</h2>
+<div class="outline-text-2" id="text-orgad37f2c">
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp" id="src-math-functions">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sigmoid</span> (x)
   (<span style="font-weight: bold;">cond</span> ((&lt; x -70) 0) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">to avoid float overflow</span>
@@ -55,10 +57,10 @@ some math utilities for common lisp<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgead4779" class="outline-2">
-<h2 id="orgead4779">vectors</h2>
-<div class="outline-text-2" id="text-orgead4779">
-<div class="math-block note note" data-before="note" data-after="" id="org8e1121c">
+<div id="outline-container-org4bead55" class="outline-2">
+<h2 id="org4bead55">vectors</h2>
+<div class="outline-text-2" id="text-org4bead55">
+<div class="math-block note note" data-before="note" data-after="" id="org5265d9d">
 <p>
 these functions work, but some use lists and some do redundant operations, they need efficiency improvement<br />
 </p>
@@ -101,9 +103,9 @@ these functions work, but some use lists and some do redundant operations, they 
 </div>
 </div>
 </div>
-<div id="outline-container-orgca4ee8d" class="outline-2">
-<h2 id="orgca4ee8d">matrices</h2>
-<div class="outline-text-2" id="text-orgca4ee8d">
+<div id="outline-container-org4b14c91" class="outline-2">
+<h2 id="org4b14c91">matrices</h2>
+<div class="outline-text-2" id="text-org4b14c91">
 <p>
 im using arrays for matrices, which use different functions than vectors/lists<br />
 matrix multiplication:<br />
@@ -178,9 +180,9 @@ matrix multiplication:<br />
 </pre>
 </div>
 </div>
-<div id="outline-container-org69fcc61" class="outline-3">
-<h3 id="org69fcc61">matrix multiplication implementation comparison between lists and arrays</h3>
-<div class="outline-text-3" id="text-org69fcc61">
+<div id="outline-container-org4dd336e" class="outline-3">
+<h3 id="org4dd336e">matrix multiplication implementation comparison between lists and arrays</h3>
+<div class="outline-text-3" id="text-org4dd336e">
 <p>
 with lists:<br />
 </p>
@@ -223,11 +225,11 @@ with arrays:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgf06f24a" class="outline-3">
-<h3 id="orgf06f24a">2d transformation matrices</h3>
-<div class="outline-text-3" id="text-orgf06f24a">
+<div id="outline-container-org438f8a4" class="outline-3">
+<h3 id="org438f8a4">2d transformation matrices</h3>
+<div class="outline-text-3" id="text-org438f8a4">
 <p>
-linearly mapping a grid to another:<br />
+<a href="/2d_transformations.html#1685671420">linearly mapping a grid to another</a>:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp" id="src-map-grid">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-grid-matrix</span> (src-x-range dest-x-range src-y-range dest-y-range)
@@ -266,9 +268,9 @@ example usage:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org6c3d977" class="outline-2">
-<h2 id="org6c3d977"><a href="/linearly_mapping_an_interval_onto_another.html#1686235443">linearly mapping discrete range onto another</a></h2>
-<div class="outline-text-2" id="text-org6c3d977">
+<div id="outline-container-org6b8d98e" class="outline-2">
+<h2 id="org6b8d98e"><a href="/linearly_mapping_an_interval_onto_another.html#1686235443">linearly mapping discrete range onto another</a></h2>
+<div class="outline-text-2" id="text-org6b8d98e">
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp" id="src-map-num">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-num</span> (num src-min src-max dest-min dest-max)
   <span style="font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
@@ -277,9 +279,9 @@ example usage:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgb3e1d7a" class="outline-2">
-<h2 id="orgb3e1d7a">sets</h2>
-<div class="outline-text-2" id="text-orgb3e1d7a">
+<div id="outline-container-org84cd8fe" class="outline-2">
+<h2 id="org84cd8fe">sets</h2>
+<div class="outline-text-2" id="text-org84cd8fe">
 <p>
 a good resource <a href="https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html">https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html</a><br />
 the builtin <code>set-difference</code> sometimes reverses the lists it returns for some reason and its bothersome, e.g.:<br />
@@ -331,9 +333,9 @@ check for set equality:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org12d83db" class="outline-2">
-<h2 id="org12d83db">combinatorics</h2>
-<div class="outline-text-2" id="text-org12d83db">
+<div id="outline-container-orgda3ca8b" class="outline-2">
+<h2 id="orgda3ca8b">combinatorics</h2>
+<div class="outline-text-2" id="text-orgda3ca8b">
 <p>
 generating variations:<br />
 </p>

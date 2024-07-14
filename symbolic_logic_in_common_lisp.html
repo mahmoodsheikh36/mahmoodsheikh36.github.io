@@ -16,13 +16,15 @@
 <link rel="stylesheet" href="/main.css">
 <!-- for dark mode -->
 <script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
 <div class="navbar">
   <a href='/'>home</a>
   <a href='/blog.html'>blog</a>
-  <a href='/archive.html'>archive</a>
+  <a href='/search.html'>search</a>
   <a href='/about.html'>about</a>
   <div id="darkModeToggle" onclick="toggleDarkMode()">
     &#9680; <!-- Circle with left half black -->
@@ -33,11 +35,11 @@
 <p>
 logic programming in common lisp<br />
 </p>
-<div id="outline-container-org96b0a12" class="outline-2">
-<h2 id="org96b0a12">logical statements</h2>
-<div class="outline-text-2" id="text-org96b0a12">
+<div id="outline-container-org15e73bc" class="outline-2">
+<h2 id="org15e73bc">logical statements</h2>
+<div class="outline-text-2" id="text-org15e73bc">
 <p>
-we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical statements, e.g. given the following knowledge base of horn clauses:<br />
+we make use of the symbolic capabilities of lisp, we use quoting and symbols to represent logical statements, e.g. given the following <a href="/knowledge_base.html#1695139429">knowledge base</a> of <a href="/horn_clause.html#1695127372">horn clause</a>s:<br />
 </p>
 
 <div class="equation-container">
@@ -219,11 +221,11 @@ how about substitutions? how do we represent for example the substitution <?xml 
 </pre>
 </div>
 </div>
-<div id="outline-container-org9302cc8" class="outline-2">
-<h2 id="org9302cc8">early inference engines</h2>
-<div class="outline-text-2" id="text-org9302cc8">
+<div id="outline-container-org5303051" class="outline-2">
+<h2 id="org5303051">early <a href="/inference_engine.html#1695332120">inference engine</a>s</h2>
+<div class="outline-text-2" id="text-org5303051">
 <p>
-imma start off with the unification algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the <b>occur check</b> and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates<br />
+imma start off with the <a href="/unification.html#1695052486">unification</a> algorithm, this one differs a bit from the pseudocode version, as it doesnt apply the <b>occur check</b> and doesnt distinguish between a compound statement or a list of expressions, as they are only used to represent predicates<br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">variable?</span> (x)
@@ -283,7 +285,7 @@ a test:<br />
 
 
 <p>
-next up, we need to implement forward chaining and backward chaining which take in a knowledge base of statements which are definite clauses and do algorithmic inference, this code makes use of <a href="/common_lisp_math_utils.html#1683135667">common lisp math utils</a><br />
+next up, we need to implement <a href="/forward_chaining.html#1695126755">forward chaining</a> and <a href="/backward_chaining.html#1695127100">backward chaining</a> which take in a knowledge base of statements which are <a href="/definite_clause.html#1695080997">definite clause</a>s and do <a href="/inference_algorithm.html#1695222520">algorithmic inference</a>, this code makes use of <a href="/common_lisp_math_utils.html#1683135667">common lisp math utils</a><br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">find-variables-in-statement</span> (statement)
@@ -442,7 +444,7 @@ example usage:<br />
 </pre>
 </div>
 <p>
-some functions (that do their best) to "unpack" a knowledge base by unpacking conjunctions and implications into multiple smaller statements that are easier to deal with (there isnt much we can do when the precedent of an implication is a logical connective)<br />
+some functions (that do their best) to "unpack" a knowledge base by unpacking conjunctions and implications into multiple smaller statements that are easier to deal with (there isnt much we can do when the precedent of an implication is a <a href="/logical_connective.html#1680370390">logical connective</a>)<br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">unpack-implication</span> (implication)
@@ -1086,7 +1088,7 @@ example usage:<br />
 </div>
 
 <p>
-the backward chaining algorithm (we dont implement it as a generator here):<br />
+the <a href="/backward_chaining.html#1695127100">backward chaining</a> algorithm (we dont implement it as a generator here):<br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">backward-chaining</span> (knowledge-base query)

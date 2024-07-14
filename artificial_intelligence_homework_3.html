@@ -16,13 +16,15 @@
 <link rel="stylesheet" href="/main.css">
 <!-- for dark mode -->
 <script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
 <div class="navbar">
   <a href='/'>home</a>
   <a href='/blog.html'>blog</a>
-  <a href='/archive.html'>archive</a>
+  <a href='/search.html'>search</a>
   <a href='/about.html'>about</a>
   <div id="darkModeToggle" onclick="toggleDarkMode()">
     &#9680; <!-- Circle with left half black -->
@@ -30,22 +32,22 @@
 </div><h1 class="main-title">artificial intelligence homework 3</h1><span class="desc">homework on constraint satisfaction problems</span>
 </div>
 <div id="content" class="content">
-<div class="math-block note note" data-before="note" data-after="" id="org982009c">
+<div class="math-block note note" data-before="note" data-after="" id="orgdb1992e">
 <p>
 scroll to the end if you're only interested in the solution and the steps in raw text..<br />
 </p>
 
 </div>
 <p>
-homework on constraint satisfaction problem<br />
+homework on <a href="/constraint_satisfaction_problem.html#1692705570">constraint satisfaction problem</a><br />
 using <a href="/working_with_graphs_in_common_lisp.html#1691879374">common lisp graphs</a><br />
-graph image from homework:<br />
+<a href="/graph.html#1678745451">graph</a> image from homework:<br />
 <img src="/Tue_Aug_22_08:26:06_PM_IDT_2023.png" /><br />
 </p>
 <ul class="org-ul">
 <li>gotta solve this as an <b>rgba map coloring problem</b><br /></li>
 <li>make use of forward checking<br /></li>
-<li>variable ordering heuristic: prioritize vertices that are the least constraining (least edges, least constraints on others) to most constraining (most edges), in case of a draw, use the variable with the most remaining colors (least constrained), if there is another tie, choose the leftmost vertex in the constraint graph<br /></li>
+<li>variable ordering heuristic: prioritize <a href="/graph.html#1678745451">vertices</a> that are the least constraining (least edges, least constraints on others) to most constraining (most edges), in case of a draw, use the variable with the most remaining colors (least constrained), if there is another tie, choose the leftmost vertex in the constraint graph<br /></li>
 <li>no value ordering heuristics<br /></li>
 </ul>
 <p>
@@ -197,7 +199,7 @@ visualize it with tikz:<br />
 
 <p>
 a constraint satisfaction problem is defined by its variables, domains and contrains<br />
-since i had written the problem in its constraint graph form, i had to write a function to convert it into its "original" form, its variables, domains and it defines the constraint of neighbors not having the same color, which is from the map coloring problem (so this method is not really general, but specific to this problem):<br />
+since i had written the problem in its <a href="/constraint_graph.html#1692713583">constraint graph</a> form, i had to write a function to convert it into its "original" form, its variables, domains and it defines the constraint of neighbors not having the same color, which is from the map coloring problem (so this method is not really general, but specific to this problem):<br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">constraint-satisfaction-problem</span>

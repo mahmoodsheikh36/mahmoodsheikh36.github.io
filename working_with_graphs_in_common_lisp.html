@@ -15,13 +15,15 @@
 <link rel="stylesheet" href="/main.css">
 <!-- for dark mode -->
 <script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
 <div class="navbar">
   <a href='/'>home</a>
   <a href='/blog.html'>blog</a>
-  <a href='/archive.html'>archive</a>
+  <a href='/search.html'>search</a>
   <a href='/about.html'>about</a>
   <div id="darkModeToggle" onclick="toggleDarkMode()">
     &#9680; <!-- Circle with left half black -->
@@ -30,13 +32,13 @@
 </div>
 <div id="content" class="content">
 <p>
-working with graphs in common lisp<br />
+working with <a href="/graph.html#1678745451">graph</a>s in common lisp<br />
 </p>
-<div id="outline-container-orgeb5d677" class="outline-2">
-<h2 id="orgeb5d677">my initial approach</h2>
-<div class="outline-text-2" id="text-orgeb5d677">
+<div id="outline-container-org9b9dfc5" class="outline-2">
+<h2 id="org9b9dfc5">my initial approach</h2>
+<div class="outline-text-2" id="text-org9b9dfc5">
 <p>
-for simplicity ill represent a graph as a list of cons's, if we are dealing with a weighted graph, we use the second item in the cons as a cons with the first item being the node and the second being the weight<br />
+for simplicity ill represent a <a href="/graph.html#1678745451">graph</a> as a list of cons's, if we are dealing with a <a href="/weighted_graph.html#1681301076">weighted graph</a>, we use the second item in the cons as a cons with the first item being the node and the second being the weight<br />
 i implemented the helper functions <code>node-weight</code> and <code>node</code> for this purpose<br />
 an edge is written/stored in the format <code>'(&lt;src&gt; . (&lt;dest&gt; . &lt;weight&gt;))</code> or simply <code>'(&lt;src&gt; . &lt;dest&gt;)</code> if it has no weight<br />
 but what about a directed graph? maybe thats to worry about later (maybe just this structure but use <code>'(node1 . node2)</code> and <code>'(node2 . node1)</code> for bidirectional edges and pass an argument to functions that specifies whether graphs are directed so they have to respect the order of the cons)<br />
@@ -113,6 +115,29 @@ example usage:<br />
 
 <p>
 this could be placed in a tex file like so:<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">% on arch linux you need the texlive-luatex package
+% you might also need the following line
+% \RequirePackage{luatex85} % needed to make 'standalone' work with lualatex
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,graphs,graphdrawing,quotes}
+\usegdlibrary{force}
+
+\begin{document}
+
+\tikz\graph[spring layout] {
+0 -&gt; 1,
+1 -&gt; 2,
+1 -&gt; 3,
+0 -&gt; 5,
+};
+
+\end{document}
+</pre>
+</div>
+<p>
 and compiled to <code>dvi</code> with<br />
 </p>
 <div class="org-src-container" data-language="bash">
@@ -128,7 +153,7 @@ a <code>yourfile.dvi</code> will be generated, use <code>dvisvgm</code> to conve
 </div>
 <p>
 this will generate an svg image<br />
-an implementation of A* algorithm:<br />
+an implementation of <a href="/A*_algorithm.html#1691868569">A* algorithm</a>:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">a-star</span> (graph src dest heuristic-function)
@@ -192,9 +217,9 @@ an implementation of A* algorithm:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgcf78f98" class="outline-2">
-<h2 id="orgcf78f98">adjacency list implementation</h2>
-<div class="outline-text-2" id="text-orgcf78f98">
+<div id="outline-container-orgec13a6b" class="outline-2">
+<h2 id="orgec13a6b"><a href="/adjacency_list.html#1678815059">adjacency list</a> implementation</h2>
+<div class="outline-text-2" id="text-orgec13a6b">
 <p>
 an adjancy list is list of linked lists, where each linked list stores a vertex and its outgoing edges, this makes representing directed graphs simple, so i decided to rewrite my code and to this approach<br />
 a vertex stores a list of edges, an "edge" stores the destination vertex and the weight (if the graph is directed we can tell which direction an edge because its source and destination vertex are determined already in the structure, so its direction must be from the source to the destination), here, an edge need not store its source vertex because the source vertex links to it already, if a function expects to receive a list of edges, not an adjacency list, then perhaps a list could be used in the form <code>'(source dest weight)</code>.<br />
