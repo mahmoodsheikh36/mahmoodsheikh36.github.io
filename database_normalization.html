@@ -31,19 +31,19 @@
 </div><h1 class="main-title">database normalization</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org4c884d7">
+<div class="dummy" id="orge1ff698">
 <p>
 the normalization process, as first proposed by Codd (1972a), takes a relation schema through a series of tests to certify whether it satisfies a certain normal form. the process, which proceeds in a top-down fashion by evaluating each relation against the criteria for normal forms and decomposing relations as necessary, can thus be considered as relational design by analysis.<br />
 </p>
 
 </div>
-<div class="math-block my_example my_example" data-before="example" data-after="" id="org4b48cd7">
+<div class="math-block my_example my_example" data-before="example" data-after="" id="org11067a2">
 <p>
 students can partake in multiple courses and a course can have multiple students taking it, we want to build a relation that contains the ratings of the students in the courses with the following condition: in each course in which a student partakes, they receive a single ordinal rating, for example a student gets assigned the first in class, and another gets assigned the second and so on.<br />
 consider the following relation which is proposed as the solution for the problem:<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql">ratings(student_id, course_code, rating)
+<pre class="src src-sql">ratings<span style="color: #d0730f;">(</span>student_id, course_code, rating<span style="color: #d0730f;">)</span>
 </pre>
 </div>
 <p>
@@ -93,7 +93,7 @@ in order to abide by BC/NF rules, we add the relation (student id, <span class="
 </ul>
 
 </div>
-<div class="math-block my_example my_example" data-before="example" data-after="" id="org0a35e6c">
+<div class="math-block my_example my_example" data-before="example" data-after="" id="org409e53b">
 <p>
 given the relation (worker id, project code, language) such that<br />
 </p>
@@ -196,7 +196,7 @@ the relation is in BC/NF (and hence 3NF and 2NF and 1NF) but not 4NF, the soluti
 </p>
 
 </div>
-<div class="math-block my_example my_example" data-before="example" data-after="" id="org50f0c25">
+<div class="math-block my_example my_example" data-before="example" data-after="" id="orgdf7f935">
 <p>
 consider the following relation: car salesmen represent car companies and sell their products.<br />
 the following functional dependencies can be found:<br />

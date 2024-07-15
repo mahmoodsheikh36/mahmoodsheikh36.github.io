@@ -34,12 +34,12 @@
 <p>
 see <a href="https://www.youtube.com/watch?v=LTzNR9FVliU">polynomial regression quick demo</a><br />
 </p>
-<div id="outline-container-org3510d7c" class="outline-2">
-<h2 id="org3510d7c">linear regression</h2>
-<div class="outline-text-2" id="text-org3510d7c">
+<div id="outline-container-org92c76a6" class="outline-2">
+<h2 id="org92c76a6">linear regression</h2>
+<div class="outline-text-2" id="text-org92c76a6">
 <p>
 i could've used my code for <a href="/multivariate_linear_regression.html#1682012888">multivariate linear regression</a> but i wanna study how neural networks can do regression tasks<br />
-if we were to try approximating a linear function using a simple <a href="/feedforward_neural_network.html#1683060983">multilayer perceptron</a> we would see that since most <a href="/activation_function.html#1683061700">activation function</a>s squash the values of the network into a small range like <?xml version='1.0' encoding='UTF-8'?>
+if we were to try approximating a linear function using a simple multilayer perceptron we would see that since most <a href="/activation_function.html#1683061700">activation function</a>s squash the values of the network into a small range like <?xml version='1.0' encoding='UTF-8'?>
 
 <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 23.352765 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
@@ -334,7 +334,7 @@ lets do regression now, for this problem, we are trying to approximate a functio
 <use x='36.942304' y='0' xlink:href='#g0-82'/>
 </g>
 </g>
-</svg>, so it only makes sense for the network to have 1 input and 1 output, we use a single hidden <a href="/convolutional_neural_network.html#1684594232">dense layer</a> for the simplicity and compactness of the model, although there would be no point in having more than a single node in the hidden layer because in any case we'd be doing univariate linear regression<br />
+</svg>, so it only makes sense for the network to have 1 input and 1 output, we use a single hidden dense layer for the simplicity and compactness of the model, although there would be no point in having more than a single node in the hidden layer because in any case we'd be doing univariate linear regression<br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">regression-test-1</span> ()
@@ -362,9 +362,9 @@ when running <code>regression-test-1</code>, the loss drops quiet quickly and th
 </p>
 </div>
 </div>
-<div id="outline-container-orgcdf3ce3" class="outline-2">
-<h2 id="orgcdf3ce3">polynomial regression</h2>
-<div class="outline-text-2" id="text-orgcdf3ce3">
+<div id="outline-container-org10be9f3" class="outline-2">
+<h2 id="org10be9f3">polynomial regression</h2>
+<div class="outline-text-2" id="text-org10be9f3">
 <p>
 the difference in codomains is not the only reason we need to consider different activation functions, a neural network is a function that is a composition of its activation functions, a linear function can be a composition of other linear functions, but it makes less sense for a linear function to be a composition of sigmoids<br />
 each parameter that the network learns is a coefficient that is multiplied by the activation of a neuron, the activation of a neuron itself is a function, determined by the activation function of that neuron, so if we wanted to approximate a polynomial, we need different coefficients for different exponential degrees, e.g. <?xml version='1.0' encoding='UTF-8'?>

@@ -31,7 +31,7 @@
 </div><h1 class="main-title">multivariate linear regression</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org764bf9f">
+<div class="dummy" id="org3a130fa">
 <p>
 we can easily extend from univariate linear regression to <b>multivariate linear regression</b>, such that each example <?xml version='1.0' encoding='UTF-8'?>
 
@@ -677,7 +677,7 @@ it is also possible to solve analytically for the <?xml version='1.0' encoding='
 </svg><br />
 minimizes the squared error.<br />
 </p>
-<div class="math-block note note" data-before="note" data-after="" id="org6de5b22">
+<div class="math-block note note" data-before="note" data-after="" id="orga88dae4">
 <p>
 im confused a little here, if we can solve for it analyitcally then why would we consider gradient descent in the first place (solving analytically requires less computing time)?<br />
 turns out, when fitting higher degree functions its not analytically solvable<br />
@@ -935,9 +935,9 @@ as with loss functions, with <?xml version='1.0' encoding='UTF-8'?>
 </p>
 
 </div>
-<div id="outline-container-org4e50694" class="outline-2">
-<h2 id="org4e50694">fitting higher order functions</h2>
-<div class="outline-text-2" id="text-org4e50694">
+<div id="outline-container-org5562c20" class="outline-2">
+<h2 id="org5562c20">fitting higher order functions</h2>
+<div class="outline-text-2" id="text-org5562c20">
 <p>
 if we wanted to fit a given data set to a higher order function, say quadratic, we just introduce <?xml version='1.0' encoding='UTF-8'?>
 
@@ -985,7 +985,7 @@ if we wanted to fit a given data set to a higher order function, say quadratic, 
 </div>
 <div id="outline-container-ID-98c4ead7-c672-419f-84c2-f7f147be1111" class="outline-2">
 <h2 id="ID-98c4ead7-c672-419f-84c2-f7f147be1111">lisp implementation</h2>
-<div class="outline-text-2" id="text-org0ed1878">
+<div class="outline-text-2" id="text-org308f3f5">
 <p>
 enough talk, its time to implement this in common lisp<br />
 first we need the data<br />
@@ -1386,7 +1386,7 @@ weights: (15.316911 -0.2039037 0.17000248), loss: 10013.191
 <p>
 the function we got is very close to the actual function which is (according to the article i lined) <code>heart disease = 15 + (-0.2*biking) + (0.178*smoking)</code><br />
 </p>
-<div class="math-block note note" data-before="note" data-after="" id="org57708d3">
+<div class="math-block note note" data-before="note" data-after="" id="org9c8d4fb">
 <p>
 messing with the learning rate dramatically affected the final output, took me a bit of time to find a good value<br />
 if we had higher float decision we would've gotten better results but after some amount of iterations the loss just stops changing and converges to a specific number<br />
@@ -1394,7 +1394,7 @@ the loss might seem like a high number at first but its really just because the 
 </p>
 
 </div>
-<div class="math-block note note" data-before="note" data-after="" id="org4afb6b7">
+<div class="math-block note note" data-before="note" data-after="" id="orge2608e6">
 <p>
 after messing with the learning-rate value, i realized how huge of an effect it had on the behavior of the algorithm, a slightly bigger step size causes the loss and weights to diverge for some reason and i cant see why<br />
 </p>

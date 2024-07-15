@@ -31,9 +31,9 @@
 </div><h1 class="main-title">convolutional neural network</h1>
 </div>
 <div id="content" class="content">
-<div id="outline-container-org9bca1a2" class="outline-2">
-<h2 id="org9bca1a2">citations</h2>
-<div class="outline-text-2" id="text-org9bca1a2">
+<div id="outline-container-org7024947" class="outline-2">
+<h2 id="org7024947">citations</h2>
+<div class="outline-text-2" id="text-org7024947">
 <ul class="org-ul">
 <li>(Peter Norvig, Stuart J. Russell, 2020)<br /></li>
 <li>(Jianxin Wu, 2017)<br /></li>
@@ -44,9 +44,9 @@ and countless other resources that helped me form a good understanding of the to
 </p>
 </div>
 </div>
-<div id="outline-container-org4ea02b6" class="outline-2">
-<h2 id="org4ea02b6">motivation</h2>
-<div class="outline-text-2" id="text-org4ea02b6">
+<div id="outline-container-org583b8bd" class="outline-2">
+<h2 id="org583b8bd">motivation</h2>
+<div class="outline-text-2" id="text-org583b8bd">
 <p>
 an image cannot be thought of as a simple vector of input pixel values, primarily because <b>adjacency of pixels in an image matters</b>. simple <a href="/feedforward_neural_network.html#1683060983">multilayer perceptrons</a> arent suited for images because adjacent neurons in the same layer arent really connected or affected by each other, which isnt the case in images.<br />
 consider an input image with <?xml version='1.0' encoding='UTF-8'?>
@@ -221,9 +221,9 @@ usually an image is stored in memory as a 2d array (or matrix), each cell contai
 </p>
 </div>
 </div>
-<div id="outline-container-orgf4aa23b" class="outline-2">
-<h2 id="orgf4aa23b">convolutional layers</h2>
-<div class="outline-text-2" id="text-orgf4aa23b">
+<div id="outline-container-orga84479b" class="outline-2">
+<h2 id="orga84479b">convolutional layers</h2>
+<div class="outline-text-2" id="text-orga84479b">
 <p>
 a convolutional neural network is one that contains spatially local connections, at least in the early layers which we call <b>convolutional layers</b>, and has patterns of weights that are replicated across the units in each layer. a pattern of weights that is replicated across multiple local regions is called a <b>kernel</b> which is applied with a <a href="/convolution.html#1686612708">convolution</a>.<br />
 in practice, multiple kernels are learned at each convolutional layer, suppose the input to the <?xml version='1.0' encoding='UTF-8'?>
@@ -424,7 +424,7 @@ in practice, multiple kernels are learned at each convolutional layer, suppose t
 </g>
 </svg> feature maps.<br />
 </p>
-<div class="math-block note note" data-before="note" data-after="" id="org49895fe">
+<div class="math-block note note" data-before="note" data-after="" id="org5441a83">
 <p>
 its important to maintain the order of dimensions as <?xml version='1.0' encoding='UTF-8'?>
 
@@ -464,9 +464,9 @@ at the first layer, the image is stored as a tensor of order 3 of <b>depth</b> <
 </p>
 </div>
 </div>
-<div id="outline-container-orgbe4a069" class="outline-2">
-<h2 id="orgbe4a069">pooling layers and downsampling</h2>
-<div class="outline-text-2" id="text-orgbe4a069">
+<div id="outline-container-orgc9116a3" class="outline-2">
+<h2 id="orgc9116a3">pooling layers and downsampling</h2>
+<div class="outline-text-2" id="text-orgc9116a3">
 <p>
 a pooling layer in a neural network summarizes a set of adjacent units from the preceding pooling layer with a single value. pooling works just like a convolution layer, with a kernel size l and stride <?xml version='1.0' encoding='UTF-8'?>
 
@@ -1558,17 +1558,17 @@ translating these conditions into equations, we get:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org9ee56c4" class="outline-2">
-<h2 id="org9ee56c4">flatten layer</h2>
-<div class="outline-text-2" id="text-org9ee56c4">
+<div id="outline-container-orgda13ddf" class="outline-2">
+<h2 id="orgda13ddf">flatten layer</h2>
+<div class="outline-text-2" id="text-orgda13ddf">
 <p>
 a layer that takes a tensor and <a href="/vectorization.html#1690850867">vectorizes</a> or <b>flattens</b> it, turning it into a 1d vector, it doesnt need any parameters.<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org63104b6" class="outline-2">
-<h2 id="org63104b6">fully connected convolutional layers</h2>
-<div class="outline-text-2" id="text-org63104b6">
+<div id="outline-container-org4fb12c4" class="outline-2">
+<h2 id="org4fb12c4">fully connected convolutional layers</h2>
+<div class="outline-text-2" id="text-org4fb12c4">
 <p>
 suppose the input of a layer <?xml version='1.0' encoding='UTF-8'?>
 
@@ -1948,9 +1948,9 @@ notice that here <?xml version='1.0' encoding='UTF-8'?>
 </p>
 </div>
 </div>
-<div id="outline-container-org647fac7" class="outline-2">
-<h2 id="org647fac7">full example</h2>
-<div class="outline-text-2" id="text-org647fac7">
+<div id="outline-container-orgddcc057" class="outline-2">
+<h2 id="orgddcc057">full example</h2>
+<div class="outline-text-2" id="text-orgddcc057">
 <p>
 consider the following network:<br />
 <img src="/net.png" /><br />
@@ -3912,7 +3912,7 @@ the output is of size <?xml version='1.0' encoding='UTF-8'?>
 </g>
 </svg></b>:<br />
 </p>
-<div class="math-block note note" data-before="note" data-after="" id="orgf738505">
+<div class="math-block note note" data-before="note" data-after="" id="org17ddad8">
 <p>
 in the image, the output layer and the last fully connected layer are treated as separate layers, this makes little sense because that way the fully connected layers would have no parameters, here we treat them as a single fully connected layer.<br />
 </p>
@@ -8002,7 +8002,7 @@ such that <?xml version='1.0' encoding='UTF-8'?>
 </p>
 <div class="math-block note note" data-before="note" data-after="" id="not-convnet-I-indicies">
 <p>
-its important to notice how in eq-convnet-1 the indicies <?xml version='1.0' encoding='UTF-8'?>
+its important to notice how in <a href="/convolutional_neural_network.html#eq-convnet-1">eq-convnet-1</a> the indicies <?xml version='1.0' encoding='UTF-8'?>
 
 <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 24.226092 6.718534' style="height: 0.6609em; vertical-align: -0.1874em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
@@ -8061,7 +8061,7 @@ its important to notice how in eq-convnet-1 the indicies <?xml version='1.0' enc
 </g>
 </svg> are added element-wise aswell, this is important as its a property that is later exploited in the code for backpropagation.<br />
 i should also note that the process of backpropagation in a convolutional layer, just like the feedforwarding process, resembles that of a convolutional one, i have yet to find out how to show that this follows from these math formulas.<br />
-furthermore, here the expression eq-convnet-1 would be correct only when the indicies of <?xml version='1.0' encoding='UTF-8'?>
+furthermore, here the expression <a href="/convolutional_neural_network.html#eq-convnet-1">eq-convnet-1</a> would be correct only when the indicies of <?xml version='1.0' encoding='UTF-8'?>
 
 <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.010576 8.551656 7.510577' style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
@@ -8098,13 +8098,13 @@ furthermore, here the expression eq-convnet-1 would be correct only when the ind
 </div>
 </div>
 </div>
-<div id="outline-container-orgc887057" class="outline-2">
-<h2 id="orgc887057">architecture</h2>
-<div class="outline-text-2" id="text-orgc887057">
+<div id="outline-container-orgea4de91" class="outline-2">
+<h2 id="orgea4de91">architecture</h2>
+<div class="outline-text-2" id="text-orgea4de91">
 </div>
-<div id="outline-container-orgb141ffb" class="outline-3">
-<h3 id="orgb141ffb">LeNet-5</h3>
-<div class="outline-text-3" id="text-orgb141ffb">
+<div id="outline-container-orgf3fd2b8" class="outline-3">
+<h3 id="orgf3fd2b8">LeNet-5</h3>
+<div class="outline-text-3" id="text-orgf3fd2b8">
 <p>
 the <b>lenet-5</b> one of the earliest and most basic CNN architecture.<br />
 it consists of 7 layers. the first layer consists of an input image with dimensions of 32x32. it is convolved with 6 filters of size 5x5 resulting in dimension of 28x28x6. the second layer is a pooling operation with a filter of size 2×2 and stride of 2. hence the resulting image dimension will be 14x14x6.<br />
@@ -8124,7 +8124,7 @@ the final seventh layer will be a softmax output layer with <?xml version='1.0' 
 </svg> possible classes depending upon the number of classes in the dataset.<br />
 </p>
 
-<div id="orgd44d5ac" class="figure">
+<div id="orgf543fa6" class="figure">
 <p><img src="/lenet5.png" /><br />
 </p>
 <p><span class="figure-number">Figure 1: </span>lenet5 basic architecture</p>
@@ -8132,13 +8132,13 @@ the final seventh layer will be a softmax output layer with <?xml version='1.0' 
 </div>
 </div>
 </div>
-<div id="outline-container-org01aec17" class="outline-2">
-<h2 id="org01aec17">common lisp implementation</h2>
-<div class="outline-text-2" id="text-org01aec17">
+<div id="outline-container-orgb1823f4" class="outline-2">
+<h2 id="orgb1823f4">common lisp implementation</h2>
+<div class="outline-text-2" id="text-orgb1823f4">
 </div>
-<div id="outline-container-org1267164" class="outline-3">
-<h3 id="org1267164">an abstract structure for networks</h3>
-<div class="outline-text-3" id="text-org1267164">
+<div id="outline-container-org4f864aa" class="outline-3">
+<h3 id="org4f864aa">an abstract structure for networks</h3>
+<div class="outline-text-3" id="text-org4f864aa">
 <p>
 after having studied cnn's, i realied i need a more flexible data structure for networks than what i had in <a href="/feedforward_neural_network.html#1683060983">simple feedforward networks</a>, because with simple perceptrons i only used one type of layer, with cnn's we need to be able to build networks with arbitrary layers, so i dropped my previous progress and started over:<br />
 </p>
@@ -8185,13 +8185,13 @@ after having studied cnn's, i realied i need a more flexible data structure for 
 </div>
 </div>
 </div>
-<div id="outline-container-orgded56b9" class="outline-3">
-<h3 id="orgded56b9">convolutional layer</h3>
-<div class="outline-text-3" id="text-orgded56b9">
+<div id="outline-container-org4efc455" class="outline-3">
+<h3 id="org4efc455">convolutional layer</h3>
+<div class="outline-text-3" id="text-org4efc455">
 <p>
 we use the relu by default to reduce the risk of a vanishing gradient.<br />
 </p>
-<div class="math-block note note" data-before="note" data-after="" id="org362566c">
+<div class="math-block note note" data-before="note" data-after="" id="orga0ab5bb">
 <p>
 i should note that later on, during the writing of <code>propbackward</code> for convolutional layers, i realized that i needed some more data from <code>feedforward</code> than im currently returning, so <code>feedforward</code> functions needed some slight modifications which also meant i needed to rewrite the <code>network-feedforward</code> function.<br />
 i needed more data like the unactivated output tensor of a layer, not just the final output of the layer, and the input to the layer.<br />
@@ -8296,9 +8296,9 @@ time to implement different types of layers, starting with convolutional layer:<
 </div>
 </div>
 </div>
-<div id="outline-container-org7f93dd6" class="outline-3">
-<h3 id="org7f93dd6">pooling layer</h3>
-<div class="outline-text-3" id="text-org7f93dd6">
+<div id="outline-container-org5c43928" class="outline-3">
+<h3 id="org5c43928">pooling layer</h3>
+<div class="outline-text-3" id="text-org5c43928">
 <p>
 pooling layer:<br />
 </p>
@@ -8351,9 +8351,9 @@ pooling layer:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org5de7000" class="outline-3">
-<h3 id="org5de7000">flatten layer</h3>
-<div class="outline-text-3" id="text-org5de7000">
+<div id="outline-container-orgf2ae735" class="outline-3">
+<h3 id="orgf2ae735">flatten layer</h3>
+<div class="outline-text-3" id="text-orgf2ae735">
 <p>
 a flatten layer, which is used to reduce dimensionality to 1d (to vectorize the input tensor), and doesnt have any parameters:<br />
 </p>
@@ -8368,9 +8368,9 @@ a flatten layer, which is used to reduce dimensionality to 1d (to vectorize the 
 </div>
 </div>
 </div>
-<div id="outline-container-orgbeafada" class="outline-3">
-<h3 id="orgbeafada">dense layer</h3>
-<div class="outline-text-3" id="text-orgbeafada">
+<div id="outline-container-orgd78b44e" class="outline-3">
+<h3 id="orgd78b44e">dense layer</h3>
+<div class="outline-text-3" id="text-orgd78b44e">
 <p>
 a dense layer, or a fully connected layer:<br />
 </p>
@@ -8398,9 +8398,9 @@ a dense layer, or a fully connected layer:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgacb7b12" class="outline-3">
-<h3 id="orgacb7b12">test code</h3>
-<div class="outline-text-3" id="text-orgacb7b12">
+<div id="outline-container-org0fd7daa" class="outline-3">
+<h3 id="org0fd7daa">test code</h3>
+<div class="outline-text-3" id="text-org0fd7daa">
 <p>
 feedforwarding test in convolutional layers, with an (randomly generated) input image of depth 3 (3 channels), width 6 and height 6 (in the code columns and rows, respectively), like in <a href="/convolutional_neural_network.html#fig-convlayer">fig-convlayer</a>:<br />
 </p>
@@ -8537,9 +8537,9 @@ we got 10 values out, as expected (the size of the output layer is 10)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org2f561a3" class="outline-3">
-<h3 id="org2f561a3">convolutional layer backprop</h3>
-<div class="outline-text-3" id="text-org2f561a3">
+<div id="outline-container-org520d447" class="outline-3">
+<h3 id="org520d447">convolutional layer backprop</h3>
+<div class="outline-text-3" id="text-org520d447">
 <p>
 its time to implement backpropagation!<br />
 a table of the variables in the code and their counterparts in the math formulas:<br />
@@ -8943,9 +8943,9 @@ i had to go back and edit the definition of the <code>pooling-layer</code> class
 </p>
 </div>
 </div>
-<div id="outline-container-orgddab4ee" class="outline-3">
-<h3 id="orgddab4ee">pooling layer backprop</h3>
-<div class="outline-text-3" id="text-orgddab4ee">
+<div id="outline-container-org6f68cf8" class="outline-3">
+<h3 id="org6f68cf8">pooling layer backprop</h3>
+<div class="outline-text-3" id="text-org6f68cf8">
 <p>
 backprop for pooling layer:<br />
 </p>
@@ -8994,9 +8994,9 @@ backprop for pooling layer:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org5f04266" class="outline-3">
-<h3 id="org5f04266">flatten layer backprop</h3>
-<div class="outline-text-3" id="text-org5f04266">
+<div id="outline-container-orgf5ba3d2" class="outline-3">
+<h3 id="orgf5ba3d2">flatten layer backprop</h3>
+<div class="outline-text-3" id="text-orgf5ba3d2">
 <p>
 backprop for flatten layers is probably the simplest, we only need to reshape the deltas and pass them on:<br />
 </p>
@@ -9008,9 +9008,9 @@ backprop for flatten layers is probably the simplest, we only need to reshape th
 </div>
 </div>
 </div>
-<div id="outline-container-orgf7a6776" class="outline-3">
-<h3 id="orgf7a6776">test code</h3>
-<div class="outline-text-3" id="text-orgf7a6776">
+<div id="outline-container-org1140644" class="outline-3">
+<h3 id="org1140644">test code</h3>
+<div class="outline-text-3" id="text-org1140644">
 <p>
 time for a simple propbackward test:<br />
 </p>
@@ -9052,9 +9052,9 @@ although there are some things that can be improved (i think im doing unnecessar
 </p>
 </div>
 </div>
-<div id="outline-container-orgb7684b4" class="outline-3">
-<h3 id="orgb7684b4">printing/formatting networks</h3>
-<div class="outline-text-3" id="text-orgb7684b4">
+<div id="outline-container-org79e4246" class="outline-3">
+<h3 id="org79e4246">printing/formatting networks</h3>
+<div class="outline-text-3" id="text-org79e4246">
 <p>
 it would help to be able to inspect a network and see for example how many parameters it has so we implement a <code>print-object</code> function:<br />
 </p>
@@ -9105,9 +9105,9 @@ total network weights: 61470&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-org0ea265e" class="outline-3">
-<h3 id="org0ea265e">full pass propagation and training</h3>
-<div class="outline-text-3" id="text-org0ea265e">
+<div id="outline-container-org88139fd" class="outline-3">
+<h3 id="org88139fd">full pass propagation and training</h3>
+<div class="outline-text-3" id="text-org88139fd">
 <p>
 now we need a function that takes a set of examples and trains a network<br />
 </p>
@@ -9127,9 +9127,9 @@ now we need a function that takes a set of examples and trains a network<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org5bd85d4" class="outline-3">
-<h3 id="org5bd85d4">test code</h3>
-<div class="outline-text-3" id="text-org5bd85d4">
+<div id="outline-container-org18f94be" class="outline-3">
+<h3 id="org18f94be">test code</h3>
+<div class="outline-text-3" id="text-org18f94be">
 <p>
 lets try a simple example:<br />
 </p>
@@ -9187,9 +9187,9 @@ i gave training on mnist with cnn a shot and tackled the issue of a vanishing gr
 </p>
 </div>
 </div>
-<div id="outline-container-orgd3ed676" class="outline-3">
-<h3 id="orgd3ed676">backprop optimization</h3>
-<div class="outline-text-3" id="text-orgd3ed676">
+<div id="outline-container-org4322f3e" class="outline-3">
+<h3 id="org4322f3e">backprop optimization</h3>
+<div class="outline-text-3" id="text-org4322f3e">
 <div class="math-block any any" data-before="any" data-after="" id="any:optimization1">
 <p>
 if we reconsider the equations <a href="/convolutional_neural_network.html#eq-convnet-weight-delta">eq-convnet-weight-delta</a>, we'll find that we're doing alot of redundant work, as mentioned in <a href="/convolutional_neural_network.html#not-convnet-I-indicies">not-convnet-I-indicies</a>, there are indicies we're iterating over that we have to ignore, so we could cut them out of the loop which will tremendously reduce the number of iterations.<br />
@@ -11415,9 +11415,9 @@ after coming up with this, i had to go back and edit the backpropagation functio
 </div>
 </div>
 </div>
-<div id="outline-container-org2f11d8d" class="outline-3">
-<h3 id="org2f11d8d">distributed training</h3>
-<div class="outline-text-3" id="text-org2f11d8d">
+<div id="outline-container-org719668f" class="outline-3">
+<h3 id="org719668f">distributed training</h3>
+<div class="outline-text-3" id="text-org719668f">
 <p>
 perhaps distributed training would help, so i decided to work on a simple multithreaded solution before going for a gpu solution.<br />
 here implement distributed training by data parallelism with the help of <a href="/common_lisp_lparallel.html#1691677477">lparallel</a>, two packages are needed, <code>lparallel</code> and <code>serapeum</code>, both installable from quicklisp.<br />
@@ -11550,9 +11550,9 @@ although cpu multithreading can speed up training, a gpu is still alot faster in
 </p>
 </div>
 </div>
-<div id="outline-container-orgcc7cdca" class="outline-3">
-<h3 id="orgcc7cdca">analyzing accuracy and loss</h3>
-<div class="outline-text-3" id="text-orgcc7cdca">
+<div id="outline-container-orgd5c75ec" class="outline-3">
+<h3 id="orgd5c75ec">analyzing accuracy and loss</h3>
+<div class="outline-text-3" id="text-orgd5c75ec">
 <p>
 we also need a function to get the total error of the network:<br />
 </p>
@@ -11572,13 +11572,13 @@ we also need a function to get the total error of the network:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgd1e1ee6" class="outline-3">
-<h3 id="orgd1e1ee6">saving parameters to disk</h3>
-<div class="outline-text-3" id="text-orgd1e1ee6">
+<div id="outline-container-org1ce63dd" class="outline-3">
+<h3 id="org1ce63dd">saving parameters to disk</h3>
+<div class="outline-text-3" id="text-org1ce63dd">
 <p>
 we may also want to save the weights of a network to a file for later reloading:<br />
 </p>
-<div class="math-block note note" data-before="note" data-after="" id="org902df48">
+<div class="math-block note note" data-before="note" data-after="" id="org279d0e1">
 <p>
 TODO: currently this doesnt save biases, needs to be fixed<br />
 </p>
