@@ -31,11 +31,11 @@
 </div><h1 class="main-title">byte-pair encoding</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org6002e30">
+<div class="dummy" id="orgbdcf393">
 <p>
 instead of defining tokens as words (whether delimited by spaces or more complex algorithms), or as characters (as in chinese), we can use our data to automatically tell us what the tokens should be. this is especially useful in dealing with unknown words, an important problem in language processing. NLP algorithms often learn some facts about language from one corpus (a training corpus) and then use these facts to make decisions about a separate test corpus and its language. thus if our training corpus contains, say the words low, new, newer, but not lower, then if the word lower appears in our test corpus, our system will not know what to do with it.<br />
 </p>
-<div class="math-block dummy2 dummy2" data-before="dummy2" data-after="" id="orgbbac540">
+<div class="math-block dummy2" data-before="dummy2" data-after="">
 <p>
 to deal with this unknown word problem, modern tokenizers often automatically induce sets of tokens that include tokens smaller than words, called subwords. subwords can be arbitrary substrings, or they can be meaning-bearing units like the morphemes -<b>est</b> or -<b>er</b>. (a morpheme is the smallest meaning-bearing unit of a language; for example the word <b>unlikeliest</b> has the morphemes <b>un</b>-, <b>likely</b>, and -<b>est</b>.) in modern tokenization schemes, most tokens are words, but some tokens are frequently occurring morphemes or other subwords like -<b>er</b>. every unseen words like lower can thus be represented by some sequence of known subword units, such as <b>low</b> and <b>er</b>, or even as a sequence of individual letters if necessary.<br />
 </p>
@@ -576,7 +576,7 @@ in the <i>byte-pair encoding</i> or <i>BPE</i> algorithm, the BPE token learner 
 </div>
 
 </div>
-<div class="math-block note note" data-before="note" data-after="" id="org4fb86b2">
+<div class="math-block note" data-before="note" data-after="">
 <p>
 <a href="https://huggingface.co/learn/nlp-course/en/chapter6/5">https://huggingface.co/learn/nlp-course/en/chapter6/5</a> demonstrates an implementation of the bpe algorithm.<br />
 </p>

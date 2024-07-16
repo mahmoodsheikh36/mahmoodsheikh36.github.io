@@ -31,8 +31,8 @@
 </div><h1 class="main-title">convolution</h1>
 </div>
 <div id="content" class="content">
-<div class="math-block definition definition" data-before="definition: convolution" data-after="(Maria Vakalopoulou, Stergios Christodoulidis, Ninon Burgos, Olivier Colliot, Vincent Lepetit. Deep learning: basics and convolutional neural networks (CNN). Olivier Colliot. Machine Learning for Brain Disorders, Springer, In press. hal-03957224, 2023)
-" id="org6664dc2">
+<div class="math-block definition" data-before="definition: convolution" data-after="(Maria Vakalopoulou, Stergios Christodoulidis, Ninon Burgos, Olivier Colliot, Vincent Lepetit. Deep learning: basics and convolutional neural networks (CNN). Olivier Colliot. Machine Learning for Brain Disorders, Springer, In press. hal-03957224, 2023)
+" id="def-conv">
 <p>
 the convolution operation is defined as the integral of the product of two functions <?xml version='1.0' encoding='UTF-8'?>
 
@@ -115,7 +115,7 @@ the convolution operation is defined as the integral of the product of two funct
 <p>
 in essence, the convolution operation shows how one function affects the other<br />
 </p>
-<div class="math-block definition definition" data-before="definition: discrete convolution" data-after="" id="def-conv-dicrete">
+<div class="math-block definition" data-before="definition: discrete convolution" data-after="" id="def-conv-dicrete">
 <p>
 for two functions <?xml version='1.0' encoding='UTF-8'?>
 
@@ -292,9 +292,9 @@ extending to 2 dimensional functions we'd get:<br />
 </p>
 
 </div>
-<div class="math-block my_example my_example" data-before="example" data-after="" id="orgfb19d56">
+<div class="math-block my_example" data-before="example" data-after="">
 <p>
-in machine learning, specifically in convolutional neural network, the convolution operation is used do detect features in an <b>image</b>, one of the operands is the image and the second is the <b>kernel</b>, see <a href="#fig-conv-1">No description for this link</a><br />
+in machine learning, specifically in <a href="/convolutional_neural_network.html#1684594232">convolutional neural network</a>, the convolution operation is used do detect features in an <b>image</b>, one of the operands is the image and the second is the <b>kernel</b>, see <a href="#fig-conv-1">No description for this link</a><br />
 </p>
 
 <div id="fig-conv-1" class="equation-container">
@@ -874,26 +874,26 @@ an example of a flipped kernel:<br />
 </p>
 
 </div>
-<div class="dummy" id="orgcd724e7">
+<div class="dummy" id="org27e7391">
 <p>
 if you look at <a href="/convolution.html#fig-conv-1">fig-conv-1</a>, you may notice the edges essentially get "trimmed off", converting a 7x7 matrix into a 5×5 one. the pixels on the edge are never at the center of the kernel, because there is nothing for the kernel to extend to beyond the edge. but we often would like the size of the output to equal the input.<br />
 to solve this, a <i>padding</i> is introduced to the image, where "fake" pixels are placed around the image to extend its dimensions so that the result of the convolution would grow to equal the size we want.<br />
 </p>
 
 </div>
-<div class="dummy" id="orgf0b24e9">
+<div class="dummy" id="orgda635a8">
 <p>
 often when applying a convolution, we want an output with a lower size than the input. one way of accomplishing this is by using a <i>stride</i>, which is the amount of pixels the kernel <b>slides</b> over (skips) in a given dimension.<br />
 </p>
 
 </div>
-<div class="dummy" id="org0637477">
+<div class="dummy" id="org5a1f854">
 <p>
 convolution is commutative<br />
 </p>
 
 </div>
-<div class="math-block my_example my_example" data-before="example" data-after="" id="exa-conv-1">
+<div class="math-block my_example" data-before="example" data-after="" id="exa-conv-1">
 <p>
 given an image <?xml version='1.0' encoding='UTF-8'?>
 
@@ -1281,7 +1281,7 @@ or equivalently (since both convolution and multiplication are commutative):<br 
 </p>
 
 </div>
-<div class="math-block lemma lemma" data-before="lemma: derivative property of convolutions" data-after="" id="lem-conv-derivative">
+<div class="math-block lemma" data-before="lemma: derivative property of convolutions" data-after="" id="lem-conv-derivative">
 <p>
 <?xml version='1.0' encoding='UTF-8'?>
 

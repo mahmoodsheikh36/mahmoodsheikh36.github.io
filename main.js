@@ -8,19 +8,39 @@ window.onload = function(e) {
   fetch("search.json").then(response => response.json()).then(json => data = json);
 }
 
+let popupElm;
 function handleMathButton(node) {
   if (node.classList.contains('math-button')) {
     let symbol = node.children[0];
     symbol.setAttribute('original-fill', symbol.getAttribute('fill'));
-    node.onmouseover = function() {
+    node.onmouseover = function(event) {
+      if (popupElm !== undefined)
+        popupElm.innerHTML = ''; // clear previously added blocks
       symbol.setAttribute('fill', 'red');
       let ref = node.getAttribute('data-ref');
-      console.log(ref);
-      let id = ref.substr(4);
-      console.log(findById(id));
+      let refId = ref.substr(4);
+      console.log(refId);
+      getElementByBlkId(refId, function (elm) {
+        if (popupElm === undefined) {
+          popupElm = document.createElement('div');
+          popupElm.className = "popup";
+          document.body.appendChild(popupElm);
+        }
+        popupElm.appendChild(elm);
+        Object.assign(popupElm.style, {
+          left: `${event.pageX}px`,
+          top:  `${event.pageY}px`,
+          display: `block`,
+        });
+      });
     }
     node.onmouseout = function() {
       symbol.setAttribute('fill', symbol.getAttribute('original-fill'));
+      if (popupElm !== undefined) {
+        Object.assign(popupElm.style, {
+          display: `none`,
+        });
+      }
     }
   }
 }
@@ -28,9 +48,25 @@ function handleMathButton(node) {
 // find a blk entry by its id
 function findById(id) {
   for (let entry of data) {
-    if (entry.id !== null && entry.id.includes(id)) {
+    // substr(4) because the id may begin with blk:
+    if (entry.id !== null && entry.id === id) {
       return entry;
     }
+  }
+}
+
+function getElementByBlkId(id, cb) {
+  let entry = findById(id);
+  if (entry !== undefined) {
+    console.log(entry);
+    fetch(entry.filepath).then(response => response.text()).then(function(text) {
+      // parse the "other" page (page containing the destination entry)
+      let page = new DOMParser().parseFromString(text, "text/html");
+      // the actual html entry from the other page
+      let elm = page.getElementById(entry.id);
+      console.log(elm);
+      cb(elm);
+    });
   }
 }
 

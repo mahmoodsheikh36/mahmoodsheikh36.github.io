@@ -31,13 +31,13 @@
 </div><h1 class="main-title">query optimization</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org553b957">
+<div class="dummy" id="orgb1abd88">
 <p>
 we use techniques that apply <a href="/heuristic.html#1691870705">heuristic</a> rules to modify the internal representation of a query&#x2013;which is usually in the form of a query tree or a query <a href="/graph.html#1678745451">graph</a> data structure&#x2013;to improve its expected performance. the scanner and parser of an sql query first generate a data structure that corresponds to an initial query representation, which is then optimized according to heuristic rules. this leads to an optimized query representation, which corresponds to the <i>query execution strategy</i>. following that, a <i>query execution plan</i> is generated to execute groups of operations based on the access paths available on the files involved in the query.<br />
 one of the main heuristic rules is to apply select and project operations before applying the join operation or other binary operations, because the size of the file resulting from a binary operation&#x2013;such as JOIN&#x2013;is usually a multiplicative function of the sizes of the input files. the SELECT and PROJECT operations reduce the size of a file and hence should be applied before a join or other binary operations.<br />
 the optimizer must include rules for equivalence among extended relational algebra expressions that can be applied to transform the initial tree into the final, optimized query tree. those are called <a href="/transformation_rules_for_relational_algebra_operations.html#1707901515">transformation rules for relational algebra operations</a>.<br />
 </p>
-<div class="math-block my_example my_example" data-before="example: example of transforming a query" data-after="" id="exa-query-optimization-1">
+<div class="math-block my_example" data-before="example: example of transforming a query" data-after="" id="exa-query-optimization-1">
 <p>
 consider the following query <?xml version='1.0' encoding='UTF-8'?>
 
@@ -72,7 +72,7 @@ a further improvement is achieved by switching the positions of the EMPLOYEE and
 </p>
 
 </div>
-<div class="math-block dummy2 dummy2" data-before="dummy2: outline of a heuristic algebraic optimization algorithm" data-after="" id="org6f1e794">
+<div class="math-block dummy2" data-before="dummy2: outline of a heuristic algebraic optimization algorithm" data-after="">
 <p>
 we outline the steps of an algorithm that utilizes some of the transformation rules to transform an initial query tree into a final tree that is more efficient to execute (in most cases). the algorithm will lead to transformations similar to those discussed in our example in <a href="/query_optimization.html#exa-query-optimization-1">exa-query-optimization-1</a>. the steps of the algorithm are as follows:<br />
 </p>
@@ -86,7 +86,7 @@ we outline the steps of an algorithm that utilizes some of the transformation ru
 </ol>
 
 </div>
-<div class="math-block dummy2 dummy2" data-before="dummy2: summary of heuristics for algebraic optimization" data-after="" id="org1fd0373">
+<div class="math-block dummy2" data-before="dummy2: summary of heuristics for algebraic optimization" data-after="">
 <p>
 the main heuristic is to apply first the operations that reduce the size of intermediate results. this includes performing as early as possible SELECT operations to reduce the number of tuples and PROJECT operations to reduce the number of attributes&#x2013;by moving SELECT and PROJECT operations as far down the tree as possible. additionally, the SELECT and JOIN operations that are most restrictive&#x2013;that is, result in relations with the fewest tuples or with the smallest absolute size&#x2013;should be executed before other similar operations. the latter rule is accomplished through reordering the leaf nodes of the tree among themselves while avoiding Cartesian products, and adjusting the rest of the tree appropriately.<br />
 </p>
