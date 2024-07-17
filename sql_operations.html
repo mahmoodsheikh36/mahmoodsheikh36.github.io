@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="description" content="a set of common [[blk:1702389696][sql]] operations" />
+<meta name="generator" content="Org Mode" />
+<title>sql operations</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">sql operations</h1><span class="desc">a set of common [[blk:1702389696][sql]] operations</span>
+</div>
+<div id="content" class="content">
+<div id="outline-container-org29c58da" class="outline-2">
+<h2 id="org29c58da">list databases</h2>
+<div class="outline-text-2" id="text-org29c58da">
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">show databases; -- for mysql</span>
+\l <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">for postgresql</span>
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">List of databases</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Name</td>
+<td class="org-left">Owner</td>
+<td class="org-left">Encoding</td>
+<td class="org-left">Locale Provider</td>
+<td class="org-left">Collate</td>
+<td class="org-left">Ctype</td>
+<td class="org-left">ICU Locale</td>
+<td class="org-left">ICU Rules</td>
+<td class="org-left">Access privileges</td>
+</tr>
+
+<tr>
+<td class="org-left">mahmooz</td>
+<td class="org-left">mahmooz</td>
+<td class="org-left">UTF8</td>
+<td class="org-left">libc</td>
+<td class="org-left">en_US.UTF-8</td>
+<td class="org-left">en_US.UTF-8</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">postgres</td>
+<td class="org-left">postgres</td>
+<td class="org-left">UTF8</td>
+<td class="org-left">libc</td>
+<td class="org-left">en_US.UTF-8</td>
+<td class="org-left">en_US.UTF-8</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">template0</td>
+<td class="org-left">postgres</td>
+<td class="org-left">UTF8</td>
+<td class="org-left">libc</td>
+<td class="org-left">en_US.UTF-8</td>
+<td class="org-left">en_US.UTF-8</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">=c/postgres</td>
+</tr>
+
+<tr>
+<td class="org-left">postgres=CTc/postgres</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">template1</td>
+<td class="org-left">postgres</td>
+<td class="org-left">UTF8</td>
+<td class="org-left">libc</td>
+<td class="org-left">en_US.UTF-8</td>
+<td class="org-left">en_US.UTF-8</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">=c/postgres</td>
+</tr>
+
+<tr>
+<td class="org-left">postgres=CTc/postgres</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4a96ed7" class="outline-2">
+<h2 id="org4a96ed7">deleting a database</h2>
+<div class="outline-text-2" id="text-org4a96ed7">
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">drop</span> databsae &lt;dbname&gt;;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8439ebd" class="outline-2">
+<h2 id="org8439ebd">creating databases</h2>
+<div class="outline-text-2" id="text-org8439ebd">
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">create</span> database &lt;dbname&gt;;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f2aee7" class="outline-2">
+<h2 id="org1f2aee7">describe database</h2>
+<div class="outline-text-2" id="text-org1f2aee7">
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">describe</span> sys;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3c79ca4" class="outline-2">
+<h2 id="org3c79ca4">schema</h2>
+<div class="outline-text-2" id="text-org3c79ca4">
+<div class="dummy" id="org719b18a">
+<p>
+an example of creating a <a href="/schema.html#1702318954">schema</a> (usually called a database), a schema called <code>COMPANY</code> owned by the user with authorization identifier <code>Jsmith</code>. note that each statement in SQL ends with a semicolon.<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">SCHEMA</span> COMPANY <span style="font-weight: bold;">AUTHORIZATION</span> <span style="font-style: italic;">'Jsmith'</span>;
+</pre>
+</div>
+<p>
+in general, not all users are authorized to create schemas and schema elements. the privilege to create schemas, tables, and other constructs must be explicitly granted to the relevant user accounts by the system administrator or <a href="/database_administrator.html#1702136870">DBA</a>.<br />
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-org668d5af" class="outline-2">
+<h2 id="org668d5af">create table</h2>
+<div class="outline-text-2" id="text-org668d5af">
+<div class="dummy" id="orge403168">
+<p>
+the <code>CREATE TABLE</code> command is used to specify a new relation by giving it a name and specifying its attributes and initial constraints. the attributes are specified first, and each attribute is given a name, a data type to specify its domain of values, and possibly attribute constraints, such as <code>NOT NULL</code>. the key, entity integrity, and referential integrity constraints can be specified within the <code>CREATE TABLE</code> statement after the attributes are declared, or they can be added later using the <code>ALTER TABLE</code> command.<br />
+typically, the sql schema (usually called database) in which the relations are declared is implicitly specified in the environment in which the <code>CREATE TABLE</code> statements are executed. alternatively, we can explicitly attach the schema name to the relation name, separated by a period. for example, by writing<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">COMPANY.EMPLOYEE</span>
+</pre>
+</div>
+<p>
+rather than<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">EMPLOYEE</span>
+</pre>
+</div>
+<p>
+the relations declared through <code>CREATE TABLE</code> statements are called <i>base tables</i> (or base relations); this means that the table and its rows are actually created and stored as a file by the <a href="/database_management_system.html#1702132360">dbms</a>.<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>an example schema declaration</label><pre class="src src-sql" id="src-sql-example-1"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">EMPLOYEE</span>
+ (Fname      <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15)   <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Minit      <span style="font-weight: bold; text-decoration: underline;">CHAR</span>,
+  Lname      <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15)   <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Ssn        <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9)       <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Bdate      <span style="font-weight: bold; text-decoration: underline;">DATE</span>,
+  Address    <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(30),
+  Sex        <span style="font-weight: bold; text-decoration: underline;">CHAR</span>,
+  Salary     <span style="font-weight: bold; text-decoration: underline;">DECIMAL</span>(10,2),
+  Super_ssn  <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9),
+  Dno        <span style="font-weight: bold; text-decoration: underline;">INT</span>           <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+ <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Ssn), <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">has continutation, unclosed</span>
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">DEPARTMENT</span>
+ (Dname          <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15) <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Dnumber        <span style="font-weight: bold; text-decoration: underline;">INT</span>         <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Mgr_ssn        <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9)     <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Mgr_start_date <span style="font-weight: bold; text-decoration: underline;">DATE</span>,
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Dnumber),
+  <span style="font-weight: bold;">UNIQUE</span> (Dname),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Mgr_ssn) <span style="font-weight: bold;">REFERENCES</span> EMPLOYEE(Ssn) );
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">DEPT_LOCATIONS</span>
+ (Dnumber   <span style="font-weight: bold; text-decoration: underline;">INT</span>         <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Dlocation <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15) <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Dnumber, Dlocation),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Dnumber) <span style="font-weight: bold;">REFERENCES</span> DEPARTMENT (Dnumber) );
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">PROJECT</span>
+ (Pname <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15)      <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Pnumber   <span style="font-weight: bold; text-decoration: underline;">INT</span>          <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Plocation <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15),
+  Dnum      <span style="font-weight: bold; text-decoration: underline;">INT</span>          <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Pnumber),
+  <span style="font-weight: bold;">UNIQUE</span> (Pname),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Dnum) <span style="font-weight: bold;">REFERENCES</span> DEPARTMENT (Dnumber) );
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">WORKS_ON</span>
+ (Essn  <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9)      <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Pno   <span style="font-weight: bold; text-decoration: underline;">INT</span>          <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Hours <span style="font-weight: bold; text-decoration: underline;">DECIMAL</span>(3,1) <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Essn, Pno),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Essn) <span style="font-weight: bold;">REFERENCES</span> EMPLOYEE (Ssn),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Pno) <span style="font-weight: bold;">REFERENCES</span> PROJECT (Pnumber) );
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">DEPENDENT</span>
+ (Essn           <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9)     <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Dependent_name <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15) <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Sex            <span style="font-weight: bold; text-decoration: underline;">CHAR</span>,
+  Bdate          <span style="font-weight: bold; text-decoration: underline;">DATE</span>,
+  Relationship   <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(8),
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Essn, Dependent_name),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Essn) <span style="font-weight: bold;">REFERENCES</span> EMPLOYEE(Ssn) );
+</pre>
+</div>
+
+</div>
+</div>
+</div>
+<div id="outline-container-org409344c" class="outline-2">
+<h2 id="org409344c">select-from-where</h2>
+<div class="outline-text-2" id="text-org409344c">
+<div class="dummy" id="org12d653a">
+<p>
+the basic form of the <i>SELECT</i> statement, sometimes called a <i>mapping</i> or a <i>select-from-where</i> block, is formed of the three clauses <i>SELECT</i>, <i>FROM</i>, and <i>WHERE</i> and has the following form:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span> &lt;attribute list&gt;
+<span style="font-weight: bold;">FROM</span>   &lt;<span style="font-weight: bold;">table</span> list&gt;
+<span style="font-weight: bold;">WHERE</span>  &lt;condition&gt;;
+</pre>
+</div>
+<p>
+where<br />
+</p>
+<ul class="org-ul">
+<li><code>&lt;attribute list&gt;</code> is a list of attribute names whose values are to be retrieved by the query.<br /></li>
+<li><code>&lt;table list&gt;</code> is a list of the relation names required to process the query.<br /></li>
+<li><code>&lt;condition&gt;</code> is a conditional expression that identifies the tuples to be retrieved by the query.<br /></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div id="outline-container-orgd76e17f" class="outline-2">
+<h2 id="orgd76e17f">ordering of query results</h2>
+<div class="outline-text-2" id="text-orgd76e17f">
+<p>
+the order by operator<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgaf79633" class="outline-2">
+<h2 id="orgaf79633">alter table</h2>
+</div>
+<div id="outline-container-org368c0a8" class="outline-2">
+<h2 id="org368c0a8">update</h2>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>database index</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">database index</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="org8c4e87c">
+<p>
+indexes are auxiliary access structures used to speed up the retrieval of records in response to certain search conditions. these index structures are additional files on disk that provide secondary access paths, which provide alternative ways to access the records without affecting the physical placement of records in the primary data file on disk. they enable efficient access to records based on the indexing fields that are used to construct the index. Basically, any field of the file can be used to create an index, and multiple indexes on different fields&#x2013;as well as indexes on multiple fields&#x2013;can be constructed on the same file. a variety of indexes are possible; each of them uses a particular data structure to speed up the search. to find a record or records in the data file based on a search condition on an indexing field, the index is searched, which leads to pointers to one or more disk blocks in the data file where the required records are located. the most prevalent types of indexes are based on ordered files (single-level indexes) and use <a href="/tree.html#1679584007">tree</a> data structures (multilevel indexes, b+ trees) to organize the index. indexes can also be constructed based on hashing or other search data structures.<br />
+the idea behind an ordered index is similar to that behind the index used in a textbook, which lists important terms at the end of the book in alphabetical order along with a list of page numbers where the term appears in the book. we can search the book index for a certain term in the textbook to find a list of addresses&#x2013;page numbers in this case&#x2013;and use these addresses to locate the specified pages first and then search for the term on each specified page. the alternative, if no other guidance is given, would be to sift slowly through the whole textbook word by word to find the term we are interested in; this corresponds to doing a linear search, which scans the whole file. of course, most books do have additional information, such as chapter and section titles, which help us find a term without having to search through the whole book. however, the index is the only exact indication of the pages where each term occurs in the book.<br />
+for a file with a given record structure consisting of several fields (or attributes), an index access structure is usually defined on a single field of a file, called an <i>indexing field</i> (or indexing attribute). the index typically stores each value of the index field along with a list of pointers to all disk blocks that contain records with that field value. the values in the index are ordered so that we can do a binary search on the index. if both the data file and the index file are ordered, and since the index file is typically much smaller than the data file, searching the index using a <a href="/binary_search.html#1692270964">binary search</a> is a better option. tree-structured multilevel indexes implement an extension of the binary search idea that reduces the search space by two-way partitioning at each search step to an <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 6.160644 5.413431' style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g9-61' d='m4.722291-1.036115l-.139477-.129514c-.069738 .089664-.139477 .179328-.209215 .259029c-.288917 .368618-.468244 .52802-.607721 .52802c-.089664 0-.159402-.069738-.159402-.159402c0-.079701 .039851-.268991 .139477-.627646l.56787-2.052304c.059776-.209215 .089664-.428394 .089664-.56787c0-.358655-.268991-.607721-.657534-.607721c-.637609 0-1.265255 .607721-2.291407 2.191781l.667497-2.171856l-.029888-.019925l-1.613948 .308842v.159402c.508095 .009963 .637609 .069738 .637609 .268991c0 .059776-.009963 .119552-.019925 .169365l-.956413 3.486924h.747198c.468244-1.574097 .557908-1.793275 .996264-2.470735c.597758-.926526 1.105853-1.414695 1.474471-1.414695c.14944 0 .239103 .109589 .239103 .288917c0 .119552-.059776 .448319-.139477 .757161l-.438356 1.643836c-.129514 .518057-.159402 .647572-.159402 .747198c0 .37858 .139477 .537983 .468244 .537983c.448319 0 .697385-.199253 1.39477-1.125778z'/>
+</defs>
+<g id='page84'>
+<use x='.049801' y='0' xlink:href='#g9-61'/>
+</g>
+</svg>-ary partitioning approach that divides the search space in the file <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 6.160644 5.413431' style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g9-61' d='m4.722291-1.036115l-.139477-.129514c-.069738 .089664-.139477 .179328-.209215 .259029c-.288917 .368618-.468244 .52802-.607721 .52802c-.089664 0-.159402-.069738-.159402-.159402c0-.079701 .039851-.268991 .139477-.627646l.56787-2.052304c.059776-.209215 .089664-.428394 .089664-.56787c0-.358655-.268991-.607721-.657534-.607721c-.637609 0-1.265255 .607721-2.291407 2.191781l.667497-2.171856l-.029888-.019925l-1.613948 .308842v.159402c.508095 .009963 .637609 .069738 .637609 .268991c0 .059776-.009963 .119552-.019925 .169365l-.956413 3.486924h.747198c.468244-1.574097 .557908-1.793275 .996264-2.470735c.597758-.926526 1.105853-1.414695 1.474471-1.414695c.14944 0 .239103 .109589 .239103 .288917c0 .119552-.059776 .448319-.139477 .757161l-.438356 1.643836c-.129514 .518057-.159402 .647572-.159402 .747198c0 .37858 .139477 .537983 .468244 .537983c.448319 0 .697385-.199253 1.39477-1.125778z'/>
+</defs>
+<g id='page84'>
+<use x='.049801' y='0' xlink:href='#g9-61'/>
+</g>
+</svg>-ways at each stage.<br />
+there are several types of ordered indexes. a <a href="/primary_index.html#1702366662">primary index</a> is specified on the ordering key field of an ordered file of records. an ordering key field is used to physically order the file records on disk, and every record has a unique value for that field. if the ordering field is not a key field&#x2013;that is, if numerous records in the file can have the same value for the ordering field&#x2013;another type of index, called a <a href="/clustering_index.html#1702381817">clustering index</a>, can be used. the data file is called a clustered file in this latter case. notice that a file can have at most one physical ordering field, so it can have at most one primary index or one clustering index, but not both. a third type of index, called a <a href="/secondary_index.html#1702383809">secondary index</a>, can be specified on any nonordering field of a file. a data file can have several secondary indexes in addition to its primary access method.<br />
+</p>
+
+</div>
+<div class="dummy" id="orgc376123">
+<p>
+many rdbms have a similar type of command for creating an index, although it is not part of the <a href="/sql.html#1702389696">SQL</a> standard. the general form of this command is:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> [<span style="font-weight: bold;">UNIQUE</span>] INDEX &lt;index <span style="font-weight: bold;">name</span>&gt;
+<span style="font-weight: bold;">ON</span> &lt;<span style="font-weight: bold;">table</span> <span style="font-weight: bold;">name</span>&gt; (&lt;<span style="font-weight: bold;">column</span> <span style="font-weight: bold;">name</span>&gt; [&lt;<span style="font-weight: bold;">order</span>&gt;] {, &lt;<span style="font-weight: bold;">column</span> <span style="font-weight: bold;">name</span>&gt; [&lt;<span style="font-weight: bold;">order</span>&gt;]})
+[CLUSTER];
+</pre>
+</div>
+<div class="math-block my_example" data-before="example" data-after="">
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> INDEX DnoIndex
+<span style="font-weight: bold;">ON</span> EMPLOYEE (Dno)
+CLUSTER;
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+</body>
+</html>

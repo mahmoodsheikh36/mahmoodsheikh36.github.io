@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>common lisp graphics</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">common lisp graphics</h1>
+</div>
+<div id="content" class="content">
+<p>
+we need the libraries <code>sdl2</code>, <code>livesupport</code> (to be able to continue if an error occurs in the main loop) and <code>opengl</code> for rendering.<br />
+using <a href="/common_lisp.html#1677249560">quicklisp</a><br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:sdl2</span>)
+(ql:quickload <span style="font-weight: bold;">:livesupport</span>)
+(ql:quickload <span style="font-weight: bold;">:cl-opengl</span>)
+</pre>
+</div>
+<p>
+here im implementing an abstraction layer over opengl/sdl2 to be able to render things like math functions easily<br />
+we need a generic way to represent objects that are renderable onto a window so we use the generic function <code>render</code> and implement it in the various classes<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">render</span> (obj)
+  (<span style="font-weight: bold;">:documentation</span> <span style="font-style: italic;">"a function to render the object in an opengl context"</span>))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">rgb</span>
+  <span style="font-style: italic;">"rgb color"</span>
+  (r 0) (g 0) (b 0))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">point-2d</span> ()
+  x y (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((p point-2d))
+  (gl:with-primitives <span style="font-weight: bold;">:points</span>
+    (gl:vertex (point-2d-x p) (point-2d-y p))))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">line-2d</span>
+  point1 point2 (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0)) (width 1))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((line line-2d))
+  (<span style="font-weight: bold;">let</span> ((point1 (line-2d-point1 line))
+        (point2 (line-2d-point2 line))
+        (width (line-2d-width line)))
+    (gl:line-width width)
+    (gl:with-primitives
+        <span style="font-weight: bold;">:lines</span>
+      (gl:vertex (point-2d-x point1) (point-2d-y point1))
+      (gl:vertex (point-2d-x point2) (point-2d-y point2)))))
+
+(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">window</span> ()
+  ((draw-axis <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:draw-axis</span> <span style="font-weight: bold;">:accessor</span> window-draw-axis)
+   (renderables <span style="font-weight: bold;">:initform</span> '() <span style="font-weight: bold;">:accessor</span> window-renderables)
+   (width <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:width</span> <span style="font-weight: bold;">:initform</span> 750 <span style="font-weight: bold;">:accessor</span> window-width)
+   (height <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:height</span> <span style="font-weight: bold;">:initform</span> 750 <span style="font-weight: bold;">:accessor</span> window-height)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">window-run</span> ((my-window window))
+  (sdl2:with-init (<span style="font-weight: bold;">:everything</span>)
+    (format t <span style="font-style: italic;">"Using SDL Library Version: ~D.~D.~D~%"</span>
+            sdl2-ffi:+sdl-major-version+
+            sdl2-ffi:+sdl-minor-version+
+            sdl2-ffi:+sdl-patchlevel+)
+    (sdl2:with-window
+        (sdl-window
+         <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"basic graphics"</span>
+         <span style="font-weight: bold;">:flags</span> '(<span style="font-weight: bold;">:shown</span> <span style="font-weight: bold;">:opengl</span>)
+         <span style="font-weight: bold;">:w</span> (window-width my-window)
+         <span style="font-weight: bold;">:h</span> (window-height my-window))
+      (sdl2:with-gl-context (gl-context sdl-window)
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">init opengl</span>
+        (sdl2:gl-make-current sdl-window gl-context)
+
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">enter main loop</span>
+        (sdl2:with-event-loop (<span style="font-weight: bold;">:method</span> <span style="font-weight: bold;">:poll</span>)
+          (<span style="font-weight: bold;">:keyup</span> (<span style="font-weight: bold;">:keysym</span> keysym)
+                  (<span style="font-weight: bold;">when</span> (sdl2:scancode= (sdl2:scancode-value keysym) <span style="font-weight: bold;">:scancode-q</span>)
+                    (sdl2:push-event <span style="font-weight: bold;">:quit</span>)))
+          (<span style="font-weight: bold;">:idle</span>
+           ()
+           (livesupport:update-repl-link) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">accept requests from slime/sly, for live programming</span>
+           (livesupport:continuable (window-render my-window))
+           (sdl2:gl-swap-window sdl-window))
+          (<span style="font-weight: bold;">:quit</span> () t))))))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">window-render</span> ((win window))
+  <span style="font-style: italic;">"render the renderables, using opengl"</span>
+  (gl:clear-color 255 255 255 1.0)
+  (gl:clear <span style="font-weight: bold;">:color-buffer</span>)
+  (<span style="font-weight: bold;">loop</span> for renderable in (window-renderables win)
+        do (gl:matrix-mode <span style="font-weight: bold;">:projection</span>)
+           (gl:load-identity) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">reset matrix to default state</span>
+           <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(gl:ortho -1 1 -1 1 -1 1) ;; normalize window space, not really needed, done by default</span>
+           (gl:viewport 0 0 (window-width win) (window-height win))
+           (gl:matrix-mode <span style="font-weight: bold;">:modelview</span>)
+           (<span style="font-weight: bold;">with-slots</span> (color) renderable
+             (gl:color (/ (rgb-r color) 255) (/ (rgb-b color) 255) (/ (rgb-g color) 255)))
+           (render renderable))
+  (sdl2:delay 20))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">window-add-renderable</span> ((win window) renderable)
+  <span style="font-style: italic;">"add a renderable to renderables, a renderable is an object that has the generic function render"</span>
+  (push renderable (window-renderables win)))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">axis</span>
+  <span style="font-style: italic;">"a renderable, can hold other renderables which would be drawn locally (transformed), pos is the (point-2d) position in the window"</span>
+  (renderables '()) pos width height (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0))
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">bounds of the axes</span>
+  (min-y -1) (max-y 1) (min-x -1) (max-x 1))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">axis-add-renderable</span> ((a axis) renderable)
+  <span style="font-style: italic;">"add a renderable to renderables, a renderable is an object that has the generic function render"</span>
+  (push renderable (axis-renderables a)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((a axis))
+  (<span style="font-weight: bold;">with-slots</span> (min-y min-x max-y max-x width height) a
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">axes view matrix setup</span>
+    (gl:matrix-mode <span style="font-weight: bold;">:projection</span>)
+    (gl:viewport (point-2d-x (axis-pos a))
+                 (point-2d-y (axis-pos a))
+                 width
+                 height)
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">apply matirx to make the screenspace correct for original width/height</span>
+    (gl:ortho 0 width 0 height -1 1)
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">render ticks of both axes</span>
+    (<span style="font-weight: bold;">let</span> ((origin (make-point-2d
+                   <span style="font-weight: bold;">:x</span> (map-num 0 0 width (map-num 0 min-x max-x 0 width) width)
+                   <span style="font-weight: bold;">:y</span> (map-num 0 0 height (map-num 0 min-y max-y 0 height) height))))
+      (<span style="font-weight: bold;">loop</span> for x from (point-2d-x origin) below width by 75
+            do (render
+                (make-line-2d
+                 <span style="font-weight: bold;">:point1</span> (make-point-2d
+                          <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> (- (point-2d-y origin) 10))
+                 <span style="font-weight: bold;">:point2</span> (make-point-2d
+                          <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> (- (point-2d-y origin) -10))
+                 <span style="font-weight: bold;">:width</span> 3)))
+      (<span style="font-weight: bold;">loop</span> for x from (point-2d-x origin) above 0 by 75
+            do (render
+                (make-line-2d
+                 <span style="font-weight: bold;">:point1</span> (make-point-2d
+                          <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> (- (point-2d-y origin) 10))
+                 <span style="font-weight: bold;">:point2</span> (make-point-2d
+                          <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> (- (point-2d-y origin) -10))
+                 <span style="font-weight: bold;">:width</span> 3)))
+      (<span style="font-weight: bold;">loop</span> for y from (point-2d-y origin) above 0 by 75
+              do (render
+                  (make-line-2d
+                   <span style="font-weight: bold;">:point1</span> (make-point-2d
+                            <span style="font-weight: bold;">:x</span> (- (point-2d-x origin) 10) <span style="font-weight: bold;">:y</span> y)
+                   <span style="font-weight: bold;">:point2</span> (make-point-2d
+                            <span style="font-weight: bold;">:x</span> (- (point-2d-x origin) -10) <span style="font-weight: bold;">:y</span> y)
+                   <span style="font-weight: bold;">:width</span> 3)))
+      (<span style="font-weight: bold;">loop</span> for y from (point-2d-y origin) below height by 75
+              do (render
+                  (make-line-2d
+                   <span style="font-weight: bold;">:point1</span> (make-point-2d
+                            <span style="font-weight: bold;">:x</span> (- (point-2d-x origin) 10) <span style="font-weight: bold;">:y</span> y)
+                   <span style="font-weight: bold;">:point2</span> (make-point-2d
+                            <span style="font-weight: bold;">:x</span> (- (point-2d-x origin) -10) <span style="font-weight: bold;">:y</span> y)
+                   <span style="font-weight: bold;">:width</span> 3))))
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">reset matrix then apply another matrix so that the screenspace is correct for min/max-x/y</span>
+    (gl:load-identity)
+    (gl:ortho min-x max-x min-y max-y -1 1)
+    (gl:matrix-mode <span style="font-weight: bold;">:modelview</span>)
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">render axes</span>
+    (render
+     (make-line-2d
+      <span style="font-weight: bold;">:point1</span> (make-point-2d
+               <span style="font-weight: bold;">:x</span> min-x <span style="font-weight: bold;">:y</span> 0)
+      <span style="font-weight: bold;">:point2</span> (make-point-2d
+               <span style="font-weight: bold;">:x</span> max-x <span style="font-weight: bold;">:y</span> 0)
+      <span style="font-weight: bold;">:width</span> 3))
+    (render
+     (make-line-2d
+      <span style="font-weight: bold;">:point1</span> (make-point-2d
+               <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> max-y)
+      <span style="font-weight: bold;">:point2</span> (make-point-2d
+               <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> min-y)
+      <span style="font-weight: bold;">:width</span> 3))
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">render children (renderables)</span>
+    (<span style="font-weight: bold;">loop</span> for renderable in (axis-renderables a)
+          do (render renderable))))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">plot</span>
+  <span style="font-style: italic;">"lam is the lambda function to call with x (should return y)"</span>
+  lam
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">bounds of the plot (drawing bound of the plots)</span>
+  min-y max-y min-x max-x
+  (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-num</span> (num src-min src-max dest-min dest-max)
+  <span style="font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
+  (/ (- (+ (* (- num src-min) (- dest-max dest-min)) (* dest-min src-max)) (* dest-min src-min)) (- src-max src-min)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((p plot))
+  (<span style="font-weight: bold;">let</span> ((prev-point nil)
+        (lam (plot-lam p)))
+    (<span style="font-weight: bold;">loop</span> for x from -100 below 100
+          do (<span style="font-weight: bold;">let*</span> ((x (map-num x -100 100 (plot-min-x p) (plot-max-x p)))
+                    (new-y (funcall lam x))
+                    (new-point (make-point-2d <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> new-y)))
+               (<span style="font-weight: bold;">if</span> prev-point
+                   (render (make-line-2d
+                            <span style="font-weight: bold;">:point1</span> prev-point
+                            <span style="font-weight: bold;">:point2</span> new-point)))
+               (setf prev-point new-point)))))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">discrete-plot</span>
+  <span style="font-style: italic;">"a discrete plot, one that connects a finite amount of points"</span>
+  points (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((p discrete-plot))
+  (<span style="font-weight: bold;">let*</span> ((points (discrete-plot-points p))
+         (prev-point (elt points 0)))
+    (<span style="font-weight: bold;">loop</span> for i from 1 below (length points)
+          do (<span style="font-weight: bold;">let</span> ((new-point (elt points i)))
+               (render (make-line-2d
+                        <span style="font-weight: bold;">:point1</span> prev-point
+                        <span style="font-weight: bold;">:point2</span> new-point))
+               (setf prev-point new-point)))))
+</pre>
+</div>
+<p>
+example usage:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sdl2-test</span> ()
+  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*win*</span> (make-instance 'window <span style="font-weight: bold;">:draw-axis</span> t <span style="font-weight: bold;">:width</span> 750 <span style="font-weight: bold;">:height</span> 750))
+  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*axis*</span> (make-axis
+                        <span style="font-weight: bold;">:min-x</span> -1
+                        <span style="font-weight: bold;">:max-x</span> 3
+                        <span style="font-weight: bold;">:max-y</span> 3
+                        <span style="font-weight: bold;">:min-y</span> -1
+                        <span style="font-weight: bold;">:pos</span> (make-point-2d <span style="font-weight: bold;">:x</span> 100 <span style="font-weight: bold;">:y</span> 100)
+                        <span style="font-weight: bold;">:width</span> 750
+                        <span style="font-weight: bold;">:height</span> 750))
+  (window-add-renderable *win* *axis*)
+  (axis-add-renderable *axis* (make-plot <span style="font-weight: bold;">:lam</span> (<span style="font-weight: bold;">lambda</span> (x) (* x x)) <span style="font-weight: bold;">:min-x</span> -2 <span style="font-weight: bold;">:max-x</span> 1))
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(axis-add-renderable *axis* (make-plot :lam (lambda (x) (sin x)) :min-x -2 :max-x 1))</span>
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(axis-add-renderable *axis* (make-plot :lam (lambda (x) (tan x)) :min-x -2 :max-x 1))</span>
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(axis-add-renderable *axis* (make-plot :lam (lambda (x) (cos x)) :min-x -2 :max-x 1))</span>
+  (axis-add-renderable
+   *axis*
+   (make-discrete-plot <span style="font-weight: bold;">:points</span>
+                       (list (make-point-2d <span style="font-weight: bold;">:x</span> -1 <span style="font-weight: bold;">:y</span> 1)
+                             (make-point-2d <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> 0)
+                             (make-point-2d <span style="font-weight: bold;">:x</span> 2 <span style="font-weight: bold;">:y</span> 1))))
+  (sb-thread:make-thread (<span style="font-weight: bold;">lambda</span> () (window-run *win*))))
+</pre>
+</div>
+<p>
+we can create objects and add them dynamically to the window:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(window-add-renderable
+ *win*
+ (make-discrete-plot <span style="font-weight: bold;">:points</span>
+                     (list (make-point-2d <span style="font-weight: bold;">:x</span> (/ (random 10) 10) <span style="font-weight: bold;">:y</span> (/ (random 10) 10))
+                           (make-point-2d <span style="font-weight: bold;">:x</span> (/ (random 10) 10) <span style="font-weight: bold;">:y</span> (/ (random 10) 10)))))
+</pre>
+</div>
+<p>
+rendering text wasnt as simple as i expected, i ended up using <b>freetype</b> because thats what most webpages seemed to promote. the library <code>cl-freetype2</code> provides freetype bindings for sbcl, example usage is here <a href="https://github.com/rpav/cl-freetype2/blob/master/doc/example.md">https://github.com/rpav/cl-freetype2/blob/master/doc/example.md</a><br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-freetype2</span>)
+</pre>
+</div>
+<p>
+toy around with it to make sure it works:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">make sure your encoding is set to UTF-8</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">load font, change according to your system, im on linux</span>
+(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*face*</span> (freetype2:new-face <span style="font-style: italic;">"/usr/share/fonts/TTF/CascadiaCode.ttf"</span>))
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Set the size to 24 points and 36 DPI</span>
+(freetype2:set-char-size *face* (* 24 64) 0 36 36)
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">trivial output:</span>
+(freetype2:print-with-face *face* <span style="font-style: italic;">"Hello"</span>)
+(ft2:get-char-index *face* #\a)
+(ft2:load-char *face* #\A)
+(ft2:render-glyph *face*)
+(ft2:do-string-render (*face* <span style="font-style: italic;">"o"</span> bitmap x y)
+  (print (ft2:bitmap-to-array bitmap)))
+</pre>
+</div>
+<p>
+it was hard to figure things out as this was my first time rendering text at such a low level and couldnt find proper documentation for <code>cl-freetype2</code>, had to browse through the source code<br />
+i tried to adapt the code from <a href="http://3bb.cc/tutorials/cl-opengl/textures.html">http://3bb.cc/tutorials/cl-opengl/textures.html</a>:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">renderable-text</span> ()
+  text pos (color (make-rgb <span style="font-weight: bold;">:r</span> 255 <span style="font-weight: bold;">:b</span> 255 <span style="font-weight: bold;">:g</span> 255)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((txt renderable-text))
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Render text using FreeType2</span>
+  (<span style="font-weight: bold;">let</span> ((face (freetype2:new-face <span style="font-style: italic;">"/usr/share/fonts/TTF/CascadiaCode.ttf"</span>))
+        (text (renderable-text-text txt))
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(x (point-2d-x (renderable-text-pos txt)))</span>
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(y (point-2d-y (renderable-text-pos txt)))</span>
+        (texture (car (gl:gen-textures 1))))
+    (freetype2:set-char-size face (* 48 64) 0 36 36)
+    (gl:enable <span style="font-weight: bold;">:texture-2d</span>)
+    (gl:bind-texture <span style="font-weight: bold;">:texture-2d</span> texture)
+    (gl:tex-parameter <span style="font-weight: bold;">:texture-2d</span> <span style="font-weight: bold;">:texture-min-filter</span> <span style="font-weight: bold;">:linear</span>)
+    (gl:color 1 1 1)
+    (ft2:do-string-render (face <span style="font-style: italic;">"l"</span> bitmap x y)
+      (<span style="font-weight: bold;">let</span> ((gray-colored-pixels (list-&gt;vector (apply #'concatenate (append '(list) (array-&gt;list (ft2:bitmap-to-array bitmap)))))))
+        (gl:tex-image-2d <span style="font-weight: bold;">:texture-2d</span> 0 <span style="font-weight: bold;">:luminance</span> 64 64 0 <span style="font-weight: bold;">:luminance</span> <span style="font-weight: bold;">:unsigned-byte</span> gray-colored-pixels)
+        )
+      (gl:with-primitives <span style="font-weight: bold;">:quads</span>
+        (gl:tex-coord 0 0)
+        (gl:vertex -1 1)
+        (gl:tex-coord 1 0)
+        (gl:vertex 0 1)
+        (gl:tex-coord 1 1)
+        (gl:vertex 0 0)
+        (gl:tex-coord 0 1)
+        (gl:vertex -1 0)))
+    (gl:delete-textures (list texture))))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">freetype-test</span> ()
+  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*win*</span> (make-instance 'window <span style="font-weight: bold;">:draw-axis</span> t <span style="font-weight: bold;">:width</span> 750 <span style="font-weight: bold;">:height</span> 750))
+  (window-add-renderable *win* (make-renderable-text
+                                <span style="font-weight: bold;">:text</span> <span style="font-style: italic;">"hello"</span>
+                                <span style="font-weight: bold;">:pos</span> (make-point-2d <span style="font-weight: bold;">:x</span> 10 <span style="font-weight: bold;">:y</span> 10)))
+  (window-run *win*))
+</pre>
+</div>
+<p>
+couldn't get this to work so i gave up and decided to use raylib since it provides more features than sdl2 (on its own, for example sdl2 doesnt have a way to draw a line with a specific thickness) and i wouldnt even have to deal with opengl<br />
+</p>
+<div id="outline-container-orgc9d5063" class="outline-2">
+<h2 id="orgc9d5063">cl-raylib</h2>
+<div class="outline-text-2" id="text-orgc9d5063">
+<p>
+on <code>arch linux</code> had to install it using <code>pacman</code> (<code>raylib</code>)<br />
+<code>cl-raylib</code> is currently not on quicklist so you gotta fetch it manually:<br />
+</p>
+<div class="org-src-container" data-language="bash">
+<pre class="src src-bash">git clone https://github.com/longlene/cl-raylib.git ~/.quicklisp/local-projects/cl-raylib
+</pre>
+</div>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-raylib</span>)
+(ql:quickload <span style="font-weight: bold;">:3d-vectors</span>) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">we need this library to work with cl-raylib..</span>
+</pre>
+</div>
+<p>
+its pretty simple to get started with:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">raylib-first-test</span> ()
+  (<span style="font-weight: bold;">let</span> ((screen-width 800)
+        (screen-height 450))
+    (raylib:with-window (screen-width screen-height <span style="font-style: italic;">"raylib [core] example - basic window"</span>)
+      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(raylib:set-target-fps 60)</span>
+      (<span style="font-weight: bold;">loop</span>
+        until (raylib:window-should-close) <span style="font-weight: bold; font-style: italic;">; dectect window close button or ESC key</span>
+        do (raylib:with-drawing
+             (raylib:clear-background raylib:+raywhite+)
+             (raylib:draw-fps 20 20)
+             (raylib:draw-text <span style="font-style: italic;">"Congrats! You created your first window!"</span> 190 200 20 raylib:+lightgray+))))))
+</pre>
+</div>
+<p>
+we need some way to say whether an object is renderable or not, to discriminate renderable objects and prevent an attempt to render other objects, we use cl's <code>defgeneric</code> and construct some basic renderable types:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">rgb</span>
+  <span style="font-style: italic;">"rgb color"</span>
+  (r 0) (g 0) (b 0))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">point-2d</span> ()
+  x y (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0)))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">line-2d</span>
+  p1 p2 (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0)) (width 1.0))
+</pre>
+</div>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">render</span> (obj)
+  (<span style="font-weight: bold;">:documentation</span> <span style="font-style: italic;">"a function to render an object"</span>))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((p point-2d))
+  (raylib:draw-pixel (point-2d-x p) (point-2d-y p)
+                     (raylib:make-rgba
+                      (rgb-r (point-2d-color p))
+                      (rgb-g (point-2d-color p))
+                      (rgb-b (point-2d-color p)))))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((line line-2d))
+  (<span style="font-weight: bold;">with-slots</span> (p1 p2 color width) line
+    (raylib:draw-line-ex
+     (3d-vectors:vec (point-2d-x p1) (point-2d-y p1))
+     (3d-vectors:vec (point-2d-x p2) (point-2d-y p2))
+     (float width)
+     (raylib:make-rgba
+      (rgb-r color)
+      (rgb-g color)
+      (rgb-b color)))))
+</pre>
+</div>
+<p>
+we present the basic code for opening a window and drawing to it:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defclass</span> <span style="font-weight: bold; text-decoration: underline;">window</span> ()
+  ((renderables <span style="font-weight: bold;">:initform</span> '() <span style="font-weight: bold;">:accessor</span> window-renderables)
+   (width <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:width</span> <span style="font-weight: bold;">:initform</span> 750 <span style="font-weight: bold;">:accessor</span> window-width)
+   (height <span style="font-weight: bold;">:initarg</span> <span style="font-weight: bold;">:height</span> <span style="font-weight: bold;">:initform</span> 750 <span style="font-weight: bold;">:accessor</span> window-height)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">window-run</span> ((win window))
+  (<span style="font-weight: bold;">let</span> ((my-should-close nil))
+    (<span style="font-weight: bold;">with-slots</span> (width height) win
+      (raylib:with-window (width height <span style="font-style: italic;">"test window"</span>)
+        (raylib:set-target-fps 60)
+        (<span style="font-weight: bold;">loop</span>
+          until my-should-close <span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">(or (raylib:window-should-close) my-should-close)</span>
+          do (raylib:with-drawing
+               (raylib:clear-background raylib:+raywhite+)
+               (livesupport:update-repl-link) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">accept requests from slime/sly, for live programming</span>
+               (livesupport:continuable (window-render win)))
+               <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(raylib:draw-fps 20 20)</span>
+             (<span style="font-weight: bold;">when</span> (raylib:is-key-pressed <span style="font-weight: bold;">:key-q</span>)
+               (setf my-should-close t))
+          )))))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">window-render</span> ((win window))
+  <span style="font-style: italic;">"render the renderables"</span>
+  (<span style="font-weight: bold;">loop</span> for renderable in (window-renderables win)
+        do (render renderable)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">window-add-renderable</span> ((win window) renderable)
+  <span style="font-style: italic;">"add a renderable to renderables, a renderable is an object that has the generic function render"</span>
+  (push renderable (window-renderables win)))
+</pre>
+</div>
+<p>
+example usage:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">raylib-second-test</span> ()
+  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*win*</span> (make-instance 'window <span style="font-weight: bold;">:width</span> 750 <span style="font-weight: bold;">:height</span> 750))
+  (window-add-renderable *win*
+                         (make-line-2d <span style="font-weight: bold;">:p1</span> (make-point-2d <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> 0)
+                                       <span style="font-weight: bold;">:p2</span> (make-point-2d <span style="font-weight: bold;">:x</span> 300 <span style="font-weight: bold;">:y</span> 300)))
+  (window-run *win*))
+</pre>
+</div>
+<p>
+we need to implement math plotting functionality, but..<br />
+unfortunately raylib doesnt allow matrix manipulation (atleast for 2d cameras)<br />
+i had to figure out an easy way to allow objects to render themselves to a normalized screen space, for example we might want to draw a mathematical function from x=0 to x=10, and y might vary from 0-100 if the function was <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224769 32.502247 9.792' style="height: 0.9632em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g1-48' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
+<path id='g1-49' d='m3.92528 0v-.14944c-.787049-.009963-.946451-.109589-.946451-.587796v-5.977584l-.079701-.019925l-1.793275 .9066v.139477c.119552-.049813 .229141-.089664 .268991-.109589c.179328-.069738 .348692-.109589 .448319-.109589c.209215 0 .298879 .14944 .298879 .468244v4.513076c0 .328767-.079701 .557908-.239103 .647572c-.14944 .089664-.288917 .119552-.707347 .129514v.14944h2.749689z'/>
+<path id='g2-61' d='m5.499377-3.287671v-.557908h-5.100872v.557908h5.100872zm0 2.022416v-.557908h-5.100872v.557908h5.100872z'/>
+<path id='g0-71' d='m4.144458-1.026152l-.139477-.079701c-.079701 .099626-.129514 .14944-.219178 .268991c-.229141 .298879-.33873 .398506-.468244 .398506c-.139477 0-.229141-.129514-.298879-.408468c-.019925-.089664-.029888-.139477-.039851-.159402c-.239103-.936488-.358655-1.474471-.358655-1.62391c.438356-.767123 .797011-1.205479 .976339-1.205479c.059776 0 .14944 .029888 .239103 .079701c.119552 .069738 .18929 .089664 .278954 .089664c.199253 0 .33873-.14944 .33873-.358655c0-.219178-.169365-.368618-.408468-.368618c-.438356 0-.806974 .358655-1.504359 1.424658l-.109589-.547945c-.139477-.67746-.249066-.876712-.518057-.876712c-.229141 0-.547945 .079701-1.165629 .288917l-.109589 .039851l.039851 .14944l.169365-.039851c.18929-.049813 .308842-.069738 .388543-.069738c.249066 0 .308842 .089664 .448319 .687422l.288917 1.225405l-.816936 1.165629c-.209215 .298879-.398506 .478207-.508095 .478207c-.059776 0-.159402-.029888-.259029-.089664c-.129514-.069738-.229141-.099626-.318804-.099626c-.199253 0-.33873 .14944-.33873 .348692c0 .259029 .18929 .418431 .498132 .418431s.428394-.089664 .926526-.687422l.896638-1.175592l.298879 1.195517c.129514 .518057 .259029 .667497 .577833 .667497c.37858 0 .637609-.239103 1.215442-1.135741z'/>
+<path id='g0-72' d='m4.244085-3.845579c0-.298879-.249066-.547945-.547945-.547945c-.229141 0-.388543 .14944-.388543 .368618c0 .159402 .079701 .259029 .278954 .388543c.18929 .109589 .259029 .199253 .259029 .33873c0 .398506-.358655 1.165629-1.215442 2.580324l-.199253-1.155666c-.14944-.886675-.707347-2.520548-.856787-2.520548h-.039851l-.089664 .009963l-.976339 .169365l-.318804 .059776v.169365c.119552-.029888 .199253-.039851 .308842-.039851c.398506 0 .577833 .14944 .767123 .637609c.268991 .67746 .816936 2.909091 .816936 3.307597c0 .109589-.039851 .229141-.099626 .348692c-.079701 .129514-.52802 .71731-.707347 .9066c-.229141 .249066-.348692 .328767-.478207 .328767c-.069738 0-.129514-.029888-.239103-.109589c-.14944-.119552-.249066-.169365-.368618-.169365c-.219178 0-.388543 .169365-.388543 .388543c0 .259029 .209215 .438356 .508095 .438356c.56787 0 1.643836-1.145704 2.669988-2.859278c.836862-1.374844 1.305106-2.470735 1.305106-3.038605z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.3985' y='0' xlink:href='#g0-72'/>
+<use x='7.967817' y='0' xlink:href='#g2-61'/>
+<use x='16.633032' y='0' xlink:href='#g1-49'/>
+<use x='21.614352' y='0' xlink:href='#g1-48'/>
+<use x='26.595672' y='0' xlink:href='#g0-71'/>
+</g>
+</g>
+</svg>, but in raylib's window 0,0 is at the top left and y increases as we go down the window, we need some sort of <b>normalization</b>, it is fairly easy to implement a normalization function/matrix, but consider an axes object with many math functions, how would the functions know where the axis' 0,0 point is? they'd have to have a reference of the axis object, but it doesnt make much sense for them to have a pointer to their parent, in opengl this was possible because the parent was able to manipulate its viewport and its rendering matrix and then let its children draw themselves to a normalized portion of the window, as far as i can tell, raylib doesnt provide such functionality by default, so i had to come up with something, and thought about using a <a href="/common_lisp.html#1677249560">macro</a> (eventually settled on a different approach, explained below), perhaps call it <code>with-normalization</code>, that takes a normalization function, code to execute, modifies every call to a point's <code>x</code> and <code>y</code> and normalizes it before it is passed to raylib rendering functions, lets see how well that goes<br />
+so basically we want the accessors of the <code>point-2d</code> class to behave differently inside our macro, which begs the question, is that even possible? can we have it so that a specific function behaves differently inside a macro? my first guess was i could modify the <code>body</code> passed to a macro to wrap the calls to <code>point-2d-x</code> and <code>point-2d-y</code> with another function, this would introduce some problems, but then i found out anaphoric macro, so that's what im gonna use<br />
+consider the following macro:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defmacro</span> <span style="font-weight: bold;">with-normalization</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;body</span> body)
+  `(<span style="font-weight: bold;">flet</span> ((point-2d-x (p) (/ (point-2d-x p) 10)))
+     ,@body))
+</pre>
+</div>
+<p>
+in the simple case it works fine but not in others:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">CL-USER&gt; (setf a (make-point-2d <span style="font-weight: bold;">:x</span> 10 <span style="font-weight: bold;">:y</span> 10))
+#S(POINT-2D <span style="font-weight: bold;">:NIL</span> NIL <span style="font-weight: bold;">:X</span> 10 <span style="font-weight: bold;">:Y</span> 10 <span style="font-weight: bold;">:COLOR</span> #S(RGB <span style="font-weight: bold;">:R</span> 0 <span style="font-weight: bold;">:G</span> 0 <span style="font-weight: bold;">:B</span> 0))
+CL-USER&gt; (<span style="font-weight: bold;">with-normalization</span> a)
+#S(POINT-2D <span style="font-weight: bold;">:NIL</span> NIL <span style="font-weight: bold;">:X</span> 10 <span style="font-weight: bold;">:Y</span> 10 <span style="font-weight: bold;">:COLOR</span> #S(RGB <span style="font-weight: bold;">:R</span> 0 <span style="font-weight: bold;">:G</span> 0 <span style="font-weight: bold;">:B</span> 0))
+CL-USER&gt; (<span style="font-weight: bold;">with-normalization</span> (point-2d-x a))
+1 (1 bit, #x1, #o1, #b1)
+CL-USER&gt; (<span style="font-weight: bold;">with-normalization</span> (<span style="font-weight: bold;">with-normalization</span> (point-2d-x a)))
+1/10 (0.1, 10%)
+</pre>
+</div>
+<p>
+this works in a <code>lexical</code> scope, calling an outer function that makes a call to <code>point-2d-x</code> wouldnt work as we want because its not shadowed <code>dynamically</code><br />
+this can be done, but its already ugly as it is and uglier approaches isnt something im looking for<br />
+</p>
+
+<p>
+so i just decided to pass rendering parameters around, i.e. each function receives a matrix/function that normalizes things and uses that on every object before drawing it, so we modify the generic <code>render</code> function to take a transformation matrix and so we have to rewrite the rendering functions for all renderable types we have, which for now are just a point and a line<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defgeneric</span> <span style="font-weight: bold;">render</span> (obj transformation-matrix)
+  (<span style="font-weight: bold;">:documentation</span> <span style="font-style: italic;">"a function to render an object using the given transformation matrix"</span>))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">point-2d-transform</span> ((p point-2d) transformation-matrix)
+  (<span style="font-weight: bold;">let*</span> ((x (point-2d-x p))
+         (y (point-2d-y p))
+         (point-as-matrix (list-&gt;array (map 'list #'list (list x y 1))))
+         (transformed-point-as-matrix (matrix-mul transformation-matrix point-as-matrix))
+         (transformed-point-as-list (array-&gt;list transformed-point-as-matrix)))
+    (make-point-2d <span style="font-weight: bold;">:x</span> (car (car transformed-point-as-list))
+                   <span style="font-weight: bold;">:y</span> (car (car (cdr transformed-point-as-list)))
+                   <span style="font-weight: bold;">:color</span> (point-2d-color p))))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((p point-2d) transformation-matrix)
+  (<span style="font-weight: bold;">let</span> ((p (point-2d-transform p transformation-matrix)))
+    (raylib:draw-pixel (round (point-2d-x p)) (round (point-2d-y p))
+                       (raylib:make-rgba
+                        (rgb-r (point-2d-color p))
+                        (rgb-g (point-2d-color p))
+                        (rgb-b (point-2d-color p))))))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((line line-2d) transformation-matrix)
+  (<span style="font-weight: bold;">with-slots</span> (p1 p2 color width) line
+    (<span style="font-weight: bold;">let</span> ((p1 (point-2d-transform p1 transformation-matrix))
+          (p2 (point-2d-transform p2 transformation-matrix)))
+      (raylib:draw-line-ex
+       (3d-vectors:vec (point-2d-x p1) (point-2d-y p1))
+       (3d-vectors:vec (point-2d-x p2) (point-2d-y p2))
+       (float width)
+       (raylib:make-rgba
+        (rgb-r color)
+        (rgb-g color)
+        (rgb-b color))))))
+</pre>
+</div>
+<p>
+i wanted a simple way to draw continuous and discrete math functions, so i thought about implementing an <code>axis</code> object first, which would hold these plots and pass the proper transformation matrix to them, plus it would take care of actually rendering the axes on the screen<br />
+here im <a href="/2d_transformations.html#1685671420">linearly mapping grids</a> using the transformation matrix for it<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*default-transformation-matrix*</span> #2A((1 0 0) (0 1 0) (0 0 1)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">window-render</span> ((win window))
+  <span style="font-style: italic;">"render the renderables"</span>
+  (<span style="font-weight: bold;">loop</span> for renderable in (window-renderables win)
+        do (render renderable *default-transformation-matrix*)))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">axis</span>
+  <span style="font-style: italic;">"a renderable, can hold other renderables which would be drawn locally (transformed), pos is the (point-2d) position in the window"</span>
+  (renderables '()) pos width height (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0))
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">bounds of the axes</span>
+  (min-y -1) (max-y 1) (min-x -1) (max-x 1))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">axis-add-renderable</span> ((a axis) renderable)
+  <span style="font-style: italic;">"add a renderable to renderables, a renderable is an object that has the generic function render"</span>
+  (push renderable (axis-renderables a)))
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">for some reason text is oddly positioned with an offset, might be related: https://github.com/raysan5/raylib/issues/908</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">draw-text</span> (text size x y)
+  (raylib:draw-text
+   text
+   (round (- x (/ (raylib:measure-text text size) 2)))
+   (round (+ y (/ (3d-vectors:vy (raylib:measure-text-ex (raylib:get-font-default) text (float size) 1.0)) 2)))
+   size
+   raylib:+black+))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((a axis) transformation-matrix)
+  (<span style="font-weight: bold;">with-slots</span> (min-y min-x max-y max-x width height pos) a
+    (<span style="font-weight: bold;">let*</span> ((pos-x (point-2d-x pos))
+           (pos-y (point-2d-y pos))
+           (children-transformation-matrix
+             (map-grid
+              transformation-matrix
+              (list min-x max-x)
+              (list pos-x (+ pos-x width))
+              (list min-y max-y)
+              (list (+ pos-y height) pos-y)))
+           (origin (point-2d-transform (make-point-2d <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> 0) children-transformation-matrix))
+           (tick-distance 75))
+      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">render children (renderables)</span>
+      (<span style="font-weight: bold;">loop</span> for renderable in (axis-renderables a)
+            do (render
+                renderable
+                children-transformation-matrix))
+      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">draw the ticks on the axes</span>
+      (<span style="font-weight: bold;">loop</span> for x from (point-2d-x origin) below (+ pos-x width) by tick-distance
+            do (render
+                (make-line-2d
+                 <span style="font-weight: bold;">:p1</span> (make-point-2d
+                      <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> (- (point-2d-y origin) 10))
+                 <span style="font-weight: bold;">:p2</span> (make-point-2d
+                      <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> (- (point-2d-y origin) -10))
+                 <span style="font-weight: bold;">:width</span> 3)
+                transformation-matrix)
+               (<span style="font-weight: bold;">when</span> (&gt; x (point-2d-x origin))
+                 (draw-text
+                  (format nil <span style="font-style: italic;">"~,3f"</span> (map-num x (point-2d-x origin) (+ pos-x width) 0 max-x))
+                  20
+                  x
+                  (- (point-2d-y origin) -10))))
+      (<span style="font-weight: bold;">loop</span> for x from (point-2d-x origin) above pos-x by tick-distance
+            do (render
+                (make-line-2d
+                 <span style="font-weight: bold;">:p1</span> (make-point-2d
+                      <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> (- (point-2d-y origin) 10))
+                 <span style="font-weight: bold;">:p2</span> (make-point-2d
+                      <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> (- (point-2d-y origin) -10))
+                 <span style="font-weight: bold;">:width</span> 3)
+                transformation-matrix)
+               (<span style="font-weight: bold;">when</span> (&lt; x (point-2d-x origin))
+                 (draw-text
+                  (format nil <span style="font-style: italic;">"~,3f"</span> (map-num x (point-2d-x origin) pos-x 0 min-x))
+                  20
+                  x
+                  (- (point-2d-y origin) -10))))
+      (<span style="font-weight: bold;">loop</span> for y from (point-2d-y origin) above pos-y by tick-distance
+            do (render
+                (make-line-2d
+                 <span style="font-weight: bold;">:p1</span> (make-point-2d
+                      <span style="font-weight: bold;">:x</span> (- (point-2d-x origin) 10) <span style="font-weight: bold;">:y</span> y)
+                 <span style="font-weight: bold;">:p2</span> (make-point-2d
+                      <span style="font-weight: bold;">:x</span> (- (point-2d-x origin) -10) <span style="font-weight: bold;">:y</span> y)
+                 <span style="font-weight: bold;">:width</span> 3)
+                transformation-matrix)
+               (<span style="font-weight: bold;">when</span> (&lt; y (point-2d-y origin))
+                 (draw-text
+                  (format nil <span style="font-style: italic;">"~,3f"</span> (map-num y (point-2d-y origin) pos-y 0 max-y))
+                  20
+                  (point-2d-x origin)
+                  y)))
+      (<span style="font-weight: bold;">loop</span> for y from (point-2d-y origin) below (+ pos-y height) by tick-distance
+            do (render
+                (make-line-2d
+                 <span style="font-weight: bold;">:p1</span> (make-point-2d
+                      <span style="font-weight: bold;">:x</span> (- (point-2d-x origin) 10) <span style="font-weight: bold;">:y</span> y)
+                 <span style="font-weight: bold;">:p2</span> (make-point-2d
+                      <span style="font-weight: bold;">:x</span> (- (point-2d-x origin) -10) <span style="font-weight: bold;">:y</span> y)
+                 <span style="font-weight: bold;">:width</span> 3)
+                transformation-matrix)
+               (<span style="font-weight: bold;">when</span> (&gt; y (point-2d-y origin))
+                 (draw-text
+                  (format nil <span style="font-style: italic;">"~,3f"</span> (map-num y (point-2d-y origin) (+ pos-y height) 0 min-y))
+                  20
+                  (point-2d-x origin)
+                  y)))
+      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">draw the axes</span>
+      (render
+       (make-line-2d
+        <span style="font-weight: bold;">:p1</span> (make-point-2d
+             <span style="font-weight: bold;">:x</span> min-x <span style="font-weight: bold;">:y</span> 0)
+        <span style="font-weight: bold;">:p2</span> (make-point-2d
+             <span style="font-weight: bold;">:x</span> max-x <span style="font-weight: bold;">:y</span> 0)
+        <span style="font-weight: bold;">:width</span> 3)
+       children-transformation-matrix)
+      (render
+       (make-line-2d
+        <span style="font-weight: bold;">:p1</span> (make-point-2d
+             <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> max-y)
+        <span style="font-weight: bold;">:p2</span> (make-point-2d
+             <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> min-y)
+        <span style="font-weight: bold;">:width</span> 3)
+       children-transformation-matrix))))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">plot</span>
+  <span style="font-style: italic;">"lam is the lambda function to call with x (should return y)"</span>
+  lam
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">bounds of the plot (drawing bound of the plots)</span>
+  min-y max-y min-x max-x
+  (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-num</span> (num src-min src-max dest-min dest-max)
+  <span style="font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
+  (/ (- (+ (* (- num src-min) (- dest-max dest-min)) (* dest-min src-max)) (* dest-min src-min)) (- src-max src-min)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((p plot) transformation-matrix)
+  (<span style="font-weight: bold;">let</span> ((prev-point nil)
+        (lam (plot-lam p))
+        (iterations/2 25)) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">number of iterations divided by 2</span>
+    (<span style="font-weight: bold;">loop</span> for x from (- iterations/2) upto iterations/2
+          do (<span style="font-weight: bold;">let*</span> ((x (map-num x (- iterations/2) iterations/2 (plot-min-x p) (plot-max-x p)))
+                    (new-y (funcall lam x))
+                    (new-point (make-point-2d <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> new-y)))
+               (<span style="font-weight: bold;">if</span> prev-point
+                   (render (make-line-2d
+                            <span style="font-weight: bold;">:p1</span> prev-point
+                            <span style="font-weight: bold;">:p2</span> new-point)
+                           transformation-matrix))
+               (setf prev-point new-point)))))
+
+(<span style="font-weight: bold;">defstruct</span> <span style="font-weight: bold; text-decoration: underline;">discrete-plot</span>
+  <span style="font-style: italic;">"a discrete plot, one that connects a finite amount of points (not really the definition of 'discrete')"</span>
+  points (color (make-rgb <span style="font-weight: bold;">:r</span> 0 <span style="font-weight: bold;">:b</span> 0 <span style="font-weight: bold;">:g</span> 0)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((p discrete-plot) transformation-matrix)
+  (<span style="font-weight: bold;">let*</span> ((points (discrete-plot-points p))
+         (prev-point (elt points 0)))
+    (<span style="font-weight: bold;">loop</span> for i from 1 below (length points)
+          do (<span style="font-weight: bold;">let</span> ((new-point (elt points i)))
+               (render (make-line-2d
+                        <span style="font-weight: bold;">:p1</span> prev-point
+                        <span style="font-weight: bold;">:p2</span> new-point)
+                       transformation-matrix)
+               (setf prev-point new-point)))))
+</pre>
+</div>
+<p>
+example usage:<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">raylib-third-test</span> ()
+  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*win*</span> (make-instance 'window <span style="font-weight: bold;">:width</span> 750 <span style="font-weight: bold;">:height</span> 750))
+  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*axis*</span> (make-axis
+                        <span style="font-weight: bold;">:min-x</span> -10
+                        <span style="font-weight: bold;">:max-x</span> 10
+                        <span style="font-weight: bold;">:max-y</span> 20
+                        <span style="font-weight: bold;">:min-y</span> -5
+                        <span style="font-weight: bold;">:pos</span> (make-point-2d <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> 0)
+                        <span style="font-weight: bold;">:width</span> 750
+                        <span style="font-weight: bold;">:height</span> 750))
+  (window-add-renderable *win* *axis*)
+  (axis-add-renderable *axis* (make-plot <span style="font-weight: bold;">:lam</span> (<span style="font-weight: bold;">lambda</span> (x) (* x x)) <span style="font-weight: bold;">:min-x</span> -10 <span style="font-weight: bold;">:max-x</span> 10))
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(axis-add-renderable *axis* (make-plot :lam (lambda (x) (sin x)) :min-x -10 :max-x 10))</span>
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(axis-add-renderable *axis* (make-plot :lam (lambda (x) (tan x)) :min-x -10 :max-x 10))</span>
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(axis-add-renderable *axis* (make-plot :lam (lambda (x) (cos x)) :min-x -10 :max-x 10))</span>
+  (sb-thread:make-thread (<span style="font-weight: bold;">lambda</span> () (window-run *win*))))
+</pre>
+</div>
+<p>
+hmmm, im very tempted to try and visualize the <a href="/mandelbrot.html#1686597466">mandelbrot</a> now, so lets do it, im thinking about just writing the mandelbrot as a function and map it to every pixel on the screen, maybe the function would return a value in 0-255 that describes how "bright" a point is? and we'd just turn it into an rgb? i think that'd do<br />
+</p>
+<div class="org-src-container" data-language="lisp">
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">complex-square</span> (a b)
+  (values (- (expt a 2) (expt b 2)) (* 2 a b)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">complex-abs</span>(a b)
+  (sqrt (+ (expt (abs a) 2) (expt (abs b) 2))))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">mandelbrot</span> (c-a c-b)
+  <span style="font-style: italic;">"a is the real number that lies on the real axis, b is a real number which is the component of the imaginary axis, the function returns a value 0-255 that represents the brightness of the point to be used when drawing it"</span>
+  (<span style="font-weight: bold;">let</span> ((iterations 20)
+        (z-a 0)
+        (z-b 0)
+        (last-i 0))
+    (<span style="font-weight: bold;">loop</span> for i from 0 below iterations
+          do (<span style="font-weight: bold;">multiple-value-bind</span> (squared-z-a squared-z-b) (complex-square z-a z-b)
+               (setf z-a (+ squared-z-a c-a))
+               (setf z-b (+ squared-z-b c-b)))
+             (setf last-i i)
+             (<span style="font-weight: bold;">when</span> (&gt; (complex-abs z-a z-b) 2)
+               (<span style="font-weight: bold;">return</span>)))
+    (<span style="font-weight: bold;">if</span> (&gt; last-i 5)
+        (map-num last-i 10 (1- iterations) 254 0)
+        255)))
+
+(<span style="font-weight: bold;">defmethod</span> <span style="font-weight: bold;">render</span> ((thing (eql <span style="font-weight: bold;">:mandelbrot</span>)) transformation-matrix)
+  <span style="font-style: italic;">"render function specialized for the mandelbrot"</span>
+  (<span style="font-weight: bold;">loop</span> for x from -1.6 below 0.5 by 0.015 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">some bounds of the mandelbrot i already know smaller than [-2,2]</span>
+        do (<span style="font-weight: bold;">loop</span> for y from -0.9 below 1 by 0.015
+                 do (<span style="font-weight: bold;">let</span> ((brightness (mandelbrot x y)))
+                      (<span style="font-weight: bold;">when</span> (&lt; brightness 255)
+                        (render
+                         (make-point-2d <span style="font-weight: bold;">:x</span> x <span style="font-weight: bold;">:y</span> y <span style="font-weight: bold;">:color</span> (make-rgb <span style="font-weight: bold;">:r</span> (round brightness)
+                                                                   <span style="font-weight: bold;">:g</span> (round brightness)
+                                                                   <span style="font-weight: bold;">:b</span> (round brightness)))
+                         transformation-matrix))))))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">mandelbrot-test</span> ()
+  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*win*</span> (make-instance 'window <span style="font-weight: bold;">:width</span> 400 <span style="font-weight: bold;">:height</span> 400))
+  (<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*axis*</span> (make-axis
+                        <span style="font-weight: bold;">:min-x</span> -2
+                        <span style="font-weight: bold;">:max-x</span> 2
+                        <span style="font-weight: bold;">:max-y</span> 2
+                        <span style="font-weight: bold;">:min-y</span> -2
+                        <span style="font-weight: bold;">:pos</span> (make-point-2d <span style="font-weight: bold;">:x</span> 0 <span style="font-weight: bold;">:y</span> 0)
+                        <span style="font-weight: bold;">:width</span> 500
+                        <span style="font-weight: bold;">:height</span> 500))
+  (window-add-renderable *win* *axis*)
+  (axis-add-renderable *axis* <span style="font-weight: bold;">:mandelbrot</span>)
+  (sb-thread:make-thread (<span style="font-weight: bold;">lambda</span> () (window-run *win*))))
+</pre>
+</div>
+<p>
+use <code>(mandelbrot-test)</code> to run this (obviously)<br />
+she's pretty but slow as fuck<br />
+to kill the window now we have to press "q" continuously, because the main loop doesnt reach the code that checks whether a key is pressed until the frame has finished drawing, and the mandelbrot takes some time to draw<br />
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

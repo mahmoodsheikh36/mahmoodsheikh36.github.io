@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>english letter frequency distribution</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">english letter frequency distribution</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="org198a49d">
+<table id="tab-eng-freq" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> average letter frequencies for english-language text</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">letter</th>
+<th scope="col" class="org-right">frequency (percentage)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">a</td>
+<td class="org-right">8.2</td>
+</tr>
+
+<tr>
+<td class="org-left">b</td>
+<td class="org-right">1.5</td>
+</tr>
+
+<tr>
+<td class="org-left">c</td>
+<td class="org-right">2.8</td>
+</tr>
+
+<tr>
+<td class="org-left">d</td>
+<td class="org-right">4.3</td>
+</tr>
+
+<tr>
+<td class="org-left">e</td>
+<td class="org-right">12.7</td>
+</tr>
+
+<tr>
+<td class="org-left">f</td>
+<td class="org-right">2.2</td>
+</tr>
+
+<tr>
+<td class="org-left">g</td>
+<td class="org-right">2.0</td>
+</tr>
+
+<tr>
+<td class="org-left">h</td>
+<td class="org-right">6.1</td>
+</tr>
+
+<tr>
+<td class="org-left">i</td>
+<td class="org-right">7.0</td>
+</tr>
+
+<tr>
+<td class="org-left">j</td>
+<td class="org-right">0.2</td>
+</tr>
+
+<tr>
+<td class="org-left">k</td>
+<td class="org-right">0.8</td>
+</tr>
+
+<tr>
+<td class="org-left">l</td>
+<td class="org-right">4.0</td>
+</tr>
+
+<tr>
+<td class="org-left">m</td>
+<td class="org-right">2.4</td>
+</tr>
+
+<tr>
+<td class="org-left">n</td>
+<td class="org-right">6.7</td>
+</tr>
+
+<tr>
+<td class="org-left">o</td>
+<td class="org-right">1.5</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+<td class="org-right">1.9</td>
+</tr>
+
+<tr>
+<td class="org-left">q</td>
+<td class="org-right">0.1</td>
+</tr>
+
+<tr>
+<td class="org-left">r</td>
+<td class="org-right">6.0</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-right">6.3</td>
+</tr>
+
+<tr>
+<td class="org-left">t</td>
+<td class="org-right">9.1</td>
+</tr>
+
+<tr>
+<td class="org-left">u</td>
+<td class="org-right">2.8</td>
+</tr>
+
+<tr>
+<td class="org-left">v</td>
+<td class="org-right">1.0</td>
+</tr>
+
+<tr>
+<td class="org-left">w</td>
+<td class="org-right">2.4</td>
+</tr>
+
+<tr>
+<td class="org-left">x</td>
+<td class="org-right">0.2</td>
+</tr>
+
+<tr>
+<td class="org-left">y</td>
+<td class="org-right">2.0</td>
+</tr>
+
+<tr>
+<td class="org-left">z</td>
+<td class="org-right">0.1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<div class="org-src-container" data-language="python">
+<pre class="src src-python"><span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
+<span style="font-weight: bold;">import</span> matplotlib.pyplot <span style="font-weight: bold;">as</span> plt
+
+<span style="font-weight: bold; font-style: italic;">height</span> = [<span style="font-weight: bold;">float</span>(entry[1]) <span style="font-weight: bold;">for</span> entry <span style="font-weight: bold;">in</span> table]
+<span style="font-weight: bold; font-style: italic;">bars</span> = [entry[0] <span style="font-weight: bold;">for</span> entry <span style="font-weight: bold;">in</span> table]
+<span style="font-weight: bold; font-style: italic;">x_pos</span> = np.arange(<span style="font-weight: bold;">len</span>(bars))
+
+plt.bar(x_pos, height, color = (0.5, 0.1, 0.5, 0.6))
+
+plt.title(<span style="font-style: italic;">'letter frequency in english'</span>)
+plt.xlabel(<span style="font-style: italic;">'letter'</span>)
+plt.ylabel(<span style="font-style: italic;">'frequency (percentage)'</span>)
+
+plt.xticks(x_pos, bars)
+
+plt.show()
+</pre>
+</div>
+
+
+<div id="org871039e" class="figure">
+<p><img src="/Aycl6jM.svg" /></p>
+</div>
+</div>
+</body>
+</html>
