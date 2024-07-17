@@ -26,6 +26,7 @@ function handleMathButton(node) {
           popupElm.className = "popup";
           document.body.appendChild(popupElm);
         }
+        popupElm.innerHTML = '';
         popupElm.appendChild(elm);
         Object.assign(popupElm.style, {
           left: `${event.pageX}px`,
