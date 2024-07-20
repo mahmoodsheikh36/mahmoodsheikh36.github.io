@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>relational algebra</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">relational algebra</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="orge9eeeb0">
+<p>
+the basic set of operations for the formal relational model is the <i>relational algebra</i>. these operations enable a user to specify basic retrieval requests as <i>relational algebra expressions</i>. the result of a retrieval query is a new relation. the algebra operations thus produce new relations, which can be further manipulated using operations of the same algebra. a sequence of relational algebra operations forms a relational algebra expression, whose result will also be a relation that represents the result of a database query (or retrieval request).<br />
+</p>
+
+</div>
+<div class="dummy" id="org5d2d985">
+<p>
+the operations of relational algebra include:<br />
+</p>
+<ul class="org-ul">
+<li><a href="/set_operations.html#1701450250">set operations</a><br /></li>
+<li>select operation<br /></li>
+<li>project operation<br /></li>
+<li>rename operation<br /></li>
+<li>division operation<br /></li>
+<li>join operation<br />
+<ul class="org-ul">
+<li>semi join<br /></li>
+<li>outer join<br /></li>
+<li>inner join<br /></li>
+<li>natural join<br /></li>
+</ul></li>
+<li>outer union<br /></li>
+<li>insert operation<br /></li>
+<li>delete operation<br /></li>
+<li>update operation<br /></li>
+</ul>
+
+</div>
+<div class="dummy" id="org8adf6fd">
+<p>
+the set of relational algebra operations <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 69.685381 10.115783' style="height: 0.9951em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g1-99' d='m5.190535-4.393524h-3.447073c-.916563 0-1.464508 1.09589-1.544209 1.285181h.109589c.049813-.069738 .418431-.557908 .936488-.557908h.518057l-.697385 2.102117c-.219178 .657534-1.036115 .687422-1.036115 1.364882v.049813c0 .169365 .129514 .259029 .368618 .259029c.37858 0 .737235-.239103 1.225405-1.653798l.727273-2.122042h1.006227l-.488169 2.141968c-.069738 .288917-.109589 .537983-.109589 .737235v.089664c0 .428394 .298879 .806974 .787049 .806974c.229141 0 .498132-.069738 .498132-.398506v-.039851c0-.587796-.597758-.508095-.597758-1.066002c0-.079701 .009963-.169365 .039851-.278954l.488169-1.992528h1.046077l.169365-.727273z'/>
+<path id='g1-100' d='m4.811955-2.889166c0-.438356-.259029-1.504359-1.534247-1.504359c-1.39477 0-2.371108 .976339-2.759651 2.620174l-.418431 1.783313c-.069738 .318804-.318804 1.255293-.727273 2.052304h1.006227l.637609-2.321295h.009963c0 .009963 .239103 .368618 1.016189 .368618c1.534247 0 2.769614-1.524284 2.769614-2.998755zm-.757161 .019925c0 .737235-.418431 2.709838-1.793275 2.709838c-.86675 0-.936488-1.006227-.936488-1.215442c0-.757161 .398506-2.779577 1.793275-2.779577c.846824 0 .936488 .886675 .936488 1.285181z'/>
+<path id='g1-102' d='m6.734745-4.393524h-3.636364c-1.504359 0-2.849315 1.255293-2.849315 2.929016c0 1.006227 .537983 1.574097 1.554172 1.574097c1.225405 0 2.749689-1.185554 2.749689-2.958904c0-.56787-.18929-.787049-.18929-.797011h2.171856l.199253-.747198zm-2.938979 1.554172c0 1.484433-.826899 2.699875-1.853051 2.699875c-.767123 0-.86675-.996264-.86675-1.295143c0-1.92279 1.026152-2.689913 1.763387-2.689913c.368618 0 .956413 .099626 .956413 1.285181z'/>
+<path id='g1-150' d='m1.942715-.059776c0-.826899-.577833-.956413-.806974-.956413c-.249066 0-.577833 .14944-.577833 .577833c0 .398506 .358655 .498132 .617684 .498132c.069738 0 .119552-.009963 .14944-.019925c.039851-.009963 .069738-.019925 .089664-.019925c.069738 0 .139477 .049813 .139477 .139477c0 .18929-.159402 .637609-.816936 1.05604l.089664 .18929c.298879-.099626 1.115816-.757161 1.115816-1.464508z'/>
+<path id='g0-0' d='m5.718555-2.281445v-.557908h-5.100872v.557908h5.100872z'/>
+<path id='g0-2' d='m5.778331-.348692l-2.221669-2.211706l2.221669-2.221669l-.398506-.398506l-2.211706 2.221669l-2.211706-2.221669l-.398506 .398506l2.211706 2.221669l-2.211706 2.211706l.398506 .398506l2.211706-2.221669l2.211706 2.221669l.398506-.398506z'/>
+<path id='g0-91' d='m5.897883-2.630137v-3.078456h-.508095v3.118306c0 1.05604-.926526 2.082192-2.132005 2.082192c-1.145704 0-2.132005-.896638-2.132005-2.082192v-3.118306h-.508095v3.078456c0 1.484433 1.235367 2.630137 2.650062 2.630137s2.630137-1.145704 2.630137-2.630137z'/>
+<path id='g0-102' d='m2.430884-5.589041c0-.368618 .298879-1.105853 1.09589-1.305106c.049813-.019925 .089664-.049813 .089664-.099626c0-.099626-.079701-.119552-.18929-.099626c-.777086 .119552-1.703611 .757161-1.713574 1.424658v1.77335c0 .348692-.059776 .846824-.199253 .936488c-.358655 .249066-.727273 .268991-.946451 .268991c-.049813 .009963-.089664 .069738-.089664 .119552c0 .099626 .059776 .119552 .159402 .129514c.657534 .029888 .936488 .33873 1.046077 .787049c.029888 .099626 .029888 .109589 .029888 .438356v1.594022c0 .37858-.099626 .826899 .37858 1.165629c.388543 .268991 .946451 .428394 1.334994 .428394c.109589 0 .18929 0 .18929-.109589c0-.089664-.059776-.069738-.159402-.099626c-.667497-.169365-.86675-.518057-.996264-.986301c-.029888-.079701-.029888-.099626-.029888-.418431v-1.713574c0-.408468-.079701-.56787-.398506-.856787c-.209215-.18929-.298879-.278954-.577833-.358655c.816936-.199253 .976339-.617684 .976339-1.145704v-1.872976z'/>
+<path id='g0-103' d='m1.663761-5.589041v1.872976c0 .52802 .159402 .946451 .976339 1.145704c-.278954 .079701-.368618 .169365-.577833 .358655c-.318804 .288917-.398506 .448319-.398506 .856787v1.713574c0 .318804 0 .33873-.029888 .418431c-.129514 .468244-.328767 .816936-.996264 .986301c-.099626 .029888-.159402 .009963-.159402 .099626c0 .109589 .079701 .109589 .18929 .109589c.388543 0 .946451-.159402 1.334994-.428394c.478207-.33873 .37858-.787049 .37858-1.165629v-1.594022c0-.328767 0-.33873 .029888-.438356c.109589-.448319 .388543-.757161 1.046077-.787049c.099626-.009963 .159402-.029888 .159402-.129514c0-.049813-.039851-.109589-.089664-.119552c-.219178 0-.587796-.019925-.946451-.268991c-.139477-.089664-.199253-.587796-.199253-.936488v-1.77335c-.009963-.667497-.936488-1.305106-1.713574-1.424658c-.109589-.019925-.18929 0-.18929 .099626c0 .049813 .039851 .079701 .089664 .099626c.797011 .199253 1.09589 .936488 1.09589 1.305106z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='.249051' y='0' xlink:href='#g0-102'/>
+<use x='4.722253' y='0' xlink:href='#g1-102'/>
+<use x='11.855513' y='0' xlink:href='#g1-150'/>
+<use x='16.345283' y='0' xlink:href='#g1-99'/>
+<use x='21.924364' y='0' xlink:href='#g1-150'/>
+<use x='26.184998' y='0' xlink:href='#g0-91'/>
+<use x='32.700567' y='0' xlink:href='#g1-150'/>
+<use x='37.479248' y='0' xlink:href='#g1-100'/>
+<use x='42.898913' y='0' xlink:href='#g1-150'/>
+<use x='47.159547' y='0' xlink:href='#g0-0'/>
+<use x='53.495783' y='0' xlink:href='#g1-150'/>
+<use x='57.756417' y='0' xlink:href='#g0-2'/>
+<use x='64.341704' y='0' xlink:href='#g0-103'/>
+</g>
+</g>
+</svg> is a complete set; that is, any of the other original relational algebra operations can be expressed as a sequence of operations from this set.<br />
+</p>
+
+</div>
+</div>
+</body>
+</html>
