@@ -34,9 +34,9 @@
 <p>
 some math utilities for <a href="/common_lisp.html#1677249560">common lisp</a><br />
 </p>
-<div id="outline-container-org3d11ee0" class="outline-2">
-<h2 id="org3d11ee0">essential functions</h2>
-<div class="outline-text-2" id="text-org3d11ee0">
+<div id="outline-container-org4ca80e3" class="outline-2">
+<h2 id="org4ca80e3">essential functions</h2>
+<div class="outline-text-2" id="text-org4ca80e3">
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp" id="src-math-functions">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sigmoid</span> (x)
   (<span style="font-weight: bold;">cond</span> ((&lt; x -70) 0) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">to avoid float overflow</span>
@@ -57,9 +57,9 @@ some math utilities for <a href="/common_lisp.html#1677249560">common lisp</a><b
 </div>
 </div>
 </div>
-<div id="outline-container-org2fa3a52" class="outline-2">
-<h2 id="org2fa3a52">vectors</h2>
-<div class="outline-text-2" id="text-org2fa3a52">
+<div id="outline-container-org50cfb03" class="outline-2">
+<h2 id="org50cfb03">vectors</h2>
+<div class="outline-text-2" id="text-org50cfb03">
 <div class="math-block note" data-before="note" data-after="">
 <p>
 these functions work, but some use lists and some do redundant operations, they need efficiency improvement<br />
@@ -103,9 +103,9 @@ these functions work, but some use lists and some do redundant operations, they 
 </div>
 </div>
 </div>
-<div id="outline-container-org145c163" class="outline-2">
-<h2 id="org145c163">matrices</h2>
-<div class="outline-text-2" id="text-org145c163">
+<div id="outline-container-org580bbb5" class="outline-2">
+<h2 id="org580bbb5">matrices</h2>
+<div class="outline-text-2" id="text-org580bbb5">
 <p>
 im using arrays for matrices, which use different functions than vectors/lists<br />
 matrix multiplication:<br />
@@ -180,9 +180,9 @@ matrix multiplication:<br />
 </pre>
 </div>
 </div>
-<div id="outline-container-orgfa98f3c" class="outline-3">
-<h3 id="orgfa98f3c">matrix multiplication implementation comparison between lists and arrays</h3>
-<div class="outline-text-3" id="text-orgfa98f3c">
+<div id="outline-container-org6d6934b" class="outline-3">
+<h3 id="org6d6934b">matrix multiplication implementation comparison between lists and arrays</h3>
+<div class="outline-text-3" id="text-org6d6934b">
 <p>
 with lists:<br />
 </p>
@@ -225,9 +225,9 @@ with arrays:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org3d04fc1" class="outline-3">
-<h3 id="org3d04fc1">2d transformation matrices</h3>
-<div class="outline-text-3" id="text-org3d04fc1">
+<div id="outline-container-org31234d0" class="outline-3">
+<h3 id="org31234d0">2d transformation matrices</h3>
+<div class="outline-text-3" id="text-org31234d0">
 <p>
 <a href="/2d_transformations.html#1685671420">linearly mapping a grid to another</a>:<br />
 </p>
@@ -268,9 +268,9 @@ example usage:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org3f1b2f9" class="outline-2">
-<h2 id="org3f1b2f9"><a href="/linearly_mapping_an_interval_onto_another.html#1686235443">linearly mapping discrete range onto another</a></h2>
-<div class="outline-text-2" id="text-org3f1b2f9">
+<div id="outline-container-org425216e" class="outline-2">
+<h2 id="org425216e"><a href="/linearly_mapping_an_interval_onto_another.html#1686235443">linearly mapping discrete range onto another</a></h2>
+<div class="outline-text-2" id="text-org425216e">
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp" id="src-map-num">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">map-num</span> (num src-min src-max dest-min dest-max)
   <span style="font-style: italic;">"(map-num 0.5 -1 1 -50 50) =&gt; 25.0"</span>
@@ -279,9 +279,9 @@ example usage:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org5bb3e44" class="outline-2">
-<h2 id="org5bb3e44">sets</h2>
-<div class="outline-text-2" id="text-org5bb3e44">
+<div id="outline-container-orga9d3179" class="outline-2">
+<h2 id="orga9d3179">sets</h2>
+<div class="outline-text-2" id="text-orga9d3179">
 <p>
 a good resource <a href="https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html">https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node152.html</a><br />
 the builtin <code>set-difference</code> sometimes reverses the lists it returns for some reason and its bothersome, e.g.:<br />
@@ -333,9 +333,9 @@ check for set equality:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org3255452" class="outline-2">
-<h2 id="org3255452">combinatorics</h2>
-<div class="outline-text-2" id="text-org3255452">
+<div id="outline-container-orgadcc8b5" class="outline-2">
+<h2 id="orgadcc8b5">combinatorics</h2>
+<div class="outline-text-2" id="text-orgadcc8b5">
 <p>
 generating variations:<br />
 </p>
@@ -383,7 +383,7 @@ generating variations with repetition:<br />
 <p>
 generating combinations:<br />
 to make the problem easier to tackle i took some examples:<br />
-assume the sequence "ashey" and the length 3, the base case for <a href="/recursive_functions_in_programming.html#1667600200">recursion</a> would be a sequence of length 3, so if we were to progress letter by letter through the sequence we'd get to a function call with the sequence "hey" and the length 3, then when we exit recursion calls back to the call with the sequence "shey", we need to consider the cell "s" with 3 other sequences, "he","hy","ey", which itself is a combination with the sequence "hey" and length 2, so a call to the function should take care of getting the combinations of the subsequences its concatenating which requires a recursive call to the function by with a reduced length and a reduced subsequence, we may use this as a base case, so when we get a length of 2 we return every combination of length 2, this will satisfy the call with the sequence "hey" and length 3 which in turn satisfies the call with the sequence "shey" and length 4, and so on..<br />
+assume the sequence "ashey" and the length 3, the base case for <a href="/recursive_algorithm.html#1667600200">recursion</a> would be a sequence of length 3, so if we were to progress letter by letter through the sequence we'd get to a function call with the sequence "hey" and the length 3, then when we exit recursion calls back to the call with the sequence "shey", we need to consider the cell "s" with 3 other sequences, "he","hy","ey", which itself is a combination with the sequence "hey" and length 2, so a call to the function should take care of getting the combinations of the subsequences its concatenating which requires a recursive call to the function by with a reduced length and a reduced subsequence, we may use this as a base case, so when we get a length of 2 we return every combination of length 2, this will satisfy the call with the sequence "hey" and length 3 which in turn satisfies the call with the sequence "shey" and length 4, and so on..<br />
 </p>
 <div class="org-src-container" data-language="lisp">
 <pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">combinations</span> (seq len)
