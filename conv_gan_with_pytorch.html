@@ -38,9 +38,9 @@ some information was quoted from <a href="https://machinelearningmastery.com/how
 </p>
 
 </div>
-<div id="outline-container-org8a3042c" class="outline-2">
-<h2 id="org8a3042c">essential packages</h2>
-<div class="outline-text-2" id="text-org8a3042c">
+<div id="outline-container-orgf5906b4" class="outline-2">
+<h2 id="orgf5906b4">essential packages</h2>
+<div class="outline-text-2" id="text-orgf5906b4">
 <p>
 we need to import some essential packages:<br />
 </p>
@@ -63,9 +63,9 @@ here, if the machine we're using has a cuda-supported gpu available, we use that
 </div>
 </div>
 </div>
-<div id="outline-container-orgc4297ea" class="outline-2">
-<h2 id="orgc4297ea">load the data</h2>
-<div class="outline-text-2" id="text-orgc4297ea">
+<div id="outline-container-orge8eb45a" class="outline-2">
+<h2 id="orge8eb45a">load the data</h2>
+<div class="outline-text-2" id="text-orge8eb45a">
 <p>
 we start by loading the mnist dataset (the 28x28 images of hand-written digits), we use the <code>torchvision</code> package from <code>pypi</code> which provides various datasets for machine learning<br />
 </p>
@@ -133,15 +133,15 @@ gen_images_img(train_x[:30].cpu().reshape((-1, 28, 28)), f)
 </div>
 
 
-<div id="org3405423" class="figure">
+<div id="orgc983b21" class="figure">
 <p><img src="/zuBb2Oa.png" /><br />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8fad9a0" class="outline-2">
-<h2 id="org8fad9a0">discriminator</h2>
-<div class="outline-text-2" id="text-org8fad9a0">
+<div id="outline-container-org918a3c7" class="outline-2">
+<h2 id="org918a3c7">discriminator</h2>
+<div class="outline-text-2" id="text-org918a3c7">
 <p>
 the discriminator model must take a sample image from our dataset as input and output a classification, a prediction as to whether the sample is real or fake. or perhaps the likelihood of the sample being real, which means the discriminator does binary classification.<br />
 pytorch makes defining neural nets easy by inheriting from <code>nn.Module</code>, here, since we're dealing with images, we use <a href="/convolutional_neural_network.html#1684594232">convolutional layer</a>s, in combinations with dropout layers which arent "mandatory" but they help improve results, the last layers are a <a href="/convolutional_neural_network.html#1684594232">flatten layer</a> and a linear layer, the output for a single image would be a float in the range 0-1.<br />
@@ -203,7 +203,7 @@ summary(Discriminator().cuda(), (1, 28, 28))
 </pre>
 </div>
 
-<pre class="example" id="org7fa1cc8">
+<pre class="example" id="org5d9728f">
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -261,19 +261,23 @@ as the values in the original images range from 0 to 255 (for grayscale colors),
 
 <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 23.352765 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
-<path id='g3-150' d='m1.942715-.059776c0-.826899-.577833-.956413-.806974-.956413c-.249066 0-.577833 .14944-.577833 .577833c0 .398506 .358655 .498132 .617684 .498132c.069738 0 .119552-.009963 .14944-.019925c.039851-.009963 .069738-.019925 .089664-.019925c.069738 0 .139477 .049813 .139477 .139477c0 .18929-.159402 .637609-.816936 1.05604l.089664 .18929c.298879-.099626 1.115816-.757161 1.115816-1.464508z'/>
-<path id='g4-48' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
-<path id='g4-49' d='m3.92528 0v-.14944c-.787049-.009963-.946451-.109589-.946451-.587796v-5.977584l-.079701-.019925l-1.793275 .9066v.139477c.119552-.049813 .229141-.089664 .268991-.109589c.179328-.069738 .348692-.109589 .448319-.109589c.209215 0 .298879 .14944 .298879 .468244v4.513076c0 .328767-.079701 .557908-.239103 .647572c-.14944 .089664-.288917 .119552-.707347 .129514v.14944h2.749689z'/>
-<path id='g1-187' d='m2.978829 1.673724h-.856787c-.328767 0-.488169-.169365-.488169-.518057v-7.511831c0-.308842 .129514-.438356 .448319-.438356h.896638v-.249066h-2.102117v8.966376h2.102117v-.249066z'/>
-<path id='g1-188' d='m.33873 1.673724v.249066h2.102117v-8.966376h-2.102117v.249066h.856787c.328767 0 .488169 .169365 .488169 .518057v7.511831c0 .308842-.139477 .438356-.448319 .438356h-.896638z'/>
+<path id='g4-150' d='m1.942715-.059776c0-.826899-.577833-.956413-.806974-.956413c-.249066 0-.577833 .14944-.577833 .577833c0 .398506 .358655 .498132 .617684 .498132c.069738 0 .119552-.009963 .14944-.019925c.039851-.009963 .069738-.019925 .089664-.019925c.069738 0 .139477 .049813 .139477 .139477c0 .18929-.159402 .637609-.816936 1.05604l.089664 .18929c.298879-.099626 1.115816-.757161 1.115816-1.464508z'/>
+<use id='g7-48' xlink:href='#g5-48' transform='scale(1.818182)'/>
+<use id='g7-49' xlink:href='#g5-49' transform='scale(1.818182)'/>
+<path id='g5-48' d='m2.608219-1.808219c0-1.123288-.49863-1.89589-1.216438-1.89589c-.30137 0-.531507 .093151-.734247 .284932c-.317808 .306849-.526027 .936986-.526027 1.578082c0 .59726 .180822 1.238356 .438356 1.545205c.20274 .241096 .482192 .372603 .8 .372603c.279452 0 .515068-.093151 .712329-.284932c.317808-.30137 .526027-.936986 .526027-1.6zm-.526027 .010959c0 1.145205-.241096 1.731507-.712329 1.731507s-.712329-.586301-.712329-1.726027c0-1.161644 .246575-1.769863 .717808-1.769863c.460274 0 .706849 .619178 .706849 1.764384z'/>
+<path id='g5-49' d='m2.158904 0v-.082192c-.432877-.005479-.520548-.060274-.520548-.323288v-3.287671l-.043836-.010959l-.986301 .49863v.076712c.065753-.027397 .126027-.049315 .147945-.060274c.09863-.038356 .191781-.060274 .246575-.060274c.115068 0 .164384 .082192 .164384 .257534v2.482192c0 .180822-.043836 .306849-.131507 .356164c-.082192 .049315-.158904 .065753-.389041 .071233v.082192h1.512329z'/>
+<use id='g2-187' xlink:href='#g1-187' transform='scale(1.369862)'/>
+<use id='g2-188' xlink:href='#g1-188' transform='scale(1.369862)'/>
+<path id='g1-187' d='m2.174546 1.221819h-.625455c-.24 0-.356364-.123636-.356364-.378182v-5.483639c0-.225455 .094545-.32 .327273-.32h.654546v-.181818h-1.534546v6.545457h1.534546v-.181818z'/>
+<path id='g1-188' d='m.247273 1.221819v.181818h1.534546v-6.545457h-1.534546v.181818h.625455c.24 0 .356364 .123636 .356364 .378182v5.483639c0 .225455-.101818 .32-.327273 .32h-.654546z'/>
 </defs>
-<g id='page13'>
+<g id='page12'>
 <g fill='currentColor'>
-<use x='.597749' y='0' xlink:href='#g1-187'/>
-<use x='4.214177' y='0' xlink:href='#g4-48'/>
-<use x='9.195497' y='0' xlink:href='#g3-150'/>
-<use x='13.456131' y='0' xlink:href='#g4-49'/>
-<use x='18.437451' y='0' xlink:href='#g1-188'/>
+<use x='.597749' y='0' xlink:href='#g2-187'/>
+<use x='4.214177' y='0' xlink:href='#g7-48'/>
+<use x='9.195497' y='0' xlink:href='#g4-150'/>
+<use x='13.456131' y='0' xlink:href='#g7-49'/>
+<use x='18.437451' y='0' xlink:href='#g2-188'/>
 </g>
 </g>
 </svg> which is easier to work with, this is standard practice in ML. we also need to expand the dimensions of the images into 3d because our models expect 3d tensors and the mnist dataset only contains 2d greyscaled images, so a batch of images would be of 4 dimensions:<br />
@@ -293,9 +297,9 @@ before: torch.Size([60000, 28, 28])
 after: torch.Size([60000, 1, 28, 28])
 </pre>
 </div>
-<div id="outline-container-orgce861c1" class="outline-3">
-<h3 id="orgce861c1">training the discriminator</h3>
-<div class="outline-text-3" id="text-orgce861c1">
+<div id="outline-container-orgbfdd0a3" class="outline-3">
+<h3 id="orgbfdd0a3">training the discriminator</h3>
+<div class="outline-text-3" id="text-orgbfdd0a3">
 <p>
 we could systematically enumerate all samples in the training dataset, and that is a good approach, but good training via stochastic gradient descent requires that the training dataset be shuffled prior to each epoch. a simpler approach is to select random samples of images from the training dataset.<br />
 the <code>generate_real_samples_for_discriminator()</code> function below takes the training dataset as an argument and selects a random subset of images; it also returns class labels for the images, specifically a class label of 1, to indicate that the images are real.<br />
@@ -403,7 +407,7 @@ f
 </div>
 
 
-<div id="org05c1dac" class="figure">
+<div id="org1f7b1f2" class="figure">
 <p><img src="/ar1T72O.svg" /><br />
 </p>
 </div>
@@ -414,9 +418,9 @@ as we can see, the loss gradually declines which means the discriminator (theore
 </div>
 </div>
 </div>
-<div id="outline-container-orgab9f807" class="outline-2">
-<h2 id="orgab9f807">generator</h2>
-<div class="outline-text-2" id="text-orgab9f807">
+<div id="outline-container-org0fab5f9" class="outline-2">
+<h2 id="org0fab5f9">generator</h2>
+<div class="outline-text-2" id="text-org0fab5f9">
 <p>
 the generator model is responsible for creating new, fake but plausible images of handwritten digits. it does so by taking a point from the <a href="/latent_space.html#1694044864">latent space</a> as input and outputting a tensor representing a grayscale image.<br />
 the latent space is an arbitrarily defined <a href="/finite_set.html#1697397101">finite</a> <a href="/vector_space.html#1703225547">vector space</a>. it has no meaning, but by drawing points from this space and feeding them to the generator model during training, the generator model will assign meaning to the latent points and, in turn, to the latent space. at the end of training, the latent vector space would have an internal structure that is a compressed representation of the output space (the MNIST image dataset), that only the generator knows how to turn into plausible images that fool the discriminator.<br />
@@ -477,7 +481,7 @@ summary(Generator(100).to(device), (1, 100)) <span style="font-weight: bold; fon
 </pre>
 </div>
 
-<pre class="example" id="org5449f15">
+<pre class="example" id="org07195da">
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -533,14 +537,14 @@ gen_images_img(X.reshape((-1, 28, 28)), f)
 </div>
 
 
-<div id="org519b4e6" class="figure">
+<div id="orgb5823f8" class="figure">
 <p><img src="/dUD33Ha.png" /><br />
 </p>
 </div>
 </div>
-<div id="outline-container-org1af0f8b" class="outline-3">
-<h3 id="org1af0f8b">training the generator</h3>
-<div class="outline-text-3" id="text-org1af0f8b">
+<div id="outline-container-orgd1c61c0" class="outline-3">
+<h3 id="orgd1c61c0">training the generator</h3>
+<div class="outline-text-3" id="text-orgd1c61c0">
 <p>
 to train the generator, we need to attach it to the discriminator in a sequential manner, such that the output of the generator would be forwarded to the discriminator for classification, the discriminator would determine whether the data generated by the generator passes as a real image. this is why the training of disciminator beforehand to classify real data from fake ones is cruical, otherwise the generator wouldnt learn (this is one approach, another is described later).<br />
 during the training of the generator, we may want to freeze the parameters of the discriminator, because we wouldnt want the discriminator training and overfitting on fake data.<br />
@@ -618,7 +622,7 @@ f
 </div>
 
 
-<div id="orgc579118" class="figure">
+<div id="orgb9b0953" class="figure">
 <p><img src="/YMD1rgW.png" /><br />
 </p>
 </div>
@@ -752,18 +756,18 @@ but the results are interesting, even after the first epoch, we can see that the
 </div>
 </div>
 </div>
-<div id="outline-container-org0e1c8d5" class="outline-2">
-<h2 id="org0e1c8d5">performance evaluation</h2>
-<div class="outline-text-2" id="text-org0e1c8d5">
+<div id="outline-container-org06fd68d" class="outline-2">
+<h2 id="org06fd68d">performance evaluation</h2>
+<div class="outline-text-2" id="text-org06fd68d">
 <p>
 generally, there are no objective ways to evaluate the performance of a GAN model. we cannot calculate this objective error score for generated images. it might be possible in the case of MNIST images because the images are so well constrained, but in general, it is not possible (yet).<br />
 instead, images must be subjectively evaluated for quality by a human agent. this means that we cannot know when to stop training without looking at examples of generated images. in turn, the adversarial nature of the training process means that the generator is changing after every batch, meaning that once "good enough" images can be generated, the subjective quality of the images may then begin to vary, improve, or even degrade with subsequent updates.<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org000820b" class="outline-2">
-<h2 id="org000820b">latent output space visualization</h2>
-<div class="outline-text-2" id="text-org000820b">
+<div id="outline-container-org4576821" class="outline-2">
+<h2 id="org4576821">latent output space visualization</h2>
+<div class="outline-text-2" id="text-org4576821">
 <p>
 while we cant visualize dimensions higher than 3d, and while computer screens are 2d, we can still try to explore higher dimensions by "navigating" them and projecting the results. by navigation i mean choosing an axis and "hovering" over its possible values while holding the other variables constant, to see how the changes to the variable that corresponds to the axis we chose affect the space we project.<br />
 </p>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>binary number</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">binary number</h1>
+</div>
+<div id="content" class="content">
+<p>
+<i>binary-coded decimal (BCD)</i> is a <a href="/binary_coding.html#1674137370">binary encoded</a> representation of decimal values where each digit is represented by a fixed number of bits, usually four or eight.<br />
+<i>BCD</i> takes advantage of the fact that any one decimal numeral can be represented by a four-bit pattern. the most obvious way of encoding digits is natural BCD (NBCD), where each decimal digit is represented by its corresponding four-bit binary value, as shown in the following table.<br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> each digit from 0 to 9 and their corresponding BCD encoding</caption>
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">digit</th>
+<th scope="col" class="org-right">BCD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">0000</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">0001</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">0010</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">0011</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">0100</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">0101</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-right">0110</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">0111</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-right">1000</td>
+</tr>
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-right">1001</td>
+</tr>
+</tbody>
+</table>
+<div class="math-block my_example" data-before="example" data-after="">
+<p>
+the number 59 would be encoded 0101 1001, usually we dont write spaces, so 01011001.<br />
+</p>
+
+</div>
+<div class="org-src-container" data-language="python">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">int_to_binary</span>(num):
+  <span style="font-weight: bold;">return</span> <span style="font-style: italic;">'{0:b}'</span>.<span style="font-weight: bold;">format</span>(num)
+<span style="font-weight: bold;">return</span> [(num, int_to_binary(num)) <span style="font-weight: bold;">for</span> num <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(0, 32)]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 2:</span> table of decimals and their binary representation</caption>
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">decimal</th>
+<th scope="col" class="org-right">binary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">10</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">11</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">100</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">101</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-right">110</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">111</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-right">1000</td>
+</tr>
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-right">1001</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-right">1010</td>
+</tr>
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-right">1011</td>
+</tr>
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-right">1100</td>
+</tr>
+
+<tr>
+<td class="org-right">13</td>
+<td class="org-right">1101</td>
+</tr>
+
+<tr>
+<td class="org-right">14</td>
+<td class="org-right">1110</td>
+</tr>
+
+<tr>
+<td class="org-right">15</td>
+<td class="org-right">1111</td>
+</tr>
+
+<tr>
+<td class="org-right">16</td>
+<td class="org-right">10000</td>
+</tr>
+
+<tr>
+<td class="org-right">17</td>
+<td class="org-right">10001</td>
+</tr>
+
+<tr>
+<td class="org-right">18</td>
+<td class="org-right">10010</td>
+</tr>
+
+<tr>
+<td class="org-right">19</td>
+<td class="org-right">10011</td>
+</tr>
+
+<tr>
+<td class="org-right">20</td>
+<td class="org-right">10100</td>
+</tr>
+
+<tr>
+<td class="org-right">21</td>
+<td class="org-right">10101</td>
+</tr>
+
+<tr>
+<td class="org-right">22</td>
+<td class="org-right">10110</td>
+</tr>
+
+<tr>
+<td class="org-right">23</td>
+<td class="org-right">10111</td>
+</tr>
+
+<tr>
+<td class="org-right">24</td>
+<td class="org-right">11000</td>
+</tr>
+
+<tr>
+<td class="org-right">25</td>
+<td class="org-right">11001</td>
+</tr>
+
+<tr>
+<td class="org-right">26</td>
+<td class="org-right">11010</td>
+</tr>
+
+<tr>
+<td class="org-right">27</td>
+<td class="org-right">11011</td>
+</tr>
+
+<tr>
+<td class="org-right">28</td>
+<td class="org-right">11100</td>
+</tr>
+
+<tr>
+<td class="org-right">29</td>
+<td class="org-right">11101</td>
+</tr>
+
+<tr>
+<td class="org-right">30</td>
+<td class="org-right">11110</td>
+</tr>
+
+<tr>
+<td class="org-right">31</td>
+<td class="org-right">11111</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
