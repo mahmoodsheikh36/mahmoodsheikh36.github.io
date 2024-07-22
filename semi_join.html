@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>semi join</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">semi join</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="orgdfb2368">
+<p>
+the semantics of semi-join are as follows: a row of <code>T1</code> is returned as soon as <code>T1.X</code> finds a match with any value of <code>T2.Y</code> without searching for further matches. this is in contrast to finding all possible matches in <a href="/inner_join.html#1704911074">inner join</a>.<br />
+consider the following schema:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql">EMPLOYEE (Ssn, Bdate, Address, Sex, Salary, Dno)
+DEPARTMENT (Dnumber, Dname, Dmgrssn, Zipcode)
+</pre>
+</div>
+<p>
+where a department is located in a specific zip code.<br />
+let us consider the following query:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql">Q(SJ): <span style="font-weight: bold;">SELECT</span> <span style="font-weight: bold;">COUNT</span>(*)
+<span style="font-weight: bold;">FROM</span>  DEPARTMENT D
+<span style="font-weight: bold;">WHERE</span> D.Dnumber <span style="font-weight: bold;">IN</span> (<span style="font-weight: bold;">SELECT</span> E.Dno
+                    <span style="font-weight: bold;">FROM</span>   EMPLOYEE E
+                    <span style="font-weight: bold;">WHERE</span>  E.Salary &gt; 200000)
+</pre>
+</div>
+<p>
+here we have a nested query which is joined by the connector <code>IN</code>.<br />
+to remove the nested query:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql">(<span style="font-weight: bold;">SELECT</span> E.Dno
+ <span style="font-weight: bold;">FROM</span>   EMPLOYEE E
+ <span style="font-weight: bold;">WHERE</span>  E.Salary &gt; 200000)
+</pre>
+</div>
+<p>
+is called as unnesting. it leads to the following query with an operation called <i>semi-join</i>, which we show with a non-standard notation "S=" below:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span> <span style="font-weight: bold;">COUNT</span>(*)
+<span style="font-weight: bold;">FROM</span> EMPLOYEE E, DEPARTMENT D
+<span style="font-weight: bold;">WHERE</span> D.Dnumber S= E.Dno <span style="font-weight: bold;">and</span> E.Salary &gt; 200000;
+</pre>
+</div>
+<p>
+the above query is counting the number of departments that have employees who make more than $200,000 annually. here, the operation is to find the department whose <code>Dnumber</code> attribute matches the value(s) for the <code>Dno</code> attribute of <code>Employee</code> with that high salary.<br />
+in algebra, alternate notations exist. one common notation is <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.878571 6.997502 5.378573' style="height: 0.5291em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-110' d='m5.379826-.647572v-.67746l-1.892902-1.235367l1.892902-1.265255v-.617684l-2.391034 1.564134l-2.371108-1.564134v3.795766l2.371108-1.58406l2.391034 1.58406zm-2.879203-1.912827l-1.334994 .886675v-1.77335l1.334994 .886675z'/>
+</defs>
+<g id='page1'>
+<g fill='currentColor'>
+<use x='0' y='0' xlink:href='#g0-110'/>
+</g>
+</g>
+</svg>.<br />
+</p>
+
+</div>
+</div>
+</body>
+</html>

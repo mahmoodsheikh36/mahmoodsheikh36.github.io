@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>key constraint</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">key constraint</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="org30374e9">
+<p>
+because keys and referential integrity constraints are very important, there are special clauses within the <code>CREATE TABLE</code> statement to specify them. the <code>PRIMARY KEY</code> clause specifies one or more attributes that make up the primary key of a relation. if a primary key has a single attribute, the clause can follow the attribute directly. the <code>UNIQUE</code> clause specifies alternate (unique) keys, also known as candidate keys. the <code>UNIQUE</code> clause can also be specified directly for a unique key if it is a single attribute, as in the following example:<br />
+</p>
+<div class="org-src-container" data-language="sql">
+<pre class="src src-sql">Dname <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15) <span style="font-weight: bold;">UNIQUE</span>,
+</pre>
+</div>
+<p>
+referential integrity is specified via the <code>FOREIGN KEY</code> clause, a referential integrity constraint can be violated when tuples are inserted or deleted, or when a foreign key or primary key attribute value is updated. the default action that <a href="/sql.html#1702389696">sql</a> takes for an integrity violation is to reject the update operation that will cause a violation, which is known as the <code>RESTRICT</code> option. however, the schema designer can specify an alternative action to be taken by attaching a referential triggered action clause to any foreign key constraint. the options include <code>SET NULL</code>, <code>CASCADE</code>, and <code>SET DEFAULT</code>. an option must be qualified with either <code>ON DELETE</code> or <code>ON UPDATE</code>.<br />
+</p>
+
+</div>
+</div>
+</body>
+</html>

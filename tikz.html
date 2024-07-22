@@ -1,0 +1,1684 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>tikz</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">tikz</h1>
+</div>
+<div id="content" class="content">
+<p>
+for reference: <a href="/tikz_refcard.pdf">refcard</a><br />
+</p>
+
+<p>
+<a href="https://github.com/xinychen/awesome-latex-drawing#example-1">https://github.com/xinychen/awesome-latex-drawing#example-1</a><br />
+<a href="https://texample.net/tikz/examples/difference-quotient/">https://texample.net/tikz/examples/difference-quotient/</a><br />
+</p>
+
+<p>
+tikz is used to draw graphics in latex documents<br />
+it can be imported like this:<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\usepackage{tikz}
+</pre>
+</div>
+<div id="outline-container-orgae6bc1f" class="outline-2">
+<h2 id="orgae6bc1f">primitive shapes</h2>
+<div class="outline-text-2" id="text-orgae6bc1f">
+<p>
+drawing primitive shapes like lines/rectangles is very simple<br />
+</p>
+</div>
+<div id="outline-container-orge47670b" class="outline-3">
+<h3 id="orge47670b">lines</h3>
+<div class="outline-text-3" id="text-orge47670b">
+
+<div id="org400cf67" class="figure">
+<p><img src="/tJcTbR.svg" /><br />
+</p>
+</div>
+
+<p>
+here <code>|-</code> generates a broken line while <code>--</code> generates a straight line<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\tikz\draw (0,0) -- (3,2) -- (5,0) |- (4,3);
+\tikz\draw[-&gt;] (-2,0) -- (-3,0);
+</pre>
+</div>
+
+
+<div id="orga513121" class="figure">
+<p><img src="/E8OU1y.svg" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd4dd320" class="outline-3">
+<h3 id="orgd4dd320">polygons</h3>
+<div class="outline-text-3" id="text-orgd4dd320">
+<p>
+tikz has lots of builtin shapes like:<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\tikz\draw (0,0) circle (10px);
+\tikz\draw[fill=gray!30!white] (0,0) ellipse (28pt and 20pt);
+\tikz\draw[line width=2mm] (0,0) arc (30:200:1cm);
+\tikz\fill[color=red] (0,0) rectangle (2,1);
+</pre>
+</div>
+
+
+<div id="orgc876c63" class="figure">
+<p><img src="/4GY1Ec.svg" /><br />
+</p>
+</div>
+
+<p>
+and if tikz doesnt have a specific shape we can always use lines to draw it<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">% use cycle instead of manually writing (0,0)
+\tikz\draw (0,0) -- (4,0) -- (4,4) -- cycle;
+</pre>
+</div>
+
+
+<div id="orgd261abd" class="figure">
+<p><img src="/5kARLC.svg" /><br />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orga2b8595" class="outline-2">
+<h2 id="orga2b8595">nodes</h2>
+<div class="outline-text-2" id="text-orga2b8595">
+<p>
+nodes are used  to represent entities for various purposes including inserting text and connecting entities<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture} \draw
+  (1,1) node[circle, draw]{A} --
+  (2,2) node[circle, draw]{B};
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="orga2b7793" class="figure">
+<p><img src="/JuXxvo.svg" /><br />
+</p>
+</div>
+
+<p>
+to get a more "proper" result we use the <code>anchor</code> argument<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture} \draw
+  (1,1) node[anchor=north east, circle, draw]{A} --
+  (2,2) node[anchor=south west, circle, draw]{B};
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="orgbd79d0e" class="figure">
+<p><img src="/fwDlQd.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture} \draw
+  (0,0) node[anchor=north, rectangle, draw, label=above:Top, label=below:Bottom]{inside rectangle} |-
+  (3,3) node[anchor=west, rectangle, draw, label=above:Top, label=below:Bottom]{another rectangle};
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org493dbdb" class="figure">
+<p><img src="/vERNnP.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}
+  % draw the sets
+  \filldraw[fill=blue!20, draw=blue!60] (-1.5,0) circle (1cm);
+  \filldraw[fill=red!20, draw=red!60] (1.5,0) circle (1cm);
+
+  % the texts
+  \node at (-1.5,1.5) {$X$};
+  \node at (1.5,1.5) {$Y$};
+
+  % the points in the sets (here I just create nodes to use them later on to position
+  % the circles and the arrows
+  \node (x1) at (-1.5,0.7) {$a$};
+  \node (x2) at (-1.5,0.3) {$b$};
+  \node (x3) at (-1.5,-0.2) {$c$};
+  \node (x4) at (-1.5,-0.7) {$d$};
+  \node (y1) at (1.5,0.7) {$1$};
+  \node (y2) at (1.5,0.3) {$2$};
+  \node (y3) at (1.5,-0.2) {$3$};
+  \node (y4) at (1.5,-0.7) {$4$};
+
+  % draw the arrows
+  \draw[-&gt;] (x1) -- (y4);
+  \draw[-&gt;] (x2) -- (y2);
+  \draw[-&gt;] (x3) -- (y1);
+  \draw[-&gt;] (x4) -- (y3);
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="orgedc23ef" class="figure">
+<p><img src="/BgY0KZ.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}[
+    &gt; = stealth, % arrow head style
+    shorten &gt; = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 1cm, % distance between nodes
+    semithick % line style
+  ]
+
+  \tikzstyle{every state}=[
+    draw = black,
+    thin,
+    fill = cyan!29,
+    minimum size = 5mm
+  ]
+
+  \node[state] (a) {$a$};
+  \node[state] (b)[below left=of a] {$b$};
+  \node[state] (c)[below left=0.3cm and 0.3cm of b] {$c$};
+  \node[state] (f)[below left=0.3cm and 0.3cm of c] {$f$};
+  \node[state] (j)[below left=0.3cm and 0.3cm of f ] {$j$};
+  \node[state] (d)[below left=0.3cm and 0.3cm of j] {$d$};
+  \node[state] (i)[below left=0.3cm and 0.3cm of d] {$i$};
+
+  \path[-&gt;] (a) edge node {} (b);
+  \path[-&gt;] (b) edge node {} (c);
+  \path[-&gt;] (c) edge node {} (f);
+  \path[-&gt;] (f) edge node {} (j);
+  \path[-&gt;] (j) edge node {} (d);
+  \path[-&gt;] (d) edge node {} (i);
+  \path[-&gt;] (b) edge[bend right=45, blue, very thick] node {} (j);
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org6f8cd63" class="figure">
+<p><img src="/sP1ObG.svg" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8afcc0a" class="outline-2">
+<h2 id="org8afcc0a">2d plots</h2>
+<div class="outline-text-2" id="text-org8afcc0a">
+<p>
+you can play around with the parameters to see how they affect the drawing<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}
+  \draw[-&gt;] (-3, 0) -- (4.2, 0) node[right] {$x$};
+  \draw[-&gt;] (0, -3) -- (0, 4.2) node[above] {$y$};
+  \draw[scale=0.5, domain=-3:3, smooth, variable=\x, blue] plot ({\x}, {\x*\x});
+  \draw[scale=0.5, domain=-3:3, smooth, variable=\y, red]  plot ({\y*\y}, {\y});
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org1be2af7" class="figure">
+<p><img src="/cdn8lr.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}
+  % drawing the grid
+  \draw[thick, color = gray, step = 1cm, dashed] (-1,-1) grid (5,5);
+  \draw[-&gt;] (-2,0) -- (6,0) node[right]{$x$};
+  \draw[-&gt;] (0,-2) -- (0,6) node[above]{$y$};
+
+  % defining nodes
+  \node (A) at (1,2);
+  \node (B) at (2,4);
+  \node (C) at (0,4);
+  \node (D) at (5,2);
+  \node (E) at (1.65, 3.35);
+
+  % draw the lines
+  \draw[red, thick, dashed] (A) -- (B);
+  \draw[black, thick] (C) -- (D);
+
+  % draw the points
+  \draw[fill=orange] (E) circle (2pt) node[right] {E(1.65, 3.35)};
+  \draw[fill=blue] (A) circle (2pt) node[below right] {A(1,2)};
+  \draw[fill=blue] (B) circle (2pt) node[above left] {B(2,4)};
+  \draw[fill=blue] (C) circle (2pt) node[below left] {C(0,4)};
+  \draw[fill=blue] (D) circle (2pt) node[above right] {D(5,2)};
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="orgcd65cdc" class="figure">
+<p><img src="/9DtrIs.svg" /><br />
+</p>
+</div>
+</div>
+<div id="outline-container-ID-1C206B6D-4313-4C15-82AE-A1D28214A37F" class="outline-3">
+<h3 id="ID-1C206B6D-4313-4C15-82AE-A1D28214A37F">pgfplots</h3>
+<div class="outline-text-3" id="text-orgc1e3a58">
+<p>
+you can use the <b>pgfplots</b> package which is written using <b>tikz</b> to make things easier, include it using:<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\usepackage{pgfplots}
+</pre>
+</div>
+<p>
+example usage:<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}
+  \begin{axis}[domain=-4:4, samples=100, grid=major,
+    restrict y to domain=0:4, xlabel=$x$, ylabel=$y(x)$, legend pos=north west]
+    \addplot [color=red]    {2*exp(x)};
+    \addplot [color=green]  {exp(x)};
+    \addplot [color=purple] {exp(-x)};
+    \addplot [color=blue]   {2*exp(-x)};
+
+    \legend{$2e^x$, $e^x$, $e^{-x}$, $2e^{-x}$}
+  \end{axis}
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org7e5ca91" class="figure">
+<p><img src="/gSMHG5.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\usepgfplotslibrary{fillbetween}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis lines=middle, xlabel=$x$, ylabel=$y$,
+    xmin=-3, xmax=3,
+    ymin=-10, ymax=10,
+    xtick distance=1, ytick distance=4]
+
+    \addplot [domain=-2.5:2.5, samples=100, name path=f, thick, color=red!50]
+    {3*x^3 - x^2 - 10*x};
+
+    \addplot [domain=-2.5:2.5, samples=100, name path=g, thick, color=blue!50]
+    {- x^2 + 2*x};
+
+    \addplot[red!10, opacity=0.4] fill between[of=f and g, soft clip={domain=-2:2}];
+
+    \node[color=red, font=\footnotesize] at (axis cs: -1.6,7) {$f(x)=3x^3 - x^2 - 10x$};
+    \node[color=blue, font=\footnotesize] at (axis cs: 1.1,2.2) {$g(x)=- x^2 + 2x$};
+  \end{axis}
+\end{tikzpicture}
+</pre>
+</div>
+
+<p>
+<img src="/7c8Bc5.svg" /><br />
+scatter plot:<br />
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -192.373752 368.203724 192.873754' style="height: 18.9725em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<clipPath id='clip1'>
+<path d='m42.5898-30.2812h194.2809v-161.3948h-194.2809z'/>
+</clipPath>
+<path id='g7-9' d='m3.028643 1.603985c-.797011-.627646-1.075965-.976339-1.344956-1.723537c-.239103-.667497-.348692-1.424658-.348692-2.420922c0-1.046077 .129514-1.863014 .398506-2.480697c.278954-.617684 .577833-.976339 1.295143-1.554172l-.089664-.159402c-.737235 .478207-1.036115 .737235-1.404732 1.195517c-.707347 .86675-1.05604 1.863014-1.05604 3.028643c0 1.265255 .368618 2.241594 1.24533 3.257783c.408468 .478207 .667497 .697385 1.185554 1.016189l.119552-.159402z'/>
+<path id='g7-10' d='m2.839352-2.460772c0-1.275218-.368618-2.241594-1.24533-3.257783c-.408468-.478207-.667497-.697385-1.185554-1.016189l-.119552 .159402c.797011 .627646 1.066002 .976339 1.344956 1.723537c.239103 .667497 .348692 1.424658 .348692 2.420922c0 1.036115-.129514 1.863014-.398506 2.470735c-.278954 .627646-.577833 .986301-1.295143 1.564134l.089664 .159402c.737235-.478207 1.036115-.737235 1.404732-1.195517c.707347-.86675 1.05604-1.863014 1.05604-3.028643z'/>
+<path id='g7-47' d='m7.043587-6.405978v-.18929h-2.34122v.18929c.37858 .029888 .518057 .069738 .667497 .159402c.199253 .139477 .288917 .498132 .288917 1.115816v3.35741l-3.835616-4.821918h-1.703611v.18929c.428394 0 .56787 .079701 .966376 .547945v4.393524c0 1.026152-.139477 1.215442-.966376 1.275218v.18929h2.34122v-.18929c-.767123-.039851-.936488-.268991-.936488-1.275218v-3.905355l4.403487 5.479452h.169365v-5.240349c0-.597758 .099626-.966376 .288917-1.09589c.139477-.099626 .278954-.139477 .657534-.179328z'/>
+<path id='g7-78' d='m7.721046 0v-.14944l-.259029-.019925c-.298879-.019925-.428394-.199253-.428394-.587796v-2.052304c0-1.175592-.388543-1.77335-1.155666-1.77335c-.577833 0-1.085928 .259029-1.62391 .836862c-.179328-.56787-.518057-.836862-1.05604-.836862c-.438356 0-.71731 .139477-1.544209 .767123v-.747198l-.069738-.019925c-.508095 .18929-.846824 .298879-1.39477 .448319v.169365c.129514-.029888 .209215-.039851 .318804-.039851c.259029 0 .348692 .159402 .348692 .637609v2.520548c0 .537983-.139477 .687422-.697385 .697385v.14944h2.211706v-.14944c-.52802-.019925-.67746-.129514-.67746-.518057v-2.809465c0 0 .079701-.119552 .14944-.18929c.249066-.229141 .67746-.398506 1.026152-.398506c.438356 0 .657534 .348692 .657534 1.046077v2.161893c0 .557908-.109589 .667497-.67746 .707347v.14944h2.231631v-.14944c-.56787-.009963-.71731-.179328-.71731-.797011v-2.510585c.298879-.428394 .627646-.607721 1.085928-.607721c.56787 0 .747198 .268991 .747198 1.09589v2.102117c0 .56787-.079701 .647572-.657534 .71731v.14944h2.181818z'/>
+<path id='g6-1' d='m6.156912 0l-2.789539-6.724782h-.169365l-2.958904 6.724782h5.917808zm-1.165629-.418431h-4.094645l2.132005-4.821918l1.96264 4.821918z'/>
+<path id='g3-34' d='m7.312578 0v-.159402c-.67746-.059776-.767123-.109589-.767123-.428394c0-.169365 .019925-.288917 .109589-.607721l1.225405-4.41345c.179328-.597758 .229141-.647572 .816936-.737235v-.159402h-1.663761l-3.347447 4.911582l-.547945-4.911582h-1.803238v.159402c.498132 .029888 .737235 .139477 .737235 .368618c0 .079701-.039851 .229141-.099626 .408468l-.089664 .298879l-.029888 .109589l-1.05604 3.706102c-.308842 1.036115-.458281 1.235367-.976339 1.295143v.159402h1.972603v-.159402c-.508095-.039851-.707347-.159402-.707347-.438356c0-.109589 .039851-.348692 .089664-.52802l1.175592-4.313823l.607721 5.439601h.169365l3.755915-5.589041l-1.285181 4.682441c-.159402 .52802-.358655 .67746-1.006227 .747198v.159402h2.719801z'/>
+<path id='g3-54' d='m3.845579 .597758c-.009963-.627646-.488169-1.066002-1.444583-1.315068c-.438356-.109589-.697385-.268991-.697385-.418431s.229141-.408468 .358655-.408468c0 0 .039851 0 .069738 .009963c.079701 .019925 .219178 .029888 .308842 .029888c.9066 0 1.823163-.797011 1.823163-1.574097c0-.169365-.029888-.358655-.089664-.56787h.498132l-.009963-.388543h-.607721c-.029888 0-.079701-.019925-.159402-.079701c-.268991-.179328-.597758-.278954-.976339-.278954c-1.105853 0-1.992528 .767123-1.992528 1.703611c.009963 .518057 .229141 .816936 .797011 1.075965c-.577833 .398506-.757161 .597758-.757161 .836862c0 .129514 .089664 .249066 .278954 .388543c-.956413 .627646-1.155666 .836862-1.155666 1.275218c0 .71731 .647572 1.165629 1.673724 1.165629c1.255293 0 2.082192-.587796 2.082192-1.454545zm-.597758 .298879c0 .537983-.56787 .936488-1.334994 .936488c-.797011 0-1.275218-.37858-1.275218-1.016189c0-.239103 .049813-.408468 .209215-.597758c.129514-.169365 .547945-.498132 .627646-.498132c0 0 .029888 .009963 .049813 .019925l.288917 .089664c1.05604 .328767 1.424658 .607721 1.43462 1.066002zm-.069738-3.237858c-.219178 .408468-.52802 .627646-.86675 .627646c-.388543 0-.597758-.288917-.597758-.767123c0-.9066 .557908-1.693649 1.195517-1.693649c.368618 0 .557908 .239103 .56787 .707347c0 .348692-.119552 .787049-.298879 1.125778z'/>
+<path id='g3-71' d='m4.144458-1.026152l-.139477-.079701c-.079701 .099626-.129514 .14944-.219178 .268991c-.229141 .298879-.33873 .398506-.468244 .398506c-.139477 0-.229141-.129514-.298879-.408468c-.019925-.089664-.029888-.139477-.039851-.159402c-.239103-.936488-.358655-1.474471-.358655-1.62391c.438356-.767123 .797011-1.205479 .976339-1.205479c.059776 0 .14944 .029888 .239103 .079701c.119552 .069738 .18929 .089664 .278954 .089664c.199253 0 .33873-.14944 .33873-.358655c0-.219178-.169365-.368618-.408468-.368618c-.438356 0-.806974 .358655-1.504359 1.424658l-.109589-.547945c-.139477-.67746-.249066-.876712-.518057-.876712c-.229141 0-.547945 .079701-1.165629 .288917l-.109589 .039851l.039851 .14944l.169365-.039851c.18929-.049813 .308842-.069738 .388543-.069738c.249066 0 .308842 .089664 .448319 .687422l.288917 1.225405l-.816936 1.165629c-.209215 .298879-.398506 .478207-.508095 .478207c-.059776 0-.159402-.029888-.259029-.089664c-.129514-.069738-.229141-.099626-.318804-.099626c-.199253 0-.33873 .14944-.33873 .348692c0 .259029 .18929 .418431 .498132 .418431s.428394-.089664 .926526-.687422l.896638-1.175592l.298879 1.195517c.129514 .518057 .259029 .667497 .577833 .667497c.37858 0 .637609-.239103 1.215442-1.135741z'/>
+<path id='g3-149' d='m1.803238-.428394c0-.308842-.259029-.56787-.557908-.56787s-.547945 .249066-.547945 .56787c0 .37858 .33873 .537983 .547945 .537983s.557908-.169365 .557908-.537983z'/>
+<use id='g1-1' xlink:href='#g0-1' transform='scale(1.369862)'/>
+<path id='g0-0' d='m4.174547-1.665455v-.407273h-3.723638v.407273h3.723638z'/>
+<path id='g0-1' d='m1.316364-1.861819c0-.225455-.189091-.414546-.407273-.414546s-.4 .181818-.4 .414546c0 .276364 .247273 .392727 .4 .392727s.407273-.123636 .407273-.392727z'/>
+<use id='g5-48' xlink:href='#g4-48' transform='scale(1.369862)'/>
+<use id='g5-49' xlink:href='#g4-49' transform='scale(1.369862)'/>
+<use id='g5-50' xlink:href='#g4-50' transform='scale(1.369862)'/>
+<use id='g5-52' xlink:href='#g4-52' transform='scale(1.369862)'/>
+<use id='g5-54' xlink:href='#g4-54' transform='scale(1.369862)'/>
+<use id='g5-56' xlink:href='#g4-56' transform='scale(1.369862)'/>
+<path id='g4-48' d='m3.46182-2.400001c0-1.49091-.661818-2.516365-1.614546-2.516365c-.4 0-.705455 .123636-.974546 .378182c-.421818 .407273-.698182 1.243637-.698182 2.094546c0 .792728 .24 1.643637 .581818 2.05091c.269091 .32 .64 .494546 1.061819 .494546c.370909 0 .683637-.123636 .945455-.378182c.421818-.4 .698182-1.243637 .698182-2.123637zm-.698182 .014545c0 1.520001-.32 2.298183-.945455 2.298183s-.945455-.778182-.945455-2.29091c0-1.541819 .327273-2.349092 .952728-2.349092c.610909 0 .938182 .821819 .938182 2.341819z'/>
+<path id='g4-49' d='m2.865456 0v-.109091c-.574546-.007273-.690909-.08-.690909-.429091v-4.363638l-.058182-.014545l-1.309091 .661818v.101818c.087273-.036364 .167273-.065455 .196364-.08c.130909-.050909 .254546-.08 .327273-.08c.152727 0 .218182 .109091 .218182 .341818v3.294547c0 .24-.058182 .407273-.174546 .472727c-.109091 .065455-.210909 .087273-.516364 .094545v.109091h2.007274z'/>
+<path id='g4-50' d='m3.454547-.996364l-.094545-.036364c-.269091 .414546-.363637 .48-.690909 .48h-1.738183l1.221819-1.280001c.647273-.676364 .930909-1.229091 .930909-1.796364c0-.727273-.589091-1.287273-1.345455-1.287273c-.4 0-.778182 .16-1.047273 .450909c-.232727 .247273-.341818 .48-.465455 .996364l.152727 .036364c.290909-.712728 .552728-.945455 1.054546-.945455c.610909 0 1.025455 .414546 1.025455 1.025455c0 .567273-.334546 1.243637-.945455 1.89091l-1.294546 1.374546v.087273h2.836365l.4-.996364z'/>
+<path id='g4-52' d='m3.432729-1.214546v-.465455h-.741818v-3.236365h-.32l-2.283637 3.236365v.465455h2.043637v1.214546h.56v-1.214546h.741818zm-1.309091-.465455h-1.745455l1.745455-2.494546v2.494546z'/>
+<path id='g4-54' d='m3.403638-1.592728c0-.930909-.530909-1.520001-1.367273-1.520001c-.32 0-.472727 .050909-.930909 .327273c.196364-1.098182 1.01091-1.883637 2.152728-2.072728l-.014545-.116364c-.829091 .072727-1.25091 .210909-1.781819 .581818c-.785455 .56-1.214546 1.389091-1.214546 2.363637c0 .632728 .196364 1.272728 .509091 1.636364c.276364 .32 .669091 .494546 1.12 .494546c.901819 0 1.527273-.690909 1.527273-1.694546zm-.654546 .247273c0 .8-.283636 1.243637-.792728 1.243637c-.64 0-1.032728-.683637-1.032728-1.81091c0-.370909 .058182-.574546 .203636-.683637c.152727-.116364 .378182-.181818 .632728-.181818c.625455 0 .989091 .523637 .989091 1.432728z'/>
+<path id='g4-56' d='m3.236365-1.127273c0-.56-.247273-.916364-1.127273-1.57091c.72-.385455 .974546-.690909 .974546-1.185455c0-.596364-.523637-1.032728-1.25091-1.032728c-.792728 0-1.381819 .487273-1.381819 1.149091c0 .472727 .138182 .683637 .901819 1.352728c-.785455 .596364-.945455 .821819-.945455 1.316364c0 .705455 .574546 1.200001 1.396364 1.200001c.872728 0 1.432728-.48 1.432728-1.229091zm-.552728 .225455c0 .472727-.327273 .8-.8 .8c-.552728 0-.923637-.421818-.923637-1.054546c0-.465455 .16-.770909 .581818-1.112728l.436364 .32c.530909 .378182 .705455 .64 .705455 1.047273zm-.101818-2.989092c0 .414546-.203636 .741818-.618182 1.018182c-.036364 .021818-.036364 .021818-.065455 .043636c-.647273-.421818-.909091-.756364-.909091-1.163637c0-.421818 .327273-.72 .785455-.72c.494546 0 .807273 .32 .807273 .821819z'/>
+</defs>
+<g id='page1'>
+<g fill='none' stroke-miterlimit='10'>
+<path d='m58.78123-30.2812v-4.25393m40.01957 4.25393v-4.25393m40.0195 4.25393v-4.25393m40.0234 4.25393v-4.25393m40.02 4.25393v-4.25393m-160.08247-157.14087v4.25m40.01957-4.25v4.25m40.0195-4.25v4.25m40.0234-4.25v4.25m40.02-4.25v4.25' stroke='#808080' stroke-width='.19925'/>
+<path d='m42.5898-42.914041h4.2539m-4.2539-32.035159h4.2539m-4.2539-32.0312h4.2539m-4.2539-32.0352h4.2539m-4.2539-32.0354h4.2539m190.027 128.136959h-4.254m4.254-32.035159h-4.254m4.254-32.0312h-4.254m4.254-32.0352h-4.254m4.254-32.0354h-4.254' stroke='#808080' stroke-width='.19925'/>
+<path d='m42.5898-30.2812v-161.3948h194.2809v161.3948h-194.2809z' stroke='currentColor' stroke-width='.3985'/>
+</g>
+<g fill='currentColor'>
+<g transform='translate(-45.082 53.9776)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-5.0613 53.9776)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-50'/>
+</g>
+<g transform='translate(34.959 53.9776)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-52'/>
+</g>
+<g transform='translate(74.98 54.1121)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-54'/>
+</g>
+<g transform='translate(115.001 53.9776)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-56'/>
+</g>
+<g transform='translate(113.304 67.85157)'>
+<use x='101.471685' y='-74.014803' xlink:href='#g1-1'/>
+<use x='104.061962' y='-74.014803' xlink:href='#g5-49'/>
+<use x='109.043282' y='-74.014803' xlink:href='#g5-48'/>
+<use x='114.315503' y='-77.631231' xlink:href='#g0-0'/>
+<use x='119.231874' y='-77.631231' xlink:href='#g4-50'/>
+</g>
+<g transform='translate(-67.2833 34.3927)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-75.0841 2.3591)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-48'/>
+<use x='106.512778' y='-74.014803' xlink:href='#g3-149'/>
+<use x='109.172801' y='-74.014803' xlink:href='#g5-50'/>
+</g>
+<g transform='translate(-75.0841 -29.6742)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-48'/>
+<use x='106.512778' y='-74.014803' xlink:href='#g3-149'/>
+<use x='109.172801' y='-74.014803' xlink:href='#g5-52'/>
+</g>
+<g transform='translate(-75.0841 -61.6412)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-48'/>
+<use x='106.512778' y='-74.014803' xlink:href='#g3-149'/>
+<use x='109.172801' y='-74.014803' xlink:href='#g5-54'/>
+</g>
+<g transform='translate(-75.0841 -93.7412)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g5-48'/>
+<use x='106.512778' y='-74.014803' xlink:href='#g3-149'/>
+<use x='109.172801' y='-74.014803' xlink:href='#g5-56'/>
+</g>
+</g>
+<g fill='none' stroke-width='.3985' stroke-miterlimit='10' clip-path='url(#clip1)'>
+<path d='m58.78123-43.730447l6.66797-5.539063l6.6719-5.53909l6.6718-5.5351l6.668-5.5391l6.6719-5.5391l6.668-5.5351l6.6718-5.5391l6.668-5.539l6.6719-5.5352l6.668-5.5391l6.6718-5.5351l6.668-5.5391l6.6719-5.539l6.6718-5.5352l6.6677-5.539l6.672-5.5391l6.668-5.5352l6.672-5.539l6.668-5.5389l6.672-5.535l6.668-5.539l6.672-5.539l6.668-5.536l6.672-5.539' stroke='#f00'/>
+<g stroke='currentColor'>
+<path d='m68.18748-51.57029h1.41402'/>
+<path d='m69.601545-53.56251v3.98438'/>
+<path d='m68.18748-51.57029h-1.41797'/>
+<path d='m66.769578-49.57813v-3.98437'/>
+<path d='m68.18748-51.57029v-.01563'/>
+<path d='m66.19138-51.585987h3.98828'/>
+<path d='m68.18748-51.57029v.01562'/>
+<path d='m70.17966-51.554728h-3.98829'/>
+<path d='m87.1953-67.3633h1.4141'/>
+<path d='m88.609416-69.35547v3.98437'/>
+<path d='m87.1953-67.3633h-1.4141'/>
+<path d='m85.781255-65.37109v-3.98438'/>
+<path d='m87.1953-67.3633v-.0156'/>
+<path d='m85.20314-67.378865h3.98437'/>
+<path d='m87.1953-67.3633v.0157'/>
+<path d='m89.18753-67.347617h-3.98437'/>
+<path d='m106.207-83.2851h1.4141'/>
+<path d='m107.620893-85.27735v3.98438'/>
+<path d='m106.207-83.2851h-1.418'/>
+<path d='m104.788741-81.29297v-3.98437'/>
+<path d='m106.207-83.2851v-.0157'/>
+<path d='m104.21061-83.30074h3.98828'/>
+<path d='m106.207-83.2851v.0156'/>
+<path d='m108.199-83.269492h-3.98829'/>
+<path d='m125.2148-99.0469h1.4141'/>
+<path d='m126.628871-101.03903v3.98438'/>
+<path d='m125.2148-99.0469h-1.414'/>
+<path d='m123.800603-97.05465v-3.98437'/>
+<path d='m125.2148-99.0469v-.0156'/>
+<path d='m123.22247-99.062519h3.98437'/>
+<path d='m125.2148-99.0469v.0157'/>
+<path d='m127.20697-99.031241h-3.98438'/>
+<path d='m163.8357-130.7461h1.414'/>
+<path d='m165.249954-132.73866v3.98437'/>
+<path d='m163.8357-130.7461h-1.414'/>
+<path d='m162.421678-128.75416v-3.98829'/>
+<path d='m163.8357-130.7461v-.0156'/>
+<path d='m161.84358-130.761337h3.98437'/>
+<path d='m163.8357-130.7461v.0157'/>
+<path d='m165.82807-130.730474h-3.98437'/>
+<path d='m183.2457-146.527h1.414'/>
+<path d='m184.660061-148.51926v3.98438'/>
+<path d='m183.2457-146.527h-1.414'/>
+<path d='m181.831801-144.53479v-3.98437'/>
+<path d='m183.2457-146.527v-.016'/>
+<path d='m181.25364-146.542946h3.98437'/>
+<path d='m183.2457-146.527v.015'/>
+<path d='m185.23816-146.512099h-3.98437'/>
+<path d='m202.8557-162.43h1.414'/>
+<path d='m204.269283-164.4216v3.98437'/>
+<path d='m202.8557-162.43h-1.414'/>
+<path d='m201.441038-160.43713v-3.98829'/>
+<path d='m202.8557-162.43v-.015'/>
+<path d='m200.8629-162.445276h3.98438'/>
+<path d='m202.8557-162.43v.016'/>
+<path d='m204.84737-162.414444h-3.98437'/>
+<path d='m219.2657-178.211h1.414'/>
+<path d='m220.679931-180.20304v3.98437'/>
+<path d='m219.2657-178.211h-1.418'/>
+<path d='m217.847779-176.21858v-3.98437'/>
+<path d='m219.2657-178.211v-.016'/>
+<path d='m217.26965-178.226748h3.98828'/>
+<path d='m219.2657-178.211v.016'/>
+<path d='m221.25805-178.194885h-3.98828'/>
+</g>
+</g>
+<path d='m70.1797-51.57029c0-1.10156-.8946-1.99219-1.99222-1.99219c-1.10156 0-1.99609 .89063-1.99609 1.99219s.89453 1.99219 1.99609 1.99219c1.09762 0 1.99222-.89063 1.99222-1.99219z' fill='#00f'/>
+<path d='m70.1797-51.57029c0-1.10156-.8946-1.99219-1.99222-1.99219c-1.10156 0-1.99609 .89063-1.99609 1.99219s.89453 1.99219 1.99609 1.99219c1.09762 0 1.99222-.89063 1.99222-1.99219z' stroke='#00c' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<path d='m89.1875-67.3633c0-1.1015-.8906-1.9921-1.9922-1.9921s-1.9922 .8906-1.9922 1.9921c0 1.0977 .8906 1.9922 1.9922 1.9922s1.9922-.8945 1.9922-1.9922z' fill='#00f'/>
+<path d='m89.1875-67.3633c0-1.1015-.8906-1.9921-1.9922-1.9921s-1.9922 .8906-1.9922 1.9921c0 1.0977 .8906 1.9922 1.9922 1.9922s1.9922-.8945 1.9922-1.9922z' stroke='#00c' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<path d='m108.1992-83.2851c0-1.1016-.8945-1.9922-1.9922-1.9922c-1.1016 0-1.9961 .8906-1.9961 1.9922c0 1.1015 .8945 1.9922 1.9961 1.9922c1.0977 0 1.9922-.8907 1.9922-1.9922z' fill='#00f'/>
+<path d='m108.1992-83.2851c0-1.1016-.8945-1.9922-1.9922-1.9922c-1.1016 0-1.9961 .8906-1.9961 1.9922c0 1.1015 .8945 1.9922 1.9961 1.9922c1.0977 0 1.9922-.8907 1.9922-1.9922z' stroke='#00c' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<path d='m127.207-99.0469c0-1.1015-.8906-1.9921-1.9922-1.9921c-1.1015 0-1.9922 .8906-1.9922 1.9921c0 1.0977 .8907 1.9922 1.9922 1.9922c1.1016 0 1.9922-.8945 1.9922-1.9922z' fill='#00f'/>
+<path d='m127.207-99.0469c0-1.1015-.8906-1.9921-1.9922-1.9921c-1.1015 0-1.9922 .8906-1.9922 1.9921c0 1.0977 .8907 1.9922 1.9922 1.9922c1.1016 0 1.9922-.8945 1.9922-1.9922z' stroke='#00c' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<path d='m165.8277-130.7461c0-1.1015-.89-1.9922-1.992-1.9922c-1.101 0-1.992 .8907-1.992 1.9922c0 1.0977 .891 1.9922 1.992 1.9922c1.102 0 1.992-.8945 1.992-1.9922z' fill='#00f'/>
+<path d='m165.8277-130.7461c0-1.1015-.89-1.9922-1.992-1.9922c-1.101 0-1.992 .8907-1.992 1.9922c0 1.0977 .891 1.9922 1.992 1.9922c1.102 0 1.992-.8945 1.992-1.9922z' stroke='#00c' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<path d='m185.2387-146.527c0-1.098-.895-1.993-1.993-1.993c-1.101 0-1.992 .895-1.992 1.993c0 1.101 .891 1.992 1.992 1.992c1.098 0 1.993-.891 1.993-1.992z' fill='#00f'/>
+<path d='m185.2387-146.527c0-1.098-.895-1.993-1.993-1.993c-1.101 0-1.992 .895-1.992 1.993c0 1.101 .891 1.992 1.992 1.992c1.098 0 1.993-.891 1.993-1.992z' stroke='#00c' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<path d='m204.8477-162.43c0-1.101-.891-1.996-1.992-1.996c-1.102 0-1.992 .895-1.992 1.996c0 1.098 .89 1.993 1.992 1.993c1.101 0 1.992-.895 1.992-1.993z' fill='#00f'/>
+<path d='m204.8477-162.43c0-1.101-.891-1.996-1.992-1.996c-1.102 0-1.992 .895-1.992 1.996c0 1.098 .89 1.993 1.992 1.993c1.101 0 1.992-.895 1.992-1.993z' stroke='#00c' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<path d='m221.2577-178.211c0-1.101-.894-1.992-1.992-1.992c-1.102 0-1.996 .891-1.996 1.992c0 1.102 .894 1.992 1.996 1.992c1.098 0 1.992-.89 1.992-1.992z' fill='#00f'/>
+<path d='m221.2577-178.211c0-1.101-.894-1.992-1.992-1.992c-1.102 0-1.996 .891-1.996 1.992c0 1.102 .894 1.992 1.996 1.992c1.098 0 1.992-.89 1.992-1.992z' stroke='#00c' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(24.263 68.93177)'>
+<use x='101.372067' y='-74.014803' xlink:href='#g6-1'/>
+<use x='107.778041' y='-74.014803' xlink:href='#g3-71'/>
+<use x='115.175274' y='-74.014803' xlink:href='#g7-9'/>
+<use x='118.492833' y='-74.014803' xlink:href='#g7-78'/>
+<use x='126.243767' y='-74.014803' xlink:href='#g7-10'/>
+</g>
+<g fill='currentColor' transform='matrix(0 -1 1 0 84.0688 6.0022)'>
+<use x='101.870199' y='-74.014803' xlink:href='#g3-34'/>
+<use x='110.985994' y='-74.014803' xlink:href='#g3-54'/>
+<use x='118.761842' y='-74.014803' xlink:href='#g7-9'/>
+<use x='122.079401' y='-74.014803' xlink:href='#g7-47'/>
+<use x='129.272427' y='-74.014803' xlink:href='#g7-10'/>
+</g>
+</g>
+</svg>
+</span>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org5a48210" class="outline-2">
+<h2 id="org5a48210">3d plots</h2>
+<div class="outline-text-2" id="text-org5a48210">
+<p>
+for 3d plots we use the package <code>tikz-3dplot</code><br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\usepackage{tikz-3dplot}
+</pre>
+</div>
+<p>
+we start with a simple 3d plot with 3 vectors<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\tdplotsetmaincoords{70}{110}
+\begin{tikzpicture}[tdplot_main_coords, scale=2]
+  % draw main axes
+  \draw[thick,-&gt;] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+  \draw[thick,-&gt;] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+  \draw[thick,-&gt;] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+
+  % draw the vector lines
+  \draw[thick,color=blue,-&gt;] (0,0,0) -- (.7,.8,0) node[anchor=north]{$\vec{v_1}$};
+  \draw[thick,color=blue,-&gt;] (0,0,0) -- (0,.7,.3) node[anchor=west]{$\vec{v_2}$};
+  \draw[thick,color=blue,-&gt;] (0,0,0) -- (0,.2,.7) node[anchor=south]{$\vec{v_3}$};
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org80a65d2" class="figure">
+<p><img src="/EcA741.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\tdplotsetmaincoords{70}{130} % set initial 3d rotation
+\begin{tikzpicture}[tdplot_main_coords, scale = 1]
+  % draw the main axes
+  \draw[thick, -&gt;] (-2,0,0) -- (5,0,0) node[below left] {$x$};
+  \draw[thick, -&gt;] (0,-2,0) -- (0,5,0) node[below right] {$y$};
+  \draw[thick, -&gt;] (0,0,-2) -- (0,0,5) node[left] {$z$};
+
+  \draw[thick, blue, dashed] (-1,4,8) -- (-5,-4,-4);
+  \draw[thick, red, &lt;-&gt;] (-4,-2,-1) -- (-2,2,5) node[midway, above, sloped, black] {vector};
+
+  \filldraw[draw=black, fill=blue, opacity=0.3] (0,6,7) -- (-3,1,5) -- (-2,1,4) -- cycle;
+
+  \draw[fill=black] (0,6,7) circle (2pt) node[below right] {(0,6,7)};
+  \draw[fill=black] (-3,1,5) circle (2pt) node[above left] {(-3,1,5)};
+  \draw[fill=black] (-2,1,4) circle (2pt) node[below left] {(-2,1,4)};
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="orgf7da41b" class="figure">
+<p><img src="/jAMOqE.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">% set the plot display orientation
+% syntax: \tdplotsetdisplay{\theta_d}{\phi_d}
+\tdplotsetmaincoords{60}{110}
+
+% define polar coordinates for some vector
+% TODO: look into using 3d spherical coordinate system
+\pgfmathsetmacro{\rvec}{.8}
+\pgfmathsetmacro{\thetavec}{30}
+\pgfmathsetmacro{\phivec}{60}
+
+% use the tdplot_main_coords style to implement the display the coordinate transformation provided by 3dplot
+\begin{tikzpicture}[scale=5,tdplot_main_coords]
+
+  % set up some coordinates
+  % -----------------------
+  \node (O) at (0,0,0);
+
+  % determine a coordinate (P) using (r,\theta,\phi) coordinates.  This command
+  % also determines (Pxy), (Pxz), and (Pyz): the xy-, xz-, and yz-projections
+  % of the point (P).
+  % syntax: \tdplotsetcoord{Coordinate name without parentheses}{r}{\theta}{\phi}
+  \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+
+  % draw the main coordinate system axes
+  \draw[thick,-&gt;] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+  \draw[thick,-&gt;] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+  \draw[thick,-&gt;] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+
+  % draw a vector from origin to point (P) 
+  \draw[-stealth,color=red] (O) -- (P);
+
+  % draw projection on xy plane, and a connecting line
+  \draw[dashed, color=red] (O) -- (Pxy);
+  \draw[dashed, color=red] (P) -- (Pxy);
+
+  % draw the angle \phi, and label it
+  % syntax: \tdplotdrawarc[coordinate frame, draw options]{center point}{r}{angle}{label options}{label}
+  \tdplotdrawarc{(O)}{0.2}{0}{\phivec}{anchor=north}{$\phi$}
+
+  % set the rotated coordinate system so the x'-y' plane lies within the
+  % "theta plane" of the main coordinate system
+  % syntax: \tdplotsetthetaplanecoords{\phi}
+  \tdplotsetthetaplanecoords{\phivec}
+
+  % draw theta arc and label, using rotated coordinate system
+  \tdplotdrawarc[tdplot_rotated_coords]{(0,0,0)}{0.5}{0}{\thetavec}{anchor=south west}{$\theta$}
+
+  % draw some dashed arcs, demonstrating direct arc drawing
+  \draw[dashed,tdplot_rotated_coords] (\rvec,0,0) arc (0:90:\rvec);
+  \draw[dashed] (\rvec,0,0) arc (0:90:\rvec);
+
+  % set the rotated coordinate definition within display using a translation
+  % coordinate and Euler angles in the "z(\alpha)y(\beta)z(\gamma)" euler rotation convention
+  % syntax: \tdplotsetrotatedcoords{\alpha}{\beta}{\gamma}
+  \tdplotsetrotatedcoords{\phivec}{\thetavec}{0}
+
+  % translate the rotated coordinate system
+  % syntax: \tdplotsetrotatedcoordsorigin{point}
+  \tdplotsetrotatedcoordsorigin{(P)}
+
+  % use the tdplot_rotated_coords style to work in the rotated, translated coordinate frame
+  \draw[thick,tdplot_rotated_coords,-&gt;] (0,0,0) -- (.5,0,0) node[anchor=north west]{$x'$};
+  \draw[thick,tdplot_rotated_coords,-&gt;] (0,0,0) -- (0,.5,0) node[anchor=west]{$y'$};
+  \draw[thick,tdplot_rotated_coords,-&gt;] (0,0,0) -- (0,0,.5) node[anchor=south]{$z'$};
+
+  % WARNING:  coordinates defined by the \coordinate command (eg. (O), (P), etc.)
+  % cannot be used in rotated coordinate frames.  Use only literal coordinates.  
+
+  % draw some vector, and its projection, in the rotated coordinate frame
+  \draw[-stealth,color=blue,tdplot_rotated_coords] (0,0,0) -- (.2,.2,.2);
+  \draw[dashed,color=blue,tdplot_rotated_coords] (0,0,0) -- (.2,.2,0);
+  \draw[dashed,color=blue,tdplot_rotated_coords] (.2,.2,0) -- (.2,.2,.2);
+
+  % show its phi arc and label
+  \tdplotdrawarc[tdplot_rotated_coords,color=blue]{(0,0,0)}{0.2}{0}{45}{anchor=north west,color=black}{$\phi'$}
+
+  % change the rotated coordinate frame so that it lies in its theta plane.
+  % Note that this overwrites the original rotated coordinate frame
+  % syntax: \tdplotsetrotatedthetaplanecoords{\phi'}
+  \tdplotsetrotatedthetaplanecoords{45}
+
+  % draw theta arc and label
+  \tdplotdrawarc[tdplot_rotated_coords,color=blue]{(0,0,0)}{0.2}{0}{55}{anchor=south west,color=black}{$\theta'$}
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org5741403" class="figure">
+<p><img src="/EUmDsX.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}[scale=3,line cap=round]
+  \begin{scope}[rotate around y=45,rotate around z=30,canvas is zx plane at y=0]
+    \draw [green!50!black, dashed, ultra thick] (-1,0) arc (180:360:1);
+  \end{scope}
+
+  \begin{scope}[canvas is zx plane at y=0]
+    \draw [ultra thin, step = 0.25, lightgray] (-1,-1) grid (1,1);
+    \draw [dashed, red] (225:1) -- (0,0) -- (135:1);
+    \draw [green, ultra thick] (0, 0) circle (1);
+    \foreach\i in{0,90}
+    {
+      \filldraw [fill= orange!20, draw = orange] (0,0) -- (\i:0.5) arc (\i:\i+45:0.5) -- cycle;
+      \draw [-&gt;, orange, ultra thick] (0,0) -- (\i:1);
+    }
+    \node [anchor = north west] at (0, 1) {$\vec{i}$};
+    \node [anchor = north]      at (1, 0) {$\vec{j}$};
+  \end{scope}
+
+  \begin{scope}[rotate around y=45,rotate around z=30]
+    \draw [canvas is zx plane at y=0, green!50!black, ultra thick] (1, 0) arc (0:180:1);
+    \foreach\i in {0,90}
+    \filldraw [canvas is xy plane at z=0, fill=red!20, draw=red] (0,0) -- (\i-30:0.4) arc (\i-30:\i:0.4) -- cycle;
+    \draw [-&gt;, red, ultra thick] (0,0,0) -- (1,0,0);
+    \draw [-&gt;, red, ultra thick] (0,0,0) -- (0,1,0);
+    \draw [-&gt;, red, ultra thick] (0,0,0) -- (0,0,1);
+  \end{scope}
+
+  \draw [-&gt;, orange, ultra thick] (0,0,0) -- (0,1,0) node[black, anchor=south east] at (0, 1, 0) {$\vec{z_0}$};
+  \draw [canvas is zx plane at y=0.75, -&gt;, blue] (0,-0.15) arc (-90:180:0.15);
+  \node at (0.3,0.9) {$\dot{\Psi}\vec{z_0}$};
+
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="orgdd47177" class="figure">
+<p><img src="/ggUg1y.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\tdplotsetmaincoords{80}{45}
+\tdplotsetrotatedcoords{-90}{180}{-90}
+
+%% style for surfaces
+\tikzset{surface/.style={draw=blue!70!black, fill=blue!40!white, fill opacity=.6}}
+
+%% macros to draw back and front of cones
+%% optional first argument is styling; others are z, radius, side offset (in degrees)
+\newcommand{\coneback}[4][]{
+  %% start at the correct point on the circle, draw the arc, then draw to the origin of the diagram, then close the path
+  \draw[canvas is xy plane at z=#2, #1] (45-#4:#3) arc (45-#4:225+#4:#3) -- (O) --cycle;
+}
+\newcommand{\conefront}[4][]{
+  \draw[canvas is xy plane at z=#2, #1] (45-#4:#3) arc (45-#4:-135+#4:#3) -- (O) --cycle;
+}
+\begin{tikzpicture}[tdplot_main_coords]
+  \coordinate (O) at (0,0,0);
+
+  %% make sure to draw everything from back to front
+  \coneback[surface]{-1.5}{2.5}{-15}
+  \coneback[surface]{-3}{2}{-10}
+  \draw (0,0,-5) -- (O);
+  \conefront[surface]{-3}{2}{-10}
+  \conefront[surface]{-1.5}{2.5}{-15}
+  \filldraw[surface] circle (3);
+  \draw[-&gt;] (-6,0,0) -- (6,0,0) node[right] {$x$};
+  \draw[-&gt;] (0,-6,0) -- (0,6,0) node[right] {$y$};
+  \coneback[surface]{1.5}{2.5}{15}
+  \coneback[surface]{3}{2}{10}
+  \draw[-&gt;] (O) -- (0,0,5) node[above] {$z$};
+  \conefront[surface]{3}{2}{10}
+  \conefront[surface]{1.5}{2.5}{15}
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org70fd7b4" class="figure">
+<p><img src="/o79smS.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\ud}[0]{\mathrm{d}}
+
+\tikzset{
+  vector/.style = {
+    thick,
+    &gt; = stealth',
+  },
+  axis/.style = {
+    very thin,
+    &gt; = stealth',
+  },
+}
+
+\tdplotsetmaincoords{70}{120}
+\tdplotsetrotatedcoords{90}{90}{90}
+\begin{tikzpicture}[tdplot_main_coords,scale=0.5]
+  \draw (0,0,0) -- ++(0,-2.3,0) node[left]{$-$};
+
+  % draw a condensor plate
+  \draw[fill=lightgray] (-1.5,0,-1.5)--(-1.5,0,1.5)--(1.5,0,1.5)--(1.5,0,-1.5)--cycle;
+  \draw[fill=lightgray] (1.5,0,-1.5)--(1.5,-0.2,-1.5)--(1.5,-0.2,1.5)--(1.5,0,1.5)--cycle;
+  \draw[fill=lightgray] (1.5,-0.2,1.5)--(-1.5,-0.2,1.5)--(-1.5,0,1.5)--(1.5,0,1.5)--cycle;
+
+  \def\q{-2.3}
+
+  % draw surface
+  \draw (0,-0.5*\q,0) coordinate(R);
+  \tdplotdrawarc[tdplot_rotated_coords,fill opacity=0.5,fill=lightgray!30,draw=black]{(R)}{3}{0}{360}{}{}
+  \draw[tdplot_rotated_coords](R)++(-110:3) node[below left]{$S_2$};
+  \draw[tdplot_rotated_coords](R)++(70:3) node[above]{$C$};
+
+  % draw second condensor plate
+  \draw[fill=lightgray] (-1.5,0-\q,-1.5)--(-1.5,0-\q,1.5)--(1.5,0-\q,1.5)--(1.5,0-\q,-1.5)--cycle;
+  \draw[fill=lightgray] (1.5,0-\q,-1.5)--(1.5,-0.2-\q,-1.5)--(1.5,-0.2-\q,1.5)--(1.5,0-\q,1.5)--cycle;
+  \draw[fill=lightgray] (1.5,-0.2-\q,1.5)--(-1.5,-0.2-\q,1.5)--(-1.5,0-\q,1.5)--(1.5,0-\q,1.5)--cycle;
+  \draw (0,-\q,0)--++(0,2,0)node[right]{$+$};
+\end{tikzpicture}%
+\begin{tikzpicture}[tdplot_main_coords,scale=0.5]
+  \tdplotsetrotatedcoords{90}{90}{90}%
+
+  \draw (0,0,0)--++(0,-2.3,0)node[left]{$-$};
+
+  % draw condensore plate
+  \draw[fill=lightgray] (-1.5,0,-1.5)--(-1.5,0,1.5)--(1.5,0,1.5)--(1.5,0,-1.5)--cycle;
+  \draw[fill=lightgray] (1.5,0,-1.5)--(1.5,-0.2,-1.5)--(1.5,-0.2,1.5)--(1.5,0,1.5)--cycle;
+  \draw[fill=lightgray] (1.5,-0.2,1.5)--(-1.5,-0.2,1.5)--(-1.5,0,1.5)--(1.5,0,1.5)--cycle;
+
+  % draw surface
+  \def\q{-2.3}
+  \def\R{3}
+  \draw (0,-0.5*\q,0) coordinate(R);
+  \tdplotdrawarc[tdplot_rotated_coords,fill=lightgray,fill opacity=0.5,draw=black]{(R)}{\R}{0}{360}{}{}
+  \draw[tdplot_rotated_coords](R)++(-110:\R) node[below left]{$S_1$};
+  \draw[tdplot_rotated_coords](R)++(70:\R) node[above]{$C$};
+  \tdplotsetrotatedcoords{0}{70}{90}
+  \draw[tdplot_rotated_coords](R)++(90:\R) coordinate (A) circle(0.5pt);
+  \draw[tdplot_rotated_coords,fill opacity=0.5,fill=lightgray!30](A)arc(90:270:\R);
+  \tdplotsetrotatedcoords{90}{90}{90}
+  \tdplotdrawarc[tdplot_rotated_coords,fill=lightgray!10,draw=black]{(R)}{\R}{0}{360}{}{}
+  \begin{scope}
+
+    % draw condensor plate again, inside (clip outside)
+    \clip[tdplot_rotated_coords] (R)++(0:\R) arc (0:360:\R);
+    \draw[fill=lightgray] (-1.5,0,-1.5)--(-1.5,0,1.5)--(1.5,0,1.5)--(1.5,0,-1.5)--cycle;
+    \draw[fill=lightgray] (1.5,0,-1.5)--(1.5,-0.2,-1.5)--(1.5,-0.2,1.5)--(1.5,0,1.5)--cycle;
+    \draw[fill=lightgray] (1.5,-0.2,1.5)--(-1.5,-0.2,1.5)--(-1.5,0,1.5)--(1.5,0,1.5)--cycle;
+  \end{scope}
+  \draw[tdplot_rotated_coords] (R)++(0:\R) arc (0:360:\R);
+
+  % draw second condensor plate
+  \draw[fill=lightgray] (-1.5,0-\q,-1.5)--(-1.5,0-\q,1.5)--(1.5,0-\q,1.5)--(1.5,0-\q,-1.5)--cycle;
+  \draw[fill=lightgray] (1.5,0-\q,-1.5)--(1.5,-0.2-\q,-1.5)--(1.5,-0.2-\q,1.5)--(1.5,0-\q,1.5)--cycle;
+  \draw[fill=lightgray] (1.5,-0.2-\q,1.5)--(-1.5,-0.2-\q,1.5)--(-1.5,0-\q,1.5)--(1.5,0-\q,1.5)--cycle;
+  \draw (0,-\q,0)--++(0,2,0)node[right]{$+$};
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org1f5cfa8" class="figure">
+<p><img src="/mq5YoS.svg" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8f4fd97" class="outline-2">
+<h2 id="org8f4fd97">3d plots with pgfplots</h2>
+<div class="outline-text-2" id="text-org8f4fd97">
+<p>
+the <code>\addplot3</code> makes drawing 3d graphics much easier, the syntax is simply <code>\addplot {&lt;math expresion of f(x,y)&gt;};</code> which is a shorthand-hand equivalent for <code>\addplot[&lt;options&gt;] expression {&lt;math expression of f(x,y)&gt;};</code><br />
+</p>
+
+<p>
+consider this example which plots <?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.025511 70.226625 11.592742' style="height: 1.1403em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g4-50' d='m3.454547-.996364l-.094545-.036364c-.269091 .414546-.363637 .48-.690909 .48h-1.738183l1.221819-1.280001c.647273-.676364 .930909-1.229091 .930909-1.796364c0-.727273-.589091-1.287273-1.345455-1.287273c-.4 0-.778182 .16-1.047273 .450909c-.232727 .247273-.341818 .48-.465455 .996364l.152727 .036364c.290909-.712728 .552728-.945455 1.054546-.945455c.610909 0 1.025455 .414546 1.025455 1.025455c0 .567273-.334546 1.243637-.945455 1.89091l-1.294546 1.374546v.087273h2.836365l.4-.996364z'/>
+<path id='g6-61' d='m5.499377-3.287671v-.557908h-5.100872v.557908h5.100872zm0 2.022416v-.557908h-5.100872v.557908h5.100872z'/>
+<use id='g1-0' xlink:href='#g0-0' transform='scale(1.369862)'/>
+<use id='g1-185' xlink:href='#g0-185' transform='scale(1.369862)'/>
+<use id='g1-186' xlink:href='#g0-186' transform='scale(1.369862)'/>
+<path id='g0-0' d='m4.174547-1.665455v-.407273h-3.723638v.407273h3.723638z'/>
+<path id='g0-185' d='m2.145455-5.214548c-1.054546 .683637-1.796364 1.861819-1.796364 3.345456c0 1.352728 .770909 2.720001 1.774546 3.338183l.087273-.116364c-.96-.756364-1.236364-1.636364-1.236364-3.243638c0-1.614546 .298182-2.45091 1.236364-3.207274l-.065455-.116364z'/>
+<path id='g0-186' d='m.276364-5.214548l-.065455 .116364c.938182 .756364 1.236364 1.592728 1.236364 3.207274c0 1.607273-.276364 2.487274-1.236364 3.243638l.087273 .116364c1.003637-.618182 1.774546-1.985455 1.774546-3.338183c0-1.483637-.741818-2.661819-1.796364-3.345456z'/>
+<path id='g3-53' d='m4.224159-6.107098c0-.368618-.368618-.647572-.856787-.647572c-.478207 0-.856787 .209215-1.215442 .647572c-.308842 .398506-.518057 .86675-.816936 1.843088h-.916563l-.069738 .318804h.896638l-.876712 4.184309c-.229141 1.075965-.547945 1.613948-.966376 1.613948c-.119552 0-.199253-.069738-.199253-.159402c0-.039851 .009963-.059776 .039851-.109589c.039851-.059776 .049813-.099626 .049813-.159402c0-.209215-.179328-.37858-.388543-.37858s-.368618 .179328-.368618 .408468c0 .348692 .33873 .607721 .787049 .607721c.886675 0 1.574097-.976339 1.992528-2.819427l.71731-3.188045h1.085928l.059776-.318804h-1.075965c.288917-1.574097 .657534-2.271482 1.215442-2.271482c.139477 0 .219178 .049813 .219178 .129514c0 0-.009963 .049813-.039851 .089664c-.049813 .079701-.059776 .129514-.059776 .209215c0 .239103 .14944 .398506 .368618 .398506c.229141 0 .418431-.179328 .418431-.398506z'/>
+<path id='g3-71' d='m4.144458-1.026152l-.139477-.079701c-.079701 .099626-.129514 .14944-.219178 .268991c-.229141 .298879-.33873 .398506-.468244 .398506c-.139477 0-.229141-.129514-.298879-.408468c-.019925-.089664-.029888-.139477-.039851-.159402c-.239103-.936488-.358655-1.474471-.358655-1.62391c.438356-.767123 .797011-1.205479 .976339-1.205479c.059776 0 .14944 .029888 .239103 .079701c.119552 .069738 .18929 .089664 .278954 .089664c.199253 0 .33873-.14944 .33873-.358655c0-.219178-.169365-.368618-.408468-.368618c-.438356 0-.806974 .358655-1.504359 1.424658l-.109589-.547945c-.139477-.67746-.249066-.876712-.518057-.876712c-.229141 0-.547945 .079701-1.165629 .288917l-.109589 .039851l.039851 .14944l.169365-.039851c.18929-.049813 .308842-.069738 .388543-.069738c.249066 0 .308842 .089664 .448319 .687422l.288917 1.225405l-.816936 1.165629c-.209215 .298879-.398506 .478207-.508095 .478207c-.059776 0-.159402-.029888-.259029-.089664c-.129514-.069738-.229141-.099626-.318804-.099626c-.199253 0-.33873 .14944-.33873 .348692c0 .259029 .18929 .418431 .498132 .418431s.428394-.089664 .926526-.687422l.896638-1.175592l.298879 1.195517c.129514 .518057 .259029 .667497 .577833 .667497c.37858 0 .637609-.239103 1.215442-1.135741z'/>
+<path id='g3-72' d='m4.244085-3.845579c0-.298879-.249066-.547945-.547945-.547945c-.229141 0-.388543 .14944-.388543 .368618c0 .159402 .079701 .259029 .278954 .388543c.18929 .109589 .259029 .199253 .259029 .33873c0 .398506-.358655 1.165629-1.215442 2.580324l-.199253-1.155666c-.14944-.886675-.707347-2.520548-.856787-2.520548h-.039851l-.089664 .009963l-.976339 .169365l-.318804 .059776v.169365c.119552-.029888 .199253-.039851 .308842-.039851c.398506 0 .577833 .14944 .767123 .637609c.268991 .67746 .816936 2.909091 .816936 3.307597c0 .109589-.039851 .229141-.099626 .348692c-.079701 .129514-.52802 .71731-.707347 .9066c-.229141 .249066-.348692 .328767-.478207 .328767c-.069738 0-.129514-.029888-.239103-.109589c-.14944-.119552-.249066-.169365-.368618-.169365c-.219178 0-.388543 .169365-.388543 .388543c0 .259029 .209215 .438356 .508095 .438356c.56787 0 1.643836-1.145704 2.669988-2.859278c.836862-1.374844 1.305106-2.470735 1.305106-3.038605z'/>
+<path id='g3-150' d='m1.942715-.059776c0-.826899-.577833-.956413-.806974-.956413c-.249066 0-.577833 .14944-.577833 .577833c0 .398506 .358655 .498132 .617684 .498132c.069738 0 .119552-.009963 .14944-.019925c.039851-.009963 .069738-.019925 .089664-.019925c.069738 0 .139477 .049813 .139477 .139477c0 .18929-.159402 .637609-.816936 1.05604l.089664 .18929c.298879-.099626 1.115816-.757161 1.115816-1.464508z'/>
+</defs>
+<g id='page2'>
+<g fill='currentColor'>
+<use x='1.73349' y='0' xlink:href='#g3-53'/>
+<use x='6.754669' y='0' xlink:href='#g1-185'/>
+<use x='10.470729' y='0' xlink:href='#g3-71'/>
+<use x='15.377302' y='0' xlink:href='#g3-150'/>
+<use x='20.036436' y='0' xlink:href='#g3-72'/>
+<use x='24.83842' y='0' xlink:href='#g1-186'/>
+<use x='31.421415' y='0' xlink:href='#g6-61'/>
+<use x='40.086631' y='0' xlink:href='#g3-71'/>
+<use x='44.993204' y='-3.616428' xlink:href='#g4-50'/>
+<use x='51.341559' y='0' xlink:href='#g1-0'/>
+<use x='60.290161' y='0' xlink:href='#g3-72'/>
+<use x='65.092145' y='-3.616428' xlink:href='#g4-50'/>
+</g>
+</g>
+</svg>:<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}
+  \begin{axis}[colorbar]
+    \addplot3 [
+    surf,
+    samples=15,
+    domain=0:1,y domain=-1:1
+    ] {x^2 - y^2};
+  \end{axis}
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="orga851e8f" class="figure">
+<p><img src="/4MXkkm.svg" /><br />
+</p>
+</div>
+
+<p>
+the <code>colorbar</code> argument passed to the <code>axis</code> environment simply generates the color bar on the right<br />
+</p>
+
+<p>
+the <code>surf</code> argument passed to <code>axis</code> environment simply tells it to fill the gaps between the lines to form a solid surface<br />
+</p>
+
+<p>
+a very useful variant of <code>\addplot3</code> is one that takes 3 math expressions, one for each variable, the syntax is:<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\addplot3[&lt;options&gt;] expression {&lt;x expression&gt;, &lt;y expression&gt;, &lt;z expression&gt;};
+</pre>
+</div>
+
+<p>
+which for most purposes can be simplified to<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\addplot3{&lt;x expression&gt;, &lt;y expression&gt;, &lt;z expression&gt;};
+</pre>
+</div>
+
+<p>
+note that <code>\addplot3(x,y,x^2)</code> is equivalent to <code>\addplot{x^2}</code><br />
+</p>
+
+<p>
+consider the following examples<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}
+  \begin{axis}[
+    axis lines=center,
+    axis on top,
+    domain=0:1,
+    y domain=0:2*pi,
+    xmin=-1.5, xmax=1.5,
+    ymin=-1.5, ymax=1.5, zmin=0.0]
+    \addplot3 [surf, colormap/blackwhite, shader=flat] ({x*cos(deg(y))},{x*sin(deg(y))},{x});
+  \end{axis}
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org350f9ec" class="figure">
+<p><img src="/8mXtxD.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">  \begin{tikzpicture}
+    \begin{axis}[view={60}{30}]
+    \addplot3[surf,shader=flat,
+      samples=20,
+      color=red, opacity=0.15,
+      domain=-1.11:1.11, y domain=0:2*pi,
+      z buffer=sort
+      ]
+     ({(pi-x)*cos(deg(y))+pi}, {cos(deg(x))}, {(pi-x)*sin(deg(y))});
+   \addplot3[surf,shader=flat,
+     samples=20,
+     color=blue, opacity=0.15,
+     domain=-1.11:1.11, y domain=0:2*pi,
+     z buffer=sort]
+    ({(pi-x)*cos(deg(y))+pi}, {x*x-0.25*pi}, {(pi-x)*sin(deg(y))});
+   \end{axis}
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="orgfcc0fab" class="figure">
+<p><img src="/O4rtO3.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">  \begin{tikzpicture}
+    \begin{axis}
+    [   view={45}{20},
+    unit vector ratio=1 1 1,
+    xmin=-2, xmax=8,
+    ymin=-3, ymax=2,
+    zmin=-5, zmax=5,
+    width=15cm,
+    ]
+    \addplot3[surf,shader=flat,
+      samples=20,
+      color=red, opacity=0.15,
+      domain=-1.11:1.11, y domain=0:2*pi,
+      z buffer=sort,
+      ]
+     ({(pi-x)*cos(deg(y))+pi}, {cos(deg(x))}, {(pi-x)*sin(deg(y))});
+   \addplot3[surf,shader=flat,
+     samples=20,
+     color=red, opacity=0.15,
+     domain=-1.11:1.11, y domain=0:2*pi,
+     z buffer=sort]
+    ({(pi-x)*cos(deg(y))+pi}, {x*x-0.25*pi}, {(pi-x)*sin(deg(y))});
+   \end{axis}
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org03cb2ff" class="figure">
+<p><img src="/cVNpiY.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{tikzpicture}
+  \pgfmathsetmacro{\u}{1.5}
+  \begin{axis}[set layers,
+    x={(3.2*\u cm,0.0cm)}, 
+    y={(0cm,\u cm)},
+    z={(-\u*0.3535cm,-\u*0.3535cm)},  
+    axis lines=center,
+    xmin=0
+    ]
+    \addplot3[opacity=0.2,surf,shader=flat,on layer=axis background,
+    samples=20,
+    domain=0:1,y domain=pi:2*pi,
+    z buffer=sort]
+    (x,{(x + 1)*cos(deg(y))}, {(x+1) * sin(deg(y))});
+
+    \addplot3[opacity=0.4,surf,shader=flat,on layer=main,
+    samples=40,
+    domain=0:1,y domain=0:2*pi,
+    z buffer=sort]
+    (x,{(x^3 + 1)*cos(deg(y))}, {(x^3 + 1) * sin(deg(y))});
+
+    \addplot3[opacity=0.2,surf,shader=flat,on layer=axis foreground,
+    samples=20,
+    domain=0:1,y domain=0:pi,
+    z buffer=sort]
+    (x,{(x + 1)*cos(deg(y))}, {(x+1) * sin(deg(y))});
+  \end{axis}
+\end{tikzpicture}
+</pre>
+</div>
+
+
+<div id="org424e443" class="figure">
+<p><img src="/7XtVM6.svg" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9f7b058" class="outline-2">
+<h2 id="org9f7b058">forest</h2>
+<div class="outline-text-2" id="text-org9f7b058">
+<p>
+forest is a package used to draw "binary tree"-like diagrams<br />
+it can be imported as:<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\usepackage{forest}
+</pre>
+</div>
+</div>
+<div id="outline-container-org3a50f25" class="outline-3">
+<h3 id="org3a50f25">usage</h3>
+<div class="outline-text-3" id="text-org3a50f25">
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{forest}
+  [10
+    [50
+      [20]
+      [30]
+    ]
+  ]
+\end{forest}
+</pre>
+</div>
+
+
+<div id="org9be5d8f" class="figure">
+<p><img src="/mQF4R6.svg" /><br />
+</p>
+</div>
+
+<p>
+what you put in the brackets is basically a <code>tikz</code> node and can take any shape, for example this is a binary tree with some basic math expressions and various shapes<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{forest}
+  [$n$,rectangle,draw
+    [$\dfrac{n}{3}$,circle,draw
+      [$T\left(\dfrac{n}{9}\right)$,rectangle,draw]
+      [$T\left(\dfrac{2n}{9}\right)$,circle,draw]
+      [hello,circle,draw]
+    ]
+    [$\dfrac{2n}{3}$,circle,draw
+      [$T\left(\dfrac{2n}{9}\right)$,ellipse,draw]
+      [$T\left(\dfrac{4n}{9}\right)$,draw]
+    ]
+  ]
+\end{forest}
+</pre>
+</div>
+
+
+<div id="orgc2afae1" class="figure">
+<p><img src="/LOBRBL.svg" /><br />
+</p>
+</div>
+
+<p>
+to insert a node without drawing it so that you get the effect of an empty child but still have correct indentation for other children we use <code>[,phantom]</code> which is a node that gets inserted but not drawn, example:<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{forest}
+  [$n$,rectangle,draw
+    [$\dfrac{n}{3}$,circle,draw
+      [,phantom]
+      [$T\left(\dfrac{n}{9}\right)$,circle,draw]
+    ]
+    [$\dfrac{2n}{3}$,circle,draw
+      [$T\left(\dfrac{2n}{9}\right)$,circle,draw]
+      [$T\left(\dfrac{4n}{9}\right)$,circle,draw]
+    ]
+  ]
+\end{forest}
+</pre>
+</div>
+
+
+<div id="org505e9a0" class="figure">
+<p><img src="/YQJ95R.svg" /><br />
+</p>
+</div>
+
+<p>
+you can treat the <code>forest</code> environment like <code>tikzpicture</code>, you can freely add more nodes and drawings, to use a node of <code>forest</code> as a tikz node you pass <code>name=&lt;name&gt;</code> to it, example:<br />
+</p>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{forest}
+  [5,circle,draw,name=root
+    [3,circle,draw
+      [2,circle,draw
+        [1,circle,draw]
+        [,phantom]
+      ]
+      [,phantom]
+    ]
+    [10,circle,draw
+      [7,circle,draw]
+      [18,circle,draw]
+    ]
+  ]
+  \node (root_text) at (2,0) {root};
+  \draw[-&gt;, blue] (root) -- (root_text);
+\end{forest}
+</pre>
+</div>
+
+
+<div id="orgf563149" class="figure">
+<p><img src="/bupAbG.svg" /><br />
+</p>
+</div>
+
+<p>
+a more advanced example:<br />
+</p>
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{forest}
+  [5,circle,draw,name=root
+    [3,circle,draw,name=n4
+      [2,circle,draw,name=n5
+        [1,circle,draw,name=n6]
+        [,phantom]
+      ]
+      [,phantom]
+    ]
+    [10,circle,draw,name=n1
+      [7,circle,draw,name=n2]
+      [18,circle,draw,name=n3]
+    ]
+  ]
+  % root text
+  \node (root_text) at (2,0.5) {root};
+  \draw[-&gt;, blue] (root) -- (root_text);
+  % Tright
+  \node (Tright_text) at (3,-3) {$T_{\text{right}(\text{root})}$};
+  \node[draw=red, double, fit=(n1) (n3) (n2), inner sep=1ex, circle] (Tright) {};
+  \draw[-&gt;, blue] (Tright) -- (Tright_text);
+  % Tleft
+  \node (Tleft_text) at (-4,-3) {$T_{\text{left}(\text{root})}$};
+  \node[draw=green, double, fit=(n4) (n5) (n6), inner sep=1ex, ellipse] (Tleft) {};
+  \draw[-&gt;, blue] (Tleft) -- (Tleft_text);
+\end{forest}
+</pre>
+</div>
+
+
+<div id="orgefbc1cd" class="figure">
+<p><img src="/Yl6ICB.svg" /><br />
+</p>
+</div>
+
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\begin{forest}
+  for tree={grow'=north}
+  [A
+    [B, edge label={node[midway,below,font=\scriptsize]{1}} [] [] [] [] [] [] [] [] [] []]
+    [C, edge label={node[midway,below,font=\scriptsize]{2}} [] [] [] [] [] [] [] [] [] []]
+  ]
+\end{forest}
+</pre>
+</div>
+
+
+<div id="org634b265" class="figure">
+<p><img src="/KYyGNeh.svg" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd1297a0" class="outline-3">
+<h3 id="orgd1297a0">! TeX capacity exceeded, sorry [save size=80000].</h3>
+<div class="outline-text-3" id="text-orgd1297a0">
+<p>
+to get over this increase the value of <code>save_size</code> in <code>kpsewhich texmf.cnf</code><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org83d01f7" class="outline-2">
+<h2 id="org83d01f7">calc projection</h2>
+<div class="outline-text-2" id="text-org83d01f7">
+<p>
+<a href="https://tex.stackexchange.com/questions/25342/how-to-draw-orthogonal-vectors-using-tikz">https://tex.stackexchange.com/questions/25342/how-to-draw-orthogonal-vectors-using-tikz</a><br />
+the projection syntax from the calc library also takes an optional angle: (<?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 70.265511 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<use id='g5-33' xlink:href='#g4-33' transform='scale(1.369862)'/>
+<use id='g5-48' xlink:href='#g4-48' transform='scale(1.369862)'/>
+<use id='g5-57' xlink:href='#g4-57' transform='scale(1.369862)'/>
+<use id='g5-58' xlink:href='#g4-58' transform='scale(1.369862)'/>
+<path id='g4-33' d='m1.716364-4.334547c0-.378182-.138182-.581818-.385455-.581818c-.24 0-.385455 .218182-.385455 .56c0 .167273 .065455 .763637 .145455 1.287273c.065455 .436364 .109091 .821819 .123636 1.003637l.065455 .785455h.094545l.327273-2.785456c.007273-.087273 .014545-.167273 .014545-.269091zm.007273 4.02182c0-.218182-.174546-.4-.392727-.4s-.385455 .174546-.385455 .4c0 .218182 .16 .378182 .378182 .378182c.232727 0 .4-.16 .4-.378182z'/>
+<path id='g4-48' d='m3.46182-2.400001c0-1.49091-.661818-2.516365-1.614546-2.516365c-.4 0-.705455 .123636-.974546 .378182c-.421818 .407273-.698182 1.243637-.698182 2.094546c0 .792728 .24 1.643637 .581818 2.05091c.269091 .32 .64 .494546 1.061819 .494546c.370909 0 .683637-.123636 .945455-.378182c.421818-.4 .698182-1.243637 .698182-2.123637zm-.698182 .014545c0 1.520001-.32 2.298183-.945455 2.298183s-.945455-.778182-.945455-2.29091c0-1.541819 .327273-2.349092 .952728-2.349092c.610909 0 .938182 .821819 .938182 2.341819z'/>
+<path id='g4-57' d='m3.338183-2.865456c0-1.200001-.669091-2.05091-1.607273-2.05091c-.865455 0-1.512728 .734546-1.512728 1.716364c0 .887273 .523637 1.476364 1.309091 1.476364c.4 0 .705455-.116364 1.09091-.414546c-.298182 1.185455-1.105455 1.963637-2.21091 2.152728l.021818 .145455c.814546-.094545 1.214546-.232727 1.709092-.589091c.756364-.552728 1.200001-1.454546 1.200001-2.436365zm-.705455 .283636c0 .145455-.029091 .210909-.109091 .276364c-.203636 .174546-.472727 .269091-.734546 .269091c-.552728 0-.901819-.545455-.901819-1.41091c0-.414546 .116364-.850909 .269091-1.04c.123636-.145455 .305455-.225455 .516364-.225455c.632728 0 .96 .625455 .96 1.847273v.283636z'/>
+<path id='g4-58' d='m1.396364-2.923638c0-.225455-.189091-.414546-.407273-.414546s-.4 .189091-.4 .414546c0 .210909 .181818 .392727 .392727 .392727c.225455 0 .414546-.181818 .414546-.392727zm0 2.61091c0-.225455-.189091-.414546-.407273-.414546s-.4 .189091-.4 .414546c0 .210909 .181818 .392727 .392727 .392727c.225455 0 .414546-.181818 .414546-.392727z'/>
+<path id='g3-22' d='m5.618929 0v-.159402c-.56787-.049813-.637609-.129514-.757161-.856787l-.936488-5.638854h-.259029l-2.889166 4.98132c-.787049 1.325031-.886675 1.43462-1.285181 1.514321v.159402h1.863014v-.159402c-.508095-.049813-.587796-.099626-.587796-.348692c0-.18929 .029888-.278954 .199253-.617684l.56787-1.125778h2.191781l.199253 1.305106c.009963 .089664 .019925 .179328 .019925 .259029c0 .37858-.139477 .468244-.777086 .52802v.159402h2.450809zm-1.942715-2.610212h-1.932752l1.494396-2.590286l.438356 2.590286z'/>
+<path id='g3-23' d='m5.369863-1.992528c0-.727273-.308842-1.09589-1.255293-1.504359c.707347-.169365 .996264-.288917 1.315068-.56787c.278954-.239103 .428394-.56787 .428394-.976339c0-.946451-.707347-1.464508-1.992528-1.464508h-2.570361v.159402c.627646 .049813 .767123 .119552 .767123 .408468c0 .14944-.039851 .388543-.109589 .637609l-1.225405 4.403487c-.179328 .577833-.249066 .637609-.806974 .737235v.159402h2.809465c1.564134 0 2.6401-.806974 2.6401-1.992528zm-1.075965-.039851c0 1.075965-.737235 1.733499-1.952677 1.733499c-.418431 0-.637609-.139477-.637609-.418431c0-.129514 .119552-.597758 .348692-1.39477l.318804-1.185554c.627646 0 1.05604 .039851 1.255293 .119552c.418431 .159402 .667497 .597758 .667497 1.145704zm.557908-3.098381c0 1.026152-.667497 1.514321-2.042341 1.514321h-.33873l.647572-2.311333c.059776-.219178 .179328-.278954 .56787-.278954c.806974 0 1.165629 .33873 1.165629 1.075965z'/>
+<path id='g3-37' d='m6.027397-5.021171c0-.956413-.747198-1.484433-2.102117-1.484433h-2.470735v.159402c.56787 .069738 .707347 .14944 .707347 .418431c0 .14944-.039851 .328767-.169365 .797011l-1.175592 4.234122c-.179328 .597758-.249066 .657534-.816936 .737235v.159402h2.440847v-.159402c-.627646-.089664-.67746-.119552-.67746-.468244c0-.109589 .019925-.18929 .119552-.56787l.52802-1.92279c.259029 .059776 .498132 .079701 .916563 .079701c.787049 0 1.464508-.159402 1.882939-.458281c.518057-.358655 .816936-.926526 .816936-1.524284zm-1.026152 0c0 .647572-.229141 1.105853-.667497 1.364882c-.308842 .169365-.697385 .249066-1.315068 .249066c-.179328 0-.229141 0-.518057-.049813l.707347-2.470735c.059776-.209215 .179328-.278954 .458281-.278954c.37858 0 .757161 .089664 .956413 .229141c.259029 .179328 .37858 .478207 .37858 .956413z'/>
+<use id='g1-185' xlink:href='#g0-185' transform='scale(1.369862)'/>
+<use id='g1-186' xlink:href='#g0-186' transform='scale(1.369862)'/>
+<path id='g0-185' d='m2.145455-5.214548c-1.054546 .683637-1.796364 1.861819-1.796364 3.345456c0 1.352728 .770909 2.720001 1.774546 3.338183l.087273-.116364c-.96-.756364-1.236364-1.636364-1.236364-3.243638c0-1.614546 .298182-2.45091 1.236364-3.207274l-.065455-.116364z'/>
+<path id='g0-186' d='m.276364-5.214548l-.065455 .116364c.938182 .756364 1.236364 1.592728 1.236364 3.207274c0 1.607273-.276364 2.487274-1.236364 3.243638l.087273 .116364c1.003637-.618182 1.774546-1.985455 1.774546-3.338183c0-1.483637-.741818-2.661819-1.796364-3.345456z'/>
+</defs>
+<g id='page3'>
+<g fill='currentColor'>
+<use x='.498132' y='0' xlink:href='#g1-185'/>
+<use x='4.961375' y='0' xlink:href='#g3-22'/>
+<use x='11.178053' y='0' xlink:href='#g1-186'/>
+<use x='14.993716' y='0' xlink:href='#g5-33'/>
+<use x='18.809409' y='0' xlink:href='#g1-185'/>
+<use x='22.814379' y='0' xlink:href='#g3-37'/>
+<use x='29.160561' y='0' xlink:href='#g1-186'/>
+<use x='32.976223' y='0' xlink:href='#g5-33'/>
+<use x='36.293784' y='0' xlink:href='#g5-57'/>
+<use x='41.275104' y='0' xlink:href='#g5-48'/>
+<use x='49.023757' y='0' xlink:href='#g5-58'/>
+<use x='55.058834' y='0' xlink:href='#g1-185'/>
+<use x='59.163422' y='0' xlink:href='#g3-23'/>
+<use x='65.449845' y='0' xlink:href='#g1-186'/>
+</g>
+</g>
+</svg>) is the projection of point (P) on the line from (A) to (B) after that line has been rotated 90 degrees around point (A). This makes it easy to draw the vector components:<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org38757de" class="outline-2">
+<h2 id="org38757de">animation</h2>
+<div class="outline-text-2" id="text-org38757de">
+<div class="org-src-container" data-language="latex">
+<pre class="src src-latex">\foreach \v in {0,0.5,...,5}
+{
+\begin{tikzpicture}
+  \draw[-&gt;] (-3, 0) -- (4.2, 0) node[right] {$x$};
+  \draw[-&gt;] (0, -3) -- (0, 4.2) node[above] {$y$};
+  \draw[scale=0.5, domain=-3:3, smooth, variable=\x, blue] plot ({\x+\v}, {\x*\x});
+  \draw[scale=0.5, domain=-3:3, smooth, variable=\y, red]  plot ({\y*\y}, {\y+\v});
+\end{tikzpicture}
+}
+</pre>
+</div>
+
+
+<div id="orgd5467ee" class="figure">
+<p><img src="/e3xkrhv.gif" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org4595a35" class="outline-2">
+<h2 id="org4595a35">neural network</h2>
+<div class="outline-text-2" id="text-org4595a35">
+
+<div id="org116f519" class="figure">
+<p><img src="/DrBomTG.svg" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org2a6078f" class="outline-2">
+<h2 id="org2a6078f">turing machine</h2>
+<div class="outline-text-2" id="text-org2a6078f">
+<div class="dummy" id="org70ffb49">
+
+<div class="equation-container">
+<span class="equation">
+<?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -170.355339 368.203724 170.85534' style="height: 16.8066em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g6-61' d='m5.499377-3.287671v-.557908h-5.100872v.557908h5.100872zm0 2.022416v-.557908h-5.100872v.557908h5.100872z'/>
+<path id='g0-0' d='m4.174547-1.665455v-.407273h-3.723638v.407273h3.723638z'/>
+<path id='g2-63' d='m3.847274-2.298183c-.014545-.567273-.385455-.909091-.989091-.909091c-.545455 0-.945455 .232727-1.41091 .821819l.225455-.792728c0 0-.014545-.029091-.036364-.029091h-.007273l-1.280001 .16l.021818 .109091c.247273 0 .538182 0 .545455 .196364c.007273 .087273-.276364 1.09091-.552728 2.058183l-.407273 1.629092c-.072727 .334546-.181818 .421818-.538182 .429091l.007273 .116364h1.723637l-.007273-.109091c-.392727 0-.538182-.058182-.545455-.218182c0-.101818 .130909-.647273 .276364-1.207273c.210909 .094545 .356364 .123636 .552728 .123636c1.214546 0 2.465456-1.214546 2.421819-2.378183zm-.763637 .021818c.021818 .48-.189091 1.083637-.523637 1.527273c-.334546 .458182-.734546 .690909-1.178182 .690909c-.232727 0-.407273-.109091-.414546-.269091c-.007273-.247273 .254546-1.192728 .48-1.738183c.203636-.48 .654546-.829091 1.061819-.829091h.036364c.356364 .014545 .523637 .203636 .538182 .618182z'/>
+<path id='g3-23' d='m5.369863-1.992528c0-.727273-.308842-1.09589-1.255293-1.504359c.707347-.169365 .996264-.288917 1.315068-.56787c.278954-.239103 .428394-.56787 .428394-.976339c0-.946451-.707347-1.464508-1.992528-1.464508h-2.570361v.159402c.627646 .049813 .767123 .119552 .767123 .408468c0 .14944-.039851 .388543-.109589 .637609l-1.225405 4.403487c-.179328 .577833-.249066 .637609-.806974 .737235v.159402h2.809465c1.564134 0 2.6401-.806974 2.6401-1.992528zm-1.075965-.039851c0 1.075965-.737235 1.733499-1.952677 1.733499c-.418431 0-.637609-.139477-.637609-.418431c0-.129514 .119552-.597758 .348692-1.39477l.318804-1.185554c.627646 0 1.05604 .039851 1.255293 .119552c.418431 .159402 .667497 .597758 .667497 1.145704zm.557908-3.098381c0 1.026152-.667497 1.514321-2.042341 1.514321h-.33873l.647572-2.311333c.059776-.219178 .179328-.278954 .56787-.278954c.806974 0 1.165629 .33873 1.165629 1.075965z'/>
+<path id='g3-24' d='m5.977584-1.305106l-.169365-.139477c-.896638 .886675-1.474471 1.175592-2.291407 1.175592c-1.105853 0-1.743462-.747198-1.743462-2.042341c0-1.185554 .478207-2.391034 1.255293-3.198007c.478207-.498132 1.105853-.767123 1.763387-.767123c.916563 0 1.424658 .537983 1.524284 1.613948l.179328 .029888l.368618-1.982565h-.209215c-.079701 .159402-.179328 .219178-.37858 .219178c-.089664 0-.199253-.019925-.408468-.069738c-.438356-.109589-.836862-.169365-1.165629-.169365c-2.132005 0-4.044832 1.992528-4.044832 4.214197c0 1.524284 1.075965 2.600249 2.600249 2.600249c1.026152 0 1.823163-.428394 2.719801-1.484433z'/>
+<path id='g3-47' d='m5.50934-1.673724l-.18929-.029888c-.318804 .637609-.498132 .876712-.836862 1.066002c-.33873 .199253-.836862 .278954-1.653798 .278954h-1.603985l4.811955-6.007472v-.139477h-4.841843l-.458281 1.454545l.18929 .049813c.209215-.438356 .328767-.607721 .518057-.777086c.288917-.249066 .816936-.368618 1.564134-.368618h1.703611l-4.772105 6.007472v.139477h5.031133l.537983-1.673724z'/>
+<path id='g3-49' d='m4.712329-3.198007c0-.697385-.488169-1.195517-1.155666-1.195517c-.697385 0-1.215442 .408468-1.92279 1.504359l1.036115-3.865504l-.049813-.049813c-.498132 .089664-.856787 .14944-1.524284 .229141v.169365c.587796 .019925 .647572 .049813 .647572 .268991c0 .089664-.019925 .199253-.089664 .428394l-.049813 .18929l-.019925 .069738l-1.354919 4.991283v.039851c0 .229141 .757161 .52802 1.325031 .52802c1.504359 0 3.158157-1.733499 3.158157-3.307597zm-.846824 .14944c0 .657534-.498132 1.723537-1.09589 2.34122c-.368618 .37858-.797011 .587796-1.225405 .587796c-.308842 0-.458281-.109589-.458281-.33873c0-.597758 .298879-1.554172 .71731-2.30137c.438356-.767123 .886675-1.145704 1.364882-1.145704c.438356 0 .697385 .328767 .697385 .856787z'/>
+<path id='g3-66' d='m3.028643-1.185554c0-.388543-.209215-.816936-.67746-1.39477c-.37858-.468244-.537983-.777086-.537983-1.046077c0-.33873 .209215-.537983 .557908-.537983c.518057 0 .816936 .368618 .916563 1.145704h.159402l.199253-1.384807h-.139477c-.079701 .139477-.14944 .179328-.298879 .179328c-.079701 0-.169365-.019925-.358655-.069738c-.249066-.079701-.388543-.099626-.557908-.099626c-.737235 0-1.205479 .428394-1.205479 1.09589c0 .318804 .209215 .747198 .627646 1.285181c.388543 .508095 .557908 .856787 .557908 1.145704c0 .458281-.298879 .767123-.737235 .767123c-.557908 0-.856787-.408468-1.016189-1.354919h-.159402l-.199253 1.58406h.159402c.089664-.169365 .129514-.209215 .239103-.209215s.288917 .039851 .488169 .089664c.229141 .069738 .37858 .099626 .547945 .099626c.836862 0 1.43462-.537983 1.43462-1.295143z'/>
+<path id='g3-73' d='m3.616438 .049813c0-.219178-.139477-.358655-.348692-.358655c-.199253 0-.33873 .129514-.33873 .318804c0 .079701 .029888 .169365 .089664 .288917c.029888 .059776 .049813 .109589 .049813 .14944c0 .089664-.109589 .14944-.268991 .14944c-.249066 0-.368618-.089664-.697385-.498132c-.438356-.56787-.627646-.697385-1.205479-.826899l2.889166-3.427148v-.109589h-2.82939l-.308842 1.145704l.159402 .039851c.209215-.498132 .33873-.587796 .806974-.587796h1.454545l-3.088418 3.706102l.089664 .089664c.159402-.129514 .288917-.179328 .448319-.179328c.259029 0 .577833 .129514 1.046077 .418431c.498132 .308842 .826899 .438356 1.115816 .438356c.498132 0 .936488-.358655 .936488-.757161z'/>
+<path id='g3-149' d='m1.803238-.428394c0-.308842-.259029-.56787-.557908-.56787s-.547945 .249066-.547945 .56787c0 .37858 .33873 .537983 .547945 .537983s.557908-.169365 .557908-.537983z'/>
+<use id='g5-48' xlink:href='#g4-48' transform='scale(1.369862)'/>
+<use id='g5-49' xlink:href='#g4-49' transform='scale(1.369862)'/>
+<use id='g5-97' xlink:href='#g4-97' transform='scale(1.369862)'/>
+<use id='g5-107' xlink:href='#g4-107' transform='scale(1.369862)'/>
+<use id='g5-110' xlink:href='#g4-110' transform='scale(1.369862)'/>
+<use id='g5-114' xlink:href='#g4-114' transform='scale(1.369862)'/>
+<path id='g4-48' d='m3.46182-2.400001c0-1.49091-.661818-2.516365-1.614546-2.516365c-.4 0-.705455 .123636-.974546 .378182c-.421818 .407273-.698182 1.243637-.698182 2.094546c0 .792728 .24 1.643637 .581818 2.05091c.269091 .32 .64 .494546 1.061819 .494546c.370909 0 .683637-.123636 .945455-.378182c.421818-.4 .698182-1.243637 .698182-2.123637zm-.698182 .014545c0 1.520001-.32 2.298183-.945455 2.298183s-.945455-.778182-.945455-2.29091c0-1.541819 .327273-2.349092 .952728-2.349092c.610909 0 .938182 .821819 .938182 2.341819z'/>
+<path id='g4-49' d='m2.865456 0v-.109091c-.574546-.007273-.690909-.08-.690909-.429091v-4.363638l-.058182-.014545l-1.309091 .661818v.101818c.087273-.036364 .167273-.065455 .196364-.08c.130909-.050909 .254546-.08 .327273-.08c.152727 0 .218182 .109091 .218182 .341818v3.294547c0 .24-.058182 .407273-.174546 .472727c-.109091 .065455-.210909 .087273-.516364 .094545v.109091h2.007274z'/>
+<path id='g4-97' d='m3.214547-.290909v-.189091c-.123636 .101818-.210909 .138182-.32 .138182c-.167273 0-.218182-.101818-.218182-.421818v-1.418182c0-.370909-.036364-.574546-.138182-.741818c-.152727-.276364-.465455-.421818-.909091-.421818c-.370909 0-.72 .101818-.923637 .269091c-.181818 .152727-.298182 .363637-.298182 .545455c0 .167273 .138182 .312727 .312727 .312727s.327273-.145455 .327273-.305455c0-.029091-.007273-.065455-.014545-.116364c-.014545-.065455-.021818-.123636-.021818-.174546c0-.196364 .232727-.356364 .523637-.356364c.356364 0 .552728 .210909 .552728 .603637v.443637c-1.12 .450909-1.243637 .509091-1.556364 .785455c-.16 .145455-.261818 .392727-.261818 .632728c0 .458182 .312727 .778182 .763637 .778182c.32 0 .618182-.152727 1.061819-.530909c.036364 .385455 .167273 .530909 .465455 .530909c.247273 0 .4-.087273 .654546-.363637zm-1.127273-.603637c0 .225455-.036364 .290909-.189091 .385455c-.174546 .101818-.378182 .16-.530909 .16c-.254546 0-.458182-.247273-.458182-.56v-.029091c0-.429091 .298182-.690909 1.178182-1.01091v1.054546z'/>
+<path id='g4-107' d='m3.672729 0v-.109091c-.32-.021818-.545455-.16-.850909-.530909l-1.112728-1.41091l.210909-.196364c.516364-.48 .967273-.814546 1.178182-.872728c.109091-.029091 .210909-.043636 .334546-.043636h.058182v-.109091h-1.483637v.101818c.283636 .007273 .363637 .036364 .363637 .138182c0 .058182-.065455 .16-.167273 .247273l-.996364 .887273v-3.054547l-.029091-.014545l-.909091 .261818l-.218182 .058182v.116364c.094545-.007273 .16-.014545 .232727-.014545c.24 0 .312727 .094545 .312727 .443637v3.505456c0 .378182-.021818 .4-.545455 .487273v.109091h1.701819v-.109091l-.145455-.007273c-.290909-.014545-.4-.116364-.4-.370909v-1.338182l1.018182 1.360001l.021818 .029091c.014545 .021818 .029091 .043636 .050909 .065455c.058182 .072727 .08 .116364 .08 .152727c0 .065455-.065455 .109091-.152727 .109091h-.138182v.109091h1.585455z'/>
+<path id='g4-110' d='m3.527274 0v-.109091c-.356364-.036364-.443637-.123636-.443637-.48v-1.665455c0-.683637-.32-1.09091-.858182-1.09091c-.334546 0-.56 .123636-1.054546 .589091v-.574546l-.050909-.014545c-.356364 .130909-.603637 .210909-1.003637 .327273v.123636c.043636-.021818 .116364-.029091 .196364-.029091c.203636 0 .269091 .109091 .269091 .465455v1.803637c0 .414546-.08 .516364-.450909 .545455v.109091h1.541819v-.109091c-.370909-.029091-.48-.116364-.48-.378182v-2.043637c.349091-.327273 .509091-.414546 .749091-.414546c.356364 0 .530909 .225455 .530909 .705455v1.520001c0 .458182-.094545 .581818-.458182 .610909v.109091h1.512728z'/>
+<path id='g4-114' d='m2.436365-2.960001c0-.24-.152727-.385455-.4-.385455c-.305455 0-.516364 .167273-.872728 .683637v-.669091l-.036364-.014545c-.385455 .16-.647273 .254546-1.076364 .392727v.116364c.101818-.021818 .167273-.029091 .254546-.029091c.181818 0 .247273 .116364 .247273 .436364v1.818183c0 .363637-.050909 .414546-.516364 .501818v.109091h1.745455v-.109091c-.494546-.021818-.618182-.130909-.618182-.545455v-1.636364c0-.232727 .312727-.596364 .509091-.596364c.043636 0 .109091 .036364 .189091 .109091c.116364 .101818 .196364 .145455 .290909 .145455c.174546 0 .283636-.123636 .283636-.327273z'/>
+</defs>
+<g id='page4'>
+<g fill='currentColor'>
+<g transform='translate(-53.3662 56.113)'>
+<use x='82.041344' y='-190.567172' xlink:href='#g5-49'/>
+</g>
+<g transform='translate(-53.3662 56.113)'>
+<use x='97.062575' y='-190.567172' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-56.7651 56.113)'>
+<use x='115.642056' y='-190.567172' xlink:href='#g3-149'/>
+<use x='120.12187' y='-190.567172' xlink:href='#g3-149'/>
+<use x='124.601683' y='-190.567172' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.3662 56.113)'>
+<use x='130.503897' y='-190.567172' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-53.3662 56.113)'>
+<use x='142.126267' y='-190.567172' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-56.765 56.113)'>
+<use x='157.306889' y='-190.567172' xlink:href='#g3-149'/>
+<use x='161.786702' y='-190.567172' xlink:href='#g3-149'/>
+<use x='166.266515' y='-190.567172' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.366 56.113)'>
+<use x='172.168729' y='-190.567172' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-53.3662 56.113)'>
+<use x='82.041344' y='-168.832728' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-53.3662 56.113)'>
+<use x='97.062575' y='-168.832728' xlink:href='#g5-49'/>
+</g>
+<g transform='translate(-56.7651 56.113)'>
+<use x='116.195523' y='-175.806576' xlink:href='#g3-149'/>
+<use x='120.12187' y='-172.817784' xlink:href='#g3-149'/>
+<use x='124.048216' y='-169.828992' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.2852 56.113)'>
+<use x='130.663287' y='-176.80284' xlink:href='#g3-149'/>
+<use x='130.663287' y='-172.817784' xlink:href='#g3-149'/>
+<use x='130.663287' y='-168.832728' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.2852 56.113)'>
+<use x='142.285658' y='-176.80284' xlink:href='#g3-149'/>
+<use x='142.285658' y='-172.817784' xlink:href='#g3-149'/>
+<use x='142.285658' y='-168.832728' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.765 56.113)'>
+<use x='157.860355' y='-175.806576' xlink:href='#g3-149'/>
+<use x='161.786702' y='-172.817784' xlink:href='#g3-149'/>
+<use x='165.713049' y='-169.828992' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.285 56.113)'>
+<use x='172.32812' y='-176.80284' xlink:href='#g3-149'/>
+<use x='172.32812' y='-172.817784' xlink:href='#g3-149'/>
+<use x='172.32812' y='-168.832728' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.2852 56.1131)'>
+<use x='82.200735' y='-155.068396' xlink:href='#g3-149'/>
+<use x='82.200735' y='-151.08334' xlink:href='#g3-149'/>
+<use x='82.200735' y='-147.098284' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='97.775432' y='-154.072132' xlink:href='#g3-149'/>
+<use x='101.701779' y='-151.08334' xlink:href='#g3-149'/>
+<use x='105.628125' y='-148.094548' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='116.195523' y='-154.072132' xlink:href='#g3-149'/>
+<use x='120.12187' y='-151.08334' xlink:href='#g3-149'/>
+<use x='124.048216' y='-148.094548' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.2852 56.1131)'>
+<use x='130.663287' y='-155.068396' xlink:href='#g3-149'/>
+<use x='130.663287' y='-151.08334' xlink:href='#g3-149'/>
+<use x='130.663287' y='-147.098284' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.2852 56.1131)'>
+<use x='142.285658' y='-155.068396' xlink:href='#g3-149'/>
+<use x='142.285658' y='-151.08334' xlink:href='#g3-149'/>
+<use x='142.285658' y='-147.098284' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.765 56.1131)'>
+<use x='157.860355' y='-154.072132' xlink:href='#g3-149'/>
+<use x='161.786702' y='-151.08334' xlink:href='#g3-149'/>
+<use x='165.713049' y='-148.094548' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.285 56.1131)'>
+<use x='172.32812' y='-155.068396' xlink:href='#g3-149'/>
+<use x='172.32812' y='-151.08334' xlink:href='#g3-149'/>
+<use x='172.32812' y='-147.098284' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.3662 56.1131)'>
+<use x='82.041344' y='-133.632849' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='97.221965' y='-133.632849' xlink:href='#g3-149'/>
+<use x='101.701779' y='-133.632849' xlink:href='#g3-149'/>
+<use x='106.181592' y='-133.632849' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.3662 56.1131)'>
+<use x='115.482666' y='-133.632849' xlink:href='#g5-48'/>
+<use x='130.503897' y='-133.632849' xlink:href='#g5-49'/>
+<use x='142.126267' y='-133.632849' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-56.765 56.1131)'>
+<use x='157.306889' y='-133.632849' xlink:href='#g3-149'/>
+<use x='161.786702' y='-133.632849' xlink:href='#g3-149'/>
+<use x='166.266515' y='-133.632849' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.366 56.1131)'>
+<use x='172.168729' y='-133.632849' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-53.3662 56.1131)'>
+<use x='82.041344' y='-120.127555' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='97.221965' y='-120.127555' xlink:href='#g3-149'/>
+<use x='101.701779' y='-120.127555' xlink:href='#g3-149'/>
+<use x='106.181592' y='-120.127555' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='115.642056' y='-120.127555' xlink:href='#g3-149'/>
+<use x='120.12187' y='-120.127555' xlink:href='#g3-149'/>
+<use x='124.601683' y='-120.127555' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.3662 56.1131)'>
+<use x='130.503897' y='-120.127555' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-53.3662 56.1131)'>
+<use x='142.126267' y='-120.127555' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-56.765 56.1131)'>
+<use x='157.306889' y='-120.127555' xlink:href='#g3-149'/>
+<use x='161.786702' y='-120.127555' xlink:href='#g3-149'/>
+<use x='166.266515' y='-120.127555' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.366 56.1131)'>
+<use x='172.168729' y='-120.127555' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-52.2852 56.1131)'>
+<use x='82.200735' y='-106.363223' xlink:href='#g3-149'/>
+<use x='82.200735' y='-102.378167' xlink:href='#g3-149'/>
+<use x='82.200735' y='-98.393111' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='97.775432' y='-105.366959' xlink:href='#g3-149'/>
+<use x='101.701779' y='-102.378167' xlink:href='#g3-149'/>
+<use x='105.628125' y='-99.389375' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='116.195523' y='-105.366959' xlink:href='#g3-149'/>
+<use x='120.12187' y='-102.378167' xlink:href='#g3-149'/>
+<use x='124.048216' y='-99.389375' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.2852 56.1131)'>
+<use x='130.663287' y='-106.363223' xlink:href='#g3-149'/>
+<use x='130.663287' y='-102.378167' xlink:href='#g3-149'/>
+<use x='130.663287' y='-98.393111' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.2852 56.1131)'>
+<use x='142.285658' y='-106.363223' xlink:href='#g3-149'/>
+<use x='142.285658' y='-102.378167' xlink:href='#g3-149'/>
+<use x='142.285658' y='-98.393111' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.765 56.1131)'>
+<use x='157.860355' y='-105.366959' xlink:href='#g3-149'/>
+<use x='161.786702' y='-102.378167' xlink:href='#g3-149'/>
+<use x='165.713049' y='-99.389375' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-52.285 56.1131)'>
+<use x='172.32812' y='-106.363223' xlink:href='#g3-149'/>
+<use x='172.32812' y='-102.378167' xlink:href='#g3-149'/>
+<use x='172.32812' y='-98.393111' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.3662 56.1131)'>
+<use x='82.041344' y='-84.927676' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='97.221965' y='-84.927676' xlink:href='#g3-149'/>
+<use x='101.701779' y='-84.927676' xlink:href='#g3-149'/>
+<use x='106.181592' y='-84.927676' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-56.7651 56.1131)'>
+<use x='115.642056' y='-84.927676' xlink:href='#g3-149'/>
+<use x='120.12187' y='-84.927676' xlink:href='#g3-149'/>
+<use x='124.601683' y='-84.927676' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.3662 56.1131)'>
+<use x='130.503897' y='-84.927676' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-53.3662 56.1131)'>
+<use x='142.126267' y='-84.927676' xlink:href='#g5-48'/>
+</g>
+<g transform='translate(-56.765 56.1131)'>
+<use x='157.306889' y='-84.927676' xlink:href='#g3-149'/>
+<use x='161.786702' y='-84.927676' xlink:href='#g3-149'/>
+<use x='166.266515' y='-84.927676' xlink:href='#g3-149'/>
+</g>
+<g transform='translate(-53.366 56.1131)'>
+<use x='172.168729' y='-84.927676' xlink:href='#g5-48'/>
+</g>
+</g>
+<g fill='none' stroke-width='.3985' stroke-miterlimit='10'>
+<path d='m25.1562-144.6992v70.6992h60.48442v-70.6992z' stroke='#808080'/>
+<path d='m85.64062-74v48.8437h41.66408v-48.8437z' stroke='#808080'/>
+<path d='m23.1641-144.6992h-6.5118v70.8398h6.5118' stroke='currentColor'/>
+</g>
+<g fill='currentColor' transform='matrix(0 -1 1 0 95.1067 3.0257)'>
+<use x='76.469252' y='-84.927676' xlink:href='#g3-49'/>
+<use x='82.582816' y='-83.433295' xlink:href='#g2-63'/>
+<use x='87.313708' y='-83.433295' xlink:href='#g0-0'/>
+<use x='92.230079' y='-83.433295' xlink:href='#g4-49'/>
+<use x='99.131887' y='-84.927676' xlink:href='#g6-61'/>
+<use x='107.797102' y='-84.927676' xlink:href='#g5-114'/>
+<use x='111.114663' y='-84.927676' xlink:href='#g5-97'/>
+<use x='115.538078' y='-84.927676' xlink:href='#g5-110'/>
+<use x='120.519398' y='-84.927676' xlink:href='#g5-107'/>
+<use x='127.599446' y='-84.927676' xlink:href='#g3-23'/>
+<use x='134.599699' y='-83.433295' xlink:href='#g2-63'/>
+<use x='139.330591' y='-83.433295' xlink:href='#g0-0'/>
+<use x='144.246962' y='-83.433295' xlink:href='#g4-49'/>
+</g>
+<path d='m25.1562-146.6914v-6.5117h102.1485v6.5117' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(-26.535 -74.7493)'>
+<use x='76.489182' y='-84.927676' xlink:href='#g3-66'/>
+<use x='81.327529' y='-83.433295' xlink:href='#g2-63'/>
+<use x='89.032978' y='-84.927676' xlink:href='#g6-61'/>
+<use x='97.698194' y='-84.927676' xlink:href='#g5-114'/>
+<use x='101.015755' y='-84.927676' xlink:href='#g5-97'/>
+<use x='105.439169' y='-84.927676' xlink:href='#g5-110'/>
+<use x='110.420489' y='-84.927676' xlink:href='#g5-107'/>
+<use x='116.952604' y='-84.927676' xlink:href='#g3-24'/>
+<use x='124.361314' y='-83.433295' xlink:href='#g2-63'/>
+</g>
+<path d='m73.61719-23.1641v6.5118h53.68751v-6.5118' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(-2.1938 78.65561)'>
+<use x='76.230159' y='-84.927676' xlink:href='#g5-114'/>
+<use x='79.54772' y='-84.927676' xlink:href='#g5-97'/>
+<use x='83.971134' y='-84.927676' xlink:href='#g5-110'/>
+<use x='88.952454' y='-84.927676' xlink:href='#g5-107'/>
+<use x='96.042474' y='-84.927676' xlink:href='#g3-47'/>
+<use x='102.594397' y='-83.433295' xlink:href='#g2-63'/>
+<use x='110.299846' y='-84.927676' xlink:href='#g6-61'/>
+<use x='119.204155' y='-84.927676' xlink:href='#g3-73'/>
+<use x='124.142135' y='-83.433295' xlink:href='#g2-63'/>
+</g>
+<path d='m129.2969-144.6992h6.5117v119.5429h-6.5117' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='matrix(0 1 -1 0 57.3533 -196.5362)'>
+<use x='76.230159' y='-84.927676' xlink:href='#g5-114'/>
+<use x='79.54772' y='-84.927676' xlink:href='#g5-97'/>
+<use x='83.971134' y='-84.927676' xlink:href='#g5-110'/>
+<use x='88.952454' y='-84.927676' xlink:href='#g5-107'/>
+<use x='95.484569' y='-84.927676' xlink:href='#g3-24'/>
+<use x='102.893279' y='-83.433295' xlink:href='#g2-63'/>
+<use x='107.624171' y='-83.433295' xlink:href='#g0-0'/>
+<use x='112.540542' y='-83.433295' xlink:href='#g4-49'/>
+<use x='119.44235' y='-84.927676' xlink:href='#g6-61'/>
+<use x='128.366589' y='-84.927676' xlink:href='#g3-66'/>
+<use x='133.204936' y='-83.433295' xlink:href='#g2-63'/>
+<use x='137.935828' y='-83.433295' xlink:href='#g0-0'/>
+<use x='142.852198' y='-83.433295' xlink:href='#g4-49'/>
+</g>
+</g>
+</svg>
+</span>
+</div>
+<p>
+<a href="https://www.latex4technics.com/?note=N55SNW">https://www.latex4technics.com/?note=N55SNW</a><br />
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

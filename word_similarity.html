@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>word similarity</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">word similarity</h1>
+</div>
+<div id="content" class="content">
+<div class="dummy" id="org8cfc8d0">
+<p>
+while words don't have many synonyms, most words do have lots of similar words. <b>cat</b> is not a synonym of <b>dog</b>, but cats and dogs are certainly similar words. in moving from synonymy to similarity, it will be useful to shift from talking about relations between word senses (like synonymy) to relations between words (like similarity). dealing with words avoids having to commit to a particular representation of word senses, which will turn out to simplify our task.<br />
+the notion of <i>word similarity</i> is very useful in larger semantic tasks. knowing how similar two words are can help in computing how similar the meaning of two phrases or sentences are, a very important component of natural language understanding tasks like question answering, paraphrasing, and summarization. one way of getting values for word similarity is to ask humans to judge how similar one word is to another. a number of datasets have resulted from such experiments. for example the SimLex-999 dataset (Hill et al., 2015) gives values on a scale from 0 to 10, like the examples below, which range from near-synonyms (vanish, disappear) to pairs that scarcely seem to have anything in common (hole, agreement):<br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">vanish</td>
+<td class="org-left">disappear</td>
+<td class="org-right">9.8</td>
+</tr>
+
+<tr>
+<td class="org-left">belief</td>
+<td class="org-left">impression</td>
+<td class="org-right">5.95</td>
+</tr>
+
+<tr>
+<td class="org-left">muscle</td>
+<td class="org-left">bone</td>
+<td class="org-right">3.65</td>
+</tr>
+
+<tr>
+<td class="org-left">hole</td>
+<td class="org-left">agreement</td>
+<td class="org-right">0.3</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</body>
+</html>

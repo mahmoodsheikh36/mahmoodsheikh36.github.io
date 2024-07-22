@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="mahmood sheikh" />
+<meta name="generator" content="Org Mode" />
+<title>binary search tree</title><!-- lambda icon, frail attempt -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%22100%22 color=%22red%22>λ</text></svg>">
+<!-- not-so-awesome awesome font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/main.css">
+<!-- for dark mode -->
+<script src="darkmode.js"></script>
+<script src="search.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="navbar">
+  <a href='/'>home</a>
+  <a href='/blog.html'>blog</a>
+  <a href='/search.html'>search</a>
+  <a href='/about.html'>about</a>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">
+    &#9680; <!-- Circle with left half black -->
+  </div>
+</div><h1 class="main-title">binary search tree</h1>
+</div>
+<div id="content" class="content">
+<p>
+a <b>binary search tree</b> is a <a href="/binary_tree.html#1706801397">binary tree</a> that has the following restrictions:<br />
+</p>
+<ul class="org-ul">
+<li>the keys of all the nodes in the left <a href="/tree_data_structure.html#1706801423">subtree</a> of any given <a href="/tree_data_structure.html#1706801423">node</a> <code>x</code> is smaller than the key of <code>x</code><br /></li>
+<li>the keys of all the nodes in the right side of the tree are bigger or equal to the key of <code>x</code><br /></li>
+</ul>
+<p>
+for example the following tree is a binary search tree:<br />
+</p>
+
+<div class="equation-container">
+<span class="equation">
+<?xml version='1.0' encoding='UTF-8'?>
+
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -122.599715 368.203724 123.099716' style="height: 12.1090em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<defs>
+<path id='g0-17' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
+<path id='g0-18' d='m3.92528 0v-.14944c-.787049-.009963-.946451-.109589-.946451-.587796v-5.977584l-.079701-.019925l-1.793275 .9066v.139477c.119552-.049813 .229141-.089664 .268991-.109589c.179328-.069738 .348692-.109589 .448319-.109589c.209215 0 .298879 .14944 .298879 .468244v4.513076c0 .328767-.079701 .557908-.239103 .647572c-.14944 .089664-.288917 .119552-.707347 .129514v.14944h2.749689z'/>
+<path id='g0-19' d='m4.732254-1.364882l-.129514-.049813c-.368618 .56787-.498132 .657534-.946451 .657534h-2.381071l1.673724-1.753425c.886675-.926526 1.275218-1.683686 1.275218-2.460772c0-.996264-.806974-1.763387-1.843088-1.763387c-.547945 0-1.066002 .219178-1.43462 .617684c-.318804 .33873-.468244 .657534-.637609 1.364882l.209215 .049813c.398506-.976339 .757161-1.295143 1.444583-1.295143c.836862 0 1.404732 .56787 1.404732 1.404732c0 .777086-.458281 1.703611-1.295143 2.590286l-1.77335 1.882939v.119552h3.88543l.547945-1.364882z'/>
+<path id='g0-21' d='m4.702366-1.663761v-.637609h-1.016189v-4.433375h-.438356l-3.128269 4.433375v.637609h2.799502v1.663761h.767123v-1.663761h1.016189zm-1.793275-.637609h-2.391034l2.391034-3.417186v3.417186z'/>
+<path id='g0-22' d='m4.363636-6.784558l-.089664-.069738c-.14944 .209215-.249066 .259029-.458281 .259029h-2.082192l-1.085928 2.361146c-.009963 .019925-.009963 .049813-.009963 .049813c0 .049813 .039851 .079701 .119552 .079701c.318804 0 .71731 .069738 1.125778 .199253c1.145704 .368618 1.673724 .986301 1.673724 1.972603c0 .956413-.607721 1.703611-1.384807 1.703611c-.199253 0-.368618-.069738-.667497-.288917c-.318804-.229141-.547945-.328767-.757161-.328767c-.288917 0-.428394 .119552-.428394 .368618c0 .37858 .468244 .617684 1.215442 .617684c.836862 0 1.554172-.268991 2.052304-.777086c.458281-.448319 .667497-1.016189 .667497-1.77335c0-.71731-.18929-1.175592-.687422-1.673724c-.438356-.438356-1.006227-.667497-2.181818-.876712l.418431-.846824h1.952677c.159402 0 .199253-.019925 .229141-.089664l.37858-.886675z'/>
+<path id='g0-23' d='m4.662516-2.181818c0-1.275218-.727273-2.082192-1.872976-2.082192c-.438356 0-.647572 .069738-1.275218 .448319c.268991-1.504359 1.384807-2.580324 2.948941-2.839352l-.019925-.159402c-1.135741 .099626-1.713574 .288917-2.440847 .797011c-1.075965 .767123-1.663761 1.902864-1.663761 3.237858c0 .86675 .268991 1.743462 .697385 2.241594c.37858 .438356 .916563 .67746 1.534247 .67746c1.235367 0 2.092154-.946451 2.092154-2.321295zm-.896638 .33873c0 1.09589-.388543 1.703611-1.085928 1.703611c-.876712 0-1.414695-.936488-1.414695-2.480697c0-.508095 .079701-.787049 .278954-.936488c.209215-.159402 .518057-.249066 .86675-.249066c.856787 0 1.354919 .71731 1.354919 1.96264z'/>
+<path id='g0-25' d='m4.433375-1.544209c0-.767123-.33873-1.255293-1.544209-2.15193c.986301-.52802 1.334994-.946451 1.334994-1.62391c0-.816936-.71731-1.414695-1.713574-1.414695c-1.085928 0-1.892902 .667497-1.892902 1.574097c0 .647572 .18929 .936488 1.235367 1.853051c-1.075965 .816936-1.295143 1.125778-1.295143 1.803238c0 .966376 .787049 1.643836 1.912827 1.643836c1.195517 0 1.96264-.657534 1.96264-1.683686zm-.757161 .308842c0 .647572-.448319 1.09589-1.09589 1.09589c-.757161 0-1.265255-.577833-1.265255-1.444583c0-.637609 .219178-1.05604 .797011-1.524284l.597758 .438356c.727273 .518057 .966376 .876712 .966376 1.43462zm-.139477-4.094645c0 .56787-.278954 1.016189-.846824 1.39477c-.049813 .029888-.049813 .029888-.089664 .059776c-.886675-.577833-1.24533-1.036115-1.24533-1.594022c0-.577833 .448319-.986301 1.075965-.986301c.67746 0 1.105853 .438356 1.105853 1.125778z'/>
+</defs>
+<g id='page1'>
+<path d='m61.6992-111.21875c0-5.89844-4.78123-10.68355-10.67967-10.68355s-10.67973 4.78511-10.67973 10.68355c0 5.89453 4.78129 10.67968 10.67973 10.67968s10.67967-4.78515 10.67967-10.67968z' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(-4.9814)'>
+<use x='51.019888' y='-107.923154' xlink:href='#g0-18'/>
+<use x='56.001208' y='-107.923154' xlink:href='#g0-17'/>
+</g>
+<path d='m37.20701-77.8125c0-4.92969-3.99609-8.9258-8.925781-8.9258c-4.929689 0-8.921879 3.99611-8.921879 8.9258s3.99219 8.92188 8.921879 8.92188c4.929691 0 8.925781-3.99219 8.925781-8.92188z' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(-25.2287 33.4474)'>
+<use x='51.019888' y='-107.923154' xlink:href='#g0-23'/>
+</g>
+<path d='m27.54685-47.92964c0-4.89844-3.97265-8.87106-8.871089-8.87106c-4.898441 0-8.871091 3.97262-8.871091 8.87106c0 4.89843 3.97265 8.87109 8.871091 8.87109c4.898439 0 8.871089-3.97266 8.871089-8.87109z' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(-34.8349 63.3599)'>
+<use x='51.019888' y='-107.923154' xlink:href='#g0-21'/>
+</g>
+<path d='m17.9414-18.10157c0-4.89843-3.97265-8.87113-8.87109-8.87113c-4.89844 0-8.87109 3.9727-8.87109 8.87113c0 4.89844 3.97265 8.8711 8.87109 8.8711c4.89844 0 8.87109-3.97266 8.87109-8.8711z' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(-44.44107 93.1894)'>
+<use x='51.019888' y='-107.923154' xlink:href='#g0-19'/>
+</g>
+<path d='m84.4375-77.77344c0-5.89843-4.78123-10.67966-10.679669-10.67966c-5.898441 0-10.679731 4.78123-10.679731 10.67966c0 5.89844 4.78129 10.67969 10.679731 10.67969c5.898439 0 10.679669-4.78125 10.679669-10.67969z' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(17.7566 33.4474)'>
+<use x='51.019888' y='-107.923154' xlink:href='#g0-18'/>
+<use x='56.001208' y='-107.923154' xlink:href='#g0-25'/>
+</g>
+<path d='m73.8984-44.37891c0-5.8711-4.75389-10.62499-10.624981-10.62499c-5.867189 0-10.625019 4.75389-10.625019 10.62499c0 5.86718 4.75783 10.625 10.625019 10.625c5.871091 0 10.624981-4.75782 10.624981-10.625z' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(7.2725 66.911)'>
+<use x='51.019888' y='-107.923154' xlink:href='#g0-18'/>
+<use x='56.001208' y='-107.923154' xlink:href='#g0-21'/>
+</g>
+<path d='m59.6993-10.94141c0-5.86719-4.75785-10.62495-10.625041-10.62495c-5.867189 0-10.624959 4.75776-10.624959 10.62495s4.75777 10.625 10.624959 10.625c5.867191 0 10.625041-4.75781 10.625041-10.625z' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(-6.9273 100.34894)'>
+<use x='51.019888' y='-107.923154' xlink:href='#g0-18'/>
+<use x='56.001208' y='-107.923154' xlink:href='#g0-19'/>
+</g>
+<path d='m88.207-10.92969c0-5.92969-4.80467-10.73437-10.734353-10.73437c-5.925777 0-10.734347 4.80468-10.734347 10.73437c0 5.92578 4.80857 10.73047 10.734347 10.73047c5.929683 0 10.734353-4.80469 10.734353-10.73047z' stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'/>
+<g fill='currentColor' transform='translate(21.4724 100.34894)'>
+<use x='51.019888' y='-107.923154' xlink:href='#g0-18'/>
+<use x='56.001208' y='-107.923154' xlink:href='#g0-22'/>
+</g>
+<g stroke='currentColor' fill='none' stroke-width='.3985' stroke-miterlimit='10'>
+<path d='m44.89844-102.22657l-11.48434 16.87107'/>
+<path d='m25.4883-69.1289l-4.0352 12.5625'/>
+<path d='m15.8945-39.2969l-4.0429 12.5625'/>
+<path d='m57.13672-102.22266l10.50388 15.45316'/>
+<path d='m70.5-67.3945l-3.9844 12.6875'/>
+<path d='m59.04297-34.4141l-5.73828 13.5078'/>
+<path d='m67.5039-34.4141l5.6992 13.418'/>
+</g>
+</g>
+</svg>
+</span>
+</div>
+<div id="outline-container-org6b09782" class="outline-2">
+<h2 id="org6b09782">insertion</h2>
+<div class="outline-text-2" id="text-org6b09782">
+<p>
+a new key is always inserted as a <a href="/tree_data_structure.html#1706801423">leaf</a>. we start from the <a href="/tree_data_structure.html#1706801423">root</a>, making our way downwards by comparing the new key to the key of the current node to decide which child to move to on each iteration, until we hit a leaf node, then we add the new node as its child</p>
+</div>
+</div>
+</div>
+</body>
+</html>
