@@ -3121,9 +3121,9 @@ another important characteristic of these gradient expressions is that they have
 </p>
 
 </div>
-<div id="outline-container-orgbd6be27" class="outline-2">
-<h2 id="orgbd6be27">initial common lisp implementation</h2>
-<div class="outline-text-2" id="text-orgbd6be27">
+<div id="outline-container-org13e44b2" class="outline-2">
+<h2 id="org13e44b2">initial common lisp implementation</h2>
+<div class="outline-text-2" id="text-org13e44b2">
 <p>
 this code uses <a href="/common_lisp.html#1677249560">common lisp</a> (aswell as code/functions from the actual link itself, click it for those).<br />
 </p>
@@ -3404,9 +3404,9 @@ although notice that here we're testing the network on the same data we trained 
 </p>
 </div>
 </div>
-<div id="outline-container-org826c7e5" class="outline-2">
-<h2 id="org826c7e5">making use of gpu</h2>
-<div class="outline-text-2" id="text-org826c7e5">
+<div id="outline-container-org57770c5" class="outline-2">
+<h2 id="org57770c5">making use of gpu</h2>
+<div class="outline-text-2" id="text-org57770c5">
 <p>
 before implementing this i started experimenting with <a href="/cuda_programming_in_common_lisp.html#1686751951">cuda in common lisp</a>, one unfortunate thing is that <code>cl-cuda</code> doesnt allow using arbitrary data types like you would have in <code>C</code> with structs, we're gonna have to live with arrays of floats on the gpu.<br />
 at first i was gonna implement the most straightforward approach, which is to run every backpropagation/feedforward operation by a single gpu thread, so that if we have 256 gpu threads, we'd be doing 256 backpropagation operations in parallel whereas on the cpu (with a single thread) we'd be doing only 1, i thought this would definitely work, until i actually thought about it and then realized, how the hell can this be a thread-safe process? each thread is modifying every weight in the network and many threads are running at once, it would be a nightmare to actually use such an approach, and a miracle if it even works as intended, so i had to think of something else, something thread-safe.</p>

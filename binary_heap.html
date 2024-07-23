@@ -53,9 +53,9 @@ in a heap the keys arent necessarily sorted like in <a href="/binary_search_tree
 </p>
 
 </div>
-<div id="outline-container-orgda330ae" class="outline-2">
-<h2 id="orgda330ae">bubbling</h2>
-<div class="outline-text-2" id="text-orgda330ae">
+<div id="outline-container-org1ae2ca9" class="outline-2">
+<h2 id="org1ae2ca9">bubbling</h2>
+<div class="outline-text-2" id="text-org1ae2ca9">
 <div class="math-block definition" data-before="definition" data-after="">
 <p>
 moving a <a href="/tree_data_structure.html#1706801423">node</a> up/down a heap to get it to its correct position<br />
@@ -63,17 +63,17 @@ moving a <a href="/tree_data_structure.html#1706801423">node</a> up/down a heap 
 
 </div>
 </div>
-<div id="outline-container-org3a36814" class="outline-3">
-<h3 id="org3a36814">bubble up</h3>
-<div class="outline-text-3" id="text-org3a36814">
+<div id="outline-container-org1514c58" class="outline-3">
+<h3 id="org1514c58">bubble up</h3>
+<div class="outline-text-3" id="text-org1514c58">
 <p>
 <a href="/binary_heap.html#1706801290">bubbling</a> a node <b>upwards</b> consists of recursively switching it with its parent until its parent is bigger/smaller than it (depending on whether we're using a <a href="/heap.html#1706801306">min heap</a> or a <a href="/heap.html#1706801306">max heap</a>)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org8366845" class="outline-3">
-<h3 id="org8366845">bubble down</h3>
-<div class="outline-text-3" id="text-org8366845">
+<div id="outline-container-org8a360c6" class="outline-3">
+<h3 id="org8a360c6">bubble down</h3>
+<div class="outline-text-3" id="text-org8a360c6">
 <p>
 <a href="/binary_heap.html#1706801290">bubbling</a> a node <b>downards</b> consists of recursively switching it with one of its children until it gets to its correct position<br />
 this is a pseudocode for the algorithm:<br />
@@ -122,26 +122,26 @@ r = right(i) <span style="font-weight: bold; font-style: italic;">// </span><spa
 </div>
 </div>
 </div>
-<div id="outline-container-org84cc592" class="outline-2">
-<h2 id="org84cc592">insertion</h2>
-<div class="outline-text-2" id="text-org84cc592">
+<div id="outline-container-org34d31fd" class="outline-2">
+<h2 id="org34d31fd">insertion</h2>
+<div class="outline-text-2" id="text-org34d31fd">
 <p>
 inserting a new <a href="/tree_data_structure.html#1706801423">node</a> to the heap consists of adding it as a <a href="/tree_data_structure.html#1706801423">leaf</a> such that the heap remains <a href="/tree_data_structure.html#1706801423">almost complete</a> and <a href="/binary_heap.html#1706801290">bubbling up</a> the newly added node so that the keys in the tree remain sorted<br />
 if the heap is in <a href="/binary_heap.html#1706801290">array representation</a>, we insert the new node to the end of the array and heapify it upwards (bubble up)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orga3dd614" class="outline-2">
-<h2 id="orga3dd614">deletion</h2>
-<div class="outline-text-2" id="text-orga3dd614">
+<div id="outline-container-org756cd29" class="outline-2">
+<h2 id="org756cd29">deletion</h2>
+<div class="outline-text-2" id="text-org756cd29">
 <p>
 deletion of a node consists of replacing the rightmost leaf with it and bubble it <a href="/binary_heap.html#1706801290">downwards</a> if its smaller than one of its children or <a href="/binary_heap.html#1706801290">upwards</a> if its bigger than its parent<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org34881cc" class="outline-2">
-<h2 id="org34881cc">binary heap array representation</h2>
-<div class="outline-text-2" id="text-org34881cc">
+<div id="outline-container-org02f4767" class="outline-2">
+<h2 id="org02f4767">binary heap array representation</h2>
+<div class="outline-text-2" id="text-org02f4767">
 <div class="math-block note" data-before="note" data-after="">
 <p>
 some resources may use assume that arrays start at index 1, i see no point in that since most programming languages use 0 as the first index, so some of the following propositions might seem a little different like for example the proposition number 2 in the following list according to these sources would be that the left child of i^{th} node is <?xml version='1.0' encoding='UTF-8'?>
@@ -385,9 +385,9 @@ the array should hold 2 values, <code>array-size</code>, which is the size of th
 </p>
 </div>
 </div>
-<div id="outline-container-orge03d9e4" class="outline-2">
-<h2 id="orge03d9e4">construction of binary heap from array</h2>
-<div class="outline-text-2" id="text-orge03d9e4">
+<div id="outline-container-org62f0a48" class="outline-2">
+<h2 id="org62f0a48">construction of binary heap from array</h2>
+<div class="outline-text-2" id="text-org62f0a48">
 <p>
 given some random <a href="/array.html#1659024331">array</a>, e.g. <code>A=[10,20,30,40,50,70,35,60,80]</code>, we need to reorganize its elements such that it <a href="/binary_heap.html#1706801290">represents a binary heap</a><br />
 to achieve this we apply <a href="/binary_heap.html#1706801290">bubble down</a> to the first half of the array <b>in reverse</b> (because the <a href="/tree_data_structure.html#1706801423">leaf</a> nodes need not be heapified as they already follow the heap property)<br />
@@ -624,13 +624,13 @@ to be continued<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orge11b195" class="outline-2">
-<h2 id="orge11b195">binary heap algorithms</h2>
-<div class="outline-text-2" id="text-orge11b195">
+<div id="outline-container-org55c0849" class="outline-2">
+<h2 id="org55c0849">binary heap algorithms</h2>
+<div class="outline-text-2" id="text-org55c0849">
 </div>
-<div id="outline-container-orge018df5" class="outline-3">
-<h3 id="orge018df5">biggest k nodes</h3>
-<div class="outline-text-3" id="text-orge018df5">
+<div id="outline-container-orgf2b4ffa" class="outline-3">
+<h3 id="orgf2b4ffa">biggest k nodes</h3>
+<div class="outline-text-3" id="text-orgf2b4ffa">
 <p>
 initial inefficient solution:<br />
 </p>
