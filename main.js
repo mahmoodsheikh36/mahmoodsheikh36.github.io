@@ -15,7 +15,6 @@ function handleMathButton(node) {
     let symbol = node.children[0];
     symbol.setAttribute('original-fill', symbol.getAttribute('fill'));
     node.onmouseover = function(event) {
-      console.log('mouse in');
       toShow = true;
       if (popupElm !== undefined)
         popupElm.innerHTML = ''; // clear previously added blocks
@@ -41,7 +40,6 @@ function handleMathButton(node) {
       });
     }
     node.onmouseout = function() {
-      console.log('mouse out');
       toShow = false;
       symbol.setAttribute('fill', symbol.getAttribute('original-fill'));
       if (popupElm !== undefined) {
