@@ -36,7 +36,7 @@ to connect to a device behind a private unreachable router you can use <i>remote
 example:<br />
 </p>
 <div class="org-src-container" data-language="sh">
-<pre class="src src-sh">ssh -i path/to/key -R <span style="font-style: italic;">'*:5000:*:22'</span> user@remote -N -g
+<pre class="src src-sh">ssh -i path/to/key -R <span style="color: #528B8B;">'*:5000:*:22'</span> user@remote -N -g
 </pre>
 </div>
 <p>
@@ -51,14 +51,14 @@ a connection to the tunnel can be opened using the command<br />
 <p>
 note that <code>localuser</code> would be the user of <code>local2</code> (not the remote machine) that you want ssh to use.<br />
 </p>
-<div id="outline-container-orgbcc60ce" class="outline-2">
-<h2 id="orgbcc60ce">connection refused</h2>
-<div class="outline-text-2" id="text-orgbcc60ce">
-<div class="dummy" id="org266048a">
+<div id="outline-container-orgf6a7ec1" class="outline-2">
+<h2 id="orgf6a7ec1">connection refused</h2>
+<div class="outline-text-2" id="text-orgf6a7ec1">
+<div class="dummy" id="orgfaf6f75">
 <p>
 by default tunnel endpoints only listen on 127.0.0.1, so they can't be accessed from other machines. to change this you may need to add this to <code>/etc/ssh/sshd_config</code> on the server:<br />
 </p>
-<div class="literal" id="org7809aa4">
+<div class="literal" id="orgd806fb1">
 <p>
 GatewayPorts clientspecified<br />
 </p>
@@ -71,9 +71,9 @@ this is also the reason we use the address <code>*:5000:*:22</code>, the star is
 </p>
 </div>
 </div>
-<div id="outline-container-org70b392c" class="outline-2">
-<h2 id="org70b392c">using ipv6</h2>
-<div class="outline-text-2" id="text-org70b392c">
+<div id="outline-container-org46994fe" class="outline-2">
+<h2 id="org46994fe">using ipv6</h2>
+<div class="outline-text-2" id="text-org46994fe">
 <p>
 if you're using ipv6 you need to make sure its enabled on all machines. <code>vim /etc/sysctl.conf</code> and make sure you have the following:<br />
 </p>
@@ -86,14 +86,14 @@ net.ipv6.conf.all.disable_ipv6 = 0
 the ipv6 equivalent for <code>localhost</code> is <code>::1</code>. so, for example, the reverse tunnel ssh command becomes:<br />
 </p>
 <div class="org-src-container" data-language="sh">
-<pre class="src src-sh">ssh -i yourkey -R <span style="font-style: italic;">'*:5000:*:22'</span> -6 user@remote1:etc:etc::1 -N -g
+<pre class="src src-sh">ssh -i yourkey -R <span style="color: #528B8B;">'*:5000:*:22'</span> -6 user@remote1:etc:etc::1 -N -g
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org4401786" class="outline-2">
-<h2 id="org4401786">systemd service</h2>
-<div class="outline-text-2" id="text-org4401786">
+<div id="outline-container-org1420c8a" class="outline-2">
+<h2 id="org1420c8a">systemd service</h2>
+<div class="outline-text-2" id="text-org1420c8a">
 <p>
 an example systemd service that i use to automatically open an ssh tunnel for a linux server:<br />
 </p>

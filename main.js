@@ -9,11 +9,14 @@ window.onload = function(e) {
 }
 
 let popupElm;
+let toShow = true; /* we need this because by the time the web request is done the user might've moved the mouse and we no longer need to show the result */
 function handleMathButton(node) {
   if (node.classList.contains('math-button')) {
     let symbol = node.children[0];
     symbol.setAttribute('original-fill', symbol.getAttribute('fill'));
     node.onmouseover = function(event) {
+      console.log('mouse in');
+      toShow = true;
       if (popupElm !== undefined)
         popupElm.innerHTML = ''; // clear previously added blocks
       symbol.setAttribute('fill', 'red');
@@ -21,6 +24,8 @@ function handleMathButton(node) {
       let refId = ref.substr(4);
       console.log(refId);
       getElementByBlkId(refId, function (elm) {
+        if (!toShow)
+          return;
         if (popupElm === undefined) {
           popupElm = document.createElement('div');
           popupElm.className = "popup";
@@ -36,8 +41,11 @@ function handleMathButton(node) {
       });
     }
     node.onmouseout = function() {
+      console.log('mouse out');
+      toShow = false;
       symbol.setAttribute('fill', symbol.getAttribute('original-fill'));
       if (popupElm !== undefined) {
+        popupElm.innerHTML = '';
         Object.assign(popupElm.style, {
           display: `none`,
         });
