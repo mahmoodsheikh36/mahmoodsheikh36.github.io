@@ -31,7 +31,7 @@
 </div><h1 class="main-title">clustering index</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="orgf77070f">
+<div class="dummy" id="org4ead08b">
 <p>
 if file records are physically ordered on a nonkey field&#x2013;which does not have a distinct value for each record&#x2013;that field is called the <i>clustering field</i> and the data file is called a <i>clustered file</i>. we can create a special type of index, called a <i>clustering index</i>, to speed up retrieval of all the records that have the same value for the clustering field. this differs from a <a href="/primary_index.html#1702366662">primary index</a>, which requires that the ordering field of the data file have a distinct value for each record.<br />
 a clustering index is an ordered file with two fields; the first field is of the same type as the clustering field of the data file, and the second field is a disk block pointer. there is one entry in the clustering index for each distinct value of the clustering field, and it contains the value and a pointer to the first block in the data file that has a record with that value for its clustering field. notice that record insertion and deletion still cause problems because the data records are physically ordered. to alleviate the problem of insertion, it is common to reserve a whole block (or a cluster of contiguous blocks) for each value of the clustering field; all records with that value are placed in the block (or block cluster). this makes insertion and deletion relatively straightforward.<br />
@@ -41,7 +41,7 @@ a clustering index is an example of a non<a href="/dense_index.html#1707560006">
 <p>
 suppose that we consider an ordered file with <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224769 46.783713 7.864247' style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224769 46.783713 7.864247' style="height: 0.7245em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g4-48' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
 <path id='g4-51' d='m4.303861-2.181818c0-.508095-.159402-.976339-.448319-1.285181c-.199253-.219178-.388543-.33873-.826899-.52802c.687422-.468244 .936488-.836862 .936488-1.374844c0-.806974-.637609-1.364882-1.554172-1.364882c-.498132 0-.936488 .169365-1.295143 .488169c-.298879 .268991-.448319 .52802-.667497 1.125778l.14944 .039851c.408468-.727273 .856787-1.05604 1.484433-1.05604c.647572 0 1.09589 .438356 1.09589 1.066002c0 .358655-.14944 .71731-.398506 .966376c-.298879 .298879-.577833 .448319-1.255293 .687422v.129514c.587796 0 .816936 .019925 1.05604 .109589c.617684 .219178 1.006227 .787049 1.006227 1.474471c0 .836862-.56787 1.484433-1.305106 1.484433c-.268991 0-.468244-.069738-.836862-.308842c-.298879-.179328-.468244-.249066-.637609-.249066c-.229141 0-.37858 .139477-.37858 .348692c0 .348692 .428394 .56787 1.125778 .56787c.767123 0 1.554172-.259029 2.022416-.667497s.727273-.986301 .727273-1.653798z'/>
@@ -62,7 +62,7 @@ suppose that we consider an ordered file with <?xml version='1.0' encoding='UTF-
 </g>
 </svg> records stored on a disk with block size <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.359274 39.032781 8.078455' style="height: 0.7947em; vertical-align: -0.0707em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.359274 39.032781 8.078455' style="height: 0.7455em; vertical-align: -0.0707em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g4-48' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
 <path id='g4-52' d='m4.702366-1.663761v-.637609h-1.016189v-4.433375h-.438356l-3.128269 4.433375v.637609h2.799502v1.663761h.767123v-1.663761h1.016189zm-1.793275-.637609h-2.391034l2.391034-3.417186v3.417186z'/>
@@ -83,7 +83,7 @@ suppose that we consider an ordered file with <?xml version='1.0' encoding='UTF-
 </g>
 </svg> bytes. imagine that it is ordered by the attribute <i>Zipcode</i> and there are 1000 zip codes in the file (with an average 300 records per zip code, assuming even distribution across zip codes.) the index in this case has 1000 index entries of 11 bytes each (5-byte Zipcode and 6-byte block pointer) with a blocking factor <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.177438 160.013049 13.234109' style="height: 1.3018em; vertical-align: -0.3990em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.177438 160.013049 13.234109' style="height: 1.2527em; vertical-align: -0.3990em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g4-48' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
 <path id='g4-49' d='m3.92528 0v-.14944c-.787049-.009963-.946451-.109589-.946451-.587796v-5.977584l-.079701-.019925l-1.793275 .9066v.139477c.119552-.049813 .229141-.089664 .268991-.109589c.179328-.069738 .348692-.109589 .448319-.109589c.209215 0 .298879 .14944 .298879 .468244v4.513076c0 .328767-.079701 .557908-.239103 .647572c-.14944 .089664-.288917 .119552-.707347 .129514v.14944h2.749689z'/>
@@ -141,7 +141,7 @@ suppose that we consider an ordered file with <?xml version='1.0' encoding='UTF-
 </g>
 </svg> index entries per block. the number of index blocks is hence <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.177438 150.18157 13.234109' style="height: 1.3018em; vertical-align: -0.3990em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.177438 150.18157 13.234109' style="height: 1.2527em; vertical-align: -0.3990em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g4-48' d='m4.742217-3.287671c0-2.042341-.9066-3.447073-2.211706-3.447073c-.547945 0-.966376 .169365-1.334994 .518057c-.577833 .557908-.956413 1.703611-.956413 2.86924c0 1.085928 .328767 2.251557 .797011 2.809465c.368618 .438356 .876712 .67746 1.454545 .67746c.508095 0 .936488-.169365 1.295143-.518057c.577833-.547945 .956413-1.703611 .956413-2.909091zm-.956413 .019925c0 2.082192-.438356 3.148194-1.295143 3.148194s-1.295143-1.066002-1.295143-3.138232c0-2.11208 .448319-3.217933 1.305106-3.217933c.836862 0 1.285181 1.125778 1.285181 3.20797z'/>
 <path id='g4-49' d='m3.92528 0v-.14944c-.787049-.009963-.946451-.109589-.946451-.587796v-5.977584l-.079701-.019925l-1.793275 .9066v.139477c.119552-.049813 .229141-.089664 .268991-.109589c.179328-.069738 .348692-.109589 .448319-.109589c.209215 0 .298879 .14944 .298879 .468244v4.513076c0 .328767-.079701 .557908-.239103 .647572c-.14944 .089664-.288917 .119552-.707347 .129514v.14944h2.749689z'/>
@@ -194,7 +194,7 @@ suppose that we consider an ordered file with <?xml version='1.0' encoding='UTF-
 </g>
 </svg> blocks. to perform a binary search on the index file would need <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.177438 92.203599 13.234109' style="height: 1.3018em; vertical-align: -0.3990em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.177438 92.203599 13.234109' style="height: 1.2527em; vertical-align: -0.3990em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g5-61' d='m5.499377-3.287671v-.557908h-5.100872v.557908h5.100872zm0 2.022416v-.557908h-5.100872v.557908h5.100872z'/>
 <path id='g2-56' d='m1.941819-.749091l-.109091-.08c-.341818 .414546-.523637 .567273-.661818 .567273c-.072727 0-.138182-.050909-.145455-.109091c0-.116364 .08-.334546 .123636-.48l.589091-2.341819l.043636-.014545c-.858182 .138182-1.032728 .16-1.367273 .181818v.116364c.450909 .007273 .516364 .029091 .523637 .174546c0 .058182-.021818 .181818-.058182 .32l-.327273 1.287273c-.116364 .436364-.16 .647273-.16 .792728c.014545 .269091 .152727 .414546 .4 .414546c.4 0 .698182-.218182 1.149091-.829091zm.218182-3.534547c-.007273-.210909-.196364-.392727-.421818-.392727s-.392727 .16-.385455 .385455c.007273 .232727 .181818 .385455 .421818 .385455c.218182 0 .392727-.174546 .385455-.378182z'/>

@@ -31,7 +31,7 @@
 </div><h1 class="main-title">rename operation</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="orgaf846f3">
+<div class="dummy" id="org2d5eb38">
 <p>
 in general, for most queries, we need to apply several <a href="/relational_algebra.html#1702391772">relational algebra</a> operations one after the other. either we can write the operations as a single relational algebra expression by nesting the operations, or we can apply one operation at a time and create intermediate result relations. in the latter case, we must give names to the relations that hold the intermediate results. for example, to retrieve the first name, last name, and salary of all employees who work in department number 5, we must apply a <a href="/select.html#1704740086">select</a> and a <a href="/project_operation.html#1704791629">project</a> operation. we can write a single <a href="/relational_algebra.html#1702391772">relational algebra</a> expression, also known as an in-line expression, as follows:<br />
 <?xml version='1.0' encoding='UTF-8'?>
@@ -405,7 +405,7 @@ it is sometimes simpler to break down a complex sequence of operations by specif
 if no renaming is applied, the names of the attributes in the resulting relation of a <a href="/select.html#1704740086">select</a> operation are the same as those in the original relation and in the same order. for a <a href="/project_operation.html#1704791629">project</a> operation with no renaming, the resulting relation has the same attribute names as those in the projection list and in the same order in which they appear in the list.<br />
 we can also define a formal RENAME operation&#x2013;which can rename either the relation name or the attribute names, or both&#x2013;as a unary operator. the general RENAME operation when applied to a relation <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.010576 7.819417 7.510577' style="height: 0.6897em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.010576 7.819417 7.510577' style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g1-39' d='m5.648817 0v-.159402c-.438356-.029888-.637609-.199253-.826899-.71731l-.926526-2.440847c.767123-.169365 1.09589-.308842 1.454545-.627646c.328767-.288917 .508095-.67746 .508095-1.125778c0-.926526-.727273-1.43462-2.072229-1.43462h-2.470735v.159402c.418431 .059776 .468244 .069738 .577833 .139477c.069738 .049813 .129514 .169365 .129514 .278954c0 .119552-.039851 .358655-.119552 .627646l-1.225405 4.403487c-.179328 .587796-.239103 .647572-.806974 .737235v.159402h2.430884v-.159402c-.617684-.079701-.67746-.119552-.67746-.468244c0-.099626 .019925-.199253 .119552-.56787l.557908-2.082192l.647572 .049813l1.225405 3.227895h1.474471zm-.836862-5.090909c0 .986301-.637609 1.494396-1.882939 1.494396c-.179328 0-.259029-.009963-.508095-.049813l.647572-2.281445c.059776-.209215 .18929-.278954 .508095-.278954c.826899 0 1.235367 .368618 1.235367 1.115816z'/>
 </defs>
@@ -510,7 +510,7 @@ where the symbol <?xml version='1.0' encoding='UTF-8'?>
 </g>
 </svg> is used to denote the RENAME operator, <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.519284 7.909092' style="height: 0.7780em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.519284 7.909092' style="height: 0.7289em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g2-40' d='m4.293898-1.8132c0-.647572-.219178-1.026152-1.125778-1.942715c-.9066-.9066-.986301-1.046077-.986301-1.534247c0-.627646 .418431-1.016189 1.09589-1.016189c.368618 0 .667497 .119552 .876712 .358655c.229141 .249066 .308842 .587796 .328767 1.255293l.179328 .029888l.398506-1.982565h-.229141c-.139477 .209215-.229141 .259029-.448319 .259029c-.129514 0-.249066-.029888-.458281-.109589c-.209215-.089664-.537983-.139477-.846824-.139477c-1.036115 0-1.77335 .687422-1.77335 1.663761c0 .537983 .14944 .826899 .747198 1.464508c.129514 .129514 .259029 .268991 .388543 .418431l.388543 .418431c.468244 .488169 .597758 .747198 .597758 1.175592c0 .757161-.547945 1.325031-1.285181 1.325031c-.836862 0-1.454545-.707347-1.454545-1.683686c0-.069738 0-.109589 .019925-.199253l-.199253-.019925l-.33873 2.221669h.179328c.069738-.229141 .179328-.328767 .37858-.328767c.109589 0 .249066 .039851 .518057 .129514c.458281 .169365 .727273 .229141 1.036115 .229141c1.145704 0 2.012453-.856787 2.012453-1.992528z'/>
 </defs>
@@ -546,7 +546,7 @@ where the symbol <?xml version='1.0' encoding='UTF-8'?>
 </g>
 </svg> are the new attribute names. the first expression renames both the relation and its attributes, the second renames the relation only, and the third renames the attributes only. if the attributes of <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.010576 7.819417 7.510577' style="height: 0.6897em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.010576 7.819417 7.510577' style="height: 0.7388em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g1-39' d='m5.648817 0v-.159402c-.438356-.029888-.637609-.199253-.826899-.71731l-.926526-2.440847c.767123-.169365 1.09589-.308842 1.454545-.627646c.328767-.288917 .508095-.67746 .508095-1.125778c0-.926526-.727273-1.43462-2.072229-1.43462h-2.470735v.159402c.418431 .059776 .468244 .069738 .577833 .139477c.069738 .049813 .129514 .169365 .129514 .278954c0 .119552-.039851 .358655-.119552 .627646l-1.225405 4.403487c-.179328 .587796-.239103 .647572-.806974 .737235v.159402h2.430884v-.159402c-.617684-.079701-.67746-.119552-.67746-.468244c0-.099626 .019925-.199253 .119552-.56787l.557908-2.082192l.647572 .049813l1.225405 3.227895h1.474471zm-.836862-5.090909c0 .986301-.637609 1.494396-1.882939 1.494396c-.179328 0-.259029-.009963-.508095-.049813l.647572-2.281445c.059776-.209215 .18929-.278954 .508095-.278954c.826899 0 1.235367 .368618 1.235367 1.115816z'/>
 </defs>
@@ -591,7 +591,7 @@ where the symbol <?xml version='1.0' encoding='UTF-8'?>
 </g>
 </svg> in that order, then each <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 11.004114 9.273695' style="height: 0.8635em; vertical-align: -0.2015em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 11.004114 9.273695' style="height: 0.9122em; vertical-align: -0.2015em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g1-56' d='m1.941819-.749091l-.109091-.08c-.341818 .414546-.523637 .567273-.661818 .567273c-.072727 0-.138182-.050909-.145455-.109091c0-.116364 .08-.334546 .123636-.48l.589091-2.341819l.043636-.014545c-.858182 .138182-1.032728 .16-1.367273 .181818v.116364c.450909 .007273 .516364 .029091 .523637 .174546c0 .058182-.021818 .181818-.058182 .32l-.327273 1.287273c-.116364 .436364-.16 .647273-.16 .792728c.014545 .269091 .152727 .414546 .4 .414546c.4 0 .698182-.218182 1.149091-.829091zm.218182-3.534547c-.007273-.210909-.196364-.392727-.421818-.392727s-.392727 .16-.385455 .385455c.007273 .232727 .181818 .385455 .421818 .385455c.218182 0 .392727-.174546 .385455-.378182z'/>
 <path id='g2-22' d='m5.618929 0v-.159402c-.56787-.049813-.637609-.129514-.757161-.856787l-.936488-5.638854h-.259029l-2.889166 4.98132c-.787049 1.325031-.886675 1.43462-1.285181 1.514321v.159402h1.863014v-.159402c-.508095-.049813-.587796-.099626-.587796-.348692c0-.18929 .029888-.278954 .199253-.617684l.56787-1.125778h2.191781l.199253 1.305106c.009963 .089664 .019925 .179328 .019925 .259029c0 .37858-.139477 .468244-.777086 .52802v.159402h2.450809zm-1.942715-2.610212h-1.932752l1.494396-2.590286l.438356 2.590286z'/>
