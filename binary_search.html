@@ -44,7 +44,7 @@ method: compare key against middle entry<br />
 <p>
 time complexity is <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 36.214522 10.220402' style="height: 1.0054em; vertical-align: -0.2628em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 34.554123 10.220402' style="height: 0.9562em; vertical-align: -0.2628em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g5-103' xlink:href='#g4-103' transform='scale(1.369862)'/>
 <use id='g5-108' xlink:href='#g4-108' transform='scale(1.369862)'/>
@@ -57,14 +57,18 @@ time complexity is <?xml version='1.0' encoding='UTF-8'?>
 <path id='g3-36' d='m6.963885-4.164384c0-.049813 0-.099626 0-.139477c0-1.334994-.946451-2.331258-2.241594-2.331258c-.787049 0-1.613948 .348692-2.391034 1.006227c-1.085928 .926526-1.733499 2.201743-1.733499 3.427148c0 1.39477 .9066 2.381071 2.171856 2.381071c2.072229 0 4.084682-2.092154 4.194271-4.343711zm-1.046077-.627646c0 1.046077-.448319 2.470735-1.075965 3.407223c-.557908 .826899-1.185554 1.235367-1.902864 1.235367c-.836862 0-1.295143-.597758-1.295143-1.683686c0-.916563 .468244-2.361146 1.05604-3.227895c.557908-.846824 1.185554-1.24533 1.932752-1.24533c.797011 0 1.285181 .577833 1.285181 1.514321z'/>
 <path id='g3-61' d='m4.722291-1.036115l-.139477-.129514c-.069738 .089664-.139477 .179328-.209215 .259029c-.288917 .368618-.468244 .52802-.607721 .52802c-.089664 0-.159402-.069738-.159402-.159402c0-.079701 .039851-.268991 .139477-.627646l.56787-2.052304c.059776-.209215 .089664-.428394 .089664-.56787c0-.358655-.268991-.607721-.657534-.607721c-.637609 0-1.265255 .607721-2.291407 2.191781l.667497-2.171856l-.029888-.019925l-1.613948 .308842v.159402c.508095 .009963 .637609 .069738 .637609 .268991c0 .059776-.009963 .119552-.019925 .169365l-.956413 3.486924h.747198c.468244-1.574097 .557908-1.793275 .996264-2.470735c.597758-.926526 1.105853-1.414695 1.474471-1.414695c.14944 0 .239103 .109589 .239103 .288917c0 .119552-.059776 .448319-.139477 .757161l-.438356 1.643836c-.129514 .518057-.159402 .647572-.159402 .747198c0 .37858 .139477 .537983 .468244 .537983c.448319 0 .697385-.199253 1.39477-1.125778z'/>
 </defs>
-<g id='page10'>
+<g id='page13'>
 <use x='-.10959' y='0' xlink:href='#g3-36'/>
 <use x='8.129503' y='0' xlink:href='#g1-185'/>
+<g class='math-button' data-ref='blk:def-log'>
+<g fill='#ff8000'>
 <use x='11.845563' y='0' xlink:href='#g5-108'/>
 <use x='14.615176' y='0' xlink:href='#g5-111'/>
 <use x='19.596496' y='0' xlink:href='#g5-103'/>
-<use x='26.288017' y='0' xlink:href='#g3-61'/>
-<use x='31.398856' y='0' xlink:href='#g1-186'/>
+</g>
+</g>
+<use x='24.627617' y='0' xlink:href='#g3-61'/>
+<use x='29.738456' y='0' xlink:href='#g1-186'/>
 </g>
 </svg><br />
 </p>
@@ -78,7 +82,7 @@ time complexity is <?xml version='1.0' encoding='UTF-8'?>
   <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">lo</span> = 0, <span style="font-weight: bold; font-style: italic;">hi</span> = a.length - 1;
   <span style="font-weight: bold;">while</span> (lo &lt;= hi) {
     <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">mid</span> = lo + (hi - lo) / 2;
-    <span style="font-weight: bold;">if</span> (key &lt; <span style="font-weight: bold; text-decoration: underline;">a</span>[mid]) hi = mid - 1;
+    <span style="font-weight: bold;">if</span> (key &lt; a[mid]) hi = mid - 1;
     <span style="font-weight: bold;">else</span> <span style="font-weight: bold;">if</span> (key &gt; a[mid]) lo = mid + 1;
     <span style="font-weight: bold;">else</span> <span style="font-weight: bold;">return</span> mid;
   }
