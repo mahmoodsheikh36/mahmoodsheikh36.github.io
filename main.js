@@ -12,6 +12,7 @@ window.onload = function(e) {
         data.push(entry);
       }
     }
+    search('');
   });
 }
 
