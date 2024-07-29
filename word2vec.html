@@ -31,11 +31,11 @@
 </div><h1 class="main-title">word2vec</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org23536bf">
+<div class="dummy" id="org9323ab0">
 <p>
 the intuition of <i>word2vec</i> is that instead of counting how often each word <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 8.222918 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 8.222918 5.49812' style="height: 0.4425em; vertical-align: -0.0181em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g6-70' xlink:href='#g0-70' transform='scale(1.111111)'/>
 <path id='g0-70' d='m5.810212-3.48792c0-.268991-.19726-.466252-.466252-.466252c-.215193 0-.349689 .116563-.349689 .29589c0 .125529 .044832 .19726 .188294 .331756s.19726 .224159 .19726 .331756c0 .385554-.304857 .860772-1.479452 2.331258l-.286924-3.156164c0-.09863-.017933-.125529-.071731-.125529c-.044832 0-.071731 .017933-.116563 .089664l-1.721544 2.725778c-.035866-.789041-.161395-1.873973-.286924-2.519552c-.053798-.286924-.071731-.304857-.170361-.304857c-.457285 .107597-1.102864 .215193-1.102864 .215193v.116563h.260025c.260025 0 .32279 .053798 .394521 .376588c.09863 .430386 .215193 1.470486 .251059 2.196762l.035866 .789041c.017933 .349689 .035866 .42142 .116563 .42142c.09863 0 1.0401-1.730511 1.0401-1.730511l.789041-1.264259l.29589 2.725778c.017933 .242092 .035866 .268991 .09863 .268991c.080697 0 .170361-.089664 .403487-.385554l.080697-.09863c1.246326-1.497385 1.900872-2.591283 1.900872-3.165131z'/>
@@ -45,7 +45,7 @@ the intuition of <i>word2vec</i> is that instead of counting how often each word
 </g>
 </svg> occurs near, say, <b>apricot</b>, we'll instead train a classifier on a binary prediction task: "is word <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 8.222918 5.49812' style="height: 0.5408em; vertical-align: -0.0673em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 8.222918 5.49812' style="height: 0.4425em; vertical-align: -0.0181em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g6-70' xlink:href='#g0-70' transform='scale(1.111111)'/>
 <path id='g0-70' d='m5.810212-3.48792c0-.268991-.19726-.466252-.466252-.466252c-.215193 0-.349689 .116563-.349689 .29589c0 .125529 .044832 .19726 .188294 .331756s.19726 .224159 .19726 .331756c0 .385554-.304857 .860772-1.479452 2.331258l-.286924-3.156164c0-.09863-.017933-.125529-.071731-.125529c-.044832 0-.071731 .017933-.116563 .089664l-1.721544 2.725778c-.035866-.789041-.161395-1.873973-.286924-2.519552c-.053798-.286924-.071731-.304857-.170361-.304857c-.457285 .107597-1.102864 .215193-1.102864 .215193v.116563h.260025c.260025 0 .32279 .053798 .394521 .376588c.09863 .430386 .215193 1.470486 .251059 2.196762l.035866 .789041c.017933 .349689 .035866 .42142 .116563 .42142c.09863 0 1.0401-1.730511 1.0401-1.730511l.789041-1.264259l.29589 2.725778c.017933 .242092 .035866 .268991 .09863 .268991c.080697 0 .170361-.089664 .403487-.385554l.080697-.09863c1.246326-1.497385 1.900872-2.591283 1.900872-3.165131z'/>
@@ -56,7 +56,7 @@ the intuition of <i>word2vec</i> is that instead of counting how often each word
 </svg> likely to show up near apricot?" we don't actually care about this prediction task; instead we'll take the learned classifier weights as the word embeddings.<br />
 the revolutionary intuition here is that we can just use running text as implicitly supervised training data for such a classifier; a word <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.826889 5.413431' style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.826889 5.413431' style="height: 0.4882em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g4-50' d='m3.646326-.956413l-.159402-.099626c-.547945 .587796-.936488 .806974-1.424658 .806974c-.56787 0-.9066-.418431-.9066-1.135741c0-.846824 .348692-1.733499 .9066-2.321295c.288917-.298879 .687422-.478207 1.085928-.478207c.229141 0 .368618 .079701 .368618 .199253c0 .049813-.009963 .099626-.059776 .18929c-.069738 .129514-.089664 .18929-.089664 .288917c0 .239103 .14944 .37858 .388543 .37858c.278954 0 .478207-.18929 .478207-.458281c0-.468244-.438356-.806974-1.046077-.806974c-1.494396 0-2.889166 1.454545-2.889166 3.008717c0 .946451 .537983 1.494396 1.464508 1.494396c.747198 0 1.275218-.298879 1.882939-1.066002z'/>
 </defs>
@@ -65,7 +65,7 @@ the revolutionary intuition here is that we can just use running text as implici
 </g>
 </svg> that occurs near the target word <b>apricot</b> acts as gold 'correct answer' to the question "is word <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.826889 5.413431' style="height: 0.5325em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -4.813812 5.826889 5.413431' style="height: 0.4882em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g4-50' d='m3.646326-.956413l-.159402-.099626c-.547945 .587796-.936488 .806974-1.424658 .806974c-.56787 0-.9066-.418431-.9066-1.135741c0-.846824 .348692-1.733499 .9066-2.321295c.288917-.298879 .687422-.478207 1.085928-.478207c.229141 0 .368618 .079701 .368618 .199253c0 .049813-.009963 .099626-.059776 .18929c-.069738 .129514-.089664 .18929-.089664 .288917c0 .239103 .14944 .37858 .388543 .37858c.278954 0 .478207-.18929 .478207-.458281c0-.468244-.438356-.806974-1.046077-.806974c-1.494396 0-2.889166 1.454545-2.889166 3.008717c0 .946451 .537983 1.494396 1.464508 1.494396c.747198 0 1.275218-.298879 1.882939-1.066002z'/>
 </defs>
@@ -151,7 +151,7 @@ if we consider one word/context pair <?xml version='1.0' encoding='UTF-8'?>
 </g>
 </svg> with its <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7205em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g6-58' d='m4.273973-.976339l-.14944-.109589c-.049813 .089664-.099626 .179328-.14944 .259029c-.179328 .308842-.298879 .418431-.448319 .418431c-.209215 0-.408468-.318804-.806974-1.285181l-.368618-.876712c1.464508-1.305106 1.77335-1.504359 2.241594-1.534247v-.159402h-1.823163v.159402h.159402c.249066 0 .388543 .069738 .388543 .179328c0 .199253-.488169 .67746-1.424658 1.39477l-.428394 .328767l1.195517-4.552927l-.049813-.049813c-.587796 .129514-.966376 .199253-1.554172 .268991v.159402h.169365c.33873 0 .488169 .069738 .508095 .249066c-.019925 .169365-.079701 .428394-.219178 .896638l-.089664 .328767l-.019925 .089664l-1.265255 4.811955h.747198l.478207-1.793275l.418431-.318804c.159402 .438356 .418431 1.05604 .597758 1.404732c.318804 .627646 .498132 .816936 .787049 .816936c.398506 0 .647572-.249066 1.105853-1.085928z'/>
 </defs>
@@ -502,7 +502,7 @@ if we consider one word/context pair <?xml version='1.0' encoding='UTF-8'?>
 <p>
 that is, we want to maximize the dot product of the word with the actual context words, and minimize the dot products of the word with the <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7205em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g6-58' d='m4.273973-.976339l-.14944-.109589c-.049813 .089664-.099626 .179328-.14944 .259029c-.179328 .308842-.298879 .418431-.448319 .418431c-.209215 0-.408468-.318804-.806974-1.285181l-.368618-.876712c1.464508-1.305106 1.77335-1.504359 2.241594-1.534247v-.159402h-1.823163v.159402h.159402c.249066 0 .388543 .069738 .388543 .179328c0 .199253-.488169 .67746-1.424658 1.39477l-.428394 .328767l1.195517-4.552927l-.049813-.049813c-.587796 .129514-.966376 .199253-1.554172 .268991v.159402h.169365c.33873 0 .488169 .069738 .508095 .249066c-.019925 .169365-.079701 .428394-.219178 .896638l-.089664 .328767l-.019925 .089664l-1.265255 4.811955h.747198l.478207-1.793275l.418431-.318804c.159402 .438356 .418431 1.05604 .597758 1.404732c.318804 .627646 .498132 .816936 .787049 .816936c.398506 0 .647572-.249066 1.105853-1.085928z'/>
 </defs>

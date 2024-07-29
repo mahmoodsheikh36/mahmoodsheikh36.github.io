@@ -53,9 +53,9 @@ in a heap the keys arent necessarily sorted like in <a href="/binary_search_tree
 </p>
 
 </div>
-<div id="outline-container-org2f47bb8" class="outline-2">
-<h2 id="org2f47bb8">bubbling</h2>
-<div class="outline-text-2" id="text-org2f47bb8">
+<div id="outline-container-orgf0b1adb" class="outline-2">
+<h2 id="orgf0b1adb">bubbling</h2>
+<div class="outline-text-2" id="text-orgf0b1adb">
 <div class="math-block definition" data-before="definition" data-after="">
 <p>
 moving a <a href="/tree_data_structure.html#1706801423">node</a> up/down a heap to get it to its correct position<br />
@@ -63,17 +63,17 @@ moving a <a href="/tree_data_structure.html#1706801423">node</a> up/down a heap 
 
 </div>
 </div>
-<div id="outline-container-org1e2f9d9" class="outline-3">
-<h3 id="org1e2f9d9">bubble up</h3>
-<div class="outline-text-3" id="text-org1e2f9d9">
+<div id="outline-container-org03561be" class="outline-3">
+<h3 id="org03561be">bubble up</h3>
+<div class="outline-text-3" id="text-org03561be">
 <p>
 <a href="/binary_heap.html#1706801290">bubbling</a> a node <b>upwards</b> consists of recursively switching it with its parent until its parent is bigger/smaller than it (depending on whether we're using a <a href="/heap.html#1706801306">min heap</a> or a <a href="/heap.html#1706801306">max heap</a>)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgb2e7e54" class="outline-3">
-<h3 id="orgb2e7e54">bubble down</h3>
-<div class="outline-text-3" id="text-orgb2e7e54">
+<div id="outline-container-org0701d0f" class="outline-3">
+<h3 id="org0701d0f">bubble down</h3>
+<div class="outline-text-3" id="text-org0701d0f">
 <p>
 <a href="/binary_heap.html#1706801290">bubbling</a> a node <b>downards</b> consists of recursively switching it with one of its children until it gets to its correct position<br />
 this is a pseudocode for the algorithm:<br />
@@ -126,31 +126,31 @@ r = right(i) <span style="font-weight: bold; font-style: italic;">// </span><spa
 </div>
 </div>
 </div>
-<div id="outline-container-org05f0a48" class="outline-2">
-<h2 id="org05f0a48">insertion</h2>
-<div class="outline-text-2" id="text-org05f0a48">
+<div id="outline-container-org9d7901d" class="outline-2">
+<h2 id="org9d7901d">insertion</h2>
+<div class="outline-text-2" id="text-org9d7901d">
 <p>
 inserting a new <a href="/tree_data_structure.html#1706801423">node</a> to the heap consists of adding it as a <a href="/tree_data_structure.html#1706801423">leaf</a> such that the heap remains <a href="/tree_data_structure.html#1706801423">almost complete</a> and <a href="/binary_heap.html#1706801290">bubbling up</a> the newly added node so that the keys in the tree remain sorted<br />
 if the heap is in <a href="/binary_heap.html#1706801290">array representation</a>, we insert the new node to the end of the array and heapify it upwards (bubble up)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org9628fb6" class="outline-2">
-<h2 id="org9628fb6">deletion</h2>
-<div class="outline-text-2" id="text-org9628fb6">
+<div id="outline-container-orgc0fd008" class="outline-2">
+<h2 id="orgc0fd008">deletion</h2>
+<div class="outline-text-2" id="text-orgc0fd008">
 <p>
 deletion of a node consists of replacing the rightmost leaf with it and bubble it <a href="/binary_heap.html#1706801290">downwards</a> if its smaller than one of its children or <a href="/binary_heap.html#1706801290">upwards</a> if its bigger than its parent<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org4f9ed0e" class="outline-2">
-<h2 id="org4f9ed0e">binary heap array representation</h2>
-<div class="outline-text-2" id="text-org4f9ed0e">
+<div id="outline-container-orgc4d9da8" class="outline-2">
+<h2 id="orgc4d9da8">binary heap array representation</h2>
+<div class="outline-text-2" id="text-orgc4d9da8">
 <div class="math-block note" data-before="note" data-after="">
 <p>
 some resources may use assume that arrays start at index 1, i see no point in that since most programming languages use 0 as the first index, so some of the following propositions might seem a little different like for example the proposition number 2 in the following list according to these sources would be that the left child of i^{th} node is <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 32.950076 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 32.950076 10.006208' style="height: 0.9351em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-50' xlink:href='#g7-50' transform='scale(1.369862)'/>
 <use id='g4-187' xlink:href='#g3-187' transform='scale(1.369862)'/>
@@ -173,7 +173,7 @@ some resources may use assume that arrays start at index 1, i see no point in th
 </g>
 </svg> instead of <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 47.978057 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 47.978057 10.006208' style="height: 0.9351em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-49' xlink:href='#g7-49' transform='scale(1.369862)'/>
 <use id='g9-50' xlink:href='#g7-50' transform='scale(1.369862)'/>
@@ -202,7 +202,7 @@ some resources may use assume that arrays start at index 1, i see no point in th
 </g>
 </svg> and the right child is <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 47.978057 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 47.978057 10.006208' style="height: 0.9351em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-49' xlink:href='#g7-49' transform='scale(1.369862)'/>
 <use id='g9-50' xlink:href='#g7-50' transform='scale(1.369862)'/>
@@ -236,7 +236,7 @@ some resources may use assume that arrays start at index 1, i see no point in th
 <p>
 for an array to represent a <a href="/binary_heap.html#1706801290">binary heap</a>, the only condition is that <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -19.633239 72.631699 25.114561' style="height: 2.4705em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -19.633239 72.631699 25.114561' style="height: 2.4213em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g5-56' d='m1.941819-.749091l-.109091-.08c-.341818 .414546-.523637 .567273-.661818 .567273c-.072727 0-.138182-.050909-.145455-.109091c0-.116364 .08-.334546 .123636-.48l.589091-2.341819l.043636-.014545c-.858182 .138182-1.032728 .16-1.367273 .181818v.116364c.450909 .007273 .516364 .029091 .523637 .174546c0 .058182-.021818 .181818-.058182 .32l-.327273 1.287273c-.116364 .436364-.16 .647273-.16 .792728c.014545 .269091 .152727 .414546 .4 .414546c.4 0 .698182-.218182 1.149091-.829091zm.218182-3.534547c-.007273-.210909-.196364-.392727-.421818-.392727s-.392727 .16-.385455 .385455c.007273 .232727 .181818 .385455 .421818 .385455c.218182 0 .392727-.174546 .385455-.378182z'/>
 <path id='g2-20' d='m3.178082 23.352428v-.249066h-1.075965c-.249066 0-.458281-.169365-.458281-.418431v-22.585305c0-.249066 .209215-.428394 .458281-.428394h1.075965v-.229141h-2.30137v23.910336h2.30137z'/>
@@ -277,7 +277,7 @@ arrays that represent heap have the following characterstics:<br />
 <ol class="org-ol">
 <li>root is <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 30.001158 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 30.001158 10.006208' style="height: 0.9351em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-48' xlink:href='#g7-48' transform='scale(1.369862)'/>
 <use id='g4-187' xlink:href='#g3-187' transform='scale(1.369862)'/>
@@ -299,7 +299,7 @@ arrays that represent heap have the following characterstics:<br />
 </svg><br /></li>
 <li>the parent of the i^{th} node (in the array) is <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -19.633239 42.290142 25.114561' style="height: 2.4705em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -19.633239 42.290142 25.114561' style="height: 2.4213em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g3-0' d='m4.174547-1.665455v-.407273h-3.723638v.407273h3.723638z'/>
 <path id='g5-56' d='m1.941819-.749091l-.109091-.08c-.341818 .414546-.523637 .567273-.661818 .567273c-.072727 0-.138182-.050909-.145455-.109091c0-.116364 .08-.334546 .123636-.48l.589091-2.341819l.043636-.014545c-.858182 .138182-1.032728 .16-1.367273 .181818v.116364c.450909 .007273 .516364 .029091 .523637 .174546c0 .058182-.021818 .181818-.058182 .32l-.327273 1.287273c-.116364 .436364-.16 .647273-.16 .792728c.014545 .269091 .152727 .414546 .4 .414546c.4 0 .698182-.218182 1.149091-.829091zm.218182-3.534547c-.007273-.210909-.196364-.392727-.421818-.392727s-.392727 .16-.385455 .385455c.007273 .232727 .181818 .385455 .421818 .385455c.218182 0 .392727-.174546 .385455-.378182z'/>
@@ -326,7 +326,7 @@ arrays that represent heap have the following characterstics:<br />
 </svg><br /></li>
 <li>left child of the i^{th} node is <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 47.978057 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 47.978057 10.006208' style="height: 0.9351em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-49' xlink:href='#g7-49' transform='scale(1.369862)'/>
 <use id='g9-50' xlink:href='#g7-50' transform='scale(1.369862)'/>
@@ -356,7 +356,7 @@ arrays that represent heap have the following characterstics:<br />
 </svg><br /></li>
 <li>right child of the i^{th} node is <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 47.978057 10.006208' style="height: 0.9843em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 47.978057 10.006208' style="height: 0.9351em; vertical-align: -0.2418em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-50' xlink:href='#g7-50' transform='scale(1.369862)'/>
 <use id='g4-184' xlink:href='#g3-184' transform='scale(1.369862)'/>
@@ -389,15 +389,15 @@ the array should hold 2 values, <code>array-size</code>, which is the size of th
 </p>
 </div>
 </div>
-<div id="outline-container-org71b9ef7" class="outline-2">
-<h2 id="org71b9ef7">construction of binary heap from array</h2>
-<div class="outline-text-2" id="text-org71b9ef7">
+<div id="outline-container-orgc85b705" class="outline-2">
+<h2 id="orgc85b705">construction of binary heap from array</h2>
+<div class="outline-text-2" id="text-orgc85b705">
 <p>
 given some random <a href="/array.html#1659024331">array</a>, e.g. <code>A=[10,20,30,40,50,70,35,60,80]</code>, we need to reorganize its elements such that it <a href="/binary_heap.html#1706801290">represents a binary heap</a><br />
 to achieve this we apply <a href="/binary_heap.html#1706801290">bubble down</a> to the first half of the array <b>in reverse</b> (because the <a href="/tree_data_structure.html#1706801423">leaf</a> nodes need not be heapified as they already follow the heap property)<br />
 e.g. for the given array we apply <code>bubble(A, i)</code> such that <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224769 41.080506 7.864247' style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224769 41.080506 7.864247' style="height: 0.7244em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g4-33' xlink:href='#g3-33' transform='scale(1.369862)'/>
 <use id='g9-48' xlink:href='#g7-48' transform='scale(1.369862)'/>
@@ -450,7 +450,7 @@ this algorithm runs in <?xml version='1.0' encoding='UTF-8'?>
 <p>
 for <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 41.190096 7.864262' style="height: 0.7736em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 41.190096 7.864262' style="height: 0.7244em; vertical-align: -0.0629em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-48' xlink:href='#g7-48' transform='scale(1.369862)'/>
 <use id='g9-49' xlink:href='#g7-49' transform='scale(1.369862)'/>
@@ -469,7 +469,7 @@ for <?xml version='1.0' encoding='UTF-8'?>
 </svg> we know:<br />
 <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -30.685482 368.203724 31.185484' style="height: 3.0676em; display: block" class="org-latex org-latex-block">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -30.685482 368.203724 31.185484' style="height: 3.0185em; display: block" class="org-latex org-latex-block">
 <defs>
 <use id='g9-49' xlink:href='#g7-49' transform='scale(1.369862)'/>
 <use id='g10-61' xlink:href='#g8-61' transform='scale(1.369862)'/>
@@ -513,7 +513,7 @@ for <?xml version='1.0' encoding='UTF-8'?>
 </svg><br />
 so for <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.33435 24.088805 13.27146' style="height: 1.3055em; vertical-align: -0.3873em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -9.33435 24.088805 13.27146' style="height: 1.2563em; vertical-align: -0.3873em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g10-61' xlink:href='#g8-61' transform='scale(1.369862)'/>
 <path id='g8-61' d='m4.014547-2.400001v-.407273h-3.723638v.407273h3.723638zm0 1.476364v-.407273h-3.723638v.407273h3.723638z'/>
@@ -531,7 +531,7 @@ so for <?xml version='1.0' encoding='UTF-8'?>
 </svg>:<br />
 <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -37.787314 368.203724 38.287316' style="height: 3.7662em; display: block" class="org-latex org-latex-block">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -37.787314 368.203724 38.287316' style="height: 3.7170em; display: block" class="org-latex org-latex-block">
 <defs>
 <use id='g10-61' xlink:href='#g8-61' transform='scale(1.369862)'/>
 <use id='g9-49' xlink:href='#g7-49' transform='scale(1.369862)'/>
@@ -628,13 +628,13 @@ to be continued<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org1e70d49" class="outline-2">
-<h2 id="org1e70d49">binary heap algorithms</h2>
-<div class="outline-text-2" id="text-org1e70d49">
+<div id="outline-container-org106d965" class="outline-2">
+<h2 id="org106d965">binary heap algorithms</h2>
+<div class="outline-text-2" id="text-org106d965">
 </div>
-<div id="outline-container-org077fdfd" class="outline-3">
-<h3 id="org077fdfd">biggest k nodes</h3>
-<div class="outline-text-3" id="text-org077fdfd">
+<div id="outline-container-org68a4fa6" class="outline-3">
+<h3 id="org68a4fa6">biggest k nodes</h3>
+<div class="outline-text-3" id="text-org68a4fa6">
 <p>
 initial inefficient solution:<br />
 </p>
@@ -643,7 +643,7 @@ initial inefficient solution:<br />
 <span class="equation">
 <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -41.195386 368.203724 46.676708' style="height: 4.5915em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -41.195386 368.203724 46.676708' style="height: 4.5423em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g11-9' d='m3.028643 1.603985c-.797011-.627646-1.075965-.976339-1.344956-1.723537c-.239103-.667497-.348692-1.424658-.348692-2.420922c0-1.046077 .129514-1.863014 .398506-2.480697c.278954-.617684 .577833-.976339 1.295143-1.554172l-.089664-.159402c-.737235 .478207-1.036115 .737235-1.404732 1.195517c-.707347 .86675-1.05604 1.863014-1.05604 3.028643c0 1.265255 .368618 2.241594 1.24533 3.257783c.408468 .478207 .667497 .697385 1.185554 1.016189l.119552-.159402z'/>
 <path id='g11-10' d='m2.839352-2.460772c0-1.275218-.368618-2.241594-1.24533-3.257783c-.408468-.478207-.667497-.697385-1.185554-1.016189l-.119552 .159402c.797011 .627646 1.066002 .976339 1.344956 1.723537c.239103 .667497 .348692 1.424658 .348692 2.420922c0 1.036115-.129514 1.863014-.398506 2.470735c-.278954 .627646-.577833 .986301-1.295143 1.564134l.089664 .159402c.737235-.478207 1.036115-.737235 1.404732-1.195517c.707347-.86675 1.05604-1.863014 1.05604-3.028643z'/>
@@ -743,7 +743,7 @@ initial inefficient solution:<br />
 we analyze the <a href="/time_complexity.html#1669765481">time complexity</a> of this algorithm:<br />
 <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -14.627018 368.203724 15.12702' style="height: 1.4880em; display: block" class="org-latex org-latex-block">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -14.627018 368.203724 15.12702' style="height: 1.4388em; display: block" class="org-latex org-latex-block">
 <defs>
 <use id='g10-61' xlink:href='#g8-61' transform='scale(1.369862)'/>
 <use id='g9-49' xlink:href='#g7-49' transform='scale(1.369862)'/>
@@ -878,7 +878,7 @@ we analyze the <a href="/time_complexity.html#1669765481">time complexity</a> of
 </svg><br />
 which means that the time complexity is <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 70.952966 10.220402' style="height: 1.0054em; vertical-align: -0.2628em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.548551 70.952966 10.220402' style="height: 0.9562em; vertical-align: -0.2628em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-103' xlink:href='#g7-103' transform='scale(1.369862)'/>
 <use id='g9-108' xlink:href='#g7-108' transform='scale(1.369862)'/>
@@ -925,7 +925,7 @@ we suggest another algorithm that is more efficient:<br />
 <span class="equation">
 <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -89.016059 368.203724 94.49738' style="height: 9.2955em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -89.016059 368.203724 94.49738' style="height: 9.2463em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <use id='g9-49' xlink:href='#g7-49' transform='scale(1.369862)'/>
 <use id='g4-32' xlink:href='#g3-32' transform='scale(1.369862)'/>
