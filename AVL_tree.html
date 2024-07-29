@@ -292,9 +292,9 @@ let <code>T</code> be an AVL tree with <code>n</code> nodes and height <?xml ver
 </p>
 
 </div>
-<div id="outline-container-org906a85a" class="outline-2">
-<h2 id="org906a85a">minimal form</h2>
-<div class="outline-text-2" id="text-org906a85a">
+<div id="outline-container-orgcaa8173" class="outline-2">
+<h2 id="orgcaa8173">minimal form</h2>
+<div class="outline-text-2" id="text-orgcaa8173">
 <div class="math-block definition" data-before="definition" data-after="">
 <p>
 a minimal form of an <a href="/AVL_tree.html#1706801363">AVL tree</a> with a given height <?xml version='1.0' encoding='UTF-8'?>
@@ -582,9 +582,9 @@ here is a python snippet to find the minimal number of nodes needed for a given 
 </div>
 </div>
 </div>
-<div id="outline-container-org5cf259e" class="outline-2">
-<h2 id="org5cf259e">problematic node</h2>
-<div class="outline-text-2" id="text-org5cf259e">
+<div id="outline-container-org23af995" class="outline-2">
+<h2 id="org23af995">problematic node</h2>
+<div class="outline-text-2" id="text-org23af995">
 <div class="math-block definition" data-before="definition" data-after="">
 <p>
 a <b>problematic node</b> is a <a href="/tree_data_structure.html#1706801423">node</a> whose <a href="/tree_data_structure.html#1706801423">balance factor</a> is <?xml version='1.0' encoding='UTF-8'?>
@@ -608,25 +608,25 @@ a <b>problematic node</b> is a <a href="/tree_data_structure.html#1706801423">no
 </div>
 </div>
 </div>
-<div id="outline-container-org51526a7" class="outline-2">
-<h2 id="org51526a7">insertion</h2>
-<div class="outline-text-2" id="text-org51526a7">
+<div id="outline-container-orgeab4796" class="outline-2">
+<h2 id="orgeab4796">insertion</h2>
+<div class="outline-text-2" id="text-orgeab4796">
 <p>
 the process of inserting a node to an AVL tree starts with inserting it using the same insertion method we used for a <a href="/binary_search_tree.html#1706801383">binary search tree</a>, after said insertion we start going up the tree starting at the new node we just inserted and updating the <a href="/tree_data_structure.html#1706801423">balance factor</a> for every node we encounter as we go<br />
 if we arrive at <a href="/AVL_tree.html#1706801363">problematic node</a>, we apply the proper <a href="/AVL_tree.html#1706801363">rotation</a> to <a href="/AVL_tree.html#1706801363">rebalance</a> the tree<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org6949839" class="outline-2">
-<h2 id="org6949839">rebalancing</h2>
-<div class="outline-text-2" id="text-org6949839">
+<div id="outline-container-org39a4ee6" class="outline-2">
+<h2 id="org39a4ee6">rebalancing</h2>
+<div class="outline-text-2" id="text-org39a4ee6">
 <p>
 during a modifying operation of a <a href="/binary_tree.html#1706801397">binary tree</a>, a node might become <a href="/AVL_tree.html#1706801363">problematic</a>, to restore balance to the tree so that it remains an <a href="/AVL_tree.html#1706801363">AVL tree</a> we use <a href="/AVL_tree.html#1706801363">rotation</a>s<br />
 </p>
 </div>
-<div id="outline-container-org727fb27" class="outline-3">
-<h3 id="org727fb27">rotation</h3>
-<div class="outline-text-3" id="text-org727fb27">
+<div id="outline-container-orgb351c75" class="outline-3">
+<h3 id="orgb351c75">rotation</h3>
+<div class="outline-text-3" id="text-orgb351c75">
 <p>
 to determine which type of <b>rotation</b> we need to use to <b>rebalance</b> a given tree, we go 2 steps from the <a href="/AVL_tree.html#1706801363">problematic node</a> towards the newly inserted node which gives us the following 4 cases:<br />
 </p>
@@ -637,13 +637,13 @@ to determine which type of <b>rotation</b> we need to use to <b>rebalance</b> a 
 <li>if we go right and then left then the <b>rotation</b> is of type <a href="/AVL_tree.html#1706801363">RL</a><br /></li>
 </ol>
 </div>
-<div id="outline-container-orgecd6e50" class="outline-4">
-<h4 id="orgecd6e50">simple rotation</h4>
-<div class="outline-text-4" id="text-orgecd6e50">
+<div id="outline-container-org20add95" class="outline-4">
+<h4 id="org20add95">simple rotation</h4>
+<div class="outline-text-4" id="text-org20add95">
 </div>
-<div id="outline-container-org7f2d298" class="outline-5">
-<h5 id="org7f2d298">left left rotation</h5>
-<div class="outline-text-5" id="text-org7f2d298">
+<div id="outline-container-orgbf55213" class="outline-5">
+<h5 id="orgbf55213">left left rotation</h5>
+<div class="outline-text-5" id="text-orgbf55213">
 <p>
 let <code>z</code> be the left child of the <a href="/AVL_tree.html#1706801363">problematic node</a> and <code>x</code> be the problematic node itself<br />
 in <b>Left Left</b> rotation we rotate <code>x</code> to the right, such that the left child of <code>x</code> replaces <code>x</code> and <code>x</code> gets "rotated" to the right becoming the right child of <code>z</code> and a parent of the previous right child of <code>z</code><br />
@@ -1018,9 +1018,9 @@ and so the original tree would become:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgb8e3783" class="outline-5">
-<h5 id="orgb8e3783">right right rotation</h5>
-<div class="outline-text-5" id="text-orgb8e3783">
+<div id="outline-container-orge458184" class="outline-5">
+<h5 id="orge458184">right right rotation</h5>
+<div class="outline-text-5" id="text-orge458184">
 <p>
 this is very similar to <a href="/AVL_tree.html#1706801363">Left Left</a>, we first add the node and then if we have a <a href="/AVL_tree.html#1706801363">problematic node</a> <code>x</code> and if we took 2 steps to the right, then we use this rotation method<br />
 this method consists of rotating the <a href="/tree_data_structure.html#1706801423">subtree</a> <?xml version='1.0' encoding='UTF-8'?>
@@ -1046,24 +1046,24 @@ image taken from <a href="https://www.codesdope.com/course/data-structures-red-b
 </div>
 </div>
 </div>
-<div id="outline-container-orgd2bf87e" class="outline-4">
-<h4 id="orgd2bf87e">double rotation</h4>
-<div class="outline-text-4" id="text-orgd2bf87e">
+<div id="outline-container-org8190176" class="outline-4">
+<h4 id="org8190176">double rotation</h4>
+<div class="outline-text-4" id="text-org8190176">
 <p>
 the difference between this and <a href="/AVL_tree.html#1706801363">simple rotation</a> is that this method consists of rotating twice as you might've already guessed from the title<br />
 </p>
 </div>
-<div id="outline-container-org70f20fc" class="outline-5">
-<h5 id="org70f20fc">left right rotation</h5>
-<div class="outline-text-5" id="text-org70f20fc">
+<div id="outline-container-org48a8fa7" class="outline-5">
+<h5 id="org48a8fa7">left right rotation</h5>
+<div class="outline-text-5" id="text-org48a8fa7">
 <p>
 this method consists of 2 steps, first is applying an <a href="/AVL_tree.html#1706801363">RR</a> rotation over the left child of the <a href="/AVL_tree.html#1706801363">problematic node</a>, then applying an <a href="/AVL_tree.html#1706801363">LL</a> rotation to the <a href="/AVL_tree.html#1706801363">problematic node</a><br />
 </p>
 </div>
 </div>
-<div id="outline-container-org86025a7" class="outline-5">
-<h5 id="org86025a7">right left rotation</h5>
-<div class="outline-text-5" id="text-org86025a7">
+<div id="outline-container-orge950068" class="outline-5">
+<h5 id="orge950068">right left rotation</h5>
+<div class="outline-text-5" id="text-orge950068">
 <p>
 this method consists of 2 steps, first is applying an <a href="/AVL_tree.html#1706801363">LL</a> rotation over the right child of the <a href="/AVL_tree.html#1706801363">problematic node</a>, then applying a <a href="/AVL_tree.html#1706801363">RR</a> rotation to the <a href="/AVL_tree.html#1706801363">problematic node</a></p>
 </div>

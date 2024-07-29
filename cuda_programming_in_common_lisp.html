@@ -39,9 +39,9 @@ load it using <a href="/common_lisp.html#1677249560">quicklisp</a>:<br />
 <pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:cl-cuda</span>)
 </pre>
 </div>
-<div id="outline-container-org480ea5a" class="outline-2">
-<h2 id="org480ea5a">arch linux setup</h2>
-<div class="outline-text-2" id="text-org480ea5a">
+<div id="outline-container-org82c0590" class="outline-2">
+<h2 id="org82c0590">arch linux setup</h2>
+<div class="outline-text-2" id="text-org82c0590">
 <p>
 i had to install <code>cuda</code> for the <code>nvcc</code> compiler and more, and <code>nvidia</code> for the gpu driver, at first you may have to use <code>/opt/cuda/bin/nvcc</code> until you reboot or extend your $PATH.<br />
 to check which nvidia driver is in use run:<br />
@@ -56,13 +56,13 @@ if you have installed the <code>nvidia</code> package and your os still uses <co
 </p>
 </div>
 </div>
-<div id="outline-container-org3a387d9" class="outline-2">
-<h2 id="org3a387d9">essential concepts</h2>
-<div class="outline-text-2" id="text-org3a387d9">
+<div id="outline-container-orgd96d7a6" class="outline-2">
+<h2 id="orgd96d7a6">essential concepts</h2>
+<div class="outline-text-2" id="text-orgd96d7a6">
 </div>
-<div id="outline-container-org1111f86" class="outline-3">
-<h3 id="org1111f86">threads</h3>
-<div class="outline-text-3" id="text-org1111f86">
+<div id="outline-container-org99bc5e1" class="outline-3">
+<h3 id="org99bc5e1">threads</h3>
+<div class="outline-text-3" id="text-org99bc5e1">
 <p>
 mostly from <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
 i also read the examples from the cl-cuda's source code.<br />
@@ -76,9 +76,9 @@ for efficient cooperation, the shared memory is expected to be a low-latency mem
 </p>
 </div>
 </div>
-<div id="outline-container-org4ab94a8" class="outline-3">
-<h3 id="org4ab94a8">memory</h3>
-<div class="outline-text-3" id="text-org4ab94a8">
+<div id="outline-container-org016de5c" class="outline-3">
+<h3 id="org016de5c">memory</h3>
+<div class="outline-text-3" id="text-org016de5c">
 <p>
 CUDA threads may access data from multiple memory spaces during their execution. each thread has private <b>local memory</b>. each thread block has <b>shared memory</b> visible to all threads of the block and with the same lifetime as the block. thread blocks in a thread block cluster can perform read, write, and atomics operations on each other’s shared memory. all threads have access to the same <b>global memory</b>.<br />
 there are also two additional read-only memory spaces accessible by all threads: the constant and texture memory spaces. the global, constant, and texture memory spaces are optimized for different memory usages. texture memory also offers different addressing modes, as well as data filtering, for some specific data formats.<br />
@@ -89,9 +89,9 @@ unified memory provides managed memory to bridge the host and device memory spac
 </p>
 </div>
 </div>
-<div id="outline-container-org0c75013" class="outline-3">
-<h3 id="org0c75013">device memory</h3>
-<div class="outline-text-3" id="text-org0c75013">
+<div id="outline-container-orgc3e55f1" class="outline-3">
+<h3 id="orgc3e55f1">device memory</h3>
+<div class="outline-text-3" id="text-orgc3e55f1">
 <p>
 the CUDA programming model assumes a system composed of a host and a device, each with their own separate memory. kernels operate out of device memory, so the runtime provides functions to allocate, deallocate, and copy device memory, as well as transfer data between host memory and device memory.<br />
 device memory can be allocated either as linear memory or as <b>CUDA arrays</b>.<br />
@@ -101,9 +101,9 @@ CUDA arrays are opaque memory layouts optimized for texture fetching.<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org00bc1d1" class="outline-2">
-<h2 id="org00bc1d1">code</h2>
-<div class="outline-text-2" id="text-org00bc1d1">
+<div id="outline-container-org10d42ea" class="outline-2">
+<h2 id="org10d42ea">code</h2>
+<div class="outline-text-2" id="text-org10d42ea">
 <p>
 see <a href="/connect_to_remote_common_lisp_repl_with_sly_slime.html#1686752509">connect to remote common lisp repl with sly/slime</a> for connecting to a remote common lisp repl with emacs.<br />
 </p>
@@ -114,9 +114,9 @@ notice that when working cl-cuda the data that we're passing to the gpu is gonna
 
 </div>
 </div>
-<div id="outline-container-org9f1f3a2" class="outline-3">
-<h3 id="org9f1f3a2">cuda vector addition</h3>
-<div class="outline-text-3" id="text-org9f1f3a2">
+<div id="outline-container-org164074f" class="outline-3">
+<h3 id="org164074f">cuda vector addition</h3>
+<div class="outline-text-3" id="text-org164074f">
 <p>
 we start with the vectorAdd example, a simple example in C, stolen from <a href="https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu">https://github.com/NVIDIA/cuda-samples/blob/master/Samples/0_Introduction/vectorAdd/vectorAdd.cu</a> and modified to reduce boilerplate code.<br />
 the syntax for calling a kernel in c++ is <code>vector&lt;&lt;&lt; blocks per grid, threads per block &gt;&gt;&gt;(arg1,arg2,...)</code>.<br />
@@ -222,9 +222,9 @@ similar same code but in cl:<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org00892a6" class="outline-3">
-<h3 id="org00892a6">cuda matrix multiplication</h3>
-<div class="outline-text-3" id="text-org00892a6">
+<div id="outline-container-orgb688380" class="outline-3">
+<h3 id="orgb688380">cuda matrix multiplication</h3>
+<div class="outline-text-3" id="text-orgb688380">
 <p>
 mostly taken from <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html">https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html</a> and <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a>.<br />
 before implementing matrix multiplication for the <b>gpu</b> we need to consider some things.<br />
@@ -329,7 +329,7 @@ the product of two matrices <?xml version='1.0' encoding='UTF-8'?>
 </g>
 </svg> flops are required, if we were to consider gemm, the parameters <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.010576 17.295478 9.577807' style="height: 0.8979em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.010576 17.295478 9.577807' style="height: 0.9421em; vertical-align: -0.2525em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g3-85' d='m5.818182-4.094645l-.687422 .099626c-.268991 .767123-1.05604 1.942715-1.05604 1.952677h-.009963c0-.009963 .169365-.438356 .169365-.966376c0-.657534-.229141-1.384807-1.295143-1.384807c-1.673724 0-2.699875 1.763387-2.699875 2.968867c0 .846824 .448319 1.534247 1.484433 1.534247c.787049 0 1.384807-.607721 1.384807-.617684h.009963c0 .079701 .019925 .597758 .747198 .597758c.797011 0 1.265255-.896638 1.265255-1.125778c0-.029888-.009963-.049813-.029888-.049813c-.129514 0-.368618 .816936-.946451 .816936c-.219178 0-.278954-.249066-.278954-.508095c0-.219178 .039851-.448319 .079701-.547945c.139477-.18929 1.863014-2.759651 1.863014-2.769614zm-2.311333 1.155666c0 .946451-.368618 2.032379-.368618 2.042341s-.508095 .757161-1.265255 .757161c-.219178 0-.757161-.069738-.757161-1.344956c0-.508095 .259029-2.660025 1.653798-2.660025c.67746 0 .737235 .846824 .737235 1.205479z'/>
 <path id='g3-86' d='m5.031133-5.379826c0-.787049-.637609-1.145704-1.464508-1.145704c-1.05604 0-2.082192 .707347-2.361146 1.713574l-1.524284 5.559153c-.169365 .627646-.547945 1.185554-.647572 1.315068h.886675c.009963 0 .169365-.079701 .498132-1.325031l.33873-1.285181h.009963c0 .009963 .328767 .71731 1.334994 .71731c1.494396 0 2.500623-1.115816 2.500623-2.261519c0-1.24533-1.125778-1.43462-1.135741-1.43462v-.039851c.009963 0 1.564134-.358655 1.564134-1.8132zm-.787049-.019925c0 .458281-.259029 1.58406-1.05604 1.58406c-.209215 0-.368618-.039851-.52802-.039851c-.268991 0-.458281 .229141-.458281 .408468c0 .109589 .079701 .199253 .259029 .199253c.278954 0 .348692-.049813 .577833-.049813c.498132 0 .71731 .537983 .71731 1.09589c0 .996264-.597758 1.912827-1.663761 1.912827c-.67746 0-1.115816-.348692-1.115816-.926526c0-.119552 .019925-.249066 .059776-.388543l.896638-3.198007c.179328-.647572 .637609-1.444583 1.534247-1.444583c.56787 0 .777086 .388543 .777086 .846824z'/>

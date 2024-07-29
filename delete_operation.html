@@ -31,7 +31,7 @@
 </div><h1 class="main-title">delete operation</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="orgac01a21">
+<div class="dummy" id="org8e36678">
 <p>
 the <i>Delete</i> operation can violate only referential integrity. this occurs if the tuple being deleted is referenced by foreign keys from other tuples in the database. to specify deletion, a condition on the attributes of the relation selects the tuple (or tuples) to be deleted. here are some examples.<br />
 several options are available if a deletion operation causes a violation. the first option, called <i>restrict</i>, is to reject the deletion. the second option, called <i>cascade</i>, is to attempt to cascade (or propagate) the deletion by deleting tuples that reference the tuple that is being deleted. a third option, called <i>set null</i> or <i>set default</i>, is to modify the referencing attribute values that cause the violation; each such value is either set to <i>NULL</i> or changed to reference another default valid tuple. notice that if a referencing attribute that causes a violation is part of the primary key, it cannot be set to <i>NULL</i>; otherwise, it would violate entity integrity.<br />

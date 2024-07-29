@@ -31,7 +31,7 @@
 </div><h1 class="main-title">byte-pair encoding</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="orgd68897d">
+<div class="dummy" id="org4dd22b3">
 <p>
 instead of defining tokens as words (whether delimited by spaces or more complex algorithms), or as characters (as in chinese), we can use our data to automatically tell us what the tokens should be. this is especially useful in dealing with unknown words, an important problem in language processing. NLP algorithms often learn some facts about language from one corpus (a training corpus) and then use these facts to make decisions about a separate test corpus and its language. thus if our training corpus contains, say the words low, new, newer, but not lower, then if the word lower appears in our test corpus, our system will not know what to do with it.<br />
 </p>
@@ -45,7 +45,7 @@ to deal with this unknown word problem, modern tokenizers often automatically in
 most tokenization schemes have two parts: a token learner, and a token segmenter. the token learner takes a raw training corpus (sometimes roughly preseparated into words, for example by whitespace) and induces a vocabulary, a set of tokens. the token segmenter takes a raw test sentence and segments it into the tokens in the vocabulary. three algorithms are widely used: <i>byte-pair encoding</i>, <i>unigram language modeling</i>, and <i>WordPiece</i>; there is also the <code>SentencePiece</code> library that includes implementations of the first two of the three.<br />
 in the <i>byte-pair encoding</i> or <i>BPE</i> algorithm, the BPE token learner begins with a vocabulary that is just the set of all individual characters. it then examines the training corpus, chooses the two symbols that are most frequently adjacent (say 'A', 'B'), adds a new merged symbol 'AB' to the vocabulary, and replaces every adjacent 'A' 'B' in the corpus with the new 'AB'. it continues to count and merge, creating new longer and longer character strings, until <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7205em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g6-58' d='m4.273973-.976339l-.14944-.109589c-.049813 .089664-.099626 .179328-.14944 .259029c-.179328 .308842-.298879 .418431-.448319 .418431c-.209215 0-.408468-.318804-.806974-1.285181l-.368618-.876712c1.464508-1.305106 1.77335-1.504359 2.241594-1.534247v-.159402h-1.823163v.159402h.159402c.249066 0 .388543 .069738 .388543 .179328c0 .199253-.488169 .67746-1.424658 1.39477l-.428394 .328767l1.195517-4.552927l-.049813-.049813c-.587796 .129514-.966376 .199253-1.554172 .268991v.159402h.169365c.33873 0 .488169 .069738 .508095 .249066c-.019925 .169365-.079701 .428394-.219178 .896638l-.089664 .328767l-.019925 .089664l-1.265255 4.811955h.747198l.478207-1.793275l.418431-.318804c.159402 .438356 .418431 1.05604 .597758 1.404732c.318804 .627646 .498132 .816936 .787049 .816936c.398506 0 .647572-.249066 1.105853-1.085928z'/>
 </defs>
@@ -56,7 +56,7 @@ in the <i>byte-pair encoding</i> or <i>BPE</i> algorithm, the BPE token learner 
 </g>
 </svg> merges have been done creating <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7205em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g6-58' d='m4.273973-.976339l-.14944-.109589c-.049813 .089664-.099626 .179328-.14944 .259029c-.179328 .308842-.298879 .418431-.448319 .418431c-.209215 0-.408468-.318804-.806974-1.285181l-.368618-.876712c1.464508-1.305106 1.77335-1.504359 2.241594-1.534247v-.159402h-1.823163v.159402h.159402c.249066 0 .388543 .069738 .388543 .179328c0 .199253-.488169 .67746-1.424658 1.39477l-.428394 .328767l1.195517-4.552927l-.049813-.049813c-.587796 .129514-.966376 .199253-1.554172 .268991v.159402h.169365c.33873 0 .488169 .069738 .508095 .249066c-.019925 .169365-.079701 .428394-.219178 .896638l-.089664 .328767l-.019925 .089664l-1.265255 4.811955h.747198l.478207-1.793275l.418431-.318804c.159402 .438356 .418431 1.05604 .597758 1.404732c.318804 .627646 .498132 .816936 .787049 .816936c.398506 0 .647572-.249066 1.105853-1.085928z'/>
 </defs>
@@ -67,7 +67,7 @@ in the <i>byte-pair encoding</i> or <i>BPE</i> algorithm, the BPE token learner 
 </g>
 </svg> novel tokens; <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7205em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g6-58' d='m4.273973-.976339l-.14944-.109589c-.049813 .089664-.099626 .179328-.14944 .259029c-.179328 .308842-.298879 .418431-.448319 .418431c-.209215 0-.408468-.318804-.806974-1.285181l-.368618-.876712c1.464508-1.305106 1.77335-1.504359 2.241594-1.534247v-.159402h-1.823163v.159402h.159402c.249066 0 .388543 .069738 .388543 .179328c0 .199253-.488169 .67746-1.424658 1.39477l-.428394 .328767l1.195517-4.552927l-.049813-.049813c-.587796 .129514-.966376 .199253-1.554172 .268991v.159402h.169365c.33873 0 .488169 .069738 .508095 .249066c-.019925 .169365-.079701 .428394-.219178 .896638l-.089664 .328767l-.019925 .089664l-1.265255 4.811955h.747198l.478207-1.793275l.418431-.318804c.159402 .438356 .418431 1.05604 .597758 1.404732c.318804 .627646 .498132 .816936 .787049 .816936c.398506 0 .647572-.249066 1.105853-1.085928z'/>
 </defs>
@@ -78,7 +78,7 @@ in the <i>byte-pair encoding</i> or <i>BPE</i> algorithm, the BPE token learner 
 </g>
 </svg> is thus a parameter of the algorithm. the resulting vocabulary consists of the original set of characters plus <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7697em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -7.224784 6.628874 7.824403' style="height: 0.7205em; vertical-align: -0.0590em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g6-58' d='m4.273973-.976339l-.14944-.109589c-.049813 .089664-.099626 .179328-.14944 .259029c-.179328 .308842-.298879 .418431-.448319 .418431c-.209215 0-.408468-.318804-.806974-1.285181l-.368618-.876712c1.464508-1.305106 1.77335-1.504359 2.241594-1.534247v-.159402h-1.823163v.159402h.159402c.249066 0 .388543 .069738 .388543 .179328c0 .199253-.488169 .67746-1.424658 1.39477l-.428394 .328767l1.195517-4.552927l-.049813-.049813c-.587796 .129514-.966376 .199253-1.554172 .268991v.159402h.169365c.33873 0 .488169 .069738 .508095 .249066c-.019925 .169365-.079701 .428394-.219178 .896638l-.089664 .328767l-.019925 .089664l-1.265255 4.811955h.747198l.478207-1.793275l.418431-.318804c.159402 .438356 .418431 1.05604 .597758 1.404732c.318804 .627646 .498132 .816936 .787049 .816936c.398506 0 .647572-.249066 1.105853-1.085928z'/>
 </defs>
@@ -94,7 +94,7 @@ in the <i>byte-pair encoding</i> or <i>BPE</i> algorithm, the BPE token learner 
 <span class="equation">
 <?xml version='1.0' encoding='UTF-8'?>
 
-<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -139.106251 368.203724 144.587573' style="height: 14.2227em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-.500002 -139.106251 368.203724 144.587573' style="height: 14.1735em; vertical-align: -0.5392em; display: inline-block" class="org-latex org-latex-inline">
 <defs>
 <path id='g5-26' d='m4.690911-1.178182l-.130909-.050909c-.378182 .472727-.589091 .647273-.938182 .792728c-.305455 .123636-.872728 .196364-1.505455 .196364c-.465455 0-.661818-.072727-.669091-.247273c-.007273-.087273 .08-.407273 .269091-1.047273l.232727-.836364l.647273 .021818h.072727c.290909 0 .494546 .043636 .581818 .109091c.043636 .036364 .072727 .101818 .08 .225455c0 .130909-.007273 .218182-.058182 .378182l.174546 .036364l.516364-1.701819l-.16-.029091c-.298182 .618182-.378182 .669091-1.127273 .690909l-.654546 .014545l.487273-1.694546c.036364-.16 .138182-.189091 .610909-.189091c1.309091 0 1.592728 .094545 1.607273 .530909c.007273 .094545 0 .203636 0 .327273l.181818 .014545l.218182-1.112728h-4.145456v.116364c.516364 .043636 .647273 .101818 .654546 .298182c0 .087273-.050909 .32-.08 .465455l-.909091 3.214547c-.130909 .421818-.196364 .465455-.661818 .538182l.007273 .116364h4.225456l.472727-1.178182z'/>
 <path id='g5-33' d='m4.530911-1.301819l-.174546-.043636c-.269091 .523637-.472727 .749091-.814546 .909091c-.276364 .130909-.603637 .174546-1.323637 .174546c-.603637 0-.814546-.058182-.814546-.247273c-.007273-.058182 .029091-.210909 .065455-.363637l.894546-3.22182c.109091-.370909 .327273-.509091 .821819-.538182v-.116364h-2.29091v.116364c.523637 .043636 .654546 .101818 .661818 .312727c0 .109091-.014545 .254546-.08 .450909l-.894546 3.214547c-.130909 .421818-.196364 .465455-.661818 .538182l.007273 .116364h4.167274l.436364-1.301819z'/>
