@@ -31,7 +31,7 @@
 </div><h1 class="main-title">database index</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org1a63289">
+<div class="dummy" id="org8057613">
 <p>
 indexes are auxiliary access structures used to speed up the retrieval of records in response to certain search conditions. these index structures are additional files on disk that provide secondary access paths, which provide alternative ways to access the records without affecting the physical placement of records in the primary data file on disk. they enable efficient access to records based on the indexing fields that are used to construct the index. Basically, any field of the file can be used to create an index, and multiple indexes on different fields&#x2013;as well as indexes on multiple fields&#x2013;can be constructed on the same file. a variety of indexes are possible; each of them uses a particular data structure to speed up the search. to find a record or records in the data file based on a search condition on an indexing field, the index is searched, which leads to pointers to one or more disk blocks in the data file where the required records are located. the most prevalent types of indexes are based on ordered files (single-level indexes) and use <a href="/tree.html#1679584007">tree</a> <a href="/data_structure.html#1706801566">data structure</a>s (multilevel indexes, b+ trees) to organize the index. indexes can also be constructed based on hashing or other search data structures.<br />
 the idea behind an ordered index is similar to that behind the index used in a textbook, which lists important terms at the end of the book in alphabetical order along with a list of page numbers where the term appears in the book. we can search the book index for a certain term in the textbook to find a list of addresses&#x2013;page numbers in this case&#x2013;and use these addresses to locate the specified pages first and then search for the term on each specified page. the alternative, if no other guidance is given, would be to sift slowly through the whole textbook word by word to find the term we are interested in; this corresponds to doing a linear search, which scans the whole file. of course, most books do have additional information, such as chapter and section titles, which help us find a term without having to search through the whole book. however, the index is the only exact indication of the pages where each term occurs in the book.<br />
@@ -58,7 +58,7 @@ there are several types of ordered indexes. a <a href="/primary_index.html#17023
 </p>
 
 </div>
-<div class="dummy" id="org60f0964">
+<div class="dummy" id="org428a8f1">
 <p>
 many rdbms have a similar type of command for creating an index, although it is not part of the <a href="/sql.html#1702389696">SQL</a> standard. the general form of this command is:<br />
 </p>
