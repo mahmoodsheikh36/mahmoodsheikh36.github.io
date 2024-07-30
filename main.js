@@ -1,11 +1,19 @@
 // search data
-let data;
+let data = [];
 
 window.onload = function(e) {
   // make all "math buttons" clickable
   document.querySelectorAll(".math-button").forEach(elm => handleMathButton(elm));
   // fetch the search data
-  fetch("search.json").then(response => response.json()).then(json => data = json);
+  fetch("search.json").then(response => response.json()).then(json => {
+    for (let entry of json) {
+      let entryText = entry.id || entry.title;
+      if (entryText !== undefined && entryText !== null) {
+        data.push(entry);
+      }
+    }
+    search('');
+  });
 }
 
 let popupElm;
@@ -21,7 +29,6 @@ function handleMathButton(node) {
       symbol.setAttribute('fill', 'red');
       let ref = node.getAttribute('data-ref');
       let refId = ref.substr(4);
-      console.log(refId);
       getElementByBlkId(refId, function (elm) {
         if (!toShow)
           return;
@@ -65,26 +72,29 @@ function findById(id) {
 function getElementByBlkId(id, cb) {
   let entry = findById(id);
   if (entry !== undefined) {
-    console.log(entry);
     fetch(entry.filepath).then(response => response.text()).then(function(text) {
       // parse the "other" page (page containing the destination entry)
       let page = new DOMParser().parseFromString(text, "text/html");
       // the actual html entry from the other page
       let elm = page.getElementById(entry.id);
-      console.log(elm);
       cb(elm);
     });
   }
 }
 
-function search(el) {
-  let val = el.value;
+function searchInput(el) {
+  search(el.value);
+}
+
+function search(val) {
   let resultsContainer = document.getElementById("search-results-container");
   resultsContainer.innerHTML = '';
-  if (val === '')
-    return;
+  // if (val === '')
+  //   return;
+  let matchingEntries = [];
   for (let entry of data) {
-    if (entry.title !== undefined && entry.id !== undefined && entry.title.includes(val)) {
+    const entryText = entry.title || entry.id;
+    if (entryText.includes(val)) {
       const container = document.createElement("div");
       const subcontainer = document.createElement("div");
       const span = document.createElement("span");
@@ -148,12 +158,17 @@ function search(el) {
         }
       }
 
-      span.appendChild(document.createTextNode(entry.title));
+      span.appendChild(document.createTextNode(entryText));
       container.appendChild(subcontainer);
       subcontainer.appendChild(span);
       subcontainer.appendChild(plusMinusButton);
       container.appendChild(infoElm);
       resultsContainer.appendChild(container);
+
+      matchingEntries.push(entry);
     }
   }
+  // update numbers
+  document.getElementById("search-numbers-results").innerHTML = '' + matchingEntries.length;
+  document.getElementById("search-numbers-public").innerHTML = '' + data.length;
 }
