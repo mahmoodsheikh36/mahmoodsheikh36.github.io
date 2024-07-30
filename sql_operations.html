@@ -32,9 +32,9 @@
 </div><h1 class="main-title">sql operations</h1><span class="desc">a set of common [[blk:1702389696][sql]] operations</span>
 </div>
 <div id="content" class="content">
-<div id="outline-container-org3b36d1b" class="outline-2">
-<h2 id="org3b36d1b">list databases</h2>
-<div class="outline-text-2" id="text-org3b36d1b">
+<div id="outline-container-org62c4b11" class="outline-2">
+<h2 id="org62c4b11">list databases</h2>
+<div class="outline-text-2" id="text-org62c4b11">
 <div class="org-src-container" data-language="sql">
 <pre class="src src-sql"><span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">show databases; -- for mysql</span>
 \l <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">for postgresql</span>
@@ -164,37 +164,37 @@
 </table>
 </div>
 </div>
-<div id="outline-container-orgae6a0d8" class="outline-2">
-<h2 id="orgae6a0d8">deleting a database</h2>
-<div class="outline-text-2" id="text-orgae6a0d8">
+<div id="outline-container-org0ed4f5c" class="outline-2">
+<h2 id="org0ed4f5c">deleting a database</h2>
+<div class="outline-text-2" id="text-org0ed4f5c">
 <div class="org-src-container" data-language="sql">
 <pre class="src src-sql"><span style="font-weight: bold;">drop</span> databsae &lt;dbname&gt;;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org12ef7b7" class="outline-2">
-<h2 id="org12ef7b7">creating databases</h2>
-<div class="outline-text-2" id="text-org12ef7b7">
+<div id="outline-container-org931e3ce" class="outline-2">
+<h2 id="org931e3ce">creating databases</h2>
+<div class="outline-text-2" id="text-org931e3ce">
 <div class="org-src-container" data-language="sql">
 <pre class="src src-sql"><span style="font-weight: bold;">create</span> database &lt;dbname&gt;;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org03a631e" class="outline-2">
-<h2 id="org03a631e">describe database</h2>
-<div class="outline-text-2" id="text-org03a631e">
+<div id="outline-container-org8f760bc" class="outline-2">
+<h2 id="org8f760bc">describe database</h2>
+<div class="outline-text-2" id="text-org8f760bc">
 <div class="org-src-container" data-language="sql">
 <pre class="src src-sql"><span style="font-weight: bold;">describe</span> sys;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb4a945b" class="outline-2">
-<h2 id="orgb4a945b">schema</h2>
-<div class="outline-text-2" id="text-orgb4a945b">
-<div class="dummy" id="org7ecafd0">
+<div id="outline-container-orgff06730" class="outline-2">
+<h2 id="orgff06730">schema</h2>
+<div class="outline-text-2" id="text-orgff06730">
+<div class="dummy" id="orgcf7d73a">
 <p>
 an example of creating a <a href="/schema.html#1702318954">schema</a> (usually called a database), a schema called <code>COMPANY</code> owned by the user with authorization identifier <code>Jsmith</code>. note that each statement in SQL ends with a semicolon.<br />
 </p>
@@ -209,10 +209,10 @@ in general, not all users are authorized to create schemas and schema elements. 
 </div>
 </div>
 </div>
-<div id="outline-container-org0b1d8a1" class="outline-2">
-<h2 id="org0b1d8a1">create table</h2>
-<div class="outline-text-2" id="text-org0b1d8a1">
-<div class="dummy" id="org1ac60ef">
+<div id="outline-container-org8681c15" class="outline-2">
+<h2 id="org8681c15">create table</h2>
+<div class="outline-text-2" id="text-org8681c15">
+<div class="dummy" id="orgc496a2a">
 <p>
 the <code>CREATE TABLE</code> command is used to specify a new relation by giving it a name and specifying its attributes and initial constraints. the attributes are specified first, and each attribute is given a name, a data type to specify its domain of values, and possibly attribute constraints, such as <code>NOT NULL</code>. the key, entity integrity, and referential integrity constraints can be specified within the <code>CREATE TABLE</code> statement after the attributes are declared, or they can be added later using the <code>ALTER TABLE</code> command.<br />
 typically, the sql schema (usually called database) in which the relations are declared is implicitly specified in the environment in which the <code>CREATE TABLE</code> statements are executed. alternatively, we can explicitly attach the schema name to the relation name, separated by a period. for example, by writing<br />
@@ -286,10 +286,10 @@ the relations declared through <code>CREATE TABLE</code> statements are called <
 </div>
 </div>
 </div>
-<div id="outline-container-org1bcf2b4" class="outline-2">
-<h2 id="org1bcf2b4">select-from-where</h2>
-<div class="outline-text-2" id="text-org1bcf2b4">
-<div class="dummy" id="orgaffb349">
+<div id="outline-container-org749a0c7" class="outline-2">
+<h2 id="org749a0c7">select-from-where</h2>
+<div class="outline-text-2" id="text-org749a0c7">
+<div class="dummy" id="orgf26789a">
 <p>
 the basic form of the <i>SELECT</i> statement, sometimes called a <i>mapping</i> or a <i>select-from-where</i> block, is formed of the three clauses <i>SELECT</i>, <i>FROM</i>, and <i>WHERE</i> and has the following form:<br />
 </p>
@@ -311,19 +311,19 @@ where<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgba2093f" class="outline-2">
-<h2 id="orgba2093f">ordering of query results</h2>
-<div class="outline-text-2" id="text-orgba2093f">
+<div id="outline-container-org2a6f698" class="outline-2">
+<h2 id="org2a6f698">ordering of query results</h2>
+<div class="outline-text-2" id="text-org2a6f698">
 <p>
 the order by operator<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org180f270" class="outline-2">
-<h2 id="org180f270">alter table</h2>
+<div id="outline-container-org4812045" class="outline-2">
+<h2 id="org4812045">alter table</h2>
 </div>
-<div id="outline-container-org379be68" class="outline-2">
-<h2 id="org379be68">update</h2>
+<div id="outline-container-org073c062" class="outline-2">
+<h2 id="org073c062">update</h2>
 </div>
 </div>
 </body>
