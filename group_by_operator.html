@@ -32,23 +32,23 @@
 </div><h1 class="main-title">group by operator</h1><span class="desc">for each project on which more than two employees work, retrieve the project number, the project name, and the number of employees who work on the project.</span>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org1adec61">
+<div class="dummy" id="org4323809">
 <p>
 aggregate functions are used to summarize information from multiple tuples into a single-tuple summary. grouping is used to create subgroups of tuples before summarization. grouping and aggregation are required in many database applications, a number of built-in functions exist: <i>COUNT</i>, <i>SUM</i>, <i>MAX</i>, <i>MIN</i>, and <i>AVG</i>.<br />
 in many cases we want to apply an aggregate function operation to subgroups of tuples in a relation, where the subgroups are based on some attribute values. for example, we may want to find the average salary of employees in each department or the number of employees who work on each project. in these cases we need to partition the relation into nonoverlapping subsets (or groups) of tuples. each group (partition) will consist of the tuples that have the same value of some attribute(s), called the grouping attribute(s). we can then apply the function to each such group independently to produce summary information about each group. <a href="/sql.html#1702389696">sql</a> has a <code>GROUP BY</code> clause for this purpose. the GROUP BY clause specifies the grouping attributes, which should also appear in the SELECT clause, so that the value resulting from applying each aggregate function to a group of tuples appears along with the value of the grouping attribute(s).<br />
 sometimes we want to retrieve the values of these functions only for groups that satisfy certain conditions. SQL provides a <code>HAVING</code> clause, which can appear in conjunction with a GROUP BY clause, for this purpose. HAVING provides a condition on the summary information regarding the group of tuples associated with each value of the grouping attributes. only the groups that satisfy the condition are retrieved in the result of the query.<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span>
-  Pnumber, Pname, <span style="font-weight: bold;">COUNT</span> (*)
-<span style="font-weight: bold;">FROM</span>
+<pre class="src src-sql"><span style="color: #DD6F48;">SELECT</span>
+  Pnumber, Pname, <span style="color: #FE8019;">COUNT</span> <span style="color: #5C7E81;">(</span>*<span style="color: #5C7E81;">)</span>
+<span style="color: #DD6F48;">FROM</span>
   PROJECT, WORKS_ON
-<span style="font-weight: bold;">WHERE</span>
+<span style="color: #DD6F48;">WHERE</span>
   Pnumber = Pno
-<span style="font-weight: bold;">GROUP</span> <span style="font-weight: bold;">BY</span>
+<span style="color: #DD6F48;">GROUP</span> <span style="color: #DD6F48;">BY</span>
   Pnumber, Pname
-<span style="font-weight: bold;">HAVING</span>
-  <span style="font-weight: bold;">COUNT</span> (*) &gt; 2;
+<span style="color: #DD6F48;">HAVING</span>
+  <span style="color: #FE8019;">COUNT</span> <span style="color: #5C7E81;">(</span>*<span style="color: #5C7E81;">)</span> &gt; 2;
 </pre>
 </div>
 

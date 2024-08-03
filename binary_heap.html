@@ -53,9 +53,9 @@ in a heap the keys arent necessarily sorted like in <a href="/binary_search_tree
 </p>
 
 </div>
-<div id="outline-container-orgedc9a96" class="outline-2">
-<h2 id="orgedc9a96">bubbling</h2>
-<div class="outline-text-2" id="text-orgedc9a96">
+<div id="outline-container-org9598efc" class="outline-2">
+<h2 id="org9598efc">bubbling</h2>
+<div class="outline-text-2" id="text-org9598efc">
 <div class="math-block definition" data-before="definition" data-after="">
 <p>
 moving a <a href="/tree_data_structure.html#1706801423">node</a> up/down a heap to get it to its correct position<br />
@@ -63,17 +63,17 @@ moving a <a href="/tree_data_structure.html#1706801423">node</a> up/down a heap 
 
 </div>
 </div>
-<div id="outline-container-org01b86e3" class="outline-3">
-<h3 id="org01b86e3">bubble up</h3>
-<div class="outline-text-3" id="text-org01b86e3">
+<div id="outline-container-orgaea2065" class="outline-3">
+<h3 id="orgaea2065">bubble up</h3>
+<div class="outline-text-3" id="text-orgaea2065">
 <p>
 <a href="/binary_heap.html#1706801290">bubbling</a> a node <b>upwards</b> consists of recursively switching it with its parent until its parent is bigger/smaller than it (depending on whether we're using a <a href="/heap.html#1706801306">min heap</a> or a <a href="/heap.html#1706801306">max heap</a>)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orga99da2d" class="outline-3">
-<h3 id="orga99da2d">bubble down</h3>
-<div class="outline-text-3" id="text-orga99da2d">
+<div id="outline-container-orgcb7b719" class="outline-3">
+<h3 id="orgcb7b719">bubble down</h3>
+<div class="outline-text-3" id="text-orgcb7b719">
 <p>
 <a href="/binary_heap.html#1706801290">bubbling</a> a node <b>downards</b> consists of recursively switching it with one of its children until it gets to its correct position<br />
 this is a pseudocode for the algorithm:<br />
@@ -108,7 +108,7 @@ r = right(i) <span style="font-weight: bold; font-style: italic;">// </span><spa
 <path id='g3-36' d='m6.963885-4.164384c0-.049813 0-.099626 0-.139477c0-1.334994-.946451-2.331258-2.241594-2.331258c-.787049 0-1.613948 .348692-2.391034 1.006227c-1.085928 .926526-1.733499 2.201743-1.733499 3.427148c0 1.39477 .9066 2.381071 2.171856 2.381071c2.072229 0 4.084682-2.092154 4.194271-4.343711zm-1.046077-.627646c0 1.046077-.448319 2.470735-1.075965 3.407223c-.557908 .826899-1.185554 1.235367-1.902864 1.235367c-.836862 0-1.295143-.597758-1.295143-1.683686c0-.916563 .468244-2.361146 1.05604-3.227895c.557908-.846824 1.185554-1.24533 1.932752-1.24533c.797011 0 1.285181 .577833 1.285181 1.514321z'/>
 <path id='g3-61' d='m4.722291-1.036115l-.139477-.129514c-.069738 .089664-.139477 .179328-.209215 .259029c-.288917 .368618-.468244 .52802-.607721 .52802c-.089664 0-.159402-.069738-.159402-.159402c0-.079701 .039851-.268991 .139477-.627646l.56787-2.052304c.059776-.209215 .089664-.428394 .089664-.56787c0-.358655-.268991-.607721-.657534-.607721c-.637609 0-1.265255 .607721-2.291407 2.191781l.667497-2.171856l-.029888-.019925l-1.613948 .308842v.159402c.508095 .009963 .637609 .069738 .637609 .268991c0 .059776-.009963 .119552-.019925 .169365l-.956413 3.486924h.747198c.468244-1.574097 .557908-1.793275 .996264-2.470735c.597758-.926526 1.105853-1.414695 1.474471-1.414695c.14944 0 .239103 .109589 .239103 .288917c0 .119552-.059776 .448319-.139477 .757161l-.438356 1.643836c-.129514 .518057-.159402 .647572-.159402 .747198c0 .37858 .139477 .537983 .468244 .537983c.448319 0 .697385-.199253 1.39477-1.125778z'/>
 </defs>
-<g id='page10'>
+<g id='page13'>
 <use x='-.10959' y='0' xlink:href='#g3-36'/>
 <use x='8.129503' y='0' xlink:href='#g1-185'/>
 <g class='math-button' data-ref='blk:def-log'>
@@ -126,26 +126,26 @@ r = right(i) <span style="font-weight: bold; font-style: italic;">// </span><spa
 </div>
 </div>
 </div>
-<div id="outline-container-orgb86f844" class="outline-2">
-<h2 id="orgb86f844">insertion</h2>
-<div class="outline-text-2" id="text-orgb86f844">
+<div id="outline-container-org20f3f88" class="outline-2">
+<h2 id="org20f3f88">insertion</h2>
+<div class="outline-text-2" id="text-org20f3f88">
 <p>
 inserting a new <a href="/tree_data_structure.html#1706801423">node</a> to the heap consists of adding it as a <a href="/tree_data_structure.html#1706801423">leaf</a> such that the heap remains <a href="/tree_data_structure.html#1706801423">almost complete</a> and <a href="/binary_heap.html#1706801290">bubbling up</a> the newly added node so that the keys in the tree remain sorted<br />
 if the heap is in <a href="/binary_heap.html#1706801290">array representation</a>, we insert the new node to the end of the array and heapify it upwards (bubble up)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgcdc4447" class="outline-2">
-<h2 id="orgcdc4447">deletion</h2>
-<div class="outline-text-2" id="text-orgcdc4447">
+<div id="outline-container-org11499df" class="outline-2">
+<h2 id="org11499df">deletion</h2>
+<div class="outline-text-2" id="text-org11499df">
 <p>
 deletion of a node consists of replacing the rightmost leaf with it and bubble it <a href="/binary_heap.html#1706801290">downwards</a> if its smaller than one of its children or <a href="/binary_heap.html#1706801290">upwards</a> if its bigger than its parent<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgdc63f67" class="outline-2">
-<h2 id="orgdc63f67">binary heap array representation</h2>
-<div class="outline-text-2" id="text-orgdc63f67">
+<div id="outline-container-orgb29b55f" class="outline-2">
+<h2 id="orgb29b55f">binary heap array representation</h2>
+<div class="outline-text-2" id="text-orgb29b55f">
 <div class="math-block note" data-before="note" data-after="">
 <p>
 some resources may use assume that arrays start at index 1, i see no point in that since most programming languages use 0 as the first index, so some of the following propositions might seem a little different like for example the proposition number 2 in the following list according to these sources would be that the left child of i^{th} node is <?xml version='1.0' encoding='UTF-8'?>
@@ -189,7 +189,7 @@ some resources may use assume that arrays start at index 1, i see no point in th
 <path id='g6-56' d='m2.34122-1.026152l-.129514-.109589c-.428394 .56787-.647572 .777086-.816936 .777086c-.079701 0-.159402-.069738-.159402-.14944c0-.159402 .099626-.458281 .159402-.657534l.876712-3.20797l-.029888-.019925c-1.006227 .18929-1.205479 .219178-1.594022 .249066v.159402c.537983 .009963 .627646 .039851 .627646 .239103c0 .079701-.029888 .249066-.089664 .438356l-.478207 1.763387c-.159402 .597758-.219178 .886675-.219178 1.085928c0 .368618 .159402 .56787 .458281 .56787c.468244 0 .826899-.298879 1.39477-1.135741zm.408468-4.83188c0-.288917-.229141-.547945-.498132-.547945s-.468244 .219178-.468244 .52802c0 .318804 .18929 .52802 .478207 .52802c.259029 0 .488169-.229141 .488169-.508095z'/>
 <path id='g6-65' d='m4.104608-3.88543c0-.298879-.18929-.508095-.468244-.508095c-.229141 0-.498132 .14944-.757161 .418431c-.408468 .428394-.806974 1.006227-.966376 1.404732l-.139477 .358655l.52802-2.161893l-.029888-.019925l-1.544209 .268991v.169365c.079701 0 .169365 0 .249066 0c.229141 0 .438356 .019925 .438356 .229141c0 .139477 0 .139477-.159402 .816936l-.806974 2.909091h.757161c.508095-1.673724 .667497-2.072229 1.105853-2.809465c.348692-.607721 .637609-.936488 .816936-.936488c.069738 0 .109589 .039851 .159402 .139477c.079701 .169365 .159402 .219178 .358655 .219178c.298879 0 .458281-.179328 .458281-.498132z'/>
 </defs>
-<g id='page2'>
+<g id='page7'>
 <use x='.747183' y='0' xlink:href='#g6-22'/>
 <use x='6.804455' y='0' xlink:href='#g6-65'/>
 <use x='11.267698' y='0' xlink:href='#g6-65'/>
@@ -218,7 +218,7 @@ some resources may use assume that arrays start at index 1, i see no point in th
 <path id='g6-56' d='m2.34122-1.026152l-.129514-.109589c-.428394 .56787-.647572 .777086-.816936 .777086c-.079701 0-.159402-.069738-.159402-.14944c0-.159402 .099626-.458281 .159402-.657534l.876712-3.20797l-.029888-.019925c-1.006227 .18929-1.205479 .219178-1.594022 .249066v.159402c.537983 .009963 .627646 .039851 .627646 .239103c0 .079701-.029888 .249066-.089664 .438356l-.478207 1.763387c-.159402 .597758-.219178 .886675-.219178 1.085928c0 .368618 .159402 .56787 .458281 .56787c.468244 0 .826899-.298879 1.39477-1.135741zm.408468-4.83188c0-.288917-.229141-.547945-.498132-.547945s-.468244 .219178-.468244 .52802c0 .318804 .18929 .52802 .478207 .52802c.259029 0 .488169-.229141 .488169-.508095z'/>
 <path id='g6-65' d='m4.104608-3.88543c0-.298879-.18929-.508095-.468244-.508095c-.229141 0-.498132 .14944-.757161 .418431c-.408468 .428394-.806974 1.006227-.966376 1.404732l-.139477 .358655l.52802-2.161893l-.029888-.019925l-1.544209 .268991v.169365c.079701 0 .169365 0 .249066 0c.229141 0 .438356 .019925 .438356 .229141c0 .139477 0 .139477-.159402 .816936l-.806974 2.909091h.757161c.508095-1.673724 .667497-2.072229 1.105853-2.809465c.348692-.607721 .637609-.936488 .816936-.936488c.069738 0 .109589 .039851 .159402 .139477c.079701 .169365 .159402 .219178 .358655 .219178c.298879 0 .458281-.179328 .458281-.498132z'/>
 </defs>
-<g id='page2'>
+<g id='page7'>
 <use x='.747183' y='0' xlink:href='#g6-22'/>
 <use x='6.804455' y='0' xlink:href='#g6-65'/>
 <use x='11.267698' y='0' xlink:href='#g6-65'/>
@@ -342,7 +342,7 @@ arrays that represent heap have the following characterstics:<br />
 <path id='g6-56' d='m2.34122-1.026152l-.129514-.109589c-.428394 .56787-.647572 .777086-.816936 .777086c-.079701 0-.159402-.069738-.159402-.14944c0-.159402 .099626-.458281 .159402-.657534l.876712-3.20797l-.029888-.019925c-1.006227 .18929-1.205479 .219178-1.594022 .249066v.159402c.537983 .009963 .627646 .039851 .627646 .239103c0 .079701-.029888 .249066-.089664 .438356l-.478207 1.763387c-.159402 .597758-.219178 .886675-.219178 1.085928c0 .368618 .159402 .56787 .458281 .56787c.468244 0 .826899-.298879 1.39477-1.135741zm.408468-4.83188c0-.288917-.229141-.547945-.498132-.547945s-.468244 .219178-.468244 .52802c0 .318804 .18929 .52802 .478207 .52802c.259029 0 .488169-.229141 .488169-.508095z'/>
 <path id='g6-65' d='m4.104608-3.88543c0-.298879-.18929-.508095-.468244-.508095c-.229141 0-.498132 .14944-.757161 .418431c-.408468 .428394-.806974 1.006227-.966376 1.404732l-.139477 .358655l.52802-2.161893l-.029888-.019925l-1.544209 .268991v.169365c.079701 0 .169365 0 .249066 0c.229141 0 .438356 .019925 .438356 .229141c0 .139477 0 .139477-.159402 .816936l-.806974 2.909091h.757161c.508095-1.673724 .667497-2.072229 1.105853-2.809465c.348692-.607721 .637609-.936488 .816936-.936488c.069738 0 .109589 .039851 .159402 .139477c.079701 .169365 .159402 .219178 .358655 .219178c.298879 0 .458281-.179328 .458281-.498132z'/>
 </defs>
-<g id='page2'>
+<g id='page7'>
 <use x='.747183' y='0' xlink:href='#g6-22'/>
 <use x='6.804455' y='0' xlink:href='#g6-65'/>
 <use x='11.267698' y='0' xlink:href='#g6-65'/>
@@ -389,9 +389,9 @@ the array should hold 2 values, <code>array-size</code>, which is the size of th
 </p>
 </div>
 </div>
-<div id="outline-container-org7cd371e" class="outline-2">
-<h2 id="org7cd371e">construction of binary heap from array</h2>
-<div class="outline-text-2" id="text-org7cd371e">
+<div id="outline-container-orgf9a98e8" class="outline-2">
+<h2 id="orgf9a98e8">construction of binary heap from array</h2>
+<div class="outline-text-2" id="text-orgf9a98e8">
 <p>
 given some random <a href="/array.html#1659024331">array</a>, e.g. <code>A=[10,20,30,40,50,70,35,60,80]</code>, we need to reorganize its elements such that it <a href="/binary_heap.html#1706801290">represents a binary heap</a><br />
 to achieve this we apply <a href="/binary_heap.html#1706801290">bubble down</a> to the first half of the array <b>in reverse</b> (because the <a href="/tree_data_structure.html#1706801423">leaf</a> nodes need not be heapified as they already follow the heap property)<br />
@@ -438,7 +438,7 @@ this algorithm runs in <?xml version='1.0' encoding='UTF-8'?>
 <path id='g3-186' d='m.37858-7.143213l-.089664 .159402c1.285181 1.036115 1.693649 2.181818 1.693649 4.393524c0 2.201743-.37858 3.407223-1.693649 4.443337l.119552 .159402c1.374844-.846824 2.430884-2.719801 2.430884-4.572852c0-2.032379-1.016189-3.646326-2.460772-4.582814z'/>
 <path id='g7-2' d='m4.991283-2.351183c-.069738-.308842-.109589-.946451-.109589-1.24533c0-.288917 .039851-.518057 .109589-.797011h-.249066c-.069738 .33873-.239103 .577833-.577833 .577833h-1.05604c-.388543 0-.488169-.169365-.627646-.577833h-.249066c.069738 .318804 .109589 .876712 .109589 1.175592c0 .278954-.029888 .607721-.099626 .86675h.249066c.139477-.408468 .249066-.617684 .627646-.617684h1.046077c.358655 0 .488169 .239103 .577833 .617684h.249066zm1.863014-.946451c0-1.972603-1.305106-3.437111-3.257783-3.437111c-1.942715 0-3.257783 1.384807-3.257783 3.407223c0 2.072229 1.325031 3.466999 3.257783 3.466999c1.912827 0 3.257783-1.384807 3.257783-3.437111zm-1.135741-.059776c0 1.195517-.278954 2.132005-.826899 2.660025c-.348692 .328767-.787049 .478207-1.285181 .478207c-.458281 0-.896638-.139477-1.235367-.448319c-.607721-.557908-.896638-1.454545-.896638-2.6401c0-.946451 .259029-1.912827 .687422-2.400996c.388543-.448319 .886675-.667497 1.424658-.667497c.468244 0 .86675 .169365 1.225405 .468244c.56787 .478207 .9066 1.414695 .9066 2.550436z'/>
 </defs>
-<g id='page7'>
+<g id='page10'>
 <use x='0' y='0' xlink:href='#g7-2'/>
 <use x='7.691159' y='0' xlink:href='#g3-185'/>
 <use x='11.457021' y='0' xlink:href='#g4-61'/>
@@ -628,13 +628,13 @@ to be continued<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org4a72893" class="outline-2">
-<h2 id="org4a72893">binary heap algorithms</h2>
-<div class="outline-text-2" id="text-org4a72893">
+<div id="outline-container-orga1394de" class="outline-2">
+<h2 id="orga1394de">binary heap algorithms</h2>
+<div class="outline-text-2" id="text-orga1394de">
 </div>
-<div id="outline-container-orge8995e6" class="outline-3">
-<h3 id="orge8995e6">biggest k nodes</h3>
-<div class="outline-text-3" id="text-orge8995e6">
+<div id="outline-container-orgb21ddeb" class="outline-3">
+<h3 id="orgb21ddeb">biggest k nodes</h3>
+<div class="outline-text-3" id="text-orgb21ddeb">
 <p>
 initial inefficient solution:<br />
 </p>

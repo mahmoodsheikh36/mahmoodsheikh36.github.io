@@ -35,14 +35,14 @@
 emacs can lookup words in dictionaries, the simplest usage is through the function <code>dictionary-search</code> and confirming with <code>y</code> when emacs asks you whether to use <code>dict.org</code> (the website), i have this bound as a key:<br />
 </p>
 <div class="org-src-container" data-language="emacs-lisp">
-<pre class="src src-emacs-lisp">(general-define-key <span style="font-weight: bold;">:states</span> '(normal motion) <span style="font-weight: bold;">:keymaps</span> 'override <span style="font-style: italic;">"SPC s a"</span> 'dictionary-search)
+<pre class="src src-emacs-lisp"><span style="color: #5C7E81;">(</span>general-define-key <span style="color: #FE8019;">:states</span> '<span style="color: #837486;">(</span>normal motion<span style="color: #837486;">)</span> <span style="color: #FE8019;">:keymaps</span> 'override <span style="color: #528B8B;">"SPC s a"</span> 'dictionary-search<span style="color: #5C7E81;">)</span>
 </pre>
 </div>
 <p>
 you can also force it to use <code>dict.org</code> without confirmation:<br />
 </p>
 <div class="org-src-container" data-language="emacs-lisp">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> dictionary-server <span style="font-style: italic;">"dict.org"</span>)
+<pre class="src src-emacs-lisp"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">setq</span> dictionary-server <span style="color: #528B8B;">"dict.org"</span><span style="color: #5C7E81;">)</span>
 </pre>
 </div>
 <p>
@@ -50,7 +50,7 @@ or if you want to run a local dictionary server, on arch linux you'd need:<br />
 </p>
 <div class="org-src-container" data-language="bash">
 <pre class="src src-bash">sudo pacman -S dictd
-yay -S dict-gcide dict-wn dict-moby-thesaurus <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">dicts only available in aur</span>
+yay -S dict-gcide dict-wn dict-moby-thesaurus <span style="color: #928374;"># </span><span style="color: #928374;">dicts only available in aur</span>
 sudo systemctl enable dictd
 </pre>
 </div>

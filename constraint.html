@@ -31,21 +31,21 @@
 </div><h1 class="main-title">constraint</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="orge275d29">
+<div class="dummy" id="orgb31f466">
 <p>
 because sql allows NULLs as attribute values, a constraint <code>NOT NULL</code> may be specified if NULL is not permitted for a particular attribute. this is always implicitly specified for the attributes that are part of the primary key of each relation, but it can be specified for any other attributes whose values are required not to be NULL.<br />
 it is also possible to define a default value for an attribute by appending the clause <code>DEFAULT &lt;value&gt;</code> to an attribute definition. the default value is included in any new tuple if an explicit value is not provided for that attribute.<br />
 another type of constraint can restrict attribute or domain values using the <code>CHECK</code> clause following an attribute or domain definition. for example, suppose that department numbers are restricted to integer numbers between 1 and 20; then, we can change the attribute declaration of <code>Dnumber</code> in the <code>DEPARTMENT</code> table in [BROKEN LINK: src-sql-example1] to the following:<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql">Dnumber <span style="font-weight: bold; text-decoration: underline;">INT</span> <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span> <span style="font-weight: bold;">CHECK</span> (Dnumber &gt; 0 <span style="font-weight: bold;">AND</span> Dnumber &lt; 21);
+<pre class="src src-sql">Dnumber <span style="color: #66999D;">INT</span> <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span> <span style="color: #DD6F48;">CHECK</span> <span style="color: #5C7E81;">(</span>Dnumber &gt; 0 <span style="color: #DD6F48;">AND</span> Dnumber &lt; 21<span style="color: #5C7E81;">)</span>;
 </pre>
 </div>
 <p>
 the CHECK clause can also be used in conjunction with the <code>CREATE DOMAIN</code> statement. for example, we can write the following statement:<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">DOMAIN</span> D_NUM <span style="font-weight: bold;">AS</span> <span style="font-weight: bold; text-decoration: underline;">INTEGER</span> <span style="font-weight: bold;">CHECK</span> (D_NUM &gt; 0 <span style="font-weight: bold;">AND</span> D_NUM &lt; 21);
+<pre class="src src-sql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">DOMAIN</span> D_NUM <span style="color: #DD6F48;">AS</span> <span style="color: #66999D;">INTEGER</span> <span style="color: #DD6F48;">CHECK</span> <span style="color: #5C7E81;">(</span>D_NUM &gt; 0 <span style="color: #DD6F48;">AND</span> D_NUM &lt; 21<span style="color: #5C7E81;">)</span>;
 </pre>
 </div>
 <p>

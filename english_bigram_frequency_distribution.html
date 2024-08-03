@@ -31,7 +31,7 @@
 </div><h1 class="main-title">english bigram frequency distribution</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="orgf62f4ad">
+<div class="dummy" id="org4a08596">
 <table id="tab-eng-bigram-freq" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -264,29 +264,29 @@
 
 </div>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python" id="src-eng-bigram-freq"><span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
-<span style="font-weight: bold;">import</span> matplotlib.pyplot <span style="font-weight: bold;">as</span> plt
+<pre class="src src-python" id="src-eng-bigram-freq"><span style="color: #DD6F48;">import</span> numpy <span style="color: #DD6F48;">as</span> np
+<span style="color: #DD6F48;">import</span> matplotlib.pyplot <span style="color: #DD6F48;">as</span> plt
 
-plt.figure(figsize=(15,6))
+plt.figure<span style="color: #5C7E81;">(</span>figsize=<span style="color: #837486;">(</span>15,6<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
 
-<span style="font-weight: bold; font-style: italic;">height</span> = [<span style="font-weight: bold;">float</span>(entry[1]) <span style="font-weight: bold;">for</span> entry <span style="font-weight: bold;">in</span> table]
-<span style="font-weight: bold; font-style: italic;">bars</span> = [entry[0] <span style="font-weight: bold;">for</span> entry <span style="font-weight: bold;">in</span> table]
-<span style="font-weight: bold; font-style: italic;">x_pos</span> = np.arange(<span style="font-weight: bold;">len</span>(bars))
+<span style="color: #83A598;">height</span> = <span style="color: #5C7E81;">[</span><span style="color: #FE8019;">float</span><span style="color: #837486;">(</span>entry<span style="color: #9C6F68;">[</span>1<span style="color: #9C6F68;">]</span><span style="color: #837486;">)</span> <span style="color: #DD6F48;">for</span> entry <span style="color: #DD6F48;">in</span> table<span style="color: #5C7E81;">]</span>
+<span style="color: #83A598;">bars</span> = <span style="color: #5C7E81;">[</span>entry<span style="color: #837486;">[</span>0<span style="color: #837486;">]</span> <span style="color: #DD6F48;">for</span> entry <span style="color: #DD6F48;">in</span> table<span style="color: #5C7E81;">]</span>
+<span style="color: #83A598;">x_pos</span> = np.arange<span style="color: #5C7E81;">(</span><span style="color: #FE8019;">len</span><span style="color: #837486;">(</span>bars<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
 
-plt.bar(x_pos, height, color = (0.5, 0.1, 0.5, 0.6))
+plt.bar<span style="color: #5C7E81;">(</span>x_pos, height, color = <span style="color: #837486;">(</span>0.5, 0.1, 0.5, 0.6<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
 
-plt.title(<span style="font-style: italic;">'bigram frequency in english'</span>)
-plt.xlabel(<span style="font-style: italic;">'bigram'</span>)
-plt.ylabel(<span style="font-style: italic;">'frequency (percentage)'</span>)
+plt.title<span style="color: #5C7E81;">(</span><span style="color: #528B8B;">'bigram frequency in english'</span><span style="color: #5C7E81;">)</span>
+plt.xlabel<span style="color: #5C7E81;">(</span><span style="color: #528B8B;">'bigram'</span><span style="color: #5C7E81;">)</span>
+plt.ylabel<span style="color: #5C7E81;">(</span><span style="color: #528B8B;">'frequency (percentage)'</span><span style="color: #5C7E81;">)</span>
 
-plt.xticks(x_pos, bars)
+plt.xticks<span style="color: #5C7E81;">(</span>x_pos, bars<span style="color: #5C7E81;">)</span>
 
-plt.gcf()
+plt.gcf<span style="color: #5C7E81;">()</span>
 </pre>
 </div>
 
 
-<div id="orge8e1137" class="figure">
+<div id="orgaa9e8cc" class="figure">
 <p><img src="/zM2vulU.svg" /></p>
 </div>
 </div>

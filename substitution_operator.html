@@ -31,7 +31,7 @@
 </div><h1 class="main-title">substitution operator</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="orgaca3f87">
+<div class="dummy" id="org1fbcce9">
 <p>
 an important use of <a href="/regular_expression.html#1700141308">regular expression</a>s is in substitutions. for example, the substitution operator <code>s/regexp1/pattern/</code> used in python and in Unix commands like <code>vim</code> or <code>sed</code> allows a <a href="/string.html#1700075256">string</a> characterized by a regular expression to be replaced by another string:<br />
 </p>
@@ -43,14 +43,14 @@ an important use of <a href="/regular_expression.html#1700141308">regular expres
 it is often useful to be able to refer to a particular subpart of the string matching the first pattern. for example, suppose we wanted to put angle brackets around all integers in a text, for example, changing <i>the 35 boxes</i> to <i>the &lt;35&gt; boxes</i>. we'd like a way to refer to the integer we've found so that we can easily add the brackets. to do this, we put parentheses <code>(</code> and <code>)</code> around the first pattern and use the number operator <code>\1</code> in the second pattern to refer back. here's how it looks:<br />
 </p>
 <div class="org-src-container" data-language="sh">
-<pre class="src src-sh"><span style="font-weight: bold;">s/</span>([0-9]+)/&lt;\1&gt;/
+<pre class="src src-sh"><span style="color: #A89984;">s/</span><span style="color: #5C7E81;">(</span><span style="color: #837486;">[</span>0-9<span style="color: #837486;">]</span>+<span style="color: #5C7E81;">)</span>/&lt;\1&gt;/
 </pre>
 </div>
 <p>
 the parenthesis and number operators can also specify that a certain string or expression must occur twice in the text. for example, suppose we are looking for the pattern "the Xer they were, the Xer they will be", where we want to constrain the two X's to be the same string. we do this by surrounding the first X with the parenthesis operator, and replacing the second X with the number operator \1, as follows:<br />
 </p>
 <div class="org-src-container" data-language="sh">
-<pre class="src src-sh"><span style="font-weight: bold;">/the</span> (.*)er they were, the \1er they will be/
+<pre class="src src-sh"><span style="color: #A89984;">/the</span> <span style="color: #5C7E81;">(</span>.*<span style="color: #5C7E81;">)</span>er they were, the \1er they will be/
 </pre>
 </div>
 <p>
@@ -58,7 +58,7 @@ Here the <code>\1</code> will be replaced by whatever string matched the first i
 this use of parentheses to store a pattern in memory is called a <i>capture group</i>. every time a capture group is used (i.e., parentheses surround a pattern), the resulting match is stored in a numbered register. if you match two different sets of register parentheses, <code>\2</code> means whatever matched the second capture group. thus<br />
 </p>
 <div class="org-src-container" data-language="sh">
-<pre class="src src-sh"><span style="font-weight: bold;">/the</span> (.*)er they (.*), the \1er we \2/
+<pre class="src src-sh"><span style="color: #A89984;">/the</span> <span style="color: #5C7E81;">(</span>.*<span style="color: #5C7E81;">)</span>er they <span style="color: #5C7E81;">(</span>.*<span style="color: #5C7E81;">)</span>, the \1er we \2/
 </pre>
 </div>
 <p>
@@ -66,7 +66,7 @@ will match the <i>faster they ran, the faster we ran</i> but not <i>the faster t
 parentheses thus have a double function in regular expressions; they are used to group terms for specifying the order in which operators should apply, and they are used to capture something in a register. occasionally we might want to use parentheses for grouping, but don't want to capture the resulting pattern in a register. in that case we use a <i>non-capturing group</i>, which is specified by putting the commands <code>?:</code> after the open paren, in the form <code>(?: pattern )</code>.<br />
 </p>
 <div class="org-src-container" data-language="sh">
-<pre class="src src-sh"><span style="font-weight: bold;">/</span>(?:some|a few) (people|cats) like some \1/
+<pre class="src src-sh"><span style="color: #A89984;">/</span><span style="color: #5C7E81;">(</span>?:some|a few<span style="color: #5C7E81;">)</span> <span style="color: #5C7E81;">(</span>people|cats<span style="color: #5C7E81;">)</span> like some \1/
 </pre>
 </div>
 <p>

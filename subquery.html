@@ -36,17 +36,17 @@
 query all the books that came out in the same year as the book with the id 1112:<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span>
+<pre class="src src-sql"><span style="color: #DD6F48;">SELECT</span>
   book_name
-<span style="font-weight: bold;">FROM</span>
+<span style="color: #DD6F48;">FROM</span>
   books
-<span style="font-weight: bold;">WHERE</span>
-  <span style="font-weight: bold;">year</span> = (<span style="font-weight: bold;">SELECT</span>
-            <span style="font-weight: bold;">year</span>
-          <span style="font-weight: bold;">FROM</span>
+<span style="color: #DD6F48;">WHERE</span>
+  <span style="color: #DD6F48;">year</span> = <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">SELECT</span>
+            <span style="color: #DD6F48;">year</span>
+          <span style="color: #DD6F48;">FROM</span>
             books
-          <span style="font-weight: bold;">WHERE</span>
-            book_id = 1112);
+          <span style="color: #DD6F48;">WHERE</span>
+            book_id = 1112<span style="color: #5C7E81;">)</span>;
 </pre>
 </div>
 
@@ -56,29 +56,29 @@ query all the books that came out in the same year as the book with the id 1112:
 subqueries can only appear in on the right-hand side of an sql query, e.g. the following query is invalid:<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span>
+<pre class="src src-sql"><span style="color: #DD6F48;">SELECT</span>
   book_name
-<span style="font-weight: bold;">FROM</span>
+<span style="color: #DD6F48;">FROM</span>
   books
-<span style="font-weight: bold;">WHERE</span>
-  (<span style="font-weight: bold;">SELECT</span> <span style="font-weight: bold;">year</span> <span style="font-weight: bold;">FROM</span> books <span style="font-weight: bold;">WHERE</span> book_id = 1112) = <span style="font-weight: bold;">year</span>;
+<span style="color: #DD6F48;">WHERE</span>
+  <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">SELECT</span> <span style="color: #DD6F48;">year</span> <span style="color: #DD6F48;">FROM</span> books <span style="color: #DD6F48;">WHERE</span> book_id = 1112<span style="color: #5C7E81;">)</span> = <span style="color: #DD6F48;">year</span>;
 </pre>
 </div>
 
 </div>
 <div class="math-block my_example" data-before="example" data-after="">
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span>
+<pre class="src src-sql"><span style="color: #DD6F48;">SELECT</span>
   book_name
-<span style="font-weight: bold;">FROM</span>
+<span style="color: #DD6F48;">FROM</span>
   books
-<span style="font-weight: bold;">WHERE</span>
-  (<span style="font-weight: bold;">year</span>, faculty) = (<span style="font-weight: bold;">select</span>
-                       <span style="font-weight: bold;">year</span>, faculty
-                     <span style="font-weight: bold;">from</span>
+<span style="color: #DD6F48;">WHERE</span>
+  <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">year</span>, faculty<span style="color: #5C7E81;">)</span> = <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">select</span>
+                       <span style="color: #DD6F48;">year</span>, faculty
+                     <span style="color: #DD6F48;">from</span>
                        books
-                     <span style="font-weight: bold;">where</span>
-                       book_id = 1112);
+                     <span style="color: #DD6F48;">where</span>
+                       book_id = 1112<span style="color: #5C7E81;">)</span>;
 </pre>
 </div>
 
