@@ -16,6 +16,45 @@ window.onload = function(e) {
   });
 }
 
+// when loading an svg from another page, we need to modify the id's that it uses for the elements to avoid conflicts with svg's we already have on the current page which may have similar ids and cause rendering issues.
+function randomizeSvgIds(node, idsMap=new Map()) {
+  randomizeSvgIdsHandleElement(node, idsMap);
+  for (var i = 0; i < node.childNodes.length; i++) {
+    var child = node.childNodes[i];
+    randomizeSvgIds(child, idsMap);
+    randomizeSvgIdsHandleElement(child, idsMap);
+  }
+}
+function randomizeSvgIdsHandleElement(elm, idsMap) {
+  if (elm.id) {
+    // create new id if it doesnt exist in the map
+    if (!idsMap.has(elm.id))
+      idsMap.set(elm.id, randomString(10));
+    elm.id = idsMap.get(elm.id);
+  }
+  if (elm.href !== undefined) {
+    // modify id reference
+    let myId = elm.href.baseVal.substr(1);
+    if (myId) {
+      if (!idsMap.has(myId))
+        idsMap.set(myId, randomString(10));
+      elm.href.baseVal = '#' + idsMap.get(myId);
+    }
+  }
+}
+// from https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+function randomString(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
 let popupElm;
 let toShow = true; /* we need this because by the time the web request is done the user might've moved the mouse and we no longer need to show the result */
 function handleMathButton(node) {
@@ -32,6 +71,8 @@ function handleMathButton(node) {
       getElementByBlkId(refId, function (elm) {
         if (!toShow)
           return;
+        // elm = elm.cloneNode(true); // clone it so we wont have problems
+        randomizeSvgIds(elm);
         if (popupElm === undefined) {
           popupElm = document.createElement('div');
           popupElm.className = "popup";
