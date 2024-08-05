@@ -27,6 +27,8 @@ function randomizeSvgIds(node, idsMap=new Map()) {
   }
 }
 function randomizeSvgIdsHandleElement(elm, idsMap) {
+  // if (!elm)
+    // return;
   if (elm.id) {
     // create new id if it doesnt exist in the map
     if (!idsMap.has(elm.id))
@@ -71,6 +73,8 @@ function handleMathButton(node) {
       let refId = ref.substr(4);
       getElementByBlkId(refId, function (elm) {
         if (!toShow)
+          return;
+        if (!elm)
           return;
         // elm = elm.cloneNode(true); // clone it so we wont have problems
         randomizeSvgIds(elm);
