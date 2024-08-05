@@ -71,6 +71,7 @@ function handleMathButton(node) {
       symbol.setAttribute('fill', 'red');
       let ref = node.getAttribute('data-ref');
       let refId = ref.substr(4);
+      console.log(refId);
       getElementByBlkId(refId, function (elm) {
         if (!toShow)
           return;
