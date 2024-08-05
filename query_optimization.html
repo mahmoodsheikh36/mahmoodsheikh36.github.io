@@ -31,7 +31,7 @@
 </div><h1 class="main-title">query optimization</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org7be5a0f">
+<div class="dummy" id="orge0844ba">
 <p>
 we use techniques that apply <a href="/heuristic.html#1691870705">heuristic</a> rules to modify the internal representation of a query&#x2013;which is usually in the form of a <a href="/query_tree.html#1707502707">query tree</a> or a query <a href="/graph.html#1678745451">graph</a> <a href="/data_structure.html#1706801566">data structure</a>&#x2013;to improve its expected performance. the scanner and parser of an <a href="/sql.html#1702389696">sql</a> query first generate a data structure that corresponds to an initial query representation, which is then optimized according to heuristic rules. this leads to an optimized query representation, which corresponds to the <i>query execution strategy</i>. following that, a <i>query execution plan</i> is generated to execute groups of operations based on the access paths available on the files involved in the query.<br />
 one of the main heuristic rules is to apply <a href="/select.html#1704740086">select</a> and <a href="/project_operation.html#1704791629">project</a> operations before applying the <a href="/join_operation.html#1704802497">join operation</a> or other <a href="/binary_operation.html#1671403949">binary operation</a>s, because the size of the file resulting from a binary operation&#x2013;such as JOIN&#x2013;is usually a multiplicative function of the sizes of the input files. the SELECT and PROJECT operations reduce the size of a file and hence should be applied before a join or other binary operations.<br />
