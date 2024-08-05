@@ -34,77 +34,77 @@
 <p>
 a collection of utility functions for <a href="/common_lisp.html#1677249560">common lisp</a>.<br />
 </p>
-<div id="outline-container-orgd7ddb21" class="outline-2">
-<h2 id="orgd7ddb21">arrays</h2>
-<div class="outline-text-2" id="text-orgd7ddb21">
+<div id="outline-container-orgbfc82cf" class="outline-2">
+<h2 id="orgbfc82cf">arrays</h2>
+<div class="outline-text-2" id="text-orgbfc82cf">
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-array-dims"><span style="color: #928374;">;; </span><span style="color: #928374;">(defun array-width (2d-array)</span>
-<span style="color: #928374;">;;   </span><span style="color: #928374;">(car (cdr (array-dimensions 2d-array))))</span>
-<span style="color: #928374;">;; </span><span style="color: #928374;">(defun array-height (2d-array)</span>
-<span style="color: #928374;">;;   </span><span style="color: #928374;">(car (array-dimensions 2d-array)))</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-rows</span> <span style="color: #837486;">(</span>arr<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"number of rows in array"</span>
-  <span style="color: #837486;">(</span>elt <span style="color: #9C6F68;">(</span>array-dimensions arr<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>- <span style="color: #7B665C;">(</span>length <span style="color: #5C7E81;">(</span>array-dimensions arr<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span> 2<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-cols</span> <span style="color: #837486;">(</span>arr<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"number of columns in array"</span>
-  <span style="color: #837486;">(</span>elt <span style="color: #9C6F68;">(</span>array-dimensions arr<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>- <span style="color: #7B665C;">(</span>length <span style="color: #5C7E81;">(</span>array-dimensions arr<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span> 1<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-depth</span> <span style="color: #837486;">(</span>arr<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"depth of a tensor of the third order"</span>
-  <span style="color: #837486;">(</span>elt <span style="color: #9C6F68;">(</span>array-dimensions arr<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>- <span style="color: #7B665C;">(</span>length <span style="color: #5C7E81;">(</span>array-dimensions arr<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span> 3<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-size</span> <span style="color: #837486;">(</span>arr<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span>array-total-size arr<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-array-dims"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defun array-width (2d-array)</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">(car (cdr (array-dimensions 2d-array))))</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defun array-height (2d-array)</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">(car (array-dimensions 2d-array)))</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-rows</span> (arr)
+  <span style="font-style: italic;">"number of rows in array"</span>
+  (elt (array-dimensions arr) (- (length (array-dimensions arr)) 2)))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-cols</span> (arr)
+  <span style="font-style: italic;">"number of columns in array"</span>
+  (elt (array-dimensions arr) (- (length (array-dimensions arr)) 1)))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-depth</span> (arr)
+  <span style="font-style: italic;">"depth of a tensor of the third order"</span>
+  (elt (array-dimensions arr) (- (length (array-dimensions arr)) 3)))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-size</span> (arr)
+  (array-total-size arr))
 </pre>
 </div>
 <p>
 turn multidimensional (nested) list into array:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-list-to-array"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">list-dimensions</span> <span style="color: #837486;">(</span>list<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">if</span> <span style="color: #9C6F68;">(</span>and <span style="color: #7B665C;">(</span>eq <span style="color: #5C7E81;">(</span>type-of list<span style="color: #5C7E81;">)</span> 'cons<span style="color: #7B665C;">)</span> <span style="color: #7B665C;">(</span>eq <span style="color: #5C7E81;">(</span>type-of <span style="color: #837486;">(</span>car list<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span> 'cons<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-      <span style="color: #9C6F68;">(</span>append <span style="color: #7B665C;">(</span>list <span style="color: #5C7E81;">(</span>length list<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span> <span style="color: #7B665C;">(</span>list-dimensions <span style="color: #5C7E81;">(</span>car list<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-      <span style="color: #9C6F68;">(</span>list <span style="color: #7B665C;">(</span>length list<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">list-&gt;array</span> <span style="color: #837486;">(</span>list<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span>make-array <span style="color: #9C6F68;">(</span>list-dimensions list<span style="color: #9C6F68;">)</span>
-              <span style="color: #FE8019;">:initial-contents</span> list<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-list-to-array">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-dimensions</span> (list)
+  (<span style="font-weight: bold;">if</span> (and (eq (type-of list) 'cons) (eq (type-of (car list)) 'cons))
+      (append (list (length list)) (list-dimensions (car list)))
+      (list (length list))))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-&gt;array</span> (list)
+  (make-array (list-dimensions list)
+              <span style="font-weight: bold;">:initial-contents</span> list))
 </pre>
 </div>
 <p>
 turn multidimensional array into a list:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-array-to-list"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-&gt;list</span> <span style="color: #837486;">(</span>array<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">let*</span> <span style="color: #9C6F68;">(</span><span style="color: #7B665C;">(</span>dimensions <span style="color: #5C7E81;">(</span>array-dimensions array<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-         <span style="color: #7B665C;">(</span>depth      <span style="color: #5C7E81;">(</span>1- <span style="color: #837486;">(</span>length dimensions<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-         <span style="color: #7B665C;">(</span>indices    <span style="color: #5C7E81;">(</span>make-list <span style="color: #837486;">(</span>1+ depth<span style="color: #837486;">)</span> <span style="color: #FE8019;">:initial-element</span> 0<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">labels</span> <span style="color: #7B665C;">(</span><span style="color: #5C7E81;">(</span>recurse <span style="color: #837486;">(</span>n<span style="color: #837486;">)</span>
-               <span style="color: #837486;">(</span><span style="color: #DD6F48;">loop</span> for j below <span style="color: #9C6F68;">(</span>nth n dimensions<span style="color: #9C6F68;">)</span>
-                     do <span style="color: #9C6F68;">(</span>setf <span style="color: #7B665C;">(</span>nth n indices<span style="color: #7B665C;">)</span> j<span style="color: #9C6F68;">)</span>
-                     collect <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">if</span> <span style="color: #7B665C;">(</span>= n depth<span style="color: #7B665C;">)</span>
-                                 <span style="color: #7B665C;">(</span>apply #'aref array indices<span style="color: #7B665C;">)</span>
-                                 <span style="color: #7B665C;">(</span>recurse <span style="color: #5C7E81;">(</span>1+ n<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-      <span style="color: #7B665C;">(</span>recurse 0<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-array-to-list">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-&gt;list</span> (array)
+  (<span style="font-weight: bold;">let*</span> ((dimensions (array-dimensions array))
+         (depth      (1- (length dimensions)))
+         (indices    (make-list (1+ depth) <span style="font-weight: bold;">:initial-element</span> 0)))
+    (<span style="font-weight: bold;">labels</span> ((recurse (n)
+               (<span style="font-weight: bold;">loop</span> for j below (nth n dimensions)
+                     do (setf (nth n indices) j)
+                     collect (<span style="font-weight: bold;">if</span> (= n depth)
+                                 (apply #'aref array indices)
+                                 (recurse (1+ n))))))
+      (recurse 0))))
 </pre>
 </div>
 <p>
 to generate an array with random elements of arbitrary dimensions:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-random-tensor"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">random-float</span> <span style="color: #837486;">(</span>min max<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span>+ min <span style="color: #9C6F68;">(</span>* <span style="color: #7B665C;">(</span>random 1.0<span style="color: #7B665C;">)</span> <span style="color: #7B665C;">(</span>- max min<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">random-list</span> <span style="color: #837486;">(</span>dims <span style="color: #66999D;">&amp;optional</span> <span style="color: #9C6F68;">(</span>min -1<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>max 1<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">let*</span> <span style="color: #9C6F68;">(</span><span style="color: #7B665C;">(</span>dim <span style="color: #5C7E81;">(</span>car dims<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">let</span> <span style="color: #7B665C;">(</span><span style="color: #5C7E81;">(</span>list <span style="color: #837486;">(</span>make-list dim<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-      <span style="color: #7B665C;">(</span><span style="color: #DD6F48;">if</span> <span style="color: #5C7E81;">(</span>&gt; <span style="color: #837486;">(</span>length dims<span style="color: #837486;">)</span> 1<span style="color: #5C7E81;">)</span>
-          <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">loop</span> for i from 0 below dim
-                do <span style="color: #837486;">(</span>setf <span style="color: #9C6F68;">(</span>elt list i<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>random-list <span style="color: #7B665C;">(</span>cdr dims<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-          <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">loop</span> for i from 0 below dim
-                do <span style="color: #837486;">(</span>setf <span style="color: #9C6F68;">(</span>elt list i<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>random-float min max<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-      list<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">random-tensor</span> <span style="color: #837486;">(</span>dims <span style="color: #66999D;">&amp;optional</span> <span style="color: #9C6F68;">(</span>min -1<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>max 1<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"an inefficient way, but ill take it for now."</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">if</span> <span style="color: #9C6F68;">(</span>atom dims<span style="color: #9C6F68;">)</span>
-      <span style="color: #9C6F68;">(</span>list-&gt;array <span style="color: #7B665C;">(</span>random-list <span style="color: #5C7E81;">(</span>list dims<span style="color: #5C7E81;">)</span> min max<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-      <span style="color: #9C6F68;">(</span>list-&gt;array <span style="color: #7B665C;">(</span>random-list dims min max<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-random-tensor">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-float</span> (min max)
+  (+ min (* (random 1.0) (- max min))))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-list</span> (dims <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (min -1) (max 1))
+  (<span style="font-weight: bold;">let*</span> ((dim (car dims)))
+    (<span style="font-weight: bold;">let</span> ((list (make-list dim)))
+      (<span style="font-weight: bold;">if</span> (&gt; (length dims) 1)
+          (<span style="font-weight: bold;">loop</span> for i from 0 below dim
+                do (setf (elt list i) (random-list (cdr dims))))
+          (<span style="font-weight: bold;">loop</span> for i from 0 below dim
+                do (setf (elt list i) (random-float min max))))
+      list)))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">random-tensor</span> (dims <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (min -1) (max 1))
+  <span style="font-style: italic;">"an inefficient way, but ill take it for now."</span>
+  (<span style="font-weight: bold;">if</span> (atom dims)
+      (list-&gt;array (random-list (list dims) min max))
+      (list-&gt;array (random-list dims min max))))
 </pre>
 </div>
 <p>
@@ -112,336 +112,336 @@ the following utility functions are similar to <code>map</code> but for arrays:<
 we sometimes may wanna iterate through a multidimensional array and do an action on each of its indicies, the following utility functions helps do that easily, without nesting loops, although notice that this function iterates through every cell in the array, so it may not be what you want (efficiency wise) if you only want to apply something to only a portion of the array<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-array-map"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-map</span> <span style="color: #837486;">(</span>fn <span style="color: #66999D;">&amp;rest</span> arrays<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"apply fn to elements of arrays. return a new array with the results"</span>
-  <span style="color: #837486;">(</span>apply #'array-map-into
-         <span style="color: #9C6F68;">(</span>append <span style="color: #7B665C;">(</span>list fn <span style="color: #5C7E81;">(</span>make-array <span style="color: #837486;">(</span>array-dimensions <span style="color: #9C6F68;">(</span>car arrays<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-                 arrays<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-map-into</span> <span style="color: #837486;">(</span>fn dest-array <span style="color: #66999D;">&amp;rest</span> arrays<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"call fn with elements of arrays. write results into dest-array"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">dotimes</span> <span style="color: #9C6F68;">(</span>i <span style="color: #7B665C;">(</span>array-total-size <span style="color: #5C7E81;">(</span>car arrays<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span> dest-array<span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>setf <span style="color: #7B665C;">(</span>row-major-aref dest-array i<span style="color: #7B665C;">)</span>
-          <span style="color: #7B665C;">(</span>apply fn <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">loop</span> for array in arrays collect <span style="color: #837486;">(</span>row-major-aref array i<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-map-indicies-into</span> <span style="color: #837486;">(</span>array fn dest-array<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"apply fn to each combination of indicies of array, return a new array with the results, the argument to fn should be the indicies list, e.g. (3 5 3) to be used with aref, e.g. (aref arr 3 5 3)"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">dotimes</span> <span style="color: #9C6F68;">(</span>i <span style="color: #7B665C;">(</span>array-total-size array<span style="color: #7B665C;">)</span> dest-array<span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>setf <span style="color: #7B665C;">(</span>row-major-aref dest-array i<span style="color: #7B665C;">)</span>
-          <span style="color: #7B665C;">(</span>apply fn <span style="color: #5C7E81;">(</span>list array <span style="color: #837486;">(</span>from-row-major <span style="color: #9C6F68;">(</span>array-dimensions dest-array<span style="color: #9C6F68;">)</span> i<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-map-indicies</span> <span style="color: #837486;">(</span>array fn<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"see description of array-map-by-idx-into, this function is an alias for it that provides a new array as dest-array"</span>
-  <span style="color: #837486;">(</span>array-map-indicies-into array fn <span style="color: #9C6F68;">(</span>make-array <span style="color: #7B665C;">(</span>array-dimensions array<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">aref-indicies</span> <span style="color: #837486;">(</span>arr idx-list<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"to shorten code, not having to use apply everywhere"</span>
-  <span style="color: #837486;">(</span>apply #'aref <span style="color: #9C6F68;">(</span>cons arr idx-list<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-array-map">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-map</span> (fn <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> arrays)
+  <span style="font-style: italic;">"apply fn to elements of arrays. return a new array with the results"</span>
+  (apply #'array-map-into
+         (append (list fn (make-array (array-dimensions (car arrays))))
+                 arrays)))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-map-into</span> (fn dest-array <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> arrays)
+  <span style="font-style: italic;">"call fn with elements of arrays. write results into dest-array"</span>
+  (<span style="font-weight: bold;">dotimes</span> (i (array-total-size (car arrays)) dest-array)
+    (setf (row-major-aref dest-array i)
+          (apply fn (<span style="font-weight: bold;">loop</span> for array in arrays collect (row-major-aref array i))))))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-map-indicies-into</span> (array fn dest-array)
+  <span style="font-style: italic;">"apply fn to each combination of indicies of array, return a new array with the results, the argument to fn should be the indicies list, e.g. (3 5 3) to be used with aref, e.g. (aref arr 3 5 3)"</span>
+  (<span style="font-weight: bold;">dotimes</span> (i (array-total-size array) dest-array)
+    (setf (row-major-aref dest-array i)
+          (apply fn (list array (from-row-major (array-dimensions dest-array) i))))))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-map-indicies</span> (array fn)
+  <span style="font-style: italic;">"see description of array-map-by-idx-into, this function is an alias for it that provides a new array as dest-array"</span>
+  (array-map-indicies-into array fn (make-array (array-dimensions array))))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">aref-indicies</span> (arr idx-list)
+  <span style="font-style: italic;">"to shorten code, not having to use apply everywhere"</span>
+  (apply #'aref (cons arr idx-list)))
 </pre>
 </div>
 <p>
 a utility function to copy a subarray of an array<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-subarray"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">subarray</span> <span style="color: #837486;">(</span>a offsets dims<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"copy a subarray of a given array</span>
-<span style="color: #528B8B;">example usage:</span>
-<span style="color: #528B8B;">(subarray #2A((0.70462835 0.7893367 0.3833828)</span>
-<span style="color: #528B8B;">              (0.8126608 0.6136594 0.37239313)</span>
-<span style="color: #528B8B;">              (0.44657052 0.4761132 0.9504193)) '(1 0) '(2 2))"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">let*</span> <span style="color: #9C6F68;">(</span><span style="color: #7B665C;">(</span>b <span style="color: #5C7E81;">(</span>make-array dims<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>subarray-util a b nil nil offsets <span style="color: #7B665C;">(</span>array-dimensions a<span style="color: #7B665C;">)</span> dims<span style="color: #9C6F68;">)</span>
-    b<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-subarray">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">subarray</span> (a offsets dims)
+  <span style="font-style: italic;">"copy a subarray of a given array</span>
+<span style="font-style: italic;">example usage:</span>
+<span style="font-style: italic;">(subarray #2A((0.70462835 0.7893367 0.3833828)</span>
+<span style="font-style: italic;">              (0.8126608 0.6136594 0.37239313)</span>
+<span style="font-style: italic;">              (0.44657052 0.4761132 0.9504193)) '(1 0) '(2 2))"</span>
+  (<span style="font-weight: bold;">let*</span> ((b (make-array dims)))
+    (subarray-util a b nil nil offsets (array-dimensions a) dims)
+    b))
 
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">subarray-util</span> <span style="color: #837486;">(</span>a b a-indicies b-indicies offsets a-dims b-dims<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">if</span> b-dims
-      <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">let</span> <span style="color: #7B665C;">(</span><span style="color: #5C7E81;">(</span>use-b-dims <span style="color: #837486;">(</span>eq <span style="color: #9C6F68;">(</span>length a-dims<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>length b-dims<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-            <span style="color: #5C7E81;">(</span>offset <span style="color: #837486;">(</span>car offsets<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-        <span style="color: #7B665C;">(</span><span style="color: #DD6F48;">if</span> use-b-dims
-            <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">loop</span> for i from offset below <span style="color: #837486;">(</span>+ offset <span style="color: #9C6F68;">(</span>car b-dims<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-                  do <span style="color: #837486;">(</span>subarray-util
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">subarray-util</span> (a b a-indicies b-indicies offsets a-dims b-dims)
+  (<span style="font-weight: bold;">if</span> b-dims
+      (<span style="font-weight: bold;">let</span> ((use-b-dims (eq (length a-dims) (length b-dims)))
+            (offset (car offsets)))
+        (<span style="font-weight: bold;">if</span> use-b-dims
+            (<span style="font-weight: bold;">loop</span> for i from offset below (+ offset (car b-dims))
+                  do (subarray-util
                       a
                       b
-                      <span style="color: #9C6F68;">(</span>append a-indicies <span style="color: #7B665C;">(</span>list i<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-                      <span style="color: #9C6F68;">(</span>append b-indicies <span style="color: #7B665C;">(</span>list <span style="color: #5C7E81;">(</span>- i offset<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-                      <span style="color: #9C6F68;">(</span>cdr offsets<span style="color: #9C6F68;">)</span>
-                      <span style="color: #9C6F68;">(</span>cdr a-dims<span style="color: #9C6F68;">)</span>
-                      <span style="color: #9C6F68;">(</span>cdr b-dims<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-            <span style="color: #5C7E81;">(</span>subarray-util
+                      (append a-indicies (list i))
+                      (append b-indicies (list (- i offset)))
+                      (cdr offsets)
+                      (cdr a-dims)
+                      (cdr b-dims)))
+            (subarray-util
              a
              b
-             <span style="color: #837486;">(</span>append a-indicies <span style="color: #9C6F68;">(</span>list offset<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
+             (append a-indicies (list offset))
              nil
-             <span style="color: #837486;">(</span>cdr offsets<span style="color: #837486;">)</span>
-             <span style="color: #837486;">(</span>cdr a-dims<span style="color: #837486;">)</span>
-             b-dims<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-      <span style="color: #9C6F68;">(</span>setf <span style="color: #7B665C;">(</span>apply #'aref <span style="color: #5C7E81;">(</span>cons b b-indicies<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-            <span style="color: #7B665C;">(</span>apply #'aref <span style="color: #5C7E81;">(</span>cons a a-indicies<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+             (cdr offsets)
+             (cdr a-dims)
+             b-dims)))
+      (setf (apply #'aref (cons b b-indicies))
+            (apply #'aref (cons a a-indicies)))))
 </pre>
 </div>
 <p>
 a utility that copies the n-th element of an array, which is an array itself:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-array-nth"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">copy-array-nth</span> <span style="color: #837486;">(</span>arr idx<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"return a copy of the nth subarray of an array"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">let*</span> <span style="color: #9C6F68;">(</span><span style="color: #7B665C;">(</span>new-dims <span style="color: #5C7E81;">(</span>cdr <span style="color: #837486;">(</span>array-dimensions arr<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-         <span style="color: #7B665C;">(</span>offsets <span style="color: #5C7E81;">(</span>append <span style="color: #837486;">(</span>list idx<span style="color: #837486;">)</span> <span style="color: #837486;">(</span>make-list <span style="color: #9C6F68;">(</span>length new-dims<span style="color: #9C6F68;">)</span> <span style="color: #FE8019;">:initial-element</span> 0<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>subarray
+<pre class="src src-lisp" id="src-array-nth">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-array-nth</span> (arr idx)
+  <span style="font-style: italic;">"return a copy of the nth subarray of an array"</span>
+  (<span style="font-weight: bold;">let*</span> ((new-dims (cdr (array-dimensions arr)))
+         (offsets (append (list idx) (make-list (length new-dims) <span style="font-weight: bold;">:initial-element</span> 0))))
+    (subarray
      arr
      offsets
-     new-dims<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-nth</span> <span style="color: #837486;">(</span>arr idx<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"return the nth subarray of an array without copying"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">let</span> <span style="color: #9C6F68;">(</span><span style="color: #7B665C;">(</span>new-dims <span style="color: #5C7E81;">(</span>cdr <span style="color: #837486;">(</span>array-dimensions arr<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>make-array new-dims
-                <span style="color: #FE8019;">:displaced-to</span> arr
-                <span style="color: #FE8019;">:displaced-index-offset</span> <span style="color: #7B665C;">(</span>* idx <span style="color: #5C7E81;">(</span>reduce #'* new-dims<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+     new-dims)))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-nth</span> (arr idx)
+  <span style="font-style: italic;">"return the nth subarray of an array without copying"</span>
+  (<span style="font-weight: bold;">let</span> ((new-dims (cdr (array-dimensions arr))))
+    (make-array new-dims
+                <span style="font-weight: bold;">:displaced-to</span> arr
+                <span style="font-weight: bold;">:displaced-index-offset</span> (* idx (reduce #'* new-dims)))))
 </pre>
 </div>
 <p>
 a utility function to copy a subarray into an array<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-copy-into-array"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">copy-into-array</span> <span style="color: #837486;">(</span>a b <span style="color: #66999D;">&amp;optional</span> <span style="color: #9C6F68;">(</span>offsets <span style="color: #7B665C;">(</span>make-list <span style="color: #5C7E81;">(</span>length <span style="color: #837486;">(</span>array-dimensions a<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span> <span style="color: #FE8019;">:initial-element</span> 0<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"copy an (possibly smaller) array (b) into another array (a)"</span>
-  <span style="color: #837486;">(</span>copy-into-array-util a b nil nil offsets <span style="color: #9C6F68;">(</span>array-dimensions a<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>array-dimensions b<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-  a<span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-copy-into-array">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-into-array</span> (a b <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> (offsets (make-list (length (array-dimensions a)) <span style="font-weight: bold;">:initial-element</span> 0)))
+  <span style="font-style: italic;">"copy an (possibly smaller) array (b) into another array (a)"</span>
+  (copy-into-array-util a b nil nil offsets (array-dimensions a) (array-dimensions b))
+  a)
 
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">copy-into-array-util</span> <span style="color: #837486;">(</span>a b a-indicies b-indicies offsets a-dims b-dims<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">if</span> b-dims
-      <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">let</span> <span style="color: #7B665C;">(</span><span style="color: #5C7E81;">(</span>use-b-dims <span style="color: #837486;">(</span>eq <span style="color: #9C6F68;">(</span>length a-dims<span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span>length b-dims<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-            <span style="color: #5C7E81;">(</span>offset <span style="color: #837486;">(</span>car offsets<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-        <span style="color: #7B665C;">(</span><span style="color: #DD6F48;">if</span> use-b-dims
-            <span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">loop</span> for i from offset below <span style="color: #837486;">(</span>+ offset <span style="color: #9C6F68;">(</span>car b-dims<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-                  do <span style="color: #837486;">(</span>copy-into-array-util
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-into-array-util</span> (a b a-indicies b-indicies offsets a-dims b-dims)
+  (<span style="font-weight: bold;">if</span> b-dims
+      (<span style="font-weight: bold;">let</span> ((use-b-dims (eq (length a-dims) (length b-dims)))
+            (offset (car offsets)))
+        (<span style="font-weight: bold;">if</span> use-b-dims
+            (<span style="font-weight: bold;">loop</span> for i from offset below (+ offset (car b-dims))
+                  do (copy-into-array-util
                       a
                       b
-                      <span style="color: #9C6F68;">(</span>append a-indicies <span style="color: #7B665C;">(</span>list i<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-                      <span style="color: #9C6F68;">(</span>append b-indicies <span style="color: #7B665C;">(</span>list <span style="color: #5C7E81;">(</span>- i offset<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-                      <span style="color: #9C6F68;">(</span>cdr offsets<span style="color: #9C6F68;">)</span>
-                      <span style="color: #9C6F68;">(</span>cdr a-dims<span style="color: #9C6F68;">)</span>
-                      <span style="color: #9C6F68;">(</span>cdr b-dims<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-            <span style="color: #5C7E81;">(</span>copy-into-array-util
+                      (append a-indicies (list i))
+                      (append b-indicies (list (- i offset)))
+                      (cdr offsets)
+                      (cdr a-dims)
+                      (cdr b-dims)))
+            (copy-into-array-util
              a
              b
-             <span style="color: #837486;">(</span>append a-indicies <span style="color: #9C6F68;">(</span>list offset<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
+             (append a-indicies (list offset))
              nil
-             <span style="color: #837486;">(</span>cdr offsets<span style="color: #837486;">)</span>
-             <span style="color: #837486;">(</span>cdr a-dims<span style="color: #837486;">)</span>
-             b-dims<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-      <span style="color: #9C6F68;">(</span>setf <span style="color: #7B665C;">(</span>apply #'aref <span style="color: #5C7E81;">(</span>cons a a-indicies<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-            <span style="color: #7B665C;">(</span>apply #'aref <span style="color: #5C7E81;">(</span>cons b b-indicies<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+             (cdr offsets)
+             (cdr a-dims)
+             b-dims)))
+      (setf (apply #'aref (cons a a-indicies))
+            (apply #'aref (cons b b-indicies)))))
 </pre>
 </div>
 <p>
 a utility function to copy an array into anothers highest dimension<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-set-array-nth"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">set-array-nth</span> <span style="color: #837486;">(</span>arr other-arr idx<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"example usage: (set-array-nth (make-array '(4 4 4)) (random-tensor '(4 4)) 1)"</span>
-  <span style="color: #837486;">(</span>copy-into-array
+<pre class="src src-lisp" id="src-set-array-nth">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">set-array-nth</span> (arr other-arr idx)
+  <span style="font-style: italic;">"example usage: (set-array-nth (make-array '(4 4 4)) (random-tensor '(4 4)) 1)"</span>
+  (copy-into-array
    arr
    other-arr
-   <span style="color: #9C6F68;">(</span>append <span style="color: #7B665C;">(</span>list idx<span style="color: #7B665C;">)</span> <span style="color: #7B665C;">(</span>make-list <span style="color: #5C7E81;">(</span>length <span style="color: #837486;">(</span>array-dimensions other-arr<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span> <span style="color: #FE8019;">:initial-element</span> 0<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+   (append (list idx) (make-list (length (array-dimensions other-arr)) <span style="font-weight: bold;">:initial-element</span> 0))))
 </pre>
 </div>
 <p>
 vectorizing an array (turning it into a 1d vector) is pretty simple:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-vectorize-array"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">vectorize-array</span> <span style="color: #837486;">(</span>arr<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"turn an array into a 1d vector"</span>
-  <span style="color: #837486;">(</span>make-array <span style="color: #9C6F68;">(</span>list <span style="color: #7B665C;">(</span>array-total-size arr<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span> <span style="color: #FE8019;">:displaced-to</span> arr<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-vectorize-array">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">vectorize-array</span> (arr)
+  <span style="font-style: italic;">"turn an array into a 1d vector"</span>
+  (make-array (list (array-total-size arr)) <span style="font-weight: bold;">:displaced-to</span> arr))
 </pre>
 </div>
 <p>
 a function that refers the row-major index of a cell of an array (shamelessly stolen from <a href="https://groups.google.com/g/comp.lang.lisp/c/CM3MQkyOTHk?pli=1">https://groups.google.com/g/comp.lang.lisp/c/CM3MQkyOTHk?pli=1</a>):<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-row-major"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">array-index-row-major</span> <span style="color: #837486;">(</span>array rmi<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"basically the inverse of array-row-major-index, example:</span>
-<span style="color: #528B8B;">(defvar *a* (make-array '(7 4 9 5)))</span>
-<span style="color: #528B8B;">(array-row-major-index *a* 3 2 8 1) =&gt; 671</span>
-<span style="color: #528B8B;">(array-index-row-major *a* 671) =&gt; (3 2 8 1)</span>
-<span style="color: #528B8B;">"</span>
-  <span style="color: #837486;">(</span>reduce #'<span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">lambda</span> <span style="color: #7B665C;">(</span>dim x<span style="color: #7B665C;">)</span>
-              <span style="color: #7B665C;">(</span>nconc
-               <span style="color: #5C7E81;">(</span>multiple-value-list <span style="color: #837486;">(</span>truncate <span style="color: #9C6F68;">(</span>car x<span style="color: #9C6F68;">)</span> dim<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-               <span style="color: #5C7E81;">(</span>cdr x<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-          <span style="color: #9C6F68;">(</span>cdr <span style="color: #7B665C;">(</span>array-dimensions array<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-          <span style="color: #FE8019;">:initial-value</span> <span style="color: #9C6F68;">(</span>list rmi<span style="color: #9C6F68;">)</span>
-          <span style="color: #FE8019;">:from-end</span> t<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-row-major">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">array-index-row-major</span> (array rmi)
+  <span style="font-style: italic;">"basically the inverse of array-row-major-index, example:</span>
+<span style="font-style: italic;">(defvar *a* (make-array '(7 4 9 5)))</span>
+<span style="font-style: italic;">(array-row-major-index *a* 3 2 8 1) =&gt; 671</span>
+<span style="font-style: italic;">(array-index-row-major *a* 671) =&gt; (3 2 8 1)</span>
+<span style="font-style: italic;">"</span>
+  (reduce #'(<span style="font-weight: bold;">lambda</span> (dim x)
+              (nconc
+               (multiple-value-list (truncate (car x) dim))
+               (cdr x)))
+          (cdr (array-dimensions array))
+          <span style="font-weight: bold;">:initial-value</span> (list rmi)
+          <span style="font-weight: bold;">:from-end</span> t))
 
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">from-row-major</span> <span style="color: #837486;">(</span>dims row-major-idx<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"same function as array-index-row-major, but not specific to arrays"</span>
-  <span style="color: #837486;">(</span>reduce #'<span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">lambda</span> <span style="color: #7B665C;">(</span>dim x<span style="color: #7B665C;">)</span>
-              <span style="color: #7B665C;">(</span>nconc
-               <span style="color: #5C7E81;">(</span>multiple-value-list <span style="color: #837486;">(</span>truncate <span style="color: #9C6F68;">(</span>car x<span style="color: #9C6F68;">)</span> dim<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-               <span style="color: #5C7E81;">(</span>cdr x<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-          <span style="color: #9C6F68;">(</span>cdr dims<span style="color: #9C6F68;">)</span>
-          <span style="color: #FE8019;">:initial-value</span> <span style="color: #9C6F68;">(</span>list row-major-idx<span style="color: #9C6F68;">)</span>
-          <span style="color: #FE8019;">:from-end</span> t<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">from-row-major</span> (dims row-major-idx)
+  <span style="font-style: italic;">"same function as array-index-row-major, but not specific to arrays"</span>
+  (reduce #'(<span style="font-weight: bold;">lambda</span> (dim x)
+              (nconc
+               (multiple-value-list (truncate (car x) dim))
+               (cdr x)))
+          (cdr dims)
+          <span style="font-weight: bold;">:initial-value</span> (list row-major-idx)
+          <span style="font-weight: bold;">:from-end</span> t))
 </pre>
 </div>
 <p>
 a function to simply copy/clone an array/tensor:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-copy-array"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">copy-array</span> <span style="color: #837486;">(</span>arr<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">let</span> <span style="color: #9C6F68;">(</span><span style="color: #7B665C;">(</span>new-arr <span style="color: #5C7E81;">(</span>make-array <span style="color: #837486;">(</span>array-dimensions arr<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>copy-into-array new-arr arr<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-copy-array">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">copy-array</span> (arr)
+  (<span style="font-weight: bold;">let</span> ((new-arr (make-array (array-dimensions arr))))
+    (copy-into-array new-arr arr)))
 </pre>
 </div>
 <p>
 reducing an array with a function:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-reduce-array"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">reduce-array</span> <span style="color: #837486;">(</span>arr fn<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span>apply #'reduce
-         <span style="color: #9C6F68;">(</span>list fn <span style="color: #7B665C;">(</span>make-array <span style="color: #5C7E81;">(</span>array-total-size arr<span style="color: #5C7E81;">)</span> <span style="color: #FE8019;">:displaced-to</span> arr<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-reduce-array">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">reduce-array</span> (arr fn)
+  (apply #'reduce
+         (list fn (make-array (array-total-size arr) <span style="font-weight: bold;">:displaced-to</span> arr))))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge0af33c" class="outline-2">
-<h2 id="orge0af33c">sequences</h2>
-<div class="outline-text-2" id="text-orge0af33c">
+<div id="outline-container-org57a393d" class="outline-2">
+<h2 id="org57a393d">sequences</h2>
+<div class="outline-text-2" id="text-org57a393d">
 <p>
 a function to get the last element in a list (or any sequence):<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-last-elt"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">last-elt</span> <span style="color: #837486;">(</span>seq<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"example usage: CL-USER&gt; (last-elt (vector 1 2 3)) =&gt; 3"</span>
-  <span style="color: #837486;">(</span>elt seq <span style="color: #9C6F68;">(</span>1- <span style="color: #7B665C;">(</span>length seq<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-last-elt">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">last-elt</span> (seq)
+  <span style="font-style: italic;">"example usage: CL-USER&gt; (last-elt (vector 1 2 3)) =&gt; 3"</span>
+  (elt seq (1- (length seq))))
 </pre>
 </div>
 <p>
 converting nested lists to nested vectors:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">list-&gt;vector</span> <span style="color: #837486;">(</span>mylist<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"convert nested lists into nested vectors"</span>
-  <span style="color: #837486;">(</span>coerce
-   <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">loop</span> for sublist in mylist
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-&gt;vector</span> (mylist)
+  <span style="font-style: italic;">"convert nested lists into nested vectors"</span>
+  (coerce
+   (<span style="font-weight: bold;">loop</span> for sublist in mylist
          collect
-         <span style="color: #7B665C;">(</span><span style="color: #DD6F48;">cond</span>
-           <span style="color: #5C7E81;">(</span><span style="color: #837486;">(</span>equal <span style="color: #9C6F68;">(</span>type-of sublist<span style="color: #9C6F68;">)</span> 'cons<span style="color: #837486;">)</span> <span style="color: #837486;">(</span>list-&gt;vector sublist<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-           <span style="color: #5C7E81;">(</span>t sublist<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-   'vector<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">let</span> <span style="color: #837486;">(</span><span style="color: #9C6F68;">(</span>mylist '<span style="color: #7B665C;">(</span><span style="color: #5C7E81;">(</span>1 2<span style="color: #5C7E81;">)</span> 3 4<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span>print <span style="color: #9C6F68;">(</span>list-&gt;vector mylist<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span> <span style="color: #928374;">;; </span><span style="color: #928374;">=&gt; #(#(1 2) 3 4) </span>
+         (<span style="font-weight: bold;">cond</span>
+           ((equal (type-of sublist) 'cons) (list-&gt;vector sublist))
+           (t sublist)))
+   'vector))
+(<span style="font-weight: bold;">let</span> ((mylist '((1 2) 3 4)))
+  (print (list-&gt;vector mylist))) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">=&gt; #(#(1 2) 3 4) </span>
 </pre>
 </div>
 <p>
 or this shorter one:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-list-to-vector"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">list-&gt;vector</span> <span style="color: #837486;">(</span>list<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">if</span> <span style="color: #9C6F68;">(</span>atom list<span style="color: #9C6F68;">)</span> list
-      <span style="color: #9C6F68;">(</span>map 'vector #'list-&gt;vector list<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-list-to-vector">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">list-&gt;vector</span> (list)
+  (<span style="font-weight: bold;">if</span> (atom list) list
+      (map 'vector #'list-&gt;vector list)))
 </pre>
 </div>
 <p>
 get the type of a sequence (<code>type-of</code> is unreliable):<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">seq-type</span> <span style="color: #837486;">(</span>seq<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"get the type of a sequence (`</span><span style="color: #BBAA97;">type-of</span><span style="color: #528B8B;">' is unreliable), returns one of 3 values, so its not completely general as the types are hardcoded"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">typecase</span> seq
-    <span style="color: #9C6F68;">(</span>string 'string<span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>vector 'vector<span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>list 'list<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">seq-type</span> (seq)
+  <span style="font-style: italic;">"get the type of a sequence (`</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">type-of</span><span style="font-style: italic;">' is unreliable), returns one of 3 values, so its not completely general as the types are hardcoded"</span>
+  (<span style="font-weight: bold;">typecase</span> seq
+    (string 'string)
+    (vector 'vector)
+    (list 'list)))
 </pre>
 </div>
 <p>
 a concatenate function that acts with respect to the sequence type:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">concatenate-type-aware</span> <span style="color: #837486;">(</span>seqs<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"get the type of a sequence (`</span><span style="color: #BBAA97;">type-of</span><span style="color: #528B8B;">' is unreliable), returns one of 3 values, so its not completely general as the types are hardcoded, the type of sequence to return is determined by the first sequences in the list of sequences</span>
-<span style="color: #528B8B;">example usages:</span>
-<span style="color: #528B8B;">CL-USER&gt; (concatenate-type-aware '((1 2 3) (1)))</span>
-<span style="color: #528B8B;">(1 2 3 1)</span>
-<span style="color: #528B8B;">CL-USER&gt; (concatenate-type-aware '(\"hi\" \"hey\"))</span>
-<span style="color: #528B8B;">\"hihey\"</span>
-<span style="color: #528B8B;">CL-USER&gt; (concatenate-type-aware '(#(1 2 3) #(10)))</span>
-<span style="color: #528B8B;">#(1 2 3 10)</span>
-<span style="color: #528B8B;">"</span>
-  <span style="color: #837486;">(</span>apply #'concatenate <span style="color: #9C6F68;">(</span>list* <span style="color: #7B665C;">(</span>seq-type <span style="color: #5C7E81;">(</span>first seqs<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span> seqs<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">concatenate*</span> <span style="color: #837486;">(</span>seqs<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"an alias for `</span><span style="color: #BBAA97;">concatenate-type-aware</span><span style="color: #528B8B;">'"</span>
-  <span style="color: #837486;">(</span>funcall #'concatenate-type-aware seqs<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">concatenate-type-aware</span> (seqs)
+  <span style="font-style: italic;">"get the type of a sequence (`</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">type-of</span><span style="font-style: italic;">' is unreliable), returns one of 3 values, so its not completely general as the types are hardcoded, the type of sequence to return is determined by the first sequences in the list of sequences</span>
+<span style="font-style: italic;">example usages:</span>
+<span style="font-style: italic;">CL-USER&gt; (concatenate-type-aware '((1 2 3) (1)))</span>
+<span style="font-style: italic;">(1 2 3 1)</span>
+<span style="font-style: italic;">CL-USER&gt; (concatenate-type-aware '(\"hi\" \"hey\"))</span>
+<span style="font-style: italic;">\"hihey\"</span>
+<span style="font-style: italic;">CL-USER&gt; (concatenate-type-aware '(#(1 2 3) #(10)))</span>
+<span style="font-style: italic;">#(1 2 3 10)</span>
+<span style="font-style: italic;">"</span>
+  (apply #'concatenate (list* (seq-type (first seqs)) seqs)))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">concatenate*</span> (seqs)
+  <span style="font-style: italic;">"an alias for `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">concatenate-type-aware</span><span style="font-style: italic;">'"</span>
+  (funcall #'concatenate-type-aware seqs))
 </pre>
 </div>
 <p>
 delete nth element of a sequence:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">remove-nth</span> <span style="color: #837486;">(</span>seq n<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"remove the n-th element from the sequence `</span><span style="color: #BBAA97;">seq</span><span style="color: #528B8B;">', returns a new sequence with the desired result, the function doesnt modify `</span><span style="color: #BBAA97;">seq</span><span style="color: #528B8B;">'"</span>
-  <span style="color: #837486;">(</span>remove-if <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">lambda</span> <span style="color: #7B665C;">(</span>_<span style="color: #7B665C;">)</span> t<span style="color: #9C6F68;">)</span> seq <span style="color: #FE8019;">:start</span> n <span style="color: #FE8019;">:count</span> 1<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">remove-nth</span> (seq n)
+  <span style="font-style: italic;">"remove the n-th element from the sequence `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">seq</span><span style="font-style: italic;">', returns a new sequence with the desired result, the function doesnt modify `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">seq</span><span style="font-style: italic;">'"</span>
+  (remove-if (<span style="font-weight: bold;">lambda</span> (_) t) seq <span style="font-weight: bold;">:start</span> n <span style="font-weight: bold;">:count</span> 1))
 </pre>
 </div>
 <p>
 split a sequence into singleton sequences (of the same type as the original sequence)<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">seq-singletons</span> <span style="color: #837486;">(</span>seq<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"turn a sequence into a list of singletons (1-element sequences) of the same type"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">let</span> <span style="color: #9C6F68;">(</span><span style="color: #7B665C;">(</span>my-seq-type <span style="color: #5C7E81;">(</span>seq-type seq<span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-    <span style="color: #9C6F68;">(</span>map 'list my-seq-type seq<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">seq-singletons</span> (seq)
+  <span style="font-style: italic;">"turn a sequence into a list of singletons (1-element sequences) of the same type"</span>
+  (<span style="font-weight: bold;">let</span> ((my-seq-type (seq-type seq)))
+    (map 'list my-seq-type seq)))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org98f30c3" class="outline-2">
-<h2 id="org98f30c3">argmin and argmax</h2>
-<div class="outline-text-2" id="text-org98f30c3">
+<div id="outline-container-org1293577" class="outline-2">
+<h2 id="org1293577">argmin and argmax</h2>
+<div class="outline-text-2" id="text-org1293577">
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-argmin-argmax"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">argmax</span> <span style="color: #837486;">(</span>s <span style="color: #66999D;">&amp;key</span> <span style="color: #9C6F68;">(</span>key #'identity<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"returns value,index of element in sequence s that maximizes the key function"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">when</span> s
-    <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">let*</span> <span style="color: #7B665C;">(</span><span style="color: #5C7E81;">(</span>m <span style="color: #837486;">(</span>reduce #'max s <span style="color: #FE8019;">:key</span> key<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-           <span style="color: #5C7E81;">(</span>idx <span style="color: #837486;">(</span>position m s <span style="color: #FE8019;">:key</span> key<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-      <span style="color: #7B665C;">(</span>values <span style="color: #5C7E81;">(</span>elt s idx<span style="color: #5C7E81;">)</span> idx<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp" id="src-argmin-argmax">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">argmax</span> (s <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (key #'identity))
+  <span style="font-style: italic;">"returns value,index of element in sequence s that maximizes the key function"</span>
+  (<span style="font-weight: bold;">when</span> s
+    (<span style="font-weight: bold;">let*</span> ((m (reduce #'max s <span style="font-weight: bold;">:key</span> key))
+           (idx (position m s <span style="font-weight: bold;">:key</span> key)))
+      (values (elt s idx) idx))))
 
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">argmin</span> <span style="color: #837486;">(</span>s <span style="color: #66999D;">&amp;key</span> <span style="color: #9C6F68;">(</span>key #'identity<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"returns value,index of element in sequence s that minimizes the key function"</span>
-  <span style="color: #837486;">(</span><span style="color: #DD6F48;">when</span> s
-    <span style="color: #9C6F68;">(</span><span style="color: #DD6F48;">let*</span> <span style="color: #7B665C;">(</span><span style="color: #5C7E81;">(</span>m <span style="color: #837486;">(</span>reduce #'min s <span style="color: #FE8019;">:key</span> key<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-           <span style="color: #5C7E81;">(</span>idx <span style="color: #837486;">(</span>position m s <span style="color: #FE8019;">:key</span> key<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span>
-      <span style="color: #7B665C;">(</span>values <span style="color: #5C7E81;">(</span>elt s idx<span style="color: #5C7E81;">)</span> idx<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">argmin</span> (s <span style="font-weight: bold; text-decoration: underline;">&amp;key</span> (key #'identity))
+  <span style="font-style: italic;">"returns value,index of element in sequence s that minimizes the key function"</span>
+  (<span style="font-weight: bold;">when</span> s
+    (<span style="font-weight: bold;">let*</span> ((m (reduce #'min s <span style="font-weight: bold;">:key</span> key))
+           (idx (position m s <span style="font-weight: bold;">:key</span> key)))
+      (values (elt s idx) idx))))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge768681" class="outline-2">
-<h2 id="orge768681">open url in browser</h2>
-<div class="outline-text-2" id="text-orge768681">
+<div id="outline-container-orgaaa308b" class="outline-2">
+<h2 id="orgaaa308b">open url in browser</h2>
+<div class="outline-text-2" id="text-orgaaa308b">
 <p>
 open a url by its default browser/app on macos/windows/linux<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp" id="src-open-browser"><span style="color: #928374;">;; </span><span style="color: #928374;">from https://github.com/eudoxia0/trivial-open-browser/blob/master/src/trivial-open-browser.lisp</span>
+<pre class="src src-lisp" id="src-open-browser"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">from https://github.com/eudoxia0/trivial-open-browser/blob/master/src/trivial-open-browser.lisp</span>
 
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defparameter</span> <span style="color: #83A598;">+format-string+</span>
-              #+<span style="color: #837486;">(</span>or win32 mswindows windows<span style="color: #837486;">)</span>
-              <span style="color: #528B8B;">"explorer ~S"</span>
-              #+<span style="color: #837486;">(</span>or macos darwin<span style="color: #837486;">)</span>
-              <span style="color: #528B8B;">"open ~S"</span>
-              #-<span style="color: #837486;">(</span>or win32 mswindows macos darwin windows<span style="color: #837486;">)</span>
-              <span style="color: #528B8B;">"xdg-open ~S"</span><span style="color: #5C7E81;">)</span>
+(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">+format-string+</span>
+              #+(or win32 mswindows windows)
+              <span style="font-style: italic;">"explorer ~S"</span>
+              #+(or macos darwin)
+              <span style="font-style: italic;">"open ~S"</span>
+              #-(or win32 mswindows macos darwin windows)
+              <span style="font-style: italic;">"xdg-open ~S"</span>)
 
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">open-browser-through-shell</span> <span style="color: #837486;">(</span>url<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"run a shell command to open `url`."</span>
-  <span style="color: #837486;">(</span>uiop:run-program <span style="color: #9C6F68;">(</span>format nil +format-string+ url<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">open-browser-through-shell</span> (url)
+  <span style="font-style: italic;">"run a shell command to open `url`."</span>
+  (uiop:run-program (format nil +format-string+ url)))
 
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defparameter</span>
+(<span style="font-weight: bold;">defparameter</span>
  *browser-function*
  #'open-browser-through-shell
- <span style="color: #528B8B;">"the function that gets called with the URL to open the browser. defaults to</span>
-<span style="color: #528B8B;">  `#'open-browser-through-shell`."</span><span style="color: #5C7E81;">)</span>
+ <span style="font-style: italic;">"the function that gets called with the URL to open the browser. defaults to</span>
+<span style="font-style: italic;">  `#'open-browser-through-shell`."</span>)
 
-<span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defun</span> <span style="color: #A89984;">open-browser</span> <span style="color: #837486;">(</span>url<span style="color: #837486;">)</span>
-  <span style="color: #528B8B;">"open the browser to `url`."</span>
-  <span style="color: #837486;">(</span>funcall *browser-function* url<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">open-browser</span> (url)
+  <span style="font-style: italic;">"open the browser to `url`."</span>
+  (funcall *browser-function* url))
 </pre>
 </div>
 </div>

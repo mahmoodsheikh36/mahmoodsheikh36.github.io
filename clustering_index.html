@@ -31,7 +31,7 @@
 </div><h1 class="main-title">clustering index</h1>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org3d2a193">
+<div class="dummy" id="orgf9bd805">
 <p>
 if file records are physically ordered on a nonkey field&#x2013;which does not have a distinct value for each record&#x2013;that field is called the <i>clustering field</i> and the data file is called a <i>clustered file</i>. we can create a special type of index, called a <i>clustering index</i>, to speed up retrieval of all the records that have the same value for the clustering field. this differs from a <a href="/primary_index.html#1702366662">primary index</a>, which requires that the ordering field of the data file have a distinct value for each record.<br />
 a clustering index is an ordered file with two fields; the first field is of the same type as the clustering field of the data file, and the second field is a disk block pointer. there is one entry in the clustering index for each distinct value of the clustering field, and it contains the value and a pointer to the first block in the data file that has a record with that value for its clustering field. notice that record insertion and deletion still cause problems because the data records are physically ordered. to alleviate the problem of insertion, it is common to reserve a whole block (or a cluster of contiguous blocks) for each value of the clustering field; all records with that value are placed in the block (or block cluster). this makes insertion and deletion relatively straightforward.<br />

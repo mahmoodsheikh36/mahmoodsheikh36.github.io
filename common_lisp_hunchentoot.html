@@ -37,26 +37,26 @@ for reference <a href="https://lispcookbook.github.io/cl-cookbook/web.html">http
 begin by loading the package using <a href="/common_lisp.html#1677249560">quicklisp</a>:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span>ql:quickload <span style="color: #FE8019;">:hunchentoot</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:hunchentoot</span>)
 </pre>
 </div>
 <p>
 a simple example:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span><span style="color: #DD6F48;">defparameter</span> <span style="color: #83A598;">*acceptor*</span> <span style="color: #837486;">(</span>make-instance 'hunchentoot:easy-acceptor <span style="color: #FE8019;">:port</span> 4242<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span>setf <span style="color: #837486;">(</span>hunchentoot:acceptor-document-root *acceptor*<span style="color: #837486;">)</span> <span style="color: #928374;">;; </span><span style="color: #928374;">location of pages to server statically</span>
-      #p<span style="color: #528B8B;">"path/to/www"</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span>hunchentoot:start *acceptor*<span style="color: #5C7E81;">)</span> <span style="color: #928374;">;; </span><span style="color: #928374;">run the server</span>
+<pre class="src src-lisp">(<span style="font-weight: bold;">defparameter</span> <span style="font-weight: bold; font-style: italic;">*acceptor*</span> (make-instance 'hunchentoot:easy-acceptor <span style="font-weight: bold;">:port</span> 4242))
+(setf (hunchentoot:acceptor-document-root *acceptor*) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">location of pages to server statically</span>
+      #p<span style="font-style: italic;">"path/to/www"</span>)
+(hunchentoot:start *acceptor*) <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">run the server</span>
 </pre>
 </div>
 <p>
 to serve a dynamic file (one that is generated per-request) we define a handler:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span>hunchentoot:define-easy-handler <span style="color: #837486;">(</span>say-yo <span style="color: #FE8019;">:uri</span> <span style="color: #528B8B;">"/yo"</span><span style="color: #837486;">)</span> <span style="color: #837486;">(</span>name<span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span>setf <span style="color: #9C6F68;">(</span>hunchentoot:content-type*<span style="color: #9C6F68;">)</span> <span style="color: #528B8B;">"text/plain"</span><span style="color: #837486;">)</span>
-  <span style="color: #837486;">(</span>format nil <span style="color: #528B8B;">"Hey~@[ ~A~]!"</span> name<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp">(hunchentoot:define-easy-handler (say-yo <span style="font-weight: bold;">:uri</span> <span style="font-style: italic;">"/yo"</span>) (name)
+  (setf (hunchentoot:content-type*) <span style="font-style: italic;">"text/plain"</span>)
+  (format nil <span style="font-style: italic;">"Hey~@[ ~A~]!"</span> name))
 </pre>
 </div>
 <p>
@@ -64,30 +64,30 @@ visit <a href="http://localhost:4242/yo?name=Alice">http://localhost:4242/yo?nam
 i needed the <a href="https://github.com/madnificent/jsown">jsown</a> to encode/decode json messages:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span>ql:quickload <span style="color: #FE8019;">:jsown</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp">(ql:quickload <span style="font-weight: bold;">:jsown</span>)
 </pre>
 </div>
 <p>
 examples:<br />
 </p>
 <div class="org-src-container" data-language="lisp">
-<pre class="src src-lisp"><span style="color: #5C7E81;">(</span>print <span style="color: #837486;">(</span>jsown:parse <span style="color: #528B8B;">"{\"foo\":\"bar\",\"baz\":100.25}"</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span>print <span style="color: #837486;">(</span>jsown:val '<span style="color: #9C6F68;">(</span><span style="color: #FE8019;">:obj</span> <span style="color: #7B665C;">(</span><span style="color: #528B8B;">"foo"</span> . <span style="color: #528B8B;">"bar"</span><span style="color: #7B665C;">)</span> <span style="color: #7B665C;">(</span><span style="color: #528B8B;">"frolic"</span> . 100<span style="color: #7B665C;">)</span> <span style="color: #7B665C;">(</span><span style="color: #528B8B;">"fragrance"</span> . 1001/100<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span> <span style="color: #528B8B;">"frolic"</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span>print <span style="color: #837486;">(</span>jsown:new-js <span style="color: #9C6F68;">(</span><span style="color: #528B8B;">"foo"</span> <span style="color: #528B8B;">"bar"</span><span style="color: #9C6F68;">)</span> <span style="color: #9C6F68;">(</span><span style="color: #528B8B;">"baz"</span> <span style="color: #7B665C;">(</span>+ 100 0.25<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span>print <span style="color: #837486;">(</span>jsown:to-json
-        <span style="color: #9C6F68;">(</span>jsown:new-js
-          <span style="color: #7B665C;">(</span><span style="color: #528B8B;">"items"</span> nil<span style="color: #7B665C;">)</span>
-          <span style="color: #7B665C;">(</span><span style="color: #528B8B;">"falseIsEmptyList"</span> <span style="color: #FE8019;">:f</span><span style="color: #7B665C;">)</span>
-          <span style="color: #7B665C;">(</span><span style="color: #528B8B;">"success"</span> t<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
-<span style="color: #5C7E81;">(</span>print <span style="color: #837486;">(</span>assoc <span style="color: #528B8B;">"items"</span>
-              <span style="color: #9C6F68;">(</span>cdr
-               <span style="color: #7B665C;">(</span>jsown:parse
-                <span style="color: #5C7E81;">(</span>jsown:to-json
-                 <span style="color: #837486;">(</span>jsown:new-js
-                   <span style="color: #9C6F68;">(</span><span style="color: #528B8B;">"items"</span> '<span style="color: #7B665C;">(</span>1 2 9 0<span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-                   <span style="color: #9C6F68;">(</span><span style="color: #528B8B;">"falseIsEmptyList"</span> <span style="color: #FE8019;">:f</span><span style="color: #9C6F68;">)</span>
-                   <span style="color: #9C6F68;">(</span><span style="color: #528B8B;">"success"</span> t<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span><span style="color: #7B665C;">)</span><span style="color: #9C6F68;">)</span>
-              <span style="color: #FE8019;">:test</span> #'equal<span style="color: #837486;">)</span><span style="color: #5C7E81;">)</span>
+<pre class="src src-lisp">(print (jsown:parse <span style="font-style: italic;">"{\"foo\":\"bar\",\"baz\":100.25}"</span>))
+(print (jsown:val '(<span style="font-weight: bold;">:obj</span> (<span style="font-style: italic;">"foo"</span> . <span style="font-style: italic;">"bar"</span>) (<span style="font-style: italic;">"frolic"</span> . 100) (<span style="font-style: italic;">"fragrance"</span> . 1001/100)) <span style="font-style: italic;">"frolic"</span>))
+(print (jsown:new-js (<span style="font-style: italic;">"foo"</span> <span style="font-style: italic;">"bar"</span>) (<span style="font-style: italic;">"baz"</span> (+ 100 0.25))))
+(print (jsown:to-json
+        (jsown:new-js
+          (<span style="font-style: italic;">"items"</span> nil)
+          (<span style="font-style: italic;">"falseIsEmptyList"</span> <span style="font-weight: bold;">:f</span>)
+          (<span style="font-style: italic;">"success"</span> t))))
+(print (assoc <span style="font-style: italic;">"items"</span>
+              (cdr
+               (jsown:parse
+                (jsown:to-json
+                 (jsown:new-js
+                   (<span style="font-style: italic;">"items"</span> '(1 2 9 0))
+                   (<span style="font-style: italic;">"falseIsEmptyList"</span> <span style="font-weight: bold;">:f</span>)
+                   (<span style="font-style: italic;">"success"</span> t)))))
+              <span style="font-weight: bold;">:test</span> #'equal))
 </pre>
 </div>
 

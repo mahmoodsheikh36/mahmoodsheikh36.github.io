@@ -108,9 +108,9 @@ the number 59 would be encoded 0101 1001, usually we dont write spaces, so 01011
 
 </div>
 <div class="org-src-container" data-language="python">
-<pre class="src src-python"><span style="color: #DD6F48;">def</span> <span style="color: #A89984;">int_to_binary</span><span style="color: #5C7E81;">(</span><span style="color: #83A598;">num</span><span style="color: #5C7E81;">)</span>:
-  <span style="color: #DD6F48;">return</span> <span style="color: #528B8B;">'{0:b}'</span>.format<span style="color: #5C7E81;">(</span>num<span style="color: #5C7E81;">)</span>
-<span style="color: #DD6F48;">return</span> <span style="color: #5C7E81;">[</span><span style="color: #837486;">(</span>num, int_to_binary<span style="color: #9C6F68;">(</span>num<span style="color: #9C6F68;">)</span><span style="color: #837486;">)</span> <span style="color: #DD6F48;">for</span> num <span style="color: #DD6F48;">in</span> <span style="color: #FE8019;">range</span><span style="color: #837486;">(</span>0, 32<span style="color: #837486;">)</span><span style="color: #5C7E81;">]</span>
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">int_to_binary</span>(num):
+  <span style="font-weight: bold;">return</span> <span style="font-style: italic;">'{0:b}'</span>.<span style="font-weight: bold;">format</span>(num)
+<span style="font-weight: bold;">return</span> [(num, int_to_binary(num)) <span style="font-weight: bold;">for</span> num <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(0, 32)]
 </pre>
 </div>
 

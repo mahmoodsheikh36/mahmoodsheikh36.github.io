@@ -53,7 +53,7 @@ this algorithm runs in <?xml version='1.0' encoding='UTF-8'?>
 <use x='7.691159' y='0' xlink:href='#g0-185'/>
 <use x='11.457021' y='0' xlink:href='#g1-61'/>
 </g>
-<g class='math-button' data-ref='blk:def-log'>
+<g class='math-button' data-ref='blk:def-log' pointer-events='bounding-box'>
 <g fill='#ff8000'>
 <use x='16.56786' y='0' xlink:href='#g2-108'/>
 <use x='19.337473' y='0' xlink:href='#g2-111'/>
@@ -72,43 +72,43 @@ this algorithm runs in <?xml version='1.0' encoding='UTF-8'?>
 image taken from <a href="https://www.programiz.com/dsa/merge-sort">https://www.programiz.com/dsa/merge-sort</a>, will keep this here until i make my own<br />
 </p>
 <div class="org-src-container" data-language="C++">
-<pre class="src src-C++" id="src-mergesort"><span style="color: #FE8019;">#include</span> <span style="color: #5C7E81;">&lt;</span><span style="color: #528B8B;">iostream</span><span style="color: #5C7E81;">&gt;</span>
-<span style="color: #DD6F48;">template</span> <span style="color: #5C7E81;">&lt;</span><span style="color: #DD6F48;">typename</span> <span style="color: #66999D;">T</span><span style="color: #5C7E81;">&gt;</span>
-<span style="color: #66999D;">void</span> <span style="color: #A89984;">merge</span><span style="color: #5C7E81;">(</span><span style="color: #66999D;">T</span> <span style="color: #83A598;">arr</span><span style="color: #837486;">[]</span>, <span style="color: #66999D;">int</span> <span style="color: #83A598;">l</span>, <span style="color: #66999D;">int</span> <span style="color: #83A598;">m</span>, <span style="color: #66999D;">int</span> <span style="color: #83A598;">r</span><span style="color: #5C7E81;">)</span> <span style="color: #5C7E81;">{</span>
-  <span style="color: #66999D;">int</span> <span style="color: #83A598;">n1</span> = m - l + 1;
-  <span style="color: #66999D;">int</span> <span style="color: #83A598;">n2</span> = r - m;
-  <span style="color: #66999D;">T</span> <span style="color: #83A598;">L</span><span style="color: #837486;">[</span>n1<span style="color: #837486;">]</span>;
-  <span style="color: #66999D;">T</span> <span style="color: #83A598;">R</span><span style="color: #837486;">[</span>n2<span style="color: #837486;">]</span>;
+<pre class="src src-C++" id="src-mergesort"><span style="font-weight: bold;">#include</span> <span style="font-style: italic;">&lt;</span><span style="font-style: italic;">iostream</span><span style="font-style: italic;">&gt;</span>
+<span style="font-weight: bold;">template</span> &lt;<span style="font-weight: bold;">typename</span> <span style="font-weight: bold; text-decoration: underline;">T</span>&gt;
+<span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">merge</span>(<span style="font-weight: bold; text-decoration: underline;">T</span> <span style="font-weight: bold; font-style: italic;">arr</span>[], <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">l</span>, <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">m</span>, <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">r</span>) {
+  <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">n1</span> = m - l + 1;
+  <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">n2</span> = r - m;
+  <span style="font-weight: bold; text-decoration: underline;">T</span> <span style="font-weight: bold; font-style: italic;">L</span>[n1];
+  <span style="font-weight: bold; text-decoration: underline;">T</span> <span style="font-weight: bold; font-style: italic;">R</span>[n2];
 
-  <span style="color: #DD6F48;">for</span> <span style="color: #837486;">(</span><span style="color: #66999D;">int</span> <span style="color: #83A598;">i</span> = 0; i &lt; n1; ++i<span style="color: #837486;">)</span>
-    L<span style="color: #837486;">[</span>i<span style="color: #837486;">]</span> = arr<span style="color: #837486;">[</span>l + i<span style="color: #837486;">]</span>;
-  <span style="color: #DD6F48;">for</span> <span style="color: #837486;">(</span><span style="color: #66999D;">int</span> <span style="color: #83A598;">j</span> = 0; j &lt; n2; ++j<span style="color: #837486;">)</span>
-    R<span style="color: #837486;">[</span>j<span style="color: #837486;">]</span> = arr<span style="color: #837486;">[</span>m + 1 + j<span style="color: #837486;">]</span>;
+  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; n1; ++i)
+    L[i] = arr[l + i];
+  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">j</span> = 0; j &lt; n2; ++j)
+    R[j] = arr[m + 1 + j];
 
-  <span style="color: #66999D;">int</span> <span style="color: #83A598;">i</span> = 0, <span style="color: #83A598;">j</span> = 0;
-  <span style="color: #66999D;">int</span> <span style="color: #83A598;">k</span> = l;
-  <span style="color: #DD6F48;">while</span> <span style="color: #837486;">(</span>i &lt; n1 &amp;&amp; j &lt; n2<span style="color: #837486;">)</span> <span style="color: #837486;">{</span>
-    <span style="color: #DD6F48;">if</span> <span style="color: #9C6F68;">(</span>L<span style="color: #7B665C;">[</span>i<span style="color: #7B665C;">]</span> &lt;= R<span style="color: #7B665C;">[</span>j<span style="color: #7B665C;">]</span><span style="color: #9C6F68;">)</span>
-      arr<span style="color: #9C6F68;">[</span>k++<span style="color: #9C6F68;">]</span> = L<span style="color: #9C6F68;">[</span>i++<span style="color: #9C6F68;">]</span>;
-    <span style="color: #DD6F48;">else</span>
-      arr<span style="color: #9C6F68;">[</span>k++<span style="color: #9C6F68;">]</span> = R<span style="color: #9C6F68;">[</span>j++<span style="color: #9C6F68;">]</span>;
-  <span style="color: #837486;">}</span>
+  <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0, <span style="font-weight: bold; font-style: italic;">j</span> = 0;
+  <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">k</span> = l;
+  <span style="font-weight: bold;">while</span> (i &lt; n1 &amp;&amp; j &lt; n2) {
+    <span style="font-weight: bold;">if</span> (L[i] &lt;= R[j])
+      arr[k++] = L[i++];
+    <span style="font-weight: bold;">else</span>
+      arr[k++] = R[j++];
+  }
 
-  <span style="color: #DD6F48;">while</span> <span style="color: #837486;">(</span>i &lt; n1<span style="color: #837486;">)</span>
-    arr<span style="color: #837486;">[</span>k++<span style="color: #837486;">]</span> = L<span style="color: #837486;">[</span>i++<span style="color: #837486;">]</span>;
-  <span style="color: #DD6F48;">while</span> <span style="color: #837486;">(</span>j &lt; n2<span style="color: #837486;">)</span>
-    arr<span style="color: #837486;">[</span>k++<span style="color: #837486;">]</span> = R<span style="color: #837486;">[</span>j++<span style="color: #837486;">]</span>;
-<span style="color: #5C7E81;">}</span>
+  <span style="font-weight: bold;">while</span> (i &lt; n1)
+    arr[k++] = L[i++];
+  <span style="font-weight: bold;">while</span> (j &lt; n2)
+    arr[k++] = R[j++];
+}
 
-<span style="color: #DD6F48;">template</span> <span style="color: #5C7E81;">&lt;</span><span style="color: #DD6F48;">typename</span> <span style="color: #66999D;">T</span><span style="color: #5C7E81;">&gt;</span>
-<span style="color: #66999D;">void</span> <span style="color: #A89984;">sort</span><span style="color: #5C7E81;">(</span><span style="color: #66999D;">T</span> <span style="color: #83A598;">arr</span><span style="color: #837486;">[]</span>, <span style="color: #66999D;">int</span> <span style="color: #83A598;">l</span>, <span style="color: #66999D;">int</span> <span style="color: #83A598;">r</span><span style="color: #5C7E81;">)</span> <span style="color: #5C7E81;">{</span>
-  <span style="color: #DD6F48;">if</span> <span style="color: #837486;">(</span>l &lt; r<span style="color: #837486;">)</span> <span style="color: #837486;">{</span>
-    <span style="color: #66999D;">int</span> <span style="color: #83A598;">m</span> = l+<span style="color: #9C6F68;">(</span>r-l<span style="color: #9C6F68;">)</span>/2;
-    sort<span style="color: #9C6F68;">(</span>arr, l, m<span style="color: #9C6F68;">)</span>;
-    sort<span style="color: #9C6F68;">(</span>arr, m + 1, r<span style="color: #9C6F68;">)</span>;
-    merge<span style="color: #9C6F68;">(</span>arr, l, m, r<span style="color: #9C6F68;">)</span>;
-  <span style="color: #837486;">}</span>
-<span style="color: #5C7E81;">}</span>
+<span style="font-weight: bold;">template</span> &lt;<span style="font-weight: bold;">typename</span> <span style="font-weight: bold; text-decoration: underline;">T</span>&gt;
+<span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">sort</span>(<span style="font-weight: bold; text-decoration: underline;">T</span> <span style="font-weight: bold; font-style: italic;">arr</span>[], <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">l</span>, <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">r</span>) {
+  <span style="font-weight: bold;">if</span> (l &lt; r) {
+    <span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold; font-style: italic;">m</span> = l+(r-l)/2;
+    sort(arr, l, m);
+    sort(arr, m + 1, r);
+    merge(arr, l, m, r);
+  }
+}
 </pre>
 </div>
 </div>

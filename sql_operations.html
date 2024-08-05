@@ -32,12 +32,12 @@
 </div><h1 class="main-title">sql operations</h1><span class="desc">a set of common [[blk:1702389696][sql]] operations</span>
 </div>
 <div id="content" class="content">
-<div id="outline-container-orgb5ada6d" class="outline-2">
-<h2 id="orgb5ada6d">list databases</h2>
-<div class="outline-text-2" id="text-orgb5ada6d">
+<div id="outline-container-org0d28e0c" class="outline-2">
+<h2 id="org0d28e0c">list databases</h2>
+<div class="outline-text-2" id="text-org0d28e0c">
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="color: #928374;">-- </span><span style="color: #928374;">show databases; -- for mysql</span>
-\l <span style="color: #928374;">-- </span><span style="color: #928374;">for postgresql</span>
+<pre class="src src-sql"><span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">show databases; -- for mysql</span>
+\l <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">for postgresql</span>
 </pre>
 </div>
 
@@ -164,42 +164,42 @@
 </table>
 </div>
 </div>
-<div id="outline-container-org9b2d5ab" class="outline-2">
-<h2 id="org9b2d5ab">deleting a database</h2>
-<div class="outline-text-2" id="text-org9b2d5ab">
+<div id="outline-container-org32b34df" class="outline-2">
+<h2 id="org32b34df">deleting a database</h2>
+<div class="outline-text-2" id="text-org32b34df">
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="color: #DD6F48;">drop</span> databsae &lt;dbname&gt;;
+<pre class="src src-sql"><span style="font-weight: bold;">drop</span> databsae &lt;dbname&gt;;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org2d56538" class="outline-2">
-<h2 id="org2d56538">creating databases</h2>
-<div class="outline-text-2" id="text-org2d56538">
+<div id="outline-container-org3604d09" class="outline-2">
+<h2 id="org3604d09">creating databases</h2>
+<div class="outline-text-2" id="text-org3604d09">
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="color: #DD6F48;">create</span> database &lt;dbname&gt;;
+<pre class="src src-sql"><span style="font-weight: bold;">create</span> database &lt;dbname&gt;;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc36a4e4" class="outline-2">
-<h2 id="orgc36a4e4">describe database</h2>
-<div class="outline-text-2" id="text-orgc36a4e4">
+<div id="outline-container-org465f422" class="outline-2">
+<h2 id="org465f422">describe database</h2>
+<div class="outline-text-2" id="text-org465f422">
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="color: #DD6F48;">describe</span> sys;
+<pre class="src src-sql"><span style="font-weight: bold;">describe</span> sys;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org075b558" class="outline-2">
-<h2 id="org075b558">schema</h2>
-<div class="outline-text-2" id="text-org075b558">
-<div class="dummy" id="orgd46b6bc">
+<div id="outline-container-org7a4e0d0" class="outline-2">
+<h2 id="org7a4e0d0">schema</h2>
+<div class="outline-text-2" id="text-org7a4e0d0">
+<div class="dummy" id="org705a96b">
 <p>
 an example of creating a <a href="/schema.html#1702318954">schema</a> (usually called a database), a schema called <code>COMPANY</code> owned by the user with authorization identifier <code>Jsmith</code>. note that each statement in SQL ends with a semicolon.<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">SCHEMA</span> COMPANY <span style="color: #DD6F48;">AUTHORIZATION</span> <span style="color: #528B8B;">'Jsmith'</span>;
+<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">SCHEMA</span> COMPANY <span style="font-weight: bold;">AUTHORIZATION</span> <span style="font-style: italic;">'Jsmith'</span>;
 </pre>
 </div>
 <p>
@@ -209,94 +209,94 @@ in general, not all users are authorized to create schemas and schema elements. 
 </div>
 </div>
 </div>
-<div id="outline-container-orge069660" class="outline-2">
-<h2 id="orge069660">create table</h2>
-<div class="outline-text-2" id="text-orge069660">
-<div class="dummy" id="org7b658d3">
+<div id="outline-container-org69d6829" class="outline-2">
+<h2 id="org69d6829">create table</h2>
+<div class="outline-text-2" id="text-org69d6829">
+<div class="dummy" id="org37a2ef6">
 <p>
 the <code>CREATE TABLE</code> command is used to specify a new relation by giving it a name and specifying its attributes and initial constraints. the attributes are specified first, and each attribute is given a name, a data type to specify its domain of values, and possibly attribute constraints, such as <code>NOT NULL</code>. the key, entity integrity, and referential integrity constraints can be specified within the <code>CREATE TABLE</code> statement after the attributes are declared, or they can be added later using the <code>ALTER TABLE</code> command.<br />
 typically, the sql schema (usually called database) in which the relations are declared is implicitly specified in the environment in which the <code>CREATE TABLE</code> statements are executed. alternatively, we can explicitly attach the schema name to the relation name, separated by a period. for example, by writing<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">COMPANY.EMPLOYEE</span>
+<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">COMPANY.EMPLOYEE</span>
 </pre>
 </div>
 <p>
 rather than<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">EMPLOYEE</span>
+<pre class="src src-sql"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">EMPLOYEE</span>
 </pre>
 </div>
 <p>
 the relations declared through <code>CREATE TABLE</code> statements are called <i>base tables</i> (or base relations); this means that the table and its rows are actually created and stored as a file by the <a href="/database_management_system.html#1702132360">dbms</a>.<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>an example schema declaration</label><pre class="src src-sql" id="src-sql-example-1"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">EMPLOYEE</span>
- <span style="color: #5C7E81;">(</span>Fname      <span style="color: #66999D;">VARCHAR</span><span style="color: #837486;">(</span>15<span style="color: #837486;">)</span>   <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Minit      <span style="color: #66999D;">CHAR</span>,
-  Lname      <span style="color: #66999D;">VARCHAR</span><span style="color: #837486;">(</span>15<span style="color: #837486;">)</span>   <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Ssn        <span style="color: #66999D;">CHAR</span><span style="color: #837486;">(</span>9<span style="color: #837486;">)</span>       <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Bdate      <span style="color: #66999D;">DATE</span>,
-  Address    <span style="color: #66999D;">VARCHAR</span><span style="color: #837486;">(</span>30<span style="color: #837486;">)</span>,
-  Sex        <span style="color: #66999D;">CHAR</span>,
-  Salary     <span style="color: #66999D;">DECIMAL</span><span style="color: #837486;">(</span>10,2<span style="color: #837486;">)</span>,
-  Super_ssn  <span style="color: #66999D;">CHAR</span><span style="color: #837486;">(</span>9<span style="color: #837486;">)</span>,
-  Dno        <span style="color: #66999D;">INT</span>           <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
- <span style="color: #DD6F48;">PRIMARY</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #837486;">(</span>Ssn<span style="color: #837486;">)</span>, <span style="color: #928374;">-- </span><span style="color: #928374;">has continutation, unclosed</span>
-<span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">DEPARTMENT</span>
- <span style="color: #837486;">(</span>Dname          <span style="color: #66999D;">VARCHAR</span><span style="color: #9C6F68;">(</span>15<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Dnumber        <span style="color: #66999D;">INT</span>         <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Mgr_ssn        <span style="color: #66999D;">CHAR</span><span style="color: #9C6F68;">(</span>9<span style="color: #9C6F68;">)</span>     <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Mgr_start_date <span style="color: #66999D;">DATE</span>,
-  <span style="color: #DD6F48;">PRIMARY</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Dnumber<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">UNIQUE</span> <span style="color: #9C6F68;">(</span>Dname<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">FOREIGN</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Mgr_ssn<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">REFERENCES</span> EMPLOYEE<span style="color: #9C6F68;">(</span>Ssn<span style="color: #9C6F68;">)</span> <span style="color: #837486;">)</span>;
-<span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">DEPT_LOCATIONS</span>
- <span style="color: #837486;">(</span>Dnumber   <span style="color: #66999D;">INT</span>         <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Dlocation <span style="color: #66999D;">VARCHAR</span><span style="color: #9C6F68;">(</span>15<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  <span style="color: #DD6F48;">PRIMARY</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Dnumber, Dlocation<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">FOREIGN</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Dnumber<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">REFERENCES</span> DEPARTMENT <span style="color: #9C6F68;">(</span>Dnumber<span style="color: #9C6F68;">)</span> <span style="color: #837486;">)</span>;
-<span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">PROJECT</span>
- <span style="color: #837486;">(</span>Pname <span style="color: #66999D;">VARCHAR</span><span style="color: #9C6F68;">(</span>15<span style="color: #9C6F68;">)</span>      <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Pnumber   <span style="color: #66999D;">INT</span>          <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Plocation <span style="color: #66999D;">VARCHAR</span><span style="color: #9C6F68;">(</span>15<span style="color: #9C6F68;">)</span>,
-  Dnum      <span style="color: #66999D;">INT</span>          <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  <span style="color: #DD6F48;">PRIMARY</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Pnumber<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">UNIQUE</span> <span style="color: #9C6F68;">(</span>Pname<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">FOREIGN</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Dnum<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">REFERENCES</span> DEPARTMENT <span style="color: #9C6F68;">(</span>Dnumber<span style="color: #9C6F68;">)</span> <span style="color: #837486;">)</span>;
-<span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">WORKS_ON</span>
- <span style="color: #837486;">(</span>Essn  <span style="color: #66999D;">CHAR</span><span style="color: #9C6F68;">(</span>9<span style="color: #9C6F68;">)</span>      <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Pno   <span style="color: #66999D;">INT</span>          <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Hours <span style="color: #66999D;">DECIMAL</span><span style="color: #9C6F68;">(</span>3,1<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  <span style="color: #DD6F48;">PRIMARY</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Essn, Pno<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">FOREIGN</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Essn<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">REFERENCES</span> EMPLOYEE <span style="color: #9C6F68;">(</span>Ssn<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">FOREIGN</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Pno<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">REFERENCES</span> PROJECT <span style="color: #9C6F68;">(</span>Pnumber<span style="color: #9C6F68;">)</span> <span style="color: #837486;">)</span>;
-<span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">DEPENDENT</span>
- <span style="color: #837486;">(</span>Essn           <span style="color: #66999D;">CHAR</span><span style="color: #9C6F68;">(</span>9<span style="color: #9C6F68;">)</span>     <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Dependent_name <span style="color: #66999D;">VARCHAR</span><span style="color: #9C6F68;">(</span>15<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">NULL</span>,
-  Sex            <span style="color: #66999D;">CHAR</span>,
-  Bdate          <span style="color: #66999D;">DATE</span>,
-  Relationship   <span style="color: #66999D;">VARCHAR</span><span style="color: #9C6F68;">(</span>8<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">PRIMARY</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Essn, Dependent_name<span style="color: #9C6F68;">)</span>,
-  <span style="color: #DD6F48;">FOREIGN</span> <span style="color: #DD6F48;">KEY</span> <span style="color: #9C6F68;">(</span>Essn<span style="color: #9C6F68;">)</span> <span style="color: #DD6F48;">REFERENCES</span> EMPLOYEE<span style="color: #9C6F68;">(</span>Ssn<span style="color: #9C6F68;">)</span> <span style="color: #837486;">)</span>;
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>an example schema declaration</label><pre class="src src-sql" id="src-sql-example-1"><span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">EMPLOYEE</span>
+ (Fname      <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15)   <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Minit      <span style="font-weight: bold; text-decoration: underline;">CHAR</span>,
+  Lname      <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15)   <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Ssn        <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9)       <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Bdate      <span style="font-weight: bold; text-decoration: underline;">DATE</span>,
+  Address    <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(30),
+  Sex        <span style="font-weight: bold; text-decoration: underline;">CHAR</span>,
+  Salary     <span style="font-weight: bold; text-decoration: underline;">DECIMAL</span>(10,2),
+  Super_ssn  <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9),
+  Dno        <span style="font-weight: bold; text-decoration: underline;">INT</span>           <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+ <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Ssn), <span style="font-weight: bold; font-style: italic;">-- </span><span style="font-weight: bold; font-style: italic;">has continutation, unclosed</span>
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">DEPARTMENT</span>
+ (Dname          <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15) <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Dnumber        <span style="font-weight: bold; text-decoration: underline;">INT</span>         <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Mgr_ssn        <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9)     <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Mgr_start_date <span style="font-weight: bold; text-decoration: underline;">DATE</span>,
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Dnumber),
+  <span style="font-weight: bold;">UNIQUE</span> (Dname),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Mgr_ssn) <span style="font-weight: bold;">REFERENCES</span> EMPLOYEE(Ssn) );
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">DEPT_LOCATIONS</span>
+ (Dnumber   <span style="font-weight: bold; text-decoration: underline;">INT</span>         <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Dlocation <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15) <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Dnumber, Dlocation),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Dnumber) <span style="font-weight: bold;">REFERENCES</span> DEPARTMENT (Dnumber) );
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">PROJECT</span>
+ (Pname <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15)      <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Pnumber   <span style="font-weight: bold; text-decoration: underline;">INT</span>          <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Plocation <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15),
+  Dnum      <span style="font-weight: bold; text-decoration: underline;">INT</span>          <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Pnumber),
+  <span style="font-weight: bold;">UNIQUE</span> (Pname),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Dnum) <span style="font-weight: bold;">REFERENCES</span> DEPARTMENT (Dnumber) );
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">WORKS_ON</span>
+ (Essn  <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9)      <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Pno   <span style="font-weight: bold; text-decoration: underline;">INT</span>          <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Hours <span style="font-weight: bold; text-decoration: underline;">DECIMAL</span>(3,1) <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Essn, Pno),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Essn) <span style="font-weight: bold;">REFERENCES</span> EMPLOYEE (Ssn),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Pno) <span style="font-weight: bold;">REFERENCES</span> PROJECT (Pnumber) );
+<span style="font-weight: bold;">CREATE</span> <span style="font-weight: bold;">TABLE</span> <span style="font-weight: bold;">DEPENDENT</span>
+ (Essn           <span style="font-weight: bold; text-decoration: underline;">CHAR</span>(9)     <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Dependent_name <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(15) <span style="font-weight: bold;">NOT</span> <span style="font-weight: bold;">NULL</span>,
+  Sex            <span style="font-weight: bold; text-decoration: underline;">CHAR</span>,
+  Bdate          <span style="font-weight: bold; text-decoration: underline;">DATE</span>,
+  Relationship   <span style="font-weight: bold; text-decoration: underline;">VARCHAR</span>(8),
+  <span style="font-weight: bold;">PRIMARY</span> <span style="font-weight: bold;">KEY</span> (Essn, Dependent_name),
+  <span style="font-weight: bold;">FOREIGN</span> <span style="font-weight: bold;">KEY</span> (Essn) <span style="font-weight: bold;">REFERENCES</span> EMPLOYEE(Ssn) );
 </pre>
 </div>
 
 </div>
 </div>
 </div>
-<div id="outline-container-org5ee0a29" class="outline-2">
-<h2 id="org5ee0a29">select-from-where</h2>
-<div class="outline-text-2" id="text-org5ee0a29">
-<div class="dummy" id="orgcdb92fa">
+<div id="outline-container-orgf9ff038" class="outline-2">
+<h2 id="orgf9ff038">select-from-where</h2>
+<div class="outline-text-2" id="text-orgf9ff038">
+<div class="dummy" id="orge5b7276">
 <p>
 the basic form of the <i>SELECT</i> statement, sometimes called a <i>mapping</i> or a <i>select-from-where</i> block, is formed of the three clauses <i>SELECT</i>, <i>FROM</i>, and <i>WHERE</i> and has the following form:<br />
 </p>
 <div class="org-src-container" data-language="sql">
-<pre class="src src-sql"><span style="color: #DD6F48;">SELECT</span> &lt;attribute list&gt;
-<span style="color: #DD6F48;">FROM</span>   &lt;<span style="color: #DD6F48;">table</span> list&gt;
-<span style="color: #DD6F48;">WHERE</span>  &lt;condition&gt;;
+<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span> &lt;attribute list&gt;
+<span style="font-weight: bold;">FROM</span>   &lt;<span style="font-weight: bold;">table</span> list&gt;
+<span style="font-weight: bold;">WHERE</span>  &lt;condition&gt;;
 </pre>
 </div>
 <p>
@@ -311,19 +311,19 @@ where<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org2b97801" class="outline-2">
-<h2 id="org2b97801">ordering of query results</h2>
-<div class="outline-text-2" id="text-org2b97801">
+<div id="outline-container-org7064cdf" class="outline-2">
+<h2 id="org7064cdf">ordering of query results</h2>
+<div class="outline-text-2" id="text-org7064cdf">
 <p>
 the order by operator<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgb0ff8a3" class="outline-2">
-<h2 id="orgb0ff8a3">alter table</h2>
+<div id="outline-container-org6f6583f" class="outline-2">
+<h2 id="org6f6583f">alter table</h2>
 </div>
-<div id="outline-container-org39bcdcf" class="outline-2">
-<h2 id="org39bcdcf">update</h2>
+<div id="outline-container-orga61ae48" class="outline-2">
+<h2 id="orga61ae48">update</h2>
 </div>
 </div>
 </body>
