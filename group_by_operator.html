@@ -32,7 +32,7 @@
 </div><h1 class="main-title">group by operator</h1><span class="desc">for each project on which more than two employees work, retrieve the project number, the project name, and the number of employees who work on the project.</span>
 </div>
 <div id="content" class="content">
-<div class="dummy" id="org8a5e2e6">
+<div class="dummy" id="orgfb2378e">
 <p>
 aggregate functions are used to summarize information from multiple tuples into a single-tuple summary. grouping is used to create subgroups of tuples before summarization. grouping and aggregation are required in many database applications, a number of built-in functions exist: <i>COUNT</i>, <i>SUM</i>, <i>MAX</i>, <i>MIN</i>, and <i>AVG</i>.<br />
 in many cases we want to apply an aggregate function operation to subgroups of tuples in a relation, where the subgroups are based on some attribute values. for example, we may want to find the average salary of employees in each department or the number of employees who work on each project. in these cases we need to partition the relation into nonoverlapping subsets (or groups) of tuples. each group (partition) will consist of the tuples that have the same value of some attribute(s), called the grouping attribute(s). we can then apply the function to each such group independently to produce summary information about each group. <a href="/sql.html#1702389696">sql</a> has a <code>GROUP BY</code> clause for this purpose. the GROUP BY clause specifies the grouping attributes, which should also appear in the SELECT clause, so that the value resulting from applying each aggregate function to a group of tuples appears along with the value of the grouping attribute(s).<br />
