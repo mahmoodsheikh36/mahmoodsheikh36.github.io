@@ -27,8 +27,6 @@ function randomizeSvgIds(node, idsMap=new Map()) {
   }
 }
 function randomizeSvgIdsHandleElement(elm, idsMap) {
-  // if (!elm)
-    // return;
   if (elm.id) {
     // create new id if it doesnt exist in the map
     if (!idsMap.has(elm.id))
@@ -78,7 +76,7 @@ function handleMathButton(node) {
         if (!elm)
           return;
         // elm = elm.cloneNode(true); // clone it so we wont have problems
-        randomizeSvgIds(elm);
+        elm.querySelectorAll('svg').forEach(entry => randomizeSvgIds(entry)); // fix some rendering issues caused by conflicting id's
         if (popupElm === undefined) {
           popupElm = document.createElement('div');
           popupElm.className = "popup";
